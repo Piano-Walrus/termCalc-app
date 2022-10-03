@@ -1612,9 +1612,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 keypad.setLayoutParams(buttonViewParams);
                 findViewById(R.id.horizontalComplex).setLayoutParams(compScrollParams);
 
-                if (!roundedButtons)
+                if (!roundedButtons) {
                     trigScrollParams.width = (int) scrollViewWidth;
                     findViewById(R.id.horizontalTrig).setLayoutParams(trigScrollParams);
+                }
             }
 
             for (i = 0; i < allButtons.length; i++) {
