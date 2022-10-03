@@ -3340,10 +3340,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (isCustomTheme) {
                     if (!Aux.isNull(cMain) && Aux.isColor(cMain))
                         drawer.setBackgroundColor(Color.parseColor(cMain));
-                    else {
-                        if (!Aux.isNull(bgColor))
-                            drawer.setBackgroundColor(Color.parseColor(bgColor));
-                    }
+                    else if (!Aux.isNull(bgColor))
+                        drawer.setBackgroundColor(Color.parseColor(bgColor));
                 }
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -3357,16 +3355,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_geo:
                 frame.setVisibility(View.VISIBLE);
 
-                if (theme.equals("2")) {
-                    setTheme(R.style.ThemeOverlay_AppCompat_Light);
+                if (theme.equals("2"))
                     drawer.setBackgroundColor(Color.WHITE);
-                }
-                else {
-                    if (theme.equals("3") || theme.equals("4"))
-                        drawer.setBackgroundColor(Color.BLACK);
+                else if (theme.equals("3") || theme.equals("4"))
+                    drawer.setBackgroundColor(Color.BLACK);
 
-                    setTheme(R.style.ThemeOverlay_AppCompat_Dark);
-                }
+                setTheme(theme.equals("2") ? R.style.ThemeOverlay_AppCompat_Light : R.style.ThemeOverlay_AppCompat_Dark);
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new GeometryFragmentNew(), "geometry").commit();
