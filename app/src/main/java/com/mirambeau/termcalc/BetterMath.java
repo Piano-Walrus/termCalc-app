@@ -80,10 +80,10 @@ public class BetterMath {
 
     public static BigDecimal evaluate(String eq, boolean prioritizeCoefficients, MathContext mc) throws NaNException {
         int i;
-        int parenthesisDifference = AuX.countChars(eq, "(") - AuX.countChars(eq, ")");
+        int parenthesisDifference = Ax.countChars(eq, "(") - Ax.countChars(eq, ")");
         MathContext speedMc = mc.getPrecision() > 11 ? new MathContext(mc.getPrecision() / 2, RoundingMode.HALF_UP) : mc;
 
-        eq = eq.replace(" ", "").replace("ln", "log" + AuX.eSub);
+        eq = eq.replace(" ", "").replace("ln", "log" + Ax.eSub);
 
         for (i=0; i < parenthesisDifference; i++) {
             eq += ")";
@@ -95,15 +95,15 @@ public class BetterMath {
         e = BigDecimalMath.e(mc).toPlainString();
 
         //Replace pi symbol with value 3.1415...
-        while (eqArray.contains(AuX.pi))
-            eqArray.set(eqArray.indexOf(AuX.pi), pi);
+        while (eqArray.contains(Ax.pi))
+            eqArray.set(eqArray.indexOf(Ax.pi), pi);
 
         //Replace e symbol with value 2.7182...
         while (eqArray.contains("e"))
             eqArray.set(eqArray.indexOf("e"), e);
 
         for (i=1; i < eqArray.size(); i++) {
-            if ((eqArray.get(i).equals("-") || eqArray.get(i).equals(AuX.emDash)) && !AuX.isFullNum(eqArray.get(i-1))) {
+            if ((eqArray.get(i).equals("-") || eqArray.get(i).equals(Ax.emDash)) && !Ax.isFullNum(eqArray.get(i-1))) {
                 eqArray.set(i + 1, parseBigDecimal(eqArray.get(i + 1), mc).negate(mc).toPlainString());
                 eqArray.remove(i);
             }
@@ -121,13 +121,11 @@ public class BetterMath {
             eqArray.set(start, evaluate(subList.toString().trim().replace("[", "").replace("]", "").replace(",", "").replace(" ", "")).toPlainString());
 
             try {
-                if (AuX.isFullNum(eqArray.get(end + 1)) || eqArray.get(end + 1).equals(AuX.sq)) {
+                if (Ax.isFullNum(eqArray.get(end + 1)) || eqArray.get(end + 1).equals(Ax.sq)) {
                     eqArray.add(end + 1, "*");
                 }
             }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
+            catch (Exception ignored) {}
 
             for (i=0; i < end-start; i++) {
                 eqArray.remove(start+1);
@@ -135,7 +133,7 @@ public class BetterMath {
 
             //Handle coefficients that appear before parenthesis
             try {
-                if (AuX.isFullNum(eqArray.get(start-1)) && (start < 2 || !eqArray.get(start-2).equals(AuX.sq))) {
+                if (Ax.isFullNum(eqArray.get(start-1)) && (start < 2 || !eqArray.get(start-2).equals(Ax.sq))) {
                     if (prioritizeCoefficients) {
                         eqArray.add(start + 1, ")");
                         eqArray.add(start, "*");
@@ -148,15 +146,13 @@ public class BetterMath {
                 else if (eqArray.get(start-1).equals("!") || eqArray.get(start-1).equals(")")) {
                     eqArray.add(start, "*");
                 }
-                else if (start >= 2 && AuX.isFullNum(eqArray.get(start-1)) && eqArray.get(start-2).equals(AuX.sq)) {
+                else if (start >= 2 && Ax.isFullNum(eqArray.get(start-1)) && eqArray.get(start-2).equals(Ax.sq)) {
                     eqArray.add(start, "*");
                     eqArray.set(start-1, sqrt(parseBigDecimal(eqArray.get(start-1), mc), mc).toPlainString());
                     eqArray.remove(start-2);
                 }
             }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
+            catch (Exception ignored) {}
 
             System.out.println(eqArray);
         }
@@ -166,7 +162,7 @@ public class BetterMath {
             String current = eqArray.get(i);
             String next;
 
-            if (AuX.trigList.contains(current)) {
+            if (Ax.trigList.contains(current)) {
                 try {
                     next = eqArray.get(i+1);
                 }
@@ -174,7 +170,7 @@ public class BetterMath {
                     throw new NaNException("Parse Error");
                 }
 
-                if (AuX.isFullNum(next)) {
+                if (Ax.isFullNum(next)) {
                     eqArray.set(i, Trig.evaluate(current, next));
                     eqArray.remove(i + 1);
                 }
@@ -195,7 +191,7 @@ public class BetterMath {
                 throw new NaNException("Parse Error");
             }
 
-            if (AuX.isFullSubNum(next)) {
+            if (Ax.isFullSubNum(next)) {
                 base = next;
 
                 try {
@@ -207,7 +203,7 @@ public class BetterMath {
             }
 
             //Log Base 10
-            if (AuX.isFullNum(next) && (base.equals("10") || base.equals("~"))) {
+            if (Ax.isFullNum(next) && (base.equals("10") || base.equals("~"))) {
                 eqArray.set(index, BigDecimalMath.log10(BigDecimalMath.toBigDecimal(next, mc), mc).toPlainString());
                 eqArray.remove(index+1);
 
@@ -216,7 +212,7 @@ public class BetterMath {
             }
             else if (!base.equals("~")) {
                 //Natural Log
-                if (base.equals(AuX.eSub)) {
+                if (base.equals(Ax.eSub)) {
 
                     eqArray.set(index, BigDecimalMath.log(BigDecimalMath.toBigDecimal(next, mc), speedMc).toPlainString());
 
@@ -224,19 +220,19 @@ public class BetterMath {
                     eqArray.remove(index + 1);
                 }
                 //Log Base 2
-                else if (base.equals(AuX.subscripts[2])) {
+                else if (base.equals(Ax.subscripts[2])) {
                     eqArray.set(index, BigDecimalMath.log2(BigDecimalMath.toBigDecimal(next, mc), speedMc).toPlainString());
 
                     eqArray.remove(index + 1);
                     eqArray.remove(index + 1);
                 }
                 //Log Base n
-                else if (AuX.isFullSubNum(base)) {
+                else if (Ax.isFullSubNum(base)) {
                     if (base.equals("0")) {
                         throw new NaNException("Nan");
                     }
                     else {
-                        base = AuX.subToNum(base);
+                        base = Ax.subToNum(base);
 
                         eqArray.set(index, logBase(base, next, speedMc).toPlainString());
 
@@ -252,15 +248,15 @@ public class BetterMath {
         }
 
         //Handle Roots
-        while (eqArray.contains(AuX.sq)) {
-            int index = eqArray.indexOf(AuX.sq);
+        while (eqArray.contains(Ax.sq)) {
+            int index = eqArray.indexOf(Ax.sq);
 
             try {
-                if (AuX.isFullNum(eqArray.get(index+1))) {
+                if (Ax.isFullNum(eqArray.get(index+1))) {
                     //N-th Root
-                    if (index >= 1 && AuX.superlist.contains(eqArray.get(index-1))) {
+                    if (index >= 1 && Ax.superlist.contains(eqArray.get(index-1))) {
                         //TODO: Handle non-integer nth-roots
-                        eqArray.set(index-1, newPow(parseBigDecimal(eqArray.get(index+1), mc), BigDecimal.ONE.divide(parseBigDecimal(Integer.toString(AuX.superlist.indexOf(eqArray.get(index-1))), mc), mc)).toPlainString());
+                        eqArray.set(index-1, newPow(parseBigDecimal(eqArray.get(index+1), mc), BigDecimal.ONE.divide(parseBigDecimal(Integer.toString(Ax.superlist.indexOf(eqArray.get(index-1))), mc), mc)).toPlainString());
 
                         eqArray.remove(index);
                         eqArray.remove(index);
@@ -302,7 +298,7 @@ public class BetterMath {
 
             int numIndex = eqArray.indexOf("!") - 1;
 
-            if (AuX.isFullNum(eqArray.get(numIndex))){
+            if (Ax.isFullNum(eqArray.get(numIndex))){
                 eqArray.set(numIndex, fact(eqArray.get(numIndex), mc));
                 eqArray.remove(numIndex + 1);
             }
@@ -325,7 +321,7 @@ public class BetterMath {
 
             int index = eqArray.indexOf("^");
 
-            if (AuX.isFullNum(eqArray.get(index-1)) && AuX.isFullNum(eqArray.get(index+1))) {
+            if (Ax.isFullNum(eqArray.get(index-1)) && Ax.isFullNum(eqArray.get(index+1))) {
                 String previous = eqArray.get(index - 1);
                 String next = eqArray.get(index + 1);
 
@@ -352,44 +348,40 @@ public class BetterMath {
         }
 
         //Handle Multiplication & Division
-        if (eqArray.contains("*") || eqArray.contains(AuX.multi) || eqArray.contains("%") || eqArray.contains(AuX.multiDot) || eqArray.contains(AuX.bulletDot) || eqArray.contains("/") || eqArray.contains(AuX.divi)) {
-            for (i = 0; i < eqArray.size() && (eqArray.contains("*") || eqArray.contains(AuX.multi) || eqArray.contains("%") || eqArray.contains(AuX.multiDot) || eqArray.contains(AuX.bulletDot) || eqArray.contains("/") || eqArray.contains(AuX.divi)); i++) {
+        if (eqArray.contains("*") || eqArray.contains(Ax.multi) || eqArray.contains("%") || eqArray.contains(Ax.multiDot) || eqArray.contains(Ax.bulletDot) || eqArray.contains("/") || eqArray.contains(Ax.divi)) {
+            for (i = 0; i < eqArray.size() && (eqArray.contains("*") || eqArray.contains(Ax.multi) || eqArray.contains("%") || eqArray.contains(Ax.multiDot) || eqArray.contains(Ax.bulletDot) || eqArray.contains("/") || eqArray.contains(Ax.divi)); i++) {
                 String current = eqArray.get(i);
                 String previous = "", next = "";
 
-                if (!eqArray.contains("*") && !eqArray.contains("/") && !eqArray.contains("%") && !eqArray.contains(AuX.multi) && !eqArray.contains(AuX.divi)
-                        && !eqArray.contains(AuX.multiDot) && !eqArray.contains(AuX.bulletDot))
+                if (!eqArray.contains("*") && !eqArray.contains("/") && !eqArray.contains("%") && !eqArray.contains(Ax.multi) && !eqArray.contains(Ax.divi)
+                        && !eqArray.contains(Ax.multiDot) && !eqArray.contains(Ax.bulletDot))
                     break;
 
                 try {
                     previous = eqArray.get(i - 1);
                 }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
+                catch (Exception ignored) {}
 
                 try {
                     next = eqArray.get(i + 1);
                 }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
+                catch (Exception ignored) {}
 
-                if (AuX.isNull(current) || AuX.chat(current, 0) == null)
+                if (Ax.isNull(current) || Ax.chat(current, 0) == null)
                     continue;
 
-                if (AuX.isFullNum(AuX.chat(current, 0)) || AuX.chat(current, 0).equals(".")) {
-                    if (i > 0 && (previous.equals("*") || previous.equals("/") || previous.equals(AuX.multi) || previous.equals(AuX.divi) ||
-                            previous.equals(AuX.multiDot) || previous.equals(AuX.bulletDot)))
+                if (Ax.isFullNum(Ax.chat(current, 0)) || Ax.chat(current, 0).equals(".")) {
+                    if (i > 0 && (previous.equals("*") || previous.equals("/") || previous.equals(Ax.multi) || previous.equals(Ax.divi) ||
+                            previous.equals(Ax.multiDot) || previous.equals(Ax.bulletDot)))
                         i = -1;
 
                     continue;
                 }
 
-                if (AuX.isDigit(AuX.chat(current, 0)) || AuX.chat(current, 0).equals("."))
+                if (Ax.isDigit(Ax.chat(current, 0)) || Ax.chat(current, 0).equals("."))
                     continue;
 
-                if (current.equals("*") || current.equals(AuX.multi) || current.equals(AuX.multiDot) || current.equals(AuX.bulletDot)) {
+                if (current.equals("*") || current.equals(Ax.multi) || current.equals(Ax.multiDot) || current.equals(Ax.bulletDot)) {
                     eqArray.set(i - 1, parseBigDecimal(previous, mc).multiply(parseBigDecimal(next, mc), mc).toPlainString());
 
                     eqArray.remove(i);
@@ -397,11 +389,9 @@ public class BetterMath {
                     try {
                         eqArray.remove(i);
                     }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    catch (Exception ignored) {}
                 }
-                else if (current.equals("/") || current.equals(AuX.divi)) {
+                else if (current.equals("/") || current.equals(Ax.divi)) {
                     eqArray.set(i - 1, parseBigDecimal(previous, mc).divide(parseBigDecimal(next, mc), mc).toPlainString());
 
                     eqArray.remove(i);
@@ -409,9 +399,7 @@ public class BetterMath {
                     try {
                         eqArray.remove(i);
                     }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    catch (Exception ignored) {}
                 }
                 else if (current.equals("%")) {
                     eqArray.set(i - 1, modulus(parseBigDecimal(previous, mc), parseBigDecimal(next, mc)).toPlainString());
@@ -421,12 +409,10 @@ public class BetterMath {
                     try {
                         eqArray.remove(i);
                     }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    catch (Exception ignored) {}
                 }
 
-                if (i == eqArray.size() - 1 && (eqArray.contains("*") || eqArray.contains(AuX.multi) || eqArray.contains(AuX.multiDot) || eqArray.contains(AuX.bulletDot) || eqArray.contains("/") || eqArray.contains(AuX.divi)))
+                if (i == eqArray.size() - 1 && (eqArray.contains("*") || eqArray.contains(Ax.multi) || eqArray.contains(Ax.multiDot) || eqArray.contains(Ax.bulletDot) || eqArray.contains("/") || eqArray.contains(Ax.divi)))
                     i = 0;
             }
 
@@ -434,28 +420,26 @@ public class BetterMath {
         }
 
         //Handle Addition & Subtraction
-        if (eqArray.contains("+") || eqArray.contains("-") || eqArray.contains(AuX.emDash)) {
-            for (i = 0; i < eqArray.size() && (eqArray.contains("+") || eqArray.contains("-") || eqArray.contains(AuX.emDash)); i++) {
+        if (eqArray.contains("+") || eqArray.contains("-") || eqArray.contains(Ax.emDash)) {
+            for (i = 0; i < eqArray.size() && (eqArray.contains("+") || eqArray.contains("-") || eqArray.contains(Ax.emDash)); i++) {
                 String current = eqArray.get(i);
                 String previous = "", next = "";
 
-                if (AuX.isNull(current) || AuX.chat(current, 0) == null)
+                if (Ax.isNull(current) || Ax.chat(current, 0) == null)
                     continue;
 
                 try {
                     previous = eqArray.get(i - 1);
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
+                catch (Exception ignored) {}
 
                 try {
                     next = eqArray.get(i + 1);
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
+                catch (Exception ignored) {}
 
-                if (AuX.isFullNum(AuX.chat(current, 0)) || AuX.chat(current, 0).equals(".")) {
-                    if (i > 0 && (previous.equals("+") || previous.equals("-") || previous.equals(AuX.emDash)))
+                if (Ax.isFullNum(Ax.chat(current, 0)) || Ax.chat(current, 0).equals(".")) {
+                    if (i > 0 && (previous.equals("+") || previous.equals("-") || previous.equals(Ax.emDash)))
                         i = -1;
 
                     continue;
@@ -468,11 +452,10 @@ public class BetterMath {
 
                     try {
                         eqArray.remove(i);
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
+                    catch (Exception ignored) {}
                 }
-                else if (current.equals("-") || current.equals(AuX.emDash)) {
+                else if (current.equals("-") || current.equals(Ax.emDash)) {
                     if (i == 0) {
                         eqArray.set(1, parseBigDecimal(next, mc).negate(mc).toPlainString());
 
@@ -486,9 +469,7 @@ public class BetterMath {
                         try {
                             eqArray.remove(i);
                         }
-                        catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        catch (Exception ignored) {}
                     }
                 }
 
@@ -496,7 +477,7 @@ public class BetterMath {
                     i = 0;
             }
 
-            System.out.println(eqArray.toString());
+            System.out.println(eqArray);
         }
 
         try {
@@ -508,9 +489,11 @@ public class BetterMath {
         }
         catch (Exception e) {
             e.printStackTrace();
+
+            throw new NaNException("Parse Error");
         }
 
-        if (eqArray.size() > 0 && (AuX.isFullNum(eqArray.get(0)) || (eqArray.get(0).length() > 1 && AuX.isFullNum(eqArray.get(0).substring(1)) && (eqArray.get(0).startsWith("-") || eqArray.get(0).startsWith(AuX.emDash)))))
+        if (eqArray.size() > 0 && (Ax.isFullNum(eqArray.get(0)) || (eqArray.get(0).length() > 1 && Ax.isFullNum(eqArray.get(0).substring(1)) && (eqArray.get(0).startsWith("-") || eqArray.get(0).startsWith(Ax.emDash)))))
             return parseBigDecimal(eqArray.get(0), mc);
         else
             throw new NaNException("NaN");
@@ -521,20 +504,20 @@ public class BetterMath {
         ArrayList<String> eqArray = new ArrayList<>();
 
         for (i=0; i < eq.length(); i++) {
-            String current = AuX.chat(eq, i);
+            String current = Ax.chat(eq, i);
 
             if (current == null || current.equals("\0") || current.equals(" ") || current.equals(","))
                 continue;
 
-            if (AuX.isDigit(current) || current.equals(".")) {
-                if (eqArray.size() < 1 || AuX.isOp(eqArray.get(eqArray.size() - 1)))
+            if (Ax.isDigit(current) || current.equals(".")) {
+                if (eqArray.size() < 1 || Ax.isOp(eqArray.get(eqArray.size() - 1)))
                     eqArray.add(current);
                 else
                     eqArray.set(eqArray.size() - 1, eqArray.get(eqArray.size() - 1) + current);
             }
             //TODO: Parse n-th roots properly
-            else if (AuX.isOp(current) || current.equals(AuX.pi) || current.equals("e") || AuX.superlist.contains(current) ||
-                    AuX.sublist.contains(current) || current.equals("ₑ")) {
+            else if (Ax.isOp(current) || current.equals(Ax.pi) || current.equals("e") || Ax.superlist.contains(current) ||
+                    Ax.sublist.contains(current) || current.equals("ₑ")) {
                 eqArray.add(current);
             }
             else {
@@ -545,39 +528,29 @@ public class BetterMath {
                     trigCheck = eq.substring(i, i+6);
                 }
                 catch (Exception e) {
-                    e.printStackTrace();
-
                     try {
                         trigCheck = eq.substring(i, i+5);
                     }
                     catch (Exception e2) {
-                        e.printStackTrace();
-
                         try {
                             trigCheck = eq.substring(i, i+3);
                         }
                         catch (Exception e3) {
-                            e.printStackTrace();
-
                             try {
                                 trigCheck = eq.substring(i, i+2);
                             }
                             catch (Exception e4) {
-                                e4.printStackTrace();
-
                                 try {
                                     trigCheck = eq.substring(i, i+1);
                                 }
-                                catch (Exception e5) {
-                                    e5.printStackTrace();
-                                }
+                                catch (Exception ignored) {}
                             }
                         }
                     }
                 }
 
                 if (!trigCheck.equals("~")) {
-                    int length = AuX.trigIn.length - 1;
+                    int length = Ax.trigIn.length - 1;
 
                     for (j=length; j >= 0; j--) {
                         if (j == length) {
@@ -600,36 +573,30 @@ public class BetterMath {
                                     //by the length of either "log" or "ln"
                                     i += eqArray.get(eqArray.size() - 1).length() - 1;
                                 }
-                                catch (Exception e) {
-                                    e.printStackTrace();
-                                }
+                                catch (Exception ignored) {}
 
                                 //Handle coefficients before log or ln
                                 try {
-                                    if (AuX.isFullNum(eqArray.get(eqArray.size() - 2))) {
+                                    if (Ax.isFullNum(eqArray.get(eqArray.size() - 2))) {
                                         eqArray.add(eqArray.size() - 1, "*");
                                     }
                                 }
-                                catch (Exception e) {
-                                    e.printStackTrace();
-                                }
+                                catch (Exception ignored) {}
 
                                 break;
                             }
                         }
 
-                        if (trigCheck.startsWith(AuX.trigIn[j])) {
-                            eqArray.add(trigCheck.substring(0, AuX.trigIn[j].length()));
-                            eq = eq.substring(0, i) + eq.substring(i + AuX.trigIn[j].length() - 1);
+                        if (trigCheck.startsWith(Ax.trigIn[j])) {
+                            eqArray.add(trigCheck.substring(0, Ax.trigIn[j].length()));
+                            eq = eq.substring(0, i) + eq.substring(i + Ax.trigIn[j].length() - 1);
 
                             try {
-                                if (AuX.isFullNum(eqArray.get(eqArray.size() - 2))) {
+                                if (Ax.isFullNum(eqArray.get(eqArray.size() - 2))) {
                                     eqArray.add(eqArray.size() - 1, "*");
                                 }
                             }
-                            catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                            catch (Exception ignored) {}
 
                             break;
                         }
@@ -780,7 +747,7 @@ public class BetterMath {
     public static String fact(String num, MathContext mc) throws NaNException {
         BigDecimal i;
 
-        if (num == null || num.equals("\0") || num.contains(".") || !AuX.isFullNum(num))
+        if (num == null || num.equals("\0") || num.contains(".") || !Ax.isFullNum(num))
             throw new NaNException("NaN") ;
 
         BigDecimal number;
@@ -886,7 +853,7 @@ class Trig {
 
 
 
-class AuX {
+class Ax {
     public static final String eSub = "ₑ";
     public static final String opSub = "₍";
     public static final String cpSub = "₎";
@@ -1032,9 +999,7 @@ class AuX {
                     numChars++;
             }
         }
-        catch (NullPointerException e){
-            e.printStackTrace();
-        }
+        catch (Exception ignored) {}
 
         return numChars;
     }

@@ -24,7 +24,6 @@
     <string name="volume">VOLUMEN</string>
     <string name="surface_area">ÁREA DE SUPERFICIE</string>
     <string name="term_menu_item" translatable="false">Tema</string>
-    <string name="term_menu_item" translatable="false">T</string>
     <string name="unsaved_confirmation">¿Desea aplicar sus cambios al tema actual?</string>
     <string name="twitter_title">Icono De Twitter por \"Pixel Perfect\"</string>
     <string name="apache_licenses">Licencias Apache 2.0</string>

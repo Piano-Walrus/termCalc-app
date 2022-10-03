@@ -2180,7 +2180,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
             if (modSymbol != null && !modSymbol.equals("\0"))
-            bMod.setText(tinydb.getString("modSymbol"));
+                bMod.setText(tinydb.getString("modSymbol"));
 
             if (isCustomTheme) {
                 if (Aux.isTinyColor("-b%"))

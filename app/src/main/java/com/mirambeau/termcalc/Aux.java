@@ -9,7 +9,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.RippleDrawable;
 import android.text.SpannableStringBuilder;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -22,8 +21,6 @@ import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -221,7 +218,7 @@ public class Aux {
             makeToast(output, 1);
         }
         catch (Exception e) {
-            Aux.saveStack(e);
+            saveStack(e);
         }
     }
 
@@ -315,18 +312,18 @@ public class Aux {
         TinyDB tinydb = tinydb();
 
         int i;
-        boolean mainIsSet = Aux.isTinyColor("cMain"), keyTextIsSet = Aux.isTinyColor("cNum");
+        boolean mainIsSet = isTinyColor("cMain"), keyTextIsSet = isTinyColor("cNum");
         int cMain;
         String[] colorTexts = {"-b=t", "cFabText", "-bop", "-b+t", "-b-t", "-b"+ multi + "t", "-b"+ divi + "t", "cFab", "-b=", "cSecondary", "cTop", "cTertiary", "cPrimary", "-b(t", "-b)t", "-b+", "-b-", "-b" + multi, "-b" + divi};
 
         if (mainIsSet)
-            cMain = Aux.getTinyColor("cMain");
+            cMain = getTinyColor("cMain");
         else
             cMain = 0;
 
         for (i=0; i < colorTexts.length; i++){
             if (isTinyColor(colorTexts[i])) {
-                if (tinydb.getBoolean("isAlwaysDarkNav") && Aux.getAverageBrightness(tinydb.getString(colorTexts[i])) < 8)
+                if (tinydb.getBoolean("isAlwaysDarkNav") && getAverageBrightness(tinydb.getString(colorTexts[i])) < 8)
                     continue;
 
                 if (i == 0 && keyTextIsSet && getTinyColor("cNum") == getTinyColor("-b=t"))
@@ -346,7 +343,7 @@ public class Aux {
 
                     Log.d("grayTest", "#" + color.substring(2) + "7");
 
-                    if (Aux.isTinyColor("-mt")){
+                    if (isTinyColor("-mt")){
                         if (!(isGray(color) && isGray(tinydb.getString("-mt"))) && !isMain)
                             return color;
                     }
