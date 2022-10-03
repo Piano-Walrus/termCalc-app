@@ -8,7 +8,7 @@
 
     <string name="date_menu_item">Date Calculator</string>
     <string name="dec_frac_menu_item">Decimal to Fraction</string>
-    <string name="term_menu_item" translatable="false">Theme</string>
+    <string name="term_menu_item">Theme</string>
     <string name="conversions_menu_item">Conversions</string>
     <string name="about_menu_item">About</string>
     <string name="configuration_menu_header">Personalization</string>
@@ -25,7 +25,8 @@
         Note: This behavior can be disabled in settings.
         \n4. The equals/clear animation is now a bit smoother.
         \n5. The changelog will now display one more previous version.
-        \n6. Minor bug fixes and performance improvements.
+        \n6. Updated a few Spanish translations.
+        \n7. Minor bug fixes and performance improvements.
 
     </string>
 
@@ -280,7 +281,7 @@
 
     </string>
 
-    <string name="custom_editor">
+    <string name="custom_editor" translatable="false">
         Enables the ability to change individual zone/button colors in your theme.
 
     </string>
@@ -304,12 +305,12 @@
     </string>
     <string name="current_release">Current Release</string>
     <string name="previous_versions">Previous Versions</string>
-    <string name="google_copyright">Copyright © Google Inc. All rights reserved.</string>
-    <string name="junit_copyright">Copyright © 2021 The JUnit Team</string>
-    <string name="azeesoft_copyright">Copyright © 2016 AzeeSoft</string>
-    <string name="appintro_copyright" tools:ignore="TypographyDashes">Copyright © 2015-2020 AppIntro Developers</string>
-    <string name="mathview_copyright">Copyright © MathView Developers</string>
-    <string name="bigdecimalmath_copyright">Copyright © 2017 Eric Obermühlner</string>
+    <string name="google_copyright" translatable="false">Copyright © Google Inc. All rights reserved.</string>
+    <string name="junit_copyright" translatable="false">Copyright © 2021 The JUnit Team</string>
+    <string name="azeesoft_copyright" translatable="false">Copyright © 2016 AzeeSoft</string>
+    <string name="appintro_copyright" tools:ignore="TypographyDashes" translatable="false">Copyright © 2015-2020 AppIntro Developers</string>
+    <string name="mathview_copyright" translatable="false">Copyright © MathView Developers</string>
+    <string name="bigdecimalmath_copyright" translatable="false">Copyright © 2017 Eric Obermühlner</string>
 
     <string name="twitter_title">Twitter Icon by \"Pixel perfect\"</string>
     <string name="image_attributions">Image Attributions:</string>
@@ -321,11 +322,11 @@
     <string name="volume">VOLUME</string>
     <string name="surface_area">SURFACE AREA</string>
 
-    <string name="backups">Backup/Restore</string>
+    <string name="backups" translatable="false">Backup/Restore</string>
     <string name="importNew">Import</string>
-    <string name="backup_current_theme">Backup current theme</string>
+    <string name="backup_current_theme" translatable="false">Backup current theme</string>
 
-    <string name="editor_help">
+    <string name="editor_help" translatable="false">
         Tap any button to change its colors.
         \n\nTo modify entire groups of buttons, select the \"Zones\" tab towards the bottom of the
         screen, then tap the groups you\'d like to modify.
@@ -333,7 +334,7 @@
 
     </string>
 
-    <string name="main_help">
+    <string name="main_help" translatable="false">
         The function bar at the top of the keypad can be scrolled both horizontally, and vertically. It can also be expanded by pressing the small arrow key above it.
         \n\nYou can long-press \"√\" after typing any number, to input an n-th root (the root being the number you typed initially). You can also
         long-press \"log\" after any number to input a log with that number as the base. Finally, long-pressing any trigonometric function will input its hyperbolic counterpart.
@@ -343,19 +344,19 @@
     </string>
 
     <!-- Long label should be <= 25 characters-->
-    <string name="shortcut_long_label">Terminal</string>
+    <string name="shortcut_long_label" translatable="false">Terminal</string>
     <!-- Short label should be <= 10 characters-->
-    <string name="shortcut_short_label">Terminal</string>
+    <string name="shortcut_short_label" translatable="false">Terminal</string>
 
-    <string name="terminal_intro_text">Type \"help\" or \"?\" for a list of available commands.\n
+    <string name="terminal_intro_text" translatable="false">Type \"help\" or \"?\" for a list of available commands.\n
 
     </string>
     <string name="new_function">New Function</string>
     <string name="new_constant">New Constant</string>
 
-    <string name="theme_nav_summary">When \"Custom Colors\" is enabled, apply the colors in your theme to the nav drawer.</string>
+    <string name="theme_nav_summary" translatable="false">When \"Custom Colors\" is enabled, apply the colors in your theme to the nav drawer.</string>
     <string name="clear">Clear</string>
-    <string name="focus_summary">Hides system bars to minimize distraction.</string>
+    <string name="focus_summary" translatable="false">Hides system bars to minimize distraction.</string>
 
 
 </resources>

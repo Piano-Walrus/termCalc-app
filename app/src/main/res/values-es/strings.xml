@@ -6,7 +6,7 @@
     <string name="about_menu_item" translatable="false">Información</string>
     <string name="scientific_calculator" translatable="false">Calculadora Científica</string>
     <string name="other_menu_header" translatable="false">Más</string>
-    <string name="theme_settings" translatable="false">Configuración del Tema</string>
+    <string name="theme_settings" translatable="false">Configuración</string>
     <string name="home_menu_item" translatable="false">Pantalla Principal</string>
     <string name="parse_error">Error de Análisis</string>
     <string name="domain_error">Error de Dominio</string>
@@ -21,6 +21,18 @@
     <string name="changelog">Registro de Cambios</string>
     <string name="licenses_title">Licencias</string>
     <string name="geometry">Geometry</string>
-    <string name="volume">VOLUME</string>
-    <string name="surface_area">SURFACE AREA</string>
+    <string name="volume">VOLUMEN</string>
+    <string name="surface_area">ÁREA DE SUPERFICIE</string>
+    <string name="term_menu_item" translatable="false">Tema</string>
+    <string name="term_menu_item" translatable="false">T</string>
+    <string name="unsaved_confirmation">¿Desea aplicar sus cambios al tema actual?</string>
+    <string name="twitter_title">Icono De Twitter por \"Pixel Perfect\"</string>
+    <string name="apache_licenses">Licencias Apache 2.0</string>
+    <string name="functions">Funciones</string>
+    <string name="image_attributions">Atribuciones de Imagen:</string>
+    <string name="constants">CONSTANTES</string>
+    <string name="new_constant">Nueva Constante</string>
+    <string name="new_function">Nueva Función</string>
+    <string name="importNew">Importar</string>
+    <string name="clear">Borrar</string>
 </resources>

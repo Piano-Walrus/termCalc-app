@@ -2970,7 +2970,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 if (toolbarTitle.startsWith("Conv"))
                     mainHelpText.setText("This section converts your input between various different units of measurement.\n\nThe bar directly above the keypad scrolls horizontally. Select which unit type you'd like from this bar, then select your \"From\" and \"To\" units by tapping on the corresponding unit.");
-                else if (toolbarTitle.startsWith("Date"))
+                else if (toolbarTitle.startsWith("Date") || toolbarTitle.endsWith("Fecha"))
                     mainHelpText.setText("This section takes your input of two specific dates, and outputs the time between the two dates in the middle of the screen. Simply tap each text box on the bottom half of the screen, select your two dates, and tap the checkmark button at the bottom.\n\nTip: When selecting each date, in the date picker interface that appears after tapping a text box, you can tap the year at the top to change it.");
                 else if (toolbarTitle.startsWith("Geo"))
                     mainHelpText.setText("This section lets you both view, and evaluate, various common geometric expressions, i.e. the area of a square or volume of a cube.\n\nTip: The button at the bottom right of the screen allows you to quickly jump to a specific shape in the list.");
@@ -4180,13 +4180,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             String title;
 
             try {
-                if (toolbar.getTitle().toString().startsWith("Ho"))
+                String currentTitle = toolbar.getTitle().toString();
+
+                if (currentTitle.startsWith("Ho"))
                     title = "Home";
-                else if (toolbar.getTitle().toString().startsWith("Conv"))
+                else if (currentTitle.startsWith("Pantalla"))
+                    title = "Pantalla Principal";
+                else if (currentTitle.startsWith("Conv"))
                     title = "Conversions";
-                else if (toolbar.getTitle().toString().startsWith("Da"))
+                else if (currentTitle.startsWith("Da"))
                     title = "Date";
-                else if (toolbar.getTitle().toString().startsWith("Decimal"))
+                else if (currentTitle.endsWith("Fecha"))
+                    title = "Cálculo de Fecha";
+                else if (currentTitle.endsWith("Fracción"))
+                    title = "Decimal a Fracción";
+                else if (currentTitle.startsWith("Decimal"))
                     title = "Decimal to Fraction";
                 else
                     title = "Home";
