@@ -23,7 +23,7 @@ The application also has a somewhat hidden terminal interface (hence the terribl
 The list below outlines all currently-supported terminal commands that are intended for use by end-users:
  - help: displays basic commands, essentially this list until the "themes" command
  - help \[command]: prints information about a specific command
- - set \[button code] \[color hex]: sets a color in the current theme (for a quick guide on button codes, run "help set")
+ - set \[button code] \[color hex]: sets a color in the current theme (for a list of button codes, run "help set")
  - get \[button code]: prints a color in the current theme
  - sym -mod \[any text]: sets the text of the mod button
  - reset \[button code]: resets a color in the current theme to its default value
