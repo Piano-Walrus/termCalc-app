@@ -983,9 +983,9 @@
                 android:src="@drawable/ic_baseline_swap_horiz_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHeight="ratio=1:1"
+                app:layout_constraintWidth="parent=0.133"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth="parent=0.133" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/expandCustomsNew"
@@ -995,9 +995,9 @@
                 android:src="@drawable/ic_baseline_add_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHeight="ratio=1:1"
+                app:layout_constraintWidth="parent=0.133"
                 app:layout_constraintStart_toEndOf="@id/bInv"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth="parent=0.133" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/customConstantsNew"
@@ -1008,9 +1008,9 @@
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHeight="ratio=1:1"
+                app:layout_constraintWidth="parent=0.133"
                 app:layout_constraintStart_toEndOf="@id/expandCustomsNew"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth="parent=0.133" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/customFunctionsNew"
@@ -1021,9 +1021,9 @@
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHeight="ratio=1:1"
+                app:layout_constraintWidth="parent=0.133"
                 app:layout_constraintStart_toEndOf="@id/customConstantsNew"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth="parent=0.133" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/decFracButtonNew"
@@ -1034,9 +1034,9 @@
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHeight="ratio=1:1"
-                app:layout_constraintStart_toEndOf="@id/customConstantsNew"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth="parent=0.133" />
+                app:layout_constraintWidth="parent=0.133"
+                app:layout_constraintStart_toEndOf="@id/customFunctionsNew"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/bInv"
@@ -1050,10 +1050,9 @@
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/swapTopBar"
                 app:layout_constraintHeight="ratio=1:1"
-                app:layout_constraintStart_toEndOf="@+id/swapTopBar"
-                app:layout_constraintTop_toTopOf="@+id/swapTopBar"
                 app:layout_constraintWidth="parent=0.133"
-                app:srcCompat="@drawable/ic_outline_backspace_24" />
+                app:layout_constraintStart_toEndOf="@+id/swapTopBar"
+                app:layout_constraintTop_toTopOf="@+id/swapTopBar" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
