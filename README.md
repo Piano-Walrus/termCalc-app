@@ -1,6 +1,5 @@
 # TermCalc
-A fully customizable Android calculator app, with various advanced features and functions. 
-
+![termcalc banner](https://repository-images.githubusercontent.com/544607231/dd9b74c3-3d95-4d4f-8436-7bb315938610)
 ## Theme Customization
 There are two ways to modify TermCalc's appearance. The first is through the basic theme menu, which simply allows the user to select a light or dark theme, then an accent color. The second is using the custom theme editor. When using the latter, any item on the home screen of the application can be customized. Both the background and text colors of each element can be modified, either using a color picker, or entering a specific hex code. Entire zones (like the number keypad, for example) can also be modified at once to speed-up theme creation. Custom themes can also intelligently modify the application's nav drawer (adaptively determining which colors in the theme would clash the least with the background color of the nav drawer), and other sections of the application (i.e. Unit Converter). Users can also switch between round, or square/borderless buttons when using either theme editor (round buttons are currently a WIP, but should be an option in the next update). Finally, custom themes can also be saved, restored, and shared with others at any time.
 
