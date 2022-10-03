@@ -1,0 +1,74 @@
+<resources>
+    <string-array name="theme_entries">
+        <item>Dark</item>
+        <item>Light</item>
+        <item>Black (Colored Buttons)</item>
+        <item>Black (Black Buttons)</item>
+        <item>Monochrome</item>
+    </string-array>
+
+    <string-array name="theme_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="term_entries">
+        <item>Black</item>
+        <item>Dark</item>
+        <item>Light</item>
+        <item>Ubuntu</item>
+        <item>Ubuntu Dark</item>
+        <item>Matrix</item>
+        <item>Powershell</item>
+    </string-array>
+
+    <string-array name="term_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+
+
+    <string-array name="currency_entries">
+        <item>Upon app startup</item>
+        <item>Upon opening the Conversions section (Recommended)</item>
+        <item>Upon switching to the Currency tab</item>
+    </string-array>
+
+    <string-array name="currency_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+
+    <string-array name="custom_fab_entries">
+        <item>As Buttons</item>
+        <item>In 3-dot Menu</item>
+        <item>Both</item>
+    </string-array>
+
+    <string-array name="custom_fab_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="button_shape_entries">
+        <item>Square</item>
+        <item>Round</item>
+    </string-array>
+
+    <string-array name="button_shape_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_code_24"
+        android:shortcutId="terminal_shortcut"
+        android:shortcutLongLabel="@string/shortcut_long_label"
+        android:shortcutShortLabel="@string/shortcut_short_label">
+
+        <intent
+            android:action="android.intent.action.TERMINAL"
+            android:targetClass="com.mirambeau.termcalc.TerminalActivity"
+            android:targetPackage="com.mirambeau.termcalc"/>
+
+    </shortcut>
+</shortcuts>

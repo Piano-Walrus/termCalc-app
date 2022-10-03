@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/circle_layout"
+    android:paddingHorizontal="16dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cpLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <ImageButton
+            android:id="@+id/bgPrimaryStroke2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/circle_stroke_large"
+            android:clickable="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/bgPrimary2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/circle_large"
+            android:clickable="false"
+            app:layout_constraintBottom_toBottomOf="@+id/bgPrimaryStroke2"
+            app:layout_constraintEnd_toEndOf="@+id/bgPrimaryStroke2"
+            app:layout_constraintStart_toStartOf="@+id/bgPrimaryStroke2"
+            app:layout_constraintTop_toTopOf="@+id/bgPrimaryStroke2" />
+
+        <ImageButton
+            android:id="@+id/cpPaletteIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/ic_baseline_content_paste_24"
+            android:clickable="false"
+            app:layout_constraintBottom_toBottomOf="@+id/bgPrimaryStroke2"
+            app:layout_constraintEnd_toEndOf="@+id/bgPrimaryStroke2"
+            app:layout_constraintStart_toStartOf="@+id/bgPrimaryStroke2"
+            app:layout_constraintTop_toTopOf="@+id/bgPrimaryStroke2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

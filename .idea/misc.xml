@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.35520833333333335" />
+        <entry key="app/src/main/res/drawable/black_circle.xml" value="0.2925" />
+        <entry key="app/src/main/res/drawable/cheat_the_system.xml" value="0.2925" />
+        <entry key="app/src/main/res/drawable/circle.xml" value="0.2925" />
+        <entry key="app/src/main/res/drawable/circle_button.xml" value="0.238" />
+        <entry key="app/src/main/res/drawable/circle_button_LIGHT.xml" value="0.238" />
+        <entry key="app/src/main/res/drawable/circle_cheat_the_system_again.xml" value="0.238" />
+        <entry key="app/src/main/res/drawable/circle_cheat_the_system_again_light.xml" value="0.238" />
+        <entry key="app/src/main/res/drawable/circle_large.xml" value="0.34270833333333334" />
+        <entry key="app/src/main/res/drawable/circle_light_button.xml" value="0.238" />
+        <entry key="app/src/main/res/drawable/circle_medium.xml" value="0.22847222222222222" />
+        <entry key="app/src/main/res/drawable/circle_op.xml" value="0.238" />
+        <entry key="app/src/main/res/drawable/circle_secondary.xml" value="0.238" />
+        <entry key="app/src/main/res/drawable/circle_stroke.xml" value="0.1715" />
+        <entry key="app/src/main/res/drawable/circle_stroke_large.xml" value="0.34270833333333334" />
+        <entry key="app/src/main/res/drawable/circle_stroke_medium.xml" value="0.22847222222222222" />
+        <entry key="app/src/main/res/drawable/circle_tertiary.xml" value="0.238" />
+        <entry key="app/src/main/res/drawable/circle_with_stroke.xml" value="0.2925" />
+        <entry key="app/src/main/res/drawable/dark_circle.xml" value="0.2925" />
+        <entry key="app/src/main/res/drawable/dark_drawer_header_rounded.xml" value="0.238" />
+        <entry key="app/src/main/res/drawable/dark_drawer_item_rounded.xml" value="0.2925" />
+        <entry key="app/src/main/res/drawable/editor_selected_tab.xml" value="0.2925" />
+        <entry key="app/src/main/res/drawable/editor_tab_background.xml" value="0.2925" />
+        <entry key="app/src/main/res/drawable/editor_tabs_outline.xml" value="0.2925" />
+        <entry key="app/src/main/res/drawable/editor_zone_background.xml" value="0.2925" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add_20.xml" value="0.255" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.255" />
+        <entry key="app/src/main/res/drawable/ic_baseline_dot_12.xml" value="0.2925" />
+        <entry key="app/src/main/res/drawable/ic_baseline_format_color_fill_24.xml" value="0.255" />
+        <entry key="app/src/main/res/drawable/ic_baseline_format_color_fill_28.xml" value="0.235" />
+        <entry key="app/src/main/res/drawable/ic_baseline_format_color_text_20.xml" value="0.255" />
+        <entry key="app/src/main/res/drawable/ic_baseline_format_color_text_24.xml" value="0.235" />
+        <entry key="app/src/main/res/drawable/ic_baseline_percent_24.xml" value="0.175" />
+        <entry key="app/src/main/res/drawable/ic_baseline_shape_line_24.xml" value="0.175" />
+        <entry key="app/src/main/res/drawable/ic_baseline_swap_horiz_24.xml" value="0.175" />
+        <entry key="app/src/main/res/drawable/ic_dec_frac_24.xml" value="0.25703125" />
+        <entry key="app/src/main/res/drawable/ic_decfrac.xml" value="0.25703125" />
+        <entry key="app/src/main/res/drawable/ic_expandbg.xml" value="0.255" />
+        <entry key="app/src/main/res/drawable/ic_expandbg_vertical.xml" value="0.255" />
+        <entry key="app/src/main/res/drawable/ic_outline_backspace_24.xml" value="0.238" />
+        <entry key="app/src/main/res/drawable/ic_outline_backspace_36.xml" value="0.238" />
+        <entry key="app/src/main/res/drawable/ic_outline_shape_line_24.xml" value="0.175" />
+        <entry key="app/src/main/res/drawable/ic_pi.xml" value="0.25703125" />
+        <entry key="app/src/main/res/drawable/inner_accent_circle.xml" value="0.2925" />
+        <entry key="app/src/main/res/drawable/light_circle.xml" value="0.2925" />
+        <entry key="app/src/main/res/drawable/rounded_bg_gray.xml" value="0.175" />
+        <entry key="app/src/main/res/drawable/theme_style_selected.xml" value="0.2925" />
+        <entry key="app/src/main/res/drawable/theme_toggle_selected.xml" value="0.2925" />
+        <entry key="app/src/main/res/drawable/theme_toggle_selected_stroke.xml" value="0.2925" />
+        <entry key="app/src/main/res/layout-land/activity_about.xml" value="0.21458333333333332" />
+        <entry key="app/src/main/res/layout-land/activity_about_black.xml" value="0.25" />
+        <entry key="app/src/main/res/layout-land/activity_about_light.xml" value="0.24635416666666668" />
+        <entry key="app/src/main/res/layout-land/activity_licenses.xml" value="0.22035087719298246" />
+        <entry key="app/src/main/res/layout-land/activity_main.xml" value="0.35683760683760685" />
+        <entry key="app/src/main/res/layout-sw360dp/fragment_date.xml" value="0.490625" />
+        <entry key="app/src/main/res/layout-sw411dp-land/activity_main.xml" value="0.22395833333333334" />
+        <entry key="app/src/main/res/layout-sw411dp/activity_main.xml" value="0.26042632066728455" />
+        <entry key="app/src/main/res/layout-sw411dp/fragment_date.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/layout-sw411dp/fragment_dec_to_frac.xml" value="0.3265625" />
+        <entry key="app/src/main/res/layout-sw600dp-land/activity_main.xml" value="0.24081632653061225" />
+        <entry key="app/src/main/res/layout-sw600dp/activity_main.xml" value="0.20880752102919348" />
+        <entry key="app/src/main/res/layout/activity_about.xml" value="0.3265625" />
+        <entry key="app/src/main/res/layout/activity_about_black.xml" value="0.3265625" />
+        <entry key="app/src/main/res/layout/activity_about_light.xml" value="0.3265625" />
+        <entry key="app/src/main/res/layout/activity_advanced_options.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/layout/activity_backups.xml" value="0.21805555555555556" />
+        <entry key="app/src/main/res/layout/activity_changelog.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/layout/activity_changelog_black.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/layout/activity_changelog_light.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/layout/activity_contributors.xml" value="0.1333903377511757" />
+        <entry key="app/src/main/res/layout/activity_editor.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_licenses.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/activity_main_round.xml" value="0.26763574176998717" />
+        <entry key="app/src/main/res/layout/activity_terminal.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/layout/activity_theme_settings.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/layout/assign_shortcut.xml" value="0.21216216216216216" />
+        <entry key="app/src/main/res/layout/backup_card.xml" value="0.21770833333333334" />
+        <entry key="app/src/main/res/layout/batch_edit_item.xml" value="0.21770833333333334" />
+        <entry key="app/src/main/res/layout/batch_edit_menu.xml" value="0.21770833333333334" />
+        <entry key="app/src/main/res/layout/bg_text_dialog.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/layout/bulk_edit_menu.xml" value="0.21770833333333334" />
+        <entry key="app/src/main/res/layout/color_circle.xml" value="0.3265625" />
+        <entry key="app/src/main/res/layout/constants_bottom_sheet.xml" value="0.10902777777777778" />
+        <entry key="app/src/main/res/layout/constants_rv_card.xml" value="0.21216216216216216" />
+        <entry key="app/src/main/res/layout/content.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/editor_card.xml" value="0.21216216216216216" />
+        <entry key="app/src/main/res/layout/enter_variable.xml" value="0.16" />
+        <entry key="app/src/main/res/layout/enter_variable_light.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/layout/enter_variables.xml" value="0.3265625" />
+        <entry key="app/src/main/res/layout/fragment_date.xml" value="0.785" />
+        <entry key="app/src/main/res/layout/function_rv_card.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/layout/functions_bottom_sheet.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/layout/geo_card.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/layout/help_dialog.xml" value="0.3265625" />
+        <entry key="app/src/main/res/layout/history_bottom_sheet.xml" value="0.10902777777777778" />
+        <entry key="app/src/main/res/layout/history_entry.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/layout/history_group.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/layout/main_help_dialog.xml" value="0.1638888888888889" />
+        <entry key="app/src/main/res/layout/new_cpdialog.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/new_function.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/layout/new_gradient_cpdialog.xml" value="0.21216216216216216" />
+        <entry key="app/src/main/res/layout/patron_layout.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/menu/area_jump_menu.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/menu/backups_menu.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/menu/constant_overflow.xml" value="0.21216216216216216" />
+        <entry key="app/src/main/res/menu/custom_overflow.xml" value="0.21216216216216216" />
+        <entry key="app/src/main/res/menu/editor_menu.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/menu/function_overflow.xml" value="0.10902777777777778" />
+        <entry key="app/src/main/res/menu/nav_drawer_menu.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/menu/theme_settings_menu.xml" value="0.1" />
+        <entry key="app/src/main/res/xml/accent_color_preference.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/xml/advanced_theme_preferences.xml" value="0.3265625" />
+        <entry key="app/src/main/res/xml/buttonShapePreference.xml" value="0.13638306968790082" />
+        <entry key="app/src/main/res/xml/button_shape_preference.xml" value="0.33" />
+        <entry key="app/src/main/res/xml/main_theme_preference.xml" value="0.26849080803762293" />
+        <entry key="app/src/main/res/xml/root_preferences.xml" value="0.26849080803762293" />
+      </map>
+    </option>
+  </component>
+  <component name="NullableNotNullManager">
+    <option name="myDefaultNullable" value="org.jetbrains.annotations.Nullable" />
+    <option name="myDefaultNotNull" value="androidx.annotation.NonNull" />
+    <option name="myNullables">
+      <value>
+        <list size="15">
+          <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />
+          <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
+          <item index="2" class="java.lang.String" itemvalue="javax.annotation.CheckForNull" />
+          <item index="3" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.Nullable" />
+          <item index="4" class="java.lang.String" itemvalue="android.support.annotation.Nullable" />
+          <item index="5" class="java.lang.String" itemvalue="androidx.annotation.Nullable" />
+          <item index="6" class="java.lang.String" itemvalue="android.annotation.Nullable" />
+          <item index="7" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNullable" />
+          <item index="8" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.Nullable" />
+          <item index="9" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableDecl" />
+          <item index="10" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableType" />
+          <item index="11" class="java.lang.String" itemvalue="com.android.annotations.Nullable" />
+          <item index="12" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.Nullable" />
+          <item index="13" class="java.lang.String" itemvalue="io.reactivex.annotations.Nullable" />
+          <item index="14" class="java.lang.String" itemvalue="io.reactivex.rxjava3.annotations.Nullable" />
+        </list>
+      </value>
+    </option>
+    <option name="myNotNulls">
+      <value>
+        <list size="15">
+          <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
+          <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
+          <item index="2" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.NonNull" />
+          <item index="3" class="java.lang.String" itemvalue="android.support.annotation.NonNull" />
+          <item index="4" class="java.lang.String" itemvalue="androidx.annotation.NonNull" />
+          <item index="5" class="java.lang.String" itemvalue="android.annotation.NonNull" />
+          <item index="6" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNonNull" />
+          <item index="7" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.NonNull" />
+          <item index="8" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullDecl" />
+          <item index="9" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullType" />
+          <item index="10" class="java.lang.String" itemvalue="com.android.annotations.NonNull" />
+          <item index="11" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.NonNull" />
+          <item index="12" class="java.lang.String" itemvalue="io.reactivex.annotations.NonNull" />
+          <item index="13" class="java.lang.String" itemvalue="io.reactivex.rxjava3.annotations.NonNull" />
+          <item index="14" class="java.lang.String" itemvalue="lombok.NonNull" />
+        </list>
+      </value>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="SuppressKotlinCodeStyleNotification">
+    <option name="disableForAll" value="true" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.21770833333333334" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

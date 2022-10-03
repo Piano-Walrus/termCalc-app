@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_header_bg"
+    android:layout_width="match_parent"
+    android:layout_height="176dp"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:paddingLeft="12dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    android:clipToPadding="false"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:elevation="5dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="5dp"
+        app:layout_constraintStart_toStartOf="@+id/navHeaderIcon"
+        app:layout_constraintEnd_toEndOf="@+id/navHeaderIcon"
+        app:layout_constraintTop_toTopOf="@+id/navHeaderIcon"
+        app:layout_constraintBottom_toBottomOf="@+id/navHeaderIcon">
+
+        <ImageView
+            android:id="@+id/navHeaderIconShadow"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:elevation="5dp"
+            android:contentDescription="@string/navigation_header"
+            app:srcCompat="@drawable/ic_termcalc_icon" />
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/navHeaderIcon"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:contentDescription="@string/navigation_header"
+        android:elevation="50dp"
+        android:layout_marginStart="5dp"
+        app:srcCompat="@drawable/ic_termcalc_icon"
+        app:layout_constraintBottom_toTopOf="@+id/navHeaderTitle"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ImageView
+        android:id="@+id/navHeaderIconRight"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:elevation="50dp"
+        app:srcCompat="@drawable/ic_termcalc_icon_right_half"
+        app:layout_constraintStart_toStartOf="@+id/navHeaderIcon"
+        app:layout_constraintEnd_toEndOf="@+id/navHeaderIcon"
+        app:layout_constraintTop_toTopOf="@+id/navHeaderIcon"
+        app:layout_constraintBottom_toBottomOf="@+id/navHeaderIcon" />
+
+    <ImageView
+        android:id="@+id/navHeaderIconBottomRight"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:elevation="50dp"
+        app:srcCompat="@drawable/ic_termcalc_icon_bottom_right"
+        app:layout_constraintStart_toStartOf="@+id/navHeaderIcon"
+        app:layout_constraintEnd_toEndOf="@+id/navHeaderIcon"
+        app:layout_constraintTop_toTopOf="@+id/navHeaderIcon"
+        app:layout_constraintBottom_toBottomOf="@+id/navHeaderIcon" />
+
+    <ImageView
+        android:id="@+id/navHeaderIconLeftText"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:elevation="50dp"
+        app:srcCompat="@drawable/ic_termcalc_icon_text_left"
+        app:layout_constraintStart_toStartOf="@+id/navHeaderIcon"
+        app:layout_constraintEnd_toEndOf="@+id/navHeaderIcon"
+        app:layout_constraintTop_toTopOf="@+id/navHeaderIcon"
+        app:layout_constraintBottom_toBottomOf="@+id/navHeaderIcon" />
+
+    <ImageView
+        android:id="@+id/navHeaderIconBottomRightText"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:elevation="50dp"
+        app:srcCompat="@drawable/ic_termcalc_icon_text_bottom_right"
+        app:layout_constraintStart_toStartOf="@+id/navHeaderIcon"
+        app:layout_constraintEnd_toEndOf="@+id/navHeaderIcon"
+        app:layout_constraintTop_toTopOf="@+id/navHeaderIcon"
+        app:layout_constraintBottom_toBottomOf="@+id/navHeaderIcon" />
+
+    <ImageView
+        android:id="@+id/navHeaderIconTopRightText"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:elevation="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/navHeaderIcon"
+        app:layout_constraintEnd_toEndOf="@+id/navHeaderIcon"
+        app:layout_constraintStart_toStartOf="@+id/navHeaderIcon"
+        app:layout_constraintTop_toTopOf="@+id/navHeaderIcon"
+        app:srcCompat="@drawable/ic_termcalc_icon_text_top_right" />
+
+    <TextView
+        android:id="@+id/navHeaderTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:text="TermCalc"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/navHeaderSubtitle"
+        app:layout_constraintStart_toStartOf="@+id/navHeaderSubtitle" />
+
+
+    <TextView
+        android:id="@+id/navHeaderSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="4dp"
+        android:text="@string/scientific_calculator"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,89 @@
+<resources>
+    <!-- Main Dark Theme -->
+    <style name="DarkTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="colorPrimary">@color/darkColorPrimary</item>
+        <item name="colorPrimaryDark">@color/darkColorPrimaryDark</item>
+        <item name="colorAccent">#03DAC5</item>
+        <item name="colorSecondary">#00B5A3</item>
+        <item name="android:textColorAlertDialogListItem">#FFFFFF</item>
+        <item name="android:statusBarColor">
+            @android:color/transparent
+        </item>
+        <item name="android:navigationBarColor">
+            #1C232B
+        </item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:textAppearanceLarge">@style/MyTextAppearance</item>
+    </style>
+
+    <!-- Main Monochrome Theme -->
+    <style name="Monochrome" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="colorPrimary">@color/darkColorPrimary</item>
+        <item name="colorPrimaryDark">@color/darkColorPrimaryDark</item>
+        <item name="colorAccent">#03DAC5</item>
+        <item name="colorSecondary">#00B5A3</item>
+        <item name="android:textColorAlertDialogListItem">#FFFFFF</item>
+        <item name="android:statusBarColor">
+            @android:color/transparent
+        </item>
+        <item name="android:navigationBarColor">
+            #1C232B
+        </item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:textAppearanceLarge">@style/MyTextAppearance</item>
+    </style>
+
+    <!-- Main Light Theme -->
+    <style name="LightTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="colorPrimary">@color/lightColorPrimary</item>
+        <item name="colorPrimaryDark">@color/lightColorPrimaryDark</item>
+        <item name="colorAccent">#03DAC5</item>
+        <item name="colorSecondary">#00B5A3</item>
+        <item name="android:statusBarColor">
+            @android:color/transparent
+        </item>
+        <item name="android:navigationBarColor">
+            #E2E2E2
+        </item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:textAppearanceLarge">@style/MyTextAppearance</item>
+    </style>
+
+    <style name="DarkThemeDialog" parent="android:Theme.Material.Light.Dialog">
+        <item name="colorPrimary">@color/darkColorPrimary</item>
+        <item name="colorPrimaryDark">@color/darkColorPrimaryDark</item>
+        <item name="colorAccent">#03DAC5</item>
+        <item name="colorSecondary">#00B5A3</item>
+        <item name="android:textColorAlertDialogListItem">#222222</item>
+
+        <item name="android:textAppearanceLarge">@style/MyTextAppearance</item>
+        <item name="android:textColorSecondary">#222222</item>
+        <item name="android:textColorPrimary">#222222</item>
+    </style>
+
+
+    <style name="MyTextAppearance" parent="@android:style/TextAppearance.Large">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="DarkTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/rounded_dialog</item>
+    </style>
+
+
+</resources>

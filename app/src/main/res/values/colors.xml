@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark Theme -->
+    <color name="darkColorPrimary">#272C33</color>
+    <color name="darkColorPrimaryDark">#202227</color>
+    <color name="darkColorText">#FFFFFF</color>
+
+    <!-- Light Theme -->
+    <color name="lightColorPrimary">#FFFFFF</color>
+    <color name="lightColorPrimaryDark">#FFFFFF</color>
+
+    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccentDarker">#46B8A9</color>
+
+    <color name="colorDarkest">#16171B</color>
+
+    <color name="darkNavItemBG">#21000000</color>
+    <color name="blackNavItemBG">#3B000000</color>
+    <color name="lightNavItemBG">#0F000000</color>
+
+    <color name="transparentWhite">#BFFFFFFF</color>
+    <color name="rippleWhite">#3EFFFFFF</color>
+    <color name="rippleDarkGray">#3EFFFFFF</color>
+</resources>

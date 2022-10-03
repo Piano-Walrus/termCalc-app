@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/micrograms"
+        android:orderInCategory="0"
+        android:title="Micrograms"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/milligrams"
+        android:orderInCategory="1"
+        android:title="Milligrams"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/centigrams"
+        android:orderInCategory="2"
+        android:title="Centigrams"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/grams"
+        android:orderInCategory="3"
+        android:title="Grams"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/kilograms"
+        android:orderInCategory="4"
+        android:title="Kilograms"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/ounces"
+        android:orderInCategory="5"
+        android:title="Ounces"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/pounds"
+        android:orderInCategory="6"
+        android:title="Pounds"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/newtons"
+        android:orderInCategory="7"
+        android:title="Newtons"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/stones"
+        android:orderInCategory="8"
+        android:title="Stones"
+        app:showAsAction="never"/>
+
+</menu>

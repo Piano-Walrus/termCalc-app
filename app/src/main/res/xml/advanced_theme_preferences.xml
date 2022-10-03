@@ -1,0 +1,49 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:title="General">
+
+        <SwitchPreference
+            app:title="Theme Nav Drawer"
+            android:summary="@string/theme_nav_summary"
+            android:key="navTheme"
+            android:defaultValue="true"
+            app:icon="@drawable/ic_baseline_menu_24" />
+
+        <SwitchPreference
+            app:title="Force Dark Nav Drawer"
+            android:summary="Always set the nav drawer to dark mode."
+            android:key="isAlwaysDarkNav"
+            android:defaultValue="false"
+            app:icon="@drawable/ic_baseline_dark_mode_24" />
+
+        <SwitchPreference
+            app:title="Darken Dark Mode Status Bar"
+            android:summary="Darken the status bar slightly when using a custom dark theme."
+            android:key="darkStatusBar"
+            android:defaultValue="false"
+            app:icon="@drawable/ic_baseline_opacity_24" />
+
+        <SwitchPreference
+            app:title="Darken Top Bar Tab"
+            android:summary="Slightly darken the tab above the top bar."
+            android:key="isDarkTab"
+            android:defaultValue="true"
+            app:icon="@drawable/ic_baseline_expand_up_light_24" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="Terminal">
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/term_entries"
+            android:entryValues="@array/term_values"
+            android:key="termTheme"
+            app:icon="@drawable/ic_palette_24"
+            app:title="Terminal Theme"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

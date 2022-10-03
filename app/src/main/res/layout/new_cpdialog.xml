@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/colorPickerTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:text="Color Picker"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/clipboardTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:text="Clipboard"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/divider2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cpLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:layout_constraintBottom_toBottomOf="@+id/divider2"
+                    app:layout_constraintEnd_toEndOf="@+id/colorPickerTitle"
+                    app:layout_constraintStart_toStartOf="@+id/colorPickerTitle"
+                    app:layout_constraintTop_toTopOf="@+id/divider2" >
+
+                    <ImageButton
+                        android:id="@+id/bgPrimaryStroke2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:src="@drawable/circle_stroke_large"
+                        android:clickable="false"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/bgPrimary2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:src="@drawable/circle_large"
+                        android:clickable="false"
+                        app:layout_constraintBottom_toBottomOf="@+id/bgPrimaryStroke2"
+                        app:layout_constraintEnd_toEndOf="@+id/bgPrimaryStroke2"
+                        app:layout_constraintStart_toStartOf="@+id/bgPrimaryStroke2"
+                        app:layout_constraintTop_toTopOf="@+id/bgPrimaryStroke2" />
+
+                    <ImageButton
+                        android:id="@+id/cpPaletteIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:src="@drawable/ic_palette_24"
+                        android:clickable="false"
+                        app:layout_constraintBottom_toBottomOf="@+id/bgPrimaryStroke2"
+                        app:layout_constraintEnd_toEndOf="@+id/bgPrimaryStroke2"
+                        app:layout_constraintStart_toStartOf="@+id/bgPrimaryStroke2"
+                        app:layout_constraintTop_toTopOf="@+id/bgPrimaryStroke2" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="1dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintStart_toEndOf="@+id/colorPickerTitle"
+                app:layout_constraintTop_toBottomOf="@+id/colorPickerTitle" />
+
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="1dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="24dp"
+                android:background="?android:attr/listDivider"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/colorPickerTitle"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/errorText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="No colors found in clipboard"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/cpLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/clipboardTitle"
+                app:layout_constraintTop_toTopOf="@+id/cpLayout" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/clipboardRv"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:clipToPadding="false"
+                android:paddingStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cpLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/divider4"
+                app:layout_constraintTop_toTopOf="@+id/cpLayout">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/hexTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="Hex:"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+            <TextView
+                android:id="@+id/hashtag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="#"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/hexField"
+                app:layout_constraintStart_toEndOf="@+id/hexTitle"
+                app:layout_constraintTop_toTopOf="@+id/hexField" />
+
+            <EditText
+                android:id="@+id/hexField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="FFFFFF"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/hexTitle"
+                app:layout_constraintStart_toEndOf="@+id/hashtag"
+                app:layout_constraintTop_toTopOf="@+id/hexTitle" />
+
+            <ImageButton
+                android:id="@+id/copyHex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_content_copy_24"
+                android:background="?selectableItemBackgroundBorderless"
+                android:layout_marginStart="2dp"
+                android:padding="6dp"
+                app:layout_constraintStart_toEndOf="@id/hexField"
+                app:layout_constraintTop_toTopOf="@id/hexField"
+                app:layout_constraintBottom_toBottomOf="@id/hexField" />
+
+            <TextView
+                android:id="@+id/bottomSpacer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text=" "
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/hexField"
+                app:layout_constraintTop_toBottomOf="@+id/hexField" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

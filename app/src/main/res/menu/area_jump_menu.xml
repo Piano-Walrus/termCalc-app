@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/square"
+        android:orderInCategory="0"
+        android:title="Square"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/rectangle"
+        android:orderInCategory="0"
+        android:title="Rectangle"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/circle"
+        android:orderInCategory="2"
+        android:title="Circle"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/ellipse"
+        android:orderInCategory="3"
+        android:title="Ellipse"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/triangle"
+        android:orderInCategory="4"
+        android:title="Triangle"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/trapezoid"
+        android:orderInCategory="5"
+        android:title="Trapezoid"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/Parallelogram"
+        android:orderInCategory="6"
+        android:title="Parallelogram"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/pentagon"
+        android:orderInCategory="7"
+        android:title="Pentagon"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/hexagon"
+        android:orderInCategory="8"
+        android:title="Hexagon"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/heptagon"
+        android:orderInCategory="9"
+        android:title="Heptagon"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/octagon"
+        android:orderInCategory="10"
+        android:title="Octagon"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/nonagon"
+        android:orderInCategory="12"
+        android:title="Nonagon"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/decagon"
+        android:orderInCategory="12"
+        android:title="Decagon"
+        app:showAsAction="never"/>
+
+</menu>

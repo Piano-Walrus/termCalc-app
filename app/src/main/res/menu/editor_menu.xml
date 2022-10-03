@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/backups"
+        android:orderInCategory="103"
+        android:icon="@drawable/ic_baseline_list_24"
+        android:title="Backups"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/help"
+        android:orderInCategory="105"
+        android:title="Help"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/resetAll"
+        android:orderInCategory="106"
+        android:title="Reset to Defaults"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/advancedOptions"
+        android:orderInCategory="107"
+        android:title="Advanced Options"
+        app:showAsAction="never"/>
+
+</menu>

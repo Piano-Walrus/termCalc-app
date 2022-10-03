@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="configuration_menu_header" translatable="false">Personalización</string>
+    <string name="history" translatable="false">Historia</string>
+    <string name="date_menu_item" translatable="false">Cálculo de Fecha</string>
+    <string name="about_menu_item" translatable="false">Información</string>
+    <string name="scientific_calculator" translatable="false">Calculadora Científica</string>
+    <string name="other_menu_header" translatable="false">Más</string>
+    <string name="theme_settings" translatable="false">Configuración del Tema</string>
+    <string name="home_menu_item" translatable="false">Pantalla Principal</string>
+    <string name="parse_error">Error de Análisis</string>
+    <string name="domain_error">Error de Dominio</string>
+    <string name="dec_frac_menu_item">Decimal a Fracción</string>
+    <string name="conversions_menu_item">Conversiones</string>
+    <string name="check_for_updates">Buscar Actualizaciones</string>
+    <string name="licenses">Licencias y Créditos</string>
+    <string name="contributors">Contribuyentes</string>
+    <string name="version">Versión</string>
+    <string name="current_release">Versión Actual</string>
+    <string name="previous_versions">Versiónes Previas</string>
+    <string name="changelog">Registro de Cambios</string>
+    <string name="licenses_title">Licencias</string>
+    <string name="geometry">Geometry</string>
+    <string name="volume">VOLUME</string>
+    <string name="surface_area">SURFACE AREA</string>
+</resources>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/square"
+        android:orderInCategory="0"
+        android:title="USD"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/rectangle"
+        android:orderInCategory="1"
+        android:title="EUR"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/circle"
+        android:orderInCategory="2"
+        android:title="GBP"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/canadianDollar"
+        android:orderInCategory="3"
+        android:title="CAD"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/australianDollar"
+        android:orderInCategory="4"
+        android:title="AUD"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/mexicanPeso"
+        android:orderInCategory="5"
+        android:title="MXN"
+        app:showAsAction="never"/>
+
+</menu>

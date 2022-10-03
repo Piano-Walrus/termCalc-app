@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/contributors"
+        android:orderInCategory="104"
+        android:title="@string/contributors"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/attributions"
+        android:orderInCategory="104"
+        android:title="@string/licenses"
+        app:showAsAction="never"/>
+
+</menu>

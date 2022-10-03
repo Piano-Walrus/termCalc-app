@@ -1,0 +1,361 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" translatable="false">TermCalc</string>
+
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+
+    <string name="home_menu_item">Home</string>
+
+    <string name="date_menu_item">Date Calculator</string>
+    <string name="dec_frac_menu_item">Decimal to Fraction</string>
+    <string name="term_menu_item" translatable="false">Theme</string>
+    <string name="conversions_menu_item">Conversions</string>
+    <string name="about_menu_item">About</string>
+    <string name="configuration_menu_header">Personalization</string>
+    <string name="other_menu_header">Other</string>
+    <string name="history">History</string>
+    <string name="changelog">Changelog</string>
+
+    <string name="theme_settings">Settings</string>
+
+    <string name="current_changes" translatable="false" tools:ignore="TypographyDashes">
+        1. You can now switch between square buttons and rounded buttons in Theme Settings!
+        \n2. The \"Functions\" section has been redesigned to make evaluating functions more convenient.
+        \n3. After pressing the equals button, the previously-entered expression will now appear above the result.\n
+        Note: This behavior can be disabled in settings.
+        \n4. The equals/clear animation is now a bit smoother.
+        \n5. The changelog will now display one more previous version.
+        \n6. Minor bug fixes and performance improvements.
+
+    </string>
+
+    <string name="version">Version</string>
+
+    <string name="previous_version" translatable="false">13.0.1</string>
+    <string name="previous_changes" translatable="false" tools:ignore="TypographyDashes">
+        1. Fixed a bug that caused some button text colors to not properly reset after selecting \"Reset to Defaults\" in the Theme Editor.
+        \n2. Added the \"sym\" command to the terminal\'s help text.
+        \n3. Minor bug fixes and performance improvements.
+
+    </string>
+
+    <string name="before_previous_version" translatable="false">13.0.0</string>
+    <string name="before_previous_changes" translatable="false" tools:ignore="TypographyDashes">
+        1. Completely redesigned the Theme Editor! Editing themes is now much easier.
+        \n2. Importing themes saved using version 13.0.0 and onward will no longer require you to enter a theme name, nor will these themes occasionally import with automatically-populated incorrect names.
+        \n3. You can now make the color of the button above the delete button different from the delete button\'s color.
+        \n4. Changed the modulus symbol from \"%\" to \"mod\" to avoid confusion. If you would like to change back to the \"%\" symbol, simply type \"sym -mod \"%\"\" in the terminal.\n
+        Note: This button will always input \"%\" into the current expression when pressed, regardless of its symbol.
+        \n5. You can now choose whether the top bar tab is darkened or not in \"Advanced Options.\"
+        \n6. Removed the \"backup\" and \"restore\" commands from the terminal, as they were broken and using the new editor for these functions is much easier anyway.
+        \n7. Made a few slight changes to how themes are interpreted under the hood. As a result, some older themes may need to be updated to support version 13.0.0 and above (simply restore each old theme, edit any incorrect colors, then save the theme again).
+        \n8. Fixed a bug that prevented some button colors from changing when resetting a theme back to default.
+        \n9. A ton of bug fixes for tablets and foldables.
+        \n10. Fixed multiple bugs related to the \"Date Calculator\" section.
+        \n11. The \"debug stack\" command will now work even after the application is restarted.\n
+        Note: Crash reports will still be cleared after two restarts.
+        \n12. Many other minor bug fixes and performance improvements.
+
+    </string>
+
+    <string name="before_previous_version2" translatable="false">12.2.0</string>
+    <string name="before_previous_changes2" translatable="false" tools:ignore="TypographyDashes">
+        1. You can now assign shortcuts to any of your saved Custom Constants! Try out the new feature by tapping the three dots on any constant\'s card.
+        \n2. Various bug fixes.
+
+    </string>
+
+    <string name="before_previous_version3" translatable="false">12.1.7</string>
+    <string name="before_previous_changes3" translatable="false" tools:ignore="TypographyDashes">
+        1. Fixed a very rare crash that could occur when changing theme settings under very specific circumstances.
+
+    </string>
+
+    <string name="before_previous_version4" translatable="false">12.1.6</string>
+    <string name="before_previous_changes4" translatable="false" tools:ignore="TypographyDashes">
+        1. Fixed a bug that would cause buttons to display incorrectly in landscape layouts.
+        \n2. Other minor bug fixes.
+
+    </string>
+
+
+    <string name="termHash" translatable="false"><![CDATA[</:]]></string>
+    <string name="rad" translatable="false">RAD</string>
+    <string name="check_for_updates">Check For Updates</string>
+    <string name="navigation_header" translatable="false">Navigation Header</string>
+    <string name="scientific_calculator">Scientific Calculator</string>
+    <string name="domain_error">Domain Error</string>
+    <string name="parse_error">Parse Error</string>
+
+
+    <string name="help_text" translatable="false">\n\nCurrently supported commands:\n
+         • help - prints all available commands\n
+        *Note: You can type \"help [command]\" to learn more about a particular command.\nExample: \"help set\"\n
+         • set [button code] [color hex] - sets a color in the current theme\n
+         • get [button code] - prints a color in the current theme\n
+         • sym -mod [any text] - sets the text of the \"mod\" button\n
+         • reset [button code] - resets a color in the current theme to its default value\n
+         • copy [button code] - copies a color in the current theme to the device\'s clipboard\n
+         • share [theme name] - export a theme\n
+         • mode [theme number] - changes the current base theme\n
+         • delete [theme name] - deletes the selected custom theme\n
+         • recreate - restarts the home layout (mostly used for development testing)\n
+         • themes - lists all backed up themes
+
+    </string>
+
+    <string name="help_debug" translatable="false">\n\n\n - Debug commands - \n\n
+         • debug [0/1] - enables or disables debug mode, which displays extra information about the inner workings of the main calculator\n
+         • debug sc [0/1] - enables or disables a shortcut that allows you to quickly access the terminal by long-pressing the 0 key on the home screen\n
+         • debug stack - prints the last recorded crash report\n
+         • debug reason - essentially just a shorter version of \"debug stack\"\n
+         • debug throw - throws a test exception, mainly just to test the \"debug stack\" command\n
+         • debug last - prints information regarding the last performed calculation\n
+         • tinydb [data type] [key] [value] - accesses or modifies an entry in the application\'s shared preferences\n
+         • minWidth - prints the device\'s current minimum width value\n
+         • textSize [size] - sets the text size of main calculator\'s output (recommended size: between 20-40, default size: 30)\n
+         • accent [key] - sets the accent color when using a basic theme. \"key\" corresponds to the order of the color in the theme editor (however, baby blue is 17,
+        and bright yellow is 14, so be sure to skip over each of those when counting)\n
+
+    </string>
+
+    <string name="help_help" translatable="false">\n\n~Help~
+        \nDescription: prints all available commands
+        \nUsages:\n
+        • help\n
+        • help [command]\n
+        • ?\n
+        • ? [command]\n
+
+        \nExamples: help, help set, ? backup\n
+
+        \nIf the user simply enters \"help\" or \"?\", the terminal will simply list all possible commands that can be entered. However, if the
+        user follows either of these with the name of a command, the terminal will then show more information regarding that command.\n
+
+    </string>
+
+    <string name="help_set" translatable="false">\n\n~Set~
+        \nDescription: sets a color in the current theme
+        \nUsage: set [button code] [color hex code]
+        \nExamples:\n
+        • set -p #FFFFFF\n
+        • set -kt gui\n
+
+        \nButton Codes:\n
+        -a sets all colors\n
+        -p sets primary\n
+        -s sets secondary\n
+        -t sets tertiary\n
+        -k sets keypad color\n
+        -m sets main background color\n
+        -f sets delete button color\n
+        -tt sets text color of top bar\n
+        -kt sets text color of number keypad\n
+        -ft sets icon color of delete button\n\n
+
+        -b[Button Text] sets that button\'s color\n
+        i.e. -bπ sets the color of the π button\n
+        -b[Button Text]t sets that button\'s text color\n
+        i.e. -b√t sets the text color of the √ button\n\n
+
+        **Typing any of these followed by \"gui\" will open a color picker (i.e. \"set -p gui\")**\n\n
+
+    </string>
+
+    <string name="help_get" translatable="false">\n\n~Get~
+        \nDescription: prints a color in the current theme
+        \nUsage: get [button code]
+        \nExample: get -p\n
+
+        \nButton Codes:\n
+        -a: all colors\n
+        -p: primary\n
+        -s: secondary\n
+        -t: tertiary\n
+        -k: keypad color\n
+        -m: main background color\n
+        -f: delete button color\n
+        -tt: top bar text color\n
+        -kt: keypad text color\n
+        -ft: delete button icon color\n
+
+        -b[Button Text]: specific button color
+        -b[Button Text]t: specific button text color
+
+    </string>
+
+    <string name="help_copy" translatable="false">\n\n~Copy~
+        \nDescription: copies a color in the current theme to the device\'s clipboard
+        \nUsage: copy [button code]
+        \nExample: copy -p\n
+
+        \nButton Codes:\n
+        -a: all colors\n
+        -p: primary\n
+        -s: secondary\n
+        -t: tertiary\n
+        -k: keypad color\n
+        -m: main background color\n
+        -f: delete button color\n
+        -tt: top bar text color\n
+        -kt: keypad text color\n
+        -ft: delete button icon color\n
+
+        -b[Button Text]: specific button color
+        -b[Button Text]t: specific button text color
+
+    </string>
+
+    <string name="help_share" translatable="false">\n\n~Share~
+        \nDescription: opens the share-sheet so that you can send a theme to another app
+        \nUsage: share [theme name]
+        \nExample: share myTheme\n
+
+        \nThis command is essentially the same as pressing the share button in the \"Backups\" section of the Theme Editor. It opens the ShareSheet, and shows all apps that can accept text files. This command is necessary now as themes are no longer stored in a user-accessible directory.\n
+
+    </string>
+
+    <string name="help_sym" translatable="false">\n\n~Sym~
+        \nDescription: changes the text (or \"symbol\") of the modulus button
+        \nUsages:\n
+        • sym -mod \"[any text]\"\n
+        • sym [button code] \"[any text]\"\n
+        \n(Note: This command currently only works with the \"mod\" button)\n
+        \nExamples:\n
+        • sym -mod \"%\"\n
+        • sym -b%t \"mod\"\n
+
+        \nThis command was implemented after the text of the modulus button was changed from \"%\" to \"mod\" to reduce confusion among users who are unfamiliar with the modulus function.
+        Some devices may even let you set this button\'s text to an emoji, though I wouldn\'t recommend that as it may cause issues.\n
+
+    </string>
+
+    <string name="help_mode" translatable="false">\n\n~Mode~
+        \nDescription: changes the current base theme
+        \nUsage: mode [theme number]
+        \nExample: mode 2\n
+
+        \nTyping \"mode\" followed by a number from 1-5, will change your theme to the corresponding theme. For instance, as \"Light\" is the second option for \"Main Theme\" in \"Theme Settings\", typing \"mode 2\" will change the current base theme to \"Light\".\n
+
+    </string>
+
+    <string name="help_delete" translatable="false">\n\n~Delete~
+        \nDescription: deletes the selected custom theme
+        \nUsage: delete [theme name]\n
+
+        \nThis command simply deletes the file associated with the selected theme.\n
+
+    </string>
+
+    <string name="help_reset" translatable="false">\n\n~Reset~
+        \nDescription: resets a color in the current theme to its default value
+        \nUsages:\n
+        • reset all\n
+        • reset buttons\n
+        • reset [Button Code]
+        \nExamples:\n
+        • reset -p\n
+        • reset -bπt\n
+
+        \nThis command resets any button, zone, or group of buttons, to their default values. Before update 10.5.0, this was done by entering \"set [Button Code] #reset0\". The previous method is still functional, however this new reset command is simpler and more reliable.\n
+
+    </string>
+
+    <string name="help_recreate" translatable="false">\n\n~Recreate~
+        \nDescription: restarts the home layout\n
+
+        \nEssentially, all this command does is refresh the home layout to update colors in a theme, set the text and top bar back to their default positions, etc.
+        It\'s mostly used to test certain things while developing the app. It isn\'t really too useful, especially since most commands that would require this functionality, do this anyway.
+        However, in certain scenarios it can help with identifying bugs, or testing new features.\n
+
+    </string>
+
+    <string name="help_themes" translatable="false">\n\n~Themes~
+        \nDescription: lists all backed up themes\n
+
+        \nThis command simply lists all the themes that are currently present in the \"TermCalc Themes\" directory on this device.\n
+
+        \n*Note: This command will list themes as filenames, i.e. myTheme.txt. When restoring or backing up these themes, the extension is not meant
+        to be typed with the command. So, for instance, when restoring a theme named \"myTheme.txt\", you should only type \"restore myTheme\" and exclude the file extension.\n
+
+    </string>
+
+    <string name="custom_editor">
+        Enables the ability to change individual zone/button colors in your theme.
+
+    </string>
+
+    <string name="unsaved_confirmation">Do you want to apply your changes to the current theme?</string>
+
+
+    <string name="licenses">Licenses &amp; Credits</string>
+    <string name="licenses_title">Licenses</string>
+    <string name="contributors">Contributors</string>
+
+
+    <string name="firstCont" translatable="false">Odalys (@sleepyhead)</string>
+    <string name="contDesc1" translatable="false">
+    Proofreading, spanish translations, moral support
+    </string>
+
+    <string name="secondCont" translatable="false">Chris (@Quetzhal)</string>
+    <string name="contDesc2" translatable="false">
+    Helped me find, and fix, a TON of bugs
+    </string>
+    <string name="current_release">Current Release</string>
+    <string name="previous_versions">Previous Versions</string>
+    <string name="google_copyright">Copyright © Google Inc. All rights reserved.</string>
+    <string name="junit_copyright">Copyright © 2021 The JUnit Team</string>
+    <string name="azeesoft_copyright">Copyright © 2016 AzeeSoft</string>
+    <string name="appintro_copyright" tools:ignore="TypographyDashes">Copyright © 2015-2020 AppIntro Developers</string>
+    <string name="mathview_copyright" tools:ignore="TypographyDashes">Copyright © MathView Developers</string>
+    <string name="bigdecimalmath_copyright" tools:ignore="TypographyDashes">Copyright © 2017 Eric Obermühlner</string>
+
+    <string name="twitter_title">Twitter Icon by \"Pixel perfect\"</string>
+    <string name="image_attributions">Image Attributions:</string>
+    <string name="apache_licenses">Apache 2.0 Licenses:</string>
+    <string name="constants">Constants</string>
+    <string name="functions">Functions</string>
+    <string name="geometry">Geometry</string>
+    <string name="area" translatable="false">AREA</string>
+    <string name="volume">VOLUME</string>
+    <string name="surface_area">SURFACE AREA</string>
+
+    <string name="backups">Backup/Restore</string>
+    <string name="importNew">Import</string>
+    <string name="backup_current_theme">Backup current theme</string>
+
+    <string name="editor_help">
+        Tap any button to change its colors.
+        \n\nTo modify entire groups of buttons, select the \"Zones\" tab towards the bottom of the
+        screen, then tap the groups you\'d like to modify.
+        \n\nTo toggle Light/Dark modes, tap the Moon/Sun icon at the bottom of the screen.
+
+    </string>
+
+    <string name="main_help">
+        The function bar at the top of the keypad can be scrolled both horizontally, and vertically. It can also be expanded by pressing the small arrow key above it.
+        \n\nYou can long-press \"√\" after typing any number, to input an n-th root (the root being the number you typed initially). You can also
+        long-press \"log\" after any number to input a log with that number as the base. Finally, long-pressing any trigonometric function will input its hyperbolic counterpart.
+        \n\nWhen on the \"History\" screen, you can paste any history entry simply by tapping it.
+        \n\nFeel free to contact me from the \"About\" page if you have any other questions, bug reports, or suggestions! (:
+
+    </string>
+
+    <!-- Long label should be <= 25 characters-->
+    <string name="shortcut_long_label">Terminal</string>
+    <!-- Short label should be <= 10 characters-->
+    <string name="shortcut_short_label">Terminal</string>
+
+    <string name="terminal_intro_text">Type \"help\" or \"?\" for a list of available commands.\n
+
+    </string>
+    <string name="new_function">New Function</string>
+    <string name="new_constant">New Constant</string>
+
+    <string name="theme_nav_summary">When \"Custom Colors\" is enabled, apply the colors in your theme to the nav drawer.</string>
+    <string name="clear">Clear</string>
+    <string name="focus_summary">Hides system bars to minimize distraction.</string>
+
+
+</resources>

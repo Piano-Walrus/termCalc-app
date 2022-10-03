@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/cube"
+        android:orderInCategory="0"
+        android:title="Cube"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/rectangularPrism"
+        android:orderInCategory="0"
+        android:title="Rectangular Prism"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/sphere"
+        android:orderInCategory="2"
+        android:title="Sphere"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/hemisphere"
+        android:orderInCategory="3"
+        android:title="Hemisphere"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/triangularPrism"
+        android:orderInCategory="4"
+        android:title="Triangular Prism"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/triangularPyramid"
+        android:orderInCategory="5"
+        android:title="Pyramid (Triangular Base)"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/squarePyramid"
+        android:orderInCategory="6"
+        android:title="Pyramid (Rectangular Base)"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/hexagon"
+        android:orderInCategory="7"
+        android:title="Pentagonal Prism"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/heptagon"
+        android:orderInCategory="8"
+        android:title="Cone"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/octagon"
+        android:orderInCategory="9"
+        android:title="Cylinder"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/nonagon"
+        android:orderInCategory="10"
+        android:title="Regular Octahedron"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/decagon"
+        android:orderInCategory="12"
+        android:title="Dodecahedron"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/torus"
+        android:orderInCategory="12"
+        android:title="Torus"
+        app:showAsAction="never"/>
+
+</menu>

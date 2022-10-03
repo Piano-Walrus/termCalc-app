@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_24"
+            android:title="@string/home_menu_item" />
+
+        <item android:id="@+id/nav_conversions"
+            android:icon="@drawable/ic_conversions_24"
+            android:title="@string/conversions_menu_item" />
+
+        <item android:id="@+id/nav_date"
+            android:icon="@drawable/ic_calendar_24"
+            android:title="@string/date_menu_item" />
+
+        <item android:id="@+id/nav_geo"
+            android:icon="@drawable/ic_baseline_square_foot_24"
+            android:title="@string/geometry" />
+
+    </group>
+
+    <item android:title="@string/configuration_menu_header">
+        <menu>
+
+            <item android:id="@+id/nav_term"
+                android:icon="@drawable/ic_palette_24"
+                android:title="@string/term_menu_item" />
+
+            <item android:id="@+id/nav_theme"
+                android:icon="@drawable/ic_baseline_settings_24"
+                android:title="@string/theme_settings" />
+
+        </menu>
+    </item>
+
+    <item android:title = "@string/other_menu_header">
+        <menu>
+
+            <item android:id="@+id/nav_about"
+                android:icon="@drawable/ic_baseline_info_filled_24"
+                android:title="@string/about_menu_item" />
+
+        </menu>
+    </item>
+
+</menu>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/square"
+        android:orderInCategory="0"
+        android:title="Milliliters"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/rectangle"
+        android:orderInCategory="1"
+        android:title="Liters"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/circle"
+        android:orderInCategory="2"
+        android:title="Cubic Meters"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/ellipse"
+        android:orderInCategory="3"
+        android:title="Ounces"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/triangle"
+        android:orderInCategory="4"
+        android:title="Cups"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/trapezoid"
+        android:orderInCategory="5"
+        android:title="Pints"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/Parallelogram"
+        android:orderInCategory="6"
+        android:title="Quarts"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/pentagon"
+        android:orderInCategory="7"
+        android:title="Gallons"
+        app:showAsAction="never"/>
+
+</menu>
