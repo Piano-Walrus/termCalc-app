@@ -5390,7 +5390,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             int i, k, l;
 
-            String previous;
+            String previous, resultStr;
 
             if (isLegacy) {
                 tinydb.putString("buttonPresses", Aux.getStrArray(buttonPresses));
@@ -5451,6 +5451,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             }
 
                             previous = eq3;
+                            resultStr = previousExpression.getText().toString();
 
                             equalPressed = true;
                             equaled = false;
@@ -5624,8 +5625,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         //Set text of previous expression TextView
                                         try {
                                             if (previousExpression != null) {
-                                                if (!previousExpression.getText().toString().equals("\0"))
-                                                    tv.setText(previousExpression.getText().toString());
+                                                if (!resultStr.equals("\0") && !resultStr.equals(" "))
+                                                    tv.setText(resultStr);
 
                                                 if (previous != null)
                                                     previousExpression.setText(previous.trim());
