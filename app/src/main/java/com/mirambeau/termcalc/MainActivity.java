@@ -1627,9 +1627,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 onButtonPressed(v);
                             }
                         });
-                    } catch (Exception what) {
-                        what.printStackTrace();
-                        //Log.d("huh", "i = " + i + "     j = " + j);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
             }
