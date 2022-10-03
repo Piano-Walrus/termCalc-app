@@ -319,8 +319,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             allButtons = new Button[][]{nums, compBar, trigBar, mainOps, {bDec, bParenthesisOpen, bParenthesisClose, bEquals, bMod}};
 
-            final Vibrator vibe = (Vibrator) MainActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
-
             tv = findViewById(R.id.equation);
 
             if (tinydb.getBoolean("showPreviousExpression"))
@@ -1928,7 +1926,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public boolean onLongClick(View v) {
                     Button sin = (Button) v;
 
-                    vibe.vibrate(25);
+                    vibe(25);
 
                     String pressed = sin.getText().toString();
 
@@ -1946,7 +1944,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public boolean onLongClick(View v) {
                     Button cos = (Button) v;
 
-                    vibe.vibrate(25);
+                    vibe(25);
 
                     String pressed = cos.getText().toString();
 
@@ -1964,7 +1962,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public boolean onLongClick(View v) {
                     Button tan = (Button) v;
 
-                    vibe.vibrate(25);
+                    vibe(25);
 
                     String pressed = tan.getText().toString();
 
@@ -1982,7 +1980,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public boolean onLongClick(View v) {
                     Button csc = (Button) v;
 
-                    vibe.vibrate(25);
+                    vibe(25);
 
                     String pressed = csc.getText().toString();
 
@@ -2000,7 +1998,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public boolean onLongClick(View v) {
                     Button sec = (Button) v;
 
-                    vibe.vibrate(25);
+                    vibe(25);
 
                     String pressed = sec.getText().toString();
 
@@ -2018,7 +2016,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public boolean onLongClick(View v) {
                     Button cot = (Button) v;
 
-                    vibe.vibrate(25);
+                    vibe(25);
 
                     String pressed = cot.getText().toString();
 
@@ -2080,7 +2078,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             if (!dontVibe) {
                                 int vibeDuration = tinydb.getInt("vibeDuration");
 
-                                vibe.vibrate(vibeDuration);
+                                vibe(vibeDuration);
 
                                 tinydb.putInt("vibeDuration", 25);
                             }
@@ -2247,7 +2245,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     if (!Aux.isNull(eq3) && Aux.isNum(Aux.lastChar(eq3))) {
                         int vibeDuration = tinydb.getInt("vibeDuration");
 
-                        vibe.vibrate(vibeDuration);
+                        vibe(vibeDuration);
 
                         tinydb.putInt("vibeDuration", 25);
 
@@ -8425,7 +8423,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 e.printStackTrace();
             }
 
-            vibe.vibrate(25);
+            vibe(25);
 
             showRippleAnimation(bgAnim);
 
@@ -8489,7 +8487,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (roundedButtons) {
                     for (i=0; i < MTButtons.length; i++) {
                         try {
-                            MTButtons[i].setBackground(backgrounds[i]);
+                            if (backgrounds != null)
+                                MTButtons[i].setBackground(backgrounds[i]);
                         }
                         catch (Exception e) {
                             e.printStackTrace();
@@ -8498,5 +8497,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         }, 368);
+    }
+
+    public void vibe(int duration) {
+        final Vibrator vibe = (Vibrator) MainActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
+
+        vibe.vibrate(duration);
     }
 }
