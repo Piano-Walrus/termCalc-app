@@ -50,7 +50,11 @@ public class Aux {
     public static final String sq = "√";
     public static final String bulletDot = "•";
     public static final String multiDot = "⋅";
+    public static final String superDot = "‧";
     public static final String emDash = "—";
+    public static final String superMinus = "⁻";
+
+    public static final String piStr = superscripts[3] + superDot + superscripts[1] + superscripts[4] + superscripts[1] + superscripts[5] + superscripts[9];
 
     public static ArrayList<String> ops = new ArrayList<String>(Arrays.asList("+", "-", multi, divi, sq, "^", "(", ")", "!", "%", bulletDot, multiDot, "*"));
 
@@ -1290,7 +1294,7 @@ public class Aux {
                 }
             }
 
-            if (str.equals("⋅")){
+            if (str.equals("⋅") || str.equals(superDot)){
                 superNum = ".";
                 return true;
             }

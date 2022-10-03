@@ -704,23 +704,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     bgAnim.setTextColor(Color.WHITE);
             }
 
-            switch (theme) {
-                //Light
-                case "2":
-                //AMOLED BLACK just text
-                case "4":
-                //Monochrome
-                case "5":
-                    theme_boolean = false;
-                    break;
-
-                //AMOLED BLACK w/ Buttons
-                case "3":
-                //Dark
-                case "1":
-                    theme_boolean = true;
-                    break;
-            }
+            if (theme.equals("1") || theme.equals("3"))
+                theme_boolean = true;
+            else
+                theme_boolean = false;
 
             if (theme.equals("5"))
                 tinydb.putBoolean("theme_boolean", theme_boolean);
@@ -4074,8 +4061,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         wrapText(tv);
     }
 
-    //Wrap Text
     public final void wrapText(EditText tv) {
+        wrapText(tv, true);
+    }
+
+    //Wrap Text
+    public final void wrapText(EditText tv, boolean shouldEvaluate) {
         fullEq = tv.getText().toString();
 
         final TinyDB tinydb = new TinyDB(this);
@@ -4215,6 +4206,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             recreate();
 
         tinydb.putBoolean("recreating", false);
+
+        if (shouldEvaluate) {
+            try {
+                final String eq = tv.getText().toString();
+
+                HandlerThread bmThread = new HandlerThread("BetterMathThread");
+                thread.start();
+
+                new Handler(bmThread.getLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? 6 : tinydb.getInt("precision"), RoundingMode.HALF_UP);
+
+                            previousExpression.setText(BetterMath.formatResult(BetterMath.evaluate(eq, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc), newMc));
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, 4);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         try {
             if (isLegacy)
@@ -5422,7 +5439,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         boolean goNext = false;
                         if (!equaled) {
                             String historyTemp = eq3;
-                            previous = eq3;
 
                             // Add remaining parenthesis
                             int missing = Aux.countChars(eq3, "(") - Aux.countChars(eq3, ")");
@@ -5431,44 +5447,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 findViewById(R.id.bParenthesisClose).performClick();
                             }
 
-                            try {
-                                final String eq = tv.getText().toString();
-
-                                HandlerThread thread = new HandlerThread("BetterMathThread");
-                                thread.start();
-
-                                new Handler(thread.getLooper()).postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        try {
-                                            if (tinydb.getBoolean("newEqToast"))
-                                                Aux.makeToast(evaluate(eq), MainActivity.mainActivity, 0);
-                                        }
-                                        catch (Exception e) {
-                                            try {
-                                                if (tinydb.getBoolean("newEqToast"))
-                                                    Aux.saveStack(e);
-                                                else
-                                                    e.printStackTrace();
-                                            }
-                                            catch (Exception e2) {
-                                                e2.printStackTrace();
-                                            }
-                                        }
-                                    }
-                                }, 5);
-                            }
-                            catch (Exception e) {
-                                try {
-                                    if (tinydb.getBoolean("newEqToast"))
-                                        Aux.saveStack(e);
-                                    else
-                                        e.printStackTrace();
-                                }
-                                catch (Exception e2) {
-                                    e2.printStackTrace();
-                                }
-                            }
+                            previous = eq3;
 
                             equalPressed = true;
                             equaled = false;
@@ -5694,11 +5673,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         eq3 = "\0";
                                     }
 
-                                    wrapText(tv);
+                                    wrapText(tv, false);
 
                                     //Set text of previous expression TextView
                                     try {
-                                        previousExpression.setText(previous.trim());
+                                        if (previousExpression != null) {
+                                            if (!previousExpression.getText().toString().equals("\0"))
+                                                tv.setText(previousExpression.getText().toString());
+
+                                            if (previous != null)
+                                                previousExpression.setText(previous.trim());
+                                        }
                                     }
                                     catch (Exception e) {
                                         e.printStackTrace();
@@ -8360,7 +8345,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TinyDB tinydb = new TinyDB(MainActivity.mainActivity);
         MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? 6 : tinydb.getInt("precision"), RoundingMode.HALF_UP);
 
-        return BetterMath.formatResult(BetterMath.evaluate(str, tinydb.getBoolean("prioritizeCoefficients"), newMc), newMc);
+        return BetterMath.formatResult(BetterMath.evaluate(str, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc), newMc);
     }
 
     //Show the keyboard from a dialog

@@ -63,22 +63,22 @@ public class BetterMath {
     }
 
     public static BigDecimal evaluate(String eq) throws NaNException {
-        return evaluate(eq, false, mc);
+        return evaluate(eq, false, true, mc);
     }
 
     public static BigDecimal evaluate(String eq, boolean prioritizeCoefficients) throws NaNException {
-        return evaluate(eq, prioritizeCoefficients, mc);
+        return evaluate(eq, prioritizeCoefficients, true, mc);
     }
 
-    public static BigDecimal evaluate(String eq, boolean prioritizeCoefficients, int precision) throws NaNException {
-        return evaluate(eq, prioritizeCoefficients, new MathContext(precision, RoundingMode.HALF_UP));
+    public static BigDecimal evaluate(String eq, boolean prioritizeCoefficients, boolean isRad, int precision) throws NaNException {
+        return evaluate(eq, prioritizeCoefficients, isRad, new MathContext(precision, RoundingMode.HALF_UP));
     }
 
-    public static BigDecimal evaluate(String eq, boolean prioritizeCoefficients, int precision, RoundingMode roundingMode) throws NaNException {
-        return evaluate(eq, prioritizeCoefficients, new MathContext(precision, roundingMode));
+    public static BigDecimal evaluate(String eq, boolean prioritizeCoefficients, boolean isRad, int precision, RoundingMode roundingMode) throws NaNException {
+        return evaluate(eq, prioritizeCoefficients, isRad, new MathContext(precision, roundingMode));
     }
 
-    public static BigDecimal evaluate(String eq, boolean prioritizeCoefficients, MathContext mc) throws NaNException {
+    public static BigDecimal evaluate(String eq, boolean prioritizeCoefficients, boolean isRad, MathContext mc) throws NaNException {
         int i;
         int parenthesisDifference = Ax.countChars(eq, "(") - Ax.countChars(eq, ")");
         MathContext speedMc = mc.getPrecision() > 11 ? new MathContext(mc.getPrecision() / 2, RoundingMode.HALF_UP) : mc;
@@ -171,7 +171,7 @@ public class BetterMath {
                 }
 
                 if (Ax.isFullNum(next)) {
-                    eqArray.set(i, Trig.evaluate(current, next));
+                    eqArray.set(i, Trig.evaluate(current, next, mc, isRad));
                     eqArray.remove(i + 1);
                 }
             }
@@ -835,9 +835,70 @@ class Trig {
     public static MathContext mc = new MathContext(80, RoundingMode.HALF_UP);
     public static MathContext smolMc = new MathContext(40, RoundingMode.HALF_UP);
 
-    public static String evaluate(String trigOp, String n) {
+    public static BigDecimal toDegrees(BigDecimal num) {
+        return num.multiply(BigDecimalMath.pi(smolMc), smolMc).divide(parseBigDecimal("180"), smolMc);
+    }
+
+    public static BigDecimal toRadians(BigDecimal num) {
+        return num.divide(BigDecimalMath.pi(smolMc), smolMc).multiply(parseBigDecimal("180"), smolMc);
+    }
+
+    public static String evaluate(String trigOp, String n, boolean isRad) {
+        return evaluate(trigOp, n, smolMc, isRad);
+    }
+
+    public static String evaluate(String trigOp, String n, MathContext mc, boolean isRad) {
         BigDecimal num = parseBigDecimal(n);
         BigDecimal result = new BigDecimal(n);
+
+        String op = trigOp.replace("arc", "").replace(Ax.superMinus + Ax.superscripts[1], "").replace("h", "");
+
+        //Hyperbolic
+        if (trigOp.contains("h")) {
+            if (trigOp.contains("arc") || trigOp.contains(Ax.superMinus + Ax.superscripts[1])) {
+                switch(op) {
+                    case "sin": return BigDecimalMath.asinh(num, mc).toPlainString();
+                    case "cos": return BigDecimalMath.acosh(num, mc).toPlainString();
+                    case "tan": return BigDecimalMath.atanh(num, mc).toPlainString();
+
+                    //TODO: arccsch, arcsech, arccoth
+                }
+            }
+            else {
+                switch(op) {
+                    case "sin": return BigDecimalMath.sinh(num, mc).toPlainString();
+                    case "cos": return BigDecimalMath.cosh(num, mc).toPlainString();
+                    case "tan": return BigDecimalMath.tanh(num, mc).toPlainString();
+
+                    case "csc": return BigDecimal.ONE.divide(BigDecimalMath.sinh(num, mc), mc).toPlainString();
+                    case "sec": return BigDecimal.ONE.divide(BigDecimalMath.cosh(num, mc), mc).toPlainString();
+                    case "cot": return BigDecimal.ONE.divide(BigDecimalMath.tanh(num, mc), mc).toPlainString();
+                }
+            }
+        }
+        //Normal
+        else {
+            if (trigOp.contains("arc") || trigOp.contains(Ax.superMinus + Ax.superscripts[1])) {
+                switch(op) {
+                    case "sin": return isRad ? BigDecimalMath.asin(num, mc).toPlainString() : toDegrees(BigDecimalMath.asin(num, mc)).toPlainString();
+                    case "cos": return isRad ? BigDecimalMath.acos(num, mc).toPlainString() : toDegrees(BigDecimalMath.acos(num, mc)).toPlainString();
+                    case "tan": return isRad ? BigDecimalMath.atan(num, mc).toPlainString() : toDegrees(BigDecimalMath.atan(num, mc)).toPlainString();
+
+                    //TODO: arccsc, arcsec, arccot
+                }
+            }
+            else {
+                switch(op) {
+                    case "sin": return isRad ? BigDecimalMath.sin(num, mc).toPlainString() : BigDecimalMath.sin(toRadians(num), mc).toPlainString();
+                    case "cos": return isRad ? BigDecimalMath.cos(num, mc).toPlainString() : BigDecimalMath.cos(toRadians(num), mc).toPlainString();
+                    case "tan": return isRad ? BigDecimalMath.tan(num, mc).toPlainString() : BigDecimalMath.tan(toRadians(num), mc).toPlainString();
+
+                    case "csc": return isRad ? BigDecimal.ONE.divide(BigDecimalMath.sin(num, mc), mc).toPlainString() : BigDecimal.ONE.divide(BigDecimalMath.sin(toRadians(num), mc), mc).toPlainString();
+                    case "sec": return isRad ? BigDecimal.ONE.divide(BigDecimalMath.cos(num, mc), mc).toPlainString() : BigDecimal.ONE.divide(BigDecimalMath.cos(toRadians(num), mc), mc).toPlainString();
+                    case "cot": return isRad ? BigDecimal.ONE.divide(BigDecimalMath.tan(num, mc), mc).toPlainString() : BigDecimal.ONE.divide(BigDecimalMath.tan(toRadians(num), mc), mc).toPlainString();
+                }
+            }
+        }
 
         return num.toPlainString();
     }
@@ -878,7 +939,11 @@ class Ax {
     public static final String sq = "√";
     public static final String bulletDot = "•";
     public static final String multiDot = "⋅";
+    public static final String superDot = "‧";
     public static final String emDash = "—";
+    public static final String superMinus = "⁻";
+
+    public static final String piStr = superscripts[3] + superDot + superscripts[1] + superscripts[4] + superscripts[1] + superscripts[5] + superscripts[9];
 
     public static ArrayList<String> ops = new ArrayList<>(Arrays.asList("+", "-", multi, divi, sq, "^", "(", ")", "!", "%", bulletDot, multiDot, "*", "/"));
 
@@ -1024,6 +1089,23 @@ class Ax {
     public static String lastChar(String str) {
         return (!isNull(str) && str.length() > 1) ? str.substring(str.length() - 1) : str;
     }
+
+    public static boolean isSuperscript(String str) {
+        if (!isNull(str) && str.length() == 1) {
+            if (superlist.contains(str))
+                return true;
+            if (str.equals("⋅") || str.equals(superDot))
+                return true;
+            if (str.equals("⁻"))
+                return true;
+            if (str.equals("ᵉ"))
+                return true;
+        }
+
+        return false;
+    }
+
+
 
     public static boolean isSubscript(String str) {
         if (str == null || str.equals("\0"))
