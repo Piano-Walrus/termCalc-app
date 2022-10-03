@@ -308,8 +308,8 @@
     <string name="junit_copyright">Copyright © 2021 The JUnit Team</string>
     <string name="azeesoft_copyright">Copyright © 2016 AzeeSoft</string>
     <string name="appintro_copyright" tools:ignore="TypographyDashes">Copyright © 2015-2020 AppIntro Developers</string>
-    <string name="mathview_copyright" tools:ignore="TypographyDashes">Copyright © MathView Developers</string>
-    <string name="bigdecimalmath_copyright" tools:ignore="TypographyDashes">Copyright © 2017 Eric Obermühlner</string>
+    <string name="mathview_copyright">Copyright © MathView Developers</string>
+    <string name="bigdecimalmath_copyright">Copyright © 2017 Eric Obermühlner</string>
 
     <string name="twitter_title">Twitter Icon by \"Pixel perfect\"</string>
     <string name="image_attributions">Image Attributions:</string>
