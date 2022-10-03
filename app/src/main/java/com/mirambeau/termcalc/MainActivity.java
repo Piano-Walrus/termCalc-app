@@ -2825,8 +2825,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (orientation != Configuration.ORIENTATION_PORTRAIT) {
                     ViewGroup.LayoutParams bgAnimParams = bgAnim.getLayoutParams();
 
-                    Log.d("what", "    " + screenWidth + "    uhhh " + bgAnimParams.width);
-
                     if (bgAnimParams.height <= screenHeight) {
                         bgAnimParams.height += 1.5 * (screenHeight - bgAnimParams.height);
 
@@ -3032,12 +3030,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final String color = sp.getString(SettingsActivity.KEY_PREF_COLOR, "1");
         final String theme = sp.getString(SettingsActivity.KEY_PREF_THEME, "1");
 
-        if (Objects.equals(button, findViewById(R.id.fromButton))){
+        if (Objects.equals(button, findViewById(R.id.fromButton)))
             fromTo = "from";
-        }
-        else {
+        else
             fromTo = "to";
-        }
 
         DialogFragment datePicker = new DatePickerFragment();
         datePicker.show(getSupportFragmentManager(), "date picker");
@@ -3081,9 +3077,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     inv.setTextColor(Color.parseColor("#303030"));
                 }
 
-                if (theme.equals("4")) {
+                if (theme.equals("4"))
                     inv.setTextColor(Color.WHITE);
-                }
             }
         }
     }
@@ -3100,14 +3095,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final String theme = sp.getString(SettingsActivity.KEY_PREF_THEME, "1");
         final String color = sp.getString(SettingsActivity.KEY_PREF_COLOR, "1");
 
-        final TinyDB tinydb = new TinyDB(this);
-
         boolean zeroFact = false;
 
         if (tv.getText() != null && !tv.getText().toString().equals("\0")) {
-            if (tv.getText().toString().equals("0.0!") || tv.getText().toString().equals(" 0.0!")) {
+            if (tv.getText().toString().equals("0.0!") || tv.getText().toString().equals(" 0.0!"))
                 zeroFact = true;
-            }
         }
 
         clear(bDel);
@@ -3160,16 +3152,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String[][] secondaryColors = {{"#53E2D4", "#4DB6AC", "#77C77B", "#51D6E8", "#64B5F6", "#1336A9", "#7986CB", "#8C6DCA", "#F06292", "#FF5956", "#EC8F87", "#FFB74D", "#FFD54F", "#FBF68D", "#EF5350", "#BD5E1E", "#B8E2F8"}, {"#00B5A3", "#00796B", "#388E3C", "#0097A7", "#1976D2", "#0A2068", "#303F9F", "#5E35B1", "#C2185B", "#D32F2F", "#D96459", "#F57C00", "#FFA000", "#F4E64B", "#EF5350", "#572300", "#9BCEE9"}};
         String[][] tertiaryColors = {{"#3CDECE", "#26A69A", "#68B86E", "#39CFE3", "#42A5F5", "#0D2F9E", "#5C6BC0", "#7857BA", "#EC407A", "#FA4E4B", "#EB837A", "#FFA726", "#FFCB2E", "#F8F276", "#FF5754", "#A14D15", "#ABDBF4"}, {"#00C5B1", "#00897B", "#43A047", "#00ACC1", "#1E88E5", "#0A2373", "#3949AB", "#663ABD", "#D81B60", "#E33532", "#DE685D", "#FB8C00", "#FFB300", "#FCEE54", "#FF5754", "#612703", "#ABDBF4"}};
 
-        assert color != null;
-        if (color.equals("\0")) {
+        if (color == null || color.equals("\0"))
             color = "1";
-        }
 
         if (theme != null) {
             if (theme.equals("2"))
                 setTheme(R.style.ThemeOverlay_AppCompat_Light);
             else
                 setTheme(R.style.ThemeOverlay_AppCompat_Dark);
+        }
+        else {
+            theme = "1";
+            setTheme(R.style.ThemeOverlay_AppCompat_Dark);
         }
 
         if (!isCustomTheme) {
@@ -3251,11 +3245,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (isFabExpanded && !roundedButtons)
             findViewById(R.id.expandCustoms).performClick();
 
-        if (item.getItemId() != R.id.nav_geo) {
-            if (theme.equals("1") && isCustomTheme && Aux.isColor(cMain)) {
-                main.setBackgroundColor(Color.parseColor(Aux.hexAdd(cMain, -12)));
-            }
-        }
+        if (item.getItemId() != R.id.nav_geo && theme.equals("1") && isCustomTheme && Aux.isColor(cMain))
+            main.setBackgroundColor(Color.parseColor(Aux.hexAdd(cMain, -12)));
 
         if (equaled && !(toolbar.getTitle().equals("Home") && item.getItemId() == R.id.nav_home)) {
             if (!isCustomTheme && (finalColor.equals("14") && !finalTheme.equals("4") || finalColor.equals("17") && (finalTheme.equals("3") || finalTheme.equals("1")))) {
@@ -3270,10 +3261,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (!finalTheme.equals("5"))
                     bDel.setColorFilter(Color.WHITE);
 
-                if (isCustomTheme) {
-                    if (!Aux.isTinyColor("cFabText"))
-                        bDel.setColorFilter(Color.WHITE);
-                }
+                if (isCustomTheme && !Aux.isTinyColor("cFabText"))
+                    bDel.setColorFilter(Color.WHITE);
             }
         }
 
@@ -3293,10 +3282,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (isCustomTheme) {
                     if (!Aux.isNull(cMain) && Aux.isColor(cMain))
                         drawer.setBackgroundColor(Color.parseColor(cMain));
-                    else {
-                        if (!Aux.isNull(bgColor))
-                            drawer.setBackgroundColor(Color.parseColor(bgColor));
-                    }
+                    else if (!Aux.isNull(bgColor))
+                        drawer.setBackgroundColor(Color.parseColor(bgColor));
                 }
 
                 toolbar.setTitleTextColor(Color.parseColor(bTextColor));
@@ -3320,10 +3307,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (isCustomTheme) {
                     if (!Aux.isNull(cMain) && Aux.isColor(cMain))
                         drawer.setBackgroundColor(Color.parseColor(cMain));
-                    else {
-                        if (!Aux.isNull(bgColor))
-                            drawer.setBackgroundColor(Color.parseColor(bgColor));
-                    }
+                    else if (!Aux.isNull(bgColor))
+                        drawer.setBackgroundColor(Color.parseColor(bgColor));
                 }
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -3464,9 +3449,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         View numDivider = findViewById(R.id.numeratorDivider);
         View denDivider = findViewById(R.id.denominatorDivider);
 
-        if (Aux.getThemeInt() == 2 && !isCustomTheme && Aux.getOrientation(MainActivity.mainActivity) == Configuration.ORIENTATION_LANDSCAPE) {
+        if (Aux.getThemeInt() == 2 && !isCustomTheme && Aux.getOrientation(MainActivity.mainActivity) == Configuration.ORIENTATION_LANDSCAPE)
             ((Button) findViewById(R.id.bInv)).setTextColor(color);
-        }
 
         try {
             numView.setTextColor(color);
@@ -3639,8 +3623,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void setExpandBGColor(String color) {
-        TinyDB tinydb = new TinyDB(MainActivity.mainActivity);
-
         if (Aux.isColor(color) && !isBig && !roundedButtons) {
             int ebgColor = Color.parseColor(color);
 
@@ -3652,7 +3634,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     findViewById(R.id.expandBG).setBackground(wrappedBG);
                     findViewById(R.id.expandBG2).setBackgroundColor(ebgColor);
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -3679,8 +3662,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         bClose.setElevation(0);
         bOpen.setElevation(0);
-        //tertiaryButtons.setElevation(0);
-        //scrollbar.setElevation(0);
 
         ObjectAnimator.ofFloat(expand, "rotation", 0, 180f).setDuration(250).start();
         new Handler((Looper.myLooper())).postDelayed(new Runnable() {
@@ -3828,12 +3809,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
 
-        if (frame.getVisibility() == View.VISIBLE && !toolbar.getTitle().equals("Home")){
+        if (frame.getVisibility() == View.VISIBLE && !toolbar.getTitle().equals("Home"))
             findViewById(R.id.bDegRad).setVisibility(View.INVISIBLE);
-        }
-        else {
+        else
             findViewById(R.id.bDegRad).setVisibility(View.VISIBLE);
-        }
     }
 
     @Override
@@ -4043,12 +4022,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             tinydb.putBoolean("closeDrawer", true);
         }
 
-        if (isRad) {
+        if (isRad)
             degRad.setText("RAD");
-        }
-        else {
+        else
             degRad.setText("DEG");
-        }
 
         if (isInv) {
             sin.setText("arcsin");
@@ -4163,18 +4140,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
         else {
-            if (length > 26) {
+            if (length > 26)
                 tv.setTextSize(34);
-            }
-            else if (length > 24) {
+            else if (length > 24)
                 tv.setTextSize(36);
-            }
-            else if (length > 22) {
+            else if (length > 22)
                 tv.setTextSize(38);
-            }
-            else {
+            else
                 tv.setTextSize(40);
-            }
         }
 
         if (tinydb.getBoolean("debug")) {
@@ -4296,27 +4269,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             dateClear(equals);
         }
         else if (from != null && to != null && from.getText() != null && to.getText() != null && from.getText().toString().contains(", ") && to.getText().toString().contains(", ")){
-            if (initYear > finalYear || (initYear == finalYear && initMonth > finalMonth) || (initYear == finalYear && initMonth == finalMonth && initDay > finalDay)) {
+            if (initYear > finalYear || (initYear == finalYear && initMonth > finalMonth) || (initYear == finalYear && initMonth == finalMonth && initDay > finalDay))
                 swapDate();
-            }
 
             for (i = 0; i < 12; i++) {
                 if (i == 0 || i == 2 || i == 4 || i == 6 || i == 7 || i == 9 || i == 11) {
                     calendar[i] = 31;
                 }
                 else if (i == 1) {
-                    if (initYear % 400 == 0) {
+                    if (initYear % 400 == 0)
                         calendar[i] = 29;
-                    }
-                    else if (initYear % 100 == 0) {
+                    else if (initYear % 100 == 0)
                         calendar[i] = 28;
-                    }
-                    else if (initYear % 4 == 0) {
+                    else if (initYear % 4 == 0)
                         calendar[i] = 29;
-                    }
-                    else {
+                    else
                         calendar[i] = 28;
-                    }
                 }
                 else {
                     calendar[i] = 30;
@@ -4337,14 +4305,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     resultMonth += finalMonth;
                     resultYear -= 1;
 
-                    if (resultYear < 0) {
+                    if (resultYear < 0)
                         resultYear = 0;
-                    }
                 }
 
-                if (finalMonth == initMonth && finalDay < initDay) {
+                if (finalMonth == initMonth && finalDay < initDay)
                     resultYear -= 1;
-                }
 
                 if (finalDay >= initDay) {
                     resultDay = finalDay - initDay;
@@ -4420,6 +4386,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (n1 >= 1) {
             arcsin = 2000000000;
             n = 0.00001;
+
             while (arcsin > n1) {
                 sin = Math.sin(Math.toRadians(n));
                 arcsin = 1.0 / sin;
@@ -4429,6 +4396,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else if (n1 <= 1) {
             arcsin = -2000000000;
             n = -0.00001;
+
             while (arcsin < n1) {
                 sin = Math.sin(Math.toRadians(n));
                 arcsin = 1.0 / sin;
@@ -4446,6 +4414,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (n1 > 0) {
             sec = 0;
             n = 0.00001;
+
             while (sec < n1) {
                 cos = Math.cos(Math.toRadians(n));
                 sec = 1.0 / cos;
@@ -4456,6 +4425,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             n1 = 1.0 / n1;
             cos = -2;
             n = 180;
+
             while (cos < n1) {
                 cos = Math.cos(Math.toRadians(n));
                 n -= 0.000024;
@@ -4473,6 +4443,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (n1 >= 0) {
             arctan = 2000000000;
             n = 0.00001;
+
             while (arctan > n1) {
                 tan = Math.tan(Math.toRadians(n));
                 arctan = 1.0 / (tan);
@@ -4483,11 +4454,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             n1 = n1 * -1.0;
             arctan = 2000000000;
             n = 0.00001;
+
             while (arctan > n1) {
                 tan = Math.tan(Math.toRadians(n));
                 arctan = 1.0 / (tan);
                 n += 0.000024;
             }
+
             n *= -1.0;
         }
 
@@ -4538,7 +4511,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (isLegacy) {
             try {
                 tv.setText(Aux.removeCommas(tv.getText().toString()));
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -4569,12 +4543,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         isNumber = true;
                         isSuper = false;
-                        if (numNumbers > 0) {
+
+                        if (numNumbers > 0)
                             numNumbers--;
-                        }
-                        else {
+                        else
                             numNumbers = tempNum;
-                        }
 
                         wasSuper = true;
                     }
@@ -4796,8 +4769,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         }
                     }
 
-                    Log.d("what", "lastChar = " + Aux.lastChar(newString) + "        buttonPress = " + buttonPresses[numPresses - 1]);
-
                     if (numPresses > 2 && buttonPresses[numPresses - 1].equals(")") && tv.getText().toString().length() > 1 && !tv.getText().toString().endsWith(")") && Aux.isNum(Aux.lastChar(newString))) {
                         buttonPresses[numPresses - 1] = "\0";
                         numPresses--;
@@ -4841,11 +4812,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     pc = 0;
             }
 
-            if (tinydb.getBoolean("debug")) {
-                Button bgAnim = findViewById(R.id.bgAnim);
-
-                bgAnim.setText("        " + Aux.getStrArray(buttonPresses) + "\n\n\n\n\n\n\n\n\n");
-            }
+            if (tinydb.getBoolean("debug"))
+                ((Button) findViewById(R.id.bgAnim)).setText("        " + Aux.getStrArray(buttonPresses) + "\n\n\n\n\n\n\n\n\n");
         }
         else {
             try {
