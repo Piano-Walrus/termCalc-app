@@ -109,7 +109,7 @@ public class BetterMath {
             }
         }
 
-        System.out.println(eqArray.toString());
+        System.out.println(eqArray);
 
         //Handle Parenthesis
         while (eqArray.contains("(") || eqArray.contains(")")) {
@@ -126,7 +126,7 @@ public class BetterMath {
                 }
             }
             catch (Exception e) {
-                //e.printStackTrace();
+                e.printStackTrace();
             }
 
             for (i=0; i < end-start; i++) {
@@ -158,7 +158,7 @@ public class BetterMath {
                 e.printStackTrace();
             }
 
-            System.out.println(eqArray.toString());
+            System.out.println(eqArray);
         }
 
         //Handle Trig
@@ -181,7 +181,7 @@ public class BetterMath {
             }
         }
 
-        System.out.println(eqArray.toString());
+        System.out.println(eqArray);
 
         //Handle log and ln
         while (eqArray.contains("log")) {
@@ -248,7 +248,7 @@ public class BetterMath {
                     throw new NaNException("Parse Error");
             }
 
-            System.out.println(eqArray.toString());
+            System.out.println(eqArray);
         }
 
         //Handle Roots
@@ -289,7 +289,7 @@ public class BetterMath {
                 }
             }
 
-            System.out.println(eqArray.toString());
+            System.out.println(eqArray);
         }
 
         //Handle Factorials
@@ -312,7 +312,7 @@ public class BetterMath {
             if (init.equals(eqArray.toString()))
                 throw new NaNException("Parse Error");
 
-            System.out.println(eqArray.toString());
+            System.out.println(eqArray);
         }
 
         //Handle exponents
@@ -348,7 +348,7 @@ public class BetterMath {
             if (init.equals(eqArray.toString()))
                 throw new NaNException("Parse Error");
 
-            System.out.println(eqArray.toString());
+            System.out.println(eqArray);
         }
 
         //Handle Multiplication & Division
@@ -365,14 +365,14 @@ public class BetterMath {
                     previous = eqArray.get(i - 1);
                 }
                 catch (Exception e) {
-                    //e.printStackTrace();
+                    e.printStackTrace();
                 }
 
                 try {
                     next = eqArray.get(i + 1);
                 }
                 catch (Exception e) {
-                    //e.printStackTrace();
+                    e.printStackTrace();
                 }
 
                 if (AuX.isNull(current) || AuX.chat(current, 0) == null)
@@ -430,7 +430,7 @@ public class BetterMath {
                     i = 0;
             }
 
-            System.out.println(eqArray.toString());
+            System.out.println(eqArray);
         }
 
         //Handle Addition & Subtraction
@@ -445,13 +445,13 @@ public class BetterMath {
                 try {
                     previous = eqArray.get(i - 1);
                 } catch (Exception e) {
-                    //e.printStackTrace();
+                    e.printStackTrace();
                 }
 
                 try {
                     next = eqArray.get(i + 1);
                 } catch (Exception e) {
-                    //e.printStackTrace();
+                    e.printStackTrace();
                 }
 
                 if (AuX.isFullNum(AuX.chat(current, 0)) || AuX.chat(current, 0).equals(".")) {
@@ -545,31 +545,31 @@ public class BetterMath {
                     trigCheck = eq.substring(i, i+6);
                 }
                 catch (Exception e) {
-                    //e.printStackTrace();
+                    e.printStackTrace();
 
                     try {
                         trigCheck = eq.substring(i, i+5);
                     }
                     catch (Exception e2) {
-                        //e.printStackTrace();
+                        e.printStackTrace();
 
                         try {
                             trigCheck = eq.substring(i, i+3);
                         }
                         catch (Exception e3) {
-                            //e.printStackTrace();
+                            e.printStackTrace();
 
                             try {
                                 trigCheck = eq.substring(i, i+2);
                             }
                             catch (Exception e4) {
-                                //e4.printStackTrace();
+                                e4.printStackTrace();
 
                                 try {
                                     trigCheck = eq.substring(i, i+1);
                                 }
                                 catch (Exception e5) {
-                                    //e5.printStackTrace();
+                                    e5.printStackTrace();
                                 }
                             }
                         }
@@ -601,7 +601,7 @@ public class BetterMath {
                                     i += eqArray.get(eqArray.size() - 1).length() - 1;
                                 }
                                 catch (Exception e) {
-                                    //e.printStackTrace();
+                                    e.printStackTrace();
                                 }
 
                                 //Handle coefficients before log or ln
@@ -611,7 +611,7 @@ public class BetterMath {
                                     }
                                 }
                                 catch (Exception e) {
-                                    //e.printStackTrace();
+                                    e.printStackTrace();
                                 }
 
                                 break;
@@ -628,7 +628,7 @@ public class BetterMath {
                                 }
                             }
                             catch (Exception e) {
-                                //e.printStackTrace();
+                                e.printStackTrace();
                             }
 
                             break;
@@ -913,7 +913,7 @@ class AuX {
     public static final String multiDot = "⋅";
     public static final String emDash = "—";
 
-    public static ArrayList<String> ops = new ArrayList<String>(Arrays.asList("+", "-", multi, divi, sq, "^", "(", ")", "!", "%", bulletDot, multiDot, "*", "/"));
+    public static ArrayList<String> ops = new ArrayList<>(Arrays.asList("+", "-", multi, divi, sq, "^", "(", ")", "!", "%", bulletDot, multiDot, "*", "/"));
 
     //The method's name is a shortened version of "charAt." It's literally just a shortcut for writing "Character.toString(str.charAt(index))"
     public static String chat(String str, int index) {
@@ -1009,10 +1009,7 @@ class AuX {
 
         for (i=0; i < length; i++) {
             if (!isDigit(chat(str, i))) {
-                if (chat(str, i).equals("e") || chat(str, i).equals("π") || chat(str, i).equals(".")) {
-                    continue;
-                }
-                else
+                if (!(chat(str, i).equals("e") || chat(str, i).equals("π") || chat(str, i).equals(".")))
                     return false;
             }
         }
@@ -1049,10 +1046,10 @@ class AuX {
             return "";
 
         for (s=0; s < numChars; s++) {
-            if (str != null && !str.equals("\0") && str.length() == 1)
+            if (!str.equals("\0") && str.length() == 1)
                 return "";
 
-            if (str != null && !str.equals("\0") && str.length() > 1)
+            if (!str.equals("\0") && str.length() > 1)
                 str = str.substring(0, str.length() - 1);
         }
 
@@ -1067,10 +1064,8 @@ class AuX {
         if (str == null || str.equals("\0"))
             return false;
 
-        if (str.length() == 1) {
-            if (sublist.contains(str) || sublistMisc.contains(str))
-                return true;
-        }
+        if (str.length() == 1)
+            return sublist.contains(str) || sublistMisc.contains(str);
 
         return false;
     }
@@ -1079,10 +1074,8 @@ class AuX {
         if (str == null || str.equals("\0"))
             return false;
 
-        if (str.length() == 1) {
-            if (sublist.contains(str))
-                return true;
-        }
+        if (str.length() == 1)
+            return sublist.contains(str);
 
         return false;
     }
