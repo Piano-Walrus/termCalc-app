@@ -17,7 +17,7 @@ The app uses BigDecimal precision (or rather, will once I finish the next update
  - User-defined maximum precision
  - An option to ignore PEMDAS and prioritize coefficients instead
 
-The application also has a somewhat hidden terminal interface (hence the terrible name "_Term_ Calc") that allows the user to perform a few specific niche actions, like changing the text of the modulus button to "%" as opposed to "mod," or printing a stack trace after a crash. This used to be a more integral part of the application, which is why the application is named the way it is, but as I've grown as a developer, I've created GUIs for most of the more useful functionality that the terminal provides.
+The application also has a somewhat hidden terminal-esque interface (hence the terrible name "_Term_ Calc") accessed via an icon in the toolbar of the Settings section that allows the user to perform a few specific niche actions, like changing the text of the modulus button to "%" as opposed to "mod," or printing a stack trace after a crash. This used to be a more integral part of the application, which is why the application is named the way it is, but as I've grown as a developer, I've created GUIs for most of the more useful functionality that the terminal provides.
 
 ### Terminal Commands
 The list below outlines all currently-supported terminal commands that are intended for use by end-users:
