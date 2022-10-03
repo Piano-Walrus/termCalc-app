@@ -4212,7 +4212,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 final String eq = tv.getText().toString();
 
                 HandlerThread bmThread = new HandlerThread("BetterMathThread");
-                thread.start();
+                bmThread.start();
 
                 new Handler(bmThread.getLooper()).postDelayed(new Runnable() {
                     @Override
@@ -4220,7 +4220,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         try {
                             MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? 6 : tinydb.getInt("precision"), RoundingMode.HALF_UP);
 
-                            previousExpression.setText(BetterMath.formatResult(BetterMath.evaluate(eq, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc), newMc));
+                            String result = BetterMath.formatResult(BetterMath.evaluate(eq, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc), newMc);
+
+                            if (!result.equals(eq) && Aux.isFullNum(result))
+                                previousExpression.setText(result);
                         }
                         catch (Exception e) {
                             e.printStackTrace();
@@ -5618,6 +5621,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         numbers[0][0] = result;
                                         numPresses = 1;
 
+                                        //Set text of previous expression TextView
+                                        try {
+                                            if (previousExpression != null) {
+                                                if (!previousExpression.getText().toString().equals("\0"))
+                                                    tv.setText(previousExpression.getText().toString());
+
+                                                if (previous != null)
+                                                    previousExpression.setText(previous.trim());
+                                            }
+                                        }
+                                        catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
                                         try {
                                             if (tv.getText().toString().endsWith(".000000000001") && tv.getText().toString().length() > 13)
                                                 tv.setText(Aux.newTrim(tv.getText().toString(), 13));
@@ -5674,20 +5691,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     }
 
                                     wrapText(tv, false);
-
-                                    //Set text of previous expression TextView
-                                    try {
-                                        if (previousExpression != null) {
-                                            if (!previousExpression.getText().toString().equals("\0"))
-                                                tv.setText(previousExpression.getText().toString());
-
-                                            if (previous != null)
-                                                previousExpression.setText(previous.trim());
-                                        }
-                                    }
-                                    catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
 
                                     try {
                                         if (tv.getText().toString().contains(".") && !tv.getText().toString().contains("E")) {
