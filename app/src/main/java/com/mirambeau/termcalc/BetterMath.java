@@ -175,8 +175,14 @@ public class BetterMath {
                 if (Ax.isFullNum(next)) {
                     eqArray.set(i, Trig.evaluate(current, next, mc, isRad));
 
-                    if (!isRad && eqArray.get(i).contains("0.000000000000000000"))
-                        eqArray.set(i, "0");
+                    if (!isRad) {
+                        String trigTest = eqArray.get(i);
+
+                        if (trigTest.contains("0.0000000000000000"))
+                            eqArray.set(i, "0");
+                        else if (trigTest.contains("0.9999999999999999"))
+                            eqArray.set(i, "1");
+                    }
 
                     eqArray.remove(i + 1);
                 }
