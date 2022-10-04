@@ -20,7 +20,7 @@ public class BetterMath {
         System.out.println("Original expression: " + args[0]);
 
         try {
-            System.out.println(formatResult(evaluate(args[0], args.length >= 2 && Boolean.parseBoolean(args[1])), smolMc));
+            System.out.println(formatResult(evaluate(args[0], args.length >= 2 && Boolean.parseBoolean(args[1])), smolMc, smolMc.getPrecision() / 2));
         }
         catch (NaNException nan) {
             System.out.println(nan.getMessage());
@@ -28,16 +28,14 @@ public class BetterMath {
     }
 
     public static String formatResult(BigDecimal result, int precision) {
-        return formatResult(result, new MathContext(precision, RoundingMode.HALF_UP));
+        return formatResult(result, new MathContext(precision, RoundingMode.HALF_UP), 7);
     }
 
-    public static String formatResult(BigDecimal result, MathContext mc) {
+    public static String formatResult(BigDecimal result, MathContext mc, int scale) {
         String resultStr = result.toPlainString();
 
-        if (mc.getPrecision() < resultStr.length() && resultStr.substring(0, mc.getPrecision()).contains("."))
-            return resultStr.substring(0, mc.getPrecision());
-        else if (mc.getPrecision() == resultStr.length() && resultStr.contains("."))
-            return resultStr;
+        if (result.setScale(scale, RoundingMode.HALF_UP).compareTo(BigDecimal.ZERO) != 0)
+            return result.setScale(scale, RoundingMode.HALF_UP).toPlainString();
 
         if (result.compareTo(BigDecimal.valueOf(Double.MAX_VALUE)) >= 0) {
             int length = resultStr.length();
@@ -51,8 +49,8 @@ public class BetterMath {
         }
         else {
             try {
-                if (result.compareTo(parseBigDecimal("1000000000000", mc)) >= 0)
-                    return new DecimalFormat("0.000000E0").format(Double.parseDouble(resultStr));
+                if (result.compareTo(parseBigDecimal("1000000000000", new MathContext(15, RoundingMode.HALF_UP))) >= 0 || result.compareTo(parseBigDecimal("0.000001", new MathContext(10, RoundingMode.HALF_UP))) <= 0)
+                    return new DecimalFormat("0.00000E0").format(Double.parseDouble(resultStr));
                 else
                     return new DecimalFormat("#,###.#####").format(Double.parseDouble(resultStr));
             }
@@ -82,6 +80,9 @@ public class BetterMath {
         int i;
         int parenthesisDifference = Ax.countChars(eq, "(") - Ax.countChars(eq, ")");
         MathContext speedMc = mc.getPrecision() > 11 ? new MathContext(mc.getPrecision() / 2, RoundingMode.HALF_UP) : mc;
+
+        if (Ax.isFullSignedNumE(eq))
+            return parseBigDecimal(eq, mc);
 
         eq = eq.replace(" ", "").replace("ln", "log" + Ax.eSub);
 
@@ -1047,6 +1048,14 @@ class Ax {
         }
 
         return countChars(str, ".") <= 1;
+    }
+
+    public static boolean isFullSignedNum(String str) {
+        return str != null && !str.equals("\0") && !str.equals("") && (isFullNum(str.replace(",", "")) || (str.startsWith("-") && isFullNum(str.substring(1).replace(",", ""))));
+    }
+
+    public static boolean isFullSignedNumE(String str) {
+        return str != null && !str.equals("\0") && !str.equals("") && (isFullSignedNum(str) || isFullSignedNum(str.replace("E-", "").replace("E", "")) || (str.startsWith("-") && isFullSignedNum(str.replace("E-", "").replace("E", ""))));
     }
 
     public static int countChars(String str, String input){

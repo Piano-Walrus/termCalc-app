@@ -950,6 +950,14 @@ public class Aux {
         return countChars(str, ".") <= 1;
     }
 
+    public static boolean isFullSignedNum(String str) {
+        return str != null && !str.equals("\0") && !str.equals("") && (isFullNum(str.replace(",", "")) || (str.startsWith("-") && isFullNum(str.substring(1).replace(",", ""))));
+    }
+
+    public static boolean isFullSignedNumE(String str) {
+        return str != null && !str.equals("\0") && !str.equals("") && (isFullSignedNum(str) || isFullSignedNum(str.replace("E-", "").replace("E", "")) || (str.startsWith("-") && isFullSignedNum(str.replace("E-", "").replace("E", ""))));
+    }
+
     public static boolean onlyContains(String str, String target){
         if (str == null || target == null)
             return false;
