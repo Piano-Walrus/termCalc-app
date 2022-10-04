@@ -63,7 +63,6 @@ public class BetterMath {
     public static BigDecimal evaluate(String eq, boolean prioritizeCoefficients, boolean isRad, MathContext mc, int scale) throws NaNException {
         int i;
         int parenthesisDifference = Ax.countChars(eq, "(") - Ax.countChars(eq, ")");
-        MathContext speedMc = mc.getPrecision() > 11 ? new MathContext(mc.getPrecision() / 2, RoundingMode.HALF_UP) : mc;
 
         if (Ax.isFullSignedNumE(eq))
             return parseBigDecimal(eq, mc);
@@ -217,14 +216,14 @@ public class BetterMath {
                 //Natural Log
                 if (base.equals(Ax.eSub)) {
 
-                    eqArray.set(index, BigDecimalMath.log(BigDecimalMath.toBigDecimal(next, mc), speedMc).toPlainString());
+                    eqArray.set(index, BigDecimalMath.log(BigDecimalMath.toBigDecimal(next, mc), mc).toPlainString());
 
                     eqArray.remove(index + 1);
                     eqArray.remove(index + 1);
                 }
                 //Log Base 2
                 else if (base.equals(Ax.subscripts[2])) {
-                    eqArray.set(index, BigDecimalMath.log2(BigDecimalMath.toBigDecimal(next, mc), speedMc).toPlainString());
+                    eqArray.set(index, BigDecimalMath.log2(BigDecimalMath.toBigDecimal(next, mc), mc).toPlainString());
 
                     eqArray.remove(index + 1);
                     eqArray.remove(index + 1);
@@ -237,7 +236,7 @@ public class BetterMath {
                     else {
                         base = Ax.subToNum(base);
 
-                        eqArray.set(index, logBase(base, next, speedMc, scale).toPlainString());
+                        eqArray.set(index, logBase(base, next, new MathContext((mc.getPrecision() / 5) + scale, RoundingMode.HALF_UP), scale).toPlainString());
 
                         eqArray.remove(index + 1);
                         eqArray.remove(index + 1);
@@ -687,6 +686,9 @@ public class BetterMath {
 
                             increment = updateIncrement(increment, maxIncrement, minIncrement);
                         }
+
+                        if (result.scale() > base.scale())
+                            break;
                     }
                 }
             }
@@ -715,7 +717,10 @@ public class BetterMath {
                         increment = updateIncrement(increment, maxIncrement, minIncrement);
                     }
 
-                    System.out.println("count = " + count++ + "     increment = " + previousIncrement + "    " + (previousIncrement.toPlainString().contains("2.5") ? "" : "  ") + "i = " + i + "     power = " + result + "     bound = " + bound);
+                    if (result.scale() > base.scale())
+                        break;
+
+                    //System.out.println("count = " + count++ + "     increment = " + previousIncrement + "    " + (previousIncrement.toPlainString().contains("2.5") ? "" : "  ") + "i = " + i + "     power = " + result + "     bound = " + bound);
                 }
             }
 
