@@ -4222,7 +4222,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                             String result = BetterMath.formatResult(BetterMath.evaluate(eq, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc), newMc);
 
-                            if (!result.equals(eq) && Aux.isFullNum(result))
+                            if (!result.equals(eq) && (Aux.isFullNum(result.replace(",", "")) || (result.startsWith("-") && Aux.isFullNum(result.substring(1).replace(",", "")))))
                                 previousExpression.setText(result);
                         }
                         catch (Exception e) {
