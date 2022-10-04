@@ -20,15 +20,11 @@ public class BetterMath {
         System.out.println("Original expression: " + args[0]);
 
         try {
-            System.out.println(formatResult(evaluate(args[0], args.length >= 2 && Boolean.parseBoolean(args[1])), smolMc, smolMc.getPrecision() / 2));
+            System.out.println(formatResult(evaluate(args[0], args.length >= 2 && Boolean.parseBoolean(args[1]), true, smolMc, smolMc.getPrecision() / 2), mc, 8));
         }
         catch (NaNException nan) {
             System.out.println(nan.getMessage());
         }
-    }
-
-    public static String formatResult(BigDecimal result, int precision) {
-        return formatResult(result, new MathContext(precision, RoundingMode.HALF_UP), 7);
     }
 
     public static String formatResult(BigDecimal result, MathContext mc, int scale) {
@@ -60,23 +56,11 @@ public class BetterMath {
         }
     }
 
-    public static BigDecimal evaluate(String eq) throws NaNException {
-        return evaluate(eq, false, true, mc);
+    public static BigDecimal evaluate(String eq, boolean prioritizeCoefficients, int scale) throws NaNException {
+        return evaluate(eq, prioritizeCoefficients, true, mc, scale);
     }
 
-    public static BigDecimal evaluate(String eq, boolean prioritizeCoefficients) throws NaNException {
-        return evaluate(eq, prioritizeCoefficients, true, mc);
-    }
-
-    public static BigDecimal evaluate(String eq, boolean prioritizeCoefficients, boolean isRad, int precision) throws NaNException {
-        return evaluate(eq, prioritizeCoefficients, isRad, new MathContext(precision, RoundingMode.HALF_UP));
-    }
-
-    public static BigDecimal evaluate(String eq, boolean prioritizeCoefficients, boolean isRad, int precision, RoundingMode roundingMode) throws NaNException {
-        return evaluate(eq, prioritizeCoefficients, isRad, new MathContext(precision, roundingMode));
-    }
-
-    public static BigDecimal evaluate(String eq, boolean prioritizeCoefficients, boolean isRad, MathContext mc) throws NaNException {
+    public static BigDecimal evaluate(String eq, boolean prioritizeCoefficients, boolean isRad, MathContext mc, int scale) throws NaNException {
         int i;
         int parenthesisDifference = Ax.countChars(eq, "(") - Ax.countChars(eq, ")");
         MathContext speedMc = mc.getPrecision() > 11 ? new MathContext(mc.getPrecision() / 2, RoundingMode.HALF_UP) : mc;
@@ -137,7 +121,7 @@ public class BetterMath {
 
             ArrayList<String> subList = new ArrayList<>(eqArray.subList(start+1, end));
 
-            eqArray.set(start, evaluate(subList.toString().trim().replace("[", "").replace("]", "").replace(",", "").replace(" ", "")).toPlainString());
+            eqArray.set(start, evaluate(subList.toString().trim().replace("[", "").replace("]", "").replace(",", "").replace(" ", ""), prioritizeCoefficients, isRad, mc, scale).toPlainString());
 
             try {
                 if (Ax.isFullNum(eqArray.get(end + 1)) || eqArray.get(end + 1).equals(Ax.sq)) {
@@ -253,7 +237,7 @@ public class BetterMath {
                     else {
                         base = Ax.subToNum(base);
 
-                        eqArray.set(index, logBase(base, next, speedMc).toPlainString());
+                        eqArray.set(index, logBase(base, next, speedMc, scale).toPlainString());
 
                         eqArray.remove(index + 1);
                         eqArray.remove(index + 1);
@@ -631,8 +615,8 @@ public class BetterMath {
         return logBase(parseBigDecimal(base), parseBigDecimal(num), smolMc);
     }
 
-    public static BigDecimal logBase(String base, String  num, MathContext mc) throws NaNException {
-        return logBase(parseBigDecimal(base, mc), parseBigDecimal(num, mc), mc);
+    public static BigDecimal logBase(String base, String  num, MathContext mc, int scale) throws NaNException {
+        return logBase(parseBigDecimal(base, mc, scale), parseBigDecimal(num, mc, scale), mc);
     }
 
     public static BigDecimal logBase(BigDecimal base, BigDecimal num) throws NaNException {
@@ -848,6 +832,10 @@ public class BetterMath {
     public static BigDecimal parseBigDecimal(String str, MathContext mc) {
         return BigDecimalMath.toBigDecimal(str, mc);
     }
+
+    public static BigDecimal parseBigDecimal(String str, MathContext mc, int scale) {
+        return BigDecimalMath.toBigDecimal(str, mc).setScale(scale, RoundingMode.HALF_UP);
+    }
 }
 
 class Trig {
@@ -855,11 +843,11 @@ class Trig {
     public static MathContext smolMc = new MathContext(40, RoundingMode.HALF_UP);
 
     public static BigDecimal toDegrees(BigDecimal num) {
-        return num.multiply(BigDecimalMath.pi(smolMc), smolMc).divide(parseBigDecimal("180"), smolMc);
+        return num.divide(BigDecimalMath.pi(smolMc), smolMc).multiply(parseBigDecimal("180"), smolMc);
     }
 
     public static BigDecimal toRadians(BigDecimal num) {
-        return num.divide(BigDecimalMath.pi(smolMc), smolMc).multiply(parseBigDecimal("180"), smolMc);
+        return num.multiply(BigDecimalMath.pi(smolMc), smolMc).divide(parseBigDecimal("180"), smolMc);
     }
 
     public static String evaluate(String trigOp, String n, boolean isRad) {
@@ -868,7 +856,6 @@ class Trig {
 
     public static String evaluate(String trigOp, String n, MathContext mc, boolean isRad) {
         BigDecimal num = parseBigDecimal(n);
-        BigDecimal result = new BigDecimal(n);
 
         String op = trigOp.replace("arc", "").replace(Ax.superMinus + Ax.superscripts[1], "").replace("h", "");
 

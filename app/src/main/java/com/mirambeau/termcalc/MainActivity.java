@@ -4228,7 +4228,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : tinydb.getInt("precision");
                             MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? 30 : tinydb.getInt("precision") * 2, RoundingMode.HALF_UP);
 
-                            BigDecimal result = BetterMath.evaluate(eq, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc);
+                            BigDecimal result = BetterMath.evaluate(eq, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale);
                             String resultStr = BetterMath.formatResult(result, newMc, scale).trim();
 
                             while (resultStr.equals("0") && scale < 26)
@@ -4412,6 +4412,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         isRad = keyNum.getText().toString().equals("RAD");
 
         tinydb.putBoolean("isRad", isRad);
+
+        try {
+            if (Aux.isFullSignedNumE(previousExpression.getText().toString()))
+                previousExpression.setText(evaluate(tv.getText().toString()));
+        }
+        catch (Exception ignored) {}
     }
 
     //Cosecant
@@ -5516,7 +5522,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                             int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : tinydb.getInt("precision");
                                             MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? 30 : tinydb.getInt("precision") * 2, RoundingMode.HALF_UP);
 
-                                            BigDecimal result = BetterMath.evaluate(eq3.trim(), tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc);
+                                            BigDecimal result = BetterMath.evaluate(eq3.trim(), tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale);
                                             resultStr = BetterMath.formatResult(result, newMc, scale).trim();
 
                                             while (resultStr.equals("0") && scale < 26)
@@ -7681,7 +7687,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : tinydb.getInt("precision");
         MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? 30 : tinydb.getInt("precision") * 2, RoundingMode.HALF_UP);
 
-        BigDecimal result = BetterMath.evaluate(str, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc);
+        BigDecimal result = BetterMath.evaluate(str, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale);
         String resultStr = BetterMath.formatResult(result, newMc, scale).trim();
 
         while (resultStr.equals("0") && scale < 26)
@@ -7690,7 +7696,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         while ((resultStr.endsWith("0") && resultStr.contains(".")) || resultStr.endsWith(".") || resultStr.endsWith("0E"))
             resultStr = Aux.newTrim(resultStr, 1);
 
-        return BetterMath.formatResult(BetterMath.evaluate(str, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc), tinydb.getBoolean("isDynamic") ? (tinydb.getString("buttonShape").equals("2") ? roundedPrecision : squarePrecision) : tinydb.getInt("precision"));
+        return resultStr;
     }
 
     //Show the keyboard from a dialog
