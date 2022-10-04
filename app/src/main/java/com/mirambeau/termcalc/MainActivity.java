@@ -4226,7 +4226,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         try {
                             boolean isRounded = tinydb.getString("buttonShape").equals("2");
                             int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : tinydb.getInt("precision");
-                            MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? 32 : tinydb.getInt("precision"), RoundingMode.HALF_UP);
+                            MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? 30 : tinydb.getInt("precision"), RoundingMode.HALF_UP);
 
                             BigDecimal result = BetterMath.evaluate(eq, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc);
                             String resultStr = BetterMath.formatResult(result, newMc, scale).trim();
@@ -5514,7 +5514,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         else {
                                             boolean isRounded = tinydb.getString("buttonShape").equals("2");
                                             int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : tinydb.getInt("precision");
-                                            MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? 32 : tinydb.getInt("precision"), RoundingMode.HALF_UP);
+                                            MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? 30 : tinydb.getInt("precision"), RoundingMode.HALF_UP);
 
                                             BigDecimal result = BetterMath.evaluate(eq3.trim(), tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc);
                                             resultStr = BetterMath.formatResult(result, newMc, scale).trim();
@@ -7676,7 +7676,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public String evaluate(String str) throws NaNException {
         TinyDB tinydb = new TinyDB(MainActivity.mainActivity);
-        MathContext newMc = new MathContext(32, RoundingMode.HALF_UP);
+        MathContext newMc = new MathContext(30, RoundingMode.HALF_UP);
 
         return BetterMath.formatResult(BetterMath.evaluate(str, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc), tinydb.getBoolean("isDynamic") ? (tinydb.getString("buttonShape").equals("2") ? roundedPrecision : squarePrecision) : tinydb.getInt("precision"));
     }
