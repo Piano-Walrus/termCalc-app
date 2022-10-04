@@ -5451,7 +5451,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             }
 
                             previous = eq3;
-                            resultStr = previousExpression.getText().toString();
+
+                            try {
+                                resultStr = previousExpression.getText().toString();
+                            }
+                            catch (Exception e) {
+                                e.printStackTrace();
+
+                                resultStr = "\0";
+                            }
 
                             equalPressed = true;
                             equaled = false;
@@ -5628,7 +5636,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                                 if (!resultStr.equals("\0") && !resultStr.equals("") && !resultStr.equals(" ") && (Aux.isFullNum(resultStr.replace(",", "")) || (resultStr.startsWith("-") && Aux.isFullNum(resultStr.substring(1).replace(",", "")))))
                                                     tv.setText(resultStr);
 
-                                                if (previous != null)
+                                                if (previous != null && tinydb.getBoolean("showPreviousExpression"))
                                                     previousExpression.setText(previous.trim());
                                             }
                                         }

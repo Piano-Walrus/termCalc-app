@@ -17,6 +17,8 @@ public class SettingsActivity extends AppCompatActivity {
     public static final String KEY_PREF_COLOR = "color";
     public static final String KEY_PREF_THEME = "theme";
 
+    boolean liveEvaluate = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +26,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         TinyDB tinydb = new TinyDB(this);
         tinydb.putBoolean("closeDrawer", true);
+
+        liveEvaluate = tinydb.getBoolean("showPreviousExpression");
 
         Toolbar toolbar = findViewById(R.id.themeToolbar);
 
@@ -92,7 +96,7 @@ public class SettingsActivity extends AppCompatActivity {
                 (tinydb.getBoolean("exInput") != tinydb.getBoolean("tempExInput")) ||
                 !tinydb.getString("whereCustom").equals(tinydb.getString("tempWhereCustom")) ||
                 (tinydb.getBoolean("isFocus") != tinydb.getBoolean("tempIsFocus")) ||
-                tinydb.getBoolean("isGradMain")) {
+                tinydb.getBoolean("isGradMain") || liveEvaluate != tinydb.getBoolean("showPreviousExpression")) {
             MainActivity.mainActivity.recreate();
         }
     }
