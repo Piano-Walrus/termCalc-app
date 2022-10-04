@@ -4110,8 +4110,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            if (length > 11 - foldShrinkOffset) {
-                if (length == 12 - foldShrinkOffset) {
+            roundedButtons = tinydb.getString("buttonShape").equals("2");
+
+            if (length > (roundedButtons ? 13 : 11) - foldShrinkOffset) {
+                if (length == (roundedButtons ? 14 : 12) - foldShrinkOffset) {
                     ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
                             .enableTransitionType(LayoutTransition.CHANGING);
 
@@ -4121,7 +4123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 tv.setTextSize((textSizeChanged ? tinydb.getInt("tvSize") : 30) - (foldTextOffset + 2));
             }
-            else if (length > 10 - foldShrinkOffset) {
+            else if (length > (roundedButtons ? 12 : 10) - foldShrinkOffset) {
                 ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
                         .enableTransitionType(LayoutTransition.CHANGING);
 
