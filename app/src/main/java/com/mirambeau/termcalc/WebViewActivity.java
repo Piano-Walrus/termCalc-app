@@ -33,10 +33,6 @@ public class WebViewActivity extends Activity implements ActivityCompat.OnReques
                 webView.loadUrl("https://twitter.com/nickmirambeau?s=09");
                 super.onBackPressed();
             }
-            else if (site.equals("discord")) {
-                webView.loadUrl("https://discord.gg/6JT5gMGqEC");
-                super.onBackPressed();
-            }
             else {
                 webView.loadUrl(site);
                 if (site.startsWith("https://dev"))

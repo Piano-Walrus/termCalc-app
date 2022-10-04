@@ -1,7 +1,5 @@
 package com.mirambeau.termcalc;
 
-import static java.lang.String.valueOf;
-
 import android.animation.LayoutTransition;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
@@ -16,10 +14,8 @@ import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -97,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String[][] ops = new String[numsLength1][numsLength2];
     boolean[][] isValid = new boolean[numsLength1][numsLength2];
 
-    double result = 0, tenVal = 0;
     static final double pi = Math.PI, numE = Math.E, zeroDec = 0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001 * Math.pow(10, -250);
     double backup;
 
@@ -3897,9 +3892,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         outState.putString("fullTo", fullTo);
         outState.putString("current", current);
         outState.putString("pressed", pressed);
-        //outState.putString("selectedType", selectedType);
-        //outState.putString("selectedFrom", selectedFrom);
-        //outState.putString("selectedTo", selectedTo);
+
+        try {
+            outState.putString("result", tv.getText().toString());
+        }
+        catch (Exception ignored) {}
 
         //Booleans
         outState.putBoolean("isInv", isInv);
@@ -3912,9 +3909,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         outState.putBoolean("isEquals", isEquals);
         outState.putBoolean("isNumber", isNumber);
         outState.putBoolean("isDrawerOpened", drawer.isDrawerOpen(GravityCompat.START));
-
-        //Doubles
-        outState.putDouble("result", result);
 
         //Longs
         outState.putLong("decimalFactor", decimalFactor);
@@ -3960,7 +3954,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         isTrig = savedInstanceState.getBooleanArray("isTrig");
         pc = savedInstanceState.getInt("pc");
         pari = savedInstanceState.getIntArray("pari");
-        result = savedInstanceState.getDouble("result");
         isInv = savedInstanceState.getBoolean("isInv");
         isDec = savedInstanceState.getBoolean("isDec");
         isRad = savedInstanceState.getBoolean("isRad");
@@ -4036,12 +4029,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (equaled)
             ((FloatingActionButton) findViewById(R.id.bDel)).setImageDrawable(ContextCompat.getDrawable(MainActivity.mainActivity, R.drawable.ic_close_24));
 
+        String result;
+
+        try {
+            result = savedInstanceState.getString("result");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+
+            result = "0";
+        }
+
         if (eq3 != null && eq3.equals("\0") && equaled){
-            if (result != 0) {
-                eq3 = pidf.format(Double.parseDouble(valueOf(result)));
-                tv.setText(pidf.format(Double.parseDouble(valueOf(result))));
-                wrapText(tv);
-            }
+            eq3 = result;
+            tv.setText(result);
+            wrapText(tv);
         }
 
         tv.setText(eq3);
@@ -5008,7 +5010,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             e.printStackTrace();
         }
 
-        result = 0;
         isNumber = false;
         numNumbers = 0;
 
@@ -5038,8 +5039,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         num1 = "";
 
         isLog = false;
-
-        result = 0;
 
         if (equaled){
             equaled = false;

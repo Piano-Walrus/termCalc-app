@@ -245,7 +245,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
-                    android:text="Community/Feedback:"
+                    android:text="Feedback:"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -268,32 +268,16 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
-                    android:id="@+id/discordIcon2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="24dp"
-                    android:background="?selectableItemBackgroundBorderless"
-                    android:onClick="linkHelper"
-                    android:tag="discord"
-                    android:tint="#FFFFFF"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/communityTitle"
-                    app:layout_constraintTop_toBottomOf="@+id/communityTitle"
-                    app:srcCompat="@drawable/ic_discord_logo_wordmark_white" />
-
-                <ImageButton
                     android:id="@+id/bugReportIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="24dp"
                     android:background="?selectableItemBackgroundBorderless"
                     android:onClick="openBugReport"
                     android:tint="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/discordIcon2"
+                    app:layout_constraintStart_toStartOf="@+id/communityTitle"
                     app:layout_constraintTop_toBottomOf="@+id/communityTitle"
                     app:srcCompat="@drawable/ic_baseline_bug_report_24" />
 

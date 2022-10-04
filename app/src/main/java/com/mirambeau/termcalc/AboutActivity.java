@@ -173,14 +173,6 @@ public class AboutActivity extends AppCompatActivity {
         startActivity(bugIntent);
     }
 
-    public void copyEmail(View v){
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("plain/text");
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "termcalchelp@gmail.com" });
-        intent.putExtra(Intent.EXTRA_SUBJECT, "TermCalc Feedback");
-        startActivity(Intent.createChooser(intent, ""));
-    }
-
     public void back(View v){
         super.onBackPressed();
     }
