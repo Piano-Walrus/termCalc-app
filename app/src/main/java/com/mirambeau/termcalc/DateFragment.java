@@ -158,8 +158,6 @@ public class DateFragment extends Fragment {
             String bgColor = secondary;
             String monochromeTextColor = "#303030";
 
-            MainActivity.mainActivity.setTheme(R.style.DarkTheme);
-
             ConstraintLayout input = main.findViewById(R.id.input), mainDate = main.findViewById(R.id.mainDate);
 
             FloatingActionButton dateEquals = main.findViewById(R.id.dateEquals);
