@@ -8,8 +8,8 @@ android {
         applicationId "com.mirambeau.termcalc"
         minSdkVersion 21
         targetSdkVersion 32
-        versionCode 14000007
-        versionName "14.0.0-SNAPSHOT-7"
+        versionCode 14000008
+        versionName "14.0.0-SNAPSHOT-8"
 
         multiDexEnabled true
         android.defaultConfig.vectorDrawables.useSupportLibrary = true

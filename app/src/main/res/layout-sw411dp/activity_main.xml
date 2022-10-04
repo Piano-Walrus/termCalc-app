@@ -200,8 +200,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/mainOps"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
+                app:layout_constraintWidth="parent=0.25"
                 android:background="@null"
                 android:elevation="3dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -210,8 +211,9 @@
 
                 <Button
                     android:id="@+id/sPlus"
-                    android:layout_width="102.75dp"
-                    android:layout_height="90.5dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintHeight="parent=0.25"
                     android:background="@color/colorAccent"
                     android:foreground="?attr/selectableItemBackground"
                     android:hapticFeedbackEnabled="true"
@@ -223,12 +225,13 @@
                     android:textColorHint="#FFFFFF"
                     android:textSize="30sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <Button
                     android:id="@+id/sMinus"
-                    android:layout_width="102.75dp"
-                    android:layout_height="90.5dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:background="@color/colorAccent"
                     android:foreground="?attr/selectableItemBackground"
                     android:hapticFeedbackEnabled="true"
@@ -240,12 +243,15 @@
                     android:textColorHint="#FFFFFF"
                     android:textSize="30sp"
                     app:layout_constraintBottom_toTopOf="@+id/sPlus"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight="parent=0.25"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <Button
                     android:id="@+id/sMulti"
-                    android:layout_width="102.75dp"
-                    android:layout_height="90.5dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintHeight="parent=0.25"
                     android:background="@color/colorAccent"
                     android:foreground="?attr/selectableItemBackground"
                     android:hapticFeedbackEnabled="true"
@@ -257,12 +263,14 @@
                     android:textColorHint="#FFFFFF"
                     android:textSize="30sp"
                     app:layout_constraintBottom_toTopOf="@+id/sMinus"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <Button
                     android:id="@+id/sDiv"
-                    android:layout_width="102.75dp"
-                    android:layout_height="90.5dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintHeight="parent=0.25"
                     android:background="@color/colorAccent"
                     android:foreground="?attr/selectableItemBackground"
                     android:hapticFeedbackEnabled="true"
@@ -274,6 +282,7 @@
                     android:textColorHint="#FFFFFF"
                     android:textSize="30sp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -281,17 +290,20 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/row0"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:background="@null"
                 android:elevation="0dp"
+                app:layout_constraintWidth="parent=0.75"
+                app:layout_constraintHeight="parent=0.25"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/mainOps"
                 app:layout_constraintStart_toStartOf="parent">
 
                 <Button
                     android:id="@+id/b0"
-                    android:layout_width="102.75dp"
-                    android:layout_height="90dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintWidth="parent=0.33"
                     android:background="@null"
                     android:foreground="?attr/selectableItemBackground"
                     android:onClick="number"
@@ -304,8 +316,9 @@
 
                 <Button
                     android:id="@+id/bDec"
-                    android:layout_width="102.75dp"
-                    android:layout_height="90dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintWidth="parent=0.33"
                     android:background="@null"
                     android:foreground="?attr/selectableItemBackground"
                     android:onClick="decimal"
@@ -318,8 +331,9 @@
 
                 <Button
                     android:id="@+id/bEquals"
-                    android:layout_width="102.75dp"
-                    android:layout_height="90dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintWidth="parent=0.33"
                     android:background="@null"
                     android:foreground="?attr/selectableItemBackground"
                     android:hapticFeedbackEnabled="true"
@@ -337,17 +351,20 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/row1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:background="@null"
                 android:elevation="0dp"
+                app:layout_constraintWidth="parent=0.75"
+                app:layout_constraintHeight="parent=0.25"
                 app:layout_constraintBottom_toTopOf="@+id/row0"
                 app:layout_constraintEnd_toStartOf="@+id/mainOps"
                 app:layout_constraintStart_toStartOf="parent">
 
                 <Button
                     android:id="@+id/b1"
-                    android:layout_width="102.75dp"
-                    android:layout_height="90dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintWidth="parent=0.33"
                     android:background="@null"
                     android:foreground="?attr/selectableItemBackground"
                     android:onClick="number"
@@ -360,8 +377,9 @@
 
                 <Button
                     android:id="@+id/b2"
-                    android:layout_width="102.75dp"
-                    android:layout_height="90dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintWidth="parent=0.33"
                     android:background="@null"
                     android:foreground="?attr/selectableItemBackground"
                     android:onClick="number"
@@ -374,8 +392,9 @@
 
                 <Button
                     android:id="@+id/b3"
-                    android:layout_width="102.75dp"
-                    android:layout_height="90dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintWidth="parent=0.33"
                     android:background="@null"
                     android:foreground="?attr/selectableItemBackground"
                     android:onClick="number"
@@ -391,17 +410,20 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/row2"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:background="@null"
                 android:elevation="0dp"
+                app:layout_constraintWidth="parent=0.75"
+                app:layout_constraintHeight="parent=0.25"
                 app:layout_constraintBottom_toTopOf="@+id/row1"
                 app:layout_constraintEnd_toStartOf="@+id/mainOps"
                 app:layout_constraintStart_toStartOf="parent">
 
                 <Button
                     android:id="@+id/b4"
-                    android:layout_width="102.75dp"
-                    android:layout_height="90dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintWidth="parent=0.33"
                     android:background="@null"
                     android:foreground="?attr/selectableItemBackground"
                     android:onClick="number"
@@ -414,8 +436,9 @@
 
                 <Button
                     android:id="@+id/b5"
-                    android:layout_width="102.75dp"
-                    android:layout_height="90dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintWidth="parent=0.33"
                     android:background="@null"
                     android:foreground="?attr/selectableItemBackground"
                     android:onClick="number"
@@ -428,8 +451,9 @@
 
                 <Button
                     android:id="@+id/b6"
-                    android:layout_width="102.75dp"
-                    android:layout_height="90dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintWidth="parent=0.33"
                     android:background="@null"
                     android:foreground="?attr/selectableItemBackground"
                     android:onClick="number"
@@ -444,17 +468,20 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/row3"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:background="@null"
                 android:elevation="0dp"
+                app:layout_constraintWidth="parent=0.75"
+                app:layout_constraintHeight="parent=0.25"
                 app:layout_constraintBottom_toTopOf="@+id/row2"
                 app:layout_constraintEnd_toStartOf="@+id/mainOps"
                 app:layout_constraintStart_toStartOf="parent">
 
                 <Button
                     android:id="@+id/b7"
-                    android:layout_width="102.75dp"
-                    android:layout_height="90dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintWidth="parent=0.33"
                     android:background="@null"
                     android:elevation="8dp"
                     android:foreground="?attr/selectableItemBackground"
@@ -468,8 +495,9 @@
 
                 <Button
                     android:id="@+id/b8"
-                    android:layout_width="102.75dp"
-                    android:layout_height="90dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintWidth="parent=0.33"
                     android:background="@null"
                     android:elevation="8dp"
                     android:foreground="?attr/selectableItemBackground"
@@ -483,8 +511,9 @@
 
                 <Button
                     android:id="@+id/b9"
-                    android:layout_width="102.75dp"
-                    android:layout_height="90dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintWidth="parent=0.33"
                     android:background="@null"
                     android:elevation="8dp"
                     android:foreground="?attr/selectableItemBackground"
@@ -921,8 +950,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/tertiaryButtons"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:layout_constraintWidth="parent=0.25"
             android:animateLayoutChanges="true"
             android:elevation="0dp"
             app:layout_constraintBottom_toTopOf="@+id/buttonView"
@@ -948,8 +978,9 @@
 
             <Button
                 android:id="@+id/bParenthesisOpen"
-                android:layout_width="51.5dp"
+                android:layout_width="0dp"
                 android:layout_height="70dp"
+                app:layout_constraintWidth="parent=0.5"
                 android:background="#00C5B1"
                 android:elevation="8dp"
                 android:foreground="?attr/selectableItemBackground"
@@ -964,8 +995,9 @@
 
             <Button
                 android:id="@+id/bParenthesisClose"
-                android:layout_width="51.5dp"
+                android:layout_width="0dp"
                 android:layout_height="70dp"
+                app:layout_constraintWidth="parent=0.5"
                 android:background="#00C5B1"
                 android:elevation="8dp"
                 android:foreground="?attr/selectableItemBackground"
