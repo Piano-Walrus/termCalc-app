@@ -101,8 +101,11 @@ public class BetterMath {
 
             eqArray.set(index, pi);
 
-            if (Ax.isFullSignedNumE(eqArray.get(index-1)))
-                eqArray.add(index, "*");
+            try {
+                if (Ax.isFullSignedNumE(eqArray.get(index - 1)))
+                    eqArray.add(index, "*");
+            }
+            catch (Exception ignored) {}
         }
 
         //Replace e symbol with value 2.7182...
@@ -111,8 +114,11 @@ public class BetterMath {
 
             eqArray.set(index, e);
 
-            if (Ax.isFullSignedNumE(eqArray.get(index-1)))
-                eqArray.add(index, "*");
+            try {
+                if (Ax.isFullSignedNumE(eqArray.get(index - 1)))
+                    eqArray.add(index, "*");
+            }
+            catch (Exception ignored) {}
         }
 
         for (i=1; i < eqArray.size(); i++) {
