@@ -5625,7 +5625,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         //Set text of previous expression TextView
                                         try {
                                             if (previousExpression != null) {
-                                                if (!resultStr.equals("\0") && !resultStr.equals(" ") && Aux.isFullNum(resultStr))
+                                                if (!resultStr.equals("\0") && !resultStr.equals("") && !resultStr.equals(" ") && (Aux.isFullNum(resultStr.replace(",", "")) || (resultStr.startsWith("-") && Aux.isFullNum(resultStr.substring(1).replace(",", "")))))
                                                     tv.setText(resultStr);
 
                                                 if (previous != null)
