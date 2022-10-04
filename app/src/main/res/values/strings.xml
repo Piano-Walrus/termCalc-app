@@ -21,7 +21,7 @@
     <string name="current_changes" translatable="false" tools:ignore="TypographyDashes">
         1. You can now switch between square buttons and rounded buttons in Theme Settings!
         \n2. The \"Functions\" section has been redesigned to make evaluating functions more convenient.
-        \n3. After pressing the equals button, the previously-entered expression will now appear above the result.\n
+        \n3. While typing on the Home screen, the result of your expression will now be calculated as you type it!\n
         Note: This behavior can be disabled in settings.
         \n4. The equals/clear animation is now a bit smoother.
         \n5. The changelog will now display one more previous version.

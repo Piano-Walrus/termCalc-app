@@ -50,8 +50,8 @@
             app:useSimpleSummaryProvider="true" />
 
         <SwitchPreference
-            android:title="Show Previous Expression"
-            android:summary="After performing a calculation, show the expression above the result."
+            android:title="Live Expression Evaluation"
+            android:summary="Calculate and display expression results before pressing the equals button."
             android:key="showPreviousExpression"
             android:icon="@drawable/ic_baseline_history_24"
             android:defaultValue="true"/>

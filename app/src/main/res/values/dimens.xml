@@ -1,5 +1,5 @@
 <resources>
-    <dimen name="roundedTopBarButtonWidth">67.5dp</dimen>
+    <dimen name="roundedTopBarButtonWidth">67.74dp</dimen>
     <dimen name="roundedTopBarHMargin">4dp</dimen>
     <dimen name="roundedTopBarTrigTextSize">16.5sp</dimen>
     <dimen name="roundedTopBarCompTextSize">17sp</dimen>

@@ -30,6 +30,8 @@ public class ThemeActivity extends AppCompatActivity {
     String[] bgCodes = {"cKeypad", "cPrimary", "cTertiary", "cTertiary", "cSecondary"};
     String[] textCodes = {"-b=t", "-bop", "-btt", "-btt", "cTop"};
 
+    String buttonShape;
+
     final String[] primaryColors = {"#03DAC5", "#009688", "#54AF57", "#00C7E0", "#2196F3", "#0D2A89", "#3F51B5", "#7357C2", "#E91E63", "#F44336", "#E77369", "#FF9800", "#FFC107", "#FEF65B", "#66BB6A", "#873804", "#B8E2F8"};
 
     int basicTheme, customTheme, accentColor;
@@ -60,6 +62,8 @@ public class ThemeActivity extends AppCompatActivity {
 
             final TinyDB tinydb = new TinyDB(this);
             themeActivity = this;
+
+            buttonShape = tinydb.getString("buttonShape");
 
             if (Build.VERSION.SDK_INT >= 21) {
                 getWindow().setStatusBarColor(Color.parseColor("#16181B"));
@@ -285,7 +289,7 @@ public class ThemeActivity extends AppCompatActivity {
             String theme = tinydb.getString("basicTheme");
             String color = tinydb.getString("color");
 
-            if (shouldRecreateMain || (!initTheme.equals(theme) || !initColor.equals(color) || (initState != tinydb.getBoolean("custom")) || (tinydb.getBoolean("isGradMain") != initGrad))) {
+            if (shouldRecreateMain || (!initTheme.equals(theme) || !initColor.equals(color) || (initState != tinydb.getBoolean("custom")) || (tinydb.getBoolean("isGradMain") != initGrad)) || !buttonShape.equals(tinydb.getString("buttonShape"))) {
                 MainActivity.mainActivity.recreate();
                 shouldRecreateMain = false;
             }
