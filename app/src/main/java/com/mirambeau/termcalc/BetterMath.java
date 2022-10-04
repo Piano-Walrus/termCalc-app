@@ -96,12 +96,24 @@ public class BetterMath {
         e = BigDecimalMath.e(mc).toPlainString();
 
         //Replace pi symbol with value 3.1415...
-        while (eqArray.contains(Ax.pi))
-            eqArray.set(eqArray.indexOf(Ax.pi), pi);
+        while (eqArray.contains(Ax.pi)) {
+            int index = eqArray.indexOf(Ax.pi);
+
+            eqArray.set(index, pi);
+
+            if (Ax.isFullSignedNumE(eqArray.get(index-1)))
+                eqArray.add(index, "*");
+        }
 
         //Replace e symbol with value 2.7182...
-        while (eqArray.contains("e"))
-            eqArray.set(eqArray.indexOf("e"), e);
+        while (eqArray.contains("e")) {
+            int index = eqArray.indexOf("e");
+
+            eqArray.set(index, e);
+
+            if (Ax.isFullSignedNumE(eqArray.get(index-1)))
+                eqArray.add(index, "*");
+        }
 
         for (i=1; i < eqArray.size(); i++) {
             if ((eqArray.get(i).equals("-") || eqArray.get(i).equals(Ax.emDash)) && !Ax.isFullNum(eqArray.get(i-1))) {
