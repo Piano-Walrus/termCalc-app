@@ -34,7 +34,7 @@ public class BetterMath {
     public static String formatResult(BigDecimal result, MathContext mc, int scale) {
         String resultStr = result.toPlainString();
 
-        if (result.setScale(scale, RoundingMode.HALF_UP).compareTo(BigDecimal.ZERO) != 0)
+        if (result.abs().compareTo(BigDecimal.ONE) < 0 && result.setScale(scale, RoundingMode.HALF_UP).compareTo(BigDecimal.ZERO) != 0)
             return result.setScale(scale, RoundingMode.HALF_UP).toPlainString();
 
         if (result.compareTo(BigDecimal.valueOf(Double.MAX_VALUE)) >= 0) {
