@@ -4209,7 +4209,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (shouldEvaluate) {
             try {
-                final String eq = tv.getText().toString();
+                final String eq = tv.getText().toString().trim();
 
                 HandlerThread bmThread = new HandlerThread("BetterMathThread");
                 bmThread.start();
@@ -4218,9 +4218,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public void run() {
                         try {
-                            MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? 6 : tinydb.getInt("precision"), RoundingMode.HALF_UP);
+                            MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? 24 : tinydb.getInt("precision"), RoundingMode.HALF_UP);
 
-                            String result = BetterMath.formatResult(BetterMath.evaluate(eq, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc), newMc);
+                            String result = BetterMath.formatResult(BetterMath.evaluate(eq, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc).setScale(tinydb.getBoolean("isDynamic") ? (tinydb.getString("buttonShape").equals("2") ? 9 : 6) : tinydb.getInt("precision"), RoundingMode.HALF_UP), newMc).trim();
+
+                            while ((result.endsWith("0") && result.contains(".")) || result.endsWith("."))
+                                result = Aux.newTrim(result, 1);
 
                             if (!result.equals(eq) && (Aux.isFullNum(result.replace(",", "")) || (result.startsWith("-") && Aux.isFullNum(result.substring(1).replace(",", "")))))
                                 previousExpression.setText(result);
@@ -5632,12 +5635,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                                         //Set text of previous expression TextView
                                         try {
-                                            if (previousExpression != null) {
-                                                if (!resultStr.equals("\0") && !resultStr.equals("") && !resultStr.equals(" ") && (Aux.isFullNum(resultStr.replace(",", "")) || (resultStr.startsWith("-") && Aux.isFullNum(resultStr.substring(1).replace(",", "")))))
-                                                    tv.setText(resultStr);
-
-                                                if (previous != null && tinydb.getBoolean("showPreviousExpression"))
-                                                    previousExpression.setText(previous.trim());
+                                            if (previousExpression != null && !resultStr.equals("\0") && !resultStr.equals("") && !resultStr.equals(" ") && (Aux.isFullNum(resultStr.replace(",", "")) || (resultStr.startsWith("-") && Aux.isFullNum(resultStr.substring(1).replace(",", ""))))) {
+                                                tv.setText(resultStr);
+                                                previousExpression.setText("");
                                             }
                                         }
                                         catch (Exception e) {
