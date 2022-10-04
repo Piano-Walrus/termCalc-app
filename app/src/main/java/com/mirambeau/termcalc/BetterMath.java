@@ -64,7 +64,7 @@ public class BetterMath {
         int i;
         int parenthesisDifference = Ax.countChars(eq, "(") - Ax.countChars(eq, ")");
 
-        if (Ax.isFullSignedNumE(eq))
+        if (Ax.isFullSignedNumE(eq) && !eq.contains(Ax.pi) && !eq.contains("e"))
             return parseBigDecimal(eq, mc);
 
         eq = eq.replace(" ", "").replace("ln", "log" + Ax.eSub);
