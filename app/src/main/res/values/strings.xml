@@ -24,9 +24,10 @@
         \n3. While typing on the Home screen, the result of your expression will now be calculated as you type it!\n
         Note: This behavior can be disabled in settings.
         \n4. The equals/clear animation is now a bit smoother.
-        \n5. The changelog will now display one more previous version.
-        \n6. Updated a few Spanish translations.
-        \n7. Minor bug fixes and performance improvements.
+        \n5. Switched from double to BigDecimal precision, which should improve the accuracy of calculations involving multiple numbers with many decimal places.
+        \n6. The changelog will now display one more previous version.
+        \n7. Updated a few Spanish translations.
+        \n8. Minor bug fixes and performance improvements.
 
     </string>
 
