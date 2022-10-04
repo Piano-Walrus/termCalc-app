@@ -364,10 +364,7 @@
                 android:id="@+id/buttonShapeLayout"
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-
-
-            </FrameLayout>
+                android:layout_height="wrap_content" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/themeStyleLayout"
