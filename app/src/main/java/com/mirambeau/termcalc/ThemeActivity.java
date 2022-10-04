@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 
@@ -177,6 +178,9 @@ public class ThemeActivity extends AppCompatActivity {
             //Handle Standard/Custom Toggle Preview Colors
             standardLayout = findViewById(R.id.standardLayout);
             customLayout = findViewById(R.id.customLayout);
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.buttonShapeLayout,
+                    new ButtonShapePreferenceActivity.SettingsFragment(), "buttonShape").commit();
 
             standardButtons = new Button[]{findViewById(R.id.standardEquals), findViewById(R.id.standardPlus), findViewById(R.id.standardParenthesisClose),
                     findViewById(R.id.standardParenthesisOpen), findViewById(R.id.standardPi)};
