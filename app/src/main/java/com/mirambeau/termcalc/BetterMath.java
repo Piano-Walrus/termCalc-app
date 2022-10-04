@@ -174,6 +174,10 @@ public class BetterMath {
 
                 if (Ax.isFullNum(next)) {
                     eqArray.set(i, Trig.evaluate(current, next, mc, isRad));
+
+                    if (!isRad && eqArray.get(i).contains("0.000000000000000000"))
+                        eqArray.set(i, "0");
+
                     eqArray.remove(i + 1);
                 }
             }
