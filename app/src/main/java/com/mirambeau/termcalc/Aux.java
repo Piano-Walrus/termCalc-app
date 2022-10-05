@@ -63,7 +63,8 @@ public class Aux {
 
     public static final String piStr = superscripts[3] + superDot + superscripts[1] + superscripts[4] + superscripts[1] + superscripts[5] + superscripts[9];
 
-    public static ArrayList<String> ops = new ArrayList<String>(Arrays.asList("+", "-", multi, divi, sq, "^", "(", ")", "!", "%", bulletDot, multiDot, "*"));
+    public static ArrayList<String> ops = new ArrayList<String>(Arrays.asList("+", "-", multi, divi, "%", bulletDot, multiDot, "*", "^", sq, "(", ")", "!"));
+    public static ArrayList<String> binaryOps = new ArrayList<String>(Arrays.asList("+", "-", multi, divi, "%", bulletDot, multiDot, "*", "^"));
 
     public static boolean ratesChecked = false;
     static boolean isUpper = false;
@@ -1324,6 +1325,16 @@ public class Aux {
             return false;
 
         if (ops.contains(str))
+            return true;
+
+        return false;
+    }
+
+    public static boolean isBinaryOp(String str) {
+        if (isNull(str))
+            return false;
+
+        if (binaryOps.contains(str))
             return true;
 
         return false;

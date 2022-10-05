@@ -2079,6 +2079,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
 
                     operation(pressed);
+                    tv.append("(");
+                }
+            });
+
+            //Ln
+            compBar[6].setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("SetTextI18n")
+                @Override
+                public void onClick(View v) {
+                    Button pressed = (Button) v;
+
+                    try {
+                        Aux.removeCommas(tv.getText().toString());
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    operation(pressed);
+                    tv.append("(");
                 }
             });
 
@@ -4568,6 +4588,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (tv.getText().toString().endsWith("\0") || tv.getText().toString().endsWith(" "))
                     tv.setText(Aux.newTrim(tv.getText().toString(), 1));
 
+                //Error if tv contains negative square root
+                if (getTvText().contains(Aux.sq + "-") || getTvText().contains(Aux.sq + Aux.emDash))
+                    error = true;
+
                 if (tv.getText() == null || tv.getText().toString().equals(".") || tv.getText().toString().equals(" .") || tv.getText().toString().equals("\0.") || tv.getText().toString().endsWith("(") || tv.getText().toString().endsWith("÷") || tv.getText().toString().endsWith("×") || tv.getText().toString().endsWith("+") || tv.getText().toString().endsWith("-") || tv.getText().toString().endsWith("^") || tv.getText().toString().endsWith("√") || tv.getText().toString().endsWith("÷.") || tv.getText().toString().endsWith("+.") || tv.getText().toString().endsWith("-.") || tv.getText().toString().endsWith("^.") || tv.getText().toString().endsWith("×.") || tv.getText().toString().endsWith("√.") || tv.getText().toString().endsWith("log(.") || tv.getText().toString().endsWith("ln(.")) {
 
                 }
@@ -5063,18 +5087,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             e.printStackTrace();
         }
 
-        if (Aux.isNum(buttonText)) {
+        if (Aux.isNum(buttonText))
             number(v);
-        }
-        else if (buttonText.equals(".")) {
+        else if (buttonText.equals("."))
             decimal(v);
-        }
-        else if (buttonText.equals("=")) {
+        else if (buttonText.equals("="))
             newerEquals(v);
-        }
-        else {
+        else if (buttonText.equals("(") || buttonText.equals(")"))
+            parenthesis(v);
+        else
             operation(v);
-        }
     }
 
     public final void operation(View v) {
@@ -5085,11 +5107,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 boolean dont = false;
 
                 String pressed = keyNum.getText().toString();
+                getTvText();
 
                 if (pressed.equals("%"))
                     pressed = Aux.multi;
 
-                if (!(pressed.equals(")") && (tv.getText() == null || tv.getText().toString().equals(".") || tv.getText().toString().equals(" .") || tv.getText().toString().equals("\0.") || (tv.getText().toString().endsWith("(") || tv.getText().toString().endsWith("÷") || tv.getText().toString().endsWith("×") || tv.getText().toString().endsWith("+") || tv.getText().toString().endsWith("-") || tv.getText().toString().endsWith("^") || tv.getText().toString().endsWith("√"))))) {
+                if (!(pressed.equals(")") && (tvText.equals(".") || tvText.equals(" .") || tvText.equals("\0.") || tvText.endsWith("(") || tv.getText().toString().endsWith("÷") || tv.getText().toString().endsWith("×") || tv.getText().toString().endsWith("+") || tv.getText().toString().endsWith("-") || tv.getText().toString().endsWith("^") || tv.getText().toString().endsWith("√")))) {
                     if (!isBig) {
                         ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
                                 .disableTransitionType(LayoutTransition.CHANGING);
@@ -5099,52 +5122,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
 
                     //Check for too many negative signs
-                    if (!(pressed.equals("-") && tv.getText().toString().equals("\0" + "-")) && !(pressed.equals("-") && getTvText().endsWith("-") && Aux.newTrim(getTvText(), 1).endsWith("("))) {
-                        if (equaled) {
+                    if (!(pressed.equals("-") && getTvText().endsWith("-") && Aux.newTrim(getTvText(), 1).endsWith("("))) {
+                        if (equaled)
                             getEqualed();
-                        }
 
-                        if ((!getTvText().equals("\0") && !getTvText().endsWith("--")) || (pressed.equals("log") || Aux.isTrig(pressed) || pressed.equals("ln") || pressed.equals("√") || pressed.equals("("))) {
-                            if (pressed.equals("!") && (Aux.lastChar(getTvText()).equals("!") || Aux.lastChar(getTvText()).equals("-"))) {
+                        if (!(pressed.equals("!") && (Aux.lastChar(getTvText()).equals("!") || Aux.lastChar(getTvText()).equals("-")))) {
+                            if (Aux.isOp(pressed) || pressed.equals("log") || pressed.equals("ln") || Aux.isTrig(pressed)) {
+                                if (Aux.isBinaryOp(pressed) && !pressed.equals("-") && !pressed.equals(Aux.emDash) && Aux.isBinaryOp(Aux.lastChar(getTvText())))
+                                    removeLast();
 
-                            }
-                            else if (pressed.equals("√") || pressed.equals("-") || pressed.equals("(") || pressed.equals("log") || pressed.equals("ln") || Aux.isTrig(pressed)) {
-                                if ((pressed.equals("+") || pressed.equals("÷") || pressed.equals("×") || pressed.equals("^") || pressed.equals("ⁿ√") || pressed.equals("!")) && (Aux.lastChar(getTvText()).equals("+") || Aux.lastChar(getTvText()).equals("×") || Aux.lastChar(getTvText()).equals("÷") || Aux.lastChar(getTvText()).equals("ⁿ√") || Aux.lastChar(getTvText()).equals("^") || Aux.lastChar(getTvText()).equals("%"))) {
-                                    if (!(pressed.equals("!") && Aux.lastChar(Aux.newTrim(getTvText(), 1)).equals("!")))
-                                        removeLast();
-                                }
-                                
-                                //Negative Stuffs
-                                String textView = tv.getText().toString();
-                                if (pressed.equals("-") && Aux.lastChar(getTvText()).equals("√")) {
-                                    error = true;
-                                }
-
-                                if (!tv.getText().toString().equals("\0") && (getTvText().endsWith(".") && (pressed.equals("(") || pressed.equals(")")))) {
+                                if (!tv.getText().toString().equals("\0") && (getTvText().endsWith(".") && pressed.equals("(")))
                                     dont = true;
-                                }
-                                else if (!tv.getText().toString().equals("\0") && (getTvText().endsWith("(") && (pressed.equals("!") || pressed.equals("+") || pressed.equals("^") || pressed.equals("×") || pressed.equals("÷")))) {
+                                else if (!tv.getText().toString().equals("\0") && (getTvText().endsWith("(") && (pressed.equals("!") || (Aux.isBinaryOp(pressed) && !pressed.equals("-") && !pressed.equals(Aux.emDash)))))
                                     dont = true;
-                                }
-                                else if (!tv.getText().toString().equals("\0") && (tv.getText().toString().equals("-") || tv.getText().toString().equals(" -") || tv.getText().toString().equals("- ")) && (pressed.equals("-") || pressed.equals("+") || pressed.equals("×") || pressed.equals("÷") || pressed.equals("^") || pressed.equals(")"))) {
+                                else if (!tv.getText().toString().equals("\0") && (tv.getText().toString().equals("-") || tv.getText().toString().equals(" -") || tv.getText().toString().equals("- ")) && (Aux.isBinaryOp(pressed) || pressed.equals(")")))
                                     dont = true;
-                                }
-                                else if (!tv.getText().toString().equals("\0") && (textView.endsWith("÷-") || textView.endsWith("×-") || textView.endsWith("+-") || textView.endsWith("^-") || (textView.endsWith("(-") && !pressed.equals("(") && !pressed.equals("√") && !pressed.equals("log") && !pressed.equals("ln")) || textView.endsWith("√-"))) {
-                                    int t;
-
-                                    for (t = 0; t < trigIn.length; t++) {
-                                        if (pressed.equals(trigIn[t]) && !(textView.endsWith("(-"))) {
-                                            dont = true;
-                                            break;
-                                        }
-                                    }
-                                }
-                                else if (!tv.getText().toString().equals("\0") && getTvText().endsWith("√") && (pressed.equals("√") || pressed.equals("+") || pressed.equals("^") || pressed.equals("×") || pressed.equals("÷") || pressed.equals("!"))) {
+                                else if (!tv.getText().toString().equals("\0") && getTvText().endsWith("√") && ((Aux.isBinaryOp(pressed) && !pressed.equals("-") && !pressed.equals(Aux.emDash)) || pressed.equals("!")))
                                     dont = true;
-                                }
-                                else if (!tv.getText().toString().equals("\0") && getTvText().endsWith("-") && !pressed.equals("-") && !pressed.equals("!") && !pressed.equals("log") && !pressed.equals("ln") && !pressed.equals("√") && !pressed.equals("(") && !pressed.equals(")")) {
-
-                                }
                                 else if (getTvText().endsWith("--") && pressed.equals("-"))
                                     dont = true;
 
@@ -5157,8 +5151,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             }
                         }
                     }
-
-                    pressed = "\0";
 
                     if (!dont)
                         isDec = false;
@@ -5187,12 +5179,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 try {
                     tv.setSelection(cursor + keyText.length());
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     e.printStackTrace();
 
                     try {
                         tv.setSelection(cursor + 1);
-                    } catch (Exception e2) {
+                    }
+                    catch (Exception e2) {
                         e.printStackTrace();
                         tv.setSelection(cursor);
                     }
