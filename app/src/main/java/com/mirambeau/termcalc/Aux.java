@@ -46,7 +46,7 @@ public class Aux {
     public static final ArrayList<String> sublistMisc = new ArrayList<>(Arrays.asList(eSub, opSub, cpSub, "."));
     public static final ArrayList<String> normalListMisc = new ArrayList<>(Arrays.asList("e", "(", ")", "."));
 
-    static final String[] trigIn = {"sin", "cos", "tan", "csc", "sec", "cot", "sinh", "cosh", "tanh", "csch", "sech", "coth", "arcsin", "arccos", "arctan", "arccsc", "arcsec", "arccot", "arcsinh", "arccosh", "arctanh", "arccsch", "arcsech", "arccoth"};
+    static final String[] trigIn = {"sin", "cos", "tan", "csc", "sec", "cot", "sinh", "cosh", "tanh", "csch", "sech", "coth", "arcsin", "arccos", "arctan", "arccsc", "arcsec", "arccot", "arcsinh", "arccosh", "arctanh", "arccsch", "arcsech", "arccoth", "sin⁻¹", "cos⁻¹", "tan⁻¹", "csc⁻¹", "sec⁻¹", "cot⁻¹"};
 
     static final String[] currencyCodes = {"USD", "EUR", "GBP", "CAD", "AUD", "MXN"};
     static double[] rates = {-1.0, -1.0, -1.0, -1.0, -1.0, -1.0};

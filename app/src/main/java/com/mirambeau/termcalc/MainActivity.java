@@ -89,16 +89,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     static float barHeight = (float) 70.1;
 
-    int temp, yup;
     int initDay, finalDay, initMonth, finalMonth, initYear, finalYear, resultDay, resultMonth, resultYear;
 
     int vibeDuration = 25;
 
     int foldTextOffset = 0;
 
-    long decimalFactor = 1;
-
-    String tvText, num1, fullEq, fullFrom, fullTo, eqConv, current, pressed, fromTo, fromSave, toSave, selectedFrom, selectedTo, selectedType;
+    String tvText, num1, fullEq, fullFrom, fullTo, eqConv, current, fromTo, fromSave, toSave, selectedFrom, selectedTo, selectedType;
     String bgColor, keypadColor, bTextColor, primary, secondary, tertiary, initSecondary;
 
     static final String[] trigIn = {"sin", "cos", "tan", "csc", "sec", "cot", "sinh", "cosh", "tanh", "csch", "sech", "coth", "arcsin", "arccos", "arctan", "arccsc", "arcsec", "arccot", "arcsinh", "arccosh", "arctanh", "arccsch", "arcsech", "arccoth"};
@@ -123,8 +120,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView previousExpression;
     EditText tv;
 
-    Boolean isInv = false, isNumber = false, isDec = false, isRad = true, equaled = false, deleted = false, isEquals = false;
-    boolean isExpanded, hasExpanded, isLog, error, dError, isE, didIntro, isBig, isSqrtFact, isCustomTheme, dontVibe, isFabExpanded;
+    Boolean isInv = false, isDec = false, isRad = true, equaled = false, deleted = false, isEquals = false;
+    boolean isExpanded, hasExpanded, error, dError, didIntro, isE, isBig, isSqrtFact, isCustomTheme, dontVibe, isFabExpanded;
     boolean isDate = false;
     boolean[] isTrig = new boolean[101];
     boolean theme_boolean = true, isDynamic;
@@ -2082,8 +2079,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
 
                     operation(pressed);
-
-                    isLog = true;
                 }
             });
 
@@ -3732,10 +3727,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onSaveInstanceState(@NonNull Bundle outState){
         super.onSaveInstanceState(outState);
 
-        //Ints
-        outState.putInt("yup", yup);
-        outState.putInt("temp", temp);
-
         //Strings
         outState.putString("fullEq", fullEq);
         outState.putString("eq3", getTvText());
@@ -3746,7 +3737,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         outState.putString("fullFrom", fullFrom);
         outState.putString("fullTo", fullTo);
         outState.putString("current", current);
-        outState.putString("pressed", pressed);
 
         try {
             outState.putString("result", tv.getText().toString());
@@ -3760,11 +3750,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         outState.putBoolean("equaled", equaled);
         outState.putBoolean("deleted", deleted);
         outState.putBoolean("isEquals", isEquals);
-        outState.putBoolean("isNumber", isNumber);
         outState.putBoolean("isDrawerOpened", drawer.isDrawerOpen(GravityCompat.START));
-
-        //Longs
-        outState.putLong("decimalFactor", decimalFactor);
 
         //Arrays
         outState.putBooleanArray("isTrig", isTrig);
@@ -3799,18 +3785,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         isDec = savedInstanceState.getBoolean("isDec");
         isRad = savedInstanceState.getBoolean("isRad");
         equaled = savedInstanceState.getBoolean("equaled");
-        yup = savedInstanceState.getInt("yup");
         current = savedInstanceState.getString("current");
-        pressed = savedInstanceState.getString("pressed");
-        temp = savedInstanceState.getInt("temp");
-        decimalFactor = savedInstanceState.getLong("decimalFactor");
         deleted = savedInstanceState.getBoolean("deleted");
         isEquals = savedInstanceState.getBoolean("isEquals");
         fromSave = savedInstanceState.getString("fromSave");
         toSave = savedInstanceState.getString("toSave");
         fullFrom = savedInstanceState.getString("fullFrom");
         fullTo = savedInstanceState.getString("fullTo");
-        isNumber = savedInstanceState.getBoolean("isNumber");
         num1 = savedInstanceState.getString("num1");
         eqConv = savedInstanceState.getString("eqConv");
 
@@ -4049,6 +4030,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public final void swapDate(){
+        int temp;
+
         temp = initDay;
         initDay = finalDay;
         finalDay = temp;
@@ -4518,8 +4501,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             e.printStackTrace();
         }
 
-        isNumber = false;
-
         isDec = false;
 
         tv.clearFocus();
@@ -4531,7 +4512,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         num1 = "";
 
-        isLog = false;
         isE = false;
         equaled = false;
         isSqrtFact = false;
@@ -4542,8 +4522,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String buttonText = ((Button) v).getText().toString();
 
         if (isLegacy) {
-            isNumber = false;
-
             if (!isBig) {
                 ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
                         .disableTransitionType(LayoutTransition.CHANGING);
@@ -4607,9 +4585,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     findViewById(R.id.bEquals).performClick();
                 }
                 else {
-                    isLog = false;
-                    isNumber = false;
-
                     getTvText();
 
                     if (tvText.contains("ln(0)") || tvText.contains("ln(0.0)") || tvText.endsWith("ln(0") || tvText.endsWith("ln(0.") || tvText.endsWith("ln(0.0"))
@@ -4651,7 +4626,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                             String lastChar = Aux.lastChar(getTvText());
 
-                            if (lastChar != null && ((lastChar.equals("!") || lastChar.equals(")") || lastChar.equals("π") || lastChar.equals("e") || lastChar.equals("∞") || yup == 1))) {
+                            if (lastChar != null && ((lastChar.equals("!") || lastChar.equals(")") || lastChar.equals("π") || lastChar.equals("e") || lastChar.equals("∞") || Aux.isDigit(lastChar)))) {
                                 if (error || dError)
                                     error();
                                 else {
@@ -4670,8 +4645,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                                         spin(clear, theme, color, R.drawable.ic_close_24);
                                     }
-
-                                    isLog = false;
 
                                     //Set text of previous expression TextView
                                     try {
@@ -4853,23 +4826,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
 
                 if (!(!tv.getText().toString().equals("\0") && (getTvText().endsWith("π") || getTvText().endsWith("e") || getTvText().endsWith("!")))) {
-                    if (!isDec)
-                        isNumber = false;
-
                     if (equaled) {
                         equaled = false;
-                        decimalFactor = 1;
 
                         clear(findViewById(R.id.delete));
                         spin(clear, theme, color, R.drawable.ic_baseline_arrow_back_24);
                     }
 
                     if (!isDec) {
-                        tv.append(".");
-
                         isDec = true;
-                        decimalFactor = 1;
 
+                        tv.append(".");
                         wrapText(tv);
                     }
                 }
@@ -4917,8 +4884,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             final FloatingActionButton clear = findViewById(R.id.bDel);
 
             if (isLegacy) {
-                isNumber = true;
-
                 //Disable animations until the equals button is pressed
                 if (!isBig) {
                     ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
@@ -4936,7 +4901,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         final String theme = sp.getString(SettingsActivity.KEY_PREF_THEME, "1");
 
                         equaled = false;
-                        decimalFactor = 1;
 
                         clear(findViewById(R.id.delete));
                         spin(clear, theme, color, R.drawable.ic_baseline_arrow_back_24);
@@ -5067,8 +5031,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     equaled = false;
                 }
 
-                isNumber = false;
-
                 spin(clear, theme, color, R.drawable.ic_baseline_arrow_back_24);
             }
 
@@ -5127,11 +5089,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             final Button keyNum = (Button) v;
 
             if (isLegacy) {
-                int i;
-
                 boolean dont = false;
 
-                pressed = keyNum.getText().toString();
+                String pressed = keyNum.getText().toString();
 
                 if (pressed.equals("%"))
                     pressed = Aux.multi;
@@ -5145,36 +5105,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 .disableTransitionType(LayoutTransition.CHANGING);
                     }
 
-                    if (isLog && pressed.equals(")")) {
-                        if ((Aux.isNum(Aux.lastChar(getTvText())) || getTvText().endsWith("!") || (getTvText().endsWith(".") && Aux.isNum(Aux.lastChar(Aux.newTrim(getTvText(), 1))))))
-                            isLog = false;
-                        else
-                            dont = true;
-                    }
-
-                    isNumber = false;
-
                     //Check for too many negative signs
                     if (!(pressed.equals("-") && tv.getText().toString().equals("\0" + "-")) && !(pressed.equals("-") && getTvText().endsWith("-") && Aux.newTrim(getTvText(), 1).endsWith("("))) {
-                        //Check if operation is trig
-                        for (i = 0; i < trigIn.length; i++) {
-                            if (pressed.equals(trigIn[i])) {
-                                yup = 1;
-                                break;
-                            }
-                        }
-
                         if (equaled) {
                             getEqualed();
                         }
 
-                        if ((!getTvText().equals("\0") && !getTvText().endsWith("--")) || (pressed.equals("log") || yup == 1 || pressed.equals("ln") || pressed.equals("√") || pressed.equals("("))) {
+                        if ((!getTvText().equals("\0") && !getTvText().endsWith("--")) || (pressed.equals("log") || Aux.isTrig(pressed) || pressed.equals("ln") || pressed.equals("√") || pressed.equals("("))) {
                             if (pressed.equals("!") && (Aux.lastChar(getTvText()).equals("!") || Aux.lastChar(getTvText()).equals("-"))) {
 
                             }
-                            else if (pressed.equals("√") || pressed.equals("-") || pressed.equals("(") || pressed.equals("log") || pressed.equals("ln") || yup == 1) {
-                                yup = 0;
-
+                            else if (pressed.equals("√") || pressed.equals("-") || pressed.equals("(") || pressed.equals("log") || pressed.equals("ln") || Aux.isTrig(pressed)) {
                                 if ((pressed.equals("+") || pressed.equals("÷") || pressed.equals("×") || pressed.equals("^") || pressed.equals("ⁿ√") || pressed.equals("!")) && (Aux.lastChar(getTvText()).equals("+") || Aux.lastChar(getTvText()).equals("×") || Aux.lastChar(getTvText()).equals("÷") || Aux.lastChar(getTvText()).equals("ⁿ√") || Aux.lastChar(getTvText()).equals("^") || Aux.lastChar(getTvText()).equals("%"))) {
                                     if (!(pressed.equals("!") && Aux.lastChar(Aux.newTrim(getTvText(), 1)).equals("!")))
                                         removeLast();
@@ -5196,42 +5137,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     dont = true;
                                 }
                                 else if (!tv.getText().toString().equals("\0") && (textView.endsWith("÷-") || textView.endsWith("×-") || textView.endsWith("+-") || textView.endsWith("^-") || (textView.endsWith("(-") && !pressed.equals("(") && !pressed.equals("√") && !pressed.equals("log") && !pressed.equals("ln")) || textView.endsWith("√-"))) {
-                                    int t, tempYup = yup;
+                                    int t;
+
                                     for (t = 0; t < trigIn.length; t++) {
-                                        if (pressed.equals(trigIn[t])) {
-                                            yup = 1;
+                                        if (pressed.equals(trigIn[t]) && !(textView.endsWith("(-"))) {
+                                            dont = true;
                                             break;
                                         }
                                     }
-
-                                    if (!(textView.endsWith("(-") && yup == 1))
-                                        dont = true;
-
-                                    yup = tempYup;
                                 }
                                 else if (!tv.getText().toString().equals("\0") && getTvText().endsWith("√") && (pressed.equals("√") || pressed.equals("+") || pressed.equals("^") || pressed.equals("×") || pressed.equals("÷") || pressed.equals("!"))) {
                                     dont = true;
                                 }
                                 else if (!tv.getText().toString().equals("\0") && getTvText().endsWith("-") && !pressed.equals("-") && !pressed.equals("!") && !pressed.equals("log") && !pressed.equals("ln") && !pressed.equals("√") && !pressed.equals("(") && !pressed.equals(")")) {
-                                    int t, tempYup = yup;
-                                    for (t = 0; t < trigIn.length; t++) {
-                                        if (pressed.equals(trigIn[t])) {
-                                            yup = 1;
-                                            break;
-                                        }
-                                    }
 
-                                    yup = tempYup;
                                 }
-                                else if (getTvText().endsWith("-") && getTvText().endsWith("--") && pressed.equals("-"))
-                                    tv.append("-");
+                                else if (getTvText().endsWith("--") && pressed.equals("-"))
+                                    dont = true;
 
                                 if (!dont) {
-                                    tv.append(keyNum.getText().toString());
-
                                     isDec = false;
-                                    decimalFactor = 1;
 
+                                    tv.append(keyNum.getText().toString());
                                     wrapText(tv);
                                 }
                             }
@@ -5240,10 +5167,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     pressed = "\0";
 
-                    if (!dont) {
-                        decimalFactor = 1;
+                    if (!dont)
                         isDec = false;
-                    }
                 }
             }
             else {
@@ -5258,10 +5183,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 String tvText = tv.getText().toString();
                 String keyText = keyNum.getText().toString();
 
-                if (keyText != null) {
-                    if (keyText.startsWith("a") || keyText.startsWith("s") || keyText.startsWith("c") || keyText.startsWith("t") || keyText.startsWith("l"))
-                        keyText += "(";
-                }
+                if (keyText.startsWith("a") || keyText.startsWith("s") || keyText.startsWith("c") || keyText.startsWith("t") || keyText.startsWith("l"))
+                    keyText += "(";
 
                 //TODO: Check to make sure operations like "+" can't be typed in the beginning of the expression
                 if (cursor > 0)
