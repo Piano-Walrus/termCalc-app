@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     int foldTextOffset = 0;
 
-    String tvText, num1, fullEq, fullFrom, fullTo, eqConv, current, fromTo, fromSave, toSave, selectedFrom, selectedTo, selectedType;
+    String tvText, fullEq, fullFrom, fullTo, eqConv, current, fromTo, fromSave, toSave, selectedFrom, selectedTo, selectedType;
     String bgColor, keypadColor, bTextColor, primary, secondary, tertiary, initSecondary;
 
     static final String[] trigIn = {"sin", "cos", "tan", "csc", "sec", "cot", "sinh", "cosh", "tanh", "csch", "sech", "coth", "arcsin", "arccos", "arctan", "arccsc", "arcsec", "arccot", "arcsinh", "arccosh", "arctanh", "arccsch", "arcsech", "arccoth"};
@@ -3213,8 +3213,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent themeIntent = new Intent(this, SettingsActivity.class);
                 startActivity(themeIntent);
 
-                num1 = "";
-
                 break;
 
             case R.id.nav_about:
@@ -3731,7 +3729,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         outState.putString("fullEq", fullEq);
         outState.putString("eq3", getTvText());
         outState.putString("eqConv", eqConv);
-        outState.putString("num1", num1);
         outState.putString("fromSave", fromSave);
         outState.putString("toSave", toSave);
         outState.putString("fullFrom", fullFrom);
@@ -3792,7 +3789,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toSave = savedInstanceState.getString("toSave");
         fullFrom = savedInstanceState.getString("fullFrom");
         fullTo = savedInstanceState.getString("fullTo");
-        num1 = savedInstanceState.getString("num1");
         eqConv = savedInstanceState.getString("eqConv");
 
         selectedType = savedInstanceState.getString("selectedType");
@@ -4508,9 +4504,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (Aux.tinydb().getBoolean("exInput"))
             tv.setEnabled(true);
-
-
-        num1 = "";
 
         isE = false;
         equaled = false;
