@@ -4350,7 +4350,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         //TODO: Backspacing log base n
                     }
                     else {
-                        tv.setText(Aux.newTrim(getTvText(), 1));
+                        //Delete trig, log, or ln
+                        if (getTvText().endsWith("(")) {
+                            tv.setText(Aux.newTrim(getTvText(), 1));
+
+                            if (tvText.endsWith(Aux.superMinus + Aux.superscripts[1]) && Aux.isLetter(Aux.lastChar(Aux.newTrim(tvText, 2))))
+                                tv.setText(Aux.newTrim(getTvText(), 2));
+
+                            while (Aux.isLetter(Aux.lastChar(getTvText()))) {
+                                tv.setText(Aux.newTrim(getTvText(), 1));
+                            }
+                        }
+                        //Normal backspace
+                        else
+                            tv.setText(Aux.newTrim(getTvText(), 1));
                     }
                 }
 
@@ -5146,6 +5159,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     isDec = false;
 
                                     tv.append(keyNum.getText().toString());
+
+                                    if (Aux.isTrig(keyNum.getText().toString()))
+                                        tv.append("(");
+
                                     wrapText(tv);
                                 }
                             }
