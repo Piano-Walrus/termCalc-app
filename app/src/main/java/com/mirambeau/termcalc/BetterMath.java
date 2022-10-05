@@ -85,8 +85,16 @@ public class BetterMath {
             eqArray.set(index, pi);
 
             try {
-                if (Ax.isFullSignedNumE(eqArray.get(index - 1)))
+                if (Ax.isFullSignedNumE(eqArray.get(index - 1))) {
                     eqArray.add(index, "*");
+                    index++;
+                }
+            }
+            catch (Exception ignored) {}
+
+            try {
+                if (Ax.isFullSignedNumE(eqArray.get(index + 1)))
+                    eqArray.add(index + 1, "*");
             }
             catch (Exception ignored) {}
         }
@@ -98,8 +106,16 @@ public class BetterMath {
             eqArray.set(index, e);
 
             try {
-                if (Ax.isFullSignedNumE(eqArray.get(index - 1)))
+                if (Ax.isFullSignedNumE(eqArray.get(index - 1))) {
                     eqArray.add(index, "*");
+                    index++;
+                }
+            }
+            catch (Exception ignored) {}
+
+            try {
+                if (Ax.isFullSignedNumE(eqArray.get(index + 1)))
+                    eqArray.add(index + 1, "*");
             }
             catch (Exception ignored) {}
         }
@@ -522,10 +538,14 @@ public class BetterMath {
                 continue;
 
             if (Ax.isDigit(current) || current.equals(".")) {
-                if (eqArray.size() < 1 || Ax.isOp(eqArray.get(eqArray.size() - 1)))
+                String lastItem;
+
+                lastItem = eqArray.size() > 0 ? eqArray.get(eqArray.size() - 1) : "";
+
+                if (eqArray.size() < 1 || (Ax.isOp(lastItem) || lastItem.equals(Ax.pi) || lastItem.equals("e")))
                     eqArray.add(current);
                 else
-                    eqArray.set(eqArray.size() - 1, eqArray.get(eqArray.size() - 1) + current);
+                    eqArray.set(eqArray.size() - 1, lastItem + current);
             }
             //TODO: Parse n-th roots properly
             else if (Ax.isOp(current) || current.equals(Ax.pi) || current.equals("e") || Ax.superlist.contains(current) ||
