@@ -139,9 +139,8 @@ public class BetterMath {
             eqArray.set(start, evaluate(subList.toString().trim().replace("[", "").replace("]", "").replace(",", "").replace(" ", ""), prioritizeCoefficients, isRad, mc, scale).toPlainString());
 
             try {
-                if (Ax.isFullNum(eqArray.get(end + 1)) || eqArray.get(end + 1).equals(Ax.sq)) {
+                if (Ax.isFullNum(eqArray.get(end + 1)) || eqArray.get(end + 1).equals(Ax.sq))
                     eqArray.add(end + 1, "*");
-                }
             }
             catch (Exception ignored) {}
 
@@ -538,9 +537,7 @@ public class BetterMath {
                 continue;
 
             if (Ax.isDigit(current) || current.equals(".")) {
-                String lastItem;
-
-                lastItem = eqArray.size() > 0 ? eqArray.get(eqArray.size() - 1) : "";
+                String lastItem = eqArray.size() > 0 ? eqArray.get(eqArray.size() - 1) : "";
 
                 if (eqArray.size() < 1 || (Ax.isOp(lastItem) || lastItem.equals(Ax.pi) || lastItem.equals("e")))
                     eqArray.add(current);
@@ -550,6 +547,11 @@ public class BetterMath {
             //TODO: Parse n-th roots properly
             else if (Ax.isOp(current) || current.equals(Ax.pi) || current.equals("e") || Ax.superlist.contains(current) ||
                     Ax.sublist.contains(current) || current.equals("ₑ")) {
+                String lastItem = eqArray.size() > 0 ? eqArray.get(eqArray.size() - 1) : "";
+
+                if (Ax.isDigit(lastItem) && current.equals(Ax.sq))
+                    eqArray.add("*");
+
                 eqArray.add(current);
             }
             else {
