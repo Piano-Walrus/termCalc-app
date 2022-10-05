@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     static float barHeight = (float) 70.1;
 
-    int negative, count, temp, tempNum, numNumbers, yup;
+    int negative, temp, tempNum, numNumbers, yup;
     int initDay, finalDay, initMonth, finalMonth, initYear, finalYear, resultDay, resultMonth, resultYear;
 
     int[] pari = new int[numsLength2 - 1];
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     int numPresses = 1, currentButton = 0;
 
     Boolean isInv = false, isNumber = false, isDec = false, isRad = true, equalPressed = false, equaled = false, negative2 = false, deleted = false, isEquals = false;
-    boolean isExpanded, hasExpanded, isSuper, isLog, error, dError, hasTrig, isE, didIntro, isBig, isSqrtFact, isCustomTheme, dontVibe, isFabExpanded;
+    boolean isExpanded, hasExpanded, isSuper, isLog, error, dError, isE, didIntro, isBig, isSqrtFact, isCustomTheme, dontVibe, isFabExpanded;
     boolean isDate = false;
     boolean[] isTrig = new boolean[101];
     boolean theme_boolean = true, isDynamic;
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     boolean isDarkTab = true;
     boolean roundedButtons = false;
 
-    DecimalFormat bigdf, arcdf, pidf, userdf;
+    DecimalFormat arcdf;
 
     final int darkGray = Color.parseColor("#222222");
     final int monochromeTextColor = Color.parseColor("#303030");
@@ -205,11 +205,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 tinydb.putString("-mt", "\0");
 
             if (!tinydb.getBoolean("clearedHistory")) {
-                tinydb.putListString("equations", new ArrayList<String>());
-                tinydb.putListString("answers", new ArrayList<String>());
-                tinydb.putListInt("dayEntries", new ArrayList<Integer>());
-                tinydb.putListInt("monthEntries", new ArrayList<Integer>());
-                tinydb.putListInt("yearEntries", new ArrayList<Integer>());
+                tinydb.putListString("equations", new ArrayList<>());
+                tinydb.putListString("answers", new ArrayList<>());
+                tinydb.putListInt("dayEntries", new ArrayList<>());
+                tinydb.putListInt("monthEntries", new ArrayList<>());
+                tinydb.putListInt("yearEntries", new ArrayList<>());
 
                 tinydb.putBoolean("clearedHistory", true);
             }
@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 tinydb.putString("basicTheme", "1");
 
             if (!isDynamic) {
-                String dfStr = "#,###.";
+                StringBuilder dfStr = new StringBuilder("#,###.");
                 int precision = tinydb.getInt("precision");
 
                 if (precision == 0) {
@@ -233,20 +233,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
 
                 for (i = 0; i < precision; i++) {
-                    dfStr += "#";
+                    dfStr.append("#");
                 }
 
-                userdf = new DecimalFormat(dfStr);
-
-                arcdf = userdf;
-                bigdf = userdf;
-                pidf = userdf;
+                arcdf = new DecimalFormat(dfStr.toString());
             }
-            else {
+            else
                 arcdf = new DecimalFormat("#,###.####");
-                bigdf = new DecimalFormat("#,###.#############");
-                pidf = new DecimalFormat("#,###.#####");
-            }
 
             int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
             int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
@@ -2234,9 +2227,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         tinydb.putInt("vibeDuration", 25);
 
-                        if (negative2 || negative == 1 || (numbers[pc][pari[pc]] == 0 && isValid[pc][pari[pc]])) {
+                        if (negative2 || negative == 1 || (numbers[pc][pari[pc]] == 0 && isValid[pc][pari[pc]]))
                             error = true;
-                        }
 
                         int n;
                         int numChars = Aux.countNums(eq3);
@@ -3876,7 +3868,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         outState.putInt("pc", pc);
         outState.putInt("negative", negative);
         outState.putInt("yup", yup);
-        outState.putInt("count", count);
         outState.putInt("temp", temp);
         outState.putInt("currentButton", currentButton);
         outState.putInt("numNumbers", numNumbers);
@@ -3964,7 +3955,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         yup = savedInstanceState.getInt("yup");
         current = savedInstanceState.getString("current");
         pressed = savedInstanceState.getString("pressed");
-        count = savedInstanceState.getInt("count");
         temp = savedInstanceState.getInt("temp");
         decimalFactor = savedInstanceState.getLong("decimalFactor");
         deleted = savedInstanceState.getBoolean("deleted");
@@ -4253,7 +4243,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         try {
             if (isLegacy)
-                tv.setText(Aux.updateCommas(tv.getText().toString()));
+                tv.setText(Aux.updateCommas(tv.getText().toString()).replace("\n", "").trim());
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -5440,8 +5430,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         showRippleAnimation(findViewById(R.id.bgAnim));
                     }
                     else {
-                        boolean goNext = false;
-
                         if (!equaled) {
                             String historyTemp = eq3;
 
