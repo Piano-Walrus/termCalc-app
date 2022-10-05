@@ -85,35 +85,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     BigDecimal piDec = new BigDecimal("3.14159265358979323846264338327950");
     MathContext mc = MathContext.DECIMAL128;
 
-    int numsLength1 = 45, numsLength2 = 101;
-
     int squarePrecision = 6, roundedPrecision = 8;
-
-    double[][] numbers = new double[numsLength1][numsLength2];
-    String[][] ops = new String[numsLength1][numsLength2];
-    boolean[][] isValid = new boolean[numsLength1][numsLength2];
-
-    static final double pi = Math.PI, numE = Math.E, zeroDec = 0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001 * Math.pow(10, -250);
-    double backup;
 
     static float barHeight = (float) 70.1;
 
-    int negative, temp, tempNum, numNumbers, yup;
+    int temp, yup;
     int initDay, finalDay, initMonth, finalMonth, initYear, finalYear, resultDay, resultMonth, resultYear;
 
-    int[] pari = new int[numsLength2 - 1];
-    int pc = 0;
+    int vibeDuration = 25;
 
     int foldTextOffset = 0;
 
     long decimalFactor = 1;
 
-    String num1, fullEq, fullFrom, fullTo, eq3, eqConv, current, pressed, fromTo, fromSave, toSave, newString, selectedFrom, selectedTo, selectedType, lastEq;
+    String tvText, num1, fullEq, fullFrom, fullTo, eqConv, current, pressed, fromTo, fromSave, toSave, selectedFrom, selectedTo, selectedType;
     String bgColor, keypadColor, bTextColor, primary, secondary, tertiary, initSecondary;
 
     static final String[] trigIn = {"sin", "cos", "tan", "csc", "sec", "cot", "sinh", "cosh", "tanh", "csch", "sech", "coth", "arcsin", "arccos", "arctan", "arccsc", "arcsec", "arccot", "arcsinh", "arccosh", "arctanh", "arccsch", "arcsech", "arccoth"};
     static final String[] trigOut = {"sin(", "cos(", "tan(", "csc(", "sec(", "cot(", "sinh(", "cosh(", "tanh(", "csch(", "sech(", "coth(", "arcsin(", "arccos(", "arctan(", "arccsc(", "arcsec(", "arccot(", "arcsinh(", "arccosh(", "arctanh(", "arccsch(", "arcsech(", "arccoth("};
-    static final String[] superscripts = {"⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"};
     static final String[] subscripts = {"₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉"};
 
     static final String[] initConstantTitles = {"Avogadro's Number", "Atomic Mass Unit", "Planck's Constant", "Electron Charge", "Gas Constant", "Faraday Constant", "Acceleration of Gravity"};
@@ -134,11 +123,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView previousExpression;
     EditText tv;
 
-    String[] buttonPresses = new String[300];
-    int numPresses = 1, currentButton = 0;
-
-    Boolean isInv = false, isNumber = false, isDec = false, isRad = true, equalPressed = false, equaled = false, negative2 = false, deleted = false, isEquals = false;
-    boolean isExpanded, hasExpanded, isSuper, isLog, error, dError, isE, didIntro, isBig, isSqrtFact, isCustomTheme, dontVibe, isFabExpanded;
+    Boolean isInv = false, isNumber = false, isDec = false, isRad = true, equaled = false, deleted = false, isEquals = false;
+    boolean isExpanded, hasExpanded, isLog, error, dError, isE, didIntro, isBig, isSqrtFact, isCustomTheme, dontVibe, isFabExpanded;
     boolean isDate = false;
     boolean[] isTrig = new boolean[101];
     boolean theme_boolean = true, isDynamic;
@@ -694,10 +680,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     bgAnim.setTextColor(Color.WHITE);
             }
 
-            if (theme.equals("1") || theme.equals("3"))
-                theme_boolean = true;
-            else
-                theme_boolean = false;
+            theme_boolean = theme.equals("1") || theme.equals("3");
 
             if (theme.equals("5"))
                 tinydb.putBoolean("theme_boolean", theme_boolean);
@@ -1904,7 +1887,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public boolean onLongClick(View v) {
                     Button sin = (Button) v;
 
-                    vibe(25);
+                    vibe(vibeDuration);
 
                     String pressed = sin.getText().toString();
 
@@ -1922,7 +1905,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public boolean onLongClick(View v) {
                     Button cos = (Button) v;
 
-                    vibe(25);
+                    vibe(vibeDuration);
 
                     String pressed = cos.getText().toString();
 
@@ -1940,7 +1923,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public boolean onLongClick(View v) {
                     Button tan = (Button) v;
 
-                    vibe(25);
+                    vibe(vibeDuration);
 
                     String pressed = tan.getText().toString();
 
@@ -1958,7 +1941,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public boolean onLongClick(View v) {
                     Button csc = (Button) v;
 
-                    vibe(25);
+                    vibe(vibeDuration);
 
                     String pressed = csc.getText().toString();
 
@@ -1976,7 +1959,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public boolean onLongClick(View v) {
                     Button sec = (Button) v;
 
-                    vibe(25);
+                    vibe(vibeDuration);
 
                     String pressed = sec.getText().toString();
 
@@ -1994,7 +1977,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public boolean onLongClick(View v) {
                     Button cot = (Button) v;
 
-                    vibe(25);
+                    vibe(vibeDuration);
 
                     String pressed = cot.getText().toString();
 
@@ -2011,139 +1994,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 @SuppressLint("SetTextI18n")
                 @Override
                 public boolean onLongClick(View v) {
-                    Button pressed = (Button) v;
-
-                    int i, j;
+                    int i;
                     int cursor = tv.getSelectionStart();
-                    String tempEq3 = "", tempTv = "";
+                    String eq3, converted = "";
+                    String tvText = tv.getText().toString();
 
                     if (equaled)
                         getEqualed();
 
-                    if (!isLegacy) {
-                        tempEq3 = eq3;
-                        tempTv = tv.getText().toString();
-                        eq3 = tempTv.substring(0, cursor);
+                    eq3 = isLegacy ? tvText : tvText.substring(0, cursor);
+
+                    for (i = eq3.length(); i > 0; i--) {
+                        String current = Aux.chat(eq3, i);
+
+                        if (Aux.isDigit(current) || current.equals(".") || current.equals("-") || current.equals(Aux.emDash) || current.equals("e") || current.equals("(") || current.equals(")"))
+                            converted = Aux.numToSuper(current) + converted;
                     }
 
-                    if (!tv.getText().toString().equals(" ")) {
-                        if (eq3 == null && lastEq != null) {
-                            eq3 = arcdf.format(lastEq);
-                            if (eq3 != null) {
-                                numNumbers = Aux.countNums(eq3);
-                            }
-                            else {
-                                isNumber = false;
-                                numNumbers = 0;
-                            }
-                        }
-                        else if (eq3 != null && eq3.equals("\0") && lastEq != null && !lastEq.equals("\0")) {
-                            eq3 = arcdf.format(Double.parseDouble(lastEq));
-                            numNumbers = Aux.countNums(eq3);
-                        }
+                    tv.setText(tvText.replace(eq3, Aux.newTrim(eq3, converted.length()) + converted));
 
-                        if (eq3 != null && eq3.length() > 0) {
-                            isNumber = true;
-                        }
-
-                        isSuper = false;
-
-                        numNumbers = Aux.countNums(eq3);
-
-                        if (eq3 != null && !eq3.equals("\0") && numNumbers > 0) {
-                            String num2;
-
-                            if (!dontVibe) {
-                                int vibeDuration = tinydb.getInt("vibeDuration");
-
-                                vibe(vibeDuration);
-
-                                tinydb.putInt("vibeDuration", 25);
-                            }
-
-                            pressed.setText("ⁿ√");
-
-                            if (isNumber) {
-                                num2 = Aux.getLast(eq3, numNumbers);
-                                eq3 = Aux.newTrim(eq3, numNumbers);
-                                num1 = "\0";
-
-                                for (i = 0; i < numNumbers; i++) {
-                                    if (Aux.chat(num2, i).equals(".")) {
-                                        num1 += "⋅";
-                                    }
-                                    else if (Aux.chat(num2, i).equals("-")) {
-                                        num1 = "⁻";
-                                    }
-                                    else if (Aux.chat(num2, i).equals("π")) {
-                                        num1 += "π";
-                                    }
-                                    else if (Aux.chat(num2, i).equals("e")) {
-                                        num1 += "ᵉ";
-                                    }
-                                    else if (Aux.chat(num2, i).equals(",")) {
-
-                                    }
-                                    else {
-                                        for (j = 0; j < 10; j++) {
-                                            if (Aux.chat(num2, i).equals(superscripts[j])) {
-                                                if (num1 != null && !num1.equals("\0")) {
-                                                    num1 = superscripts[j];
-                                                    isSuper = true;
-                                                    break;
-                                                }
-                                                else {
-                                                    num1 += superscripts[j];
-                                                    isSuper = true;
-                                                    break;
-                                                }
-                                            }
-                                        }
-                                        if (!isSuper) {
-                                            if (num1 != null && num1.equals("\0")) {
-                                                num1 = superscripts[Integer.parseInt(Aux.chat(num2, i))];
-                                            }
-                                            else {
-                                                num1 += superscripts[Integer.parseInt(Aux.chat(num2, i))];
-                                            }
-                                        }
-                                        else {
-                                            isSuper = false;
-                                        }
-                                    }
-                                }
-                                if (eq3 != null && eq3.equals("\0")) {
-                                    eq3 = num1;
-                                }
-                                else {
-                                    eq3 += num1;
-                                }
-                            }
-
-                            num1 = "\0";
-                            tempNum = numNumbers;
-                            numNumbers = 0;
-                            isSuper = false;
-
-                            if (!isLegacy) {
-                                isLegacy = true;
-                                operation(pressed);
-                                isLegacy = false;
-
-                                tv.setText(tv.getText().toString() + tempTv.substring(cursor));
-                                tv.setSelection(cursor + 1);
-                            }
-                            else
-                                operation(pressed);
-
-                            pressed.setText("√");
-                        }
-                    }
+                    if (!dontVibe)
+                        vibe(vibeDuration);
 
                     dontVibe = false;
-
-                    if (!isLegacy)
-                        eq3 = tempEq3;
 
                     return true;
                 }
@@ -2165,13 +2038,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (Aux.isTinyColor("-b%t"))
                     bMod.setTextColor(Aux.getTinyColor("-b%t"));
             }
-            
+
+            //Open parenthesis
+            findViewById(R.id.bParenthesisOpen).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    parenthesis(v);
+                }
+            });
+
+            //Close parenthesis
+            findViewById(R.id.bParenthesisClose).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    parenthesis(v);
+                }
+            });
+
             //Mod
             compBar[7].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Button button = (Button) v;
-                    
+
                     button.setText("%");
                     operation(button);
                     button.setText(tinydb.getString("modSymbol"));
@@ -2187,17 +2076,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     try {
                         Aux.removeCommas(tv.getText().toString());
-                    } catch (Exception e) {
+                    }
+                    catch (Exception e) {
                         e.printStackTrace();
                     }
 
-                    pressed.setText("(");
-                    keypress(pressed);
-                    pressed.setText("1");
-                    keypress(pressed);
-                    pressed.setText("0");
-                    keypress(pressed);
-                    pressed.setText("log");
                     operation(pressed);
 
                     isLog = true;
@@ -2210,25 +2093,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 @Override
                 public boolean onLongClick(View v) {
                     Button pressed = (Button) v;
-
-                    try {
-                        Aux.removeCommas(tv.getText().toString());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    String eq3 = getTvText();
 
                     if (equaled)
                         getEqualed();
 
                     if (!Aux.isNull(eq3) && Aux.isNum(Aux.lastChar(eq3))) {
-                        int vibeDuration = tinydb.getInt("vibeDuration");
-
                         vibe(vibeDuration);
-
-                        tinydb.putInt("vibeDuration", 25);
-
-                        if (negative2 || negative == 1 || (numbers[pc][pari[pc]] == 0 && isValid[pc][pari[pc]]))
-                            error = true;
 
                         int n;
                         int numChars = Aux.countNums(eq3);
@@ -2824,7 +2695,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 Button inv = findViewById(R.id.bInv);
 
-                HorizontalScrollView comp = findViewById(R.id.horizontalComplex);
                 LinearLayout compLayout = findViewById(R.id.horizontalComplexLinearLayout);
 
                 //SwapTopBar onClickListener
@@ -3099,7 +2969,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         wrapText(tv);
         tv.setEnabled(false);
-        eq3 = "\0";
         error = false;
         dError = false;
 
@@ -3864,17 +3733,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onSaveInstanceState(outState);
 
         //Ints
-        outState.putInt("numPresses", numPresses);
-        outState.putInt("pc", pc);
-        outState.putInt("negative", negative);
         outState.putInt("yup", yup);
         outState.putInt("temp", temp);
-        outState.putInt("currentButton", currentButton);
-        outState.putInt("numNumbers", numNumbers);
 
         //Strings
         outState.putString("fullEq", fullEq);
-        outState.putString("eq3", eq3);
+        outState.putString("eq3", getTvText());
         outState.putString("eqConv", eqConv);
         outState.putString("num1", num1);
         outState.putString("fromSave", fromSave);
@@ -3894,8 +3758,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         outState.putBoolean("isDec", isDec);
         outState.putBoolean("isRad", isRad);
         outState.putBoolean("equaled", equaled);
-        outState.putBoolean("equalPressed", equalPressed);
-        outState.putBoolean("negative2", negative2);
         outState.putBoolean("deleted", deleted);
         outState.putBoolean("isEquals", isEquals);
         outState.putBoolean("isNumber", isNumber);
@@ -3905,9 +3767,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         outState.putLong("decimalFactor", decimalFactor);
 
         //Arrays
-        outState.putIntArray("pari", pari);
         outState.putBooleanArray("isTrig", isTrig);
-        outState.putStringArray("buttonPresses", buttonPresses);
 
         //Date Ints
         outState.putInt("initDay", initDay);
@@ -3927,31 +3787,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        String theme = sp.getString(SettingsActivity.KEY_PREF_THEME, "1");
-        String color = sp.getString(SettingsActivity.KEY_PREF_COLOR, "1");
-
-        NavigationView navigationView = MainActivity.mainActivity.findViewById(R.id.nav_view);
+        int i;
+        String[] trig = {"sin", "cos", "tan", "csc", "sec", "cot"};
+        Button[] trigButtons = {findViewById(R.id.bSin), findViewById(R.id.bCos), findViewById(R.id.bTan), findViewById(R.id.bCsc), findViewById(R.id.bSec), findViewById(R.id.bCot)};
 
         Button degRad = findViewById(R.id.bDegRad);
 
-        Button sin = findViewById(R.id.bSin), cos = findViewById(R.id.bCos), tan = findViewById(R.id.bTan), csc = findViewById(R.id.bCsc), sec = findViewById(R.id.bSec), cot = findViewById(R.id.bCot);
-        FloatingActionButton dateEquals = findViewById(R.id.dateEquals);
-
-        buttonPresses = savedInstanceState.getStringArray("buttonPresses");
-        numPresses = savedInstanceState.getInt("numPresses");
-        currentButton = savedInstanceState.getInt("currentButton");
-        eq3 = savedInstanceState.getString("eq3");
+        String eq3 = savedInstanceState.getString("eq3");
         isTrig = savedInstanceState.getBooleanArray("isTrig");
-        pc = savedInstanceState.getInt("pc");
-        pari = savedInstanceState.getIntArray("pari");
         isInv = savedInstanceState.getBoolean("isInv");
         isDec = savedInstanceState.getBoolean("isDec");
         isRad = savedInstanceState.getBoolean("isRad");
         equaled = savedInstanceState.getBoolean("equaled");
-        equalPressed = savedInstanceState.getBoolean("equalPressed");
-        negative2 = savedInstanceState.getBoolean("negative2");
-        negative = savedInstanceState.getInt("negative");
         yup = savedInstanceState.getInt("yup");
         current = savedInstanceState.getString("current");
         pressed = savedInstanceState.getString("pressed");
@@ -3964,7 +3811,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fullFrom = savedInstanceState.getString("fullFrom");
         fullTo = savedInstanceState.getString("fullTo");
         isNumber = savedInstanceState.getBoolean("isNumber");
-        numNumbers = savedInstanceState.getInt("numNumbers");
         num1 = savedInstanceState.getString("num1");
         eqConv = savedInstanceState.getString("eqConv");
 
@@ -3994,27 +3840,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             tinydb.putBoolean("closeDrawer", true);
         }
 
-        if (isRad)
-            degRad.setText("RAD");
-        else
-            degRad.setText("DEG");
+        degRad.setText(isRad ? "RAD" : "DEG");
 
-        if (isInv) {
-            sin.setText("arcsin");
-            cos.setText("arccos");
-            tan.setText("arctan");
-            csc.setText("arccsc");
-            sec.setText("arcsec");
-            cot.setText("arccot");
+        try {
+            for (i = 0; i < trig.length; i++) {
+                trigButtons[i].setText(isInv ? trig[i] + Aux.superMinus + Aux.superscripts[1] : trig[i]);
+            }
         }
-        else {
-            sin.setText("sin");
-            cos.setText("cos");
-            tan.setText("tan");
-            csc.setText("csc");
-            sec.setText("sec");
-            cot.setText("cot");
+        catch (Exception e) {
+            e.printStackTrace();
         }
+
+        String tvText = tv.getText().toString();
 
         if (equaled)
             ((FloatingActionButton) findViewById(R.id.bDel)).setImageDrawable(ContextCompat.getDrawable(MainActivity.mainActivity, R.drawable.ic_close_24));
@@ -4030,16 +3867,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             result = "0";
         }
 
-        if (eq3 != null && eq3.equals("\0") && equaled){
+        if (getTvText().equals("\0") && equaled)
             eq3 = result;
-            tv.setText(result);
-            wrapText(tv);
-        }
 
         tv.setText(eq3);
 
         try {
-            String tvText = tv.getText().toString();
+            tvText = getTvText();
 
             if (tvText.length() > 1 && equaled && tvText.contains(".") && !tvText.contains("E")) {
                 if (roundedButtons)
@@ -4064,14 +3898,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fullEq = tv.getText().toString();
 
         final TinyDB tinydb = new TinyDB(this);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-
-        HorizontalScrollView eqScroll = findViewById(R.id.equationScrollView);
 
         if (tinydb.getBoolean("exInput"))
             tv.setEnabled(true);
-
-        Log.d("pc", Integer.toString(pc));
 
         int orientation = this.getResources().getConfiguration().orientation;
 
@@ -4088,15 +3917,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (tinydb.getBoolean("isFold3") && minimumWidth <= 345) {
             foldTextOffset = 8;
             foldShrinkOffset = 3;
-        }
-
-        if (numPresses >= 299)
-            numPresses--;
-
-        if (pari[pc] > 99){
-            removeLast();
-            removeLast();
-            pari[pc]--;
         }
 
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -4136,37 +3956,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             else
                 tv.setTextSize(40);
         }
-
-        if (tinydb.getBoolean("debug")) {
-            String title;
-
-            try {
-                String currentTitle = toolbar.getTitle().toString();
-
-                if (currentTitle.startsWith("Ho"))
-                    title = "Home";
-                else if (currentTitle.startsWith("Pantalla"))
-                    title = "Pantalla Principal";
-                else if (currentTitle.startsWith("Conv"))
-                    title = "Conversions";
-                else if (currentTitle.startsWith("Da"))
-                    title = "Date";
-                else if (currentTitle.endsWith("Fecha"))
-                    title = "Cálculo de Fecha";
-                else if (currentTitle.endsWith("Fracción"))
-                    title = "Decimal a Fracción";
-                else if (currentTitle.startsWith("Decimal"))
-                    title = "Decimal to Fraction";
-                else
-                    title = "Home";
-            }
-            catch (Exception e) {
-                title = "Home";
-            }
-
-            toolbar.setTitle(title + "       np = " + numPresses);
-        }
-
 
         HandlerThread thread = new HandlerThread("ClearThread");
         thread.start();
@@ -4541,7 +4330,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (isLegacy) {
             try {
-                tv.setText(Aux.removeCommas(tv.getText().toString()));
+                tv.setText(Aux.removeCommas(getTvText()));
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -4549,302 +4338,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         if (isLegacy) {
-            TinyDB tinydb = new TinyDB(this);
-
-            int i;
-
-            boolean wasSuper = false;
-            boolean doubleMinus = false;
-
-            if (numPresses <= 2)
+            if (getTvText().length() <= 1)
                 clear(bDel);
             else {
-                if ((eq3 != null) && (eq3.length() > 0)) {
-                    if (eq3.length() > 1) {
-                        String superCheck = eq3.substring(eq3.length() - 2, eq3.length() - 1);
-
-                        isSuper = isNumber = Aux.isSuperscript(superCheck);
+                if (getTvText().length() > 0) {
+                    //N-th root
+                    if (tvText.endsWith(Aux.sq) && Aux.isSuperscript(Aux.lastChar(Aux.newTrim(tvText, 1)))) {
+                        //TODO: Backspacing n-th root
                     }
-
-                    if (isSuper) {
-                        newString = eq3.substring(0, eq3.length() - 2);
-
-                        if (Aux.isSuperscript(Aux.lastChar(Aux.newTrim(eq3, 1))))
-                            newString += Aux.getSuperNum();
-
-                        isNumber = true;
-                        isSuper = false;
-
-                        if (numNumbers > 0)
-                            numNumbers--;
-                        else
-                            numNumbers = tempNum;
-
-                        wasSuper = true;
-                    }
-                    else if (eq3.length() == 1) {
-                        clear(bDel);
-                    }
-                    else if (Aux.newTrim(eq3, Aux.countNums(eq3)).endsWith("-") && buttonPresses[numPresses - 1].equals(")") && !eq3.endsWith(")")) {
-                        newString = Aux.newTrim(eq3, 1);
-                        buttonPresses[numPresses - 1] = "\0";
-                        negative2 = true;
-                        numPresses--;
-                    }
-                    else if (eq3.endsWith("(") && Aux.isSubscript(Aux.lastChar(Aux.newTrim(eq3, 1)))) {
-                        eq3 = Aux.newTrim(eq3, 1);
-
-                        int n, m;
-                        int numSubs = Aux.countNums(eq3);
-                        String number = Aux.getLast(eq3, numSubs);
-
-                        eq3 = Aux.newTrim(eq3, numSubs + 3);
-
-                        //Log
-                        for (n = 0; n < numSubs; n++) {
-                            for (m = 0; m < 10; m++) {
-                                if (number.length() > (n + 10) && number.substring(n, n + 11).startsWith(subscripts[3] + "  ̣" + subscripts[1] + subscripts[4] + subscripts[1] + subscripts[5] + subscripts[9] + subscripts[2] + subscripts[6])) {
-                                    eq3 += "π";
-                                    n += 11;
-                                    break;
-                                }
-                                else if (number.length() > (n + 12) && number.substring(n, n + 13).startsWith("₍" + subscripts[3] + "  ̣" + subscripts[1] + subscripts[4] + subscripts[1] + subscripts[5] + subscripts[9] + subscripts[2] + subscripts[6])) {
-                                    eq3 += "π";
-                                    n += 12;
-                                    break;
-                                }
-                                else if (Aux.chat(number, n).equals(subscripts[m])) {
-                                    eq3 += Integer.toString(m);
-                                    break;
-                                }
-                                else if (Aux.chat(number, n).equals(" ") && Aux.chat(number, n + 2).equals("̣")) {
-                                    eq3 += ".";
-                                    break;
-                                }
-                                else if (Aux.chat(number, n).equals("ₑ")) {
-                                    eq3 += "e";
-                                    break;
-                                }
-                                else if (Aux.chat(number, n).equals("₍") && (n > 0 && (Aux.isDigit(Integer.toString(Aux.returnSub((Aux.chat(number, n - 1))))) || Aux.chat(number, n - 1).equals("ₑ")))) {
-                                    eq3 += "π";
-                                    n += 13;
-                                    break;
-                                }
-                            }
-                        }
-
-                        newString = eq3;
-                    }
-                    else if (Aux.lastChar(Aux.newTrim(eq3, 1)).equals("E")) {
-                        int e;
-
-                        newString = Aux.newTrim(eq3, 1);
-
-                        for (e = 1; e <= 4; e++)
-                            buttonPresses[numPresses - e] = "\0";
-
-                        numPresses -= 4;
-                    }
-                    else if ((Aux.isDigit(Aux.lastChar(eq3)) || Aux.lastChar(eq3).equals("π") || Aux.lastChar(eq3).equals("e")) && (Aux.lastChar(Aux.newTrim(eq3, 1)).equals("π") || Aux.lastChar(Aux.newTrim(eq3, 1)).equals("e"))) {
-                        newString = Aux.newTrim(eq3, 1);
-                        buttonPresses[numPresses - 1] = "\0";
-                        numPresses--;
-                    }
-                    else if (eq3.endsWith("--") && buttonPresses[numPresses - 1].equals("+")) {
-                        newString = Aux.newTrim(eq3, 1);
-                        buttonPresses[numPresses - 1] = "-";
-                        doubleMinus = true;
-                    }
-                    else if (Aux.isDigit(Aux.lastChar(eq3)) && buttonPresses[numPresses - 1].equals(")") && buttonPresses[numPresses - 2].equals(Aux.lastChar(eq3))) {
-                        newString = Aux.newTrim(eq3, 1);
-                        buttonPresses[numPresses - 1] = "\0";
-                        numPresses--;
-                    }
-                    else if (eq3.charAt(eq3.length() - 2) == ')' && Aux.isDigit(Aux.lastChar(eq3))) {
-                        newString = eq3.substring(0, eq3.length() - 1);
-                        buttonPresses[numPresses - 2] = "\0";
-                        numPresses--;
-                    }
-                    else if (eq3.charAt(eq3.length() - 2) == '!' && Aux.isDigit(Aux.lastChar(eq3))) {
-                        newString = eq3.substring(0, eq3.length() - 1);
-                        buttonPresses[numPresses - 2] = "\0";
-                        numPresses--;
-                    }
-                    else if (eq3.endsWith("√-") && buttonPresses[numPresses - 2].equals(")")) {
-                        newString = eq3.substring(0, eq3.length() - 1);
-                        buttonPresses[numPresses - 1] = "\0";
-                        buttonPresses[numPresses - 2] = "\0";
-                        numPresses--;
-                        error = false;
-                        negative2 = false;
-                        negative = 0;
-                    }
-                    else if (eq3.endsWith("√")) {
-                        for (i = 0; i < 10; i++) {
-                            if (eq3.substring(eq3.length() - 2, eq3.length() - 1).equals(superscripts[i])) {
-                                newString = eq3.substring(0, eq3.length() - 2);
-                                newString += Integer.toString(i);
-                                isNumber = true;
-                                numNumbers = tempNum;
-                                break;
-                            }
-                            else if (eq3.substring(eq3.length() - 2, eq3.length() - 1).equals("ᵉ")) {
-                                newString = eq3.substring(0, eq3.length() - 2);
-                                newString += "e";
-                                isNumber = true;
-                                numNumbers = tempNum;
-                                break;
-                            }
-                            else if (eq3.substring(eq3.length() - 2, eq3.length() - 1).equals("⁻")) {
-                                newString = eq3.substring(0, eq3.length() - 2);
-                                newString += "-";
-                                isNumber = true;
-                                numNumbers = tempNum;
-                                break;
-                            }
-                            else if (eq3.substring(eq3.length() - 2, eq3.length() - 1).equals("⋅")) {
-                                newString = eq3.substring(0, eq3.length() - 2);
-                                newString += ".";
-                                isNumber = true;
-                                numNumbers = tempNum;
-                                break;
-                            }
-
-                            if (i == 9) {
-                                newString = eq3.substring(0, eq3.length() - 1);
-                                break;
-                            }
-                        }
-                    }
-                    else if (buttonPresses[numPresses - 1].length() > 1) {
-                        if (buttonPresses[numPresses - 1].equals("ⁿ√")) {
-                            newString = eq3.substring(0, eq3.length() - 1);
-                        }
-                        else {
-                            newString = eq3.substring(0, eq3.length() - (buttonPresses[numPresses - 1].length() + 1));
-                        }
-                    }
-                    else if (eq3.length() > 1 && eq3.endsWith(".") && eq3.substring(eq3.length() - 2, eq3.length() - 1).equals("0") && numPresses == 2) {
-                        newString = eq3.substring(0, eq3.length() - 2);
-                        isNumber = false;
-                        numNumbers = 0;
-                        decimalFactor = 1;
+                    //Log base n
+                    else if (tvText.endsWith("(") && Aux.isSubscript(Aux.lastChar(Aux.newTrim(tvText, 1)))) {
+                        //TODO: Backspacing log base n
                     }
                     else {
-                        newString = eq3.substring(0, eq3.length() - buttonPresses[numPresses - 1].length());
-                    }
-
-                    if (buttonPresses[numPresses - 1].equals(".")) {
-                        isDec = false;
-                        decimalFactor = 1;
-                    }
-                    else if (numPresses > 2 && buttonPresses[numPresses - 2].equals("(") && buttonPresses[numPresses - 1].equals("-") && !eq3.endsWith("(-")) {
-                        negative = 0;
-                        negative2 = false;
-
-                        buttonPresses[numPresses - 1] = "\0";
-                        numPresses--;
-                    }
-                    else if (numPresses > 2 && buttonPresses[numPresses - 2].equals("(") && buttonPresses[numPresses - 1].equals("√") && !eq3.endsWith("(√")) {
-                        negative = 0;
-                        negative2 = false;
-
-                        buttonPresses[numPresses - 1] = "\0";
-                        numPresses--;
-                    }
-                    else if (numPresses > 2 && buttonPresses[numPresses - 2].equals("√") && buttonPresses[numPresses - 1].equals("-")) {
-                        negative = 0;
-                        negative2 = false;
-                        error = false;
-                    }
-                    else if (buttonPresses[numPresses - 1].equals("0") && buttonPresses[numPresses - 2].equals(".") && buttonPresses[numPresses - 3].equals(")")) {
-                        buttonPresses[numPresses - 1] = "\0";
-                        buttonPresses[numPresses - 2] = "\0";
-
-                        numPresses -= 2;
-
-                        pc++;
-                        numbers[pc][0] = backup;
-                        backup = 0;
-                    }
-                    else if (buttonPresses[numPresses - 1].equals(")") && buttonPresses[numPresses - 2].equals(")") && !Aux.getLast(eq3, 2).equals("))") && eq3.contains("log")) {
-                        buttonPresses[numPresses - 1] = "\0";
-
-                        if (numPresses > 1)
-                            numPresses--;
-
-                        pc++;
-                    }
-                    else if (buttonPresses[numPresses - 1].equals(")")) {
-                        pc++;
-                        numbers[pc][0] = backup;
-                        backup = 0;
-                    }
-                    else if (buttonPresses[numPresses - 1].equals("(") || buttonPresses[numPresses - 1].equals("log") || buttonPresses[numPresses - 1].equals("ln")) {
-                        pc--;
-                    }
-
-                    if (numPresses > 4 && buttonPresses[numPresses - 4].equals("(") && buttonPresses[numPresses - 3].equals("1") && buttonPresses[numPresses - 2].equals("0") && buttonPresses[numPresses - 1].equals("log")) {
-                        buttonPresses[numPresses - 1] = "\0";
-                        buttonPresses[numPresses - 2] = "\0";
-                        buttonPresses[numPresses - 3] = "\0";
-
-                        numPresses -= 3;
-                    }
-
-                    if (!doubleMinus) {
-                        buttonPresses[numPresses - 1] = "\0";
-
-                        if (numPresses > 1) {
-                            numPresses--;
-                        }
-                    }
-
-                    if (numPresses > 2 && buttonPresses[numPresses - 1].equals(")") && tv.getText().toString().length() > 1 && !tv.getText().toString().endsWith(")") && Aux.isNum(Aux.lastChar(newString))) {
-                        buttonPresses[numPresses - 1] = "\0";
-                        numPresses--;
+                        tv.setText(Aux.newTrim(getTvText(), 1));
                     }
                 }
 
-                String strBackup, numCheck = newString;
-
-                if (wasSuper) {
-                    numNumbers = Aux.countNums(newString);
-
-                    strBackup = Aux.getLast(newString, numNumbers);
-
-                    for (i = 0; i < numNumbers; i++) {
-                        if (Aux.isSuperscript(Aux.chat(strBackup, i))) {
-                            if (i == 0) {
-                                strBackup = Aux.getSuperNum() + strBackup.substring(1);
-                            }
-                            else {
-                                strBackup = strBackup.substring(0, i) + Aux.getSuperNum() + strBackup.substring(i + 1);
-                            }
-                        }
-                    }
-
-                    newString = Aux.newTrim(newString, numNumbers);
-                    newString += strBackup;
-                }
-
-                numNumbers = Aux.countNums(numCheck);
-
-                if (!Aux.isNum(Aux.lastChar(eq3)) && !eq3.endsWith(".") && !(eq3.endsWith("(") || eq3.endsWith(")")) && pari[pc] > 0)
-                    pari[pc]--;
-
-                eq3 = newString;
-                newString = "\0";
-
-                if (!Aux.isNull(eq3) && eq3.endsWith("."))
+                if (!Aux.isNull(tvText) && tvText.endsWith("."))
                     isDec = true;
-
-                if (pc < 0)
-                    pc = 0;
             }
-
-            if (tinydb.getBoolean("debug"))
-                ((Button) findViewById(R.id.bgAnim)).setText("        " + Aux.getStrArray(buttonPresses) + "\n\n\n\n\n\n\n\n\n");
         }
         else {
             try {
@@ -4933,19 +4446,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 spin(bDel, theme, color, R.drawable.ic_baseline_arrow_back_24);
             }
-            else if (eq3 != null && eq3.equals("\0") && (isLegacy || (tv.getSelectionStart() < 1))) {
+            else if (tv.getText().toString() != null && tv.getText().toString().equals("\0") && (isLegacy || (tv.getSelectionStart() < 1))) {
                 clear(bDel);
             }
             else {
                 removeLast();
 
-                if (isLegacy)
-                    tv.setText(eq3);
-
                 wrapText(tv);
             }
 
-            if ((eq3.equals("\0") || eq3.equals("") || eq3.equals(" ")) && isLegacy)
+            if ((tv.getText().toString().equals("\0") || tv.getText().toString().equals("") || tv.getText().toString().equals(" ")) && isLegacy)
                 clear(bDel);
 
             if (tvText.equals(tv.getText().toString()) && tv.getSelectionStart() > 0)
@@ -4965,11 +4475,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //Clear (Long Press)
     public final void clear(View v) {
-        final TextView eq = findViewById(R.id.equation);
+        final TextView tv = findViewById(R.id.equation);
 
-        int i, k;
+        int i;
 
-        eq.setText(" ");
+        tv.setText(" ");
 
         //Debug mode
         ((Button) findViewById(R.id.bgAnim)).setText("");
@@ -5009,11 +4519,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         isNumber = false;
-        numNumbers = 0;
 
-        pc = 0;
         isDec = false;
-        numPresses = 1;
 
         tv.clearFocus();
         isLegacy = true;
@@ -5021,40 +4528,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (Aux.tinydb().getBoolean("exInput"))
             tv.setEnabled(true);
 
-        for (i = 0; i < buttonPresses.length; i++) {
-            buttonPresses[i] = "\0";
-        }
-
-        for (i = 0; i < 100; i++) {
-            isTrig[i] = false;
-        }
-
-        negative = 0;
-        negative2 = false;
-
-        eq3 = "\0";
 
         num1 = "";
 
         isLog = false;
-
-        if (equaled){
-            equaled = false;
-        }
-
-        isSqrtFact = false;
-
-        clearArrays();
-
         isE = false;
+        equaled = false;
+        isSqrtFact = false;
     }
 
+    @SuppressLint("SetTextI18n")
     public final void parenthesis(View v) {
-        Button parenthesis = (Button) v;
+        String buttonText = ((Button) v).getText().toString();
 
         if (isLegacy) {
             isNumber = false;
-            numNumbers = 0;
 
             if (!isBig) {
                 ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
@@ -5064,255 +4552,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .disableTransitionType(LayoutTransition.CHANGING);
             }
 
-            if (parenthesis.getText().toString().equals("(")) {
-                eq3 += "(";
-
-                pc++;
-
-                try {
-                    isValid[pc][pari[pc]] = false;
-                }
-                catch (IndexOutOfBoundsException e){
-                    e.printStackTrace();
-                }
+            if (buttonText.equals("(") || (buttonText.equals(")") && Aux.countChars(getTvText(), "(") > Aux.countChars(getTvText(), ")"))) {
+                tv.append(buttonText);
+                wrapText(tv);
             }
-            else {
-                if (pc != 0 && ((Aux.isNum(Aux.lastChar(eq3))) || (numbers[pc][pari[pc]] != 0 || isValid[pc][pari[pc]]) || (eq3.endsWith("!") && Aux.isNum(Aux.lastChar(Aux.newTrim(eq3, 1)))))) {
-                    if (eq3.endsWith("0")) {
-                        Button dec = findViewById(R.id.bDec);
-                        Button zero = findViewById(R.id.b0);
-
-                        keypress(dec);
-                        keypress(zero);
-                    }
-
-                    if (Aux.countChars(eq3, "(") > Aux.countChars(eq3, ")"))
-                        eq3 += ")";
-
-                    isLog = false;
-
-                    if (pc < numbers.length - 1)
-                        numbers[pc][pari[pc]] = numbers[pc + 1][0];
-
-                    // Decide whether or not to ~do everything wrong, i guess~ *sigh*
-                    if (pari[pc] > 0 && (pc < isTrig.length - 1 && isTrig[pc + 1]))
-                        isValid[pc][pari[pc] - 1] = true;
-                    else
-                        isValid[pc][pari[pc]] = true;
-
-                    if (pc < numbers.length - 1) {
-                        backup = numbers[pc + 1][0];
-                        numbers[pc + 1][0] = 0;
-                    }
-
-                    if (pc < isTrig.length - 1 && isTrig[pc + 1] && pari[pc] - 1 >= 0) {
-                        switch (ops[pc][pari[pc] - 1]) {
-                            case "sin(":
-                                if (isRad) {
-                                    numbers[pc][pari[pc] - 1] = Math.sin(numbers[pc][pari[pc]]);
-                                }
-                                else {
-                                    numbers[pc][pari[pc] - 1] = Math.sin(Math.toRadians(numbers[pc][pari[pc]]));
-                                }
-                                break;
-                            case "cos(":
-                                if (isRad) {
-                                    numbers[pc][pari[pc] - 1] = Math.cos(numbers[pc][pari[pc]]);
-                                }
-                                else {
-                                    numbers[pc][pari[pc] - 1] = Math.cos(Math.toRadians(numbers[pc][pari[pc]]));
-                                }
-                                break;
-                            case "tan(":
-                                if (isRad) {
-                                    numbers[pc][pari[pc] - 1] = Math.tan(numbers[pc][pari[pc]]);
-
-                                    if ((Math.cos(numbers[pc][pari[pc]]) > -0.00001 && Math.cos(numbers[pc][pari[pc]]) < 0.00001)) {
-                                        dError = true;
-                                    }
-                                }
-                                else {
-                                    numbers[pc][pari[pc] - 1] = Math.tan(Math.toRadians(numbers[pc][pari[pc]]));
-                                }
-                                break;
-                            case "csc(":
-                                if (isRad) {
-                                    numbers[pc][pari[pc] - 1] = 1 / Math.sin(numbers[pc][pari[pc]]);
-
-                                    if ((Math.sin(numbers[pc][pari[pc]]) > -0.00001 && Math.sin(numbers[pc][pari[pc]]) < 0.00001)) {
-                                        dError = true;
-                                    }
-                                }
-                                else {
-                                    numbers[pc][pari[pc] - 1] = 1 / Math.sin(Math.toRadians(numbers[pc][pari[pc]]));
-                                }
-                                break;
-                            case "sec(":
-                                if (isRad) {
-                                    numbers[pc][pari[pc] - 1] = 1 / Math.cos(numbers[pc][pari[pc]]);
-
-                                    if ((Math.cos(numbers[pc][pari[pc]]) > -0.00001 && Math.cos(numbers[pc][pari[pc]]) < 0.00001)) {
-                                        dError = true;
-                                    }
-                                }
-                                else {
-                                    numbers[pc][pari[pc] - 1] = 1 / Math.cos(Math.toRadians(numbers[pc][pari[pc]]));
-                                }
-                                break;
-                            case "cot(":
-                                if (isRad) {
-                                    numbers[pc][pari[pc] - 1] = 1 / Math.tan(numbers[pc][pari[pc]]);
-
-                                    if ((Math.sin(numbers[pc][pari[pc]]) > -0.00001 && Math.sin(numbers[pc][pari[pc]]) < 0.00001)) {
-                                        dError = true;
-                                    }
-                                }
-                                else {
-                                    numbers[pc][pari[pc] - 1] = 1 / Math.tan(Math.toRadians(numbers[pc][pari[pc]]));
-                                }
-                                break;
-
-                            case "arcsin(":
-                                if (isRad) {
-                                    numbers[pc][pari[pc] - 1] = (Math.asin(numbers[pc][pari[pc]]));
-                                }
-                                else {
-                                    numbers[pc][pari[pc] - 1] = Math.toDegrees(Math.asin(numbers[pc][pari[pc]]));
-                                }
-
-                                if (numbers[pc][pari[pc]] > 1 || numbers[pc][pari[pc]] < -1)
-                                    dError = true;
-
-                                break;
-                            case "arccos(":
-                                if (isRad) {
-                                    numbers[pc][pari[pc] - 1] = (Math.acos(numbers[pc][pari[pc]]));
-                                }
-                                else {
-                                    numbers[pc][pari[pc] - 1] = Math.toDegrees(Math.acos(numbers[pc][pari[pc]]));
-                                }
-
-                                if (numbers[pc][pari[pc]] > 1 || numbers[pc][pari[pc]] < -1)
-                                    dError = true;
-
-                                break;
-                            case "arctan(":
-                                if (isRad) {
-                                    numbers[pc][pari[pc] - 1] = (Math.atan(numbers[pc][pari[pc]]));
-                                }
-                                else {
-                                    numbers[pc][pari[pc] - 1] = Math.toDegrees(Math.atan(numbers[pc][pari[pc]]));
-                                }
-                                break;
-                            case "arccsc(":
-                                if (isRad) {
-                                    numbers[pc][pari[pc] - 1] = Math.toRadians(arccsc(numbers[pc][pari[pc]]));
-                                }
-                                else {
-                                    numbers[pc][pari[pc] - 1] = arccsc(numbers[pc][pari[pc]]);
-                                }
-
-                                if (numbers[pc][pari[pc]] < 1 && numbers[pc][pari[pc]] > -1)
-                                    dError = true;
-
-                                break;
-                            case "arcsec(":
-                                if (isRad) {
-                                    numbers[pc][pari[pc] - 1] = Math.toRadians(arcsec(numbers[pc][pari[pc]]));
-                                }
-                                else {
-                                    numbers[pc][pari[pc] - 1] = arcsec(numbers[pc][pari[pc]]);
-                                }
-
-                                if (numbers[pc][pari[pc]] < 1 && numbers[pc][pari[pc]] > -1)
-                                    dError = true;
-
-                                break;
-                            case "arccot(":
-                                if (isRad) {
-                                    numbers[pc][pari[pc] - 1] = Math.toRadians(arccot(numbers[pc][pari[pc]]));
-                                }
-                                else {
-                                    numbers[pc][pari[pc] - 1] = arccot(numbers[pc][pari[pc]]);
-                                }
-                                break;
-                            case "sinh(":
-                                numbers[pc][pari[pc] - 1] = Math.sinh(numbers[pc][pari[pc]]);
-                                break;
-                            case "cosh(":
-                                numbers[pc][pari[pc] - 1] = Math.cosh(numbers[pc][pari[pc]]);
-                                break;
-                            case "tanh(":
-                                numbers[pc][pari[pc] - 1] = Math.tanh(numbers[pc][pari[pc]]);
-                                break;
-                            case "csch(":
-                                numbers[pc][pari[pc] - 1] = 1 / Math.sinh(numbers[pc][pari[pc]]);
-                                break;
-                            case "sech(":
-                                numbers[pc][pari[pc] - 1] = 1 / Math.cosh(numbers[pc][pari[pc]]);
-                                break;
-                            case "coth(":
-                                numbers[pc][pari[pc] - 1] = 1 / Math.tanh(numbers[pc][pari[pc]]);
-                                break;
-                            case "arcsinh(":
-                                numbers[pc][pari[pc] - 1] = Math.log(numbers[pc][pari[pc]] + Math.sqrt(Math.pow(numbers[pc][pari[pc]], 2) + 1));
-                                break;
-                            case "arccosh(":
-                                numbers[pc][pari[pc] - 1] = Math.log(numbers[pc][pari[pc]] + Math.sqrt(Math.pow(numbers[pc][pari[pc]], 2) - 1));
-
-                                if (numbers[pc][pari[pc]] < 1)
-                                    dError = true;
-
-                                break;
-                            case "arctanh(":
-                                numbers[pc][pari[pc] - 1] = (Math.log((1 + numbers[pc][pari[pc]]) / (1 - numbers[pc][pari[pc]])) / 2);
-
-                                if (!(Math.abs(numbers[pc][pari[pc]]) < 1))
-                                    dError = true;
-
-                                break;
-
-                            case "arccsch(":
-                                if (numbers[pc][pari[pc]] < 0)
-                                    numbers[pc][pari[pc] - 1] = Math.log((1 - Math.sqrt(Math.pow(numbers[pc][pari[pc]], 2) + 1)) / numbers[pc][pari[pc]]);
-                                else if (numbers[pc][pari[pc]] > 0)
-                                    numbers[pc][pari[pc] - 1] = Math.log((1 + Math.sqrt(Math.pow(numbers[pc][pari[pc]], 2) + 1)) / numbers[pc][pari[pc]]);
-                                else if (numbers[pc][pari[pc]] <= zeroDec * 2 && numbers[pc][pari[pc]] >= zeroDec * -2)
-                                    dError = true;
-
-                                break;
-
-                            case "arcsech(":
-                                numbers[pc][pari[pc] - 1] = Math.log((1 + Math.sqrt(Math.pow(numbers[pc][pari[pc]], 2) - 1)) / numbers[pc][pari[pc]]);
-                                break;
-
-                            case "arccoth(":
-                                numbers[pc][pari[pc] - 1] = (Math.log((numbers[pc][pari[pc]] + 1) / (numbers[pc][pari[pc]] - 1)) / 2);
-                                break;
-                        }
-
-                        if (isRad) {
-                            if (Math.abs(numbers[pc][pari[pc] - 1]) < (Math.pow(10, -15)))
-                                numbers[pc][pari[pc] - 1] = 0;
-                            //An unnecessarily convoluted way of saying "between 0.9999 and 1.0001"
-                            else if (Math.abs(numbers[pc][pari[pc] - 1]) > (1 - Math.pow(10, -12)) && Math.abs(numbers[pc][pari[pc] - 1]) < (1 + Math.pow(10, -12))) {
-                                if (numbers[pc][pari[pc] - 1] < 0)
-                                    numbers[pc][pari[pc] - 1] = -1;
-                                else
-                                    numbers[pc][pari[pc] - 1] = 1;
-                            }
-                        }
-
-                        ops[pc][pari[pc] - 1] = "\0";
-                        numbers[pc][pari[pc]] = 0;
-                        isTrig[pc + 1] = false;
-                        pari[pc]--;
-                    }
-                }
-            }
-
-            tv.setText(eq3);
-            wrapText(tv);
         }
         else {
             int cursor = tv.getSelectionStart();
@@ -5323,61 +4566,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             tv.requestFocus();
             tv.setSelection(cursor);
 
-            String tvText = tv.getText().toString();
+            String tvText = getTvText();
 
-            if (cursor > 0) {
-                tv.setText(Aux.newReplace(cursor - 1, tv.getText().toString(), Aux.chat(tv.getText().toString(), cursor - 1) + parenthesis.getText().toString()));
-                tv.setSelection(cursor + 1);
-            }
-            else {
-                tv.setText((parenthesis.getText().toString() + tvText.trim()).replace("\0", "").replace(" ", "").trim());
-                tv.setSelection(cursor + 1);
-            }
+            if (cursor > 0)
+                tv.setText(Aux.newReplace(cursor - 1, tvText, Aux.chat(tvText, cursor - 1) + buttonText));
+            else
+                tv.setText(buttonText + tvText.trim().replace("\0", "").replace(" ", "").trim());
 
+            tv.setSelection(cursor + 1);
             wrapText(tv);
         }
-    }
-
-    public final void keypress(View v){
-        Button keyNum = (Button) v;
-
-        int i;
-
-        if (numPresses > (buttonPresses.length - 1)){
-            numPresses--;
-        }
-
-        buttonPresses[numPresses] = keyNum.getText().toString();
-
-        current = buttonPresses[numPresses];
-
-        if (current != null) {
-            if (current.equals("ⁿ√")) {
-                current = "√";
-            }
-            else if (current.equals("log")) {
-                current = "log(";
-            }
-            else if (current.equals("ln")) {
-                current = "ln(";
-            }
-            else {
-                for (i = 0; i < trigIn.length; i++) {
-                    try {
-                        if (ops[pc][pari[pc]].equals(trigIn[i])) {
-                            current = trigOut[i];
-                            break;
-                        }
-                    }
-                    catch (Exception e){
-                        e.printStackTrace();
-                        break;
-                    }
-                }
-            }
-        }
-
-        numPresses++;
     }
 
     @SuppressLint("SetTextI18n")
@@ -5396,11 +4594,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             String resultStr = "\0";
 
             if (isLegacy) {
-                tinydb.putString("buttonPresses", Aux.getStrArray(buttonPresses));
-
-                if (tv.getText().toString().endsWith("\0") || tv.getText().toString().endsWith(" ")) {
+                if (tv.getText().toString().endsWith("\0") || tv.getText().toString().endsWith(" "))
                     tv.setText(Aux.newTrim(tv.getText().toString(), 1));
-                }
 
                 if (tv.getText() == null || tv.getText().toString().equals(".") || tv.getText().toString().equals(" .") || tv.getText().toString().equals("\0.") || tv.getText().toString().endsWith("(") || tv.getText().toString().endsWith("÷") || tv.getText().toString().endsWith("×") || tv.getText().toString().endsWith("+") || tv.getText().toString().endsWith("-") || tv.getText().toString().endsWith("^") || tv.getText().toString().endsWith("√") || tv.getText().toString().endsWith("÷.") || tv.getText().toString().endsWith("+.") || tv.getText().toString().endsWith("-.") || tv.getText().toString().endsWith("^.") || tv.getText().toString().endsWith("×.") || tv.getText().toString().endsWith("√.") || tv.getText().toString().endsWith("log(.") || tv.getText().toString().endsWith("ln(.")) {
 
@@ -5414,14 +4609,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 else {
                     isLog = false;
                     isNumber = false;
-                    numNumbers = 0;
 
-                    if (eq3.contains("ln(0)") || eq3.contains("ln(0.0)") || eq3.endsWith("ln(0") || eq3.endsWith("ln(0.") || eq3.endsWith("ln(0.0"))
+                    getTvText();
+
+                    if (tvText.contains("ln(0)") || tvText.contains("ln(0.0)") || tvText.endsWith("ln(0") || tvText.endsWith("ln(0.") || tvText.endsWith("ln(0.0"))
                         error = true;
-                    if (eq3.contains("log(0)") || eq3.contains("log(0.0)") || eq3.endsWith("log(0") || eq3.endsWith("log(0.") || eq3.endsWith("log(0.0"))
+                    if (tvText.contains("log(0)") || tvText.contains("log(0.0)") || tvText.endsWith("log(0") || tvText.endsWith("log(0.") || tvText.endsWith("log(0.0"))
                         error = true;
 
-                    if (eq3.equals("0÷0") || eq3.equals(" 0÷0") || eq3.equals("0.0÷0.0") || eq3.equals(" 0.0÷0.0"))
+                    if (tv.getText().toString().equals("0÷0") || tv.getText().toString().equals(" 0÷0") || tv.getText().toString().equals("0.0÷0.0") || tv.getText().toString().equals(" 0.0÷0.0"))
                         error = true;
 
                     if (error || dError) {
@@ -5431,10 +4627,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                     else {
                         if (!equaled) {
-                            String historyTemp = eq3;
+                            String historyTemp = getTvText();
 
                             // Add remaining parenthesis
-                            int missing = Aux.countChars(eq3, "(") - Aux.countChars(eq3, ")");
+                            int missing = Aux.countChars(tvText, "(") - Aux.countChars(tvText, ")");
 
                             for (i=0; i < missing; i++){
                                 findViewById(R.id.bParenthesisClose).performClick();
@@ -5448,28 +4644,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 e.printStackTrace();
                             }
 
-                            equalPressed = true;
                             equaled = false;
-
                             isDec = false;
 
                             current = "\0";
-                            currentButton = 0;
 
-                            //Check to see if last character is an integer, for some reason
-                            if (buttonPresses[numPresses - 1] != null && Aux.isDigit(buttonPresses[numPresses - 1]))
-                                yup = 1;
+                            String lastChar = Aux.lastChar(getTvText());
 
-                            if (buttonPresses[numPresses - 1] != null && ((buttonPresses[numPresses - 1].equals("!") || buttonPresses[numPresses - 1].equals(")") || buttonPresses[numPresses - 1].equals("π") || buttonPresses[numPresses - 1].equals("e") || buttonPresses[numPresses - 1].equals("∞") || yup == 1))) {
-                                yup = 0;
-
-                                int t;
-                                for (t = 0; t < trigIn.length; t++) {
-                                    if (buttonPresses[currentButton + 2] != null && buttonPresses[currentButton + 2].equals(trigIn[t])) {
-                                        yup = 1;
-                                    }
-                                }
-
+                            if (lastChar != null && ((lastChar.equals("!") || lastChar.equals(")") || lastChar.equals("π") || lastChar.equals("e") || lastChar.equals("∞") || yup == 1))) {
                                 if (error || dError)
                                     error();
                                 else {
@@ -5483,10 +4665,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         }
                                     }
 
-                                    tinydb.putString("buttonPresses", Aux.getStrArray(buttonPresses));
-
-                                    equalPressed = false;
-
                                     if (!equaled) {
                                         equaled = true;
 
@@ -5494,11 +4672,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     }
 
                                     isLog = false;
-                                    pc = 0;
-
-                                    clearArrays();
-
-                                    numPresses = 1;
 
                                     //Set text of previous expression TextView
                                     try {
@@ -5510,7 +4683,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                             int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : tinydb.getInt("precision");
                                             MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? 30 : tinydb.getInt("precision") * 2, RoundingMode.HALF_UP);
 
-                                            BigDecimal result = BetterMath.evaluate(eq3.trim(), tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale);
+                                            BigDecimal result = BetterMath.evaluate(getTvText().trim(), tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale);
                                             resultStr = BetterMath.formatResult(result, newMc, scale).trim();
 
                                             while (resultStr.equals("0") && scale < 26)
@@ -5519,7 +4692,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                             while ((resultStr.endsWith("0") && resultStr.contains(".")) || resultStr.endsWith(".") || resultStr.endsWith("0E"))
                                                 resultStr = Aux.newTrim(resultStr, 1);
 
-                                            if (!resultStr.equals(eq3.trim()) && Aux.isFullSignedNumE(resultStr))
+                                            if (!resultStr.equals(getTvText().trim()) && Aux.isFullSignedNumE(resultStr))
                                                 tv.setText(resultStr);
                                         }
 
@@ -5560,9 +4733,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         }
                                     }
 
-                                    lastEq = eq3;
-                                    eq3 = "\0";
-
                                     wrapText(tv, false);
 
                                     try {
@@ -5582,8 +4752,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             for (i = 0; i < 100; i++) {
                                 isTrig[i] = false;
                             }
-
-                            equalPressed = false;
                         }
                     }
                 }
@@ -5684,14 +4852,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             .disableTransitionType(LayoutTransition.CHANGING);
                 }
 
-                if (eq3 != null && !eq3.equals("\0") && (eq3.endsWith("π") || eq3.endsWith("e") || eq3.endsWith("!")) && !equalPressed) {
-
-                }
-                else {
-                    if (!isDec) {
+                if (!(!tv.getText().toString().equals("\0") && (getTvText().endsWith("π") || getTvText().endsWith("e") || getTvText().endsWith("!")))) {
+                    if (!isDec)
                         isNumber = false;
-                        numNumbers++;
-                    }
 
                     if (equaled) {
                         equaled = false;
@@ -5702,32 +4865,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
 
                     if (!isDec) {
-                        if (eq3 == null || (eq3 != null && eq3.equals("\0"))) {
-                            eq3 = ".";
-                        }
-                        else {
-                            eq3 += ".";
-                        }
-
-                        if (!equalPressed) {
-                            keypress(keyNum);
-                        }
+                        tv.append(".");
 
                         isDec = true;
-                        numbers[pc][pari[pc]] += zeroDec;
                         decimalFactor = 1;
 
-                        if (!equalPressed) {
-                            tv.setText(eq3);
-                            wrapText(tv);
-                        }
+                        wrapText(tv);
                     }
-                }
-
-                if (tinydb.getBoolean("debug")) {
-                    Button bgAnim = findViewById(R.id.bgAnim);
-
-                    bgAnim.setText("        " + Aux.getStrArray(buttonPresses) + "\n\n\n\n\n\n\n\n\n");
                 }
             }
             else {
@@ -5773,14 +4917,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             final FloatingActionButton clear = findViewById(R.id.bDel);
 
             if (isLegacy) {
-                TinyDB tinydb = new TinyDB(this);
-
-                final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(MainActivity.mainActivity);
-                final String color = sp.getString(SettingsActivity.KEY_PREF_COLOR, "1");
-                final String theme = sp.getString(SettingsActivity.KEY_PREF_THEME, "1");
-
                 isNumber = true;
-                numNumbers++;
 
                 //Disable animations until the equals button is pressed
                 if (!isBig) {
@@ -5791,12 +4928,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             .disableTransitionType(LayoutTransition.CHANGING);
                 }
 
-                if (eq3 != null && !eq3.equals("\0") && (eq3.endsWith(".") && (keyNum.getText().toString().equals("π") || keyNum.getText().toString().equals("e") || keyNum.getText().toString().equals("∞")))) {
-
-                }
-                else {
+                if (!(!getTvText().equals("\0") && (getTvText().endsWith(".") && (keyNum.getText().toString().equals("π") || keyNum.getText().toString().equals("e") || keyNum.getText().toString().equals("∞"))))) {
                     //Clear previous result upon pressing a number key
                     if (equaled) {
+                        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(MainActivity.mainActivity);
+                        final String color = sp.getString(SettingsActivity.KEY_PREF_COLOR, "1");
+                        final String theme = sp.getString(SettingsActivity.KEY_PREF_THEME, "1");
+
                         equaled = false;
                         decimalFactor = 1;
 
@@ -5804,69 +4942,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         spin(clear, theme, color, R.drawable.ic_baseline_arrow_back_24);
                     }
 
-                    if (!equalPressed) {
-                        if (eq3 != null && !eq3.equals("\0") && (eq3.endsWith(")") || eq3.endsWith("!") || eq3.endsWith("π") || eq3.endsWith("e"))) {
-                            keypress(findViewById(R.id.sMulti));
-                        }
+                    getTvText();
 
-                        keypress(keyNum);
-                    }
-
-                    if (numPresses < 2) {
-                        numPresses = 1;
-                    }
-
-                    if (keyNum.getText().toString().equals("π")) {
-                        if (numbers[pc][pari[pc]] == 0 && !isValid[pc][pari[pc]]) {
-                            numbers[pc][pari[pc]] = pi;
-                        }
-                        else {
-                            numbers[pc][pari[pc]] *= pi;
-                        }
-                    }
-                    else if (keyNum.getText().toString().equals("e")) {
-                        if (numbers[pc][pari[pc]] == 0 && !isValid[pc][pari[pc]]) {
-                            numbers[pc][pari[pc]] = numE;
-                        }
-                        else {
-                            numbers[pc][pari[pc]] *= numE;
-                        }
-                    }
-                    else if (keyNum.getText().toString().equals("∞")) {
-                        numbers[pc][pari[pc]] = Double.POSITIVE_INFINITY;
-                    }
-                    else if (isDec) {
-                        if (!(numPresses > 2 && buttonPresses[numPresses - 1].equals("0")) || equalPressed)
-                            numbers[pc][pari[pc]] += Double.parseDouble(keyNum.getText().toString()) / (10 * decimalFactor);
-
-                        decimalFactor *= 10;
-                    }
-                    else if (numbers[pc][pari[pc]] == 0) {
-                        numbers[pc][pari[pc]] = Double.parseDouble(keyNum.getText().toString());
-                    }
-                    else {
-                        numbers[pc][pari[pc]] = (numbers[pc][pari[pc]] * 10) + Double.parseDouble(keyNum.getText().toString());
-                    }
-
-                    if (!equalPressed) {
-                        if (eq3 == null || eq3.equals("\0")) {
-                            eq3 = keyNum.getText().toString();
-                        }
-                        else {
-                            eq3 += keyNum.getText().toString();
-                        }
-
-                        tv.setText(eq3);
-                        wrapText(tv);
-                    }
-
-                    isValid[pc][pari[pc]] = true;
-                }
-
-                if (tinydb.getBoolean("debug")) {
-                    Button bgAnim = findViewById(R.id.bgAnim);
-
-                    bgAnim.setText("        " + Aux.getStrArray(buttonPresses) + "\n\n\n\n\n\n\n\n\n");
+                    tv.append(keyNum.getText().toString());
+                    wrapText(tv);
                 }
             }
             else {
@@ -5989,7 +5068,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
 
                 isNumber = false;
-                numNumbers = 0;
 
                 spin(clear, theme, color, R.drawable.ic_baseline_arrow_back_24);
             }
@@ -5997,15 +5075,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             isE = eBackup;
 
             if (isE) {
-                eq3 = tv.getText().toString();
-                int numChars = Aux.countNums(eq3);
-                String number = Aux.getLast(eq3, numChars);
+                getTvText();
 
-                eq3 = Aux.newTrim(eq3, numChars + 4);
-                eq3 += "E";
-                eq3 += number;
+                int numChars = Aux.countNums(tvText);
+                String number = Aux.getLast(tvText, numChars);
 
-                tv.setText(eq3);
+                tvText = Aux.newTrim(tvText, numChars + 4);
+                tvText += "E";
+                tvText += number;
+
+                tv.setText(tvText);
                 wrapText(tv);
             }
 
@@ -6048,22 +5127,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             final Button keyNum = (Button) v;
 
             if (isLegacy) {
-                TinyDB tinydb = new TinyDB(this);
-
                 int i;
 
                 boolean dont = false;
-                int tempPari = 0, lengthBackup = 0;
 
                 pressed = keyNum.getText().toString();
 
                 if (pressed.equals("%"))
                     pressed = Aux.multi;
 
-                if (pressed.equals(")"))
-                    lengthBackup = eq3.length();
-
-                if (!(pressed.equals(")") && (tv.getText() == null || tv.getText().toString().equals(".") || tv.getText().toString().equals(" .") || tv.getText().toString().equals("\0.") || ((tv.getText().toString().endsWith("(") || tv.getText().toString().endsWith("÷") || tv.getText().toString().endsWith("×") || tv.getText().toString().endsWith("+") || tv.getText().toString().endsWith("-") || tv.getText().toString().endsWith("^") || tv.getText().toString().endsWith("√")) && !equalPressed)))) {
+                if (!(pressed.equals(")") && (tv.getText() == null || tv.getText().toString().equals(".") || tv.getText().toString().equals(" .") || tv.getText().toString().equals("\0.") || (tv.getText().toString().endsWith("(") || tv.getText().toString().endsWith("÷") || tv.getText().toString().endsWith("×") || tv.getText().toString().endsWith("+") || tv.getText().toString().endsWith("-") || tv.getText().toString().endsWith("^") || tv.getText().toString().endsWith("√"))))) {
                     if (!isBig) {
                         ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
                                 .disableTransitionType(LayoutTransition.CHANGING);
@@ -6072,52 +5145,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 .disableTransitionType(LayoutTransition.CHANGING);
                     }
 
-                    if (eq3 == null || (eq3 != null && eq3.equals("\0"))) {
-                        eq3 = " ";
-                    }
-
-                    if (isDec && pressed.equals("!") && (numbers[pc][pari[pc]] - zeroDec != (int) numbers[pc][pari[pc]]))
-                        error = true;
-                    else if (isDec && pressed.equals("!") && Aux.isDigit(Aux.lastChar(eq3))) {
-                        int t;
-                        int length = Aux.countNums(Double.toString(numbers[pc][pari[pc]]));
-                        int trimAmount = Aux.searchFor(Double.toString(numbers[pc][pari[pc]]), ".");
-
-                        for (t = 0; t < length - trimAmount; t++) {
-                            buttonPresses[numPresses - 1] = "\0";
-                            numPresses--;
-                        }
-
-                        numbers[pc][pari[pc]] = Integer.parseInt(Aux.newTrim(Double.toString(numbers[pc][pari[pc]]), length - trimAmount));
-
-                        Log.d("numbers", Integer.toString((int) numbers[pc][pari[pc]]));
-                    }
-
                     if (isLog && pressed.equals(")")) {
-                        if ((Aux.isNum(Aux.lastChar(eq3)) || eq3.endsWith("!") || (eq3.endsWith(".") && Aux.isNum(Aux.lastChar(Aux.newTrim(eq3, 1)))))) {
-                            keypress(keyNum);
+                        if ((Aux.isNum(Aux.lastChar(getTvText())) || getTvText().endsWith("!") || (getTvText().endsWith(".") && Aux.isNum(Aux.lastChar(Aux.newTrim(getTvText(), 1))))))
                             isLog = false;
-                        }
-                        else {
+                        else
                             dont = true;
-                        }
                     }
 
                     isNumber = false;
-                    numNumbers = 0;
-
-                    if (eq3 != null) {
-                        Log.d("1", eq3);
-                    }
 
                     //Check for too many negative signs
-                    if (pressed.equals("-") && eq3 != null && eq3.equals("\0" + "-")) {
-
-                    }
-                    else if (pressed.equals("-") && buttonPresses[numPresses - 1].equals("-") && buttonPresses[numPresses - 2].equals("(")) {
-
-                    }
-                    else {
+                    if (!(pressed.equals("-") && tv.getText().toString().equals("\0" + "-")) && !(pressed.equals("-") && getTvText().endsWith("-") && Aux.newTrim(getTvText(), 1).endsWith("("))) {
                         //Check if operation is trig
                         for (i = 0; i < trigIn.length; i++) {
                             if (pressed.equals(trigIn[i])) {
@@ -6130,287 +5168,71 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             getEqualed();
                         }
 
-                        if (eq3 != null && (!eq3.equals("\0") && (!(eq3.endsWith("--") && !equalPressed))) || (pressed.equals("log") || yup == 1 || pressed.equals("ln") || pressed.equals("√") || pressed.equals("("))) {
-                            if (pressed.equals("!") && (buttonPresses[numPresses - 1].equals("!") || buttonPresses[numPresses - 1].equals("-")) && !equalPressed) {
+                        if ((!getTvText().equals("\0") && !getTvText().endsWith("--")) || (pressed.equals("log") || yup == 1 || pressed.equals("ln") || pressed.equals("√") || pressed.equals("("))) {
+                            if (pressed.equals("!") && (Aux.lastChar(getTvText()).equals("!") || Aux.lastChar(getTvText()).equals("-"))) {
 
                             }
-                            else if (numPresses > 1 || (pressed.equals("√") || pressed.equals("-") || pressed.equals("(") || pressed.equals("log") || pressed.equals("ln") || yup == 1)) {
+                            else if (pressed.equals("√") || pressed.equals("-") || pressed.equals("(") || pressed.equals("log") || pressed.equals("ln") || yup == 1) {
                                 yup = 0;
 
-                                if ((pressed.equals("+") || pressed.equals("÷") || pressed.equals("×") || pressed.equals("^") || pressed.equals("ⁿ√") || pressed.equals("!")) && (buttonPresses[numPresses - 1].equals("+") || buttonPresses[numPresses - 1].equals("×") || buttonPresses[numPresses - 1].equals("÷") || buttonPresses[numPresses - 1].equals("ⁿ√") || buttonPresses[numPresses - 1].equals("^") || buttonPresses[numPresses - 1].equals("%"))) {
-                                    if (pressed.equals("!") && buttonPresses[numPresses - 2].equals("!") && !equalPressed) {
-                                        yup = 1;
-                                    }
-                                    else {
+                                if ((pressed.equals("+") || pressed.equals("÷") || pressed.equals("×") || pressed.equals("^") || pressed.equals("ⁿ√") || pressed.equals("!")) && (Aux.lastChar(getTvText()).equals("+") || Aux.lastChar(getTvText()).equals("×") || Aux.lastChar(getTvText()).equals("÷") || Aux.lastChar(getTvText()).equals("ⁿ√") || Aux.lastChar(getTvText()).equals("^") || Aux.lastChar(getTvText()).equals("%"))) {
+                                    if (!(pressed.equals("!") && Aux.lastChar(Aux.newTrim(getTvText(), 1)).equals("!")))
                                         removeLast();
-                                    }
+                                }
+                                
+                                //Negative Stuffs
+                                String textView = tv.getText().toString();
+                                if (pressed.equals("-") && Aux.lastChar(getTvText()).equals("√")) {
+                                    error = true;
                                 }
 
-                                if (yup == 1) {
-                                    yup = 0;
+                                if (!tv.getText().toString().equals("\0") && (getTvText().endsWith(".") && (pressed.equals("(") || pressed.equals(")")))) {
+                                    dont = true;
                                 }
-                                else {
-                                    yup = 0;
-                                    //Negative Stuffs
-                                    if (!equalPressed) {
-                                        String textView = tv.getText().toString();
-                                        if (pressed.equals("-") && buttonPresses[numPresses - 1].equals("√")) {
-                                            error = true;
-                                        }
-
-                                        if ((pressed.equals("log") || pressed.equals("ln") || pressed.equals("√")) && buttonPresses[numPresses - 1].equals("-")) {
-                                            String realPressed = keyNum.getText().toString();
-
-                                            keyNum.setText("(");
-                                            keypress(keyNum);
-                                            keyNum.setText(realPressed);
-                                            keypress(keyNum);
-
-                                            negative2 = true;
-                                        }
-                                        else if (eq3 != null && !eq3.equals("\0") && (eq3.endsWith(".") && (pressed.equals("(") || pressed.equals(")")))) {
-                                            dont = true;
-                                        }
-                                        else if (eq3 != null && !eq3.equals("\0") && (eq3.endsWith("(") && (pressed.equals("!") || pressed.equals("+") || pressed.equals("^") || pressed.equals("×") || pressed.equals("÷")))) {
-                                            dont = true;
-                                        }
-                                        else if (eq3 != null && !eq3.equals("\0") && (eq3.equals("-") || eq3.equals(" -") || eq3.equals("- ")) && (pressed.equals("-") || pressed.equals("+") || pressed.equals("×") || pressed.equals("÷") || pressed.equals("^") || pressed.equals(")"))) {
-                                            dont = true;
-                                        }
-                                        else if (eq3 != null && !eq3.equals("\0") && (textView.endsWith("÷-") || textView.endsWith("×-") || textView.endsWith("+-") || textView.endsWith("^-") || (textView.endsWith("(-") && !pressed.equals("(") && !pressed.equals("√") && !pressed.equals("log") && !pressed.equals("ln")) || textView.endsWith("√-"))) {
-                                            int t, tempYup = yup;
-                                            for (t = 0; t < trigIn.length; t++) {
-                                                if (pressed.equals(trigIn[t])) {
-                                                    yup = 1;
-                                                    break;
-                                                }
-                                            }
-
-                                            if (textView.endsWith("(-") && yup == 1) {
-                                                keypress(keyNum);
-                                            }
-                                            else
-                                                dont = true;
-
-                                            yup = tempYup;
-                                        }
-                                        else if (eq3 != null && !eq3.equals("\0") && eq3.endsWith("√") && (pressed.equals("√") || pressed.equals("+") || pressed.equals("^") || pressed.equals("×") || pressed.equals("÷") || pressed.equals("!"))) {
-                                            dont = true;
-                                        }
-                                        else if (negative2) {
-                                            if (!pressed.equals(")") || pc != 0) {
-                                                keypress(findViewById(R.id.bParenthesisClose));
-                                                keyNum.setText(pressed);
-                                                keypress(keyNum);
-
-                                                negative2 = false;
-                                            }
-                                        }
-                                        else if (eq3 != null && !eq3.equals("\0") && eq3.endsWith("-") && !pressed.equals("-") && !pressed.equals("!") && !pressed.equals("log") && !pressed.equals("ln") && !pressed.equals("√") && !pressed.equals("(") && !pressed.equals(")")) {
-                                            int t, tempYup = yup;
-                                            for (t = 0; t < trigIn.length; t++) {
-                                                if (pressed.equals(trigIn[t])) {
-                                                    yup = 1;
-                                                    break;
-                                                }
-                                            }
-
-                                            if (yup != 1) {
-                                                removeLast();
-                                                keypress(keyNum);
-                                            }
-                                            else {
-                                                keypress(keyNum);
-                                            }
-
-                                            yup = tempYup;
-                                        }
-                                        else if (eq3 != null && !eq3.equals("\0") && eq3.endsWith("-") && pressed.equals("-")) {
-                                            removeLast();
-                                            eq3 += "-";
-                                            keypress(findViewById(R.id.sPlus));
-                                        }
-                                        else if (pressed.equals("-") && (buttonPresses[numPresses - 1].equals("+") || (buttonPresses[numPresses - 1].equals("-") && !buttonPresses[numPresses - 2].equals("-")) || buttonPresses[numPresses - 1].equals("×") || buttonPresses[numPresses - 1].equals("÷") || buttonPresses[numPresses - 1].equals("ⁿ√") || buttonPresses[numPresses - 1].equals("^"))) {
-                                            String realPressed = keyNum.getText().toString();
-
-                                            keyNum.setText("(");
-                                            keypress(keyNum);
-                                            keyNum.setText(realPressed);
-                                            keypress(keyNum);
-
-                                            negative2 = true;
-                                        }
-                                        else {
-                                            keypress(keyNum);
+                                else if (!tv.getText().toString().equals("\0") && (getTvText().endsWith("(") && (pressed.equals("!") || pressed.equals("+") || pressed.equals("^") || pressed.equals("×") || pressed.equals("÷")))) {
+                                    dont = true;
+                                }
+                                else if (!tv.getText().toString().equals("\0") && (tv.getText().toString().equals("-") || tv.getText().toString().equals(" -") || tv.getText().toString().equals("- ")) && (pressed.equals("-") || pressed.equals("+") || pressed.equals("×") || pressed.equals("÷") || pressed.equals("^") || pressed.equals(")"))) {
+                                    dont = true;
+                                }
+                                else if (!tv.getText().toString().equals("\0") && (textView.endsWith("÷-") || textView.endsWith("×-") || textView.endsWith("+-") || textView.endsWith("^-") || (textView.endsWith("(-") && !pressed.equals("(") && !pressed.equals("√") && !pressed.equals("log") && !pressed.equals("ln")) || textView.endsWith("√-"))) {
+                                    int t, tempYup = yup;
+                                    for (t = 0; t < trigIn.length; t++) {
+                                        if (pressed.equals(trigIn[t])) {
+                                            yup = 1;
+                                            break;
                                         }
                                     }
 
-                                    if (!dont) {
-                                        if (pc >= numsLength1 - 1)
-                                            pc = numsLength1 - 2;
+                                    if (!(textView.endsWith("(-") && yup == 1))
+                                        dont = true;
 
-                                        //Parenthesis Stuffs
-                                        if (keyNum.getText().toString().equals("(") || keyNum.getText().toString().equals(")")) {
-                                            if (keyNum.getText().toString().equals("(") && (numbers[pc][pari[pc]] != 0 || isValid[pc][pari[pc]])) {
-                                                if ((ops[pc][pari[pc]] == null || ops[pc][pari[pc]].equals("\0")) && !eq3.endsWith("(")) {
-                                                    ops[pc][pari[pc]] = "×";
-                                                    pari[pc]++;
-                                                }
-                                            }
-
-                                            parenthesis(keyNum);
-                                        }
-                                        else {
-                                            if (keyNum.getText().toString().equals("-") && pari[pc] == 0) {
-                                                numNumbers = 1;
-                                                negative = 1;
-                                            }
-
-                                            if (pc < 0)
-                                                pc = 0;
-
-                                            ops[pc][pari[pc]] = keyNum.getText().toString();
-
-                                            if (ops[pc][pari[pc]].equals("ⁿ√")) {
-                                                if (numbers[pc][pari[pc]] == 0 && !isValid[pc][pari[pc]]) {
-                                                    numbers[pc][pari[pc]] = 2;
-                                                }
-                                                else if (numbers[pc][pari[pc]] == 0 && isValid[pc][pari[pc]]) {
-                                                    error = true;
-                                                }
-                                                eq3 += "√";
-                                                ops[pc][pari[pc]] = "n";
-                                            }
-                                            else if (ops[pc][pari[pc]].equals("log")) {
-                                                if (numbers[pc][pari[pc]] == 0 && !isValid[pc][pari[pc]])
-                                                    numbers[pc][pari[pc]] = 10;
-
-                                                ops[pc][pari[pc]] = "log";
-                                                eq3 += "log(";
-
-                                                pari[pc]++;
-                                                pc++;
-                                                pari[pc]--;
-                                            }
-                                            else if (ops[pc][pari[pc]].equals("ln")) {
-                                                if (numbers[pc][pari[pc]] == 0 && !isValid[pc][pari[pc]])
-                                                    numbers[pc][pari[pc]] = 1;
-
-                                                ops[pc][pari[pc]] = "×";
-                                                pari[pc]++;
-
-                                                numbers[pc][pari[pc]] = numE;
-                                                ops[pc][pari[pc]] = "log";
-                                                eq3 += "ln(";
-
-                                                pari[pc]++;
-                                                pc++;
-                                                isValid[pc][pari[pc]] = false;
-
-                                                pari[pc]--;
-                                            }
-                                            else if (ops[pc][pari[pc]].equals("!") && equalPressed) {
-                                                eq3 += "!";
-
-                                                if (numbers[pc][pari[pc]] % 1 != 0) {
-                                                    error = true;
-                                                }
-
-                                                if (numbers[pc][pari[pc]] > 170) {
-                                                    numbers[pc][pari[pc]] = 171;
-                                                }
-                                                else if (numbers[pc][pari[pc]] < -170) {
-                                                    numbers[pc][pari[pc]] = -171;
-                                                }
-
-                                                if (numbers[pc][pari[pc]] % 1 != 0) {
-                                                    error = true;
-                                                }
-                                                else if (numbers[pc][pari[pc]] != 0) {
-                                                    double wtf;
-
-                                                    if (numbers[pc][pari[pc]] > 0) {
-                                                        for (wtf = numbers[pc][pari[pc]]; wtf > 1; wtf--) {
-                                                            numbers[pc][pari[pc]] *= (wtf - 1);
-                                                        }
-                                                    }
-                                                    else if (numbers[pc][pari[pc]] < 0) {
-                                                        numbers[pc][pari[pc]] *= -1;
-
-                                                        for (wtf = numbers[pc][pari[pc]]; wtf > 1; wtf--) {
-                                                            numbers[pc][pari[pc]] *= (wtf - 1);
-                                                        }
-
-                                                        numbers[pc][pari[pc]] *= -1;
-                                                    }
-                                                }
-                                                else {
-                                                    numbers[pc][pari[pc]] = 1;
-                                                }
-                                                ops[pc][pari[pc]] = "\0";
-                                                pari[pc]--;
-                                            }
-                                            else if (ops[pc][pari[pc]].equals("√")) {
-                                                if (pari[pc] > 0)
-                                                    tempPari = pari[pc] - 1;
-
-                                                if ((numbers[pc][pari[pc]] == 0 && !isValid[pc][tempPari]) || (pari[pc] > 0 && ops[pc][pari[pc] - 1].equals("+"))) {
-                                                    numbers[pc][pari[pc]] = 1;
-                                                    ops[pc][pari[pc]] = "×";
-                                                    pari[pc]++;
-                                                }
-                                                else if ((pari[pc] == 0 || (pari[pc] > 0 && !ops[pc][pari[pc] - 1].equals("÷") && !ops[pc][pari[pc] - 1].equals("^") && !ops[pc][pari[pc] - 1].equals("×")))) {
-                                                    ops[pc][pari[pc]] = "×";
-                                                    pari[pc]++;
-                                                }
-
-                                                numbers[pc][pari[pc]] = 2;
-                                                eq3 += "√";
-                                                ops[pc][pari[pc]] = "n";
-                                            }
-                                            else {
-                                                for (i = 0; i < trigIn.length; i++) {
-                                                    if (ops[pc][pari[pc]].equals(trigIn[i])) {
-                                                        if (numbers[pc][pari[pc]] == 0) {
-                                                            numbers[pc][pari[pc]] = 1;
-                                                        }
-                                                        if ((pari[pc] == 0 || (pari[pc] > 0 && !ops[pc][pari[pc] - 1].equals("÷")))) {
-                                                            ops[pc][pari[pc]] = "×";
-                                                            pari[pc]++;
-                                                        }
-
-
-                                                        ops[pc][pari[pc]] = trigOut[i];
-
-                                                        eq3 += ops[pc][pari[pc]];
-
-                                                        pari[pc]++;
-                                                        pc++;
-                                                        isTrig[pc] = true;
-                                                        pari[pc]--;
-                                                        i = 0;
-                                                        break;
-                                                    }
-                                                }
-                                                if (i == trigIn.length) {
-                                                    eq3 += ops[pc][pari[pc]];
-                                                }
-                                            }
-
-                                            pari[pc]++;
-
-                                            if (pari[pc] < 0)
-                                                pari[pc] = 0;
-
-                                            isDec = false;
-                                            decimalFactor = 1;
-
-                                            if (!equalPressed) {
-                                                tv.setText(eq3);
-                                                wrapText(tv);
-                                            }
+                                    yup = tempYup;
+                                }
+                                else if (!tv.getText().toString().equals("\0") && getTvText().endsWith("√") && (pressed.equals("√") || pressed.equals("+") || pressed.equals("^") || pressed.equals("×") || pressed.equals("÷") || pressed.equals("!"))) {
+                                    dont = true;
+                                }
+                                else if (!tv.getText().toString().equals("\0") && getTvText().endsWith("-") && !pressed.equals("-") && !pressed.equals("!") && !pressed.equals("log") && !pressed.equals("ln") && !pressed.equals("√") && !pressed.equals("(") && !pressed.equals(")")) {
+                                    int t, tempYup = yup;
+                                    for (t = 0; t < trigIn.length; t++) {
+                                        if (pressed.equals(trigIn[t])) {
+                                            yup = 1;
+                                            break;
                                         }
                                     }
+
+                                    yup = tempYup;
+                                }
+                                else if (getTvText().endsWith("-") && getTvText().endsWith("--") && pressed.equals("-"))
+                                    tv.append("-");
+
+                                if (!dont) {
+                                    tv.append(keyNum.getText().toString());
+
+                                    isDec = false;
+                                    decimalFactor = 1;
+
+                                    wrapText(tv);
                                 }
                             }
                         }
@@ -6422,23 +5244,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         decimalFactor = 1;
                         isDec = false;
                     }
-                }
-
-                if (lengthBackup == eq3.length() && !equalPressed && lengthBackup != 0 && buttonPresses[numPresses - 1].equals(")")) {
-                    buttonPresses[numPresses - 1] = "\0";
-                    numPresses--;
-                }
-
-                if (tinydb.getBoolean("debug")) {
-                    Button bgAnim = findViewById(R.id.bgAnim);
-
-                    bgAnim.setText("        " + Aux.getStrArray(buttonPresses) + "\n\n\n\n\n\n\n\n\n");
-                }
-
-                if ((eq3.equals("-") || eq3.equals(" -") || eq3.equals("\0-")) && buttonPresses[1].equals(")")) {
-                    buttonPresses[1] = "-";
-                    buttonPresses[2] = "\0";
-                    numPresses--;
                 }
             }
             else {
@@ -7599,75 +6404,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }, 300);
     }
 
-    public void clearArrays() {
-        int i;
-
-        for (i=0; i < numbers[0].length; i++) {
-            numbers[0][i] = 0;
-            ops[0][i] = "\0";
-            isValid[0][i] = false;
-
-            try {
-                pari[i] = 0;
-            }
-            catch (Exception ignored) {}
-        }
-
-        HandlerThread thread = new HandlerThread("MyHandlerThread1");
-        thread.start();
-
-        new Handler(thread.getLooper()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                int i, j;
-
-                for (i = 1; i < numbers.length - 20; i++) {
-                    for (j = 0; j < numbers[i].length; j++) {
-                        numbers[i][j] = 0;
-                        ops[i][j] = "\0";
-                        isValid[i][j] = false;
-                    }
-                }
-            }
-        }, 4);
-
-        HandlerThread thread2 = new HandlerThread("MyHandlerThread2");
-        thread2.start();
-
-        new Handler(thread2.getLooper()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                int i, j;
-
-                for (i = numbers.length - 20; i < numbers.length - 10; i++) {
-                    for (j = 0; j < numbers[i].length; j++) {
-                        numbers[i][j] = 0;
-                        ops[i][j] = "\0";
-                        isValid[i][j] = false;
-                    }
-                }
-            }
-        }, 4);
-
-        HandlerThread thread3 = new HandlerThread("MyHandlerThread3");
-        thread3.start();
-
-        new Handler(thread3.getLooper()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                int i, j;
-
-                for (i = numbers.length - 10; i < numbers.length; i++) {
-                    for (j = 0; j < numbers[i].length; j++) {
-                        numbers[i][j] = 0;
-                        ops[i][j] = "\0";
-                        isValid[i][j] = false;
-                    }
-                }
-            }
-        }, 4);
-    }
-
     public String evaluate(String str) throws NaNException {
         TinyDB tinydb = new TinyDB(MainActivity.mainActivity);
 
@@ -7718,7 +6454,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 e.printStackTrace();
             }
 
-            vibe(25);
+            vibe(vibeDuration);
 
             showRippleAnimation(bgAnim);
 
@@ -7792,6 +6528,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         }, 368);
+    }
+
+    public String getTvText() {
+        try {
+            tvText = tv.getText().toString();
+            return tvText;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public void vibe(int duration) {

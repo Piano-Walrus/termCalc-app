@@ -1209,6 +1209,44 @@ class Ax {
         return output;
     }
 
+    public static String numToSuper(String str) {
+        int i;
+        String output = "";
+
+        if (str == null || str.equals("\0"))
+            return null;
+
+        for (i=0; i < str.length(); i++) {
+            if (isDigit(chat(str, i)))
+                output += superlist.get(Integer.parseInt(chat(str, i)));
+            else if (normalListMisc.contains(str))
+                output += superlistMisc.get(normalListMisc.indexOf(str));
+            else
+                return null;
+        }
+
+        return output;
+    }
+
+    public static String superToNum(String str) {
+        int i;
+        String output = "";
+
+        if (str == null || str.equals("\0"))
+            return null;
+
+        for (i=0; i < str.length(); i++) {
+            if (isSuperscript(chat(str, i)))
+                output += Integer.toString(superlist.indexOf(chat(str, i)));
+            else if (superlistMisc.contains(str))
+                output += normalListMisc.get(superlistMisc.indexOf(str));
+            else
+                return null;
+        }
+
+        return output;
+    }
+
     public static String getLast(String str, int numChars){
         int s;
         String result = lastChar(str);

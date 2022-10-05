@@ -30,14 +30,21 @@ import java.util.Arrays;
 public class Aux {
     static String superNum, subNum;
 
+    public static final String eSub = "ₑ";
+    public static final String opSub = "₍";
+    public static final String cpSub = "₎";
+
     static final String[] superscripts = {"⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"};
     static final String[] subscripts = {"₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉"};
 
     static final String[] superLowerLetters = {"ᵃ", "ᵇ", "ᶜ", "ᵈ", "ᵉ", "ᶠ", "ᵍ", "ʰ", "ᶦ", "ʲ", "ᵏ", "ˡ", "ᵐ", "ⁿ", "ᵒ", "ᵖ", "ᑫ", "ʳ", "ˢ", "ᵗ", "ᵘ", "ᵛ", "ʷ", "ˣ", "ʸ", "ᶻ"};
     static final String[] superUpperLetters = {"ᴬ", "ᴮ", "ᶜ", "ᴰ", "ᴱ", "ᶠ", "ᴳ", "ᴴ", "ᴵ", "ᴶ", "ᴷ", "ᴸ", "ᴹ", "ᴺ", "ᴼ", "ᴾ", "Q", "ᴿ", "ˢ", "ᵀ", "ᵁ", "ⱽ", "ᵂ", "ˣ", "ʸ", "ᶻ"};
 
-    public static final ArrayList<String> superlist = new ArrayList<String>(Arrays.asList("⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"));
-    public static final ArrayList<String> sublist = new ArrayList<String>(Arrays.asList("₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉"));
+    public static final ArrayList<String> superlist = new ArrayList<>(Arrays.asList("⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"));
+    public static final ArrayList<String> sublist = new ArrayList<>(Arrays.asList("₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉"));
+    public static final ArrayList<String> superlistMisc = new ArrayList<>(Arrays.asList("ᵉ", "⁽", "⁾", "."));
+    public static final ArrayList<String> sublistMisc = new ArrayList<>(Arrays.asList(eSub, opSub, cpSub, "."));
+    public static final ArrayList<String> normalListMisc = new ArrayList<>(Arrays.asList("e", "(", ")", "."));
 
     static final String[] trigIn = {"sin", "cos", "tan", "csc", "sec", "cot", "sinh", "cosh", "tanh", "csch", "sech", "coth", "arcsin", "arccos", "arctan", "arccsc", "arcsec", "arccot", "arcsinh", "arccosh", "arctanh", "arccsch", "arcsech", "arccoth"};
 
@@ -185,6 +192,44 @@ public class Aux {
         }
 
         return new TinyDB(new Activity().getApplicationContext());
+    }
+
+    public static String numToSuper(String str) {
+        int i;
+        String output = "";
+
+        if (str == null || str.equals("\0"))
+            return null;
+
+        for (i=0; i < str.length(); i++) {
+            if (isDigit(chat(str, i)))
+                output += superlist.get(Integer.parseInt(chat(str, i)));
+            else if (normalListMisc.contains(str))
+                output += superlistMisc.get(normalListMisc.indexOf(str));
+            else
+                return null;
+        }
+
+        return output;
+    }
+
+    public static String superToNum(String str) {
+        int i;
+        String output = "";
+
+        if (str == null || str.equals("\0"))
+            return null;
+
+        for (i=0; i < str.length(); i++) {
+            if (isSuperscript(chat(str, i)))
+                output += Integer.toString(superlist.indexOf(chat(str, i)));
+            else if (superlistMisc.contains(str))
+                output += normalListMisc.get(superlistMisc.indexOf(str));
+            else
+                return null;
+        }
+
+        return output;
     }
 
     public ArrayList<String> getRange(ArrayList<String> array, int start, int end) {

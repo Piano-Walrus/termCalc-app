@@ -14,7 +14,8 @@
 
         <SeekBarPreference
             android:title="Maximum Decimal Places"
-            android:defaultValue="10"
+            android:summary="Note: Some complex operations may take noticeably longer to complete if this value is greater than 10."
+            android:defaultValue="9"
             android:dependency="isDynamic"
             android:max="30"
             android:shouldDisableView="true"
