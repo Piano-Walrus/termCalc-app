@@ -27,7 +27,7 @@
         \n5. Switched from double to BigDecimal precision, which should improve the accuracy of calculations involving multiple numbers with many decimal places.
         \n6. The changelog will now display one more previous version.
         \n7. Updated a few Spanish translations.
-        \n8. Minor bug fixes and performance improvements.
+        \n8. Many bug fixes and performance improvements.
 
     </string>
 
