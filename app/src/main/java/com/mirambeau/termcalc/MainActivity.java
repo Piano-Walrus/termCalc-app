@@ -4353,7 +4353,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         if (getTvText().endsWith("(")) {
                             tv.setText(Aux.newTrim(getTvText(), 1));
 
-                            if (tvText.endsWith(Aux.superMinus + Aux.superscripts[1]) && Aux.isLetter(Aux.lastChar(Aux.newTrim(tvText, 2))))
+                            if (getTvText().endsWith(Aux.superMinus + Aux.superscripts[1]) && Aux.isLetter(Aux.lastChar(Aux.newTrim(getTvText(), 2))))
                                 tv.setText(Aux.newTrim(getTvText(), 2));
 
                             while (Aux.isLetter(Aux.lastChar(getTvText()))) {
@@ -4366,7 +4366,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 }
 
-                if (!Aux.isNull(tvText) && tvText.endsWith("."))
+                if (!Aux.isNull(getTvText()) && getTvText().endsWith("."))
                     isDec = true;
             }
         }
