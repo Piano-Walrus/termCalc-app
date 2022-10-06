@@ -203,12 +203,12 @@ public class BetterMath {
 
                     String trigTest = eqArray.get(i);
 
-                    if (trigTest.startsWith("-") || trigTest.startsWith(Ax.emDash))
-                        trigTest = trigTest.substring(1);
+                    String zeros = Integer.toString((int) Math.pow(10, scale)).substring(1);
+                    String nines = zeros.replace("0", "9");
 
-                    if (trigTest.contains(".0000000000"))
+                    if (trigTest.replace("-", "").contains("." + zeros))
                         eqArray.set(i, trigTest.substring(0, trigTest.indexOf(".")));
-                    else if (trigTest.contains(".999999999999"))
+                    else if (trigTest.contains("." + nines))
                         eqArray.set(i, parseBigDecimal(trigTest.substring(0, trigTest.indexOf("."))).add(BigDecimal.ONE).toPlainString());
 
                     eqArray.remove(i + 1);
