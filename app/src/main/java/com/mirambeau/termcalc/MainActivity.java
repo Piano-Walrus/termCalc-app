@@ -5105,7 +5105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 boolean dont = false;
 
                 //If tv is empty, and the character can logically be placed first, then just type it
-                if (getTvText().trim().replace("\0", "").length() < 1 && !pressed.equals("!") && !pressed.equals(")") && (!Aux.isBinaryOp(pressed) || pressed.equals("-"))) {
+                if (getTvText().trim().replace("\0", "").replace(" ", "").length() < 1 && !pressed.equals("!") && !pressed.equals(")") && (!Aux.isBinaryOp(pressed) || pressed.equals("-"))) {
                     if (!isBig) {
                         ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
                                 .disableTransitionType(LayoutTransition.CHANGING);
