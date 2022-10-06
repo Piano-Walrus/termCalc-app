@@ -5105,24 +5105,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 boolean dont = false;
 
                 //If tv is empty, and the character can logically be placed first, then just type it
-                if (getTvText().trim().replace("\0", "").replace(" ", "").length() < 1 && !pressed.equals("!") && !pressed.equals(")") && (!Aux.isBinaryOp(pressed) || pressed.equals("-"))) {
-                    if (!isBig) {
-                        ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
-                                .disableTransitionType(LayoutTransition.CHANGING);
+                if (getTvText().trim().replace("\0", "").replace(" ", "").length() < 1) {
+                    if (!pressed.equals("!") && !pressed.equals(")") && (!Aux.isBinaryOp(pressed) || pressed.equals("-"))) {
+                        if (!isBig) {
+                            ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
+                                    .disableTransitionType(LayoutTransition.CHANGING);
 
-                        ((ViewGroup) findViewById(R.id.equationScrollView)).getLayoutTransition()
-                                .disableTransitionType(LayoutTransition.CHANGING);
+                            ((ViewGroup) findViewById(R.id.equationScrollView)).getLayoutTransition()
+                                    .disableTransitionType(LayoutTransition.CHANGING);
+                        }
+
+                        isDec = false;
+                        dont = true;
+
+                        tv.append(pressed);
+
+                        if (Aux.isTrig(pressed))
+                            tv.append("(");
+
+                        wrapText(tv);
                     }
-
-                    isDec = false;
-                    dont = true;
-
-                    tv.append(pressed);
-
-                    if (Aux.isTrig(pressed))
-                        tv.append("(");
-
-                    wrapText(tv);
+                    else {
+                        isDec = false;
+                        dont = true;
+                    }
                 }
 
                 if (!isBig) {
