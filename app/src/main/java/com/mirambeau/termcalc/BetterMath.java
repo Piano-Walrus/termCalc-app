@@ -33,7 +33,7 @@ public class BetterMath {
         String normalFormatPattern = "#,###.##";
 
         if (scale > 2) {
-            String zeros = Integer.toString((int) Math.pow(10, scale)).substring(1);
+            String zeros = Integer.toString((int) Math.pow(10, scale - 2)).substring(1);
 
             eFormatPattern += zeros + "E0";
             normalFormatPattern += zeros.replace("0", "#");
@@ -42,16 +42,10 @@ public class BetterMath {
         if (result.abs().compareTo(BigDecimal.ONE) < 0 && result.setScale(scale, RoundingMode.HALF_UP).compareTo(BigDecimal.ZERO) != 0)
             return result.setScale(scale, RoundingMode.HALF_UP).toPlainString();
 
-        if (result.compareTo(BigDecimal.valueOf(Double.MAX_VALUE)) >= 0) {
-            int length = resultStr.length();
-
-            return resultStr.charAt(0) + "." + resultStr.substring(1, 7) + "E" + (length - 1);
-        }
-        else if (result.compareTo(BigDecimal.valueOf(Double.MAX_VALUE).subtract(BigDecimal.ONE, mc).negate(mc)) <= 0) {
-            int length = resultStr.length();
-
-            return resultStr.substring(0, 2) + "." + resultStr.substring(2, 8) + "E" + (length - 2);
-        }
+        if (result.compareTo(BigDecimal.valueOf(Double.MAX_VALUE)) >= 0)
+            return resultStr.charAt(0) + "." + resultStr.substring(1, 7) + "E" + (resultStr.length() - 1);
+        else if (result.compareTo(BigDecimal.valueOf(Double.MAX_VALUE).subtract(BigDecimal.ONE, mc).negate(mc)) <= 0)
+            return resultStr.substring(0, 2) + "." + resultStr.substring(2, 8) + "E" + (resultStr.length() - 2);
         else {
             try {
                 if (!resultStr.equals("0") && result.compareTo(BigDecimal.ZERO) != 0 && (result.abs(mc).compareTo(parseBigDecimal("1000000000000", new MathContext(15, RoundingMode.HALF_UP))) >= 0 || result.abs(mc).compareTo(parseBigDecimal("0.000001", new MathContext(10, RoundingMode.HALF_UP))) <= 0))
