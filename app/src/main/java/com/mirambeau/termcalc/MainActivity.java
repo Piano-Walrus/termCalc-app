@@ -2036,22 +2036,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     bMod.setTextColor(Aux.getTinyColor("-b%t"));
             }
 
-            //Open parenthesis
-            findViewById(R.id.bParenthesisOpen).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    parenthesis(v);
-                }
-            });
-
-            //Close parenthesis
-            findViewById(R.id.bParenthesisClose).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    parenthesis(v);
-                }
-            });
-
             //Mod
             compBar[7].setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -5089,8 +5073,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public final void onButtonPressed(View v) {
-        Button button = (Button) v;
-        String buttonText = button.getText().toString();
+        String buttonText = ((Button) v).getText().toString();
 
         try {
             Aux.removeCommas(tv.getText().toString());
