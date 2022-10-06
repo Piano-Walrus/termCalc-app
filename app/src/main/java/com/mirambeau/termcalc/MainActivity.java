@@ -5095,14 +5095,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressLint("SetTextI18n")
     public final void operation(View v) {
         try {
+            String pressed = ((Button) v).getText().toString();
+
             if (isLegacy) {
-                String pressed = ((Button) v).getText().toString();
-
                 boolean dont = false;
-                boolean isMod = pressed.equals("%");
-
-                if (isMod)
-                    pressed = Aux.multi;
 
                 //If tv is empty, and the character can logically be placed first, then just type it
                 if (getTvText().trim().replace("\0", "").length() < 1 && !pressed.equals("!") && !pressed.equals(")") && (!Aux.isBinaryOp(pressed) || pressed.equals("-"))) {
@@ -5116,12 +5112,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     isDec = false;
 
-                    tv.append(isMod ? "%" : pressed);
+                    tv.append(pressed);
 
                     if (Aux.isTrig(pressed))
                         tv.append("(");
 
                     wrapText(tv);
+                    return;
                 }
 
                 if (!(pressed.equals(")") && (getTvText().trim().replace("\0", "").equals(".") || getTvText().endsWith("(") || Aux.isBinaryOp(Aux.lastChar(getTvText())) || getTvText().endsWith("√")))) {
@@ -5157,7 +5154,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 if (!dont) {
                                     isDec = false;
 
-                                    tv.append(isMod ? "%" : pressed);
+                                    tv.append(pressed);
 
                                     if (Aux.isTrig(pressed))
                                         tv.append("(");
@@ -5173,6 +5170,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
             else {
+                //TODO: Just check whether or not substring(0, cursor).length() has changed,
+                // not the entire string, and if it has, then move the cursor accordingly
                 int cursor = tv.getSelectionStart();
 
                 if (equaled)
@@ -5181,21 +5180,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 tv.requestFocus();
                 tv.setSelection(cursor);
 
-                String tvText = tv.getText().toString();
-                String keyText = ((Button) v).getText().toString();
+                String tvText = getTvText();
 
-                if (keyText.startsWith("a") || keyText.startsWith("s") || keyText.startsWith("c") || keyText.startsWith("t") || keyText.startsWith("l"))
-                    keyText += "(";
+                if (pressed.startsWith("a") || pressed.startsWith("s") || pressed.startsWith("c") || pressed.startsWith("t") || pressed.startsWith("l"))
+                    pressed += "(";
 
                 //Cursor is not at the beginning
                 if (cursor > 0)
-                    tv.setText(Aux.newReplace(cursor - 1, tvText, Aux.chat(tvText, cursor - 1) + keyText));
+                    tv.setText(Aux.newReplace(cursor - 1, tvText, Aux.chat(tvText, cursor - 1) + pressed));
                 //Cursor is at the beginning, AND pressed is something that can exist in the beginning of an expression
-                else if ((!Aux.isBinaryOp(keyText) || keyText.equals("-")) && !keyText.equals("!") && !keyText.equals(")"))
-                    tv.setText((keyText + tvText.trim()).replace("\0", "").replace(" ", "").trim());
+                else if ((!Aux.isBinaryOp(pressed) || pressed.equals("-")) && !pressed.equals("!") && !pressed.equals(")"))
+                    tv.setText((pressed + tvText.trim()).replace("\0", "").replace(" ", "").trim());
 
                 try {
-                    tv.setSelection(cursor + keyText.length());
+                    tv.setSelection(cursor + pressed.length());
                 }
                 catch (Exception e) {
                     e.printStackTrace();
