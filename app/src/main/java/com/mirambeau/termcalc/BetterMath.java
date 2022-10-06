@@ -203,7 +203,10 @@ public class BetterMath {
 
                     String trigTest = eqArray.get(i);
 
-                    if (trigTest.replace("-", "").contains(".0000000000"))
+                    if (trigTest.startsWith("-") || trigTest.startsWith(Ax.emDash))
+                        trigTest = trigTest.substring(1);
+
+                    if (trigTest.contains(".0000000000"))
                         eqArray.set(i, trigTest.substring(0, trigTest.indexOf(".")));
                     else if (trigTest.contains(".999999999999"))
                         eqArray.set(i, parseBigDecimal(trigTest.substring(0, trigTest.indexOf("."))).add(BigDecimal.ONE).toPlainString());
