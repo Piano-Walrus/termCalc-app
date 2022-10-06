@@ -4824,12 +4824,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             final FloatingActionButton clear = findViewById(R.id.bDel);
 
             if (isLegacy) {
-                final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(MainActivity.mainActivity);
-                final String color = sp.getString(SettingsActivity.KEY_PREF_COLOR, "1");
-                final String theme = sp.getString(SettingsActivity.KEY_PREF_THEME, "1");
-
-                TinyDB tinydb = new TinyDB(this);
-
                 if (!isBig) {
                     ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
                             .disableTransitionType(LayoutTransition.CHANGING);
@@ -4841,6 +4835,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (!(!tv.getText().toString().equals("\0") && (getTvText().endsWith("π") || getTvText().endsWith("e") || getTvText().endsWith("!")))) {
                     if (equaled) {
                         equaled = false;
+
+                        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(MainActivity.mainActivity);
+                        final String color = sp.getString(SettingsActivity.KEY_PREF_COLOR, "1");
+                        final String theme = sp.getString(SettingsActivity.KEY_PREF_THEME, "1");
 
                         clear(findViewById(R.id.delete));
                         spin(clear, theme, color, R.drawable.ic_baseline_arrow_back_24);
@@ -5094,20 +5092,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             operation(v);
     }
 
+    @SuppressLint("SetTextI18n")
     public final void operation(View v) {
         try {
-            final Button keyNum = (Button) v;
-
             if (isLegacy) {
+                String pressed = ((Button) v).getText().toString();
+
                 boolean dont = false;
+                boolean isMod = pressed.equals("%");
 
-                String pressed = keyNum.getText().toString();
-                getTvText();
-
-                if (pressed.equals("%"))
+                if (isMod)
                     pressed = Aux.multi;
 
-                if (!(pressed.equals(")") && (tvText.equals(".") || tvText.equals(" .") || tvText.equals("\0.") || tvText.endsWith("(") || tv.getText().toString().endsWith("÷") || tv.getText().toString().endsWith("×") || tv.getText().toString().endsWith("+") || tv.getText().toString().endsWith("-") || tv.getText().toString().endsWith("^") || tv.getText().toString().endsWith("√")))) {
+                //If tv is empty, and the character can logically be placed first, then just type it
+                if (getTvText().trim().replace("\0", "").length() < 1 && !pressed.equals("!") && !pressed.equals(")") && (!Aux.isBinaryOp(pressed) || pressed.equals("-"))) {
+                    if (!isBig) {
+                        ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
+                                .disableTransitionType(LayoutTransition.CHANGING);
+
+                        ((ViewGroup) findViewById(R.id.equationScrollView)).getLayoutTransition()
+                                .disableTransitionType(LayoutTransition.CHANGING);
+                    }
+
+                    isDec = false;
+
+                    tv.append(isMod ? "%" : pressed);
+
+                    if (Aux.isTrig(pressed))
+                        tv.append("(");
+
+                    wrapText(tv);
+                }
+
+                if (!(pressed.equals(")") && (getTvText().trim().replace("\0", "").equals(".") || getTvText().endsWith("(") || Aux.isBinaryOp(Aux.lastChar(getTvText())) || getTvText().endsWith("√")))) {
                     if (!isBig) {
                         ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
                                 .disableTransitionType(LayoutTransition.CHANGING);
@@ -5126,13 +5143,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 if (Aux.isBinaryOp(pressed) && !pressed.equals("-") && !pressed.equals(Aux.emDash) && Aux.isBinaryOp(Aux.lastChar(getTvText())))
                                     removeLast();
 
-                                if (!tv.getText().toString().equals("\0") && (getTvText().endsWith(".") && pressed.equals("(")))
+                                if (!getTvText().equals("\0") && (getTvText().endsWith(".") && pressed.equals("(")))
                                     dont = true;
-                                else if (!tv.getText().toString().equals("\0") && (getTvText().endsWith("(") && (pressed.equals("!") || (Aux.isBinaryOp(pressed) && !pressed.equals("-") && !pressed.equals(Aux.emDash)))))
+                                else if (!getTvText().equals("\0") && (getTvText().endsWith("(") && (pressed.equals("!") || (Aux.isBinaryOp(pressed) && !pressed.equals("-") && !pressed.equals(Aux.emDash)))))
                                     dont = true;
-                                else if (!tv.getText().toString().equals("\0") && (tv.getText().toString().equals("-") || tv.getText().toString().equals(" -") || tv.getText().toString().equals("- ")) && (Aux.isBinaryOp(pressed) || pressed.equals(")")))
+                                else if (!getTvText().equals("\0") && (getTvText().equals("-") || getTvText().equals(" -") || getTvText().equals("- ")) && (Aux.isBinaryOp(pressed) || pressed.equals(")")))
                                     dont = true;
-                                else if (!tv.getText().toString().equals("\0") && getTvText().endsWith("√") && ((Aux.isBinaryOp(pressed) && !pressed.equals("-") && !pressed.equals(Aux.emDash)) || pressed.equals("!")))
+                                else if (!getTvText().equals("\0") && getTvText().endsWith("√") && ((Aux.isBinaryOp(pressed) && !pressed.equals("-")) || pressed.equals("!")))
                                     dont = true;
                                 else if (getTvText().endsWith("--") && pressed.equals("-"))
                                     dont = true;
@@ -5140,9 +5157,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 if (!dont) {
                                     isDec = false;
 
-                                    tv.append(keyNum.getText().toString());
+                                    tv.append(isMod ? "%" : pressed);
 
-                                    if (Aux.isTrig(keyNum.getText().toString()))
+                                    if (Aux.isTrig(pressed))
                                         tv.append("(");
 
                                     wrapText(tv);
@@ -5165,15 +5182,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 tv.setSelection(cursor);
 
                 String tvText = tv.getText().toString();
-                String keyText = keyNum.getText().toString();
+                String keyText = ((Button) v).getText().toString();
 
                 if (keyText.startsWith("a") || keyText.startsWith("s") || keyText.startsWith("c") || keyText.startsWith("t") || keyText.startsWith("l"))
                     keyText += "(";
 
-                //TODO: Check to make sure operations like "+" can't be typed in the beginning of the expression
+                //Cursor is not at the beginning
                 if (cursor > 0)
                     tv.setText(Aux.newReplace(cursor - 1, tvText, Aux.chat(tvText, cursor - 1) + keyText));
-                else
+                //Cursor is at the beginning, AND pressed is something that can exist in the beginning of an expression
+                else if ((!Aux.isBinaryOp(keyText) || keyText.equals("-")) && !keyText.equals("!") && !keyText.equals(")"))
                     tv.setText((keyText + tvText.trim()).replace("\0", "").replace(" ", "").trim());
 
                 try {
