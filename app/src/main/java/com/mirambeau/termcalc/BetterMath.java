@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class BetterMath {
-    public static MathContext mc = new MathContext(40, RoundingMode.HALF_UP);
-    public static MathContext smolMc = new MathContext(20, RoundingMode.HALF_UP);
+    final public static MathContext mc = new MathContext(40, RoundingMode.HALF_UP);
+    final public static MathContext smolMc = new MathContext(20, RoundingMode.HALF_UP);
 
     public static String pi;
     public static String e;
@@ -84,8 +84,10 @@ public class BetterMath {
 
         ArrayList<String> eqArray = parseEq(eq.replace(",", ""));
 
-        pi = BigDecimalMath.pi(mc).toPlainString();
-        e = BigDecimalMath.e(mc).toPlainString();
+        final MathContext piMc = new MathContext(scale + 1, RoundingMode.HALF_UP);
+
+        pi = BigDecimalMath.pi(piMc).toPlainString();
+        e = BigDecimalMath.e(piMc).toPlainString();
 
         //Replace pi symbol with value 3.1415...
         while (eqArray.contains(Ax.pi)) {
