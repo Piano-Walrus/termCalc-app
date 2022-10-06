@@ -4581,6 +4581,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             String resultStr = "\0";
 
+            if (Aux.isBinaryOp(Aux.lastChar(getTvText())))
+                tv.setText(Aux.newTrim(getTvText(), 1));
+
             if (isLegacy) {
                 if (tv.getText().toString().endsWith("\0") || tv.getText().toString().endsWith(" "))
                     tv.setText(Aux.newTrim(tv.getText().toString(), 1));
