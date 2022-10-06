@@ -18,6 +18,7 @@
             android:defaultValue="9"
             android:dependency="isDynamic"
             android:max="30"
+            app:min="1"
             android:shouldDisableView="true"
             android:key="precision"
             app:showSeekBarValue="true"/>

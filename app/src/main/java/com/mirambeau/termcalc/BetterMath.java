@@ -29,6 +29,15 @@ public class BetterMath {
 
     public static String formatResult(BigDecimal result, MathContext mc, int scale) {
         String resultStr = result.toPlainString();
+        String eFormatPattern = "0.00";
+        String normalFormatPattern = "#,###.##";
+
+        if (scale > 2) {
+            String zeros = Integer.toString((int) Math.pow(10, scale)).substring(1);
+
+            eFormatPattern += zeros + "E0";
+            normalFormatPattern += zeros.replace("0", "#");
+        }
 
         if (result.abs().compareTo(BigDecimal.ONE) < 0 && result.setScale(scale, RoundingMode.HALF_UP).compareTo(BigDecimal.ZERO) != 0)
             return result.setScale(scale, RoundingMode.HALF_UP).toPlainString();
@@ -45,10 +54,10 @@ public class BetterMath {
         }
         else {
             try {
-                if (result.compareTo(parseBigDecimal("1000000000000", new MathContext(15, RoundingMode.HALF_UP))) >= 0 || result.compareTo(parseBigDecimal("0.000001", new MathContext(10, RoundingMode.HALF_UP))) <= 0)
-                    return new DecimalFormat("0.00000E0").format(Double.parseDouble(resultStr));
+                if (!resultStr.equals("0") && result.compareTo(BigDecimal.ZERO) != 0 && (result.abs(mc).compareTo(parseBigDecimal("1000000000000", new MathContext(15, RoundingMode.HALF_UP))) >= 0 || result.abs(mc).compareTo(parseBigDecimal("0.000001", new MathContext(10, RoundingMode.HALF_UP))) <= 0))
+                    return new DecimalFormat(eFormatPattern).format(Double.parseDouble(resultStr));
                 else
-                    return new DecimalFormat("#,###.#####").format(Double.parseDouble(resultStr));
+                    return new DecimalFormat(normalFormatPattern).format(Double.parseDouble(resultStr));
             }
             catch (Exception e) {
                 return result.toPlainString();
@@ -190,14 +199,12 @@ public class BetterMath {
                 if (Ax.isFullNum(next)) {
                     eqArray.set(i, Trig.evaluate(current, next, mc, isRad));
 
-                    if (!isRad) {
-                        String trigTest = eqArray.get(i);
+                    String trigTest = eqArray.get(i);
 
-                        if (trigTest.contains("0.0000000000000000"))
-                            eqArray.set(i, "0");
-                        else if (trigTest.contains("0.9999999999999999"))
-                            eqArray.set(i, "1");
-                    }
+                    if (trigTest.replace("-", "").contains(".0000000000"))
+                        eqArray.set(i, trigTest.substring(0, trigTest.indexOf(".")));
+                    else if (trigTest.contains(".999999999999"))
+                        eqArray.set(i, parseBigDecimal(trigTest.substring(0, trigTest.indexOf("."))).add(BigDecimal.ONE).toPlainString());
 
                     eqArray.remove(i + 1);
                 }

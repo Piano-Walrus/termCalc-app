@@ -5956,7 +5956,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Log.d("Error", "decToFrac returned null everytime it was called.");
                             return;
                         }
-                    } catch (NullPointerException e) {
+                    }
+                    catch (NullPointerException e) {
                         e.printStackTrace();
                         return;
                     }
