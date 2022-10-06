@@ -13,6 +13,8 @@
         android:id="@+id/mainView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:background="@color/darkColorPrimary"
         android:textAlignment="center">
 
@@ -49,6 +51,8 @@
             android:id="@+id/equationScrollView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:animateLayoutChanges="true"
             android:rotation="180"
             android:scrollbars="none"
@@ -61,12 +65,16 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:clipChildren="false"
+                android:clipToPadding="false"
                 android:animateLayoutChanges="true">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/equationLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
                     android:animateLayoutChanges="true"
                     android:paddingStart="27dp"
                     android:paddingEnd="32dp"

@@ -3988,7 +3988,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : tinydb.getInt("precision");
                             MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? 30 : tinydb.getInt("precision") * 2, RoundingMode.HALF_UP);
 
-                            BigDecimal result = BetterMath.evaluate(eq, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale);
+                            BigDecimal result = BetterMath.evaluate(eq, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale, false);
                             String resultStr = BetterMath.formatResult(result, newMc, scale).trim();
 
                             while (resultStr.equals("0") && scale < 26)
@@ -4673,7 +4673,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                             int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : tinydb.getInt("precision");
                                             MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? 30 : tinydb.getInt("precision") * 2, RoundingMode.HALF_UP);
 
-                                            BigDecimal result = BetterMath.evaluate(getTvText().trim(), tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale);
+                                            BigDecimal result = BetterMath.evaluate(getTvText().trim(), tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale, false);
                                             resultStr = BetterMath.formatResult(result, newMc, scale).trim();
 
                                             while (resultStr.equals("0") && scale < 26)
@@ -5075,7 +5075,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public final void onButtonPressed(View v) {
-        String buttonText = ((Button) v).getText().toString();
+        Button button = (Button) v;
+        String buttonText = button.getText().toString();
 
         try {
             Aux.removeCommas(tv.getText().toString());
@@ -6344,7 +6345,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : tinydb.getInt("precision");
         MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? 30 : tinydb.getInt("precision") * 2, RoundingMode.HALF_UP);
 
-        BigDecimal result = BetterMath.evaluate(str, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale);
+        BigDecimal result = BetterMath.evaluate(str, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale, false);
         String resultStr = BetterMath.formatResult(result, newMc, scale).trim();
 
         while (resultStr.equals("0") && scale < 26)

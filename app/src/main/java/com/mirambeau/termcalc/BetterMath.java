@@ -20,7 +20,7 @@ public class BetterMath {
         System.out.println("Original expression: " + args[0]);
 
         try {
-            System.out.println(formatResult(evaluate(args[0], args.length >= 2 && Boolean.parseBoolean(args[1]), true, smolMc, smolMc.getPrecision() / 2), mc, 8));
+            System.out.println(formatResult(evaluate(args[0], args.length >= 2 && Boolean.parseBoolean(args[1]), true, smolMc, smolMc.getPrecision() / 2, true), mc, 8));
         }
         catch (NaNException nan) {
             System.out.println(nan.getMessage());
@@ -60,28 +60,32 @@ public class BetterMath {
     }
 
     public static BigDecimal evaluate(String eq, boolean prioritizeCoefficients, int scale) throws NaNException {
-        return evaluate(eq, prioritizeCoefficients, true, mc, scale);
+        return evaluate(eq, prioritizeCoefficients, true, mc, scale, true);
     }
 
-    public static BigDecimal evaluate(String eq, boolean prioritizeCoefficients, boolean isRad, MathContext mc, int scale) throws NaNException {
+    public static BigDecimal evaluate(String eq, boolean prioritizeCoefficients, boolean isRad, MathContext mc, int scale, boolean debug) throws NaNException {
         int i;
-        int parenthesisDifference = Ax.countChars(eq, "(") - Ax.countChars(eq, ")");
+        int parenthesisDifference = Ax.charDiff(eq, "(", ")");
+
+        eq = eq.trim();
 
         if (Ax.isFullSignedNumE(eq) && !eq.contains(Ax.pi) && !eq.contains("e"))
             return parseBigDecimal(eq, mc);
 
-        eq = eq.replace(" ", "").replace("ln", "log" + Ax.eSub);
+        eq = eq.replace("ln", "log" + Ax.eSub);
 
         for (i=0; i < parenthesisDifference; i++) {
             eq += ")";
         }
 
-        ArrayList<String> eqArray = parseEq(eq.replace(",", ""));
+        ArrayList<String> eqArray = parseEq(eq);
 
         final MathContext piMc = new MathContext(scale + 1, RoundingMode.HALF_UP);
 
         pi = BigDecimalMath.pi(piMc).toPlainString();
         e = BigDecimalMath.e(piMc).toPlainString();
+
+        //TODO: Replace all the while loops with the new for loop thingy
 
         //Replace pi symbol with value 3.1415...
         while (eqArray.contains(Ax.pi)) {
@@ -132,7 +136,8 @@ public class BetterMath {
             }
         }
 
-        System.out.println(eqArray);
+        if (debug)
+            System.out.println(eqArray);
 
         //Handle Parenthesis
         while (eqArray.contains("(") || eqArray.contains(")")) {
@@ -141,7 +146,7 @@ public class BetterMath {
 
             ArrayList<String> subList = new ArrayList<>(eqArray.subList(start+1, end));
 
-            eqArray.set(start, evaluate(subList.toString().trim().replace("[", "").replace("]", "").replace(",", "").replace(" ", ""), prioritizeCoefficients, isRad, mc, scale).toPlainString());
+            eqArray.set(start, evaluate(subList.toString().trim().replace("[", "").replace("]", "").replace(",", "").replace(" ", ""), prioritizeCoefficients, isRad, mc, scale, false).toPlainString());
 
             try {
                 if (Ax.isFullNum(eqArray.get(end + 1)) || eqArray.get(end + 1).equals(Ax.sq))
@@ -176,7 +181,8 @@ public class BetterMath {
             }
             catch (Exception ignored) {}
 
-            System.out.println(eqArray);
+            if (debug)
+                System.out.println(eqArray);
         }
 
         //Handle Trig
@@ -207,7 +213,8 @@ public class BetterMath {
             }
         }
 
-        System.out.println(eqArray);
+        if (debug)
+            System.out.println(eqArray);
 
         //Handle log and ln
         while (eqArray.contains("log")) {
@@ -274,7 +281,8 @@ public class BetterMath {
                     throw new NaNException("Parse Error");
             }
 
-            System.out.println(eqArray);
+            if (debug)
+                System.out.println(eqArray);
         }
 
         //Handle Roots
@@ -315,7 +323,8 @@ public class BetterMath {
                 }
             }
 
-            System.out.println(eqArray);
+            if (debug)
+                System.out.println(eqArray);
         }
 
         //Handle Factorials
@@ -338,18 +347,16 @@ public class BetterMath {
             if (init.equals(eqArray.toString()))
                 throw new NaNException("Parse Error");
 
-            System.out.println(eqArray);
+            if (debug)
+                System.out.println(eqArray);
         }
 
-        //Handle exponents
-        while (eqArray.contains("^")) {
-            String init = eqArray.toString();
+        //Handle Exponents
+        for (int index = eqArray.indexOf("^"); index != -1; index = eqArray.indexOf("^")) {
+            int initLength = eqArray.size();
 
-            if (eqArray.get(0).equals("^")) {
-                throw new NaNException("Error: First character in expression cannot be '^'");
-            }
-
-            int index = eqArray.indexOf("^");
+            if (index == 0)
+                throw new NaNException("Parse Error");
 
             if (Ax.isFullNum(eqArray.get(index-1)) && Ax.isFullNum(eqArray.get(index+1))) {
                 String previous = eqArray.get(index - 1);
@@ -363,7 +370,12 @@ public class BetterMath {
                         eqArray.set(index - 1, newPow(parseBigDecimal(previous, mc), parseBigDecimal(next, mc)).toPlainString());
                     }
                     catch (Exception e2) {
-                        eqArray.set(index - 1, "" + Math.pow(Double.parseDouble(previous), Double.parseDouble(next)));
+                        try {
+                            eqArray.set(index - 1, "" + Math.pow(Double.parseDouble(previous), Double.parseDouble(next)));
+                        }
+                        catch (Exception e3) {
+                            throw new NaNException("Parse Error");
+                        }
                     }
                 }
 
@@ -371,10 +383,11 @@ public class BetterMath {
                 eqArray.remove(index);
             }
 
-            if (init.equals(eqArray.toString()))
+            if (initLength == eqArray.size())
                 throw new NaNException("Parse Error");
 
-            System.out.println(eqArray);
+            if (debug)
+                System.out.println(eqArray);
         }
 
         //Handle Multiplication & Division
@@ -446,7 +459,8 @@ public class BetterMath {
                     i = 0;
             }
 
-            System.out.println(eqArray);
+            if (debug)
+                System.out.println(eqArray);
         }
 
         //Handle Addition & Subtraction
@@ -507,12 +521,14 @@ public class BetterMath {
                     i = 0;
             }
 
-            System.out.println(eqArray);
+            if (debug)
+                System.out.println(eqArray);
         }
 
         try {
             if (eqArray.size() > 1) {
-                System.out.println("Error: eqArray size = " + eqArray.size());
+                if (debug)
+                    System.out.println(eqArray);
 
                 throw new NaNException("Parse Error");
             }
@@ -734,8 +750,6 @@ public class BetterMath {
 
                 bound = whichBound > 0 ? upperBound : lowerBound;
 
-                int count = 0;
-
                 for (i = 0;
                      i < maxPrecision && (whichBound > 0 ? initNum.compareTo(bound) : bound.compareTo(initNum)) <= 0;
                      i += increment.toPlainString().contains(maxIncrement.replace("0.", "")) && previousIncrement.toPlainString().contains(minIncrement.replace("0.", "")) ? 1 : 0) {
@@ -897,7 +911,10 @@ class Trig {
     public static String evaluate(String trigOp, String n, MathContext mc, boolean isRad) {
         BigDecimal num = parseBigDecimal(n);
 
-        String op = trigOp.replace("arc", "").replace(Ax.superMinus + Ax.superscripts[1], "").replace("h", "");
+        String op = trigOp.replace("arc", "").replace(Ax.superMinus + Ax.superscripts[1], "");
+
+        if (op.endsWith("h"))
+            op = Ax.newTrim(op, 1);
 
         //Hyperbolic
         if (trigOp.contains("h")) {
@@ -1048,6 +1065,24 @@ class Ax {
             return true;
 
         return false;
+    }
+
+    public static int charDiff(String str, String s1, String s2) {
+        if (str == null || s1 == null || s2 == null || str.length() < 2 || s1.length() != 1 || s2.length() != 1)
+            return 0;
+
+        int count1 = 0, count2 = 0;
+
+        for (int i=0; i < str.length(); i++) {
+            char current = str.charAt(i);
+
+            if (current == s1.charAt(0))
+                count1++;
+            else if (current == s2.charAt(0))
+                count2++;
+        }
+
+        return count1 - count2;
     }
 
     public static boolean isDigit(char character) {
