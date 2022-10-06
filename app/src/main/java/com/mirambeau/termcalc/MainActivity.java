@@ -4539,7 +4539,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .disableTransitionType(LayoutTransition.CHANGING);
             }
 
-            if (buttonText.equals("(") || (buttonText.equals(")") && Aux.countChars(getTvText(), "(") > Aux.countChars(getTvText(), ")"))) {
+            if (buttonText.equals("(") || ((buttonText.equals(")") && Aux.countChars(getTvText(), "(") > Aux.countChars(getTvText(), ")")) && !(getTvText().trim().replace("\0", "").equals(".") || getTvText().endsWith("(") || Aux.isBinaryOp(Aux.lastChar(getTvText())) || getTvText().endsWith("√")))) {
                 tv.append(buttonText);
                 wrapText(tv);
             }
@@ -5121,53 +5121,51 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     return;
                 }
 
-                if (!(pressed.equals(")") && (getTvText().trim().replace("\0", "").equals(".") || getTvText().endsWith("(") || Aux.isBinaryOp(Aux.lastChar(getTvText())) || getTvText().endsWith("√")))) {
-                    if (!isBig) {
-                        ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
-                                .disableTransitionType(LayoutTransition.CHANGING);
+                if (!isBig) {
+                    ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
+                            .disableTransitionType(LayoutTransition.CHANGING);
 
-                        ((ViewGroup) findViewById(R.id.equationScrollView)).getLayoutTransition()
-                                .disableTransitionType(LayoutTransition.CHANGING);
-                    }
+                    ((ViewGroup) findViewById(R.id.equationScrollView)).getLayoutTransition()
+                            .disableTransitionType(LayoutTransition.CHANGING);
+                }
 
-                    //Check for too many negative signs
-                    if (!(pressed.equals("-") && getTvText().endsWith("-") && Aux.newTrim(getTvText(), 1).endsWith("("))) {
-                        if (equaled)
-                            getEqualed();
+                //Check for too many negative signs
+                if (!(pressed.equals("-") && getTvText().endsWith("-") && Aux.newTrim(getTvText(), 1).endsWith("("))) {
+                    if (equaled)
+                        getEqualed();
 
-                        if (!(pressed.equals("!") && (Aux.lastChar(getTvText()).equals("!") || Aux.lastChar(getTvText()).equals("-")))) {
-                            if (Aux.isOp(pressed) || pressed.equals("log") || pressed.equals("ln") || Aux.isTrig(pressed)) {
-                                if (Aux.isBinaryOp(pressed) && !pressed.equals("-") && !pressed.equals(Aux.emDash) && Aux.isBinaryOp(Aux.lastChar(getTvText())))
-                                    removeLast();
+                    if (!(pressed.equals("!") && (Aux.lastChar(getTvText()).equals("!") || Aux.lastChar(getTvText()).equals("-")))) {
+                        if (Aux.isOp(pressed) || pressed.equals("log") || pressed.equals("ln") || Aux.isTrig(pressed)) {
+                            if (Aux.isBinaryOp(pressed) && !pressed.equals("-") && !pressed.equals(Aux.emDash) && Aux.isBinaryOp(Aux.lastChar(getTvText())))
+                                removeLast();
 
-                                if (!getTvText().equals("\0") && (getTvText().endsWith(".") && pressed.equals("(")))
-                                    dont = true;
-                                else if (!getTvText().equals("\0") && (getTvText().endsWith("(") && (pressed.equals("!") || (Aux.isBinaryOp(pressed) && !pressed.equals("-") && !pressed.equals(Aux.emDash)))))
-                                    dont = true;
-                                else if (!getTvText().equals("\0") && (getTvText().equals("-") || getTvText().equals(" -") || getTvText().equals("- ")) && (Aux.isBinaryOp(pressed) || pressed.equals(")")))
-                                    dont = true;
-                                else if (!getTvText().equals("\0") && getTvText().endsWith("√") && ((Aux.isBinaryOp(pressed) && !pressed.equals("-")) || pressed.equals("!")))
-                                    dont = true;
-                                else if (getTvText().endsWith("--") && pressed.equals("-"))
-                                    dont = true;
+                            if (!getTvText().equals("\0") && (getTvText().endsWith(".") && pressed.equals("(")))
+                                dont = true;
+                            else if (!getTvText().equals("\0") && (getTvText().endsWith("(") && (pressed.equals("!") || (Aux.isBinaryOp(pressed) && !pressed.equals("-") && !pressed.equals(Aux.emDash)))))
+                                dont = true;
+                            else if (!getTvText().equals("\0") && (getTvText().equals("-") || getTvText().equals(" -") || getTvText().equals("- ")) && (Aux.isBinaryOp(pressed) || pressed.equals(")")))
+                                dont = true;
+                            else if (!getTvText().equals("\0") && getTvText().endsWith("√") && ((Aux.isBinaryOp(pressed) && !pressed.equals("-")) || pressed.equals("!")))
+                                dont = true;
+                            else if (getTvText().endsWith("--") && pressed.equals("-"))
+                                dont = true;
 
-                                if (!dont) {
-                                    isDec = false;
+                            if (!dont) {
+                                isDec = false;
 
-                                    tv.append(pressed);
+                                tv.append(pressed);
 
-                                    if (Aux.isTrig(pressed))
-                                        tv.append("(");
+                                if (Aux.isTrig(pressed))
+                                    tv.append("(");
 
-                                    wrapText(tv);
-                                }
+                                wrapText(tv);
                             }
                         }
                     }
-
-                    if (!dont)
-                        isDec = false;
                 }
+
+                if (!dont)
+                    isDec = false;
             }
             else {
                 //TODO: Just check whether or not substring(0, cursor).length() has changed,
