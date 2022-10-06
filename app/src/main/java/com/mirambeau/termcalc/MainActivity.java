@@ -5106,6 +5106,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 //If tv is empty, and the character can logically be placed first, then just type it
                 if (getTvText().trim().replace("\0", "").replace(" ", "").length() < 1) {
+                    isDec = false;
+
                     if (!pressed.equals("!") && !pressed.equals(")") && (!Aux.isBinaryOp(pressed) || pressed.equals("-"))) {
                         if (!isBig) {
                             ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
@@ -5115,7 +5117,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     .disableTransitionType(LayoutTransition.CHANGING);
                         }
 
-                        isDec = false;
                         dont = true;
 
                         tv.append(pressed);
@@ -5125,10 +5126,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         wrapText(tv);
                     }
-                    else {
-                        isDec = false;
-                        dont = true;
-                    }
+                    else
+                        return;
                 }
 
                 if (!isBig) {
