@@ -5115,6 +5115,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
 
                     isDec = false;
+                    dont = true;
 
                     tv.append(pressed);
 
@@ -5122,7 +5123,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         tv.append("(");
 
                     wrapText(tv);
-                    return;
                 }
 
                 if (!isBig) {
@@ -5134,7 +5134,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
 
                 //Check for too many negative signs
-                if (!(pressed.equals("-") && getTvText().endsWith("-") && Aux.newTrim(getTvText(), 1).endsWith("("))) {
+                if (!(pressed.equals("-") && getTvText().endsWith("-") && Aux.newTrim(getTvText(), 1).endsWith("(")) && !dont) {
                     if (equaled)
                         getEqualed();
 

@@ -1324,20 +1324,14 @@ public class Aux {
         if (isNull(str))
             return false;
 
-        if (ops.contains(str))
-            return true;
-
-        return false;
+        return ops.contains(str);
     }
 
     public static boolean isBinaryOp(String str) {
         if (isNull(str))
             return false;
 
-        if (binaryOps.contains(str))
-            return true;
-
-        return false;
+        return binaryOps.contains(str);
     }
 
     static int extD = 0;
