@@ -3974,7 +3974,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (shouldEvaluate && tinydb.getBoolean("showPreviousExpression")) {
             try {
-                final String eq = tv.getText().toString().trim();
+                String tvText = getTvText().trim();
+                final String eq = Aux.isBinaryOp(Aux.lastChar(tvText)) ? Aux.newTrim(tvText, 1) : tvText;
 
                 HandlerThread bmThread = new HandlerThread("BetterMathThread");
                 bmThread.start();
