@@ -83,9 +83,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     final BigDecimal smolRange = new BigDecimal(475);
     BigDecimal piDec = new BigDecimal("3.14159265358979323846264338327950");
-    MathContext mc = MathContext.DECIMAL128;
+    MathContext mc = MathContext.DECIMAL64;
 
-    int squarePrecision = 6, roundedPrecision = 8;
+    int squarePrecision = 6, roundedPrecision = 8, maxPrecision = 20;
 
     static float barHeight = (float) 70.1;
 
@@ -182,7 +182,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             tinydb.putString("theme", theme);
 
             isFocus = tinydb.getBoolean("isFocus");
-            roundedButtons = tinydb.getString("buttonShape").equals("2") && !theme.equals("5") && !theme.equals("4");
+
+            //TODO: Enable custom rounded buttons themes, possibly after merging basic and custom themes into one layout
+            roundedButtons = !isCustomTheme && tinydb.getString("buttonShape").equals("2") && !theme.equals("5") && !theme.equals("4");
 
             if (!tinydb.getBoolean("mtIsSet"))
                 tinydb.putString("-mt", "\0");
@@ -3985,8 +3987,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     public void run() {
                         try {
                             boolean isRounded = tinydb.getString("buttonShape").equals("2");
-                            int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : tinydb.getInt("precision");
-                            MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? 30 : tinydb.getInt("precision") * 2, RoundingMode.HALF_UP);
+                            int precision = tinydb.getInt("precision");
+                            int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : precision;
+                            MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? maxPrecision : (Math.min(precision, (maxPrecision / 2)) * 2), RoundingMode.HALF_UP);
 
                             BigDecimal result = BetterMath.evaluate(eq, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale, false);
                             String resultStr = BetterMath.formatResult(result, newMc, scale).trim();
@@ -4670,8 +4673,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         }
                                         else {
                                             boolean isRounded = tinydb.getString("buttonShape").equals("2");
-                                            int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : tinydb.getInt("precision");
-                                            MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? 30 : tinydb.getInt("precision") * 2, RoundingMode.HALF_UP);
+                                            int precision = tinydb.getInt("precision");
+                                            int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : precision;
+                                            MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? maxPrecision : (Math.min(precision, (maxPrecision / 2)) * 2), RoundingMode.HALF_UP);
 
                                             BigDecimal result = BetterMath.evaluate(getTvText().trim(), tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale, false);
                                             resultStr = BetterMath.formatResult(result, newMc, scale).trim();
@@ -6342,8 +6346,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TinyDB tinydb = new TinyDB(MainActivity.mainActivity);
 
         boolean isRounded = tinydb.getString("buttonShape").equals("2");
-        int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : tinydb.getInt("precision");
-        MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? 30 : tinydb.getInt("precision") * 2, RoundingMode.HALF_UP);
+        int precision = tinydb.getInt("precision");
+        int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : precision;
+        MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? maxPrecision : (Math.min(precision, (maxPrecision / 2)) * 2), RoundingMode.HALF_UP);
 
         BigDecimal result = BetterMath.evaluate(str, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale, false);
         String resultStr = BetterMath.formatResult(result, newMc, scale).trim();
