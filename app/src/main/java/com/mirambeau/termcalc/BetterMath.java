@@ -69,6 +69,9 @@ public class BetterMath {
 
         eq = eq.trim();
 
+        if (eq.endsWith(Aux.sq))
+            throw new NaNException("Parse Error");
+
         if (Ax.isFullSignedNumE(eq) && !eq.contains(Ax.pi) && !eq.contains("e"))
             return parseBigDecimal(eq.replace(",", ""), mc);
 
@@ -144,7 +147,14 @@ public class BetterMath {
             int start = eqArray.lastIndexOf("(");
             int end = new ArrayList<>(eqArray.subList(start + 1, eqArray.size())).indexOf(")") + start + 1;
 
-            ArrayList<String> subList = new ArrayList<>(eqArray.subList(start+1, end));
+            ArrayList<String> subList;
+
+            try {
+                subList = new ArrayList<>(eqArray.subList(start + 1, end));
+            }
+            catch (Exception e) {
+                throw new NaNException("Parse Error");
+            }
 
             eqArray.set(start, evaluate(subList.toString().trim().replace("[", "").replace("]", "").replace(",", "").replace(" ", ""), prioritizeCoefficients, isRad, mc, scale, false).toPlainString());
 

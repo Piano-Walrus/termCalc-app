@@ -5117,6 +5117,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 //Cursor is at the beginning, AND pressed is something that can exist in the beginning of an expression
                 else if ((!Aux.isBinaryOp(pressed) || pressed.equals("-")) && !pressed.equals("!") && !pressed.equals(")"))
                     tv.setText((pressed + tvText.trim()).replace("\0", "").replace(" ", "").trim());
+                else
+                    pressed = "";
 
                 try {
                     tv.setSelection(cursor + pressed.length());
@@ -5129,7 +5131,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                     catch (Exception e2) {
                         e.printStackTrace();
-                        tv.setSelection(cursor);
+
+                        try {
+                            tv.setSelection(cursor);
+                        }
+                        catch (Exception ignored) {}
                     }
                 }
 
