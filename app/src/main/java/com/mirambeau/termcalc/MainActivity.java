@@ -3960,46 +3960,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         tinydb.putBoolean("recreating", false);
 
-        new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        boolean isRounded = tinydb.getString("buttonShape").equals("2");
-                        int precision = tinydb.getInt("precision");
-                        int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : precision;
-                        final MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? maxPrecision : (Math.min(precision, (maxPrecision / 2)) * 2), RoundingMode.HALF_UP);
+        if (shouldEvaluate && tinydb.getBoolean("showPreviousExpression")) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    boolean isRounded = tinydb.getString("buttonShape").equals("2");
+                    int precision = tinydb.getInt("precision");
+                    int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : precision;
+                    final MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? maxPrecision : (Math.min(precision, (maxPrecision / 2)) * 2), RoundingMode.HALF_UP);
 
-                        final String tvText = getTvText().trim();
-                        final String eq = Aux.isBinaryOp(Aux.lastChar(tvText)) ? Aux.newTrim(tvText, 1) : tvText;
+                    final String tvText = getTvText().trim();
+                    final String eq = Aux.isBinaryOp(Aux.lastChar(tvText)) ? Aux.newTrim(tvText, 1) : tvText;
 
-                        BigDecimal result;
+                    BigDecimal result;
 
-                        try {
-                            previousExpression.setText("");
-                        }
-                        catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                        try {
-                            result = BetterMath.evaluate(eq, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale, false);
-                        }
-                        catch (NaNException e) {
-                            e.printStackTrace();
-                            return;
-                        }
-
-                        String resultStr = BetterMath.formatResult(result, newMc, scale).trim();
-
-                        while (resultStr.equals("0") && scale < maxPrecision)
-                            resultStr = BetterMath.formatResult(result, newMc, scale++).trim();
-
-                        while ((resultStr.endsWith("0") && resultStr.contains(".")) || resultStr.endsWith(".") || resultStr.endsWith("0E"))
-                            resultStr = Aux.newTrim(resultStr, 1);
-
-                        if (!resultStr.equals(eq) && Aux.isFullSignedNumE(resultStr) && (!Aux.isFullNum(tvText) || tvText.equals("e") || tvText.equals(Aux.pi)))
-                            previousExpression.setText(resultStr);
+                    try {
+                        previousExpression.setText("");
                     }
-                }, "BetterMathThread").start();
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        result = BetterMath.evaluate(eq, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale, false);
+                    }
+                    catch (NaNException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+
+                    String resultStr = BetterMath.formatResult(result, newMc, scale).trim();
+
+                    while (resultStr.equals("0") && scale < maxPrecision)
+                        resultStr = BetterMath.formatResult(result, newMc, scale++).trim();
+
+                    while ((resultStr.endsWith("0") && resultStr.contains(".")) || resultStr.endsWith(".") || resultStr.endsWith("0E"))
+                        resultStr = Aux.newTrim(resultStr, 1);
+
+                    if (!resultStr.equals(eq) && Aux.isFullSignedNumE(resultStr) && (!Aux.isFullNum(tvText) || tvText.equals("e") || tvText.equals(Aux.pi)))
+                        previousExpression.setText(resultStr);
+                }
+            }, "BetterMathThread").start();
+        }
 
         try {
             if (isLegacy)
@@ -4628,14 +4630,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 e.printStackTrace();
                             }
 
-                            try {
-                                if (previousExpression != null)
-                                    previousExpression.setText("");
-                            }
-                            catch (Exception e) {
-                                e.printStackTrace();
-                            }
-
                             equaled = false;
                             isDec = false;
 
@@ -4687,14 +4681,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                                 tv.setText(resultStr);
                                         }
 
-                                        previousExpression.setText("");
+                                        try {
+                                            if (previousExpression != null)
+                                                previousExpression.setText("");
+                                        }
+                                        catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
                                         showRippleAnimation(findViewById(R.id.bgAnim));
                                     }
                                     catch (Exception e) {
                                         e.printStackTrace();
                                     }
 
-                                    if (!Aux.isFullSignedNumE(tv.getText().toString())) {
+                                    if (!Aux.isFullSignedNumE(getTvText())) {
                                         tv.setText(R.string.parse_error);
                                         showRippleAnimation(findViewById(R.id.bgAnim));
                                     }
