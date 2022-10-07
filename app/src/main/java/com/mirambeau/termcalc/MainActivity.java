@@ -4634,6 +4634,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 if (error || dError)
                                     error();
                                 else {
+                                    if (!isBig) {
+                                        ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
+                                                .enableTransitionType(LayoutTransition.CHANGING);
+
+                                        ((ViewGroup) findViewById(R.id.equationScrollView)).getLayoutTransition()
+                                                .enableTransitionType(LayoutTransition.CHANGING);
+                                    }
+
                                     if (shouldRecord) {
                                         ArrayList<String> equations = tinydb.getListString("equations");
 
