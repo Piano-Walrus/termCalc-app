@@ -865,17 +865,11 @@ public class BetterMath {
 
     public static String fact(String num, MathContext mc) throws NaNException {
         BigDecimal i;
-        boolean isNegative = false;
 
-        if (num == null || num.equals("\0") || num.contains(".") || !Ax.isFullSignedNum(num))
+        if (num == null || num.equals("\0") || num.contains(".") || !Ax.isFullNum(num))
             throw new NaNException("NaN") ;
 
         BigDecimal number;
-
-        if (num.startsWith("-")) {
-            num = num.substring(1);
-            isNegative = true;
-        }
 
         try {
             number = parseBigDecimal(num, mc);
@@ -891,7 +885,7 @@ public class BetterMath {
             number = number.multiply(i.subtract(BigDecimal.ONE), mc);
         }
 
-        return isNegative ? ("-" + number.toPlainString()) : number.toPlainString();
+        return number.toPlainString();
     }
 
     //TODO: Add mc parameter
