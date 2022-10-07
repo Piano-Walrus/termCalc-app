@@ -69,7 +69,10 @@ public class BetterMath {
 
         eq = eq.trim();
 
-        if (eq.endsWith(Aux.sq))
+        if (eq.startsWith("-(") || eq.startsWith(Ax.emDash + "("))
+            eq = "-1(" + eq.substring(2);
+
+        if (eq.endsWith(Ax.sq))
             throw new NaNException("Parse Error");
 
         if (Ax.isFullSignedNumE(eq) && !eq.contains(Ax.pi) && !eq.contains("e"))
@@ -132,10 +135,13 @@ public class BetterMath {
             catch (Exception ignored) {}
         }
 
-        for (i=1; i < eqArray.size(); i++) {
-            if ((eqArray.get(i).equals("-") || eqArray.get(i).equals(Ax.emDash)) && !Ax.isFullNum(eqArray.get(i-1))) {
-                eqArray.set(i + 1, parseBigDecimal(eqArray.get(i + 1), mc).negate(mc).toPlainString());
-                eqArray.remove(i);
+        //Handle Negative Signs
+        for (i=0; i < eqArray.size(); i++) {
+            if ((eqArray.get(i).equals("-") || eqArray.get(i).equals(Ax.emDash)) && (i == 0 || !Ax.isFullNum(eqArray.get(i-1)))) {
+                if (Ax.isFullNum(eqArray.get(i + 1))) {
+                    eqArray.set(i + 1, parseBigDecimal(eqArray.get(i + 1), mc).negate(mc).toPlainString());
+                    eqArray.remove(i);
+                }
             }
         }
 
@@ -156,10 +162,10 @@ public class BetterMath {
                 throw new NaNException("Parse Error");
             }
 
-            eqArray.set(start, evaluate(subList.toString().trim().replace("[", "").replace("]", "").replace(",", "").replace(" ", ""), prioritizeCoefficients, isRad, mc, scale, false).toPlainString());
+            eqArray.set(start, evaluate(subList.toString().trim().replace("[", "").replace("]", "").replace(",", "").replace(" ", ""), prioritizeCoefficients, isRad, mc, scale, debug).toPlainString());
 
             try {
-                if (Ax.isFullNum(eqArray.get(end + 1)) || eqArray.get(end + 1).equals(Ax.sq))
+                if (Ax.isFullSignedNum(eqArray.get(end + 1)) || eqArray.get(end + 1).equals(Ax.sq))
                     eqArray.add(end + 1, "*");
             }
             catch (Exception ignored) {}
@@ -170,7 +176,7 @@ public class BetterMath {
 
             //Handle coefficients that appear before parenthesis
             try {
-                if (Ax.isFullNum(eqArray.get(start-1)) && (start < 2 || !eqArray.get(start-2).equals(Ax.sq))) {
+                if (Ax.isFullSignedNum(eqArray.get(start-1)) && (start < 2 || !eqArray.get(start-2).equals(Ax.sq))) {
                     if (prioritizeCoefficients) {
                         eqArray.add(start + 1, ")");
                         eqArray.add(start, "*");
@@ -183,7 +189,7 @@ public class BetterMath {
                 else if (eqArray.get(start-1).equals("!") || eqArray.get(start-1).equals(")")) {
                     eqArray.add(start, "*");
                 }
-                else if (start >= 2 && Ax.isFullNum(eqArray.get(start-1)) && eqArray.get(start-2).equals(Ax.sq)) {
+                else if (start >= 2 && Ax.isFullSignedNum(eqArray.get(start-1)) && eqArray.get(start-2).equals(Ax.sq)) {
                     eqArray.add(start, "*");
                     eqArray.set(start-1, sqrt(parseBigDecimal(eqArray.get(start-1), mc), mc).toPlainString());
                     eqArray.remove(start-2);
@@ -193,6 +199,17 @@ public class BetterMath {
 
             if (debug)
                 System.out.println(eqArray);
+        }
+
+        //TODO: Handle parenthesis the first time so it doesn't have to iterate through the entire array twice
+        //Handle Negative Signs (again)
+        for (i=0; i < eqArray.size(); i++) {
+            if ((eqArray.get(i).equals("-") || eqArray.get(i).equals(Ax.emDash)) && (i == 0 || !Ax.isFullSignedNum(eqArray.get(i-1)))) {
+                if (Ax.isFullNum(eqArray.get(i + 1))) {
+                    eqArray.set(i + 1, parseBigDecimal(eqArray.get(i + 1), mc).negate(mc).toPlainString());
+                    eqArray.remove(i);
+                }
+            }
         }
 
         //Handle Trig
@@ -399,9 +416,9 @@ public class BetterMath {
                 System.out.println(eqArray);
         }
 
-        //Handle Multiplication & Division
+        //Handle Multiplication, Division, and Modulus
         if (eqArray.contains("*") || eqArray.contains(Ax.multi) || eqArray.contains("%") || eqArray.contains(Ax.multiDot) || eqArray.contains(Ax.bulletDot) || eqArray.contains("/") || eqArray.contains(Ax.divi)) {
-            for (i = 0; i < eqArray.size() && (eqArray.contains("*") || eqArray.contains(Ax.multi) || eqArray.contains("%") || eqArray.contains(Ax.multiDot) || eqArray.contains(Ax.bulletDot) || eqArray.contains("/") || eqArray.contains(Ax.divi)); i++) {
+            for (i = 0; i < eqArray.size(); i++) {
                 String current = eqArray.get(i);
                 String previous = "", next = "";
 
@@ -429,6 +446,9 @@ public class BetterMath {
 
                     continue;
                 }
+
+                if (Ax.isBinaryOp(current) && (!Ax.isFullSignedNum(previous) || !Ax.isFullSignedNum(next)))
+                    continue;
 
                 if (Ax.isDigit(Ax.chat(current, 0)) || Ax.chat(current, 0).equals("."))
                     continue;
@@ -474,7 +494,7 @@ public class BetterMath {
 
         //Handle Addition & Subtraction
         if (eqArray.contains("+") || eqArray.contains("-") || eqArray.contains(Ax.emDash)) {
-            for (i = 0; i < eqArray.size() && (eqArray.contains("+") || eqArray.contains("-") || eqArray.contains(Ax.emDash)); i++) {
+            for (i = 0; i < eqArray.size(); i++) {
                 String current = eqArray.get(i);
                 String previous = "", next = "";
 
@@ -491,12 +511,15 @@ public class BetterMath {
                 }
                 catch (Exception ignored) {}
 
-                if (Ax.isFullNum(Ax.chat(current, 0)) || Ax.chat(current, 0).equals(".")) {
+                if (Ax.isFullSignedNum(Ax.chat(current, 0)) || Ax.chat(current, 0).equals(".")) {
                     if (i > 0 && (previous.equals("+") || previous.equals("-") || previous.equals(Ax.emDash)))
                         i = -1;
 
                     continue;
                 }
+
+                if (Ax.isBinaryOp(current) && (!Ax.isFullSignedNum(previous) || !Ax.isFullSignedNum(next)))
+                    continue;
 
                 if (current.equals("+")) {
                     eqArray.set(i - 1, parseBigDecimal(previous, mc).add(parseBigDecimal(next, mc), mc).toPlainString());
@@ -526,7 +549,7 @@ public class BetterMath {
                     }
                 }
 
-                if (i >= eqArray.size() - 1 && (eqArray.contains("+") || eqArray.contains("-") || eqArray.contains("—")))
+                if (i >= eqArray.size() - 1 && (eqArray.contains("+") || eqArray.contains("-") || eqArray.contains(Ax.emDash)))
                     i = 0;
             }
 
@@ -639,7 +662,7 @@ public class BetterMath {
 
                                 //Handle coefficients before log or ln
                                 try {
-                                    if (Ax.isFullNum(eqArray.get(eqArray.size() - 2))) {
+                                    if (Ax.isFullSignedNum(eqArray.get(eqArray.size() - 2))) {
                                         eqArray.add(eqArray.size() - 1, "*");
                                     }
                                 }
@@ -654,7 +677,7 @@ public class BetterMath {
                             eq = eq.substring(0, i) + eq.substring(i + Ax.trigIn[j].length() - 1);
 
                             try {
-                                if (Ax.isFullNum(eqArray.get(eqArray.size() - 2))) {
+                                if (Ax.isFullSignedNum(eqArray.get(eqArray.size() - 2))) {
                                     eqArray.add(eqArray.size() - 1, "*");
                                 }
                             }
@@ -813,13 +836,14 @@ public class BetterMath {
     public static String fact(String num, MathContext mc) throws NaNException {
         BigDecimal i;
 
-        if (num == null || num.equals("\0") || num.contains(".") || !Ax.isFullNum(num))
+        if (num == null || num.equals("\0") || num.contains(".") || !Ax.isFullSignedNum(num))
             throw new NaNException("NaN") ;
 
         BigDecimal number;
 
         try {
-            int integerTest = Integer.parseInt(num);
+            //If this throws an exception, the number is not an integer
+            Integer.parseInt(num);
         }
         catch (Exception e) {
             throw new NaNException("NaN");
@@ -1018,6 +1042,7 @@ class Ax {
     public static final String piStr = superscripts[3] + superDot + superscripts[1] + superscripts[4] + superscripts[1] + superscripts[5] + superscripts[9];
 
     public static ArrayList<String> ops = new ArrayList<>(Arrays.asList("+", "-", multi, divi, sq, "^", "(", ")", "!", "%", bulletDot, multiDot, "*", "/"));
+    public static ArrayList<String> binaryOps = new ArrayList<String>(Arrays.asList("+", "-", multi, divi, "%", bulletDot, multiDot, "*", "^"));
 
     //The method's name is a shortened version of "charAt." It's literally just a shortcut for writing "Character.toString(str.charAt(index))"
     public static String chat(String str, int index) {
@@ -1076,6 +1101,13 @@ class Ax {
         return false;
     }
 
+    public static boolean isBinaryOp(String str) {
+        if (isNull(str))
+            return false;
+
+        return binaryOps.contains(str);
+    }
+
     public static int charDiff(String str, String s1, String s2) {
         if (str == null || s1 == null || s2 == null || str.length() < 2 || s1.length() != 1 || s2.length() != 1)
             return 0;
@@ -1121,6 +1153,9 @@ class Ax {
             return false;
 
         length = str.length();
+
+        if (length == 0)
+            return false;
 
         if (length == 1) {
             if (isDigit(str))

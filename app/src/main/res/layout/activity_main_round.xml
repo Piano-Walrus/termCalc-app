@@ -21,15 +21,17 @@
         <Button
             android:id="@+id/bgAnim"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="751dp"
-            android:layout_height="0dp"
+            android:layout_width="800dp"
+            android:layout_height="1150dp"
             android:background="@color/darkColorPrimary"
             android:clickable="false"
             android:foreground="?attr/selectableItemBackground"
             android:textAllCaps="false"
-            app:layout_constraintBottom_toTopOf="@+id/buttonView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintTop_toTopOf="@id/delete"
+            app:layout_constraintBottom_toBottomOf="@+id/delete"
+            app:layout_constraintStart_toStartOf="@id/delete"
+            app:layout_constraintEnd_toEndOf="@+id/delete"
             tools:visibility="gone" />
 
         <TextView
@@ -949,11 +951,11 @@
             android:background="@drawable/circle_cheat_the_system_again"
             android:onClick="backspace"
             android:padding="24dp"
-            app:srcCompat="@drawable/ic_outline_backspace_24"
-            app:layout_constraintTop_toTopOf="@id/deleteAnchor"
             app:layout_constraintBottom_toBottomOf="@id/deleteAnchor"
+            app:layout_constraintEnd_toEndOf="@id/deleteAnchor"
             app:layout_constraintStart_toStartOf="@id/deleteAnchor"
-            app:layout_constraintEnd_toEndOf="@id/deleteAnchor" />
+            app:layout_constraintTop_toTopOf="@id/deleteAnchor"
+            app:srcCompat="@drawable/ic_outline_backspace_24" />
 
         <ImageButton
             android:id="@+id/deleteAnchor"

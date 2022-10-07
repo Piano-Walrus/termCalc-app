@@ -122,10 +122,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     EditText tv;
 
     Boolean isInv = false, isDec = false, isRad = true, equaled = false, deleted = false, isEquals = false;
-    boolean isExpanded, hasExpanded, error, dError, didIntro, isE, isBig, isSqrtFact, isCustomTheme, dontVibe, isFabExpanded;
+    boolean isExpanded, hasExpanded, error, dError, didIntro, isBig, isSqrtFact, isCustomTheme, dontVibe, isFabExpanded;
     boolean isDate = false;
     boolean theme_boolean = true, isDynamic;
-    boolean isLegacy = true, eimParseError = false, throwEim = false, shouldRecord = true, isFocus = false;
+    boolean isLegacy = true, shouldRecord = true, isFocus = false;
     boolean isDarkTab = true;
     boolean roundedButtons = false;
 
@@ -3897,8 +3897,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             foldShrinkOffset = 3;
         }
 
-        roundedButtons = tinydb.getString("buttonShape").equals("2");
-
         ArrayList<Integer> lengths = new ArrayList<>(Arrays.asList(0, (roundedButtons ? 12 : 10) - foldShrinkOffset, (roundedButtons ? 15 : 12) - foldShrinkOffset, (roundedButtons ? 18 : 14) - foldShrinkOffset));
         ArrayList<Integer> sizes = new ArrayList<>(Arrays.asList((textSizeChanged ? tinydb.getInt("tvSize") + 8 : 38) - foldTextOffset, (textSizeChanged ? tinydb.getInt("tvSize") + 4 : 34) - foldTextOffset, (textSizeChanged ? tinydb.getInt("tvSize") : 32) - (foldTextOffset + 2), (textSizeChanged ? tinydb.getInt("tvSize") : 30) - (foldTextOffset + 2)));
 
@@ -3945,7 +3943,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     try {
                         result = BetterMath.evaluate(eq, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale, false);
                     }
-                    catch (NaNException e) {
+                    catch (Exception e) {
                         e.printStackTrace();
                         return;
                     }
@@ -4552,10 +4550,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         tv.getText().toString().endsWith("+.") || tv.getText().toString().endsWith("-.") || tv.getText().toString().endsWith("^.") || tv.getText().toString().endsWith("×.") ||
                         tv.getText().toString().endsWith("√.") || tv.getText().toString().endsWith("log(.") || tv.getText().toString().endsWith("ln(."))) {
 
-                    if (tv.getText().toString().equals("(0)!") || tv.getText().toString().equals(" (0)!") || tv.getText().toString().equals("(0.0)!") || tv.getText().toString().equals(" (0.0)!") || tv.getText().toString().equals("(0.)!") || tv.getText().toString().equals(" (0.)!") || tv.getText().toString().equals("(.0)!") || tv.getText().toString().equals(" (.0)!")) {
-                        clear(clear);
-                        findViewById(R.id.b0).performClick();
-                        findViewById(R.id.bFact).performClick();
+                    if (tv.getText().toString().equals(" (0)!") || tv.getText().toString().equals("(0.0)!") || tv.getText().toString().equals(" (0.0)!") || tv.getText().toString().equals("(0.)!") || tv.getText().toString().equals(" (0.)!") || tv.getText().toString().equals("(.0)!") || tv.getText().toString().equals(" (.0)!")) {
+                        tv.setText("0!");
                         findViewById(R.id.bEquals).performClick();
                     }
                     else {
@@ -4666,7 +4662,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         }
 
                                         if (!Aux.isFullSignedNumE(getTvText())) {
-                                            tv.setText(R.string.parse_error);
+                                            if (!getTvText().equals("NaN"))
+                                                tv.setText(R.string.parse_error);
+
                                             showRippleAnimation(findViewById(R.id.bgAnim));
                                         }
 
@@ -4717,9 +4715,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 isSqrtFact = false;
 
-                if (isCustomTheme && !Aux.isTinyColor("cFabText")) {
+                if (isCustomTheme && !Aux.isTinyColor("cFabText"))
                     clear.setColorFilter(Color.WHITE);
-                }
 
                 isLegacy = true;
                 tv.clearFocus();
@@ -4732,37 +4729,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     try {
                         //TODO: Update !isLegacy
 
-                        String[] tempEq = Aux.parseEq(tv.getText().toString());
-                        clear(clear);
                         isLegacy = true;
-                        throwEim = true;
-
-                        dontVibe = true;
-
-                        enterStr(tempEq);
-
                         dontVibe = false;
 
-                        if (eimParseError) {
-                            eimParseError = false;
-                            throwEim = false;
-                            throw new Exception("EIM Parse Error");
-                        }
-                        else {
-                            bEquals.performClick();
+                        bEquals.performClick();
 
-                            tv.clearFocus();
+                        tv.clearFocus();
 
-                            if (equaled)
-                                isLegacy = true;
-                            else
-                                isLegacy = false;
+                        isLegacy = equaled;
 
-                            wrapText(tv);
+                        wrapText(tv);
 
-                            if (tv.getText().toString().contains("Error") || tv.getText().toString().contains("NaN"))
-                                tv.setEnabled(false);
-                        }
+                        if (tv.getText().toString().contains("Error") || tv.getText().toString().contains("NaN"))
+                            tv.setEnabled(false);
                     }
                     catch (Exception e) {
                         e.printStackTrace();
@@ -4776,7 +4755,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         tv.setText("EIM Parse Error");
                         wrapText(tv);
-                        eimParseError = false;
 
                         if (tv.getText().toString().contains("Error") || tv.getText().toString().contains("NaN"))
                             tv.setEnabled(false);
@@ -5205,9 +5183,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             if (!found) {
                                 try {
                                     Button button = new Button(this);
-
-                                    if (throwEim && Aux.isLetter(current))
-                                        eimParseError = true;
 
                                     button.setText(current);
                                     operation(button);
@@ -6309,8 +6284,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     };
 
     public void showRippleAnimation(View view) {
-        int i;
-
         ImageButton swapTopBar = findViewById(R.id.swapTopBar);
         ImageButton backspace = findViewById(R.id.delete);
         Button inv = findViewById(R.id.bInv);
@@ -6324,10 +6297,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final Drawable[] backgrounds = roundedButtons ? new Drawable[]{backspace.getBackground(), swapTopBar.getBackground(), expandCustomsNew.getBackground(),
                 customConstantsNew.getBackground(), customFunctionsNew.getBackground(), decFracNew.getBackground(), inv.getBackground()} : null;
 
-        if (roundedButtons) {
-            for (i=0; i < MTButtons.length; i++) {
-                MTButtons[i].setBackground(null);
+        try {
+            if (roundedButtons) {
+                for (View button : MTButtons) {
+                    button.setBackground(null);
+                }
             }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
 
         view.setClickable(true);
@@ -6347,10 +6325,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                int i;
-
                 if (roundedButtons) {
-                    for (i=0; i < MTButtons.length; i++) {
+                    for (int i=0; i < MTButtons.length; i++) {
                         try {
                             if (backgrounds != null)
                                 MTButtons[i].setBackground(backgrounds[i]);
