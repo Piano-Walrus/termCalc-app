@@ -393,13 +393,12 @@ public class BetterMath {
         while (eqArray.contains("!")) {
             String init = eqArray.toString();
 
-            if (eqArray.get(0).equals("!")) {
-                throw new NaNException("Error: First character in expression cannot be a factorial.");
-            }
+            if (eqArray.get(0).equals("!"))
+                throw new NaNException("Parse Error");
 
             int numIndex = eqArray.indexOf("!") - 1;
 
-            if (Ax.isFullNum(eqArray.get(numIndex))){
+            if (Ax.isFullSignedNum(eqArray.get(numIndex))){
                 eqArray.set(numIndex, fact(eqArray.get(numIndex), mc));
                 eqArray.remove(numIndex + 1);
             }
@@ -866,18 +865,16 @@ public class BetterMath {
 
     public static String fact(String num, MathContext mc) throws NaNException {
         BigDecimal i;
+        boolean isNegative = false;
 
         if (num == null || num.equals("\0") || num.contains(".") || !Ax.isFullSignedNum(num))
             throw new NaNException("NaN") ;
 
         BigDecimal number;
 
-        try {
-            //If this throws an exception, the number is not an integer
-            Integer.parseInt(num);
-        }
-        catch (Exception e) {
-            throw new NaNException("NaN");
+        if (num.startsWith("-")) {
+            num = num.substring(1);
+            isNegative = true;
         }
 
         try {
@@ -887,11 +884,14 @@ public class BetterMath {
             throw new NaNException("NaN");
         }
 
+        if (!BigDecimalMath.isIntValue(number))
+            throw new NaNException("NaN");
+
         for (i = number; i.compareTo(BigDecimal.ONE) > 0; i = i.subtract(BigDecimal.ONE, mc)) {
             number = number.multiply(i.subtract(BigDecimal.ONE), mc);
         }
 
-        return number.toPlainString();
+        return isNegative ? ("-" + number.toPlainString()) : number.toPlainString();
     }
 
     //TODO: Add mc parameter
