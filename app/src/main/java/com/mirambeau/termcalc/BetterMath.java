@@ -1,5 +1,8 @@
 package com.mirambeau.termcalc;
 
+import android.os.Handler;
+import android.os.HandlerThread;
+
 import ch.obermuhlner.math.big.BigDecimalMath;
 
 import java.math.BigDecimal;
@@ -70,7 +73,7 @@ public class BetterMath {
         eq = eq.trim();
 
         if (Ax.isFullSignedNumE(eq) && !eq.contains(Ax.pi) && !eq.contains("e"))
-            return parseBigDecimal(eq, mc);
+            return parseBigDecimal(eq.replace(",", ""), mc);
 
         eq = eq.replace("ln", "log" + Ax.eSub);
 
@@ -366,20 +369,16 @@ public class BetterMath {
                 String next = eqArray.get(index + 1);
 
                 try {
-                    eqArray.set(index - 1, BigDecimalMath.pow(parseBigDecimal(previous, mc), parseBigDecimal(next, mc), mc).toPlainString());
+                    if (parseBigDecimal(next, mc).compareTo(parseBigDecimal("9999999", mc)) <= 0)
+                        eqArray.set(index - 1, BigDecimalMath.pow(parseBigDecimal(previous, mc), parseBigDecimal(next, mc), mc).toPlainString());
+                    else
+                        throw new NaNException("Error: Result too large");
                 }
                 catch (Exception e) {
-                    try {
-                        eqArray.set(index - 1, newPow(parseBigDecimal(previous, mc), parseBigDecimal(next, mc)).toPlainString());
-                    }
-                    catch (Exception e2) {
-                        try {
-                            eqArray.set(index - 1, "" + Math.pow(Double.parseDouble(previous), Double.parseDouble(next)));
-                        }
-                        catch (Exception e3) {
-                            throw new NaNException("Parse Error");
-                        }
-                    }
+                    if (e.getMessage() != null && e.getMessage().startsWith("Error"))
+                        throw new NaNException(e.getMessage());
+                    else
+                        throw new NaNException("Parse Error");
                 }
 
                 eqArray.remove(index);

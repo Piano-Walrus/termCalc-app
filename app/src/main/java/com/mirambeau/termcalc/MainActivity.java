@@ -3960,57 +3960,58 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         tinydb.putBoolean("recreating", false);
 
-        if (shouldEvaluate && tinydb.getBoolean("showPreviousExpression")) {
-            try {
-                final HandlerThread bmThread = new HandlerThread("BetterMathThread");
-                bmThread.start();
-
-                new Handler(bmThread.getLooper()).post(new Runnable() {
+        new Thread(new Runnable() {
                     @Override
                     public void run() {
+                        boolean isRounded = tinydb.getString("buttonShape").equals("2");
+                        int precision = tinydb.getInt("precision");
+                        int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : precision;
+                        final MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? maxPrecision : (Math.min(precision, (maxPrecision / 2)) * 2), RoundingMode.HALF_UP);
+
+                        final String tvText = getTvText().trim();
+                        final String eq = Aux.isBinaryOp(Aux.lastChar(tvText)) ? Aux.newTrim(tvText, 1) : tvText;
+
+                        BigDecimal result;
+
                         try {
-                            boolean isRounded = tinydb.getString("buttonShape").equals("2");
-                            int precision = tinydb.getInt("precision");
-                            int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : precision;
-                            final MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? maxPrecision : (Math.min(precision, (maxPrecision / 2)) * 2), RoundingMode.HALF_UP);
-
-                            final String tvText = getTvText().trim();
-                            final String eq = Aux.isBinaryOp(Aux.lastChar(tvText)) ? Aux.newTrim(tvText, 1) : tvText;
-
-                            BigDecimal result = BetterMath.evaluate(eq, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale, false);
-                            String resultStr = BetterMath.formatResult(result, newMc, scale).trim();
-
-                            while (resultStr.equals("0") && scale < maxPrecision)
-                                resultStr = BetterMath.formatResult(result, newMc, scale++).trim();
-
-                            while ((resultStr.endsWith("0") && resultStr.contains(".")) || resultStr.endsWith(".") || resultStr.endsWith("0E"))
-                                resultStr = Aux.newTrim(resultStr, 1);
-
-                            if (!resultStr.equals(eq) && Aux.isFullSignedNumE(resultStr))
-                                previousExpression.setText(resultStr);
-
-                            bmThread.interrupt();
+                            previousExpression.setText("");
                         }
                         catch (Exception e) {
                             e.printStackTrace();
                         }
+
+                        try {
+                            result = BetterMath.evaluate(eq, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale, false);
+                        }
+                        catch (NaNException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+
+                        String resultStr = BetterMath.formatResult(result, newMc, scale).trim();
+
+                        while (resultStr.equals("0") && scale < maxPrecision)
+                            resultStr = BetterMath.formatResult(result, newMc, scale++).trim();
+
+                        while ((resultStr.endsWith("0") && resultStr.contains(".")) || resultStr.endsWith(".") || resultStr.endsWith("0E"))
+                            resultStr = Aux.newTrim(resultStr, 1);
+
+                        if (!resultStr.equals(eq) && Aux.isFullSignedNumE(resultStr) && (!Aux.isFullNum(tvText) || tvText.equals("e") || tvText.equals(Aux.pi)))
+                            previousExpression.setText(resultStr);
                     }
-                });
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+                }, "BetterMathThread").start();
 
         try {
             if (isLegacy)
-                tv.setText(Aux.updateCommas(tv.getText().toString()).replace("\n", "").trim());
+                tv.setText(Aux.updateCommas(getTvText()).replace("\n", "").trim());
+            else
+                tv.setText(getTvText().replace("\n", "").trim());
         }
         catch (Exception e) {
             e.printStackTrace();
         }
 
-        if (!equaled) {
+        if (equaled) {
             try {
                 previousExpression.setText("");
             }
@@ -4622,6 +4623,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             try {
                                 if (previousExpression != null && Aux.isFullSignedNumE(previousExpression.getText().toString()))
                                     resultStr = previousExpression.getText().toString();
+                            }
+                            catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                            try {
+                                if (previousExpression != null)
+                                    previousExpression.setText("");
                             }
                             catch (Exception e) {
                                 e.printStackTrace();
