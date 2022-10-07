@@ -72,6 +72,7 @@ import java.math.RoundingMode;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Objects;
 
@@ -3901,66 +3902,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             foldShrinkOffset = 3;
         }
 
+        roundedButtons = tinydb.getString("buttonShape").equals("2");
+
+        ArrayList<Integer> lengths = new ArrayList<>(Arrays.asList(0, (roundedButtons ? 12 : 10) - foldShrinkOffset, (roundedButtons ? 15 : 12) - foldShrinkOffset, (roundedButtons ? 18 : 14) - foldShrinkOffset));
+        ArrayList<Integer> sizes = new ArrayList<>(Arrays.asList((textSizeChanged ? tinydb.getInt("tvSize") + 8 : 38) - foldTextOffset, (textSizeChanged ? tinydb.getInt("tvSize") + 4 : 34) - foldTextOffset, (textSizeChanged ? tinydb.getInt("tvSize") : 32) - (foldTextOffset + 2), (textSizeChanged ? tinydb.getInt("tvSize") : 30) - (foldTextOffset + 2)));
+
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            roundedButtons = tinydb.getString("buttonShape").equals("2");
-
-            if (length > (roundedButtons ? 14 : 11) - foldShrinkOffset) {
-                if (length == (roundedButtons ? 15 : 12) - foldShrinkOffset) {
-                    ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
-                            .enableTransitionType(LayoutTransition.CHANGING);
-
-                    ((ViewGroup) findViewById(R.id.equationScrollView)).getLayoutTransition()
-                            .enableTransitionType(LayoutTransition.CHANGING);
-                }
-
-                tv.setTextSize((textSizeChanged ? tinydb.getInt("tvSize") : 30) - (foldTextOffset + 2));
-            }
-            else if (length > (roundedButtons ? 13 : 10) - foldShrinkOffset) {
+            if (lengths.contains(length - 1) && length > 2) {
                 ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
                         .enableTransitionType(LayoutTransition.CHANGING);
 
                 ((ViewGroup) findViewById(R.id.equationScrollView)).getLayoutTransition()
                         .enableTransitionType(LayoutTransition.CHANGING);
-
-                tv.setTextSize((textSizeChanged ? tinydb.getInt("tvSize") + 4 : 34) - foldTextOffset);
             }
-            else {
-                tv.setTextSize((textSizeChanged ? tinydb.getInt("tvSize") + 8 : 38) - foldTextOffset);
-            }
-        }
-        else {
-            if (length > 26)
-                tv.setTextSize(34);
-            else if (length > 24)
-                tv.setTextSize(36);
-            else if (length > 22)
-                tv.setTextSize(38);
-            else
-                tv.setTextSize(40);
-        }
 
-        try {
-            ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
-                    .disableTransitionType(LayoutTransition.CHANGING);
-
-            ((ViewGroup) findViewById(R.id.equationScrollView)).getLayoutTransition()
-                    .disableTransitionType(LayoutTransition.CHANGING);
-        }
-        catch (NullPointerException e) {
-            e.printStackTrace();
-
-            if (tinydb.getBoolean("recreating")) {
-                tinydb.putBoolean("recreating", false);
-            }
-            else {
-                tinydb.putBoolean("recreating", true);
-                recreate();
+            for (int i=lengths.size()-1; i >= 0; i--) {
+                if (length > lengths.get(i)) {
+                    tv.setTextSize(sizes.get(i));
+                    break;
+                }
             }
         }
+        else
+            tv.setTextSize(40 - (length > 22 ? (length > 31 ? 10 : (int) ((length - 22) / 2) * 2) : 0));
 
-        tinydb.putBoolean("recreating", false);
-
-        if (shouldEvaluate && tinydb.getBoolean("showPreviousExpression")) {
+        if (shouldEvaluate && tinydb.getBoolean("showPreviousExpression") && previousExpression != null) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
