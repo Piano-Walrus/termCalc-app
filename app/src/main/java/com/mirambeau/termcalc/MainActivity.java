@@ -3904,8 +3904,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             roundedButtons = tinydb.getString("buttonShape").equals("2");
 
-            if (length > (roundedButtons ? 13 : 11) - foldShrinkOffset) {
-                if (length == (roundedButtons ? 14 : 12) - foldShrinkOffset) {
+            if (length > (roundedButtons ? 14 : 11) - foldShrinkOffset) {
+                if (length == (roundedButtons ? 15 : 12) - foldShrinkOffset) {
                     ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
                             .enableTransitionType(LayoutTransition.CHANGING);
 
@@ -3915,7 +3915,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 tv.setTextSize((textSizeChanged ? tinydb.getInt("tvSize") : 30) - (foldTextOffset + 2));
             }
-            else if (length > (roundedButtons ? 12 : 10) - foldShrinkOffset) {
+            else if (length > (roundedButtons ? 13 : 10) - foldShrinkOffset) {
                 ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
                         .enableTransitionType(LayoutTransition.CHANGING);
 
@@ -3939,38 +3939,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 tv.setTextSize(40);
         }
 
-        HandlerThread thread = new HandlerThread("ClearThread");
-        thread.start();
+        try {
+            ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
+                    .disableTransitionType(LayoutTransition.CHANGING);
 
-        final boolean[] shouldRecreate = {false};
+            ((ViewGroup) findViewById(R.id.equationScrollView)).getLayoutTransition()
+                    .disableTransitionType(LayoutTransition.CHANGING);
+        }
+        catch (NullPointerException e) {
+            e.printStackTrace();
 
-        new Handler(thread.getLooper()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
-                            .disableTransitionType(LayoutTransition.CHANGING);
-
-                    ((ViewGroup) findViewById(R.id.equationScrollView)).getLayoutTransition()
-                            .disableTransitionType(LayoutTransition.CHANGING);
-                }
-                catch (NullPointerException e) {
-                    e.printStackTrace();
-
-                    if (tinydb.getBoolean("recreating")) {
-                        tinydb.putBoolean("recreating", false);
-                        shouldRecreate[0] = false;
-                    }
-                    else {
-                        tinydb.putBoolean("recreating", true);
-                        shouldRecreate[0] = true;
-                    }
-                }
+            if (tinydb.getBoolean("recreating")) {
+                tinydb.putBoolean("recreating", false);
             }
-        }, 100);
-
-        if (shouldRecreate[0])
-            recreate();
+            else {
+                tinydb.putBoolean("recreating", true);
+                recreate();
+            }
+        }
 
         tinydb.putBoolean("recreating", false);
 

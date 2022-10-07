@@ -23,13 +23,6 @@
             android:key="precision"
             app:showSeekBarValue="true"/>
 
-        <SwitchPreference
-            android:title="Prioritize Coefficients"
-            android:summary="Ignore PEMDAS and prioritize evaluating coefficients in front of parentheses.\n(WARNING: Only enable this if you know what you're doing! Enabling this can yield incorrect calculation results)"
-            android:key="prioritizeCoefficients"
-            android:icon="@drawable/ic_round_warning_24"
-            android:defaultValue="false"/>
-
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -76,6 +69,13 @@
 
     <PreferenceCategory
         app:title="Advanced">
+
+        <SwitchPreference
+            android:title="Prioritize Coefficients"
+            android:summary="Ignore PEMDAS and prioritize evaluating coefficients in front of parentheses.\n(WARNING: Only enable this if you know what you're doing! Enabling this can yield incorrect calculation results)"
+            android:key="prioritizeCoefficients"
+            android:icon="@drawable/ic_round_warning_24"
+            android:defaultValue="false"/>
 
         <SwitchPreference
             android:defaultValue="false"
