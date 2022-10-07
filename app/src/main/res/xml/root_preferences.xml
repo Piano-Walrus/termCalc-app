@@ -17,7 +17,7 @@
             android:summary="Note: Some complex operations may take noticeably longer to complete if this value is greater than 10."
             android:defaultValue="9"
             android:dependency="isDynamic"
-            android:max="30"
+            android:max="17"
             app:min="1"
             android:shouldDisableView="true"
             android:key="precision"

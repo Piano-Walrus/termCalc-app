@@ -3976,25 +3976,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (shouldEvaluate && tinydb.getBoolean("showPreviousExpression")) {
             try {
-                String tvText = getTvText().trim();
-                final String eq = Aux.isBinaryOp(Aux.lastChar(tvText)) ? Aux.newTrim(tvText, 1) : tvText;
-
-                HandlerThread bmThread = new HandlerThread("BetterMathThread");
+                final HandlerThread bmThread = new HandlerThread("BetterMathThread");
                 bmThread.start();
 
-                new Handler(bmThread.getLooper()).postDelayed(new Runnable() {
+                new Handler(bmThread.getLooper()).post(new Runnable() {
                     @Override
                     public void run() {
                         try {
                             boolean isRounded = tinydb.getString("buttonShape").equals("2");
                             int precision = tinydb.getInt("precision");
                             int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : precision;
-                            MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? maxPrecision : (Math.min(precision, (maxPrecision / 2)) * 2), RoundingMode.HALF_UP);
+                            final MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? maxPrecision : (Math.min(precision, (maxPrecision / 2)) * 2), RoundingMode.HALF_UP);
+
+                            final String tvText = getTvText().trim();
+                            final String eq = Aux.isBinaryOp(Aux.lastChar(tvText)) ? Aux.newTrim(tvText, 1) : tvText;
 
                             BigDecimal result = BetterMath.evaluate(eq, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale, false);
                             String resultStr = BetterMath.formatResult(result, newMc, scale).trim();
 
-                            while (resultStr.equals("0") && scale < 26)
+                            while (resultStr.equals("0") && scale < maxPrecision)
                                 resultStr = BetterMath.formatResult(result, newMc, scale++).trim();
 
                             while ((resultStr.endsWith("0") && resultStr.contains(".")) || resultStr.endsWith(".") || resultStr.endsWith("0E"))
@@ -4002,12 +4002,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                             if (!resultStr.equals(eq) && Aux.isFullSignedNumE(resultStr))
                                 previousExpression.setText(resultStr);
+
+                            bmThread.interrupt();
                         }
                         catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
-                }, 4);
+                });
             }
             catch (Exception e) {
                 e.printStackTrace();
