@@ -4555,11 +4555,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         findViewById(R.id.bEquals).performClick();
                     }
                     else {
-                        getTvText();
+                        String tvText = getTvText();
+                        String logTest = tvText.replace("ln(", "log(");
 
-                        if (tvText.contains("ln(0)") || tvText.contains("ln(0.0)") || tvText.endsWith("ln(0") || tvText.endsWith("ln(0.") || tvText.endsWith("ln(0.0"))
-                            error = true;
-                        if (tvText.contains("log(0)") || tvText.contains("log(0.0)") || tvText.endsWith("log(0") || tvText.endsWith("log(0.") || tvText.endsWith("log(0.0"))
+                        if (logTest.contains("log(0)") || logTest.contains("log(0.0)") || logTest.endsWith("log(0") || logTest.endsWith("log(0.") || logTest.endsWith("log(0.0"))
                             error = true;
 
                         if (tv.getText().toString().equals("0÷0") || tv.getText().toString().equals(" 0÷0") || tv.getText().toString().equals("0.0÷0.0") || tv.getText().toString().equals(" 0.0÷0.0"))
@@ -4659,6 +4658,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         }
                                         catch (Exception e) {
                                             e.printStackTrace();
+
+                                            if (e.getMessage() != null && (e.getMessage().equals("NaN") || e.getMessage().equalsIgnoreCase("Division by zero")))
+                                                tv.setText("NaN");
                                         }
 
                                         if (!Aux.isFullSignedNumE(getTvText())) {

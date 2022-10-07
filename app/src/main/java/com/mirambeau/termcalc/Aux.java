@@ -64,7 +64,7 @@ public class Aux {
     public static final String piStr = superscripts[3] + superDot + superscripts[1] + superscripts[4] + superscripts[1] + superscripts[5] + superscripts[9];
 
     public static ArrayList<String> ops = new ArrayList<String>(Arrays.asList("+", "-", multi, divi, "%", bulletDot, multiDot, "*", "^", sq, "(", ")", "!"));
-    public static ArrayList<String> binaryOps = new ArrayList<String>(Arrays.asList("+", "-", multi, divi, "%", bulletDot, multiDot, "*", "^"));
+    public static ArrayList<String> binaryOps = new ArrayList<String>(Arrays.asList("+", "-", "/", "*", multi, divi, "^", "%", Aux.emDash, bulletDot, multiDot));
 
     public static boolean ratesChecked = false;
     static boolean isUpper = false;
