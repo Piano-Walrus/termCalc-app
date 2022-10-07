@@ -366,7 +366,7 @@ public class BetterMath {
                 String next = eqArray.get(index + 1);
 
                 try {
-                    eqArray.set(index - 1, parseBigDecimal(previous, mc).pow(Integer.parseInt(next)).toPlainString());
+                    eqArray.set(index - 1, BigDecimalMath.pow(parseBigDecimal(previous, mc), parseBigDecimal(next, mc), mc).toPlainString());
                 }
                 catch (Exception e) {
                     try {
