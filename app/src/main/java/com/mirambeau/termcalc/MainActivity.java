@@ -3997,7 +3997,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     while ((resultStr.endsWith("0") && resultStr.contains(".")) || resultStr.endsWith(".") || resultStr.endsWith("0E"))
                         resultStr = Aux.newTrim(resultStr, 1);
 
-                    if (!resultStr.equals(eq) && Aux.isFullSignedNumE(resultStr) && (!Aux.isFullNum(tvText) || tvText.equals("e") || tvText.equals(Aux.pi)))
+                    if (!equaled && !resultStr.equals(eq) && Aux.isFullSignedNumE(resultStr) && (!Aux.isFullNum(tvText) || tvText.equals("e") || tvText.equals(Aux.pi)))
                         previousExpression.setText(resultStr);
                 }
             }, "BetterMathThread").start();
@@ -4465,11 +4465,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //Clear (Long Press)
     public final void clear(View v) {
-        final TextView tv = findViewById(R.id.equation);
+        tv.setText("");
 
-        int i;
-
-        tv.setText(" ");
+        wrapText(tv, true);
 
         //Debug mode
         ((Button) findViewById(R.id.bgAnim)).setText("");
@@ -4651,15 +4649,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         }
                                     }
 
-                                    if (!equaled) {
-                                        equaled = true;
-
+                                    if (!equaled)
                                         spin(clear, theme, color, R.drawable.ic_close_24);
-                                    }
+
+                                    equaled = true;
 
                                     //Set text of previous expression TextView
                                     try {
-                                        if (previousExpression != null && tinydb.getBoolean("showPreviousExpression") && !resultStr.equals(" ") && Aux.isFullSignedNumE(resultStr)) {
+                                        if (previousExpression != null && tinydb.getBoolean("showPreviousExpression") && !resultStr.equals(" ") && !resultStr.equals("") && !resultStr.equals("\0") && Aux.isFullSignedNumE(resultStr)) {
                                             tv.setText(resultStr);
                                         }
                                         else {
