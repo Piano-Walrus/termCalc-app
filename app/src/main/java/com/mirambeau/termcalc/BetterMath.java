@@ -1,16 +1,13 @@
 package com.mirambeau.termcalc;
 
-import android.os.Handler;
-import android.os.HandlerThread;
-
-import ch.obermuhlner.math.big.BigDecimalMath;
-
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import ch.obermuhlner.math.big.BigDecimalMath;
 
 public class BetterMath {
     final public static MathContext mc = new MathContext(40, RoundingMode.HALF_UP);

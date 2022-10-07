@@ -3997,7 +3997,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     while ((resultStr.endsWith("0") && resultStr.contains(".")) || resultStr.endsWith(".") || resultStr.endsWith("0E"))
                         resultStr = Aux.newTrim(resultStr, 1);
 
-                    if (!equaled && !resultStr.equals(eq) && Aux.isFullSignedNumE(resultStr) && (!Aux.isFullNum(tvText) || tvText.equals("e") || tvText.equals(Aux.pi)))
+                    if (!equaled && getTvText().replace(",", "").trim().equals(tvText.replace(",", "").trim()) && !resultStr.equals(eq) && Aux.isFullSignedNumE(resultStr) && (!Aux.isFullNum(tvText) || tvText.equals("e") || tvText.equals(Aux.pi)))
                         previousExpression.setText(resultStr);
                 }
             }, "BetterMathThread").start();
@@ -4413,8 +4413,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public final void backspace(View v) {
         final FloatingActionButton bDel = findViewById(R.id.bDel);
 
-        final TinyDB tinydb = new TinyDB(this);
-
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(MainActivity.mainActivity);
         final String color = sp.getString(SettingsActivity.KEY_PREF_COLOR, "1");
         final String theme = sp.getString(SettingsActivity.KEY_PREF_THEME, "1");
@@ -4467,19 +4465,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public final void clear(View v) {
         tv.setText("");
 
-        wrapText(tv, true);
-
         //Debug mode
         ((Button) findViewById(R.id.bgAnim)).setText("");
-        Toolbar toolbar = findViewById(R.id.toolbar);
-
-        try {
-            if (toolbar.getTitle().toString().contains("Home") && !toolbar.getTitle().toString().equals("Home"))
-                toolbar.setTitle("Home");
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
 
         try {
             if (roundedButtons)
@@ -4514,7 +4501,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (Aux.tinydb().getBoolean("exInput"))
             tv.setEnabled(true);
 
-        isE = false;
         equaled = false;
         isSqrtFact = false;
     }
@@ -4532,7 +4518,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .disableTransitionType(LayoutTransition.CHANGING);
             }
 
-            if (buttonText.equals("(") || ((buttonText.equals(")") && Aux.countChars(getTvText(), "(") > Aux.countChars(getTvText(), ")")) && !(getTvText().trim().replace("\0", "").equals(".") || getTvText().endsWith("(") || Aux.isBinaryOp(Aux.lastChar(getTvText())) || getTvText().endsWith("√")))) {
+            if (equaled && buttonText.equals("(")) {
+                if (getTvText().contains("E"))
+                    tv.setText("(" + getTvText() + ")");
+
+                getEqualed();
+
+                tv.append(buttonText);
+                wrapText(tv);
+            }
+            else if (buttonText.equals("(") || (!equaled && (buttonText.equals(")") && Aux.countChars(getTvText(), "(") > Aux.countChars(getTvText(), ")")) && !(getTvText().trim().replace("\0", "").equals(".") || getTvText().endsWith("(") || Aux.isBinaryOp(Aux.lastChar(getTvText())) || getTvText().endsWith("√")))) {
                 tv.append(buttonText);
                 wrapText(tv);
             }
@@ -4965,106 +4960,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             final String color = sp.getString(SettingsActivity.KEY_PREF_COLOR, "1");
             final String theme = sp.getString(SettingsActivity.KEY_PREF_THEME, "1");
 
-            final Button[] nums = {MainActivity.mainActivity.findViewById(R.id.b0), MainActivity.mainActivity.findViewById(R.id.b1), MainActivity.mainActivity.findViewById(R.id.b2), MainActivity.mainActivity.findViewById(R.id.b3), MainActivity.mainActivity.findViewById(R.id.b4), MainActivity.mainActivity.findViewById(R.id.b5), MainActivity.mainActivity.findViewById(R.id.b6), MainActivity.mainActivity.findViewById(R.id.b7), MainActivity.mainActivity.findViewById(R.id.b8), MainActivity.mainActivity.findViewById(R.id.b9)};
-            final Button bDec = findViewById(R.id.bDec);
+            tv.setText(getTvText().replace("E", Aux.multi + "10^"));
 
-            String full = "\0";
-            boolean eBackup = isE;
-            int i, k;
-
-            if (isE) {
-                if (tv.getText() != null && !tv.getText().toString().equals("\0"))
-                    full = tv.getText().toString();
-                else {
-                    clear(clear);
-                    isE = false;
-                    return;
-                }
-
-                int eBoi = Aux.searchFor(full, "E");
-                int sciExp = Integer.parseInt(Aux.getLast(full, full.length() - eBoi - 1));
-
-                tv.setText(Aux.newTrim(full, full.length() - eBoi) + "×10^" + sciExp);
-            }
-
-            if (tv.getText().toString().contains("NaN") || tv.getText().toString().contains(getString(R.string.domain_error)) || tv.getText().toString().contains("∞") || tv.getText().toString().contains(getString(R.string.parse_error))) {
-                if (tv.getText().toString().contains("∞")) {
-                    Button b0 = findViewById(R.id.b0);
-
-                    b0.setText("∞");
-                    b0.performClick();
-                    b0.setText("0");
-                }
-
+            if (getTvText().contains("NaN") || tv.getText().toString().contains(getString(R.string.domain_error)) || getTvText().contains("∞") || getTvText().contains(getString(R.string.parse_error))) {
                 clear(clear);
-                spin(clear, theme, color, R.drawable.ic_baseline_arrow_back_24);
             }
             else {
-                //Get result and make it first number
-                if (tv.getText() != null) {
-                    int checkLength = tv.getText().toString().length();
-                    String copied = tv.getText().toString();
+                if (tv.getText() != null && getTvText().length() > 0) {
+                    String tvText = getTvText();
 
                     clear(clear);
 
-                    for (i = 0; i < checkLength; i++) {
-                        if (!Aux.chat(copied, i).equals(",")) {
-                            if (!(Aux.chat(copied, i).equals(".") || Aux.chat(copied, i).equals("×") || Aux.chat(copied, i).equals("^") || Aux.chat(copied, i).equals("-"))) {
-                                for (k = 0; k < 10; k++) {
-                                    if (Character.toString(copied.charAt(i)).equals(nums[k].getText().toString())) {
-                                        int temi = i;
-                                        nums[k].performClick();
-                                        i = temi;
-                                        break;
-                                    }
-                                }
-                            }
-                            else if (Aux.chat(copied, i).equals(".")) {
-                                int temi = i;
-                                bDec.performClick();
-                                i = temi;
-                            }
-                            else if (Aux.chat(copied, i).equals("-")) {
-                                int temi = i;
-                                findViewById(R.id.sMinus).performClick();
-                                i = temi;
-                            }
-                            else if (Aux.chat(copied, i).equals("×")) {
-                                int temi = i;
-                                findViewById(R.id.sMulti).performClick();
-                                i = temi;
-                            }
-                            else if (Aux.chat(copied, i).equals("^")) {
-                                int temi = i;
-                                findViewById(R.id.bExp).performClick();
-                                i = temi;
-                            }
-                        }
-                    }
-
-                    equaled = false;
+                    tv.setText(tvText);
                 }
-
-                spin(clear, theme, color, R.drawable.ic_baseline_arrow_back_24);
+                else
+                    clear(clear);
             }
 
-            isE = eBackup;
+            equaled = false;
 
-            if (isE) {
-                getTvText();
-
-                int numChars = Aux.countNums(tvText);
-                String number = Aux.getLast(tvText, numChars);
-
-                tvText = Aux.newTrim(tvText, numChars + 4);
-                tvText += "E";
-                tvText += number;
-
-                tv.setText(tvText);
-                wrapText(tv);
-            }
-
-            isE = false;
+            spin(clear, theme, color, R.drawable.ic_baseline_arrow_back_24);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -5140,8 +5055,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 //Check for too many negative signs
                 if (!(pressed.equals("-") && getTvText().endsWith("-") && Aux.newTrim(getTvText(), 1).endsWith("(")) && !dont) {
-                    if (equaled)
+                    if (equaled) {
+                        if (getTvText().contains("E"))
+                            tv.setText("(" + getTvText() + ")");
+
                         getEqualed();
+                    }
 
                     if (!(pressed.equals("!") && (Aux.lastChar(getTvText()).equals("!") || Aux.lastChar(getTvText()).equals("-")))) {
                         if (Aux.isOp(pressed) || pressed.equals("log") || pressed.equals("ln") || Aux.isTrig(pressed)) {
