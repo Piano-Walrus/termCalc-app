@@ -1449,48 +1449,11 @@ public class EditorActivity extends AppCompatActivity {
         try {
             final AlertDialog.Builder builder = createAlertDialog("Backup Current Theme\n");
 
-            final TinyDB tinydb = new TinyDB(MainActivity.mainActivity);
-
             View viewInflated = LayoutInflater.from(this).inflate(R.layout.content, (ViewGroup) findViewById(R.id.editorBG), false);
 
             final EditText input = (EditText) viewInflated.findViewById(R.id.input);
 
-            final TextView groupTitle = viewInflated.findViewById(R.id.themeGroupTitle);
-            final RadioGroup group = viewInflated.findViewById(R.id.themeRadioGroup);
-
-            final ConstraintLayout switchLayout = viewInflated.findViewById(R.id.themeSwitchLayout);
-            final SwitchMaterial themeSwitch = viewInflated.findViewById(R.id.themeSwitch);
-
-            themeSwitch.setChecked(true);
-
-            int radioButton = 0;
-
-            if (newTheme == 2 || newTheme == 5)
-                radioButton = 1;
-
-            ((RadioButton) group.getChildAt(radioButton)).setChecked(true);
-
-            groupTitle.setVisibility(View.GONE);
-            group.setVisibility(View.GONE);
-
-            switchLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    themeSwitch.toggle();
-
-                    if (themeSwitch.isChecked()) {
-                        groupTitle.setVisibility(View.GONE);
-                        group.setVisibility(View.GONE);
-                    }
-                    else {
-                        groupTitle.setVisibility(View.VISIBLE);
-                        group.setVisibility(View.VISIBLE);
-                    }
-                }
-            });
-
-            groupTitle.setVisibility(View.GONE);
-            group.setVisibility(View.GONE);
+            bigTheme = (newTheme == 2 || newTheme == 5) ? THEME_LIGHT : THEME_DARK;
 
             builder.setView(viewInflated);
 
@@ -1512,17 +1475,7 @@ public class EditorActivity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();
 
-                                    int i;
-
                                     onApplyClick(null);
-
-                                    if (!themeSwitch.isChecked()) {
-                                        for (i = 0; i < group.getChildCount(); i++) {
-                                            if (((RadioButton) group.getChildAt(i)).isChecked()) {
-                                                bigTheme = i == 0 ? THEME_DARK : THEME_LIGHT;
-                                            }
-                                        }
-                                    }
 
                                     backup(themeName);
 
@@ -1543,17 +1496,7 @@ public class EditorActivity extends AppCompatActivity {
                             builder2.show();
                         }
                         else {
-                            int i;
-
                             onApplyClick(null);
-
-                            if (!themeSwitch.isChecked()) {
-                                for (i = 0; i < group.getChildCount(); i++) {
-                                    if (((RadioButton) group.getChildAt(i)).isChecked()) {
-                                        bigTheme = i == 0 ? THEME_DARK : THEME_LIGHT;
-                                    }
-                                }
-                            }
 
                             backup(themeName);
 
@@ -1576,9 +1519,6 @@ public class EditorActivity extends AppCompatActivity {
             });
 
             builder.show();
-
-            switchLayout.performClick();
-            switchLayout.performClick();
         }
         catch (Exception e){
             e.printStackTrace();

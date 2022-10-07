@@ -124,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Boolean isInv = false, isDec = false, isRad = true, equaled = false, deleted = false, isEquals = false;
     boolean isExpanded, hasExpanded, error, dError, didIntro, isE, isBig, isSqrtFact, isCustomTheme, dontVibe, isFabExpanded;
     boolean isDate = false;
-    boolean[] isTrig = new boolean[101];
     boolean theme_boolean = true, isDynamic;
     boolean isLegacy = true, eimParseError = false, throwEim = false, shouldRecord = true, isFocus = false;
     boolean isDarkTab = true;
@@ -3755,9 +3754,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         outState.putBoolean("isEquals", isEquals);
         outState.putBoolean("isDrawerOpened", drawer.isDrawerOpen(GravityCompat.START));
 
-        //Arrays
-        outState.putBooleanArray("isTrig", isTrig);
-
         //Date Ints
         outState.putInt("initDay", initDay);
         outState.putInt("initMonth", initMonth);
@@ -3783,7 +3779,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Button degRad = findViewById(R.id.bDegRad);
 
         String eq3 = savedInstanceState.getString("eq3");
-        isTrig = savedInstanceState.getBooleanArray("isTrig");
         isInv = savedInstanceState.getBoolean("isInv");
         isDec = savedInstanceState.getBoolean("isDec");
         isRad = savedInstanceState.getBoolean("isRad");
@@ -4538,177 +4533,183 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 tv.setText(Aux.newTrim(getTvText(), 1));
 
             if (isLegacy) {
-                if (tv.getText().toString().endsWith("\0") || tv.getText().toString().endsWith(" "))
+                if (tv.getText() == null || getTvText().equals("\0") || getTvText().equals("") || getTvText().equals(" "))
+                    return;
+
+                if (getTvText().endsWith("\0") || getTvText().endsWith(" "))
                     tv.setText(Aux.newTrim(tv.getText().toString(), 1));
+
+                if (tv.getText() == null || getTvText().equals("\0") || getTvText().equals("") || getTvText().equals(" "))
+                    return;
 
                 //Error if tv contains negative square root
                 if (getTvText().contains(Aux.sq + "-") || getTvText().contains(Aux.sq + Aux.emDash))
                     error = true;
 
-                if (tv.getText() == null || tv.getText().toString().equals(".") || tv.getText().toString().equals(" .") || tv.getText().toString().equals("\0.") || tv.getText().toString().endsWith("(") || tv.getText().toString().endsWith("÷") || tv.getText().toString().endsWith("×") || tv.getText().toString().endsWith("+") || tv.getText().toString().endsWith("-") || tv.getText().toString().endsWith("^") || tv.getText().toString().endsWith("√") || tv.getText().toString().endsWith("÷.") || tv.getText().toString().endsWith("+.") || tv.getText().toString().endsWith("-.") || tv.getText().toString().endsWith("^.") || tv.getText().toString().endsWith("×.") || tv.getText().toString().endsWith("√.") || tv.getText().toString().endsWith("log(.") || tv.getText().toString().endsWith("ln(.")) {
+                if (!(tv.getText().toString().equals(".") || tv.getText().toString().equals(" .") || tv.getText().toString().equals("\0.") ||
+                        tv.getText().toString().endsWith("(") || tv.getText().toString().endsWith("÷") || tv.getText().toString().endsWith("×") || tv.getText().toString().endsWith("+") ||
+                        tv.getText().toString().endsWith("-") || tv.getText().toString().endsWith("^") || tv.getText().toString().endsWith("√") || tv.getText().toString().endsWith("÷.") ||
+                        tv.getText().toString().endsWith("+.") || tv.getText().toString().endsWith("-.") || tv.getText().toString().endsWith("^.") || tv.getText().toString().endsWith("×.") ||
+                        tv.getText().toString().endsWith("√.") || tv.getText().toString().endsWith("log(.") || tv.getText().toString().endsWith("ln(."))) {
 
-                }
-                else if (tv.getText().toString().equals("(0)!") || tv.getText().toString().equals(" (0)!") || tv.getText().toString().equals("(0.0)!") || tv.getText().toString().equals(" (0.0)!") || tv.getText().toString().equals("(0.)!") || tv.getText().toString().equals(" (0.)!") || tv.getText().toString().equals("(.0)!") || tv.getText().toString().equals(" (.0)!")) {
-                    clear(clear);
-                    findViewById(R.id.b0).performClick();
-                    findViewById(R.id.bFact).performClick();
-                    findViewById(R.id.bEquals).performClick();
-                }
-                else {
-                    getTvText();
-
-                    if (tvText.contains("ln(0)") || tvText.contains("ln(0.0)") || tvText.endsWith("ln(0") || tvText.endsWith("ln(0.") || tvText.endsWith("ln(0.0"))
-                        error = true;
-                    if (tvText.contains("log(0)") || tvText.contains("log(0.0)") || tvText.endsWith("log(0") || tvText.endsWith("log(0.") || tvText.endsWith("log(0.0"))
-                        error = true;
-
-                    if (tv.getText().toString().equals("0÷0") || tv.getText().toString().equals(" 0÷0") || tv.getText().toString().equals("0.0÷0.0") || tv.getText().toString().equals(" 0.0÷0.0"))
-                        error = true;
-
-                    if (error || dError) {
-                        error();
-
-                        showRippleAnimation(findViewById(R.id.bgAnim));
+                    if (tv.getText().toString().equals("(0)!") || tv.getText().toString().equals(" (0)!") || tv.getText().toString().equals("(0.0)!") || tv.getText().toString().equals(" (0.0)!") || tv.getText().toString().equals("(0.)!") || tv.getText().toString().equals(" (0.)!") || tv.getText().toString().equals("(.0)!") || tv.getText().toString().equals(" (.0)!")) {
+                        clear(clear);
+                        findViewById(R.id.b0).performClick();
+                        findViewById(R.id.bFact).performClick();
+                        findViewById(R.id.bEquals).performClick();
                     }
                     else {
-                        if (!equaled) {
-                            String historyTemp = getTvText();
+                        getTvText();
 
-                            // Add remaining parenthesis
-                            int missing = Aux.countChars(tvText, "(") - Aux.countChars(tvText, ")");
+                        if (tvText.contains("ln(0)") || tvText.contains("ln(0.0)") || tvText.endsWith("ln(0") || tvText.endsWith("ln(0.") || tvText.endsWith("ln(0.0"))
+                            error = true;
+                        if (tvText.contains("log(0)") || tvText.contains("log(0.0)") || tvText.endsWith("log(0") || tvText.endsWith("log(0.") || tvText.endsWith("log(0.0"))
+                            error = true;
 
-                            for (i=0; i < missing; i++){
-                                findViewById(R.id.bParenthesisClose).performClick();
-                            }
+                        if (tv.getText().toString().equals("0÷0") || tv.getText().toString().equals(" 0÷0") || tv.getText().toString().equals("0.0÷0.0") || tv.getText().toString().equals(" 0.0÷0.0"))
+                            error = true;
 
-                            try {
-                                if (previousExpression != null && Aux.isFullSignedNumE(previousExpression.getText().toString()))
-                                    resultStr = previousExpression.getText().toString();
-                            }
-                            catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                        if (error || dError) {
+                            error();
 
-                            equaled = false;
-                            isDec = false;
+                            showRippleAnimation(findViewById(R.id.bgAnim));
+                        }
+                        else {
+                            if (!equaled) {
+                                String historyTemp = getTvText();
 
-                            current = "\0";
+                                // Add remaining parenthesis
+                                int missing = Aux.countChars(tvText, "(") - Aux.countChars(tvText, ")");
 
-                            String lastChar = Aux.lastChar(getTvText());
+                                for (i = 0; i < missing; i++) {
+                                    findViewById(R.id.bParenthesisClose).performClick();
+                                }
 
-                            if (lastChar != null && ((lastChar.equals("!") || lastChar.equals(")") || lastChar.equals("π") || lastChar.equals("e") || lastChar.equals("∞") || Aux.isDigit(lastChar)))) {
-                                if (error || dError)
-                                    error();
-                                else {
-                                    if (!isBig) {
-                                        ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
-                                                .enableTransitionType(LayoutTransition.CHANGING);
+                                try {
+                                    if (previousExpression != null && Aux.isFullSignedNumE(previousExpression.getText().toString()))
+                                        resultStr = previousExpression.getText().toString();
+                                }
+                                catch (Exception e) {
+                                    e.printStackTrace();
+                                }
 
-                                        ((ViewGroup) findViewById(R.id.equationScrollView)).getLayoutTransition()
-                                                .enableTransitionType(LayoutTransition.CHANGING);
-                                    }
+                                equaled = false;
+                                isDec = false;
 
-                                    if (shouldRecord) {
-                                        ArrayList<String> equations = tinydb.getListString("equations");
+                                current = "\0";
 
-                                        //Add equation to history
-                                        if (tv.getText() != null && !tv.getText().toString().equals("\0") && !tv.getText().toString().contains("NaN")) {
-                                            equations.add(0, historyTemp);
-                                            tinydb.putListString("equations", equations);
-                                        }
-                                    }
+                                String lastChar = Aux.lastChar(getTvText());
 
-                                    if (!equaled)
-                                        spin(clear, theme, color, R.drawable.ic_close_24);
+                                if (lastChar != null && ((lastChar.equals("!") || lastChar.equals(")") || lastChar.equals("π") || lastChar.equals("e") || lastChar.equals("∞") || Aux.isDigit(lastChar)))) {
+                                    if (error || dError)
+                                        error();
+                                    else {
+                                        if (!isBig) {
+                                            ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
+                                                    .enableTransitionType(LayoutTransition.CHANGING);
 
-                                    equaled = true;
-
-                                    //Set text of previous expression TextView
-                                    try {
-                                        if (previousExpression != null && tinydb.getBoolean("showPreviousExpression") && !resultStr.equals(" ") && !resultStr.equals("") && !resultStr.equals("\0") && Aux.isFullSignedNumE(resultStr)) {
-                                            tv.setText(resultStr);
-                                        }
-                                        else {
-                                            boolean isRounded = tinydb.getString("buttonShape").equals("2");
-                                            int precision = tinydb.getInt("precision");
-                                            int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : precision;
-                                            MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? maxPrecision : (Math.min(precision, (maxPrecision / 2)) * 2), RoundingMode.HALF_UP);
-
-                                            BigDecimal result = BetterMath.evaluate(getTvText().trim(), tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale, false);
-                                            resultStr = BetterMath.formatResult(result, newMc, scale).trim();
-
-                                            while (resultStr.equals("0") && scale < 26)
-                                                resultStr = BetterMath.formatResult(result, newMc, scale++).trim();
-
-                                            while ((resultStr.endsWith("0") && resultStr.contains(".")) || resultStr.endsWith(".") || resultStr.endsWith("0E"))
-                                                resultStr = Aux.newTrim(resultStr, 1);
-
-                                            if (!resultStr.equals(getTvText().trim()) && Aux.isFullSignedNumE(resultStr))
-                                                tv.setText(resultStr);
+                                            ((ViewGroup) findViewById(R.id.equationScrollView)).getLayoutTransition()
+                                                    .enableTransitionType(LayoutTransition.CHANGING);
                                         }
 
+                                        if (shouldRecord) {
+                                            ArrayList<String> equations = tinydb.getListString("equations");
+
+                                            //Add equation to history
+                                            if (tv.getText() != null && !tv.getText().toString().equals("\0") && !tv.getText().toString().contains("NaN")) {
+                                                equations.add(0, historyTemp);
+                                                tinydb.putListString("equations", equations);
+                                            }
+                                        }
+
+                                        if (!equaled)
+                                            spin(clear, theme, color, R.drawable.ic_close_24);
+
+                                        equaled = true;
+
+                                        //Set text of previous expression TextView
                                         try {
-                                            if (previousExpression != null)
-                                                previousExpression.setText("");
+                                            if (previousExpression != null && tinydb.getBoolean("showPreviousExpression") && !resultStr.equals(" ") && !resultStr.equals("") && !resultStr.equals("\0") && Aux.isFullSignedNumE(resultStr)) {
+                                                tv.setText(resultStr);
+                                            }
+                                            else {
+                                                boolean isRounded = tinydb.getString("buttonShape").equals("2");
+                                                int precision = tinydb.getInt("precision");
+                                                int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : precision;
+                                                MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? maxPrecision : (Math.min(precision, (maxPrecision / 2)) * 2), RoundingMode.HALF_UP);
+
+                                                BigDecimal result = BetterMath.evaluate(getTvText().trim(), tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale, false);
+                                                resultStr = BetterMath.formatResult(result, newMc, scale).trim();
+
+                                                while (resultStr.equals("0") && scale < 26)
+                                                    resultStr = BetterMath.formatResult(result, newMc, scale++).trim();
+
+                                                while ((resultStr.endsWith("0") && resultStr.contains(".")) || resultStr.endsWith(".") || resultStr.endsWith("0E"))
+                                                    resultStr = Aux.newTrim(resultStr, 1);
+
+                                                if (!resultStr.equals(getTvText().trim()) && Aux.isFullSignedNumE(resultStr))
+                                                    tv.setText(resultStr);
+                                            }
+
+                                            try {
+                                                if (previousExpression != null)
+                                                    previousExpression.setText("");
+                                            }
+                                            catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+
+                                            showRippleAnimation(findViewById(R.id.bgAnim));
                                         }
                                         catch (Exception e) {
                                             e.printStackTrace();
                                         }
 
-                                        showRippleAnimation(findViewById(R.id.bgAnim));
-                                    }
-                                    catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    if (!Aux.isFullSignedNumE(getTvText())) {
-                                        tv.setText(R.string.parse_error);
-                                        showRippleAnimation(findViewById(R.id.bgAnim));
-                                    }
-
-                                    if (shouldRecord) {
-                                        ArrayList<String> answers = tinydb.getListString("answers");
-
-                                        //Add answer to history
-                                        if (tv.getText() != null && !tv.getText().toString().equals("\0") && !tv.getText().toString().contains("NaN")) {
-                                            answers.add(0, tv.getText().toString());
-                                            tinydb.putListString("answers", answers);
-
-                                            Calendar cal = Calendar.getInstance();
-                                            ArrayList<Integer> days, months, years;
-
-                                            days = tinydb.getListInt("dayEntries");
-                                            months = tinydb.getListInt("monthEntries");
-                                            years = tinydb.getListInt("yearEntries");
-
-                                            days.add(0, cal.get(Calendar.DAY_OF_MONTH));
-                                            months.add(0, cal.get(Calendar.MONTH));
-                                            years.add(0, cal.get(Calendar.YEAR));
-
-                                            tinydb.putListInt("dayEntries", days);
-                                            tinydb.putListInt("monthEntries", months);
-                                            tinydb.putListInt("yearEntries", years);
+                                        if (!Aux.isFullSignedNumE(getTvText())) {
+                                            tv.setText(R.string.parse_error);
+                                            showRippleAnimation(findViewById(R.id.bgAnim));
                                         }
-                                    }
 
-                                    wrapText(tv, false);
+                                        if (shouldRecord) {
+                                            ArrayList<String> answers = tinydb.getListString("answers");
 
-                                    try {
-                                        if (tv.getText().toString().contains(".") && !tv.getText().toString().contains("E")) {
-                                            if (roundedButtons)
-                                                findViewById(R.id.decFracButtonNew).setVisibility(View.VISIBLE);
-                                            else
-                                                findViewById(R.id.decFracButton).setVisibility(View.VISIBLE);
+                                            //Add answer to history
+                                            if (tv.getText() != null && !tv.getText().toString().equals("\0") && !tv.getText().toString().contains("NaN")) {
+                                                answers.add(0, tv.getText().toString());
+                                                tinydb.putListString("answers", answers);
+
+                                                Calendar cal = Calendar.getInstance();
+                                                ArrayList<Integer> days, months, years;
+
+                                                days = tinydb.getListInt("dayEntries");
+                                                months = tinydb.getListInt("monthEntries");
+                                                years = tinydb.getListInt("yearEntries");
+
+                                                days.add(0, cal.get(Calendar.DAY_OF_MONTH));
+                                                months.add(0, cal.get(Calendar.MONTH));
+                                                years.add(0, cal.get(Calendar.YEAR));
+
+                                                tinydb.putListInt("dayEntries", days);
+                                                tinydb.putListInt("monthEntries", months);
+                                                tinydb.putListInt("yearEntries", years);
+                                            }
                                         }
-                                    }
-                                    catch (Exception e) {
-                                        e.printStackTrace();
+
+                                        wrapText(tv, false);
+
+                                        try {
+                                            if (tv.getText().toString().contains(".") && !tv.getText().toString().contains("E")) {
+                                                if (roundedButtons)
+                                                    findViewById(R.id.decFracButtonNew).setVisibility(View.VISIBLE);
+                                                else
+                                                    findViewById(R.id.decFracButton).setVisibility(View.VISIBLE);
+                                            }
+                                        }
+                                        catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
                                     }
                                 }
-                            }
-
-                            for (i = 0; i < 100; i++) {
-                                isTrig[i] = false;
                             }
                         }
                     }

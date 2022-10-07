@@ -370,6 +370,8 @@ public class ThemeActivity extends AppCompatActivity {
             ConstraintLayout mt = findViewById(R.id.themeStyleLayout);
             ConstraintLayout ac = findViewById(R.id.themeColorLayout);
 
+            FrameLayout buttonShapeLayout = findViewById(R.id.buttonShapeLayout);
+
             ConstraintLayout editor = findViewById(R.id.themeEditorLayout);
             ConstraintLayout savedThemes = findViewById(R.id.backupsLayout);
 
@@ -391,6 +393,7 @@ public class ThemeActivity extends AppCompatActivity {
 
                     mt.setVisibility(visibilities[Math.abs(i-1)]);
                     ac.setVisibility(visibilities[Math.abs(i-1)]);
+                    buttonShapeLayout.setVisibility(visibilities[Math.abs(i-1)]);
 
                     editor.setVisibility(visibilities[i]);
                     savedThemes.setVisibility(visibilities[i]);

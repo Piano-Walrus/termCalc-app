@@ -550,42 +550,23 @@ public class Backups extends AppCompatActivity {
 
                 final EditText input = (EditText) viewInflated.findViewById(R.id.input);
 
-                final TextView groupTitle = viewInflated.findViewById(R.id.themeGroupTitle);
-                final RadioGroup group = viewInflated.findViewById(R.id.themeRadioGroup);
+                int theme;
 
-                final ConstraintLayout switchLayout = viewInflated.findViewById(R.id.themeSwitchLayout);
-                final SwitchMaterial themeSwitch = viewInflated.findViewById(R.id.themeSwitch);
+                try {
+                    theme = Aux.getThemeInt();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
 
-                themeSwitch.setChecked(true);
-
-                int radioButton = 0;
-
-                if (Aux.getThemeInt() == 2 || Aux.getThemeInt() == 5)
-                    radioButton = 1;
-
-                ((RadioButton) group.getChildAt(radioButton)).setChecked(true);
-
-                groupTitle.setVisibility(View.GONE);
-                group.setVisibility(View.GONE);
-
-                switchLayout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        themeSwitch.toggle();
-
-                        if (themeSwitch.isChecked()) {
-                            groupTitle.setVisibility(View.GONE);
-                            group.setVisibility(View.GONE);
-                        }
-                        else {
-                            groupTitle.setVisibility(View.VISIBLE);
-                            group.setVisibility(View.VISIBLE);
-                        }
+                    try {
+                        theme = Integer.parseInt(tinydb.getString("theme"));
                     }
-                });
+                    catch (Exception e2) {
+                        theme = 1;
+                    }
+                }
 
-                groupTitle.setVisibility(View.GONE);
-                group.setVisibility(View.GONE);
+                bigTheme = (theme == 2 || theme == 5) ? THEME_LIGHT : THEME_DARK;
 
                 builder.setView(viewInflated);
 
@@ -609,15 +590,6 @@ public class Backups extends AppCompatActivity {
 
                                     if (!themeName.equals("\0") && !themeName.equals("") && themeName.length() > 0) {
                                         try {
-                                            int i;
-
-                                            if (!themeSwitch.isChecked()) {
-                                                for (i = 0; i < group.getChildCount(); i++) {
-                                                    if (((RadioButton) group.getChildAt(i)).isChecked())
-                                                        bigTheme = i == 0 ? THEME_DARK : THEME_LIGHT;
-                                                }
-                                            }
-
                                             run("backup " + themeName);
 
                                             ArrayList<BackupCard> cards = new ArrayList<>();
@@ -646,7 +618,8 @@ public class Backups extends AppCompatActivity {
                                             Toast.makeText(Backups.this, "Successfully backed up \"" + input.getText().toString() + "\"", Toast.LENGTH_SHORT).show();
 
                                             bigTheme = "N/A";
-                                        } catch (IOException except) {
+                                        }
+                                        catch (IOException except) {
                                             except.printStackTrace();
                                         }
                                     }
@@ -666,15 +639,6 @@ public class Backups extends AppCompatActivity {
                         else {
                             if (!themeName.equals("\0") && !themeName.equals("") && themeName.length() > 0) {
                                 try {
-                                    int i;
-
-                                    if (!themeSwitch.isChecked()) {
-                                        for (i = 0; i < group.getChildCount(); i++) {
-                                            if (((RadioButton) group.getChildAt(i)).isChecked())
-                                                bigTheme = i == 0 ? THEME_DARK : THEME_LIGHT;
-                                        }
-                                    }
-
                                     run("backup " + themeName);
 
                                     ArrayList<BackupCard> cards = new ArrayList<>();
