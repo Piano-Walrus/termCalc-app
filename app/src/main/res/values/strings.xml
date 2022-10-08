@@ -23,11 +23,12 @@
         \n2. The \"Functions\" section has been redesigned to make evaluating functions more convenient.
         \n3. While typing on the Home screen, the result of your expression will now be calculated as you type it!\n
         Note: This behavior can be disabled in settings.
-        \n4. The equals/clear animation is now a bit smoother.
+        \n4. The new input method is now finally out of beta! You can now tap an expression on the home screen to go back and edit it from any point.
         \n5. Switched from double to BigDecimal precision, which should improve the accuracy of calculations involving multiple numbers with many decimal places.
-        \n6. The changelog will now display one more previous version.
-        \n7. Updated a few Spanish translations.
-        \n8. Many bug fixes and performance improvements.
+        \n6. The equals/clear animation is now a bit smoother.
+        \n7. The changelog will now display one more previous version.
+        \n8. Updated a few Spanish translations.
+        \n9. Many bug fixes and performance improvements.
 
     </string>
 
