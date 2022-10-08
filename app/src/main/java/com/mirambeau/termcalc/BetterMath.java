@@ -937,15 +937,30 @@ public class BetterMath {
     }
 
     public static BigDecimal parseBigDecimal(String str) {
-        return BigDecimalMath.toBigDecimal(str, mc);
+        try {
+            return BigDecimalMath.toBigDecimal(str, mc);
+        }
+        catch (Exception e) {
+            return new BigDecimal(str, mc);
+        }
     }
 
     public static BigDecimal parseBigDecimal(String str, MathContext mc) {
-        return BigDecimalMath.toBigDecimal(str, mc);
+        try {
+            return BigDecimalMath.toBigDecimal(str, mc);
+        }
+        catch (Exception e) {
+            return new BigDecimal(str, mc);
+        }
     }
 
     public static BigDecimal parseBigDecimal(String str, MathContext mc, int scale) {
-        return BigDecimalMath.toBigDecimal(str, mc).setScale(scale, RoundingMode.HALF_UP);
+        try {
+            return BigDecimalMath.toBigDecimal(str, mc).setScale(scale, RoundingMode.HALF_UP);
+        }
+        catch (Exception e) {
+            return new BigDecimal(str, mc).setScale(scale, RoundingMode.HALF_UP);
+        }
     }
 }
 

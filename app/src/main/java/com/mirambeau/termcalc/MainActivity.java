@@ -2136,10 +2136,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             tv.addTextChangedListener(new TextValidator(tv) {
                 @Override
-                public void validate(TextView tv, String text) {
-                    tv.setText(Aux.removeCommas(getTvText()));
+                public void validate(TextView tv, String before, String after) {
                     wrapText((EditText) tv, !equaled);
-                    tv.setText(Aux.addCommas(getTvText()));
+
+                    if (!Aux.updateCommas(getTvText()).equals(getTvText()))
+                        tv.setText(Aux.updateCommas(getTvText()).replace("\n", "").trim());
                 }
             });
 
@@ -2973,7 +2974,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         spin(bDel, theme, color, R.drawable.ic_close_24);
 
-        wrapText(tv);
         tv.setEnabled(false);
         error = false;
         dError = false;
@@ -3866,8 +3866,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         catch (Exception e) {
             e.printStackTrace();
         }
-
-        wrapText(tv);
     }
 
     public final void wrapText(EditText tv) {
@@ -3957,20 +3955,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     while ((resultStr.endsWith("0") && resultStr.contains(".")) || resultStr.endsWith(".") || resultStr.endsWith("0E"))
                         resultStr = Aux.newTrim(resultStr, 1);
 
-                    if (!equaled && getTvText().replace(",", "").trim().equals(tvText.replace(",", "").trim()) && !resultStr.equals(eq) && Aux.isFullSignedNumE(resultStr) && (!Aux.isFullNum(tvText) || tvText.equals("e") || tvText.equals(Aux.pi)))
-                        previousExpression.setText(resultStr);
+                    if (!equaled && getTvText().replace(",", "").trim().equals(tvText.replace(",", "").trim()) && !resultStr.equals(eq) && Aux.isFullSignedNumE(resultStr) && (!Aux.isFullNum(tvText) || tvText.equals("e") || tvText.equals(Aux.pi))) {
+                        try {
+                            previousExpression.setText(resultStr);
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             }, "BetterMathThread").start();
         }
 
-        try {
-            tv.setText(Aux.updateCommas(getTvText()).replace("\n", "").trim());
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (equaled) {
+        if (equaled && previousExpression != null) {
             try {
                 previousExpression.setText("");
             }
@@ -4386,14 +4383,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 spin(bDel, theme, color, R.drawable.ic_baseline_arrow_back_24);
             }
-            else if (tvText.equals("\0") && (isLegacy || (tv.getSelectionStart() < 1))) {
+            else if (tvText.equals("\0") && (isLegacy || (tv.getSelectionStart() < 1)))
                 clear(bDel);
-            }
-            else {
+            else
                 removeLast();
-
-                wrapText(tv);
-            }
 
             if ((tv.getText().toString().equals("\0") || tv.getText().toString().equals("") || tv.getText().toString().equals(" ")) && isLegacy)
                 clear(bDel);
@@ -4477,11 +4470,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getEqualed();
 
                 tv.append(buttonText);
-                wrapText(tv);
             }
             else if (buttonText.equals("(") || (!equaled && (buttonText.equals(")") && Aux.countChars(getTvText(), "(") > Aux.countChars(getTvText(), ")")) && !(getTvText().trim().replace("\0", "").equals(".") || getTvText().endsWith("(") || Aux.isBinaryOp(Aux.lastChar(getTvText())) || getTvText().endsWith("√")))) {
                 tv.append(buttonText);
-                wrapText(tv);
             }
         }
         else {
@@ -4690,8 +4681,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                             }
                                         }
 
-                                        //wrapText(tv, false);
-
                                         try {
                                             if (tv.getText().toString().contains(".") && !tv.getText().toString().contains("E")) {
                                                 if (roundedButtons)
@@ -4735,8 +4724,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         isLegacy = equaled;
 
-                        wrapText(tv);
-
                         if (tv.getText().toString().contains("Error") || tv.getText().toString().contains("NaN"))
                             tv.setEnabled(false);
                     }
@@ -4751,7 +4738,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         bEquals.performClick();
 
                         tv.setText("EIM Parse Error");
-                        wrapText(tv);
 
                         if (tv.getText().toString().contains("Error") || tv.getText().toString().contains("NaN"))
                             tv.setEnabled(false);
@@ -4796,7 +4782,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         isDec = true;
 
                         tv.append(".");
-                        wrapText(tv);
                     }
                 }
             }
@@ -4820,13 +4805,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     tv.setSelection(cursor + 1);
                 }
 
-                //TODO: Implement isDec when !isLegacy
                 if (tv.getText().toString().contains("..")) {
                     tv.setText(tv.getText().toString().replace("..", "."));
                     tv.setSelection(cursor);
                 }
-
-                wrapText(tv);
             }
         }
         catch (Exception e){
@@ -4988,8 +4970,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         if (Aux.isTrig(pressed))
                             tv.append("(");
-
-                        wrapText(tv);
                     }
                     else
                         return;
@@ -5035,8 +5015,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                                 if (Aux.isTrig(pressed))
                                     tv.append("(");
-
-                                wrapText(tv);
                             }
                         }
                     }
@@ -5088,8 +5066,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         catch (Exception ignored) {}
                     }
                 }
-
-                wrapText(tv);
             }
         }
         catch (Exception e){
@@ -5623,8 +5599,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     @Override
                                     public void onClick(View v) {
                                         if (tv.getText() != null && !tv.getText().toString().equals("\0")) {
-                                            tv.setText(tv.getText().toString() + finalFunctionText);
-                                            wrapText(tv);
+                                            tv.setText(getTvText() + finalFunctionText);
                                             isLegacy = false;
 
                                             try {
@@ -5646,7 +5621,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         }
                                         else {
                                             tv.setText(finalFunctionText);
-                                            wrapText(tv);
                                             isLegacy = false;
 
                                             try {

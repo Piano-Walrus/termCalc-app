@@ -686,14 +686,14 @@ public class EditorActivity extends AppCompatActivity {
             //Hex Field Text Changed Listener
             hexField.addTextChangedListener(new TextValidator(hexField) {
                 @Override
-                public void validate(TextView textView, String text) {
+                public void validate(TextView textView, String before, String after) {
                     try {
-                        if (Aux.isColor("#" + text.replace("#", ""))) {
-                            cpButton.setColorFilter(Color.parseColor("#" + text.replace("#", "")));
+                        if (Aux.isColor("#" + after.replace("#", ""))) {
+                            cpButton.setColorFilter(Color.parseColor("#" + after.replace("#", "")));
                         }
 
-                        if (text.contains("#")) {
-                            textView.setText(text.replace("#", ""));
+                        if (after.contains("#")) {
+                            textView.setText(after.replace("#", ""));
                         }
                     } catch (Exception e) {
                         Aux.saveStack(e);
