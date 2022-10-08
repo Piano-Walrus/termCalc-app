@@ -686,7 +686,7 @@ public class EditorActivity extends AppCompatActivity {
             //Hex Field Text Changed Listener
             hexField.addTextChangedListener(new TextValidator(hexField) {
                 @Override
-                public void validate(TextView textView, String before, String after, int initCursor, int finalCursor) {
+                public void validate(TextView textView, String before, String after) {
                     try {
                         if (Aux.isColor("#" + after.replace("#", ""))) {
                             cpButton.setColorFilter(Color.parseColor("#" + after.replace("#", "")));

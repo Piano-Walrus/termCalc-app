@@ -2137,10 +2137,77 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             tv.addTextChangedListener(new TextValidator(tv) {
                 @Override
-                public void validate(TextView textView, String before, String after, int initCursor, int finalCursor) {
-                    wrapText((EditText) tv, !equaled);
+                public void validate(TextView textView, String before, String after) {
+                    wrapText((EditText) tv);
 
                     tv.setText(Aux.updateCommas(getTvText().replace("\n", "").trim()));
+
+                    if (equaled && previousExpression != null) {
+                        try {
+                            previousExpression.setText("");
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    if (!equaled && tinydb.getBoolean("showPreviousExpression") && previousExpression != null) {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                boolean isRounded = tinydb.getString("buttonShape").equals("2");
+                                int precision = tinydb.getInt("precision");
+                                int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : precision;
+                                final MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? maxPrecision : (Math.min(precision, (maxPrecision / 2)) * 2), RoundingMode.HALF_UP);
+
+                                final String tvText = getTvText().trim();
+                                final String eq = Aux.isBinaryOp(Aux.lastChar(tvText)) ? Aux.newTrim(tvText, 1) : tvText;
+
+                                BigDecimal result;
+
+                                try {
+                                    previousExpression.setText("");
+                                }
+                                catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                try {
+                                    result = BetterMath.evaluate(eq, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale, false);
+                                }
+                                catch (Exception e) {
+                                    e.printStackTrace();
+                                    return;
+                                }
+
+                                String resultStr = BetterMath.formatResult(result, newMc, scale).trim();
+
+                                while (resultStr.equals("0") && scale < maxPrecision)
+                                    resultStr = BetterMath.formatResult(result, newMc, scale++).trim();
+
+                                while ((resultStr.endsWith("0") && resultStr.contains(".")) || resultStr.endsWith(".") || resultStr.endsWith("0E"))
+                                    resultStr = Aux.newTrim(resultStr, 1);
+
+                                if (!equaled && getTvText().replace(",", "").trim().equals(tvText.replace(",", "").trim()) && !resultStr.equals(eq) && Aux.isFullSignedNumE(resultStr) && (!Aux.isFullNum(tvText) || tvText.equals("e") || tvText.equals(Aux.pi))) {
+                                    try {
+                                        previousExpression.setText(resultStr);
+                                    }
+                                    catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        }, "BetterMathThread").start();
+
+                        if (equaled && previousExpression != null) {
+                            try {
+                                previousExpression.setText("");
+                            }
+                            catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
                 }
             });
 
@@ -3872,12 +3939,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    public final void wrapText(EditText tv) {
-        wrapText(tv, true);
-    }
-
     //Wrap Text
-    public final void wrapText(EditText tv, boolean shouldEvaluate) {
+    public final void wrapText(EditText tv) {
         final TinyDB tinydb = new TinyDB(this);
 
         int orientation = this.getResources().getConfiguration().orientation;
@@ -3918,64 +3981,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else
             tv.setTextSize(40 - (length > 22 ? (length > 31 ? 10 : (int) ((length - 22) / 2) * 2) : 0));
-
-        if (shouldEvaluate && tinydb.getBoolean("showPreviousExpression") && previousExpression != null) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    boolean isRounded = tinydb.getString("buttonShape").equals("2");
-                    int precision = tinydb.getInt("precision");
-                    int scale = tinydb.getBoolean("isDynamic") ? (isRounded ? roundedPrecision : squarePrecision) : precision;
-                    final MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? maxPrecision : (Math.min(precision, (maxPrecision / 2)) * 2), RoundingMode.HALF_UP);
-
-                    final String tvText = getTvText().trim();
-                    final String eq = Aux.isBinaryOp(Aux.lastChar(tvText)) ? Aux.newTrim(tvText, 1) : tvText;
-
-                    BigDecimal result;
-
-                    try {
-                        previousExpression.setText("");
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        result = BetterMath.evaluate(eq, tinydb.getBoolean("prioritizeCoefficients"), isRad, newMc, scale, false);
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                        return;
-                    }
-
-                    String resultStr = BetterMath.formatResult(result, newMc, scale).trim();
-
-                    while (resultStr.equals("0") && scale < maxPrecision)
-                        resultStr = BetterMath.formatResult(result, newMc, scale++).trim();
-
-                    while ((resultStr.endsWith("0") && resultStr.contains(".")) || resultStr.endsWith(".") || resultStr.endsWith("0E"))
-                        resultStr = Aux.newTrim(resultStr, 1);
-
-                    if (!equaled && getTvText().replace(",", "").trim().equals(tvText.replace(",", "").trim()) && !resultStr.equals(eq) && Aux.isFullSignedNumE(resultStr) && (!Aux.isFullNum(tvText) || tvText.equals("e") || tvText.equals(Aux.pi))) {
-                        try {
-                            previousExpression.setText(resultStr);
-                        }
-                        catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }, "BetterMathThread").start();
-        }
-
-        if (equaled && previousExpression != null) {
-            try {
-                previousExpression.setText("");
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     public final void swapDate(){
@@ -4264,6 +4269,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int endOffset = getTvText().length() - cursor;
         int deleteAmt = 1;
         String tvText = getTvText();
+
+        if (tv.getSelectionEnd() - cursor == tvText.length())
+            clear(bDel);
 
         try {
             if (cursor < tvText.length() && tvText.substring(0, cursor + 1).endsWith(",") && Aux.isDigit(Aux.chat(tvText, cursor-1)) && (cursor < 2 || !Aux.isDigit(Aux.chat(tvText, cursor-2))))

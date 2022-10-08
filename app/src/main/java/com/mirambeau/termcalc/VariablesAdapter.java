@@ -62,7 +62,7 @@ public class VariablesAdapter extends RecyclerView.Adapter<VariablesAdapter.View
 
             editText.addTextChangedListener(new TextValidator(editText) {
                 @Override
-                public void validate(TextView textView, String before, String after, int initCursor, int finalCursor) {
+                public void validate(TextView textView, String before, String after) {
                     if (listener != null) {
                         int position = getAdapterPosition();
 
