@@ -499,7 +499,7 @@ public class BetterMath {
                         }
                     }
                     else if (current.equals("%")) {
-                        eqArray.set(i - 1, modulus(parseBigDecimal(previous, mc), parseBigDecimal(next, mc)).toPlainString());
+                        eqArray.set(i - 1, modulus(parseBigDecimal(previous, mc), parseBigDecimal(next, mc), mc).toPlainString());
 
                         eqArray.remove(i);
 
@@ -888,8 +888,7 @@ public class BetterMath {
         return number.toPlainString();
     }
 
-    //TODO: Add mc parameter
-    public static BigDecimal modulus(BigDecimal n1, BigDecimal n2) {
+    public static BigDecimal modulus(BigDecimal n1, BigDecimal n2, MathContext mc) {
         if (n1.compareTo(n2) < 0)
             return n1;
         else if (n1.compareTo(n2) == 0)

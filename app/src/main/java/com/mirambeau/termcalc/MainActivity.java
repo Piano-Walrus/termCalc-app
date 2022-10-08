@@ -76,15 +76,15 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Objects;
 
+import ch.obermuhlner.math.big.BigDecimalMath;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener{
     static final int androidVersion = Build.VERSION.SDK_INT;
     private DrawerLayout drawer;
     public static Activity mainActivity;
     static Toolbar toolbar;
 
-    final BigDecimal smolRange = new BigDecimal(475);
-    BigDecimal piDec = new BigDecimal("3.14159265358979323846264338327950");
-    MathContext mc = MathContext.DECIMAL64;
+    MathContext mc = new MathContext(45, RoundingMode.HALF_UP);
 
     int squarePrecision = 6, roundedPrecision = 8, maxPrecision = 20;
 
@@ -96,11 +96,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     int foldTextOffset = 0;
 
-    String tvText, fullEq, fullFrom, fullTo, eqConv, current, fromTo, fromSave, toSave, selectedFrom, selectedTo, selectedType;
+    String tvText, fullFrom, fullTo, eqConv, current, fromTo, fromSave, toSave, selectedFrom, selectedTo, selectedType;
     String bgColor, keypadColor, bTextColor, primary, secondary, tertiary, initSecondary;
 
-    static final String[] trigIn = {"sin", "cos", "tan", "csc", "sec", "cot", "sinh", "cosh", "tanh", "csch", "sech", "coth", "arcsin", "arccos", "arctan", "arccsc", "arcsec", "arccot", "arcsinh", "arccosh", "arctanh", "arccsch", "arcsech", "arccoth"};
-    static final String[] trigOut = {"sin(", "cos(", "tan(", "csc(", "sec(", "cot(", "sinh(", "cosh(", "tanh(", "csch(", "sech(", "coth(", "arcsin(", "arccos(", "arctan(", "arccsc(", "arcsec(", "arccot(", "arcsinh(", "arccosh(", "arctanh(", "arccsch(", "arcsech(", "arccoth("};
     static final String[] subscripts = {"₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉"};
 
     static final String[] initConstantTitles = {"Avogadro's Number", "Atomic Mass Unit", "Planck's Constant", "Electron Charge", "Gas Constant", "Faraday Constant", "Acceleration of Gravity"};
@@ -424,7 +422,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 final ConstraintLayout navBg = header.findViewById(R.id.nav_header_bg);
 
                 ImageView left, leftText, right, rightText, bRight, bRightText;
-                String cLeft = "", cLeftText = "", cRight = "", cRightText = "", cbRight = "", cbRightText = "";
+                String cLeft, cLeftText, cRight = "", cRightText = "", cbRight = "", cbRightText = "";
 
                 left = header.findViewById(R.id.navHeaderIcon);
                 leftText = header.findViewById(R.id.navHeaderIconLeftText);
@@ -892,9 +890,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     frame.setFitsSystemWindows(true);
                 }
 
-                if (Build.VERSION.SDK_INT >= 21) {
-                    getWindow().setNavigationBarColor(Color.parseColor(Aux.hexAdd(bgColor, -15)));
-                }
+                getWindow().setNavigationBarColor(Color.parseColor(Aux.hexAdd(bgColor, -15)));
 
                 setMTColor(Color.WHITE);
             }
@@ -1786,6 +1782,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             Aux.adapter.setOnItemClickListener(functionItemClickListener);
 
+
+
             if (Build.VERSION.SDK_INT >= 23) {
                 HorizontalScrollView scrollView = findViewById(R.id.equationScrollView);
 
@@ -2130,10 +2128,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         eq3 += "(";
 
                         tv.setText(eq3);
-                        wrapText(tv);
                     }
 
                     return true;
+                }
+            });
+
+            tv.addTextChangedListener(new TextValidator(tv) {
+                @Override
+                public void validate(TextView tv, String text) {
+                    tv.setText(Aux.removeCommas(getTvText()));
+                    wrapText((EditText) tv, !equaled);
+                    tv.setText(Aux.addCommas(getTvText()));
                 }
             });
 
@@ -3731,7 +3737,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onSaveInstanceState(outState);
 
         //Strings
-        outState.putString("fullEq", fullEq);
         outState.putString("eq3", getTvText());
         outState.putString("eqConv", eqConv);
         outState.putString("fromSave", fromSave);
@@ -3829,8 +3834,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             e.printStackTrace();
         }
 
-        String tvText = tv.getText().toString();
-
         if (equaled)
             ((FloatingActionButton) findViewById(R.id.bDel)).setImageDrawable(ContextCompat.getDrawable(MainActivity.mainActivity, R.drawable.ic_close_24));
 
@@ -3851,7 +3854,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tv.setText(eq3);
 
         try {
-            tvText = getTvText();
+            String tvText = getTvText();
 
             if (tvText.length() > 1 && equaled && tvText.contains(".") && !tvText.contains("E")) {
                 if (roundedButtons)
@@ -3873,8 +3876,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //Wrap Text
     public final void wrapText(EditText tv, boolean shouldEvaluate) {
-        fullEq = tv.getText().toString();
-
         final TinyDB tinydb = new TinyDB(this);
 
         if (tinydb.getBoolean("exInput"))
@@ -3882,7 +3883,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         int orientation = this.getResources().getConfiguration().orientation;
 
-        int length = fullEq.length();
+        int length = getTvText().length();
 
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         float dpHeight = displayMetrics.heightPixels / displayMetrics.density;
@@ -3963,10 +3964,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         try {
-            if (isLegacy)
-                tv.setText(Aux.updateCommas(getTvText()).replace("\n", "").trim());
-            else
-                tv.setText(getTvText().replace("\n", "").trim());
+            tv.setText(Aux.updateCommas(getTvText()).replace("\n", "").trim());
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -4264,13 +4262,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public final void removeLast() {
         FloatingActionButton bDel = findViewById(R.id.bDel);
 
-        if (isLegacy) {
-            try {
-                tv.setText(Aux.removeCommas(getTvText()));
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {
+            tv.setText(Aux.removeCommas(getTvText()));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
 
         if (isLegacy) {
@@ -4331,8 +4327,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
 
                 if (cursor > 1 && Aux.chat(tv.getText().toString(), cursor - 1).equals(Aux.sq) && Aux.isSuperscript(Aux.chat(tv.getText().toString(), cursor - 2))) {
-                    int i;
-
                     tv.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DEL));
 
                     //TODO: Add a for loop that goes through Aux.countNum() superscripts and sets them back to regular numbers
@@ -4376,16 +4370,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final String color = sp.getString(SettingsActivity.KEY_PREF_COLOR, "1");
         final String theme = sp.getString(SettingsActivity.KEY_PREF_THEME, "1");
 
-        if (isLegacy) {
-            try {
-                tv.setText(Aux.removeCommas(tv.getText().toString()));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {
+            tv.setText(Aux.removeCommas(tv.getText().toString()));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
 
         try {
-            String tvText = tv.getText().toString();
+            String tvText = getTvText();
 
             if (equaled) {
                 clear(bDel);
@@ -4393,7 +4386,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 spin(bDel, theme, color, R.drawable.ic_baseline_arrow_back_24);
             }
-            else if (tv.getText().toString() != null && tv.getText().toString().equals("\0") && (isLegacy || (tv.getSelectionStart() < 1))) {
+            else if (tvText.equals("\0") && (isLegacy || (tv.getSelectionStart() < 1))) {
                 clear(bDel);
             }
             else {
@@ -4527,11 +4520,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             String resultStr = "\0";
 
+            if (tv.getText() == null)
+                return;
+
             if (Aux.isBinaryOp(Aux.lastChar(getTvText())))
                 tv.setText(Aux.newTrim(getTvText(), 1));
 
             if (isLegacy) {
-                if (tv.getText() == null || getTvText().equals("\0") || getTvText().equals("") || getTvText().equals(" "))
+                if (getTvText().equals("\0") || getTvText().equals("") || getTvText().equals(" "))
                     return;
 
                 if (getTvText().endsWith("\0") || getTvText().endsWith(" "))
@@ -4577,7 +4573,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 int missing = Aux.countChars(tvText, "(") - Aux.countChars(tvText, ")");
 
                                 for (i = 0; i < missing; i++) {
-                                    findViewById(R.id.bParenthesisClose).performClick();
+                                    tv.append(")");
                                 }
 
                                 try {
@@ -4588,7 +4584,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     e.printStackTrace();
                                 }
 
-                                equaled = false;
                                 isDec = false;
 
                                 current = "\0";
@@ -4695,7 +4690,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                             }
                                         }
 
-                                        wrapText(tv, false);
+                                        //wrapText(tv, false);
 
                                         try {
                                             if (tv.getText().toString().contains(".") && !tv.getText().toString().contains("E")) {
@@ -5846,6 +5841,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     BigDecimal denominator = fraction[1];
 
                     BigDecimal result = fraction[0].divide(fraction[1], mc);
+                    BigDecimal piDec = BigDecimalMath.toBigDecimal("3.14159265358979323846");
 
                     boolean piCheck = false;
 
@@ -5878,14 +5874,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
 
                     if (piCheck) {
-                        if (j != 0) {
+                        if (j != 0)
                             outNum = j + "π";
-                            outDen = Integer.toString(i);
-                        }
-                        else {
+                        else
                             outNum = "π";
-                            outDen = Integer.toString(i);
-                        }
+
+                        outDen = Integer.toString(i);
                     }
                     else {
                         outNum = decdf.format(numerator);
@@ -6047,6 +6041,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         boolean answerFound = false;
         int roundAmt = -1;
+
+        final BigDecimal smolRange = BigDecimalMath.toBigDecimal("475");
 
         //Decimal is between 0 and 1
         if (dec.abs().compareTo(BigDecimal.ONE) < 0) {
