@@ -76,13 +76,6 @@
             android:key="prioritizeCoefficients"
             android:icon="@drawable/ic_round_warning_24"
             android:defaultValue="false"/>
-
-        <SwitchPreference
-            android:defaultValue="false"
-            android:title="Use Experimental Input Method"
-            app:icon="@drawable/ic_baseline_science_24"
-            android:summary="Allows you to go back and edit your input after typing an expression. Note: While this feature is in development, calculations may be inaccurate after doing so. May cause crashes."
-            android:key="exInput" />
     </PreferenceCategory>
 
 </PreferenceScreen>
