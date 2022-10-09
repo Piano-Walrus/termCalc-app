@@ -1328,7 +1328,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 compBar[6].setVisibility(View.GONE);
 
             //Landscape button size adjustments depending on screen size
-            if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            if (orientation == Configuration.ORIENTATION_LANDSCAPE && !roundedButtons) {
                 int mainWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
                 int mainHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 
@@ -2987,8 +2987,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int orientation = this.getResources().getConfiguration().orientation;
 
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            bOpen.setBackground(null);
-            bClose.setBackground(null);
+            if (!roundedButtons) {
+                bOpen.setBackground(null);
+                bClose.setBackground(null);
+            }
 
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
             String theme = sp.getString(SettingsActivity.KEY_PREF_THEME, "1");

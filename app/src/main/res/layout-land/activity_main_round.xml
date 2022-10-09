@@ -28,9 +28,9 @@
             android:foreground="?attr/selectableItemBackground"
             android:textAllCaps="false"
             android:layout_marginBottom="32dp"
-            app:layout_constraintTop_toTopOf="@id/delete"
+            app:layout_constraintTop_toTopOf="@+id/delete"
             app:layout_constraintBottom_toBottomOf="@+id/delete"
-            app:layout_constraintStart_toStartOf="@id/delete"
+            app:layout_constraintStart_toStartOf="@+id/delete"
             app:layout_constraintEnd_toEndOf="@+id/delete"
             tools:visibility="gone" />
 
@@ -40,11 +40,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="23dp"
-            android:layout_marginBottom="-12dp"
+            android:layout_marginBottom="-8dp"
             android:alpha="0.7"
             android:textAlignment="viewEnd"
             android:textColor="@color/white"
             android:textSize="24sp"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/equationScrollView"
             app:layout_constraintEnd_toEndOf="@+id/delete"
             app:layout_constraintStart_toStartOf="parent" />
@@ -58,10 +59,10 @@
             android:animateLayoutChanges="true"
             android:rotation="180"
             android:scrollbars="none"
-            android:layout_marginBottom="-13dp"
+            android:layout_marginBottom="-9dp"
             app:layout_constraintBottom_toTopOf="@+id/delete"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight="parent=0.1"
+            app:layout_constraintHeight="parent=0.19"
             app:layout_constraintStart_toStartOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -120,92 +121,11 @@
         </HorizontalScrollView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/decLayout"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="?actionBarSize"
-            android:animateLayoutChanges="true"
-            app:layout_constraintBottom_toTopOf="@+id/equationScrollView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/numeratorLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:animateLayoutChanges="true"
-                app:layout_constraintBottom_toTopOf="@+id/denominatorDivider"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <TextView
-                    android:id="@+id/num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" "
-                    android:textAlignment="center"
-                    android:textSize="32sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/denominatorLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:animateLayoutChanges="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/denominatorDivider">
-
-                <TextView
-                    android:id="@+id/den"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" "
-                    android:textAlignment="center"
-                    android:textSize="32sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <View
-                android:id="@+id/numeratorDivider"
-                android:layout_width="0dp"
-                android:layout_height="1.5dp"
-                android:background="?android:attr/listDivider"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/numeratorLayout"
-                app:layout_constraintStart_toStartOf="@+id/numeratorLayout"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <View
-                android:id="@+id/denominatorDivider"
-                android:layout_width="0dp"
-                android:layout_height="1.5dp"
-                android:background="?android:attr/listDivider"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/denominatorLayout"
-                app:layout_constraintStart_toStartOf="@+id/denominatorLayout"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/buttonView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintWidth="parent=0.55"
-            app:layout_constraintHeight="parent=0.49"
+            app:layout_constraintHeight="parent=0.5"
             android:background="@null"
             android:elevation="0dp"
             android:fitsSystemWindows="true"
@@ -255,8 +175,8 @@
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
                     android:textSize="@dimen/roundedTextSize"
-                    android:layout_margin="4dp"
-                    app:layout_constraintHeight="parent=0.225"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginVertical="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -272,9 +192,9 @@
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
                     android:textSize="@dimen/roundedTextSize"
-                    android:layout_margin="4dp"
-                    app:layout_constraintHeight="parent=0.225"
-                    app:layout_constraintBottom_toBottomOf="@id/mainOpsBottomGuide"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginVertical="2dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/mainOpsBottomGuide"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/mainOpsMiddleGuide" />
@@ -289,9 +209,9 @@
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
                     android:textSize="@dimen/roundedTextSize"
-                    android:layout_margin="4dp"
-                    app:layout_constraintHeight="parent=0.225"
-                    app:layout_constraintBottom_toBottomOf="@id/mainOpsMiddleGuide"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginVertical="2dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/mainOpsMiddleGuide"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/mainOpsTopGuide" />
@@ -306,9 +226,9 @@
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
                     android:textSize="@dimen/roundedTextSize"
-                    android:layout_margin="4dp"
-                    app:layout_constraintHeight="parent=0.225"
-                    app:layout_constraintBottom_toBottomOf="@id/mainOpsTopGuide"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginVertical="2dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/mainOpsTopGuide"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
@@ -359,13 +279,12 @@
                 android:text="0"
                 android:textColor="@color/white"
                 android:textSize="@dimen/roundedTextSize"
-                android:layout_margin="4dp"
-                app:layout_constraintHeight="parent=0.225"
-                app:layout_constraintWidth="parent=0.225"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/keypadLeftGuide"
+                app:layout_constraintEnd_toEndOf="@+id/keypadLeftGuide"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/keypadBottomGuide"/>
+                app:layout_constraintTop_toTopOf="@+id/keypadBottomGuide"/>
 
             <Button
                 android:id="@+id/bDec"
@@ -377,13 +296,12 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="@dimen/roundedTextSize"
-                android:layout_margin="4dp"
-                app:layout_constraintHeight="parent=0.225"
-                app:layout_constraintWidth="parent=0.225"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/keypadLeftGuide"
-                app:layout_constraintTop_toTopOf="@id/keypadBottomGuide"
-                app:layout_constraintEnd_toEndOf="@id/keypadRightGuide"/>
+                app:layout_constraintStart_toStartOf="@+id/keypadLeftGuide"
+                app:layout_constraintTop_toTopOf="@+id/keypadBottomGuide"
+                app:layout_constraintEnd_toEndOf="@+id/keypadRightGuide"/>
 
             <Button
                 android:id="@+id/bEquals"
@@ -395,13 +313,12 @@
                 android:textAllCaps="false"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/roundedTextSize"
-                android:layout_margin="4dp"
-                app:layout_constraintHeight="parent=0.225"
-                app:layout_constraintWidth="parent=0.225"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/keypadRightGuide"
-                app:layout_constraintTop_toTopOf="@id/keypadBottomGuide"
-                app:layout_constraintEnd_toStartOf="@id/mainOps" />
+                app:layout_constraintStart_toStartOf="@+id/keypadRightGuide"
+                app:layout_constraintTop_toTopOf="@+id/keypadBottomGuide"
+                app:layout_constraintEnd_toStartOf="@+id/mainOps" />
 
             <Button
                 android:id="@+id/b1"
@@ -412,13 +329,12 @@
                 android:text="1"
                 android:textColor="@color/white"
                 android:textSize="@dimen/roundedTextSize"
-                android:layout_margin="4dp"
-                app:layout_constraintHeight="parent=0.225"
-                app:layout_constraintWidth="parent=0.225"
-                app:layout_constraintBottom_toBottomOf="@id/keypadBottomGuide"
-                app:layout_constraintEnd_toEndOf="@id/keypadLeftGuide"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
+                app:layout_constraintBottom_toBottomOf="@+id/keypadBottomGuide"
+                app:layout_constraintEnd_toEndOf="@+id/keypadLeftGuide"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/keypadMiddleGuide"/>
+                app:layout_constraintTop_toTopOf="@+id/keypadMiddleGuide"/>
 
             <Button
                 android:id="@+id/b2"
@@ -429,13 +345,12 @@
                 android:text="2"
                 android:textColor="@color/white"
                 android:textSize="@dimen/roundedTextSize"
-                android:layout_margin="4dp"
-                app:layout_constraintHeight="parent=0.225"
-                app:layout_constraintWidth="parent=0.225"
-                app:layout_constraintBottom_toBottomOf="@id/keypadBottomGuide"
-                app:layout_constraintStart_toStartOf="@id/keypadLeftGuide"
-                app:layout_constraintTop_toTopOf="@id/keypadMiddleGuide"
-                app:layout_constraintEnd_toEndOf="@id/keypadRightGuide"/>
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
+                app:layout_constraintBottom_toBottomOf="@+id/keypadBottomGuide"
+                app:layout_constraintStart_toStartOf="@+id/keypadLeftGuide"
+                app:layout_constraintTop_toTopOf="@+id/keypadMiddleGuide"
+                app:layout_constraintEnd_toEndOf="@+id/keypadRightGuide"/>
 
             <Button
                 android:id="@+id/b3"
@@ -446,13 +361,12 @@
                 android:text="3"
                 android:textColor="@color/white"
                 android:textSize="@dimen/roundedTextSize"
-                android:layout_margin="4dp"
-                app:layout_constraintHeight="parent=0.225"
-                app:layout_constraintWidth="parent=0.225"
-                app:layout_constraintBottom_toBottomOf="@id/keypadBottomGuide"
-                app:layout_constraintStart_toStartOf="@id/keypadRightGuide"
-                app:layout_constraintTop_toTopOf="@id/keypadMiddleGuide"
-                app:layout_constraintEnd_toStartOf="@id/mainOps" />
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
+                app:layout_constraintBottom_toBottomOf="@+id/keypadBottomGuide"
+                app:layout_constraintStart_toStartOf="@+id/keypadRightGuide"
+                app:layout_constraintTop_toTopOf="@+id/keypadMiddleGuide"
+                app:layout_constraintEnd_toStartOf="@+id/mainOps" />
 
             <Button
                 android:id="@+id/b4"
@@ -463,13 +377,12 @@
                 android:text="4"
                 android:textColor="@color/white"
                 android:textSize="@dimen/roundedTextSize"
-                android:layout_margin="4dp"
-                app:layout_constraintHeight="parent=0.225"
-                app:layout_constraintWidth="parent=0.225"
-                app:layout_constraintBottom_toBottomOf="@id/keypadMiddleGuide"
-                app:layout_constraintEnd_toEndOf="@id/keypadLeftGuide"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
+                app:layout_constraintBottom_toBottomOf="@+id/keypadMiddleGuide"
+                app:layout_constraintEnd_toEndOf="@+id/keypadLeftGuide"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/keypadTopGuide"/>
+                app:layout_constraintTop_toTopOf="@+id/keypadTopGuide"/>
 
             <Button
                 android:id="@+id/b5"
@@ -480,13 +393,12 @@
                 android:text="5"
                 android:textColor="@color/white"
                 android:textSize="@dimen/roundedTextSize"
-                android:layout_margin="4dp"
-                app:layout_constraintHeight="parent=0.225"
-                app:layout_constraintWidth="parent=0.225"
-                app:layout_constraintBottom_toBottomOf="@id/keypadMiddleGuide"
-                app:layout_constraintStart_toStartOf="@id/keypadLeftGuide"
-                app:layout_constraintTop_toTopOf="@id/keypadTopGuide"
-                app:layout_constraintEnd_toEndOf="@id/keypadRightGuide"/>
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
+                app:layout_constraintBottom_toBottomOf="@+id/keypadMiddleGuide"
+                app:layout_constraintStart_toStartOf="@+id/keypadLeftGuide"
+                app:layout_constraintTop_toTopOf="@+id/keypadTopGuide"
+                app:layout_constraintEnd_toEndOf="@+id/keypadRightGuide"/>
 
             <Button
                 android:id="@+id/b6"
@@ -497,13 +409,12 @@
                 android:text="6"
                 android:textColor="@color/white"
                 android:textSize="@dimen/roundedTextSize"
-                android:layout_margin="4dp"
-                app:layout_constraintHeight="parent=0.225"
-                app:layout_constraintWidth="parent=0.225"
-                app:layout_constraintBottom_toBottomOf="@id/keypadMiddleGuide"
-                app:layout_constraintStart_toStartOf="@id/keypadRightGuide"
-                app:layout_constraintTop_toTopOf="@id/keypadTopGuide"
-                app:layout_constraintEnd_toStartOf="@id/mainOps" />
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
+                app:layout_constraintBottom_toBottomOf="@+id/keypadMiddleGuide"
+                app:layout_constraintStart_toStartOf="@+id/keypadRightGuide"
+                app:layout_constraintTop_toTopOf="@+id/keypadTopGuide"
+                app:layout_constraintEnd_toStartOf="@+id/mainOps" />
 
             <Button
                 android:id="@+id/b7"
@@ -514,11 +425,10 @@
                 android:text="7"
                 android:textColor="@color/white"
                 android:textSize="@dimen/roundedTextSize"
-                android:layout_margin="4dp"
-                app:layout_constraintHeight="parent=0.225"
-                app:layout_constraintWidth="parent=0.225"
-                app:layout_constraintBottom_toBottomOf="@id/keypadTopGuide"
-                app:layout_constraintEnd_toEndOf="@id/keypadLeftGuide"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
+                app:layout_constraintBottom_toBottomOf="@+id/keypadTopGuide"
+                app:layout_constraintEnd_toEndOf="@+id/keypadLeftGuide"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
@@ -531,13 +441,12 @@
                 android:text="8"
                 android:textColor="@color/white"
                 android:textSize="@dimen/roundedTextSize"
-                android:layout_margin="4dp"
-                app:layout_constraintHeight="parent=0.225"
-                app:layout_constraintWidth="parent=0.225"
-                app:layout_constraintBottom_toBottomOf="@id/keypadTopGuide"
-                app:layout_constraintStart_toStartOf="@id/keypadLeftGuide"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
+                app:layout_constraintBottom_toBottomOf="@+id/keypadTopGuide"
+                app:layout_constraintStart_toStartOf="@+id/keypadLeftGuide"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/keypadRightGuide"/>
+                app:layout_constraintEnd_toEndOf="@+id/keypadRightGuide"/>
 
             <Button
                 android:id="@+id/b9"
@@ -548,13 +457,12 @@
                 android:text="9"
                 android:textColor="@color/white"
                 android:textSize="@dimen/roundedTextSize"
-                android:layout_margin="4dp"
-                app:layout_constraintHeight="parent=0.225"
-                app:layout_constraintWidth="parent=0.225"
-                app:layout_constraintBottom_toBottomOf="@id/keypadTopGuide"
-                app:layout_constraintStart_toStartOf="@id/keypadRightGuide"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
+                app:layout_constraintBottom_toBottomOf="@+id/keypadTopGuide"
+                app:layout_constraintStart_toStartOf="@+id/keypadRightGuide"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/mainOps" />
+                app:layout_constraintEnd_toStartOf="@+id/mainOps" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -572,11 +480,10 @@
             android:animateLayoutChanges="true"
             android:background="@null"
             android:elevation="0dp"
-            app:layout_constraintBottom_toBottom="@+id/buttonView"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/buttonView"
+            app:layout_constraintEnd_toStartOf="@+id/buttonView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/buttonView">
+            app:layout_constraintTop_toTopOf="@+id/buttonView">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/scrollbarLeftGuide"
@@ -590,7 +497,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintGuide_percent="0.5"
-                android:orientation="vertical" />
+                android:orientation="horizontal" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/scrollbarRightGuide"
@@ -611,7 +518,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintGuide_percent="0.5"
-                android:orientation="horizontal" />
+                android:orientation="vertical" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/scrollbarBottomGuide"
@@ -624,7 +531,8 @@
                 android:id="@+id/bSqrt"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="4dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
                 android:background="@drawable/circle_secondary"
                 android:elevation="0dp"
                 android:onClick="operation"
@@ -634,18 +542,15 @@
                 android:textSize="@dimen/roundedTopBarCompTextSize"
                 app:layout_constraintBottom_toTopOf="@+id/scrollbarTopGuide"
                 app:layout_constraintEnd_toEndOf="@+id/scrollbarLeftGuide"
-                app:layout_constraintHeight="parent=0.225"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth="parent=0.225" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/bMod"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="4dp"
-                app:layout_constraintWidth="parent=0.225"
-                app:layout_constraintHeight="parent=0.225"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
                 android:background="@drawable/circle_secondary"
                 android:elevation="0dp"
                 android:onClick="operation"
@@ -654,7 +559,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/roundedTopBarCompTextSize"
                 app:layout_constraintBottom_toTopOf="@+id/scrollbarTopGuide"
-                app:layout_constraintEnd_toStartOf="@+id/scrollbarMiddleHGuide"
+                app:layout_constraintEnd_toStartOf="@+id/scrollbarMiddleVGuide"
                 app:layout_constraintStart_toStartOf="@+id/scrollbarLeftGuide"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -662,7 +567,8 @@
                 android:id="@+id/bParenthesisOpen"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="4dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
                 android:background="@drawable/circle_secondary"
                 android:elevation="0dp"
                 android:onClick="operation"
@@ -671,16 +577,15 @@
                 android:textSize="@dimen/roundedTopBarCompTextSize"
                 app:layout_constraintBottom_toTopOf="@+id/scrollbarTopGuide"
                 app:layout_constraintEnd_toStartOf="@+id/scrollbarRightGuide"
-                app:layout_constraintHeight="parent=0.225"
-                app:layout_constraintStart_toEndOf="@id/scrollbarMiddleVGuide"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth="parent=0.225" />
+                app:layout_constraintStart_toStartOf="@+id/scrollbarMiddleVGuide"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/bParenthesisClose"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="4dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
                 android:background="@drawable/circle_secondary"
                 android:elevation="0dp"
                 android:onClick="operation"
@@ -689,18 +594,15 @@
                 android:textSize="@dimen/roundedTopBarCompTextSize"
                 app:layout_constraintBottom_toTopOf="@+id/scrollbarTopGuide"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight="parent=0.225"
                 app:layout_constraintStart_toStartOf="@+id/scrollbarRightGuide"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth="parent=0.225" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/bFact"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="4dp"
-                app:layout_constraintWidth="parent=0.225"
-                app:layout_constraintHeight="parent=0.225"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
                 android:background="@drawable/circle_secondary"
                 android:elevation="0dp"
                 android:onClick="operation"
@@ -708,36 +610,36 @@
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/roundedTopBarCompTextSize"
-                app:layout_constraintTop_toTopOf="@+id/scrollbarTopGuide"
+                app:layout_constraintBottom_toTopOf="@+id/scrollbarMiddleHGuide"
                 app:layout_constraintEnd_toEndOf="@+id/scrollbarLeftGuide"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="@id/scrollbarMiddleHGuide" />
+                app:layout_constraintTop_toTopOf="@+id/scrollbarTopGuide" />
 
             <Button
                 android:id="@+id/bExp"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="4dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
                 android:background="@drawable/circle_secondary"
                 android:elevation="0dp"
                 android:onClick="operation"
-                android:paddingTop="10dp"
+                android:paddingTop="7.5dp"
                 android:text="^"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/roundedTopBarMiscTextSize"
-                app:layout_constraintBottom_toBottomOf="@id/scrollbarMiddleHGuide"
+                app:layout_constraintBottom_toBottomOf="@+id/scrollbarMiddleHGuide"
                 app:layout_constraintEnd_toStartOf="@+id/scrollbarMiddleVGuide"
-                app:layout_constraintHeight="parent=0.225"
                 app:layout_constraintStart_toStartOf="@+id/scrollbarLeftGuide"
-                app:layout_constraintTop_toTopOf="@+id/scrollbarTopGuide"
-                app:layout_constraintWidth="parent=0.225" />
+                app:layout_constraintTop_toTopOf="@+id/scrollbarTopGuide" />
 
             <Button
                 android:id="@+id/bLog"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="4dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
                 android:background="@drawable/circle_secondary"
                 android:elevation="0dp"
                 android:onClick="operation"
@@ -745,18 +647,17 @@
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/roundedTopBarTrigTextSize"
-                app:layout_constraintBottom_toTopOf="@+id/scrollbarMiddleVGuide"
+                app:layout_constraintBottom_toTopOf="@+id/scrollbarMiddleHGuide"
                 app:layout_constraintEnd_toStartOf="@+id/scrollbarRightGuide"
-                app:layout_constraintHeight="parent=0.225"
-                app:layout_constraintStart_toStartOf="@+id/scrollbarMiddleHGuide"
-                app:layout_constraintTop_toTopOf="@+id/scrollbarTopGuide"
-                app:layout_constraintWidth="parent=0.225" />
+                app:layout_constraintStart_toStartOf="@+id/scrollbarMiddleVGuide"
+                app:layout_constraintTop_toTopOf="@+id/scrollbarTopGuide" />
 
             <Button
                 android:id="@+id/bLn"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="4dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
                 android:background="@drawable/circle_secondary"
                 android:elevation="0dp"
                 android:onClick="operation"
@@ -764,18 +665,17 @@
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/roundedTopBarTrigTextSize"
-                app:layout_constraintBottom_toTopOf="@+id/scrollbarMiddleVGuide"
+                app:layout_constraintBottom_toTopOf="@+id/scrollbarMiddleHGuide"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight="parent=0.225"
                 app:layout_constraintStart_toStartOf="@+id/scrollbarRightGuide"
-                app:layout_constraintTop_toTopOf="@+id/scrollbarTopGuide"
-                app:layout_constraintWidth="parent=0.225" />
+                app:layout_constraintTop_toTopOf="@+id/scrollbarTopGuide" />
 
             <Button
                 android:id="@+id/bSin"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="4dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
                 android:background="@drawable/circle_secondary"
                 android:elevation="0dp"
                 android:onClick="operation"
@@ -785,16 +685,15 @@
                 android:textSize="@dimen/roundedTopBarTrigTextSize"
                 app:layout_constraintBottom_toTopOf="@+id/scrollbarBottomGuide"
                 app:layout_constraintEnd_toStartOf="@+id/scrollbarLeftGuide"
-                app:layout_constraintHeight="parent=0.225"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/scrollbarMiddleVGuide"
-                app:layout_constraintWidth="parent=0.225" />
+                app:layout_constraintTop_toTopOf="@+id/scrollbarMiddleHGuide" />
 
             <Button
                 android:id="@+id/bCos"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="4dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
                 android:background="@drawable/circle_secondary"
                 android:elevation="0dp"
                 android:onClick="operation"
@@ -803,17 +702,16 @@
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/roundedTopBarTrigTextSize"
                 app:layout_constraintBottom_toTopOf="@+id/scrollbarBottomGuide"
-                app:layout_constraintEnd_toStartOf="@+id/scrollbarMiddleHGuide"
-                app:layout_constraintHeight="parent=0.225"
+                app:layout_constraintEnd_toStartOf="@+id/scrollbarMiddleVGuide"
                 app:layout_constraintStart_toStartOf="@+id/scrollbarLeftGuide"
-                app:layout_constraintTop_toBottomOf="@+id/scrollbarMiddleVGuide"
-                app:layout_constraintWidth="parent=0.225" />
+                app:layout_constraintTop_toBottomOf="@+id/scrollbarMiddleHGuide" />
 
             <Button
                 android:id="@+id/bTan"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="4dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
                 android:background="@drawable/circle_secondary"
                 android:elevation="0dp"
                 android:onClick="operation"
@@ -823,16 +721,15 @@
                 android:textSize="@dimen/roundedTopBarTrigTextSize"
                 app:layout_constraintBottom_toTopOf="@+id/scrollbarBottomGuide"
                 app:layout_constraintEnd_toStartOf="@+id/scrollbarRightGuide"
-                app:layout_constraintHeight="parent=0.225"
-                app:layout_constraintStart_toStartOf="@+id/scrollbarMiddleHGuide"
-                app:layout_constraintTop_toBottomOf="@+id/scrollbarMiddleVGuide"
-                app:layout_constraintWidth="parent=0.225" />
+                app:layout_constraintStart_toStartOf="@+id/scrollbarMiddleVGuide"
+                app:layout_constraintTop_toBottomOf="@+id/scrollbarMiddleHGuide" />
 
             <Button
                 android:id="@+id/bCsc"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="4dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
                 android:background="@drawable/circle_secondary"
                 android:elevation="0dp"
                 android:onClick="operation"
@@ -842,16 +739,15 @@
                 android:textSize="@dimen/roundedTopBarTrigTextSize"
                 app:layout_constraintBottom_toTopOf="@+id/scrollbarBottomGuide"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight="parent=0.225"
                 app:layout_constraintStart_toStartOf="@+id/scrollbarRightGuide"
-                app:layout_constraintTop_toBottomOf="@+id/scrollbarMiddleVGuide"
-                app:layout_constraintWidth="parent=0.225" />
+                app:layout_constraintTop_toBottomOf="@+id/scrollbarMiddleHGuide" />
 
             <Button
                 android:id="@+id/bSec"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="4dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
                 android:background="@drawable/circle_secondary"
                 android:elevation="0dp"
                 android:onClick="operation"
@@ -861,16 +757,15 @@
                 android:textSize="@dimen/roundedTopBarTrigTextSize"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/scrollbarLeftGuide"
-                app:layout_constraintHeight="parent=0.225"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/scrollbarBottomGuide"
-                app:layout_constraintWidth="parent=0.225" />
+                app:layout_constraintTop_toTopOf="@+id/scrollbarBottomGuide" />
 
             <Button
                 android:id="@+id/bCot"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="4dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
                 android:background="@drawable/circle_secondary"
                 android:elevation="0dp"
                 android:onClick="operation"
@@ -879,17 +774,16 @@
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/roundedTopBarTrigTextSize"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/scrollbarMiddleHGuide"
-                app:layout_constraintHeight="parent=0.225"
+                app:layout_constraintEnd_toStartOf="@+id/scrollbarMiddleVGuide"
                 app:layout_constraintStart_toStartOf="@+id/scrollbarLeftGuide"
-                app:layout_constraintTop_toTopOf="@+id/scrollbarBottomGuide"
-                app:layout_constraintWidth="parent=0.225" />
+                app:layout_constraintTop_toTopOf="@+id/scrollbarBottomGuide" />
 
             <Button
                 android:id="@+id/bPi"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="4dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
                 android:background="@drawable/circle_secondary"
                 android:elevation="0dp"
                 android:onClick="number"
@@ -899,16 +793,15 @@
                 android:textSize="@dimen/roundedTopBarCompTextSize"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/scrollbarRightGuide"
-                app:layout_constraintHeight="parent=0.225"
-                app:layout_constraintStart_toStartOf="@+id/scrollbarMiddleHGuide"
-                app:layout_constraintTop_toTopOf="@+id/scrollbarBottomGuide"
-                app:layout_constraintWidth="parent=0.225" />
+                app:layout_constraintStart_toStartOf="@+id/scrollbarMiddleVGuide"
+                app:layout_constraintTop_toTopOf="@+id/scrollbarBottomGuide" />
 
             <Button
                 android:id="@+id/bE"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="4dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
                 android:background="@drawable/circle_secondary"
                 android:elevation="0dp"
                 android:onClick="number"
@@ -918,11 +811,8 @@
                 android:textSize="@dimen/roundedTopBarCompTextSize"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight="parent=0.225"
                 app:layout_constraintStart_toStartOf="@+id/scrollbarRightGuide"
-                app:layout_constraintTop_toTopOf="@+id/scrollbarBottomGuide"
-                app:layout_constraintWidth="parent=0.225" />
-
+                app:layout_constraintTop_toTopOf="@+id/scrollbarBottomGuide" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -950,11 +840,11 @@
             android:layout_height="wrap_content"
             android:background="@drawable/circle_cheat_the_system_again"
             android:onClick="backspace"
-            android:padding="24dp"
-            app:layout_constraintBottom_toBottomOf="@id/deleteAnchor"
-            app:layout_constraintEnd_toEndOf="@id/deleteAnchor"
-            app:layout_constraintStart_toStartOf="@id/deleteAnchor"
-            app:layout_constraintTop_toTopOf="@id/deleteAnchor"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/deleteAnchor"
+            app:layout_constraintEnd_toEndOf="@+id/deleteAnchor"
+            app:layout_constraintStart_toStartOf="@+id/deleteAnchor"
+            app:layout_constraintTop_toTopOf="@+id/deleteAnchor"
             app:srcCompat="@drawable/ic_outline_backspace_24" />
 
         <ImageButton
@@ -962,16 +852,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="14dp"
-            android:layout_marginBottom="4dp"
             android:background="@null"
             android:onClick="backspace"
             android:padding="12dp"
             android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/scrollBar"
+            app:layout_constraintBottom_toTopOf="@+id/scrollBar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight="ratio=1:1"
             app:layout_constraintTop_toTopOf="@+id/constraintLayout4"
-            app:layout_constraintWidth="parent=0.08"
+            app:layout_constraintWidth="parent=0.07"
             app:srcCompat="@drawable/ic_outline_backspace_24" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -981,7 +870,7 @@
             android:animateLayoutChanges="true"
             android:clipToPadding="false"
             android:padding="4dp"
-            app:layout_constraintBottom_toTopOf="@id/scrollBar"
+            app:layout_constraintBottom_toTopOf="@+id/scrollBar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -1006,8 +895,8 @@
                 android:src="@drawable/ic_baseline_add_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHeight="ratio=1:1"
-                app:layout_constraintWidth="parent=0.08"
-                app:layout_constraintStart_toEndOf="@id/bInv"
+                app:layout_constraintWidth="parent=0.07"
+                app:layout_constraintStart_toEndOf="@+id/bInv"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
@@ -1019,8 +908,8 @@
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHeight="ratio=1:1"
-                app:layout_constraintWidth="parent=0.08"
-                app:layout_constraintStart_toEndOf="@id/expandCustomsNew"
+                app:layout_constraintWidth="parent=0.07"
+                app:layout_constraintStart_toEndOf="@+id/expandCustomsNew"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
@@ -1032,8 +921,8 @@
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHeight="ratio=1:1"
-                app:layout_constraintWidth="parent=0.08"
-                app:layout_constraintStart_toEndOf="@id/customConstantsNew"
+                app:layout_constraintWidth="parent=0.07"
+                app:layout_constraintStart_toEndOf="@+id/customConstantsNew"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
@@ -1045,14 +934,15 @@
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHeight="ratio=1:1"
-                app:layout_constraintWidth="parent=0.08"
-                app:layout_constraintStart_toEndOf="@id/customFunctionsNew"
+                app:layout_constraintWidth="parent=0.07"
+                app:layout_constraintStart_toEndOf="@+id/customFunctionsNew"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/bInv"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginStart="2dp"
                 android:background="@drawable/circle_cheat_the_system_again"
                 android:onClick="inv"
                 android:text="INV"
@@ -1060,7 +950,7 @@
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/swapTopBar"
                 app:layout_constraintHeight="ratio=1:1"
-                app:layout_constraintWidth="parent=0.08"
+                app:layout_constraintWidth="parent=0.07"
                 app:layout_constraintStart_toEndOf="@+id/swapTopBar"
                 app:layout_constraintTop_toTopOf="@+id/swapTopBar" />
 
