@@ -4887,14 +4887,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             final String color = sp.getString(SettingsActivity.KEY_PREF_COLOR, "1");
             final String theme = sp.getString(SettingsActivity.KEY_PREF_THEME, "1");
 
-            tv.setText(getTvText().replace("E", Aux.multi + "10^"));
-
-            if (getTvText().contains("NaN") || tv.getText().toString().contains(getString(R.string.domain_error)) || getTvText().contains("∞") || getTvText().contains(getString(R.string.parse_error))) {
+            if (getTvText().contains("NaN") || getTvText().contains("Error") || tv.getText().toString().contains(getString(R.string.domain_error)) || getTvText().contains("∞")) {
                 clear(clear);
             }
             else {
                 if (tv.getText() != null && getTvText().length() > 0) {
                     String tvText = getTvText();
+
+                    tv.setText(tvText.replace("E", Aux.multi + "10^"));
 
                     clear(clear);
 
