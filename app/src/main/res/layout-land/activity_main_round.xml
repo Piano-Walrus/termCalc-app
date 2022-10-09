@@ -21,8 +21,8 @@
         <Button
             android:id="@+id/bgAnim"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="800dp"
-            android:layout_height="1150dp"
+            android:layout_width="1150dp"
+            android:layout_height="800dp"
             android:background="@color/darkColorPrimary"
             android:clickable="false"
             android:foreground="?attr/selectableItemBackground"
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="23dp"
-            android:layout_marginBottom="-13dp"
+            android:layout_marginBottom="-12dp"
             android:alpha="0.7"
             android:textAlignment="viewEnd"
             android:textColor="@color/white"
@@ -58,7 +58,7 @@
             android:animateLayoutChanges="true"
             android:rotation="180"
             android:scrollbars="none"
-            android:layout_marginBottom="-16dp"
+            android:layout_marginBottom="-13dp"
             app:layout_constraintBottom_toTopOf="@+id/delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight="parent=0.1"
@@ -202,16 +202,16 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/buttonView"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintHeight="parent=0.486"
+            app:layout_constraintWidth="parent=0.55"
+            app:layout_constraintHeight="parent=0.49"
             android:background="@null"
             android:elevation="0dp"
             android:fitsSystemWindows="true"
             android:layout_marginBottom="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintEnd_toEndOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/mainOps"
@@ -572,358 +572,357 @@
             android:animateLayoutChanges="true"
             android:background="@null"
             android:elevation="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/buttonView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight="parent=0.0855"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintBottom_toBottom="@+id/buttonView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/buttonView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/buttonView">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/verticalScrollView"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/scrollbarLeftGuide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintGuide_percent="0.25"
+                android:orientation="vertical" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/scrollbarMiddleHGuide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintGuide_percent="0.5"
+                android:orientation="vertical" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/scrollbarRightGuide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintGuide_percent="0.75"
+                android:orientation="vertical" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/scrollbarTopGuide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintGuide_percent="0.25"
+                android:orientation="horizontal" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/scrollbarMiddleVGuide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintGuide_percent="0.5"
+                android:orientation="horizontal" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/scrollbarBottomGuide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintGuide_percent="0.75"
+                android:orientation="horizontal" />
+
+            <Button
+                android:id="@+id/bSqrt"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:scrollbars="none"
+                android:layout_height="0dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/circle_secondary"
+                android:elevation="0dp"
+                android:onClick="operation"
+                android:text="√"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/roundedTopBarCompTextSize"
+                app:layout_constraintBottom_toTopOf="@+id/scrollbarTopGuide"
+                app:layout_constraintEnd_toEndOf="@+id/scrollbarLeftGuide"
+                app:layout_constraintHeight="parent=0.225"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth="parent=0.225" />
+
+            <Button
+                android:id="@+id/bMod"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="4dp"
+                app:layout_constraintWidth="parent=0.225"
+                app:layout_constraintHeight="parent=0.225"
+                android:background="@drawable/circle_secondary"
+                android:elevation="0dp"
+                android:onClick="operation"
+                android:text="mod"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/roundedTopBarCompTextSize"
+                app:layout_constraintBottom_toTopOf="@+id/scrollbarTopGuide"
+                app:layout_constraintEnd_toStartOf="@+id/scrollbarMiddleHGuide"
+                app:layout_constraintStart_toStartOf="@+id/scrollbarLeftGuide"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/bParenthesisOpen"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/circle_secondary"
+                android:elevation="0dp"
+                android:onClick="operation"
+                android:text="("
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/roundedTopBarCompTextSize"
+                app:layout_constraintBottom_toTopOf="@+id/scrollbarTopGuide"
+                app:layout_constraintEnd_toStartOf="@+id/scrollbarRightGuide"
+                app:layout_constraintHeight="parent=0.225"
+                app:layout_constraintStart_toEndOf="@id/scrollbarMiddleVGuide"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth="parent=0.225" />
+
+            <Button
+                android:id="@+id/bParenthesisClose"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/circle_secondary"
+                android:elevation="0dp"
+                android:onClick="operation"
+                android:text=")"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/roundedTopBarCompTextSize"
+                app:layout_constraintBottom_toTopOf="@+id/scrollbarTopGuide"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight="parent=0.225"
+                app:layout_constraintStart_toStartOf="@+id/scrollbarRightGuide"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth="parent=0.225" />
+
+            <Button
+                android:id="@+id/bFact"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="4dp"
+                app:layout_constraintWidth="parent=0.225"
+                app:layout_constraintHeight="parent=0.225"
+                android:background="@drawable/circle_secondary"
+                android:elevation="0dp"
+                android:onClick="operation"
+                android:text="!"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/roundedTopBarCompTextSize"
+                app:layout_constraintTop_toTopOf="@+id/scrollbarTopGuide"
+                app:layout_constraintEnd_toEndOf="@+id/scrollbarLeftGuide"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/scrollbarMiddleHGuide" />
+
+            <Button
+                android:id="@+id/bExp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/circle_secondary"
+                android:elevation="0dp"
+                android:onClick="operation"
+                android:paddingTop="10dp"
+                android:text="^"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/roundedTopBarMiscTextSize"
+                app:layout_constraintBottom_toBottomOf="@id/scrollbarMiddleHGuide"
+                app:layout_constraintEnd_toStartOf="@+id/scrollbarMiddleVGuide"
+                app:layout_constraintHeight="parent=0.225"
+                app:layout_constraintStart_toStartOf="@+id/scrollbarLeftGuide"
+                app:layout_constraintTop_toTopOf="@+id/scrollbarTopGuide"
+                app:layout_constraintWidth="parent=0.225" />
+
+            <Button
+                android:id="@+id/bLog"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/circle_secondary"
+                android:elevation="0dp"
+                android:onClick="operation"
+                android:text="log"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/roundedTopBarTrigTextSize"
+                app:layout_constraintBottom_toTopOf="@+id/scrollbarMiddleVGuide"
+                app:layout_constraintEnd_toStartOf="@+id/scrollbarRightGuide"
+                app:layout_constraintHeight="parent=0.225"
+                app:layout_constraintStart_toStartOf="@+id/scrollbarMiddleHGuide"
+                app:layout_constraintTop_toTopOf="@+id/scrollbarTopGuide"
+                app:layout_constraintWidth="parent=0.225" />
+
+            <Button
+                android:id="@+id/bLn"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/circle_secondary"
+                android:elevation="0dp"
+                android:onClick="operation"
+                android:text="ln"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/roundedTopBarTrigTextSize"
+                app:layout_constraintBottom_toTopOf="@+id/scrollbarMiddleVGuide"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight="parent=0.225"
+                app:layout_constraintStart_toStartOf="@+id/scrollbarRightGuide"
+                app:layout_constraintTop_toTopOf="@+id/scrollbarTopGuide"
+                app:layout_constraintWidth="parent=0.225" />
+
+            <Button
+                android:id="@+id/bSin"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/circle_secondary"
+                android:elevation="0dp"
+                android:onClick="operation"
+                android:text="sin"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/roundedTopBarTrigTextSize"
+                app:layout_constraintBottom_toTopOf="@+id/scrollbarBottomGuide"
+                app:layout_constraintEnd_toStartOf="@+id/scrollbarLeftGuide"
+                app:layout_constraintHeight="parent=0.225"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/scrollbarMiddleVGuide"
+                app:layout_constraintWidth="parent=0.225" />
+
+            <Button
+                android:id="@+id/bCos"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/circle_secondary"
+                android:elevation="0dp"
+                android:onClick="operation"
+                android:text="cos"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/roundedTopBarTrigTextSize"
+                app:layout_constraintBottom_toTopOf="@+id/scrollbarBottomGuide"
+                app:layout_constraintEnd_toStartOf="@+id/scrollbarMiddleHGuide"
+                app:layout_constraintHeight="parent=0.225"
+                app:layout_constraintStart_toStartOf="@+id/scrollbarLeftGuide"
+                app:layout_constraintTop_toBottomOf="@+id/scrollbarMiddleVGuide"
+                app:layout_constraintWidth="parent=0.225" />
+
+            <Button
+                android:id="@+id/bTan"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/circle_secondary"
+                android:elevation="0dp"
+                android:onClick="operation"
+                android:text="tan"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/roundedTopBarTrigTextSize"
+                app:layout_constraintBottom_toTopOf="@+id/scrollbarBottomGuide"
+                app:layout_constraintEnd_toStartOf="@+id/scrollbarRightGuide"
+                app:layout_constraintHeight="parent=0.225"
+                app:layout_constraintStart_toStartOf="@+id/scrollbarMiddleHGuide"
+                app:layout_constraintTop_toBottomOf="@+id/scrollbarMiddleVGuide"
+                app:layout_constraintWidth="parent=0.225" />
+
+            <Button
+                android:id="@+id/bCsc"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/circle_secondary"
+                android:elevation="0dp"
+                android:onClick="operation"
+                android:text="csc"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/roundedTopBarTrigTextSize"
+                app:layout_constraintBottom_toTopOf="@+id/scrollbarBottomGuide"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight="parent=0.225"
+                app:layout_constraintStart_toStartOf="@+id/scrollbarRightGuide"
+                app:layout_constraintTop_toBottomOf="@+id/scrollbarMiddleVGuide"
+                app:layout_constraintWidth="parent=0.225" />
+
+            <Button
+                android:id="@+id/bSec"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/circle_secondary"
+                android:elevation="0dp"
+                android:onClick="operation"
+                android:text="sec"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/roundedTopBarTrigTextSize"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/scrollbarLeftGuide"
+                app:layout_constraintHeight="parent=0.225"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/scrollbarBottomGuide"
+                app:layout_constraintWidth="parent=0.225" />
+
+            <Button
+                android:id="@+id/bCot"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/circle_secondary"
+                android:elevation="0dp"
+                android:onClick="operation"
+                android:text="cot"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/roundedTopBarTrigTextSize"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/scrollbarMiddleHGuide"
+                app:layout_constraintHeight="parent=0.225"
+                app:layout_constraintStart_toStartOf="@+id/scrollbarLeftGuide"
+                app:layout_constraintTop_toTopOf="@+id/scrollbarBottomGuide"
+                app:layout_constraintWidth="parent=0.225" />
+
+            <Button
+                android:id="@+id/bPi"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/circle_secondary"
+                android:elevation="0dp"
+                android:onClick="number"
+                android:text="π"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/roundedTopBarCompTextSize"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/scrollbarRightGuide"
+                app:layout_constraintHeight="parent=0.225"
+                app:layout_constraintStart_toStartOf="@+id/scrollbarMiddleHGuide"
+                app:layout_constraintTop_toTopOf="@+id/scrollbarBottomGuide"
+                app:layout_constraintWidth="parent=0.225" />
+
+            <Button
+                android:id="@+id/bE"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/circle_secondary"
+                android:elevation="0dp"
+                android:onClick="number"
+                android:text="e"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/roundedTopBarCompTextSize"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintHeight="parent=0.225"
+                app:layout_constraintStart_toStartOf="@+id/scrollbarRightGuide"
+                app:layout_constraintTop_toTopOf="@+id/scrollbarBottomGuide"
+                app:layout_constraintWidth="parent=0.225" />
 
-                <HorizontalScrollView
-                    android:id="@+id/horizontalComplex"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scrollbars="none"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <LinearLayout
-                        android:id="@+id/horizontalComplexLinearLayout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:animateLayoutChanges="true"
-                        android:orientation="horizontal">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/sinLayout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:animateLayoutChanges="true" >
-
-                            <Button
-                                android:id="@+id/bSqrt"
-                                android:layout_width="@dimen/roundedTopBarButtonWidth"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/circle_secondary"
-                                android:layout_marginVertical="4dp"
-                                android:layout_marginEnd="4dp"
-                                android:layout_marginStart="6dp"
-                                android:elevation="0dp"
-                                android:onClick="operation"
-                                android:text="√"
-                                android:textAllCaps="false"
-                                android:textColor="#FFFFFF"
-                                android:textSize="@dimen/roundedTopBarCompTextSize"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"/>
-
-                            <Button
-                                android:id="@+id/bSin"
-                                android:layout_width="@dimen/roundedTopBarButtonWidth"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/circle_secondary"
-                                android:layout_marginVertical="4dp"
-                                android:layout_marginEnd="4dp"
-                                android:layout_marginStart="6dp"
-                                android:elevation="0dp"
-                                android:onClick="operation"
-                                android:text="sin"
-                                android:textAllCaps="false"
-                                android:textColor="#FFFFFF"
-                                android:textSize="@dimen/roundedTopBarTrigTextSize"
-                                android:visibility="gone"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/cosLayout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:animateLayoutChanges="true" >
-
-                            <Button
-                                android:id="@+id/bExp"
-                                android:layout_width="@dimen/roundedTopBarButtonWidth"
-                                android:layout_height="match_parent"
-                                android:alpha="1"
-                                android:background="@drawable/circle_secondary"
-                                android:layout_marginVertical="4dp"
-                                android:layout_marginHorizontal="@dimen/roundedTopBarHMargin"
-                                android:elevation="0dp"
-                                android:onClick="operation"
-                                android:paddingTop="10dp"
-                                android:text="^"
-                                android:textColor="#FFFFFF"
-                                android:textSize="@dimen/roundedTopBarMiscTextSize"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"/>
-
-                            <Button
-                                android:id="@+id/bCos"
-                                android:layout_width="@dimen/roundedTopBarButtonWidth"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/circle_secondary"
-                                android:layout_marginVertical="4dp"
-                                android:layout_marginHorizontal="@dimen/roundedTopBarHMargin"
-                                android:elevation="0dp"
-                                android:onClick="operation"
-                                android:text="cos"
-                                android:textAllCaps="false"
-                                android:textColor="#FFFFFF"
-                                android:textSize="@dimen/roundedTopBarTrigTextSize"
-                                android:visibility="gone"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/tanLayout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:animateLayoutChanges="true" >
-
-                            <Button
-                                android:id="@+id/bFact"
-                                android:layout_width="@dimen/roundedTopBarButtonWidth"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/circle_secondary"
-                                android:layout_marginVertical="4dp"
-                                android:layout_marginHorizontal="@dimen/roundedTopBarHMargin"
-                                android:elevation="0dp"
-                                android:onClick="operation"
-                                android:text="!"
-                                android:textColor="#FFFFFF"
-                                android:textSize="@dimen/roundedTopBarCompTextSize"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"/>
-
-                            <Button
-                                android:id="@+id/bTan"
-                                android:layout_width="@dimen/roundedTopBarButtonWidth"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/circle_secondary"
-                                android:layout_marginVertical="4dp"
-                                android:layout_marginHorizontal="@dimen/roundedTopBarHMargin"
-                                android:elevation="0dp"
-                                android:onClick="operation"
-                                android:text="tan"
-                                android:textAllCaps="false"
-                                android:textColor="#FFFFFF"
-                                android:textSize="@dimen/roundedTopBarTrigTextSize"
-                                android:visibility="gone"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/cscLayout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:animateLayoutChanges="true" >
-
-                            <Button
-                                android:id="@+id/bPi"
-                                android:layout_width="@dimen/roundedTopBarButtonWidth"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/circle_secondary"
-                                android:layout_marginVertical="4dp"
-                                android:layout_marginHorizontal="@dimen/roundedTopBarHMargin"
-                                android:elevation="0dp"
-                                android:onClick="number"
-                                android:text="π"
-                                android:textAllCaps="false"
-                                android:textColor="#FFFFFF"
-                                android:textSize="@dimen/roundedTopBarCompTextSize"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"/>
-
-                            <Button
-                                android:id="@+id/bCsc"
-                                android:layout_width="@dimen/roundedTopBarButtonWidth"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/circle_secondary"
-                                android:layout_marginVertical="4dp"
-                                android:layout_marginHorizontal="@dimen/roundedTopBarHMargin"
-                                android:elevation="0dp"
-                                android:onClick="operation"
-                                android:text="csc"
-                                android:textAllCaps="false"
-                                android:textColor="#FFFFFF"
-                                android:textSize="@dimen/roundedTopBarTrigTextSize"
-                                android:visibility="gone"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/secLayout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:animateLayoutChanges="true" >
-
-                            <Button
-                                android:id="@+id/bE"
-                                android:layout_width="@dimen/roundedTopBarButtonWidth"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/circle_secondary"
-                                android:layout_marginVertical="4dp"
-                                android:layout_marginHorizontal="@dimen/roundedTopBarHMargin"
-                                android:elevation="0dp"
-                                android:onClick="number"
-                                android:text="e"
-                                android:textAlignment="center"
-                                android:textAllCaps="false"
-                                android:textColor="#FFFFFF"
-                                android:textSize="@dimen/roundedTopBarCompTextSize"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent" />
-
-                            <Button
-                                android:id="@+id/bSec"
-                                android:layout_width="@dimen/roundedTopBarButtonWidth"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/circle_secondary"
-                                android:layout_marginVertical="4dp"
-                                android:layout_marginHorizontal="@dimen/roundedTopBarHMargin"
-                                android:elevation="0dp"
-                                android:onClick="operation"
-                                android:text="sec"
-                                android:textAllCaps="false"
-                                android:textColor="#FFFFFF"
-                                android:textSize="@dimen/roundedTopBarTrigTextSize"
-                                android:visibility="gone"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/cotLayout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:animateLayoutChanges="true" >
-
-                            <Button
-                                android:id="@+id/bMod"
-                                android:layout_width="@dimen/roundedTopBarButtonWidth"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/circle_secondary"
-                                android:layout_marginVertical="4dp"
-                                android:layout_marginHorizontal="@dimen/roundedTopBarHMargin"
-                                android:elevation="0dp"
-                                android:onClick="operation"
-                                android:text="mod"
-                                android:textAlignment="center"
-                                android:textAllCaps="false"
-                                android:textColor="#FFFFFF"
-                                android:textSize="@dimen/roundedTopBarCompTextSize"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"/>
-
-                            <Button
-                                android:id="@+id/bCot"
-                                android:layout_width="@dimen/roundedTopBarButtonWidth"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/circle_secondary"
-                                android:layout_marginVertical="4dp"
-                                android:layout_marginHorizontal="@dimen/roundedTopBarHMargin"
-                                android:elevation="0dp"
-                                android:onClick="operation"
-                                android:text="cot"
-                                android:textAlignment="center"
-                                android:textAllCaps="false"
-                                android:textColor="#FFFFFF"
-                                android:textSize="@dimen/roundedTopBarTrigTextSize"
-                                android:visibility="gone"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <Button
-                            android:id="@+id/bLog"
-                            android:layout_width="@dimen/roundedTopBarButtonWidth"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/circle_secondary"
-                            android:layout_marginVertical="4dp"
-                            android:layout_marginHorizontal="@dimen/roundedTopBarHMargin"
-                            android:elevation="0dp"
-                            android:onClick="operation"
-                            android:text="log"
-                            android:textAlignment="center"
-                            android:textAllCaps="false"
-                            android:textColor="#FFFFFF"
-                            android:textSize="@dimen/roundedTopBarTrigTextSize" />
-
-                        <Button
-                            android:id="@+id/bLn"
-                            android:layout_width="@dimen/roundedTopBarButtonWidth"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/circle_secondary"
-                            android:layout_marginVertical="4dp"
-                            android:layout_marginHorizontal="@dimen/roundedTopBarHMargin"
-                            android:elevation="0dp"
-                            android:onClick="operation"
-                            android:text="ln"
-                            android:textAlignment="center"
-                            android:textAllCaps="false"
-                            android:textColor="#FFFFFF"
-                            android:textSize="@dimen/roundedTopBarTrigTextSize" />
-
-                        <Button
-                            android:id="@+id/complexSpacer"
-                            android:layout_width="96dp"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/circle_secondary"
-                            android:layout_marginVertical="4dp"
-                            android:layout_marginHorizontal="@dimen/roundedTopBarHMargin"
-                            android:elevation="0dp"
-                            android:clickable="false"
-                            android:text=" "
-                            android:visibility="invisible"
-                            android:textAlignment="center"
-                            android:textSize="@dimen/roundedTopBarCompTextSize" />
-                    </LinearLayout>
-                </HorizontalScrollView>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -972,7 +971,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight="ratio=1:1"
             app:layout_constraintTop_toTopOf="@+id/constraintLayout4"
-            app:layout_constraintWidth="parent=0.133"
+            app:layout_constraintWidth="parent=0.08"
             app:srcCompat="@drawable/ic_outline_backspace_24" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -990,12 +989,12 @@
                 android:id="@+id/swapTopBar"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="8dp"
+                android:visibility="gone"
                 android:background="@drawable/circle_cheat_the_system_again"
                 android:src="@drawable/ic_baseline_swap_horiz_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHeight="ratio=1:1"
-                app:layout_constraintWidth="parent=0.133"
+                app:layout_constraintWidth="parent=0.08"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -1007,7 +1006,7 @@
                 android:src="@drawable/ic_baseline_add_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHeight="ratio=1:1"
-                app:layout_constraintWidth="parent=0.133"
+                app:layout_constraintWidth="parent=0.08"
                 app:layout_constraintStart_toEndOf="@id/bInv"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -1020,7 +1019,7 @@
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHeight="ratio=1:1"
-                app:layout_constraintWidth="parent=0.133"
+                app:layout_constraintWidth="parent=0.08"
                 app:layout_constraintStart_toEndOf="@id/expandCustomsNew"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -1033,7 +1032,7 @@
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHeight="ratio=1:1"
-                app:layout_constraintWidth="parent=0.133"
+                app:layout_constraintWidth="parent=0.08"
                 app:layout_constraintStart_toEndOf="@id/customConstantsNew"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -1046,7 +1045,7 @@
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHeight="ratio=1:1"
-                app:layout_constraintWidth="parent=0.133"
+                app:layout_constraintWidth="parent=0.08"
                 app:layout_constraintStart_toEndOf="@id/customFunctionsNew"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -1059,74 +1058,11 @@
                 android:text="INV"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/swapTopBar"
                 app:layout_constraintHeight="ratio=1:1"
-                app:layout_constraintWidth="parent=0.133"
+                app:layout_constraintWidth="parent=0.08"
                 app:layout_constraintStart_toEndOf="@+id/swapTopBar"
                 app:layout_constraintTop_toTopOf="@+id/swapTopBar" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/tertiaryLeftGuide"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.75" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/tertiaryButtons"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:animateLayoutChanges="true"
-            android:elevation="14dp"
-            android:background="@drawable/circle_tertiary"
-            android:layout_marginStart="2dp"
-            android:layout_marginVertical="4dp"
-            android:layout_marginEnd="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/buttonView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tertiaryLeftGuide"
-            app:layout_constraintTop_toTopOf="@+id/scrollBar">
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/tertiaryMiddleGuide"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5" />
-
-            <Button
-                android:id="@+id/bParenthesisOpen"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:elevation="12dp"
-                android:onClick="operation"
-                android:text="("
-                android:textColor="#FFFFFF"
-                android:textSize="@dimen/roundedTopBarCompTextSize"
-                app:layout_constraintBottom_toBottomOf="@+id/bParenthesisClose"
-                app:layout_constraintEnd_toStartOf="@id/tertiaryMiddleGuide"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/bParenthesisClose"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:elevation="12dp"
-                android:onClick="operation"
-                android:text=")"
-                android:textColor="#FFFFFF"
-                android:textSize="@dimen/roundedTopBarCompTextSize"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tertiaryMiddleGuide"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth="parent=0.5" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
