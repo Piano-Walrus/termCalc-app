@@ -2624,6 +2624,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             tv.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
+                    if (equaled) {
+                        getEqualed();
+                        equaled = false;
+                    }
+
                     isLegacy = !hasFocus;
 
                     if (!hasFocus) {
