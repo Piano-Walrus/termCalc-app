@@ -1730,7 +1730,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     for (f = 1; f < customLabels.length; f++) {
                                         customLabels[f].setBackgroundTintList(ColorStateList.valueOf(labelColor));
                                     }
-                                } catch (NullPointerException e) {
+                                }
+                                catch (NullPointerException e) {
                                     e.printStackTrace();
                                 }
                             }
@@ -2782,45 +2783,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 LinearLayout compLayout = findViewById(R.id.horizontalComplexLinearLayout);
 
                 //SwapTopBar onClickListener
-                swapTopBar.setOnClickListener(v -> {
-                    int a;
+                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    swapTopBar.setOnClickListener(v -> {
+                        int a;
 
-                    //Spin the swapTopBar button
-                    ObjectAnimator.ofFloat(v, "rotation", 0f, inv.getVisibility() == View.VISIBLE ? -360f : 360f).setDuration(782).start();
+                        //Spin the swapTopBar button
+                        ObjectAnimator.ofFloat(v, "rotation", 0f, inv.getVisibility() == View.VISIBLE ? -360f : 360f).setDuration(782).start();
 
-                    inv.setVisibility(Math.abs(inv.getVisibility() - 8));
+                        inv.setVisibility(Math.abs(inv.getVisibility() - 8));
 
-                    final int inVisibility = inv.getVisibility();
-                    final boolean invIsVisible = inVisibility == View.VISIBLE;
-                    final int childCount = compLayout.getChildCount();
-                    int delay = 30;
-                    int delayCount = 0;
+                        final int inVisibility = inv.getVisibility();
+                        final boolean invIsVisible = inVisibility == View.VISIBLE;
+                        final int childCount = compLayout.getChildCount();
+                        int delay = 30;
+                        int delayCount = 0;
 
-                    for (a= invIsVisible ? 0 : childCount-1; a < childCount && a > -1; a += invIsVisible ? 1 : -1) {
-                        try {
-                            int finalA = a;
+                        for (a = invIsVisible ? 0 : childCount - 1; a < childCount && a > -1; a += invIsVisible ? 1 : -1) {
+                            try {
+                                int finalA = a;
 
-                            new Handler((Looper.myLooper())).postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    try {
-                                        ((ConstraintLayout) compLayout.getChildAt(finalA)).getChildAt(1).setVisibility(inVisibility);
+                                new Handler((Looper.myLooper())).postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            ((ConstraintLayout) compLayout.getChildAt(finalA)).getChildAt(1).setVisibility(inVisibility);
+                                        }
+                                        catch (Exception e) {
+                                            e.printStackTrace();
+
+                                            //Animate log and ln
+                                            compBar[finalA - 1].setVisibility(Math.abs(inVisibility - 8));
+                                        }
                                     }
-                                    catch (Exception e) {
-                                        e.printStackTrace();
-
-                                        //Animate log and ln
-                                        compBar[finalA - 1].setVisibility(Math.abs(inVisibility - 8));
-                                    }
-                                }
-                            }, (int) ((delayCount++ * delay) / (invIsVisible ? 1 : 2.6)));
+                                }, (int) ((delayCount++ * delay) / (invIsVisible ? 1 : 2.6)));
+                            }
+                            catch (Exception e) {
+                                e.printStackTrace();
+                                break;
+                            }
                         }
-                        catch (Exception e) {
-                            e.printStackTrace();
-                            break;
-                        }
-                    }
-                });
+                    });
+                }
 
                 if (!isCustomTheme) {
                     for (i = 0; i < allButtons.length; i++) {
@@ -2847,7 +2850,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     button.setBackground(background);
                                 }
 
-                                if (button.getParent().getParent() == compLayout || button.getParent() == compLayout)
+                                if (button.getParent().getParent() == compLayout || button.getParent() == compLayout || (orientation != Configuration.ORIENTATION_PORTRAIT && button.getParent() == findViewById(R.id.scrollBar)))
                                     button.setBackgroundTintList(ColorStateList.valueOf(secondaryColor));
 
                                 button.setElevation(0f);
