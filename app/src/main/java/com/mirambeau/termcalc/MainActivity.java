@@ -2139,7 +2139,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             tv.addTextChangedListener(new TextValidator(tv) {
                 @Override
                 public void validate(TextView textView, String before, String after) {
-                    wrapText((EditText) tv);
+                    wrapText(tv);
 
                     tv.setText(Aux.updateCommas(getTvText().replace("\n", "").trim()));
 
@@ -2622,11 +2622,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             tv.setBackgroundResource(android.R.color.transparent);
 
+            tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!tv.hasFocus())
+                        tv.requestFocus();
+
+                        snapCursor();
+                }
+            });
+
             tv.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
-                    int cursor = tv.getSelectionStart();
-
                     if (equaled)
                         getEqualed();
 
@@ -2641,7 +2649,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         }
                     }
                     else {
-                        tv.setSelection(cursor);
+                        snapCursor();
                     }
                 }
             });
@@ -2867,6 +2875,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     setMTColor(textColor);
                 }
+            }
+
+            try {
+                tv.requestFocus();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
             }
 
             tinydb.putBoolean("recreating", false);
@@ -4278,13 +4293,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public final void removeLast() {
         FloatingActionButton bDel = findViewById(R.id.bDel);
 
+        int i;
         int cursor = tv.getSelectionStart();
+        int selectionRange = tv.getSelectionEnd() - cursor;
         int endOffset = getTvText().length() - cursor;
         int deleteAmt = 1;
-        String tvText = getTvText();
 
-        if (tv.getSelectionEnd() - cursor == tvText.length())
+        String tvText = getTvText();
+        String before = "~";
+
+        try {
+           before = tvText.substring(0, cursor);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (selectionRange == tvText.length()) {
             clear(bDel);
+            return;
+        }
+        else if (selectionRange != 0) {
+            cursor = tv.getSelectionEnd();
+            deleteAmt = selectionRange;
+        }
+        else if (!before.equals("~") && before.endsWith("(")) {
+            for (i=before.length()-2; i >= 0; i--) {
+                if ((Aux.isLetter(Aux.chat(before, i)) && !Aux.chat(before, i).equals("e")) || (i > 0 && (Aux.chat(before, i-1) + Aux.chat(before, i)).equals(Aux.superMinus + Aux.superscripts[1])))
+                    deleteAmt++;
+                else
+                    break;
+            }
+        }
 
         try {
             if (cursor < tvText.length() && tvText.substring(0, cursor + 1).endsWith(",") && Aux.isDigit(Aux.chat(tvText, cursor-1)) && (cursor < 2 || !Aux.isDigit(Aux.chat(tvText, cursor-2))))
@@ -4351,15 +4391,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 else if (cursor > getTvText().length())
                     cursor = getTvText().length();
 
-                boolean tempFocus = tv.hasFocus();
-
                 if (!tv.hasFocus())
                     tv.requestFocus();
 
                 tv.setSelection(cursor);
-
-                if (cursor == getTvText().length() && !tempFocus)
-                    tv.clearFocus();
             }
             catch (Exception e){
                 e.printStackTrace();
@@ -4381,6 +4416,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             ((ViewGroup) findViewById(R.id.equationScrollView)).getLayoutTransition()
                     .disableTransitionType(LayoutTransition.CHANGING);
+        }
+
+        try {
+            tv.requestFocus();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
 
         try {
@@ -4411,6 +4453,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
         catch (Exception e){
+            e.printStackTrace();
+        }
+
+        try {
+            tv.requestFocus();
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -4449,7 +4498,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         isDec = false;
 
-        tv.clearFocus();
         isLegacy = true;
 
         equaled = false;
@@ -4720,7 +4768,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     clear.setColorFilter(Color.WHITE);
 
                 isLegacy = true;
-                tv.clearFocus();
 
                 if (tv.getText().toString().contains("Error") || tv.getText().toString().contains("NaN"))
                     tv.setEnabled(false);
@@ -4734,8 +4781,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         dontVibe = false;
 
                         bEquals.performClick();
-
-                        tv.clearFocus();
 
                         isLegacy = equaled;
 
@@ -4930,6 +4975,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .disableTransitionType(LayoutTransition.CHANGING);
         }
 
+        int cursor = tv.getSelectionStart();
+        int endOffset = getTvText().length() - cursor;
+        boolean beforeComma = false;
+
+        try {
+            if (getTvText().length() > 1 && Aux.chat(getTvText(), cursor).equals(","))
+                endOffset--;
+            else if (getTvText().length() > 1 && Aux.chat(getTvText(), cursor-1).equals(","))
+                beforeComma = true;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
         if (Aux.isNum(buttonText))
             number(v);
         else if (buttonText.equals("."))
@@ -4940,6 +4999,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             parenthesis(v);
         else
             operation(v);
+
+        cursor = getTvText().length() - endOffset;
+
+        try {
+            if (!beforeComma && getTvText().length() > 1 && Aux.chat(getTvText(), cursor-1).equals(","))
+                cursor--;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        tv.setSelection(cursor);
+
+        try {
+            tv.requestFocus();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -6297,6 +6375,59 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         }, 368);
+    }
+
+    public void snapCursor() {
+        int cursor = tv.getSelectionStart();
+        String tvText = getTvText();
+
+        System.out.println("initCursor = " + cursor);
+
+        if (tvText.contains("Error") || tvText.contains("NaN"))
+            return;
+
+        if (cursor < tvText.length() && cursor > 0) {
+            int right = 0, left = 0;
+
+            String previous = tvText.substring(cursor-1, cursor);
+            String next = tvText.substring(cursor, cursor+1);
+
+            if ((Aux.isLetter(previous) && !previous.equals("e")) && ((Aux.isLetter(next) || next.equals("(")) && !next.equals("e"))) {
+                if (next.equals("("))
+                    cursor++;
+                else {
+                    int i;
+
+                    for (i = cursor + 1; i < tvText.length(); i++) {
+                        if (!Aux.chat(tvText, i).equals("("))
+                            right++;
+                    }
+
+                    for (i = cursor-1; i >= 0; i--) {
+                        String current = Aux.chat(tvText, i);
+
+                        if (Aux.isLetter(current) && !current.equals("e"))
+                            left--;
+                    }
+
+                    cursor += Math.abs(left) < right ? left : right;
+                }
+            }
+            else if (Aux.isSuperscript(previous) || Aux.isSuperscript(next))
+                cursor += tvText.substring(cursor).indexOf("(") + 1;
+        }
+        else if (cursor != 0)
+            cursor = tvText.length();
+
+        System.out.println("finalCursor = " + cursor);
+
+        try {
+            tv.setSelection(cursor);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            tv.setSelection(tvText.length() - 1);
+        }
     }
 
     public String getTvText() {
