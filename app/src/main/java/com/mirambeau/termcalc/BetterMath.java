@@ -424,7 +424,7 @@ public class BetterMath {
                 String next = eqArray.get(index + 1);
 
                 try {
-                    if (parseBigDecimal(next, mc).compareTo(parseBigDecimal("9999999", mc)) <= 0)
+                    if (previous.length() + next.length() <= 7)
                         eqArray.set(index - 1, BigDecimalMath.pow(parseBigDecimal(previous, mc), parseBigDecimal(next, mc), mc).toPlainString());
                     else
                         throw new NaNException("Error: Result too large");
