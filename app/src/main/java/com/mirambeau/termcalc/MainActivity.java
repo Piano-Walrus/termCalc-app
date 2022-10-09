@@ -2625,10 +2625,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             tv.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
-                    if (equaled) {
+                    int cursor = tv.getSelectionStart();
+
+                    if (equaled)
                         getEqualed();
-                        equaled = false;
-                    }
 
                     isLegacy = !hasFocus;
 
@@ -2639,6 +2639,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         catch (Exception e) {
                             tv.setSelection(getTvText().length() - 1);
                         }
+                    }
+                    else {
+                        tv.setSelection(cursor);
                     }
                 }
             });
@@ -4887,7 +4890,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             final String color = sp.getString(SettingsActivity.KEY_PREF_COLOR, "1");
             final String theme = sp.getString(SettingsActivity.KEY_PREF_THEME, "1");
 
-            if (getTvText().contains("NaN") || getTvText().contains("Error") || tv.getText().toString().contains(getString(R.string.domain_error)) || getTvText().contains("∞")) {
+            if (getTvText().contains("NaN") || getTvText().contains("Error") || getTvText().contains("∞")) {
                 clear(clear);
             }
             else {
@@ -4943,6 +4946,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public final void operation(View v) {
         try {
             String pressed = ((Button) v).getText().toString();
+
+            if (getTvText().contains("NaN") || getTvText().contains("Error") || getTvText().contains("∞")) {
+                getEqualed();
+                return;
+            }
 
             if (isLegacy) {
                 boolean dont = false;
