@@ -47,14 +47,14 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.tunjid.androidx:material:1.0.0-rc06'
-    implementation 'com.google.android.material:material:1.2.0'
-    implementation 'androidx.drawerlayout:drawerlayout:1.1.0'
-    implementation 'androidx.navigation:navigation-fragment:2.3.0'
-    implementation 'androidx.navigation:navigation-ui:2.3.2'
-    implementation 'androidx.preference:preference:1.1.1'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.drawerlayout:drawerlayout:1.1.1'
+    implementation 'androidx.navigation:navigation-fragment:2.5.2'
+    implementation 'androidx.navigation:navigation-ui:2.5.2'
+    implementation 'androidx.preference:preference:1.2.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation files('libs/big-math-2.3.0.jar')
     testImplementation 'junit:junit:4.12'

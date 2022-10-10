@@ -4645,7 +4645,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                             }
 
                                             tv.setText(resultStr);
-                                            tv.setSelection(resultStr.length());
                                         }
                                         else {
                                             int precision = tinydb.getInt("precision");
@@ -4661,26 +4660,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                             while ((resultStr.endsWith("0") && resultStr.contains(".")) || resultStr.endsWith(".") || resultStr.endsWith("0E"))
                                                 resultStr = Aux.newTrim(resultStr, 1);
 
-                                           //enable transition type here for equalsAnimation
-
                                             if (!resultStr.equals(getTvText().trim()) && Aux.isFullSignedNumE(resultStr)) {
                                                 tv.setText(resultStr);
-                                                tv.setSelection(resultStr.length());
                                             }
                                         }
 
+                                        tv.clearFocus();
+
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                tv.selectAll();
+                                                tv.setSelection(tv.getSelectionEnd());
+                                                tv.requestFocus();
+                                            }
+                                        }, 500);
+
                                         if (!isBig) {
                                             ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
-                                                    .disableTransitionType(LayoutTransition.CHANGING);
+                                                    .enableTransitionType(LayoutTransition.CHANGING);
 
                                             ((ViewGroup) findViewById(R.id.equationScrollView)).getLayoutTransition()
-                                                    .disableTransitionType(LayoutTransition.CHANGING);
+                                                    .enableTransitionType(LayoutTransition.CHANGING);
                                         }
-
-                                        tv.selectAll();
-                                        tv.setSelection(tv.getSelectionEnd());
-
-
 
                                         try {
                                             if (previousExpression != null)
