@@ -2141,8 +2141,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public void validate(TextView textView, String before, String after) {
                     wrapText(tv);
 
-                    tv.setText(Aux.updateCommas(getTvText().replace("\n", "").trim()));
-
                     if (equaled && previousExpression != null) {
                         try {
                             previousExpression.setText("");
@@ -2151,6 +2149,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             e.printStackTrace();
                         }
                     }
+
+                    String tvText = Aux.updateCommas(getTvText().replace("\n", ""));
+
+                    if (tvText.length() < 1) {
+                        tv.setText(" ");
+                        return;
+                    }
+                    else
+                        tv.setText(tvText.replace(" ", "").trim());
 
                     if (!equaled && tinydb.getBoolean("showPreviousExpression") && previousExpression != null) {
                         new Thread(new Runnable() {
@@ -2539,32 +2546,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
 
+            //Set tertiary buttons to 0 elevation when in portrait mode on tablets
             if (isBig && orientation == Configuration.ORIENTATION_PORTRAIT) {
-                Button inv = findViewById(R.id.bInv);
+                Button[] buttons = {compBar[3], findViewById(R.id.bInv), inv2, bParenthesisOpen, bParenthesisClose};
 
-                if (compBar[3] != null) {
-                    compBar[3].setElevation(0);
-                    compBar[3].setStateListAnimator(null);
-                }
-
-                if (inv != null) {
-                    inv.setElevation(0);
-                    inv.setStateListAnimator(null);
-                }
-
-                if (inv2 != null) {
-                    inv2.setElevation(0);
-                    inv2.setStateListAnimator(null);
-                }
-
-                if (bParenthesisOpen != null) {
-                    bParenthesisOpen.setElevation(0);
-                    bParenthesisOpen.setStateListAnimator(null);
-                }
-
-                if (bParenthesisClose != null) {
-                    bParenthesisClose.setElevation(0);
-                    bParenthesisClose.setStateListAnimator(null);
+                for (i=0; i < buttons.length; i++) {
+                    if (buttons[i] != null) {
+                        try {
+                            buttons[i].setElevation(0);
+                            buttons[i].setStateListAnimator(null);
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             }
 
@@ -2586,11 +2581,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     mainOps[0].setTextColor(Color.parseColor(tinydb.getString("-b+t")));
                 }
 
-                if (theme.equals("1") && Aux.isColor(tinydb.getString("cMain"))) {
-                    if (Build.VERSION.SDK_INT >= 21) {
-                        main.setBackgroundColor(Color.parseColor(Aux.hexAdd(tinydb.getString("cMain"), -12)));
-                    }
-                }
+                if (theme.equals("1") && Aux.isColor(tinydb.getString("cMain")))
+                    main.setBackgroundColor(Color.parseColor(Aux.hexAdd(tinydb.getString("cMain"), -12)));
             }
 
             tinydb.putString("accentPrimary", primary);
@@ -2878,6 +2870,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
             try {
+                if (getTvText().length() < 1)
+                    tv.setText(" ");
+
+                tv.setSelection(getTvText().length());
                 tv.requestFocus();
             }
             catch (Exception e) {
@@ -4466,10 +4462,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //Clear (Long Press)
     public final void clear(View v) {
-        tv.setText("");
-
-        //Debug mode
-        ((Button) findViewById(R.id.bgAnim)).setText("");
+        tv.setText(" ");
+        tv.setSelection(getTvText().length());
+        tv.requestFocus();
 
         try {
             if (roundedButtons)
@@ -4497,17 +4492,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         isDec = false;
-
-        isLegacy = true;
-
         equaled = false;
     }
 
     @SuppressLint("SetTextI18n")
     public final void parenthesis(View v) {
+        int cursor = tv.getSelectionStart();
         String buttonText = ((Button) v).getText().toString();
 
-        if (isLegacy) {
+        if (cursor == getTvText().length()) {
             if (equaled && buttonText.equals("(")) {
                 if (getTvText().contains("E"))
                     tv.setText("(" + getTvText() + ")");
@@ -4521,19 +4514,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
         else {
-            int cursor = tv.getSelectionStart();
-
-            if (equaled)
+            if (equaled) {
                 getEqualed();
 
+                cursor = getTvText().length();
+                tv.setSelection(cursor);
+            }
+            else {
+                tv.setSelection(cursor);
+            }
+
             tv.requestFocus();
-            tv.setSelection(cursor);
 
             String tvText = getTvText();
 
             if (cursor > 0)
                 tv.setText(Aux.newReplace(cursor - 1, tvText, Aux.chat(tvText, cursor - 1) + buttonText));
-            else
+            else if (buttonText.equals("("))
                 tv.setText(buttonText + tvText.trim().replace("\0", "").replace(" ", "").trim());
 
             tv.setSelection(cursor + 1);
