@@ -4843,10 +4843,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         spin(clear, theme, color, R.drawable.ic_baseline_arrow_back_24);
                     }
 
-                    getTvText();
-
                     tv.append(keyNum.getText().toString());
-                    wrapText(tv);
+                    tv.setSelection(getTvText().length());
                 }
             }
             else {
@@ -4873,8 +4871,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     tv.setText((keyNum.getText().toString() + tvText.trim()).replace("\0", "").replace(" ", "").trim());
 
                 tv.setSelection(cursor + 1);
-
-                wrapText(tv);
             }
         }
         catch (Exception e){
