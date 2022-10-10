@@ -4980,6 +4980,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         catch (Exception e) {
             e.printStackTrace();
+
+            if (buttonText.equals("="))
+                cursor = getTvText().length();
         }
 
         if (Aux.isNum(buttonText))
@@ -4993,21 +4996,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else
             operation(v);
 
-        cursor = getTvText().length() - endOffset;
+        if (!buttonText.equals("=")) {
+            cursor = getTvText().length() - endOffset;
 
-        try {
-            if (!beforeComma && getTvText().length() > 1 && Aux.chat(getTvText(), cursor-1).equals(","))
-                cursor--;
+            try {
+                if (!beforeComma && getTvText().length() > 1 && Aux.chat(getTvText(), cursor - 1).equals(","))
+                    cursor--;
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            if (initLength == getTvText().length())
+                cursor = initCursor;
         }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        else
+            cursor = getTvText().length();
 
-        if (initLength == getTvText().length())
-            cursor = initCursor;
-
-        if (!buttonText.equals("="))
-            tv.setSelection(cursor);
+        tv.setSelection(cursor);
 
         try {
             tv.requestFocus();
