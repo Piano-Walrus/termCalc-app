@@ -942,9 +942,7 @@ public class Aux {
         if (isNull(str) || str.length() != 1)
             return "";
 
-        if (isDigit(str))
-            return superscripts[Integer.parseInt(str)];
-        else if (isLetter(str)) {
+        if (isLetter(str)) {
             if (isUpper) {
                 isUpper = false;
                 return superUpperLetters[str.charAt(0) - 65];
@@ -952,8 +950,8 @@ public class Aux {
             else
                 return superLowerLetters[str.charAt(0) - 97];
         }
-
-        return "";
+        else
+            return numToSuper(str);
     }
 
     public static boolean isNum(String str) {

@@ -107,26 +107,47 @@ public class FunctionsAdapter extends RecyclerView.Adapter<FunctionsAdapter.View
         int i;
         final int darkGray = Color.parseColor("#3C4043");
 
-        String functionText = current.function;
+        String functionText = current.function.replace("*", Aux.multiDot).replace(Aux.divi, "/");
 
         holder.title.setText(current.title);
 
-        boolean isExp = false;
-
         for (i=0; i < functionText.length(); i++){
             if (functionText.length() >= i + 1 && Aux.chat(functionText, i).equals("^") && (Aux.isDigit(Aux.chat(functionText, i + 1)) || Aux.isLetter(Aux.chat(functionText, i + 1)))) {
-                functionText = Aux.newReplace(i, functionText, "");
-                isExp = true;
-            }
+                int j;
 
-            if (isExp && (Aux.isDigit(Aux.chat(functionText, i)) || Aux.isLetter(Aux.chat(functionText, i)))){
-                functionText = Aux.newReplace(i, functionText, Aux.toSuper(Aux.chat(functionText, i)));
+                functionText = Aux.newReplace(i, functionText, "");
+
+                for (j=i; j < functionText.length(); j++) {
+                    String currentStr = Aux.chat(functionText, j);
+
+                    if (currentStr != null && (Aux.isDigit(currentStr) || currentStr.equals(".") || Aux.isLetter(currentStr)))
+                        Aux.newReplace(j, functionText, Aux.toSuper(Aux.chat(functionText, j)));
+                    else
+                        break;
+                }
+
+                i = j;
             }
-            else
-                isExp = false;
         }
 
-        holder.function.setText(functionText.replace("*", Aux.multiDot));
+        String functionBackup = functionText;
+
+        try {
+            for (i=functionText.indexOf("/"); i < functionText.length(); i++) {
+                if(i == -1)
+                    break;
+
+                if (Aux.isDigit(Aux.chat(functionText, i+1)) && Aux.isDigit(Aux.chat(functionText, i-1)))
+                    Aux.newReplace(i, functionText, "⁄");
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+
+            functionText = functionBackup;
+        }
+
+        holder.function.setText(functionText);
 
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(MainActivity.mainActivity);
         String theme = sp.getString(SettingsActivity.KEY_PREF_THEME, "1");
