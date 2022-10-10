@@ -2628,7 +2628,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     if (!tv.hasFocus())
                         tv.requestFocus();
 
-                        snapCursor();
+                    snapCursor();
                 }
             });
 
