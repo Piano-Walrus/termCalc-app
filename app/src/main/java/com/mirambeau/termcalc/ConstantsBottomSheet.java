@@ -451,70 +451,18 @@ public class ConstantsBottomSheet extends BottomSheetDialogFragment {
 
     public void insertConstant(String constant) {
         try {
-            Activity main = MainActivity.mainActivity;
-
             if (constant == null || constant.length() < 1)
                 return;
 
-            int i, j, k;
-            String[] superscripts = {"⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"};
+            EditText tv = MainActivity.mainActivity.findViewById(R.id.equation);
 
-            boolean found = false, isExp = false;
-
-            final Button[] nums = {main.findViewById(R.id.b0), main.findViewById(R.id.b1), main.findViewById(R.id.b2), main.findViewById(R.id.b3), main.findViewById(R.id.b4), main.findViewById(R.id.b5), main.findViewById(R.id.b6), main.findViewById(R.id.b7), main.findViewById(R.id.b8), main.findViewById(R.id.b9)};
-            final Button[] mainOps = {main.findViewById(R.id.sPlus), main.findViewById(R.id.sMinus), main.findViewById(R.id.sMulti), main.findViewById(R.id.sDiv)};
-            final Button[] compOps = {main.findViewById(R.id.bSqrt), main.findViewById(R.id.bExp), main.findViewById(R.id.bFact), main.findViewById(R.id.bPi), main.findViewById(R.id.bE), main.findViewById(R.id.bLog), main.findViewById(R.id.bLn)};
-            final Button[] extras = {main.findViewById(R.id.bDec), main.findViewById(R.id.bParenthesisOpen), main.findViewById(R.id.bParenthesisClose)};
-
-            final Button[][] all = {nums, mainOps, compOps, extras};
-
-            for (k = 0; k < constant.length(); k++) {
-                found = false;
-
-                if (Aux.chat(constant, k).equals("⁻")) {
-                    compOps[1].performClick();
-                    mainOps[1].performClick();
-                    isExp = true;
-                    continue;
-                }
-
-                for (i = 0; i < all.length; i++) {
-                    for (j = 0; j < all[i].length; j++) {
-                        if (Aux.chat(constant, k).equals(all[i][j].getText().toString())) {
-                            all[i][j].performClick();
-                            found = true;
-                            break;
-                        }
-
-                        else if (Aux.chat(constant, k).equals(".")) {
-                            all[3][0].performClick();
-                            found = true;
-                            break;
-                        }
-                    }
-
-                    if (j == all[i].length && !found) {
-                        for (j = 0; j < 10; j++) {
-                            if (Aux.chat(constant, k).equals(superscripts[j])) {
-                                if (!isExp) {
-                                    compOps[1].performClick();
-                                    nums[j].performClick();
-                                    isExp = true;
-                                    found = true;
-                                    break;
-                                }
-                                else {
-                                    nums[j].performClick();
-                                    found = true;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                    if (found)
-                        break;
-                }
+            try {
+                tv.setText(constant);
+                tv.requestFocus();
+                tv.setSelection(tv.getText().toString().length());
+            }
+            catch (Exception e) {
+                e.printStackTrace();
             }
 
             dismiss();

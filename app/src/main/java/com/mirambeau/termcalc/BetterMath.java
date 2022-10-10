@@ -427,7 +427,7 @@ public class BetterMath {
                     int lengthCheck;
 
                     try {
-                        lengthCheck = previous.substring(previous.indexOf(".")).replace(",", "").length();
+                        lengthCheck = previous.substring(0, previous.indexOf(".")).replace(",", "").replace("-", "").length();
                     }
                     catch (Exception e) {
                         e.printStackTrace();
@@ -435,7 +435,7 @@ public class BetterMath {
                     }
 
                     try {
-                        lengthCheck += next.substring(0, next.indexOf(".")).replace(",", "").length();
+                        lengthCheck += next.substring(0, next.indexOf(".")).replace(",", "").replace("-", "").length();
                     }
                     catch (Exception e) {
                         e.printStackTrace();

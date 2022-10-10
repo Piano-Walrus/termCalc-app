@@ -4761,8 +4761,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 }
 
-                if (tv.getText().toString().contains("Error") || tv.getText().toString().contains("NaN"))
+                if (tv.getText().toString().contains("Error") || tv.getText().toString().contains("NaN")) {
                     tv.setEnabled(false);
+                    tv.clearFocus();
+                }
+                else
+                    tv.setSelection(getTvText().length());
             }
             else {
                 if (!(tv.getText() == null || tv.getText().toString().equals(".") || tv.getText().toString().equals(" .") || tv.getText().toString().equals("\0.") || tv.getText().toString().endsWith("(") || tv.getText().toString().endsWith("÷") || tv.getText().toString().endsWith("×") || tv.getText().toString().endsWith("+") || tv.getText().toString().endsWith("-") || tv.getText().toString().endsWith("^") || tv.getText().toString().endsWith("√") || tv.getText().toString().endsWith("÷.") || tv.getText().toString().endsWith("+.") || tv.getText().toString().endsWith("-.") || tv.getText().toString().endsWith("^.") || tv.getText().toString().endsWith("×.") || tv.getText().toString().endsWith("√.") || tv.getText().toString().endsWith("log(.") || tv.getText().toString().endsWith("ln(."))) {
@@ -4771,12 +4775,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         isLegacy = true;
                         bEquals.performClick();
                         isLegacy = false;
-                        tv.setSelection(getTvText().length());
 
                         dontVibe = false;
 
-                        if (tv.getText().toString().contains("Error") || tv.getText().toString().contains("NaN"))
+                        if (tv.getText().toString().contains("Error") || tv.getText().toString().contains("NaN")) {
                             tv.setEnabled(false);
+                            tv.clearFocus();
+                        }
+                        else
+                            tv.setSelection(getTvText().length());
                     }
                     catch (Exception e) {
                         e.printStackTrace();
@@ -4790,8 +4797,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         tv.setText("EIM Parse Error");
 
-                        if (tv.getText().toString().contains("Error") || tv.getText().toString().contains("NaN"))
+                        if (tv.getText().toString().contains("Error") || tv.getText().toString().contains("NaN")) {
                             tv.setEnabled(false);
+                            tv.clearFocus();
+                        }
                     }
                 }
             }
@@ -5692,7 +5701,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                             isLegacy = false;
 
                                             try {
-                                                tv.setSelection(tv.getText().toString().length());
+                                                tv.setSelection(getTvText().length());
                                             }
                                             catch (Exception e) {
                                                 e.printStackTrace();
@@ -5731,7 +5740,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 });
 
-                //Focus the next EditText (if there are any below the current one) when enter is pressed
+                //Insert the calculated function result if the enter key is pressed while the last variable's EditText is focused
                 adapter.setOnItemEditorActionListener(new VariablesAdapter.OnItemEditorActionListener() {
                     @Override
                     public void onItemEditorAction(int position, EditText editText, int actionId) {
