@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     boolean isExpanded, hasExpanded, error, dError, didIntro, isBig, isCustomTheme, dontVibe, isFabExpanded;
     boolean isDate = false;
     boolean theme_boolean = true, isDynamic;
-    boolean isLegacy = true, shouldRecord = true, isFocus = false;
+    boolean shouldRecord = true, isFocus = false;
     boolean isDarkTab = true;
     boolean roundedButtons = false;
 
@@ -1998,7 +1998,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     if (equaled)
                         getEqualed();
 
-                    eq3 = isLegacy ? tvText : tvText.substring(0, cursor);
+                    eq3 = tv.getSelectionStart() == getTvText().length() ? tvText : tvText.substring(0, cursor);
 
                     for (i = eq3.length(); i > 0; i--) {
                         String current = Aux.chat(eq3, i);
@@ -2626,8 +2626,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public void onFocusChange(View v, boolean hasFocus) {
                     if (equaled)
                         getEqualed();
-
-                    isLegacy = !hasFocus;
 
                     if (!hasFocus) {
                         try {
@@ -4329,7 +4327,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             e.printStackTrace();
         }
 
-        if (isLegacy) {
+        if (tv.getSelectionStart() == getTvText().length()) {
             if (getTvText().length() <= 1)
                 clear(bDel);
             else {
@@ -4427,12 +4425,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 spin(bDel, theme, color, R.drawable.ic_baseline_arrow_back_24);
             }
-            else if (tvText.equals("\0") && (isLegacy || (tv.getSelectionStart() < 1)))
+            else if (tvText.equals("\0") && (tv.getSelectionStart() == getTvText().length() || (tv.getSelectionStart() < 1)))
                 clear(bDel);
             else
                 removeLast();
 
-            if ((getTvText().equals("\0") || getTvText().equals("") || getTvText().equals(" ")) && isLegacy)
+            if ((getTvText().equals("\0") || getTvText().equals("") || getTvText().equals(" ")) && tv.getSelectionStart() == getTvText().length())
                 clear(bDel);
 
             if (tvText.equals(getTvText()) && tv.getSelectionStart() > 0)
@@ -4559,7 +4557,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (Aux.isBinaryOp(Aux.lastChar(getTvText())))
                 tv.setText(Aux.newTrim(getTvText(), 1));
 
-            if (isLegacy) {
+            if (tv.getSelectionStart() == getTvText().length()) {
                 if (getTvText().equals("\0") || getTvText().equals("") || getTvText().equals(" "))
                     return;
 
@@ -4769,9 +4767,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (!(tv.getText() == null || tv.getText().toString().equals(".") || tv.getText().toString().equals(" .") || tv.getText().toString().equals("\0.") || tv.getText().toString().endsWith("(") || tv.getText().toString().endsWith("÷") || tv.getText().toString().endsWith("×") || tv.getText().toString().endsWith("+") || tv.getText().toString().endsWith("-") || tv.getText().toString().endsWith("^") || tv.getText().toString().endsWith("√") || tv.getText().toString().endsWith("÷.") || tv.getText().toString().endsWith("+.") || tv.getText().toString().endsWith("-.") || tv.getText().toString().endsWith("^.") || tv.getText().toString().endsWith("×.") || tv.getText().toString().endsWith("√.") || tv.getText().toString().endsWith("log(.") || tv.getText().toString().endsWith("ln(."))) {
                     try {
                         //TODO: Update !isLegacy
-                        isLegacy = true;
+                        int tempCursor = tv.getSelectionStart();
+
+                        tv.setSelection(getTvText().length());
                         bEquals.performClick();
-                        isLegacy = false;
+                        tv.setSelection(tempCursor);
 
                         dontVibe = false;
 
@@ -4814,7 +4814,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Button keyNum = (Button) v;
             final FloatingActionButton clear = findViewById(R.id.bDel);
 
-            if (isLegacy) {
+            if (tv.getSelectionStart() == getTvText().length()) {
                 if (!(!tv.getText().toString().equals("\0") && (getTvText().endsWith("π") || getTvText().endsWith("e") || getTvText().endsWith("!")))) {
                     if (equaled) {
                         equaled = false;
@@ -5663,9 +5663,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     @SuppressLint("SetTextI18n")
                                     @Override
                                     public void onClick(View v) {
-                                        if (tv.getText() != null && !tv.getText().toString().equals("\0")) {
+                                        if (tv.getText() != null && !getTvText().equals("\0")) {
                                             tv.setText(getTvText() + finalFunctionText);
-                                            isLegacy = false;
 
                                             try {
                                                 tv.setSelection(getTvText().length());
@@ -5686,7 +5685,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         }
                                         else {
                                             tv.setText(finalFunctionText);
-                                            isLegacy = false;
 
                                             try {
                                                 tv.setSelection(getTvText().length());
