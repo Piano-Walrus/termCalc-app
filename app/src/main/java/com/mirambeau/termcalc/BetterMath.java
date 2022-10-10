@@ -144,10 +144,20 @@ public class BetterMath {
 
         //Handle Negative Signs
         for (i=0; i < eqArray.size(); i++) {
-            if ((eqArray.get(i).equals("-")) && i != 0 && !Ax.isFullNum(eqArray.get(i-1)) && !eqArray.get(i-1).equals(")")) {
-                if (Ax.isFullNum(eqArray.get(i + 1))) {
-                    eqArray.set(i + 1, parseBigDecimal(eqArray.get(i + 1), mc).negate(mc).toPlainString());
-                    eqArray.remove(i);
+            if ((eqArray.get(i).equals("-"))) {
+                String previous = "~";
+
+                try {
+                    if (i > 0)
+                        previous = eqArray.get(i - 1);
+                }
+                catch (Exception ignored) {}
+
+                if ((i == 0 || (!Ax.isFullNum(previous) && !previous.equals(")") && !previous.equals("!")))) {
+                    if (Ax.isFullNum(eqArray.get(i + 1))) {
+                        eqArray.set(i + 1, parseBigDecimal(eqArray.get(i + 1), mc).negate(mc).toPlainString());
+                        eqArray.remove(i);
+                    }
                 }
             }
         }
@@ -211,10 +221,20 @@ public class BetterMath {
         //TODO: Handle parenthesis the first time so it doesn't have to iterate through the entire array twice
         //Handle Negative Signs (again)
         for (i=0; i < eqArray.size(); i++) {
-            if ((eqArray.get(i).equals("-")) && i != 0 && !Ax.isFullNum(eqArray.get(i-1)) && !eqArray.get(i-1).equals(")")) {
-                if (Ax.isFullNum(eqArray.get(i + 1))) {
-                    eqArray.set(i + 1, parseBigDecimal(eqArray.get(i + 1), mc).negate(mc).toPlainString());
-                    eqArray.remove(i);
+            if ((eqArray.get(i).equals("-"))) {
+                String previous = "~";
+
+                try {
+                    if (i > 0)
+                        previous = eqArray.get(i - 1);
+                }
+                catch (Exception ignored) {}
+
+                if ((i == 0 || (!Ax.isFullNum(previous) && !previous.equals(")") && !previous.equals("!")))) {
+                    if (Ax.isFullNum(eqArray.get(i + 1))) {
+                        eqArray.set(i + 1, parseBigDecimal(eqArray.get(i + 1), mc).negate(mc).toPlainString());
+                        eqArray.remove(i);
+                    }
                 }
             }
         }
