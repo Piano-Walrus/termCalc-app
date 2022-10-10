@@ -87,6 +87,9 @@ public class GeometryFragmentNew extends Fragment {
 
             boolean theme_boolean;
 
+            if (theme == null || !Aux.isDigit(theme))
+                theme = "1";
+
             if (theme.equals("5"))
                 theme_boolean = tinydb.getBoolean("theme_boolean");
             else {
@@ -94,10 +97,8 @@ public class GeometryFragmentNew extends Fragment {
                 theme_boolean = mPrefs.getBoolean("theme_boolean", true);
             }
 
-            assert color != null;
-            if (color.equals("\0")) {
+            if (color == null || !Aux.isDigit(color))
                 color = "1";
-            }
 
             if (!isCustomTheme) {
                 primary = primaryColors[Integer.parseInt(color) - 1];
@@ -233,15 +234,13 @@ public class GeometryFragmentNew extends Fragment {
                     tabLayout.setBackgroundColor(Color.WHITE);
                 }
 
-                if (Build.VERSION.SDK_INT >= 21) {
-                    MainActivity.mainActivity.getWindow().setNavigationBarColor(Color.parseColor("#1A1A1B"));
+                MainActivity.mainActivity.getWindow().setNavigationBarColor(Color.parseColor("#1A1A1B"));
 
-                    if (Build.VERSION.SDK_INT >= 23) {
-                        if (geoBG != null)
-                            geoBG.setFitsSystemWindows(true);
+                if (Build.VERSION.SDK_INT >= 23) {
+                    if (geoBG != null)
+                        geoBG.setFitsSystemWindows(true);
 
-                        MainActivity.mainActivity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                    }
+                    MainActivity.mainActivity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
                 }
             }
             else if (theme.equals("5")) {
@@ -351,7 +350,7 @@ public class GeometryFragmentNew extends Fragment {
             if (tabLayout != null) {
                 tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                     @Override
-                    public final void onTabSelected(TabLayout.Tab tab) {
+                    public void onTabSelected(TabLayout.Tab tab) {
                         final int position = tab.getPosition();
 
                         adapter = new GeoAdapter(allCards.get(position));
@@ -395,12 +394,12 @@ public class GeometryFragmentNew extends Fragment {
                     }
 
                     @Override
-                    public final void onTabUnselected(TabLayout.Tab tab) {
+                    public void onTabUnselected(TabLayout.Tab tab) {
 
                     }
 
                     @Override
-                    public final void onTabReselected(TabLayout.Tab tab) {
+                    public void onTabReselected(TabLayout.Tab tab) {
 
                     }
                 });

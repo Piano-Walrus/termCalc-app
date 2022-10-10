@@ -71,6 +71,12 @@ public class Aux {
     static FunctionsAdapter adapter;
     static boolean restored = false;
 
+    public static int[][] cursorColors;
+    public static int[] switchColors;
+
+    public static int cursorColor;
+    public static int switchColor;
+
     public static String getTheme(){
         String theme = tinydb().getString("theme");
 

@@ -236,6 +236,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
             //Start handling theme
+            int cursorInt = theme.equals("2") ? 1 : 0;
+            Aux.cursorColors = new int[][]{{R.style.d_03DAC5, R.style.d_009688, R.style.d_54AF57, R.style.d_00C7E0, R.style.d_2196F3, R.style.d_0D2A89, R.style.d_3F51B5, R.style.d_6C42B6, R.style.d_E32765, R.style.d_F44336, R.style.d_E77369, R.style.d_FF9800, R.style.d_FFC107, R.style.d_FEF65B, R.style.d_66BB6A, R.style.d_873804, R.style.d_9BCEE9}, {R.style.l_03DAC5, R.style.l_009688, R.style.l_54AF57, R.style.l_00C7E0, R.style.l_2196F3, R.style.l_0D2A89, R.style.l_3F51B5, R.style.l_6C42B6, R.style.l_E32765, R.style.l_F44336, R.style.l_E77369, R.style.l_FF9800, R.style.l_FFC107, R.style.l_FEF65B, R.style.l_66BB6A, R.style.l_873804, R.style.l_9BCEE9}};
+            Aux.switchColors = new int[]{R.style.ds_03DAC5, R.style.ds_009688, R.style.ds_54AF57, R.style.ds_00C7E0, R.style.ds_2196F3, R.style.ds_0D2A89, R.style.ds_3F51B5, R.style.ds_6C42B6, R.style.ds_E32765, R.style.ds_F44336, R.style.ds_E77369, R.style.ds_FF9800, R.style.ds_FFC107, R.style.ds_FEF65B, R.style.ds_66BB6A, R.style.ds_873804, R.style.ds_9BCEE9};
+
+
             final String[] primaryColors = {"#03DAC5", "#009688", "#54AF57", "#00C7E0", "#2196F3", "#0D2A89", "#3F51B5", "LILAC", "PINK", "#F44336", "#E77369", "#FF9800", "#FFC107", "#FEF65B", "#66BB6A", "#873804", "#B8E2F8"};
             final String[][] secondaryColors = {{"#53E2D4", "#4DB6AC", "#77C77B", "#51D6E8", "#64B5F6", "#1336A9", "#7986CB", "#8C6DCA", "#F06292", "#FF5956", "#EC8F87", "#FFB74D", "#FFD54F", "#FBF68D", "#EF5350", "#BD5E1E", "#B8E2F8"}, {"#00B5A3", "#00796B", "#388E3C", "#0097A7", "#1976D2", "#0A2068", "#303F9F", "#5E35B1", "#C2185B", "#D32F2F", "#D96459", "#F57C00", "#FFA000", "#F4E64B", "#EF5350", "#572300", "#9BCEE9"}};
             final String[][] tertiaryColors = {{"#3CDECE", "#26A69A", "#68B86E", "#39CFE3", "#42A5F5", "#0D2F9E", "#5C6BC0", "#7857BA", "#EC407A", "#FA4E4B", "#EB837A", "#FFA726", "#FFCB2E", "#F8F276", "#FF5754", "#A14D15", "#ABDBF4"}, {"#00C5B1", "#00897B", "#43A047", "#00ACC1", "#1E88E5", "#0A2373", "#3949AB", "#663ABD", "#D81B60", "#E33532", "#DE685D", "#FB8C00", "#FFB300", "#FCEE54", "#FF5754", "#612703", "#ABDBF4"}};
@@ -849,13 +854,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 bDel.setColorFilter(darkGray);
             }
 
+            if (isAlwaysDarkNav)
+                Aux.cursorColor = Aux.cursorColors[0][Integer.parseInt(color)-1];
+            else
+                Aux.cursorColor = Aux.cursorColors[cursorInt][Integer.parseInt(color)-1];
+
+            setTheme(Aux.cursorColor);
+
             //Light
             if (theme.equals("2")) {
-                if (isAlwaysDarkNav)
-                    setTheme(R.style.ThemeOverlay_AppCompat_Dark);
-                else
-                    setTheme(R.style.ThemeOverlay_AppCompat_Light);
-
                 final ImageButton expand = findViewById(R.id.expand);
 
                 //Color System Bars
@@ -879,7 +886,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             //Dark
             else if (theme.equals("1")) {
-                setTheme(R.style.ThemeOverlay_AppCompat_Dark);
                 toolbar.setPopupTheme(R.style.ThemeOverlay_AppCompat_Dark);
 
                 bgColor = "#272C33";
@@ -898,7 +904,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             //AMOLED BLACK w/ Buttons
             else if (theme.equals("3")) {
-                setTheme(R.style.ThemeOverlay_AppCompat_Dark);
                 toolbar.setPopupTheme(R.style.ThemeOverlay_AppCompat_Dark);
 
                 if (Build.VERSION.SDK_INT >= 21) {
@@ -917,12 +922,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             //AMOLED BLACK just text
             else if (theme.equals("4")) {
-                setTheme(R.style.ThemeOverlay_AppCompat_Dark);
                 toolbar.setPopupTheme(R.style.ThemeOverlay_AppCompat_Dark);
 
-                if (Build.VERSION.SDK_INT >= 21) {
-                    getWindow().setNavigationBarColor(Color.BLACK);
-                }
+                getWindow().setNavigationBarColor(Color.BLACK);
 
                 main.setFitsSystemWindows(true);
                 frame.setFitsSystemWindows(true);
@@ -997,11 +999,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 bTextColor = "#303030";
                 keypadColor = secondary;
 
-                setTheme(R.style.ThemeOverlay_AppCompat_Dark);
                 toolbar.setPopupTheme(R.style.ThemeOverlay_AppCompat_Dark);
 
-                if (Build.VERSION.SDK_INT >= 21) {
-                    getWindow().setNavigationBarColor(Color.BLACK);
+                getWindow().setNavigationBarColor(Color.BLACK);
 
                     if (Build.VERSION.SDK_INT >= 23) {
                         main.setFitsSystemWindows(true);
@@ -1014,7 +1014,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
                         }
                     }
-                }
 
                 setMTColor(monochromeTextColor);
 
@@ -1083,9 +1082,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 findViewById(R.id.buttonView).setElevation(0);
             }
-            else {
-                setTheme(R.style.ThemeOverlay_AppCompat_Dark);
-            }
+
 
             //Dodie Yellow Text Color
             if (!theme.equals("5") && !isCustomTheme) {
@@ -2156,7 +2153,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         tv.setText(" ");
                         return;
                     }
-                    else
+                    else if (!getTvText().equals(" "))
                         tv.setText(tvText.replace(" ", "").trim());
 
                     if (!equaled && tinydb.getBoolean("showPreviousExpression") && previousExpression != null) {
@@ -3094,24 +3091,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         String cMain = tinydb.getString("cMain");
 
+        boolean isAlwaysDarkNav = tinydb.getBoolean("isAlwaysDarkNav");
+
+        if (theme == null || !Aux.isDigit(theme))
+            theme = "1";
+
         // - Change Button Colors According to Theme -
+        int cursorInt = theme.equals("2") ? 1 : 0;
         String[] primaryColors = {"#03DAC5", "#009688", "#54AF57", "#00C7E0", "#2196F3", "#0D2A89", "#3F51B5", "LILAC", "PINK", "#F44336", "#E77369", "#FF9800", "#FFC107", "#FEF65B", "#66BB6A", "#873804", "#B8E2F8"};
         String[][] secondaryColors = {{"#53E2D4", "#4DB6AC", "#77C77B", "#51D6E8", "#64B5F6", "#1336A9", "#7986CB", "#8C6DCA", "#F06292", "#FF5956", "#EC8F87", "#FFB74D", "#FFD54F", "#FBF68D", "#EF5350", "#BD5E1E", "#B8E2F8"}, {"#00B5A3", "#00796B", "#388E3C", "#0097A7", "#1976D2", "#0A2068", "#303F9F", "#5E35B1", "#C2185B", "#D32F2F", "#D96459", "#F57C00", "#FFA000", "#F4E64B", "#EF5350", "#572300", "#9BCEE9"}};
         String[][] tertiaryColors = {{"#3CDECE", "#26A69A", "#68B86E", "#39CFE3", "#42A5F5", "#0D2F9E", "#5C6BC0", "#7857BA", "#EC407A", "#FA4E4B", "#EB837A", "#FFA726", "#FFCB2E", "#F8F276", "#FF5754", "#A14D15", "#ABDBF4"}, {"#00C5B1", "#00897B", "#43A047", "#00ACC1", "#1E88E5", "#0A2373", "#3949AB", "#663ABD", "#D81B60", "#E33532", "#DE685D", "#FB8C00", "#FFB300", "#FCEE54", "#FF5754", "#612703", "#ABDBF4"}};
 
-        if (color == null || color.equals("\0"))
+        if (color == null || !Aux.isDigit(color))
             color = "1";
 
-        if (theme != null) {
-            if (theme.equals("2"))
-                setTheme(R.style.ThemeOverlay_AppCompat_Light);
-            else
-                setTheme(R.style.ThemeOverlay_AppCompat_Dark);
-        }
-        else {
-            theme = "1";
-            setTheme(R.style.ThemeOverlay_AppCompat_Dark);
-        }
+        if (isAlwaysDarkNav)
+            setTheme(Aux.cursorColors[0][Integer.parseInt(color)-1]);
+        else
+            setTheme(Aux.cursorColors[cursorInt][Integer.parseInt(color)-1]);
 
         if (!isCustomTheme) {
             primary = primaryColors[Integer.parseInt(color) - 1];
@@ -3221,10 +3218,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) != null)
                     getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.fragment_container)).commit();
 
-                if (theme.equals("2"))
-                    setTheme(R.style.ThemeOverlay_AppCompat_Light);
+                if (isAlwaysDarkNav)
+                    setTheme(Aux.cursorColors[0][Integer.parseInt(color)-1]);
                 else
-                    setTheme(R.style.ThemeOverlay_AppCompat_Dark);
+                    setTheme(Aux.cursorColors[cursorInt][Integer.parseInt(color)-1]);
 
                 if (isCustomTheme) {
                     if (!Aux.isNull(cMain) && Aux.isColor(cMain))
@@ -4514,19 +4511,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
         else {
-            if (equaled) {
+            String tvText = getTvText();
+
+            if (equaled)
                 getEqualed();
 
-                cursor = getTvText().length();
-                tv.setSelection(cursor);
+            try {
+                tv.setSelection(cursor + (getTvText().length() - tvText.length()));
             }
-            else {
+            catch (Exception e) {
+                e.printStackTrace();
                 tv.setSelection(cursor);
             }
 
             tv.requestFocus();
 
-            String tvText = getTvText();
+            tvText = getTvText();
 
             if (cursor > 0)
                 tv.setText(Aux.newReplace(cursor - 1, tvText, Aux.chat(tvText, cursor - 1) + buttonText));
@@ -4870,10 +4870,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressLint("SetTextI18n")
     public final void number(View v) {
         try {
+            int cursor = tv.getSelectionStart();
             Button keyNum = (Button) v;
             final FloatingActionButton clear = findViewById(R.id.bDel);
 
-            if (isLegacy) {
+            if (cursor == getTvText().length()) {
                 if (!(!getTvText().equals("\0") && (getTvText().endsWith(".") && (keyNum.getText().toString().equals("π") || keyNum.getText().toString().equals("e") || keyNum.getText().toString().equals("∞"))))) {
                     //Clear previous result upon pressing a number key
                     if (equaled) {
@@ -4894,24 +4895,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
             else {
-                int cursor = tv.getSelectionStart();
+                String tvText = getTvText();
 
                 if (equaled)
                     getEqualed();
 
+                try {
+                    tv.setSelection(cursor + (getTvText().length() - tvText.length()));
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                    tv.setSelection(cursor);
+                }
+
                 tv.requestFocus();
-                tv.setSelection(cursor);
 
-                String tvText = tv.getText().toString();
+                tvText = getTvText();
 
-                if (cursor > 0) {
+                if (cursor > 0)
                     tv.setText(Aux.newReplace(cursor - 1, tv.getText().toString(), Aux.chat(tv.getText().toString(), cursor - 1) + ((Button) v).getText().toString()));
-                    tv.setSelection(cursor + 1);
-                }
-                else {
+                else
                     tv.setText((keyNum.getText().toString() + tvText.trim()).replace("\0", "").replace(" ", "").trim());
-                    tv.setSelection(cursor + 1);
-                }
+
+                tv.setSelection(cursor + 1);
 
                 wrapText(tv);
             }
@@ -5032,6 +5038,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressLint("SetTextI18n")
     public final void operation(View v) {
         try {
+            int cursor = tv.getSelectionStart();
             String pressed = ((Button) v).getText().toString();
 
             if (getTvText().contains("NaN") || getTvText().contains("Error") || getTvText().contains("∞")) {
@@ -5039,7 +5046,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return;
             }
 
-            if (isLegacy) {
+            if (cursor == getTvText().length()) {
                 boolean dont = false;
 
                 //If tv is empty, and the character can logically be placed first, then just type it
@@ -5099,17 +5106,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     isDec = false;
             }
             else {
-                //TODO: Just check whether or not substring(0, cursor).length() has changed,
-                // not the entire string, and if it has, then move the cursor accordingly
-                int cursor = tv.getSelectionStart();
+                String tvText = getTvText();
 
                 if (equaled)
                     getEqualed();
 
-                tv.requestFocus();
-                tv.setSelection(cursor);
+                try {
+                    tv.setSelection(cursor + (getTvText().length() - tvText.length()));
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                    tv.setSelection(cursor);
+                }
 
-                String tvText = getTvText();
+                tv.requestFocus();
+
+                tvText = getTvText();
 
                 if (pressed.startsWith("a") || pressed.startsWith("s") || pressed.startsWith("c") || pressed.startsWith("t") || pressed.startsWith("l"))
                     pressed += "(";
@@ -5120,27 +5132,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 //Cursor is at the beginning, AND pressed is something that can exist in the beginning of an expression
                 else if ((!Aux.isBinaryOp(pressed) || pressed.equals("-")) && !pressed.equals("!") && !pressed.equals(")"))
                     tv.setText((pressed + tvText.trim()).replace("\0", "").replace(" ", "").trim());
-                else
-                    pressed = "";
-
-                try {
-                    tv.setSelection(cursor + pressed.length());
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-
-                    try {
-                        tv.setSelection(cursor + 1);
-                    }
-                    catch (Exception e2) {
-                        e.printStackTrace();
-
-                        try {
-                            tv.setSelection(cursor);
-                        }
-                        catch (Exception ignored) {}
-                    }
-                }
             }
         }
         catch (Exception e){
