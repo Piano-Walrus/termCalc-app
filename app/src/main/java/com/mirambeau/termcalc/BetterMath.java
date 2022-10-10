@@ -144,7 +144,7 @@ public class BetterMath {
 
         //Handle Negative Signs
         for (i=0; i < eqArray.size(); i++) {
-            if ((eqArray.get(i).equals("-")) && (i == 0 || !Ax.isFullNum(eqArray.get(i-1)))) {
+            if ((eqArray.get(i).equals("-")) && i != 0 && !Ax.isFullNum(eqArray.get(i-1)) && !eqArray.get(i-1).equals(")")) {
                 if (Ax.isFullNum(eqArray.get(i + 1))) {
                     eqArray.set(i + 1, parseBigDecimal(eqArray.get(i + 1), mc).negate(mc).toPlainString());
                     eqArray.remove(i);
@@ -211,7 +211,7 @@ public class BetterMath {
         //TODO: Handle parenthesis the first time so it doesn't have to iterate through the entire array twice
         //Handle Negative Signs (again)
         for (i=0; i < eqArray.size(); i++) {
-            if ((eqArray.get(i).equals("-")) && (i == 0 || !Ax.isFullSignedNum(eqArray.get(i-1)))) {
+            if ((eqArray.get(i).equals("-")) && i != 0 && !Ax.isFullNum(eqArray.get(i-1)) && !eqArray.get(i-1).equals(")")) {
                 if (Ax.isFullNum(eqArray.get(i + 1))) {
                     eqArray.set(i + 1, parseBigDecimal(eqArray.get(i + 1), mc).negate(mc).toPlainString());
                     eqArray.remove(i);
