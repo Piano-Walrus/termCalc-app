@@ -67,6 +67,9 @@ public class BetterMath {
         int i;
         int parenthesisDifference = Ax.charDiff(eq, "(", ")");
 
+        if (eq.contains("Error"))
+            throw new NaNException("Parse Error");
+
         eq = eq.trim();
 
         eq = eq.replace(Ax.emDash, "-");

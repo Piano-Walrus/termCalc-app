@@ -20,9 +20,11 @@ public class AdvancedThemeOptionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advanced_options);
 
+        TinyDB tinydb = new TinyDB(MainActivity.mainActivity);
+
         Toolbar toolbar = findViewById(R.id.themeToolbar);
 
-        setTheme(R.style.Theme_MaterialComponents);
+        setTheme(Aux.switchColors[Aux.isFullNum(tinydb.getString("color")) ? (Integer.parseInt(tinydb.getString("color")) - 1) : 0]);
 
         toolbar.setTitle("Advanced Options");
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
@@ -31,10 +33,8 @@ public class AdvancedThemeOptionsActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_toolbar_back_light);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().setStatusBarColor(Color.parseColor("#16171B"));
-            getWindow().setNavigationBarColor(Color.parseColor("#16171B"));
-        }
+        getWindow().setStatusBarColor(Color.parseColor("#16171B"));
+        getWindow().setNavigationBarColor(Color.parseColor("#16171B"));
 
         getSupportFragmentManager()
                 .beginTransaction()
