@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     EditText tv;
 
     Boolean isInv = false, isDec = false, isRad = true, equaled = false, deleted = false, isEquals = false;
-    boolean isExpanded, hasExpanded, error, dError, didIntro, isBig, isSqrtFact, isCustomTheme, dontVibe, isFabExpanded;
+    boolean isExpanded, hasExpanded, error, dError, didIntro, isBig, isCustomTheme, dontVibe, isFabExpanded;
     boolean isDate = false;
     boolean theme_boolean = true, isDynamic;
     boolean isLegacy = true, shouldRecord = true, isFocus = false;
@@ -4501,7 +4501,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         isLegacy = true;
 
         equaled = false;
-        isSqrtFact = false;
     }
 
     @SuppressLint("SetTextI18n")
@@ -4762,13 +4761,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 }
 
-                isSqrtFact = false;
-
-                if (isCustomTheme && !Aux.isTinyColor("cFabText"))
-                    clear.setColorFilter(Color.WHITE);
-
-                isLegacy = true;
-
                 if (tv.getText().toString().contains("Error") || tv.getText().toString().contains("NaN"))
                     tv.setEnabled(false);
             }
@@ -4776,13 +4768,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (!(tv.getText() == null || tv.getText().toString().equals(".") || tv.getText().toString().equals(" .") || tv.getText().toString().equals("\0.") || tv.getText().toString().endsWith("(") || tv.getText().toString().endsWith("÷") || tv.getText().toString().endsWith("×") || tv.getText().toString().endsWith("+") || tv.getText().toString().endsWith("-") || tv.getText().toString().endsWith("^") || tv.getText().toString().endsWith("√") || tv.getText().toString().endsWith("÷.") || tv.getText().toString().endsWith("+.") || tv.getText().toString().endsWith("-.") || tv.getText().toString().endsWith("^.") || tv.getText().toString().endsWith("×.") || tv.getText().toString().endsWith("√.") || tv.getText().toString().endsWith("log(.") || tv.getText().toString().endsWith("ln(."))) {
                     try {
                         //TODO: Update !isLegacy
-
                         isLegacy = true;
-                        dontVibe = false;
-
                         bEquals.performClick();
+                        isLegacy = false;
+                        tv.setSelection(getTvText().length());
 
-                        isLegacy = equaled;
+                        dontVibe = false;
 
                         if (tv.getText().toString().contains("Error") || tv.getText().toString().contains("NaN"))
                             tv.setEnabled(false);
@@ -4976,7 +4967,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         int cursor = tv.getSelectionStart();
+        int initCursor = cursor;
         int endOffset = getTvText().length() - cursor;
+        int initLength = getTvText().length();
         boolean beforeComma = false;
 
         try {
@@ -5010,7 +5003,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             e.printStackTrace();
         }
 
-        tv.setSelection(cursor);
+        if (initLength == getTvText().length())
+            cursor = initCursor;
+
+        if (!buttonText.equals("="))
+            tv.setSelection(cursor);
 
         try {
             tv.requestFocus();
