@@ -121,7 +121,7 @@ public class FunctionsAdapter extends RecyclerView.Adapter<FunctionsAdapter.View
                     String currentStr = Aux.chat(functionText, j);
 
                     if (currentStr != null && (Aux.isDigit(currentStr) || currentStr.equals(".") || Aux.isLetter(currentStr)))
-                        Aux.newReplace(j, functionText, Aux.toSuper(Aux.chat(functionText, j)));
+                        functionText = Aux.newReplace(j, functionText, Aux.toSuper(Aux.chat(functionText, j)));
                     else
                         break;
                 }
