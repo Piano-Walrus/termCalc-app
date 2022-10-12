@@ -4687,7 +4687,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                                 tv.setSelection(tv.getSelectionEnd());
                                                 tv.requestFocus();
                                             }
-                                        }, 385);
+                                        }, 300);
 
                                         if (!isBig) {
                                             ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
