@@ -2151,6 +2151,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     if (tvText.length() < 1) {
                         tv.setText(" ");
+                        tv.setSelection(getTvText().length());
                         return;
                     }
                     else if (!getTvText().equals(" ")) {
@@ -2871,6 +2872,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             finish();
         }
     }
+    //end of onCreate
 
     @Override
     public final boolean onOptionsItemSelected(@NonNull MenuItem item){
@@ -4674,7 +4676,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                                 tv.setSelection(tv.getSelectionEnd());
                                                 tv.requestFocus();
                                             }
-                                        }, 500);
+                                        }, 475);
 
                                         if (!isBig) {
                                             ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
@@ -4866,11 +4868,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 tvText = getTvText();
 
                 if (cursor > 0)
-                    tv.setText(Aux.newReplace(cursor - 1, tv.getText().toString(), Aux.chat(tv.getText().toString(), cursor - 1) + ((Button) v).getText().toString()));
+                    tv.setText(Aux.newReplace(cursor - 1, getTvText(), Aux.chat(getTvText(), cursor - 1) + ((Button) v).getText().toString()));
                 else
                     tv.setText((keyNum.getText().toString() + tvText.trim()).replace("\0", "").replace(" ", "").trim());
 
-                tv.setSelection(cursor + 1);
+                try {
+                    tv.setSelection(cursor + 1);
+                }
+                catch (Exception e) {
+                    tv.setSelection(getTvText().length());
+                }
             }
         }
         catch (Exception e){
