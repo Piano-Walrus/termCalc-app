@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     EditText tv;
 
     Boolean isInv = false, isDec = false, isRad = true, equaled = false, deleted = false, isEquals = false;
-    boolean isExpanded, hasExpanded, error, dError, didIntro, isBig, isCustomTheme, dontVibe, isFabExpanded;
+    boolean isExpanded, hasExpanded, error, didIntro, isBig, isCustomTheme, dontVibe, isFabExpanded;
     boolean isDate = false;
     boolean theme_boolean = true, isDynamic;
     boolean shouldRecord = true, isFocus = false;
@@ -3029,25 +3029,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final String theme = sp.getString(SettingsActivity.KEY_PREF_THEME, "1");
         final String color = sp.getString(SettingsActivity.KEY_PREF_COLOR, "1");
 
-        boolean zeroFact = false;
-
-        if (tv.getText() != null && !tv.getText().toString().equals("\0")) {
-            if (tv.getText().toString().equals("0.0!") || tv.getText().toString().equals(" 0.0!"))
-                zeroFact = true;
-        }
+        boolean zeroFact = tv.getText() != null && !getTvText().equals("\0") && (getTvText().equals("0.0!") || getTvText().equals(" 0.0!"));
 
         clear(bDel);
 
-        if (zeroFact){
-            tv.setText("1");
-        }
-        else if (dError) {
-            tv.setText(R.string.domain_error);
-            tv.setEnabled(false);
-        }
-        else {
-            tv.setText("NaN");
-        }
+        tv.setText(zeroFact ? "1" : "NaN");
+        tv.setEnabled(zeroFact);
 
         equaled = true;
 
@@ -3055,9 +3042,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         spin(bDel, theme, color, R.drawable.ic_close_24);
 
-        tv.setEnabled(false);
         error = false;
-        dError = false;
 
         bEquals.setText("=");
     }
@@ -4448,6 +4433,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //Clear (Long Press)
     public final void clear(View v) {
         tv.setText(" ");
+
+        tv.setEnabled(true);
         tv.setSelection(getTvText().length());
         tv.requestFocus();
 
@@ -4580,7 +4567,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     if (tv.getText().toString().equals("0÷0") || tv.getText().toString().equals(" 0÷0") || tv.getText().toString().equals("0.0÷0.0") || tv.getText().toString().equals(" 0.0÷0.0"))
                         error = true;
 
-                    if (error || dError) {
+                    if (error) {
                         error();
 
                         showRippleAnimation(findViewById(R.id.bgAnim));
@@ -4609,7 +4596,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             String lastChar = Aux.lastChar(getTvText());
 
                             if (lastChar != null && ((lastChar.equals("!") || lastChar.equals(")") || lastChar.equals("π") || lastChar.equals("e") || lastChar.equals("∞") || Aux.isDigit(lastChar)))) {
-                                if (error || dError)
+                                if (error)
                                     error();
                                 else {
                                     if (!isBig) {
@@ -4676,7 +4663,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                                 tv.setSelection(tv.getSelectionEnd());
                                                 tv.requestFocus();
                                             }
-                                        }, 475);
+                                        }, 385);
 
                                         if (!isBig) {
                                             ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
@@ -4851,6 +4838,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
             else {
                 String tvText = getTvText();
+                String output;
 
                 if (equaled)
                     getEqualed();
@@ -4868,9 +4856,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 tvText = getTvText();
 
                 if (cursor > 0)
-                    tv.setText(Aux.newReplace(cursor - 1, getTvText(), Aux.chat(getTvText(), cursor - 1) + ((Button) v).getText().toString()));
+                    output = Aux.newReplace(cursor - 1, getTvText(), Aux.chat(getTvText(), cursor - 1) + ((Button) v).getText().toString()).replace(" ", "");
                 else
-                    tv.setText((keyNum.getText().toString() + tvText.trim()).replace("\0", "").replace(" ", "").trim());
+                    output = (keyNum.getText().toString() + tvText.trim()).replace("\0", "").replace(" ", "").replace(" ", "");
+
+                tv.setText(output);
 
                 try {
                     tv.setSelection(cursor + 1);
