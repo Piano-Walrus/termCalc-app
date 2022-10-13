@@ -1196,25 +1196,27 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/styleContainer"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:paddingVertical="8dp"
-            android:paddingHorizontal="12dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
             android:background="@drawable/editor_pill_background"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/shapeContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/shapeContainer">
 
-            <View
-                android:id="@+id/styleDivider"
-                android:layout_width="1dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginVertical="0dp"
-                android:background="?android:attr/listDivider"
-                app:layout_constraintTop_toTopOf="parent"
+            <ImageButton
+                android:id="@+id/styleColorPlaceholder"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/editor_light_circle"
+                android:clickable="false"
+                android:elevation="6dp"
+                android:src="@drawable/editor_inner_accent_circle"
+                app:tint="#2A2A2A"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/styleLabel"
@@ -1225,7 +1227,7 @@
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/styleDivider"
+                app:layout_constraintStart_toEndOf="@id/styleColorPlaceholder"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -1235,6 +1237,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginVertical="8dp"
             android:paddingVertical="8dp"
             android:paddingHorizontal="12dp"
             android:background="@drawable/editor_pill_background"
