@@ -1272,7 +1272,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:animateLayoutChanges="true"
-        android:alpha="0.28"
+        android:alpha="0.2"
         android:background="#0A0A0A"
         android:elevation="12dp"
         android:visibility="invisible"

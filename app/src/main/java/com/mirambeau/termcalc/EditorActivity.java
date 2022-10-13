@@ -1252,7 +1252,7 @@ public class EditorActivity extends AppCompatActivity {
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(editorBG);
         constraintSet.connect(R.id.editorDrawer,ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END,0);
-        constraintSet.connect(R.id.editorDrawer,ConstraintSet.START, ConstraintSet.PARENT_ID,ConstraintSet.START,0);
+        constraintSet.clear(R.id.editorDrawer,ConstraintSet.START);
         constraintSet.applyTo(editorBG);
 
         drawerBG.setVisibility(View.VISIBLE);
@@ -1270,7 +1270,7 @@ public class EditorActivity extends AppCompatActivity {
 
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(editorBG);
-        constraintSet.connect(R.id.editorDrawer,ConstraintSet.END, ConstraintSet.UNSET, ConstraintSet.UNSET,0);
+        constraintSet.clear(R.id.editorDrawer,ConstraintSet.END);
         constraintSet.connect(R.id.editorDrawer,ConstraintSet.START, ConstraintSet.PARENT_ID,ConstraintSet.END,0);
         constraintSet.applyTo(editorBG);
 
