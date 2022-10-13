@@ -176,48 +176,68 @@ public class EditorActivity extends AppCompatActivity {
 
             newTheme = Aux.getThemeInt();
 
-
-
             //Initialize BackupCards
-            try {
-                File directory = new File(this.getFilesDir(), "themes");
-                File[] files = directory.listFiles();
+            File directory = new File(this.getFilesDir(), "themes");
+            File[] files = directory.listFiles();
 
-                if (files != null) {
-                    if (files.length > 0) {
-                        for (File file : files) {
-                            String themeName = file.getName();
+            if (files != null) {
+                if (files.length > 0) {
+                    int f;
 
-                            if (themeName.endsWith(".txt")) {
-                                themeName = themeName.replace(".txt", "");
+                    for (f = 0; f < files.length; f++) {
+                        String themeName = files[f].getName();
 
-                                boolean isFavorite = tinydb.getBoolean(themeName + "-favorite");
+                        if (themeName.endsWith(".txt")) {
+                            themeName = themeName.replace(".txt", "");
 
-                                if (isFavorite) {
-                                    cards.add(0, new BackupCard(file.getName().replace(".txt", "")));
-                                    cards.get(0).setFavorite(isFavorite);
-                                }
-                                else {
-                                    cards.add(new BackupCard(file.getName().replace(".txt", "")));
-                                    cards.get(cards.size() - 1).setFavorite(isFavorite);
-                                }
+                            String[] colors = new String[0];
+
+                            try {
+                                colors = getColorsFromFile(files[f]);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            String[] newColors = new String[6];
+
+                            if (colors.length > 6) {
+                                for (i = 0; i < 6; i++)
+                                    newColors[i] = colors[i];
+                            }
+
+                            boolean isFavorite = tinydb.getBoolean(themeName + "-favorite");
+
+                            if (isFavorite) {
+                                if (colors.length > 6)
+                                    cards.add(0, new BackupCard(files[f].getName().replace(".txt", ""), newColors, colors[6]));
+                                else if (colors.length == 6)
+                                    cards.add(0, new BackupCard(files[f].getName().replace(".txt", ""), colors));
+                                else
+                                    cards.add(0, new BackupCard(files[f].getName().replace(".txt", "")));
+
+                                cards.get(0).setFavorite(isFavorite);
+                            }
+                            else {
+                                if (colors.length > 6)
+                                    cards.add(new BackupCard(files[f].getName().replace(".txt", ""), newColors, colors[6]));
+                                else if (colors.length == 6)
+                                    cards.add(new BackupCard(files[f].getName().replace(".txt", ""), colors));
+                                else
+                                    cards.add(new BackupCard(files[f].getName().replace(".txt", "")));
+
+                                cards.get(cards.size() - 1).setFavorite(isFavorite);
                             }
                         }
-                    }
-                    else {
-                        Log.d("printf", "\nError: No theme backups currently exist.");
                     }
                 }
                 else {
                     Log.d("printf", "\nError: No theme backups currently exist.");
                 }
             }
-            catch (Exception e) {
-                Aux.saveStack(e);
+            else {
+                Log.d("printf", "\nError: No theme backups currently exist.");
             }
 
-
-            //New stuff
             adapter = new BackupAdapter(cards);
 
             backupsRv = findViewById(R.id.editorBackupsRv);

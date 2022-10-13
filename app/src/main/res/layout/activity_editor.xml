@@ -1272,8 +1272,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:animateLayoutChanges="true"
-        android:alpha="0.2"
-        android:background="#0A0A0A"
+        android:background="@color/blackNavItemBG"
         android:elevation="12dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -1287,7 +1286,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:elevation="16dp"
-        app:layout_constraintWidth="parent=0.68"
+        app:layout_constraintWidth="parent=0.72"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editorToolbar">
