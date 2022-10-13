@@ -1290,7 +1290,7 @@
         android:layout_height="0dp"
         android:elevation="13dp"
         android:animateLayoutChanges="true"
-        app:layout_constraintWidth="parent=0.8"
+        app:layout_constraintWidth="parent=0.82"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editorToolbar">
