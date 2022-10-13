@@ -416,7 +416,7 @@ public class EditorActivity extends AppCompatActivity {
             drawerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    openDrawer();
+                    toggleDrawer();
                 }
             });
 
@@ -1268,6 +1268,7 @@ public class EditorActivity extends AppCompatActivity {
     public void openDrawer() {
         ConstraintLayout editorBG = findViewById(R.id.editorBG);
         ConstraintLayout drawerBG = findViewById(R.id.editorDrawerBG);
+        ConstraintLayout drawer = findViewById(R.id.editorDrawer);
 
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(editorBG);
@@ -1276,6 +1277,9 @@ public class EditorActivity extends AppCompatActivity {
         constraintSet.applyTo(editorBG);
 
         drawerBG.setVisibility(View.VISIBLE);
+
+        drawer.getLayoutTransition()
+                .enableTransitionType(LayoutTransition.CHANGING);
 
         editorBG.getLayoutTransition()
                 .enableTransitionType(LayoutTransition.CHANGING);
@@ -1287,6 +1291,7 @@ public class EditorActivity extends AppCompatActivity {
     public void closeDrawer() {
         ConstraintLayout editorBG = findViewById(R.id.editorBG);
         ConstraintLayout drawerBG = findViewById(R.id.editorDrawerBG);
+        ConstraintLayout drawer = findViewById(R.id.editorDrawer);
 
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(editorBG);
@@ -1295,6 +1300,9 @@ public class EditorActivity extends AppCompatActivity {
         constraintSet.applyTo(editorBG);
 
         drawerBG.setVisibility(View.INVISIBLE);
+
+        drawer.getLayoutTransition()
+                .enableTransitionType(LayoutTransition.CHANGING);
 
         editorBG.getLayoutTransition()
                 .enableTransitionType(LayoutTransition.CHANGING);

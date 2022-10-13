@@ -21,4 +21,6 @@
     <color name="transparentWhite">#BFFFFFFF</color>
     <color name="rippleWhite">#3EFFFFFF</color>
     <color name="rippleDarkGray">#3EFFFFFF</color>
+
+    <color name="editorDrawerBG">#60000000</color>
 </resources>
