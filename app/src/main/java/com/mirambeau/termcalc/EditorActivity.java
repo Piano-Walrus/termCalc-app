@@ -174,9 +174,6 @@ public class EditorActivity extends AppCompatActivity {
 
             final int theme = Aux.getThemeInt();
 
-            //TODO: Actually code the new bottom buttons, and like, literally everything
-            ImageButton lightDarkIcon = findViewById(R.id.styleContainer);
-
             newTheme = Aux.getThemeInt();
 
 
@@ -1621,9 +1618,6 @@ public class EditorActivity extends AppCompatActivity {
 
         final int darkerSecondary = Color.parseColor(darkerSecondaryStr);
 
-        //TODO: sigh
-        ImageButton lightDarkIcon = findViewById(R.id.styleContainer);
-
         //Primary, Secondary, Tertiary, Main, Keypad
         String[][] defaultByTheme = {{}, {"#03DAC5", "#00B5A3", "#00C5B1", "#272C33", "#202227"}, {"#03DAC5", "#53E2D4", "#3CDECE", "#FFFFFF", "#FFFFFF"},
                 {"#03DAC5", "#53E2D4", "#3CDECE", "#000000", "#000000"}, {"#000000", "#000000", "#000000", "#000000", "#000000"},
@@ -1738,13 +1732,6 @@ public class EditorActivity extends AppCompatActivity {
 
         expand.setColorFilter(Aux.isTinyColor("cTop") ? Aux.getTinyColor("cTop") : Color.WHITE);
 
-        if (newTheme == 2) {
-            lightDarkIcon.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_light_mode_24, null));
-        }
-        else {
-            lightDarkIcon.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_dark_mode_24, null));
-        }
-
         for (i = 0; i < containers.length; i++) {
             int defaultTextColor = i == 0 && newTheme == 2 ? darkGray : Color.WHITE;
 
@@ -1794,59 +1781,6 @@ public class EditorActivity extends AppCompatActivity {
 
         if (Aux.isTinyColor("-bINV2t"))
             inv2.setTextColor(Aux.getTinyColor("-bINV2t"));
-    }
-
-    public void toggleLightDark(View v) {
-        final TinyDB tinydb = new TinyDB(MainActivity.mainActivity);
-
-        //TODO: sigh pt. ii
-        final ImageButton lightDarkIcon = findViewById(R.id.styleContainer);
-
-        ObjectAnimator.ofFloat(lightDarkIcon, "rotation", 0f, 360f).setDuration(600).start();
-        try {
-            new Handler((Looper.myLooper())).postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    if (newTheme == 2) {
-                        newTheme = tinydb.getBoolean("darkStatusBar") ? 1 : 3;
-                        lightDarkIcon.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_dark_mode_24, null));
-
-                        applyTheme();
-                    }
-                    else {
-                        new Handler((Looper.myLooper())).postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                lightDarkIcon.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_light_mode_24, null));
-                                newTheme = 2;
-
-                                applyTheme();
-                            }
-                        }, 50);
-
-                        lightDarkIcon.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_dot_20, null));
-                    }
-                }
-            }, 100);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-
-            if (newTheme == 2) {
-                newTheme = tinydb.getBoolean("darkStatusBar") ? 1 : 3;
-                lightDarkIcon.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_dark_mode_24, null));
-            }
-            else {
-                newTheme = 2;
-                lightDarkIcon.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_light_mode_24, null));
-            }
-
-            applyTheme();
-        }
-
-        themeChanged = true;
-
-        ThemeActivity.shouldRecreateMain = true;
     }
 
     public void addHistoryEntry (View view, String code, String initColor, String finalColor) {
