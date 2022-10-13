@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     EditText tv;
 
     Boolean isInv = false, isDec = false, isRad = true, equaled = false, deleted = false, isEquals = false;
-    boolean isExpanded, hasExpanded, error, dError, didIntro, isBig, isCustomTheme, dontVibe, isFabExpanded;
+    boolean isExpanded, hasExpanded, error, didIntro, isBig, isCustomTheme, dontVibe, isFabExpanded;
     boolean isDate = false;
     boolean theme_boolean = true, isDynamic;
     boolean shouldRecord = true, isFocus = false;
@@ -1994,20 +1994,44 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     int cursor = tv.getSelectionStart();
                     String eq3, converted = "";
                     String tvText = tv.getText().toString();
+                    String endText;
+                    String output;
 
                     if (equaled)
                         getEqualed();
 
                     eq3 = tv.getSelectionStart() == getTvText().length() ? tvText : tvText.substring(0, cursor);
+                    endText = tv.getSelectionStart() == getTvText().length() ? "" : tvText.substring(cursor);
 
-                    for (i = eq3.length(); i > 0; i--) {
+                    if (eq3.endsWith(".")) {
+                        if (Aux.isDigit(Aux.lastChar(Aux.newTrim(eq3, 1))))
+                            eq3 = Aux.newTrim(eq3, 1);
+                        else
+                            return true;
+                    }
+
+                    for (i = eq3.length()-1; i >= 0; i--) {
                         String current = Aux.chat(eq3, i);
 
                         if (Aux.isDigit(current) || current.equals(".") || current.equals("-") || current.equals(Aux.emDash) || current.equals("e") || current.equals("(") || current.equals(")"))
                             converted = Aux.numToSuper(current) + converted;
                     }
 
-                    tv.setText(tvText.replace(eq3, Aux.newTrim(eq3, converted.length()) + converted));
+                    if (converted.equals(""))
+                        return true;
+                    else
+                        converted += Aux.sq;
+
+                    if (cursor == getTvText().length())
+                        output = Aux.newTrim(getTvText(), converted.length() - 1) + converted;
+                    else if (cursor > 0)
+                        output = Aux.newTrim(getTvText().substring(0, cursor), converted.length() - 1) + converted + endText;
+                    else
+                        return true;
+
+                    tv.setText(output);
+
+                    tv.setSelection(cursor + 1);
 
                     if (!dontVibe)
                         vibe(vibeDuration);
@@ -2151,6 +2175,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     if (tvText.length() < 1) {
                         tv.setText(" ");
+                        tv.setSelection(getTvText().length());
                         return;
                     }
                     else if (!getTvText().equals(" ")) {
@@ -2871,6 +2896,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             finish();
         }
     }
+    //end of onCreate
 
     @Override
     public final boolean onOptionsItemSelected(@NonNull MenuItem item){
@@ -3027,25 +3053,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final String theme = sp.getString(SettingsActivity.KEY_PREF_THEME, "1");
         final String color = sp.getString(SettingsActivity.KEY_PREF_COLOR, "1");
 
-        boolean zeroFact = false;
-
-        if (tv.getText() != null && !tv.getText().toString().equals("\0")) {
-            if (tv.getText().toString().equals("0.0!") || tv.getText().toString().equals(" 0.0!"))
-                zeroFact = true;
-        }
+        boolean zeroFact = tv.getText() != null && !getTvText().equals("\0") && (getTvText().equals("0.0!") || getTvText().equals(" 0.0!"));
 
         clear(bDel);
 
-        if (zeroFact){
-            tv.setText("1");
-        }
-        else if (dError) {
-            tv.setText(R.string.domain_error);
-            tv.setEnabled(false);
-        }
-        else {
-            tv.setText("NaN");
-        }
+        tv.setText(zeroFact ? "1" : "NaN");
+        tv.setEnabled(zeroFact);
 
         equaled = true;
 
@@ -3053,9 +3066,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         spin(bDel, theme, color, R.drawable.ic_close_24);
 
-        tv.setEnabled(false);
         error = false;
-        dError = false;
 
         bEquals.setText("=");
     }
@@ -4446,6 +4457,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //Clear (Long Press)
     public final void clear(View v) {
         tv.setText(" ");
+
+        tv.setEnabled(true);
         tv.setSelection(getTvText().length());
         tv.requestFocus();
 
@@ -4578,7 +4591,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     if (tv.getText().toString().equals("0÷0") || tv.getText().toString().equals(" 0÷0") || tv.getText().toString().equals("0.0÷0.0") || tv.getText().toString().equals(" 0.0÷0.0"))
                         error = true;
 
-                    if (error || dError) {
+                    if (error) {
                         error();
 
                         showRippleAnimation(findViewById(R.id.bgAnim));
@@ -4607,7 +4620,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             String lastChar = Aux.lastChar(getTvText());
 
                             if (lastChar != null && ((lastChar.equals("!") || lastChar.equals(")") || lastChar.equals("π") || lastChar.equals("e") || lastChar.equals("∞") || Aux.isDigit(lastChar)))) {
-                                if (error || dError)
+                                if (error)
                                     error();
                                 else {
                                     if (!isBig) {
@@ -4674,7 +4687,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                                 tv.setSelection(tv.getSelectionEnd());
                                                 tv.requestFocus();
                                             }
-                                        }, 500);
+                                        }, 300);
 
                                         if (!isBig) {
                                             ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
@@ -4829,6 +4842,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Button keyNum = (Button) v;
             final FloatingActionButton clear = findViewById(R.id.bDel);
 
+            if (cursor == 0 && getTvText().equals(" "))
+                cursor = 1;
+
             if (cursor == getTvText().length()) {
                 if (!(!getTvText().equals("\0") && (getTvText().endsWith(".") && (keyNum.getText().toString().equals("π") || keyNum.getText().toString().equals("e") || keyNum.getText().toString().equals("∞"))))) {
                     //Clear previous result upon pressing a number key
@@ -4843,12 +4859,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         spin(clear, theme, color, R.drawable.ic_baseline_arrow_back_24);
                     }
 
-                    tv.append(keyNum.getText().toString());
+                    if (getTvText().equals(" ") && cursor == 1)
+                        tv.setText(keyNum.getText().toString());
+                    else
+                        tv.append(keyNum.getText().toString());
+
                     tv.setSelection(getTvText().length());
                 }
             }
             else {
                 String tvText = getTvText();
+                String output;
 
                 if (equaled)
                     getEqualed();
@@ -4866,11 +4887,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 tvText = getTvText();
 
                 if (cursor > 0)
-                    tv.setText(Aux.newReplace(cursor - 1, tv.getText().toString(), Aux.chat(tv.getText().toString(), cursor - 1) + ((Button) v).getText().toString()));
+                    output = Aux.newReplace(cursor - 1, getTvText(), Aux.chat(getTvText(), cursor - 1) + ((Button) v).getText().toString()).replace(" ", "");
                 else
-                    tv.setText((keyNum.getText().toString() + tvText.trim()).replace("\0", "").replace(" ", "").trim());
+                    output = (keyNum.getText().toString() + tvText.trim()).replace("\0", "").replace(" ", "").replace(" ", "");
 
-                tv.setSelection(cursor + 1);
+                tv.setText(output);
+
+                try {
+                    tv.setSelection(cursor + 1);
+                }
+                catch (Exception e) {
+                    tv.setSelection(getTvText().length());
+                }
             }
         }
         catch (Exception e){
@@ -4940,6 +4968,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int endOffset = getTvText().length() - cursor;
         int initLength = getTvText().length();
         boolean beforeComma = false;
+        boolean wasSpace = getTvText().equals(" ");
 
         try {
             if (getTvText().length() > 1 && Aux.chat(getTvText(), cursor).equals(","))
@@ -4960,7 +4989,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else
             operation(v);
 
-        cursor = getTvText().length() - endOffset;
+        cursor = getTvText().length() - (wasSpace ? 0 : endOffset);
 
         try {
             if (!beforeComma && getTvText().length() > 1 && Aux.chat(getTvText(), cursor - 1).equals(","))
@@ -4970,7 +4999,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             e.printStackTrace();
         }
 
-        if (initLength == getTvText().length())
+        if (!wasSpace && initLength == getTvText().length())
             cursor = initCursor;
 
         tv.setSelection(cursor);

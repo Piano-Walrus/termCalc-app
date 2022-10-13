@@ -1,5 +1,6 @@
 package com.mirambeau.termcalc;
 
+import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -449,6 +450,7 @@ public class ConstantsBottomSheet extends BottomSheetDialogFragment {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     public void insertConstant(String constant) {
         try {
             if (constant == null || constant.length() < 1)
@@ -456,10 +458,38 @@ public class ConstantsBottomSheet extends BottomSheetDialogFragment {
 
             EditText tv = MainActivity.mainActivity.findViewById(R.id.equation);
 
+            int cursor = tv.getSelectionStart();
+            int cursorOffset = constant.length();
+            String tvText = tv.getText().toString();
+
             try {
-                tv.setText(constant);
+                if (cursor == tvText.length())
+                    tv.setText(tvText + constant);
+                else if ((tvText.equals(" ") || tvText.equals("")) && cursor <= 1)
+                    tv.setText(constant);
+                else if (cursor > 0 && cursor < tv.getText().toString().length())
+                    tv.setText(tvText.substring(0, cursor) + constant + tvText.substring(cursor));
+                else
+                    cursorOffset = 0;
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+
+                tv.setText(tvText);
+                cursorOffset = 0;
+            }
+
+            try {
                 tv.requestFocus();
-                tv.setSelection(tv.getText().toString().length());
+                tv.setSelection(cursor + cursorOffset);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            try {
+                ((ViewGroup) main.findViewById(R.id.equationLayout)).getLayoutTransition().disableTransitionType(LayoutTransition.CHANGING);
+                ((ViewGroup) main.findViewById(R.id.equationScrollView)).getLayoutTransition().disableTransitionType(LayoutTransition.CHANGING);
             }
             catch (Exception e) {
                 e.printStackTrace();

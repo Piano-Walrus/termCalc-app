@@ -1,5 +1,7 @@
 package com.mirambeau.termcalc;
 
+import android.animation.LayoutTransition;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -12,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -269,6 +272,7 @@ public class HistoryBottomSheet extends BottomSheetDialogFragment {
         return false;
     }
 
+    @SuppressLint("SetTextI18n")
     public void insert(String str) {
         TinyDB tinydb = new TinyDB(MainActivity.mainActivity);
 
@@ -278,195 +282,49 @@ public class HistoryBottomSheet extends BottomSheetDialogFragment {
         Toast toast = Toast.makeText(MainActivity.mainActivity, "\"" + copied + "\" inserted", Toast.LENGTH_SHORT);
         toast.show();
 
-        int index, k, l;
-        int length = copied.length(), subInt;
-        String tempKey;
+        if (str == null || str.length() < 1)
+            return;
 
-        if (trigBar[0].getText().toString().startsWith("a"))
-            trigBar[6].performClick();
+        EditText tv = main.findViewById(R.id.equation);
 
-        for (index = 0; index < length; index++) {
-            //Remember to account for nth root and log base x
-            smol : for (k = 0; k < 10; k++) {
-                if (Aux.chat(copied, index).equals(nums[k].getText().toString())) {
-                    nums[k].performClick();
-                    break;
-                }
-                else if (Aux.chat(copied, index).equals(".")) {
-                    bDec.performClick();
-                    break;
-                }
-                else if (Aux.chat(copied, index).equals(superscripts[k])) {
-                    nums[k].performClick();
-                    break;
-                }
-                else if (Aux.chat(copied, index).equals("√")) {
-                    if (Aux.isSuperscript(Aux.chat(copied, index - 1))) {
-                        tinydb.putInt("vibeDuration", 0);
-                        compBar[0].performLongClick();
-                    }
-                    else {
-                        compBar[0].performClick();
-                    }
+        int cursor = tv.getSelectionStart();
+        int cursorOffset = str.length();
+        String tvText = tv.getText().toString();
 
-                    break;
-                }
-                else if (Aux.chat(copied, index).equals(mainOps[k % 4].getText().toString())) {
-                    tempKey = compBar[2].getText().toString();
-                    compBar[2].setText(Character.toString(copied.charAt(index)));
-                    compBar[2].performClick();
-                    compBar[2].setText(tempKey);
-                    break;
-                }
-                else if (Aux.chat(copied, index).equals(compBar[k % 7].getText().toString())) {
-                    tempKey = compBar[2].getText().toString();
-                    compBar[2].setText(Character.toString(copied.charAt(index)));
-                    compBar[2].performClick();
-                    compBar[2].setText(tempKey);
-                    break;
-                }
-                else if (Aux.chat(copied, index).equals("l") && Aux.chat(copied, index + 1).equals("n")) {
-                    compBar[6].performClick();
-                    index += 2;
-                    break;
-                }
-                else if (Aux.chat(copied, index).equals("E")) {
-                    mainOps[2].performClick();
-                    nums[1].performClick();
-                    nums[0].performClick();
-                    compBar[1].performClick();
-                    break;
-                }
-                else if (Aux.chat(copied, index).equals("∞")) {
-                    nums[0].setText("∞");
-                    nums[0].performClick();
-                    nums[0].setText("0");
-                    break;
-                }
-                else if (length - 3 >= index && Aux.chat(copied, index).equals("l") && Aux.chat(copied, index + 1).equals("o") && Aux.chat(copied, index + 2).equals("g")) {
-                    if (Aux.isSubscript(Aux.chat(copied, index + 3))){
-                        int s, numChars = 0;
-                        String number;
-
-                        //Count subscripts until the opening parenthesis of the log function
-                        for (s=1; s < length; s++){
-                            if (Aux.chat(copied, index + 3 + s).equals("(")) {
-                                numChars = s;
-                                break;
-                            }
-                        }
-
-                        Log.d("numChars", Integer.toString(numChars));
-
-                        if (numChars > 0){
-                            number = Aux.getLast(Aux.newTrim(copied, length - (index + 3 + s)), numChars);
-
-                            if (!Aux.isNull(number))
-                                Log.d("number", number);
-
-                            //Loop through subscripts and press each corresponding button before long-pressing log
-                            for (s=0; s < numChars; s++){
-                                if (Aux.chat(number, s).equals(" ") && Aux.chat(number, s + 2).equals("̣")){
-                                    bDec.performClick();
-                                    s += 2;
-                                    continue;
-                                }
-                                else if (Aux.chat(number, s).equals("₍")){
-                                    compBar[3].performClick();
-                                    s += 13;
-                                    continue;
-                                }
-                                else if (Aux.chat(number, s).equals("ₑ")){
-                                    compBar[4].performClick();
-                                    continue;
-                                }
-
-
-                                subInt = Aux.returnSub(Aux.chat(number, s));
-
-                                if (subInt != -2) {
-                                    if (subInt < 0)
-                                        compBar[subInt * -1].performClick();
-                                    else
-                                        nums[subInt].performClick();
-                                }
-                            }
-
-                            tinydb.putInt("vibeDuration", 0);
-                            compBar[5].performLongClick();
-                        }
-
-                        index += 3 + (numChars);
-                        break;
-                    }
-                    else {
-                        compBar[5].performClick();
-                        index += 3;
-                        break;
-                    }
-                }
-                else if (Aux.chat(copied, index).equals("s") || Aux.chat(copied, index).equals("c") || Aux.chat(copied, index).equals("t") | Aux.chat(copied, index).equals("a")){
-                    Button[] newTrigBar = {MainActivity.mainActivity.findViewById(R.id.bSin), MainActivity.mainActivity.findViewById(R.id.bCos), MainActivity.mainActivity.findViewById(R.id.bTan), MainActivity.mainActivity.findViewById(R.id.bCsc), MainActivity.mainActivity.findViewById(R.id.bSec), MainActivity.mainActivity.findViewById(R.id.bCot), MainActivity.mainActivity.findViewById(R.id.bInv)};
-                    if (Aux.chat(copied, index).equals("a") && Aux.chat(copied, index + 6).equals("(")){
-                        newTrigBar[6].performClick();
-                        for (l=0; l < 7; l++){
-                            if (newTrigBar[l].getText().toString().equals(Aux.chat(copied, index) + copied.charAt(index + 1) + copied.charAt(index + 2) + copied.charAt(index + 3) + copied.charAt(index + 4) + copied.charAt(index + 5))){
-                                newTrigBar[l].performClick();
-                                trigBar[6].performClick();
-                                index += 6;
-                                break smol;
-                            }
-                        }
-                    }
-                    if (Aux.chat(copied, index).equals("a") && Aux.chat(copied, index + 6).equals("h")){
-                        newTrigBar[6].performClick();
-                        for (l=0; l < 7; l++){
-                            if (newTrigBar[l].getText().toString().equals(Aux.chat(copied, index) + copied.charAt(index + 1) + copied.charAt(index + 2) + copied.charAt(index + 3) + copied.charAt(index + 4) + copied.charAt(index + 5))){
-                                tinydb.putInt("vibeDuration", 0);
-                                newTrigBar[l].performLongClick();
-                                trigBar[6].performClick();
-                                index += 7;
-                                break smol;
-                            }
-                        }
-                    }
-                    else if (Aux.chat(copied, index + 3).equals("(")){
-                        for (l=0; l < 7; l++){
-                            if (trigBar[l].getText().toString().equals(Aux.chat(copied, index) + copied.charAt(index + 1) + copied.charAt(index + 2))){
-                                trigBar[l].performClick();
-                                index += 3;
-                                break smol;
-                            }
-                        }
-                    }
-                    else if (Aux.chat(copied, index + 3).equals("h")){
-                        for (l=0; l < 7; l++){
-                            if (trigBar[l].getText().toString().equals(Aux.chat(copied, index) + copied.charAt(index + 1) + copied.charAt(index + 2))){
-                                tinydb.putInt("vibeDuration", 0);
-                                trigBar[l].performLongClick();
-                                index += 4;
-                                break smol;
-                            }
-                        }
-                    }
-                }
-                else if (Aux.chat(copied, index).equals("(")){
-                    bParenthesisOpen.performClick();
-                    break;
-                }
-                else if (Aux.chat(copied, index).equals(")")){
-                    bParenthesisClose.performClick();
-                    break;
-                }
-                else if (Aux.chat(copied, index).equals("%")){
-                    bMod.performClick();
-                    break;
-                }
-            }
-
-            tinydb.putInt("vibeDuration", 25);
-            dismiss();
+        try {
+            if (cursor == tvText.length())
+                tv.setText(tvText + str);
+            else if ((tvText.equals(" ") || tvText.equals("")) && cursor <= 1)
+                tv.setText(str);
+            else if (cursor > 0 && cursor < tv.getText().toString().length())
+                tv.setText(tvText.substring(0, cursor) + str + tvText.substring(cursor));
+            else
+                cursorOffset = 0;
         }
+        catch (Exception e) {
+            e.printStackTrace();
+
+            tv.setText(tvText);
+            cursorOffset = 0;
+        }
+
+        try {
+            tv.requestFocus();
+            tv.setSelection(cursor + cursorOffset);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            ((ViewGroup) main.findViewById(R.id.equationLayout)).getLayoutTransition().disableTransitionType(LayoutTransition.CHANGING);
+            ((ViewGroup) main.findViewById(R.id.equationScrollView)).getLayoutTransition().disableTransitionType(LayoutTransition.CHANGING);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        dismiss();
     }
 
     public Button findViewById(int id){
