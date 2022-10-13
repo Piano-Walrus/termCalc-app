@@ -390,6 +390,25 @@ public class EditorActivity extends AppCompatActivity {
                 });
             }
 
+            ImageButton drawerButton = findViewById(R.id.drawerButton);
+            ConstraintLayout drawerBG = findViewById(R.id.editorDrawerBG);
+
+            drawerButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openDrawer();
+                }
+            });
+
+            drawerBG.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    closeDrawer();
+                }
+            });
+
+
+
             undoCheck();
 
             undo.setOnClickListener(new View.OnClickListener() {
@@ -1221,17 +1240,7 @@ public class EditorActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        try {
-            MenuInflater inflater = getMenuInflater();
-            TinyDB tinydb = new TinyDB(this);
 
-            //inflater.inflate(R.menu.editor_menu, menu);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            Aux.saveStack(e);
-            finish();
-        }
 
         return true;
     }
@@ -1247,6 +1256,9 @@ public class EditorActivity extends AppCompatActivity {
         constraintSet.applyTo(editorBG);
 
         drawerBG.setVisibility(View.VISIBLE);
+
+        editorBG.getLayoutTransition()
+                .enableTransitionType(LayoutTransition.CHANGING);
 
         drawerBG.getLayoutTransition()
                 .enableTransitionType(LayoutTransition.APPEARING);
@@ -1264,6 +1276,9 @@ public class EditorActivity extends AppCompatActivity {
 
         drawerBG.setVisibility(View.INVISIBLE);
 
+        editorBG.getLayoutTransition()
+                .enableTransitionType(LayoutTransition.CHANGING);
+
         drawerBG.getLayoutTransition()
                 .enableTransitionType(LayoutTransition.DISAPPEARING);
     }
@@ -1280,12 +1295,7 @@ public class EditorActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
         try {
-            final TinyDB tinydb = new TinyDB(MainActivity.mainActivity);
-
-            if (item.getItemId() == R.id.options) {
-                toggleDrawer();
-            }
-            else if (item.getItemId() == android.R.id.home) {
+           if (item.getItemId() == android.R.id.home) {
                 onBackPressed();
                 return true;
             }

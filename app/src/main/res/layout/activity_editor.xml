@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/editorBG"
+    android:animateLayoutChanges="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/darkColorPrimary"
@@ -16,6 +17,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/drawerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:src="@drawable/ic_baseline_menu_thin_24"
+        android:layout_marginEnd="16dp"
+        android:background="?selectableItemBackgroundBorderless"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/editorToolbar"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/zoneToggleLayout"
@@ -836,12 +849,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:background="@null"
-                android:tint="#FFFFFF"
                 android:src="@drawable/ic_baseline_menu_24"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="@+id/editorFakeToolbar"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="#FFFFFF" />
 
             <Button
                 android:id="@+id/editorPreviewTitle"
@@ -862,12 +875,12 @@
                 android:layout_height="31dp"
                 android:layout_marginEnd="1dp"
                 android:background="@null"
-                android:tint="#FFFFFF"
                 android:src="@drawable/ic_baseline_more_vert_24"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="@+id/editorFakeToolbar"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="#FFFFFF" />
 
             <Button
                 android:id="@+id/editorDegRad"
@@ -1257,11 +1270,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/editorDrawerBG"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:animateLayoutChanges="true"
+        android:alpha="0.28"
         android:background="#0A0A0A"
         android:elevation="12dp"
-        android:alpha="0.28"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editorToolbar" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
