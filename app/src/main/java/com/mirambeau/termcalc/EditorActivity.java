@@ -161,7 +161,8 @@ public class EditorActivity extends AppCompatActivity {
 
             final int theme = Aux.getThemeInt();
 
-            ImageButton lightDarkIcon = findViewById(R.id.lightDarkToggle);
+            //TODO: Actually code the new bottom buttons, and like, literally everything
+            ImageButton lightDarkIcon = findViewById(R.id.styleContainer);
 
             newTheme = Aux.getThemeInt();
 
@@ -1126,16 +1127,7 @@ public class EditorActivity extends AppCompatActivity {
             MenuInflater inflater = getMenuInflater();
             TinyDB tinydb = new TinyDB(this);
 
-            inflater.inflate(R.menu.editor_menu, menu);
-
-            hasShownHelp = tinydb.getBoolean("hasShownHelp");
-
-            if (!hasShownHelp) {
-                onOptionsItemSelected(menu.findItem(R.id.help));
-
-                hasShownHelp = true;
-                tinydb.putBoolean("hasShownHelp", hasShownHelp);
-            }
+            //inflater.inflate(R.menu.editor_menu, menu);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -1146,96 +1138,54 @@ public class EditorActivity extends AppCompatActivity {
         return true;
     }
 
+    public void openDrawer() {
+        ConstraintLayout editorBG = findViewById(R.id.editorBG);
+        ConstraintLayout drawerBG = findViewById(R.id.editorDrawerBG);
+
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(editorBG);
+        constraintSet.connect(R.id.editorDrawer,ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END,0);
+        constraintSet.connect(R.id.editorDrawer,ConstraintSet.START, ConstraintSet.PARENT_ID,ConstraintSet.START,0);
+        constraintSet.applyTo(editorBG);
+
+        drawerBG.setVisibility(View.VISIBLE);
+
+        drawerBG.getLayoutTransition()
+                .enableTransitionType(LayoutTransition.APPEARING);
+    }
+
+    public void closeDrawer() {
+        ConstraintLayout editorBG = findViewById(R.id.editorBG);
+        ConstraintLayout drawerBG = findViewById(R.id.editorDrawerBG);
+
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(editorBG);
+        constraintSet.connect(R.id.editorDrawer,ConstraintSet.END, ConstraintSet.UNSET, ConstraintSet.UNSET,0);
+        constraintSet.connect(R.id.editorDrawer,ConstraintSet.START, ConstraintSet.PARENT_ID,ConstraintSet.END,0);
+        constraintSet.applyTo(editorBG);
+
+        drawerBG.setVisibility(View.INVISIBLE);
+
+        drawerBG.getLayoutTransition()
+                .enableTransitionType(LayoutTransition.DISAPPEARING);
+    }
+
+    public void toggleDrawer() {
+        ConstraintLayout drawerBG = findViewById(R.id.editorDrawerBG);
+
+        if (drawerBG.getVisibility() == View.VISIBLE)
+            closeDrawer();
+        else
+            openDrawer();
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
         try {
             final TinyDB tinydb = new TinyDB(MainActivity.mainActivity);
 
-            if (item.getItemId() == R.id.help) {
-                AlertDialog.Builder builder = createAlertDialog(hasShownHelp ? "Help\n" : "Tutorial\n");
-
-                builder.setMessage(getString(R.string.editor_help));
-
-                builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-                builder.show();
-            }
-            else if (item.getItemId() == R.id.backups) {
-                Aux.tinydb().putBoolean("wasCustom", Aux.tinydb().getBoolean("custom"));
-                startActivity(new Intent(EditorActivity.editorActivity, Backups.class));
-            }
-            else if (item.getItemId() == R.id.resetAll) {
-                AlertDialog.Builder builder2 = createAlertDialog("Are you sure you want to reset all colors in your theme to their default values?\n");
-
-                builder2.setMessage("This change will apply immediately.");
-
-                builder2.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-
-                        String[] editorCodes = {"-p", "-s", "-t", "-m", "-k", "-kt", "-tt"};
-
-                        TerminalActivity terminal = new TerminalActivity();
-
-                        try {
-                            terminal.run("reset all");
-                        }
-                        catch (Exception e2){
-                            e2.printStackTrace();
-                        }
-
-                        tinydb.putString("-mt", "#reset0");
-
-                        tinydb.putString("-bⁿ√", "#reset0");
-                        tinydb.putString("-bⁿ√t", "#reset0");
-
-                        tinydb.putBoolean("isSetSecondary", false);
-                        tinydb.putBoolean("mtIsSet", false);
-
-                        tinydb.putString("-bINV2", "");
-                        tinydb.putString("-bINV2t", "");
-
-                        tinydb.putString("-btt", "");
-                        tinydb.putString("-bop", "");
-
-                        tinydb.putString("-bfc", "");
-                        tinydb.putString("-bfct", "");
-
-                        for (String code : editorCodes)
-                            tinydb.putString(code, "\0");
-
-                        for (String[] codes : allCodes) {
-                            for (String code : codes) {
-                                tinydb.putString(code, "\0");
-
-                                if (code.startsWith("-b"))
-                                    tinydb.putString(code + "t", "\0");
-                            }
-                        }
-
-                        setButtons = new ArrayList<>();
-
-                        recreate();
-                    }
-                });
-                builder2.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-
-                builder2.show();
-            }
-            else if (item.getItemId() == R.id.advancedOptions){
-                Intent intent = new Intent(this, AdvancedThemeOptionsActivity.class);
-                startActivity(intent);
+            if (item.getItemId() == R.id.options) {
+                toggleDrawer();
             }
             else if (item.getItemId() == android.R.id.home) {
                 onBackPressed();
@@ -1570,7 +1520,8 @@ public class EditorActivity extends AppCompatActivity {
 
         final int darkerSecondary = Color.parseColor(darkerSecondaryStr);
 
-        ImageButton lightDarkIcon = findViewById(R.id.lightDarkToggle);
+        //TODO: sigh
+        ImageButton lightDarkIcon = findViewById(R.id.styleContainer);
 
         //Primary, Secondary, Tertiary, Main, Keypad
         String[][] defaultByTheme = {{}, {"#03DAC5", "#00B5A3", "#00C5B1", "#272C33", "#202227"}, {"#03DAC5", "#53E2D4", "#3CDECE", "#FFFFFF", "#FFFFFF"},
@@ -1747,7 +1698,8 @@ public class EditorActivity extends AppCompatActivity {
     public void toggleLightDark(View v) {
         final TinyDB tinydb = new TinyDB(MainActivity.mainActivity);
 
-        final ImageButton lightDarkIcon = findViewById(R.id.lightDarkToggle);
+        //TODO: sigh pt. ii
+        final ImageButton lightDarkIcon = findViewById(R.id.styleContainer);
 
         ObjectAnimator.ofFloat(lightDarkIcon, "rotation", 0f, 360f).setDuration(600).start();
         try {
