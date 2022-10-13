@@ -1,7 +1,6 @@
 package com.mirambeau.termcalc;
 
 import android.animation.LayoutTransition;
-import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -13,24 +12,19 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.os.Looper;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,7 +41,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.azeesoft.lib.colorpicker.ColorPickerDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -151,14 +144,12 @@ public class EditorActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            if (Build.VERSION.SDK_INT >= 21) {
-                getWindow().setStatusBarColor(Color.parseColor("#16181B"));
-                getWindow().setNavigationBarColor(Color.parseColor("#16181B"));
-            }
+            getWindow().setStatusBarColor(Color.parseColor("#16181B"));
+            getWindow().setNavigationBarColor(Color.parseColor("#16181B"));
 
             final Toolbar toolbar = findViewById(R.id.editorToolbar);
 
-            toolbar.setTitle("Theme Editor");
+            toolbar.setTitle("Theme");
             toolbar.showOverflowMenu();
             setSupportActionBar(toolbar);
 
