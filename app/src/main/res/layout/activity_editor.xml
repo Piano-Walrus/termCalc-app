@@ -1578,6 +1578,7 @@
                 android:background="?selectableItemBackgroundBorderless"
                 android:clipToOutline="true"
                 android:clipToPadding="true"
+                android:visibility="gone"
                 android:elevation="10dp"
                 android:clickable="true"
                 android:focusable="true">

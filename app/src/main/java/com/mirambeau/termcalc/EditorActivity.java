@@ -223,6 +223,8 @@ public class EditorActivity extends AppCompatActivity {
                 }
                 else {
                     Log.d("printf", "\nError: No theme backups currently exist.");
+
+                    findViewById(R.id.newThemeCard).setVisibility(View.VISIBLE);
                 }
             }
             else {
@@ -404,6 +406,11 @@ public class EditorActivity extends AppCompatActivity {
             ImageButton drawerButton = findViewById(R.id.drawerButton);
             ConstraintLayout drawerBG = findViewById(R.id.editorDrawerBG);
 
+            ConstraintLayout saveLayout;
+            ConstraintLayout importLayout;
+            ConstraintLayout resetLayout;
+            ConstraintLayout advancedLayout;
+
             drawerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -445,6 +452,8 @@ public class EditorActivity extends AppCompatActivity {
                     }
                 }
             });
+
+
 
             //Set colors in current theme
             applyTheme();
