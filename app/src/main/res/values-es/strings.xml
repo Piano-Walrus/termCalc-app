@@ -34,4 +34,11 @@
     <string name="new_function">Nueva Función</string>
     <string name="importNew">Importar</string>
     <string name="clear">Borrar</string>
+    <string name="style">Estilo y Color</string>
+    <string name="shape">Forma</string>
+    <string name="advanced_options">Opciones Avanzadas</string>
+    <string name="editor_options">Opciones</string>
+    <string name="editor_save">Guardar</string>
+    <string name="saved_themes">Temas Guardados</string>
+    <string name="editor_reset">Reajustar</string>
 </resources>

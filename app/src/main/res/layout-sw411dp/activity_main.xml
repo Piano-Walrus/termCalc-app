@@ -544,12 +544,13 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/scrollBar"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="70dp"
             android:animateLayoutChanges="true"
             android:background="#00B5A3"
             android:elevation="0dp"
             app:layout_constraintBottom_toTopOf="@+id/buttonView"
+            app:layout_constraintEnd_toStartOf="@+id/tertiaryButtons"
             app:layout_constraintStart_toStartOf="parent">
 
             <ScrollView
@@ -703,8 +704,7 @@
                                 android:text="sin"
                                 android:textAllCaps="false"
                                 android:textColor="#FFFFFF"
-                                android:textSize="19dp"
-                                app:layout_constraintStart_toStartOf="@+id/horizontalScrollView" />
+                                android:textSize="19dp" />
 
                             <Button
                                 android:id="@+id/bCos"
@@ -716,9 +716,7 @@
                                 android:text="cos"
                                 android:textAllCaps="false"
                                 android:textColor="#FFFFFF"
-                                android:textSize="19dp"
-                                app:layout_constraintStart_toEndOf="@+id/bSqrt"
-                                app:layout_constraintTop_toTopOf="@+id/horizontalScrollView" />
+                                android:textSize="19dp" />
 
                             <Button
                                 android:id="@+id/bTan"
@@ -730,9 +728,7 @@
                                 android:text="tan"
                                 android:textAllCaps="false"
                                 android:textColor="#FFFFFF"
-                                android:textSize="19dp"
-                                app:layout_constraintStart_toEndOf="@+id/bCbqrt"
-                                app:layout_constraintTop_toTopOf="@+id/horizontalScrollView" />
+                                android:textSize="19dp" />
 
                             <Button
                                 android:id="@+id/bCsc"

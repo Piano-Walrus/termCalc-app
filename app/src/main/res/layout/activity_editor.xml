@@ -41,11 +41,11 @@
         android:layout_marginVertical="8dp"
         android:src="@drawable/ic_baseline_redo_24"
         app:layout_constraintBottom_toBottomOf="@id/editorToolbar"
-        app:layout_constraintEnd_toStartOf="@+id/bottomBarDivider"
+        app:layout_constraintEnd_toStartOf="@+id/toolbarDivider"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:id="@+id/bottomBarDivider"
+        android:id="@+id/toolbarDivider"
         android:layout_width="1dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
@@ -690,8 +690,7 @@
                             android:text="sin"
                             android:textAllCaps="false"
                             android:textColor="#FFFFFF"
-                            android:textSize="16dp"
-                            app:layout_constraintStart_toStartOf="@+id/horizontalScrollView" />
+                            android:textSize="16dp" />
 
                         <Button
                             android:id="@+id/eBCos"
@@ -702,9 +701,7 @@
                             android:text="cos"
                             android:textAllCaps="false"
                             android:textColor="#FFFFFF"
-                            android:textSize="16dp"
-                            app:layout_constraintStart_toEndOf="@+id/bSqrt"
-                            app:layout_constraintTop_toTopOf="@+id/horizontalScrollView" />
+                            android:textSize="16dp" />
 
                         <Button
                             android:id="@+id/eBTan"
@@ -715,9 +712,7 @@
                             android:text="tan"
                             android:textAllCaps="false"
                             android:textColor="#FFFFFF"
-                            android:textSize="16dp"
-                            app:layout_constraintStart_toEndOf="@+id/bCbqrt"
-                            app:layout_constraintTop_toTopOf="@+id/horizontalScrollView" />
+                            android:textSize="16dp" />
 
                         <Button
                             android:id="@+id/eBCsc"
@@ -1189,6 +1184,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#101217"
+        android:paddingVertical="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -1206,7 +1202,7 @@
             app:layout_constraintTop_toTopOf="@+id/shapeContainer">
 
             <ImageButton
-                android:id="@+id/styleColorPlaceholder"
+                android:id="@+id/styleThemePlaceholder"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:background="@drawable/editor_light_circle"
@@ -1218,6 +1214,31 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageButton
+                android:id="@+id/styleColorPlaceholder"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/editor_light_circle"
+                android:layout_marginStart="8dp"
+                android:clickable="false"
+                android:elevation="6dp"
+                android:src="@drawable/editor_inner_accent_circle"
+                app:tint="@color/colorAccent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/styleThemePlaceholder"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/styleDivider"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:orientation="vertical"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/styleColorPlaceholder"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/styleLabel"
                 android:layout_width="wrap_content"
@@ -1227,10 +1248,22 @@
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/styleColorPlaceholder"
+                app:layout_constraintStart_toEndOf="@id/styleDivider"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/bottomBarDivider"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="6dp"
+            android:layout_marginStart="8dp"
+            android:orientation="vertical"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/styleContainer"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/shapeContainer"
@@ -1254,6 +1287,17 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
+            <View
+                android:id="@+id/shapeDivider"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:orientation="vertical"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/shapeIcon"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/shapeLabel"
                 android:layout_width="wrap_content"
@@ -1263,7 +1307,7 @@
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/shapeIcon"
+                app:layout_constraintStart_toEndOf="@id/shapeDivider"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -1281,7 +1325,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editorToolbar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -1293,7 +1337,7 @@
         app:layout_constraintWidth="parent=0.82"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editorToolbar">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/editorOptionsTitle"
@@ -1382,7 +1426,7 @@
                         android:layout_marginStart="16dp"
                         android:clickable="false"
                         android:focusable="false"
-                        android:text="@string/editor_import"
+                        android:text="@string/importNew"
                         android:textColor="#FFFFFF"
                         app:layout_constraintBottom_toBottomOf="@+id/importIcon"
                         app:layout_constraintStart_toEndOf="@id/importIcon"
@@ -1525,6 +1569,61 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/editorOptionsCard"
             app:layout_constraintTop_toBottomOf="@id/editorOptionsCard" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/newThemeCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/darkColorPrimaryDark"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="8dp"
+            android:clipToOutline="true"
+            android:clipToPadding="true"
+            app:layout_constraintTop_toTopOf="@id/editorBackupsRv"
+            app:layout_constraintStart_toStartOf="@id/editorBackupsRv"
+            app:layout_constraintEnd_toEndOf="@id/editorBackupsRv">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/newThemelayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackgroundBorderless"
+                android:clipToOutline="true"
+                android:clipToPadding="true"
+                android:elevation="10dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:id="@+id/newThemeIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:elevation="10dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:src="@drawable/ic_baseline_add_circle_48"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <TextView
+                    android:id="@+id/newThemeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="24dp"
+                    android:elevation="10dp"
+                    android:text="New Theme"
+                    android:textColor="@color/white"
+                    android:clickable="false"
+                    android:focusable="false"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/newThemeIcon"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/editorBackupsRv"

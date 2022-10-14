@@ -235,6 +235,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 tinydb.putBoolean("custom", true);
             }
 
+
+
             //Start handling theme
             int cursorInt = theme.equals("2") ? 1 : 0;
             Aux.cursorColors = new int[][]{{R.style.d_03DAC5, R.style.d_009688, R.style.d_54AF57, R.style.d_00C7E0, R.style.d_2196F3, R.style.d_0D2A89, R.style.d_3F51B5, R.style.d_6C42B6, R.style.d_E32765, R.style.d_F44336, R.style.d_E77369, R.style.d_FF9800, R.style.d_FFC107, R.style.d_FEF65B, R.style.d_66BB6A, R.style.d_873804, R.style.d_9BCEE9}, {R.style.l_03DAC5, R.style.l_009688, R.style.l_54AF57, R.style.l_00C7E0, R.style.l_2196F3, R.style.l_0D2A89, R.style.l_3F51B5, R.style.l_6C42B6, R.style.l_E32765, R.style.l_F44336, R.style.l_E77369, R.style.l_FF9800, R.style.l_FFC107, R.style.l_FEF65B, R.style.l_66BB6A, R.style.l_873804, R.style.l_9BCEE9}};
@@ -324,13 +326,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             try {
                 setSupportActionBar(toolbar);
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 Aux.saveStack(e);
             }
 
             try {
                 getSupportActionBar().setTitle(getResources().getString(R.string.home_menu_item));
-            } catch (NullPointerException except) {
+            }
+            catch (NullPointerException except) {
                 Aux.saveStack(except);
                 finish();
             }
@@ -3863,7 +3867,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
+        try {
+            super.onRestoreInstanceState(savedInstanceState);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
         int i;
         String[] trig = {"sin", "cos", "tan", "csc", "sec", "cot"};

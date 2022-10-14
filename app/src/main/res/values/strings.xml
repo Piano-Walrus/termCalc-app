@@ -347,9 +347,8 @@
 
     </string>
 
-    <!-- Long label should be <= 25 characters-->
+    <!-- home screen launcher shortcut text-->
     <string name="shortcut_long_label" translatable="false">Terminal</string>
-    <!-- Short label should be <= 10 characters-->
     <string name="shortcut_short_label" translatable="false">Terminal</string>
 
     <string name="terminal_intro_text" translatable="false">Type \"help\" or \"?\" for a list of available commands.\n
@@ -362,10 +361,9 @@
     <string name="clear">Clear</string>
     <string name="focus_summary" translatable="false">Hides system bars to minimize distraction.</string>
     <string name="shape">Shape</string>
-    <string name="style">Style</string>
+    <string name="style">Style &amp; Color</string>
     <string name="editor_options">Options</string>
     <string name="editor_save">Save</string>
-    <string name="editor_import">Import</string>
     <string name="saved_themes">Saved Themes</string>
     <string name="editor_reset">Reset</string>
     <string name="advanced_options">Advanced Options</string>

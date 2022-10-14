@@ -531,11 +531,12 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/scrollBar"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="60dp"
             android:animateLayoutChanges="true"
             android:background="#00B5A3"
             app:layout_constraintBottom_toTopOf="@+id/buttonView"
+            app:layout_constraintEnd_toStartOf="@+id/tertiaryButtons"
             app:layout_constraintStart_toStartOf="parent">
 
             <ScrollView
@@ -576,8 +577,7 @@
                                 android:text="√"
                                 android:textAllCaps="false"
                                 android:textColor="#FFFFFF"
-                                android:textSize="17sp"
-                                app:layout_constraintStart_toStartOf="@+id/horizontalScrollView" />
+                                android:textSize="17sp" />
 
                             <Button
                                 android:id="@+id/bExp"
@@ -590,9 +590,7 @@
                                 android:paddingTop="10dp"
                                 android:text="^"
                                 android:textColor="#FFFFFF"
-                                android:textSize="28dp"
-                                app:layout_constraintStart_toEndOf="@+id/bCbqrt"
-                                app:layout_constraintTop_toTopOf="@+id/horizontalScrollView" />
+                                android:textSize="28dp" />
 
                             <Button
                                 android:id="@+id/bFact"
