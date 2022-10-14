@@ -2108,7 +2108,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
 
                     operation(pressed);
-                    tv.append("(");
                 }
             });
 
