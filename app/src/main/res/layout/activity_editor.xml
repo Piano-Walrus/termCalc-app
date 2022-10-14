@@ -1302,329 +1302,328 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/editorDrawerBG"
+    <eightbitlab.com.blurview.BlurView
+        android:id="@+id/editorBlurView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:animateLayoutChanges="true"
-        android:background="@color/editorDrawerBG"
         android:elevation="12dp"
         android:visibility="invisible"
+        app:blurOverlayColor="@color/editorDrawerBG"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/editorDrawer"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:elevation="13dp"
-        android:animateLayoutChanges="true"
-        app:layout_constraintWidth="parent=0.82"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/editorOptionsTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/editor_options"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/editorOptionsCard"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/editorOptionsCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginHorizontal="16dp"
-            app:cardBackgroundColor="@color/darkColorPrimaryDark"
-            app:cardCornerRadius="6dp"
-            app:cardElevation="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/editorOptionsTitle">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/editorOptionsLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/saveOptionLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?selectableItemBackground"
-                    android:padding="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:id="@+id/saveTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:text="@string/editor_save"
-                        android:textColor="#FFFFFF"
-                        app:layout_constraintBottom_toBottomOf="@+id/saveIcon"
-                        app:layout_constraintStart_toEndOf="@id/saveIcon"
-                        app:layout_constraintTop_toTopOf="@+id/saveIcon" />
-
-                    <ImageButton
-                        android:id="@+id/saveIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:background="@null"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_baseline_save_24"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/importOptionLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?selectableItemBackground"
-                    android:padding="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/saveOptionLayout">
-
-                    <TextView
-                        android:id="@+id/importTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:text="@string/importNew"
-                        android:textColor="#FFFFFF"
-                        app:layout_constraintBottom_toBottomOf="@+id/importIcon"
-                        app:layout_constraintStart_toEndOf="@id/importIcon"
-                        app:layout_constraintTop_toTopOf="@+id/importIcon" />
-
-                    <ImageButton
-                        android:id="@+id/importIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:background="@null"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_import_24"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/resetOptionLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?selectableItemBackground"
-                    android:padding="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/importOptionLayout">
-
-                    <TextView
-                        android:id="@+id/resetTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:text="@string/editor_reset"
-                        android:textColor="#FFFFFF"
-                        app:layout_constraintBottom_toBottomOf="@+id/resetIcon"
-                        app:layout_constraintStart_toEndOf="@id/resetIcon"
-                        app:layout_constraintTop_toTopOf="@+id/resetIcon" />
-
-                    <ImageButton
-                        android:id="@+id/resetIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:background="@null"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_baseline_reset_24"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageButton
-                        android:id="@+id/resetConfirm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:background="@null"
-                        android:visibility="invisible"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_check_24"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/resetDeny"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageButton
-                        android:id="@+id/resetDeny"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:background="@null"
-                        android:visibility="invisible"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_close_24"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/advancedOptionLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?selectableItemBackground"
-                    android:padding="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/resetOptionLayout">
-
-                    <TextView
-                        android:id="@+id/advancedTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:text="@string/advanced_options"
-                        android:textColor="#FFFFFF"
-                        app:layout_constraintBottom_toBottomOf="@+id/advancedIcon"
-                        app:layout_constraintStart_toEndOf="@id/advancedIcon"
-                        app:layout_constraintTop_toTopOf="@+id/advancedIcon" />
-
-                    <ImageButton
-                        android:id="@+id/advancedIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:background="@null"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_baseline_settings_24"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/editorBackupsTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/saved_themes"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/editorOptionsCard"
-            app:layout_constraintTop_toBottomOf="@id/editorOptionsCard" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/newThemeCard"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/darkColorPrimaryDark"
-            app:cardCornerRadius="6dp"
-            app:cardElevation="8dp"
-            android:clipToOutline="true"
-            android:clipToPadding="true"
-            app:layout_constraintTop_toTopOf="@id/editorBackupsRv"
-            app:layout_constraintStart_toStartOf="@id/editorBackupsRv"
-            app:layout_constraintEnd_toEndOf="@id/editorBackupsRv">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/newThemelayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?selectableItemBackgroundBorderless"
-                android:clipToOutline="true"
-                android:clipToPadding="true"
-                android:visibility="gone"
-                android:elevation="10dp"
-                android:clickable="true"
-                android:focusable="true">
-
-                <ImageView
-                    android:id="@+id/newThemeIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:elevation="10dp"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:src="@drawable/ic_baseline_add_circle_48"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
-
-                <TextView
-                    android:id="@+id/newThemeLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="24dp"
-                    android:elevation="10dp"
-                    android:text="New Theme"
-                    android:textColor="@color/white"
-                    android:clickable="false"
-                    android:focusable="false"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/newThemeIcon"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/editorBackupsRv"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/editorDrawer"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginHorizontal="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editorBackupsTitle"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:animateLayoutChanges="true"
+            android:elevation="13dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth="parent=0.82">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/editorOptionsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/editor_options"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/editorOptionsCard"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/editorOptionsCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                app:cardBackgroundColor="@color/darkColorPrimaryDark"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/editorOptionsTitle">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/editorOptionsLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/saveOptionLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:padding="12dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/saveTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:text="@string/editor_save"
+                            android:textColor="#FFFFFF"
+                            app:layout_constraintBottom_toBottomOf="@+id/saveIcon"
+                            app:layout_constraintStart_toEndOf="@id/saveIcon"
+                            app:layout_constraintTop_toTopOf="@+id/saveIcon" />
+
+                        <ImageButton
+                            android:id="@+id/saveIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:padding="8dp"
+                            android:src="@drawable/ic_baseline_save_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/importOptionLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:padding="12dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/saveOptionLayout">
+
+                        <TextView
+                            android:id="@+id/importTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:text="@string/importNew"
+                            android:textColor="#FFFFFF"
+                            app:layout_constraintBottom_toBottomOf="@+id/importIcon"
+                            app:layout_constraintStart_toEndOf="@id/importIcon"
+                            app:layout_constraintTop_toTopOf="@+id/importIcon" />
+
+                        <ImageButton
+                            android:id="@+id/importIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:padding="8dp"
+                            android:src="@drawable/ic_import_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/resetOptionLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:padding="12dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/importOptionLayout">
+
+                        <TextView
+                            android:id="@+id/resetTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:text="@string/editor_reset"
+                            android:textColor="#FFFFFF"
+                            app:layout_constraintBottom_toBottomOf="@+id/resetIcon"
+                            app:layout_constraintStart_toEndOf="@id/resetIcon"
+                            app:layout_constraintTop_toTopOf="@+id/resetIcon" />
+
+                        <ImageButton
+                            android:id="@+id/resetIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:padding="8dp"
+                            android:src="@drawable/ic_baseline_reset_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageButton
+                            android:id="@+id/resetConfirm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:background="@null"
+                            android:padding="8dp"
+                            android:src="@drawable/ic_check_24"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/resetDeny"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageButton
+                            android:id="@+id/resetDeny"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:background="@null"
+                            android:padding="8dp"
+                            android:src="@drawable/ic_close_24"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/advancedOptionLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:padding="12dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/resetOptionLayout">
+
+                        <TextView
+                            android:id="@+id/advancedTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:text="@string/advanced_options"
+                            android:textColor="#FFFFFF"
+                            app:layout_constraintBottom_toBottomOf="@+id/advancedIcon"
+                            app:layout_constraintStart_toEndOf="@id/advancedIcon"
+                            app:layout_constraintTop_toTopOf="@+id/advancedIcon" />
+
+                        <ImageButton
+                            android:id="@+id/advancedIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:padding="8dp"
+                            android:src="@drawable/ic_baseline_settings_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/editorBackupsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/saved_themes"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/editorOptionsCard"
+                app:layout_constraintTop_toBottomOf="@id/editorOptionsCard" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/newThemeCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:clipToOutline="true"
+                android:clipToPadding="true"
+                app:cardBackgroundColor="@color/darkColorPrimaryDark"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="8dp"
+                app:layout_constraintEnd_toEndOf="@id/editorBackupsRv"
+                app:layout_constraintStart_toStartOf="@id/editorBackupsRv"
+                app:layout_constraintTop_toTopOf="@id/editorBackupsRv">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/newThemelayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:clipToOutline="true"
+                    android:clipToPadding="true"
+                    android:elevation="10dp"
+                    android:focusable="true"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/newThemeIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:clickable="false"
+                        android:elevation="10dp"
+                        android:focusable="false"
+                        android:src="@drawable/ic_baseline_add_circle_48"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/newThemeLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="24dp"
+                        android:clickable="false"
+                        android:elevation="10dp"
+                        android:focusable="false"
+                        android:text="New Theme"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/newThemeIcon" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/editorBackupsRv"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="16sp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editorBackupsTitle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
