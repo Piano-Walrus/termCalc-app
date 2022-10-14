@@ -48,6 +48,9 @@
         <item name="android:textColorPrimary">#222222</item>
     </style>
 
+    <style name="PixelTextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
 
     <style name="MyTextAppearance" parent="@android:style/TextAppearance.Large">
         <item name="android:textColor">#FFFFFF</item>
@@ -263,7 +266,7 @@
     </style>
 
     <style name="ds_2196F3"
-        parent="ThemeOverlay.AppCompat.Dark">
+        parent="Theme.AppCompat">
         <item name="colorAccent">#2196F3</item>
     </style>
 

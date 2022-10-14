@@ -144,6 +144,8 @@ public class EditorActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+            setTheme(Aux.cursorColor);
+
             getWindow().setStatusBarColor(Color.parseColor("#16181B"));
             getWindow().setNavigationBarColor(Color.parseColor("#16181B"));
 
@@ -158,8 +160,6 @@ public class EditorActivity extends AppCompatActivity {
 
             toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_toolbar_back_light);
-
-            setTheme(R.style.ThemeOverlay_AppCompat_Dark);
 
             toolbar.setOverflowIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_overflow_menu, null));
 
