@@ -2080,16 +2080,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 @SuppressLint("SetTextI18n")
                 @Override
                 public void onClick(View v) {
-                    Button pressed = (Button) v;
-
-                    try {
-                        Aux.removeCommas(tv.getText().toString());
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    operation(pressed);
+                    operation(v);
                 }
             });
 
@@ -2098,16 +2089,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 @SuppressLint("SetTextI18n")
                 @Override
                 public void onClick(View v) {
-                    Button pressed = (Button) v;
-
-                    try {
-                        Aux.removeCommas(tv.getText().toString());
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    operation(pressed);
+                    operation(v);
                 }
             });
 
@@ -5007,8 +4989,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             e.printStackTrace();
         }
 
+        //TODO: Test new wasSpace behavior
         if (!wasSpace && initLength == getTvText().length())
             cursor = initCursor;
+        else if (wasSpace)
+            cursor = getTvText().length();
 
         tv.setSelection(cursor);
 
