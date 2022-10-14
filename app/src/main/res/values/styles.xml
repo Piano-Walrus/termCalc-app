@@ -246,22 +246,22 @@
 
     <!-- Settings Colors -->
     <style name="ds_03DAC5"
-        parent="ThemeOverlay.AppCompat.Dark">
+        parent="Theme.AppCompat">
         <item name="colorAccent">#03DAC5</item>
     </style>
 
     <style name="ds_009688"
-        parent="ThemeOverlay.AppCompat.Dark">
+        parent="Theme.AppCompat">
         <item name="colorAccent">#009688</item>
     </style>
 
     <style name="ds_54AF57"
-        parent="ThemeOverlay.AppCompat.Dark">
+        parent="Theme.AppCompat">
         <item name="colorAccent">#54AF57</item>
     </style>
 
     <style name="ds_00C7E0"
-        parent="ThemeOverlay.AppCompat.Dark">
+        parent="Theme.AppCompat">
         <item name="colorAccent">#00C7E0</item>
     </style>
 
@@ -271,62 +271,62 @@
     </style>
 
     <style name="ds_0D2A89"
-        parent="ThemeOverlay.AppCompat.Dark">
+        parent="Theme.AppCompat">
         <item name="colorAccent">#0D2A89</item>
     </style>
 
     <style name="ds_3F51B5"
-        parent="ThemeOverlay.AppCompat.Dark">
+        parent="Theme.AppCompat">
         <item name="colorAccent">#3F51B5</item>
     </style>
 
     <style name="ds_6C42B6"
-        parent="ThemeOverlay.AppCompat.Dark">
+        parent="Theme.AppCompat">
         <item name="colorAccent">#6C42B6</item>
     </style>
 
     <style name="ds_E32765"
-        parent="ThemeOverlay.AppCompat.Dark">
+        parent="Theme.AppCompat">
         <item name="colorAccent">#E32765</item>
     </style>
 
     <style name="ds_F44336"
-        parent="ThemeOverlay.AppCompat.Dark">
+        parent="Theme.AppCompat">
         <item name="colorAccent">#F44336</item>
     </style>
 
     <style name="ds_E77369"
-        parent="ThemeOverlay.AppCompat.Dark">
+        parent="Theme.AppCompat">
         <item name="colorAccent">#E77369</item>
     </style>
 
     <style name="ds_FF9800"
-        parent="ThemeOverlay.AppCompat.Dark">
+        parent="Theme.AppCompat">
         <item name="colorAccent">#FF9800</item>
     </style>
 
     <style name="ds_FFC107"
-        parent="ThemeOverlay.AppCompat.Dark">
+        parent="Theme.AppCompat">
         <item name="colorAccent">#FFC107</item>
     </style>
 
     <style name="ds_FEF65B"
-        parent="ThemeOverlay.AppCompat.Dark">
+        parent="Theme.AppCompat">
         <item name="colorAccent">#FEF65B</item>
     </style>
 
     <style name="ds_66BB6A"
-        parent="ThemeOverlay.AppCompat.Dark">
+        parent="Theme.AppCompat">
         <item name="colorAccent">#66BB6A</item>
     </style>
 
     <style name="ds_873804"
-        parent="ThemeOverlay.AppCompat.Dark">
+        parent="Theme.AppCompat">
         <item name="colorAccent">#873804</item>
     </style>
 
     <style name="ds_9BCEE9"
-        parent="ThemeOverlay.AppCompat.Dark">
+        parent="Theme.AppCompat">
         <item name="colorAccent">#9BCEE9</item>
     </style>
 </resources>
