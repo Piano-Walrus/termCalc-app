@@ -11,12 +11,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Vibrator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -280,18 +277,12 @@ public class EditorActivity extends AppCompatActivity {
 
                     Toast.makeText(EditorActivity.this, "Successfully restored \"" + title + "\"", Toast.LENGTH_SHORT).show();
 
-                    HandlerThread thread = new HandlerThread("MyHandlerThread");
-                    thread.start();
+                    newRun("reset all");
+                    newRun("restore " + title);
 
-                    new Handler(thread.getLooper()).postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            newRun("restore " + title);
+                    applyTheme();
 
-                            applyTheme();
-                            closeDrawer();
-                        }
-                    }, 5);
+                    closeDrawer();
                 }
 
                 @Override
@@ -406,7 +397,7 @@ public class EditorActivity extends AppCompatActivity {
             }
 
             BlurView blurView = findViewById(R.id.editorBlurView);
-            float blurRadius = 16f;
+            float blurRadius = 12f;
 
             View decorView = getWindow().getDecorView();
             // ViewGroup you want to start blur from. Choose root as close to BlurView in hierarchy as possible.
@@ -416,10 +407,8 @@ public class EditorActivity extends AppCompatActivity {
             // Set drawable to draw in the beginning of each blurred frame.
             // Can be used in case your layout has a lot of transparent space and your content
             // gets a too low alpha value after blur is applied.
-            Drawable windowBackground = decorView.getBackground();
 
             blurView.setupWith(rootView, new RenderScriptBlur(this)) // or RenderEffectBlur
-                    .setFrameClearDrawable(windowBackground) // Optional
                     .setBlurRadius(blurRadius);
 
             ImageButton drawerButton = findViewById(R.id.drawerButton);
@@ -1286,16 +1275,17 @@ public class EditorActivity extends AppCompatActivity {
     public void openDrawer() {
         ConstraintLayout editorBG = findViewById(R.id.editorBG);
         ConstraintLayout drawer = findViewById(R.id.editorDrawer);
+        ConstraintLayout drawerLayout = findViewById(R.id.editorDrawerLayout);
 
         BlurView blurView = findViewById(R.id.editorBlurView);
 
+        blurView.setVisibility(View.VISIBLE);
+
         ConstraintSet constraintSet = new ConstraintSet();
-        constraintSet.clone(editorBG);
+        constraintSet.clone(drawerLayout);
         constraintSet.connect(R.id.editorDrawer,ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END,0);
         constraintSet.clear(R.id.editorDrawer,ConstraintSet.START);
-        constraintSet.applyTo(editorBG);
-
-        blurView.setVisibility(View.VISIBLE);
+        constraintSet.applyTo(drawerLayout);
 
         blurView.getLayoutTransition()
                 .enableTransitionType(LayoutTransition.APPEARING);
@@ -1310,16 +1300,17 @@ public class EditorActivity extends AppCompatActivity {
     public void closeDrawer() {
         ConstraintLayout editorBG = findViewById(R.id.editorBG);
         ConstraintLayout drawer = findViewById(R.id.editorDrawer);
+        ConstraintLayout drawerLayout = findViewById(R.id.editorDrawerLayout);
 
         BlurView blurView = findViewById(R.id.editorBlurView);
 
+        blurView.setVisibility(View.INVISIBLE);
+
         ConstraintSet constraintSet = new ConstraintSet();
-        constraintSet.clone(editorBG);
+        constraintSet.clone(drawerLayout);
         constraintSet.clear(R.id.editorDrawer,ConstraintSet.END);
         constraintSet.connect(R.id.editorDrawer,ConstraintSet.START, ConstraintSet.PARENT_ID,ConstraintSet.END,0);
-        constraintSet.applyTo(editorBG);
-
-        blurView.setVisibility(View.INVISIBLE);
+        constraintSet.applyTo(drawerLayout);
 
         blurView.getLayoutTransition()
                 .enableTransitionType(LayoutTransition.DISAPPEARING);
