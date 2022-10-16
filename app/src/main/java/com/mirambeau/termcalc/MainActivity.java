@@ -5447,6 +5447,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
+                    //Delete
                     if (item.getOrder() == 1) {
                         final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.mainActivity, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
 
@@ -5490,6 +5491,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         builder.show();
                     }
+                    //Edit
                     else if (item.getOrder() == 0) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.mainActivity, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
 
