@@ -63,6 +63,5 @@ dependencies {
     implementation 'com.azeesoft.lib.colorpicker:colorpicker:1.0.8@aar'
     implementation 'com.github.AppIntro:AppIntro:6.0.0'
     implementation 'io.github.kexanie.library:MathView:0.0.6'
-
     implementation 'com.github.Dimezis:BlurView:version-2.0.2'
 }
