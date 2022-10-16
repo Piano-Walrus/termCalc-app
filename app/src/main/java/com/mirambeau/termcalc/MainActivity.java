@@ -5003,18 +5003,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         tv.setSelection(cursor);
 
-        final int finalCursor = cursor;
-        final String tvTextTest = getTvText();
-
-        //Refresh cursor position after a short delay to help with wrapText intervals
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (tvTextTest.equals(getTvText()))
-                    tv.setSelection(finalCursor);
-            }
-        }, 350);
-
         try {
             tv.requestFocus();
         }
