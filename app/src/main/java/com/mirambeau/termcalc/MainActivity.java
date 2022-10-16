@@ -5345,7 +5345,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                                 functionsSheet.cards = functionCards;
                                 functionsSheet.adapter.cards = functionCards;
-                                functionsSheet.adapter.notifyItemInserted(0);
+                                functionsSheet.adapter.notifyDataSetChanged();
                                 functionsSheet.recyclerView.scrollToPosition(0);
                             }
                             catch (Exception e){
