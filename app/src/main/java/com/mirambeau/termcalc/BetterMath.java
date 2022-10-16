@@ -255,7 +255,7 @@ public class BetterMath {
                     throw new NaNException("Parse Error");
                 }
 
-                if (Ax.isFullNum(next)) {
+                if (Ax.isFullSignedNum(next)) {
                     eqArray.set(i, Trig.evaluate(current, next, mc, isRad));
 
                     String trigTest = eqArray.get(i);
