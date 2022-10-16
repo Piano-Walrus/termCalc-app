@@ -4677,7 +4677,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                                 tv.setSelection(tv.getSelectionEnd());
                                                 tv.requestFocus();
                                             }
-                                        }, 300);
+                                        }, 295);
 
                                         if (!isBig) {
                                             ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
@@ -4942,6 +4942,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (buttonText.equals("=")) {
             newerEquals(v);
             return;
+        }
+
+        if (!tv.hasFocus()) {
+            tv.setSelection(getTvText().length());
+            tv.requestFocus();
+            tv.setSelection(getTvText().length());
         }
 
         if (!isBig) {
