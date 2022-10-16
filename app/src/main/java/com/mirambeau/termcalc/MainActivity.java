@@ -4944,7 +4944,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return;
         }
 
-        if (!tv.hasFocus()) {
+        if (!tv.hasFocus() && equaled) {
             tv.setSelection(getTvText().length());
             tv.requestFocus();
             tv.setSelection(getTvText().length());
