@@ -307,6 +307,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             tv = findViewById(R.id.equation);
             tv.setEnabled(true);
 
+            tv.setLines(1);
+
             if (tinydb.getBoolean("showPreviousExpression"))
                 previousExpression = findViewById(R.id.previousExpression);
 
@@ -2143,6 +2145,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             tv.addTextChangedListener(new TextValidator(tv) {
                 @Override
                 public void validate(TextView textView, String before, String after) {
+                    tv.setLines(1);
+
                     wrapText(tv);
 
                     if (equaled && previousExpression != null) {
@@ -2221,6 +2225,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             }
                         }
                     }
+
+                    tv.setLines(1);
                 }
             });
 
