@@ -5042,7 +5042,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         tv.append(pressed);
 
-                        if (Aux.isTrig(pressed))
+                        if (Aux.isTrig(pressed) || pressed.equals("ln"))
                             tv.append("(");
                     }
                     else
@@ -5079,7 +5079,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                                 tv.append(pressed);
 
-                                if (Aux.isTrig(pressed))
+                                if (Aux.isTrig(pressed) || pressed.equals("ln"))
                                     tv.append("(");
                             }
                         }
