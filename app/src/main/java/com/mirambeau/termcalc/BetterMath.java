@@ -1246,10 +1246,10 @@ class Ax {
         }
 
         for (i=0; i < length; i++) {
-            if (!isDigit(chat(str, i))) {
-                if (!(chat(str, i).equals("e") || chat(str, i).equals("π") || chat(str, i).equals(".")))
-                    return false;
-            }
+            String current = chat(str, i);
+
+            if (current == null || (!isDigit(current) && !(current.equals("e") || current.equals("π") || current.equals("."))))
+                return false;
         }
 
         return countChars(str, ".") <= 1;

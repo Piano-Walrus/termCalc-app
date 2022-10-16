@@ -990,7 +990,7 @@ public class Aux {
         for (i=0; i < length; i++) {
             String current = chat(str, i);
 
-            if (current != null && !isDigit(current) && !(current.equals("e") || current.equals("π") || current.equals(".")))
+            if (current == null || (!isDigit(current) && !(current.equals("e") || current.equals("π") || current.equals("."))))
                 return false;
         }
 
