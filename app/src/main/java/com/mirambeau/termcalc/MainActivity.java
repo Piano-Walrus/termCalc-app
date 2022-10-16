@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     boolean isExpanded, hasExpanded, error, didIntro, isBig, isCustomTheme, dontVibe, isFabExpanded;
     boolean isDate = false;
     boolean theme_boolean = true, isDynamic;
-    boolean shouldRecord = true, isFocus = false;
+    boolean isFocus = false;
     boolean isDarkTab = true;
     boolean roundedButtons = false;
 
@@ -242,6 +242,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Aux.cursorColors = new int[][]{{R.style.d_03DAC5, R.style.d_009688, R.style.d_54AF57, R.style.d_00C7E0, R.style.d_2196F3, R.style.d_0D2A89, R.style.d_3F51B5, R.style.d_6C42B6, R.style.d_E32765, R.style.d_F44336, R.style.d_E77369, R.style.d_FF9800, R.style.d_FFC107, R.style.d_FEF65B, R.style.d_66BB6A, R.style.d_873804, R.style.d_9BCEE9}, {R.style.l_03DAC5, R.style.l_009688, R.style.l_54AF57, R.style.l_00C7E0, R.style.l_2196F3, R.style.l_0D2A89, R.style.l_3F51B5, R.style.l_6C42B6, R.style.l_E32765, R.style.l_F44336, R.style.l_E77369, R.style.l_FF9800, R.style.l_FFC107, R.style.l_FEF65B, R.style.l_66BB6A, R.style.l_873804, R.style.l_9BCEE9}};
             Aux.switchColors = new int[]{R.style.ds_03DAC5, R.style.ds_009688, R.style.ds_54AF57, R.style.ds_00C7E0, R.style.ds_2196F3, R.style.ds_0D2A89, R.style.ds_3F51B5, R.style.ds_6C42B6, R.style.ds_E32765, R.style.ds_F44336, R.style.ds_E77369, R.style.ds_FF9800, R.style.ds_FFC107, R.style.ds_FEF65B, R.style.ds_66BB6A, R.style.ds_873804, R.style.ds_9BCEE9};
 
+            setTheme(Aux.cursorColors[cursorInt][0]);
 
             final String[] primaryColors = {"#03DAC5", "#009688", "#54AF57", "#00C7E0", "#2196F3", "#0D2A89", "#3F51B5", "LILAC", "PINK", "#F44336", "#E77369", "#FF9800", "#FFC107", "#FEF65B", "#66BB6A", "#873804", "#B8E2F8"};
             final String[][] secondaryColors = {{"#53E2D4", "#4DB6AC", "#77C77B", "#51D6E8", "#64B5F6", "#1336A9", "#7986CB", "#8C6DCA", "#F06292", "#FF5956", "#EC8F87", "#FFB74D", "#FFD54F", "#FBF68D", "#EF5350", "#BD5E1E", "#B8E2F8"}, {"#00B5A3", "#00796B", "#388E3C", "#0097A7", "#1976D2", "#0A2068", "#303F9F", "#5E35B1", "#C2185B", "#D32F2F", "#D96459", "#F57C00", "#FFA000", "#F4E64B", "#EF5350", "#572300", "#9BCEE9"}};
@@ -256,6 +257,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             boolean isCustom = false;
             boolean isCustomNav = tinydb.getBoolean("navTheme");
             boolean isAlwaysDarkNav = tinydb.getBoolean("isAlwaysDarkNav");
+
+            Aux.cursorColor = isAlwaysDarkNav ? Aux.cursorColors[0][Integer.parseInt(color)-1] : Aux.cursorColors[cursorInt][Integer.parseInt(color)-1];
+
+            setTheme(Aux.cursorColor);
 
             String navBG;
             String tempTheme = theme;
@@ -857,13 +862,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (theme != null && color != null && ((color.equals("14") && !theme.equals("4")) || (color.equals("17") && (theme.equals("3") || theme.equals("1")))) && !roundedButtons) {
                 bDel.setColorFilter(darkGray);
             }
-
-            if (isAlwaysDarkNav)
-                Aux.cursorColor = Aux.cursorColors[0][Integer.parseInt(color)-1];
-            else
-                Aux.cursorColor = Aux.cursorColors[cursorInt][Integer.parseInt(color)-1];
-
-            setTheme(Aux.cursorColor);
 
             //Light
             if (theme.equals("2")) {
@@ -3087,10 +3085,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (color == null || !Aux.isFullNum(color))
             color = "1";
 
-        if (isAlwaysDarkNav)
-            setTheme(Aux.cursorColors[0][Integer.parseInt(color)-1]);
-        else
-            setTheme(Aux.cursorColors[cursorInt][Integer.parseInt(color)-1]);
+        setTheme(Aux.cursorColors[cursorInt][Integer.parseInt(color)-1]);
 
         if (!isCustomTheme) {
             primary = primaryColors[Integer.parseInt(color) - 1];
@@ -3832,6 +3827,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         outState.putBoolean("isEquals", isEquals);
         outState.putBoolean("isDrawerOpened", drawer.isDrawerOpen(GravityCompat.START));
 
+        //Ints
+        outState.putInt("cursor", tv.getSelectionStart());
+
         //Date Ints
         outState.putInt("initDay", initDay);
         outState.putInt("initMonth", initMonth);
@@ -3879,6 +3877,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         selectedTo = savedInstanceState.getString("selectedTo");
 
         boolean isDrawerOpened = savedInstanceState.getBoolean("isDrawerOpened");
+
+        int cursor = savedInstanceState.getInt("cursor");
 
         initDay = savedInstanceState.getInt("initDay");
         initMonth = savedInstanceState.getInt("initMonth");
@@ -3929,6 +3929,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             eq3 = result;
 
         tv.setText(eq3);
+
+        try {
+            if (cursor > -1 && cursor <= getTvText().length())
+                tv.setSelection(cursor);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
         try {
             String tvText = getTvText();
@@ -4621,16 +4629,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                                 .enableTransitionType(LayoutTransition.CHANGING);
                                     }
 
-                                    if (shouldRecord) {
-                                        ArrayList<String> equations = tinydb.getListString("equations");
-
-                                        //Add equation to history
-                                        if (tv.getText() != null && !tv.getText().toString().equals("\0") && !tv.getText().toString().contains("NaN")) {
-                                            equations.add(0, historyTemp);
-                                            tinydb.putListString("equations", equations);
-                                        }
-                                    }
-
                                     if (!equaled)
                                         spin(clear, theme, color, R.drawable.ic_close_24);
 
@@ -4711,11 +4709,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         showRippleAnimation(findViewById(R.id.bgAnim));
                                     }
 
-                                    if (shouldRecord) {
+                                    if (!getTvText().contains("Error") && !getTvText().contains("NaN")) {
                                         ArrayList<String> answers = tinydb.getListString("answers");
+                                        ArrayList<String> equations = tinydb.getListString("equations");
 
-                                        //Add answer to history
-                                        if (tv.getText() != null && !tv.getText().toString().equals("\0") && !tv.getText().toString().contains("NaN")) {
+                                        if (tv.getText() != null && !getTvText().equals("\0") && !getTvText().contains("NaN")) {
+                                            //Add equation to history
+                                            equations.add(0, historyTemp);
+                                            tinydb.putListString("equations", equations);
+
+                                            //Add answer to history
                                             answers.add(0, tv.getText().toString());
                                             tinydb.putListString("answers", answers);
 
@@ -4754,7 +4757,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
 
-            if (tv.getText().toString().contains("Error") || tv.getText().toString().contains("NaN")) {
+            if (getTvText().contains("Error") || getTvText().contains("NaN")) {
                 tv.setEnabled(false);
                 tv.clearFocus();
             }
@@ -4947,7 +4950,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (!tv.hasFocus() && equaled) {
             tv.setSelection(getTvText().length());
             tv.requestFocus();
-            tv.setSelection(getTvText().length());
         }
 
         if (!isBig) {
@@ -5330,6 +5332,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 builder.setView(viewInflated);
 
                 builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                    @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (expressionInput.getText() != null && titleInput.getText() != null && titleInput.getText().toString().length() > 0 && !Aux.parseVars(expressionInput.getText().toString()).equals("0")) {
@@ -5351,7 +5354,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                                 functionsSheet.cards = functionCards;
                                 functionsSheet.adapter.cards = functionCards;
-                                functionsSheet.adapter.notifyDataSetChanged();
+
+                                functionsSheet.adapter.adapters.add(0, new VariablesAdapter(functionVariables.get(0).split("`"), 0));
+                                functionsSheet.adapter.notifyItemInserted(0);
+
+                                Aux.adapter = functionsSheet.adapter;
+
                                 functionsSheet.recyclerView.scrollToPosition(0);
                             }
                             catch (Exception e){
@@ -5482,8 +5490,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                                     functionsSheet.cards = functionCards;
                                     functionsSheet.adapter.cards = functionCards;
+
+                                    functionsSheet.adapter.adapters.remove(position);
+
+                                    Aux.adapter = functionsSheet.adapter;
+
                                     functionsSheet.adapter.notifyItemRemoved(position);
-                                } catch (NullPointerException | IndexOutOfBoundsException e) {
+                                }
+                                catch (NullPointerException | IndexOutOfBoundsException e) {
                                     e.printStackTrace();
                                 }
                             }
@@ -5696,7 +5710,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             }
                         }
                         else {
-                            functionTv.setText(initFunctionText);
+                            functionTv.setText(initFunctionText.replace("*", Aux.multiDot));
 
                             copy.setVisibility(View.GONE);
 

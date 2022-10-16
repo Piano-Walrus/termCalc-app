@@ -462,7 +462,7 @@ public class BetterMath {
                     }
                     catch (Exception e) {
                         e.printStackTrace();
-                        lengthCheck = next.replace(",", "").length();
+                        lengthCheck += next.replace(",", "").length();
                     }
 
                     if (lengthCheck <= 7)
