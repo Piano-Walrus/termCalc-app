@@ -299,9 +299,9 @@ public class BetterMath {
                 }
             }
 
-            if (!Aux.isFullSignedNum(next))
+            if (!Ax.isFullSignedNum(next))
                 throw new NaNException("Parse Error");
-            else if (Aux.isFullSignedNum(next) && next.startsWith("-"))
+            else if (Ax.isFullSignedNum(next) && next.startsWith("-"))
                 throw new NaNException("NaN");
 
             //Log Base 10
@@ -661,7 +661,8 @@ public class BetterMath {
             if (Ax.isDigit(current) || current.equals(".")) {
                 String lastItem = eqArray.size() > 0 ? eqArray.get(eqArray.size() - 1) : "";
 
-                if (eqArray.size() < 1 || (Ax.isOp(lastItem) || lastItem.equals(Ax.pi) || lastItem.equals("e")))
+                //TODO: Handle superscripts preceding numbers
+                if (eqArray.size() < 1 || (Ax.isOp(lastItem) || Ax.trigList.contains(lastItem) || lastItem.equals(Ax.pi) || lastItem.equals("e") || lastItem.equals("ₑ")))
                     eqArray.add(current);
                 else
                     eqArray.set(eqArray.size() - 1, lastItem + current);
@@ -1121,8 +1122,8 @@ class Ax {
 
     public static final String piStr = superscripts[3] + superDot + superscripts[1] + superscripts[4] + superscripts[1] + superscripts[5] + superscripts[9];
 
-    public static ArrayList<String> ops = new ArrayList<>(Arrays.asList("+", "-", multi, divi, sq, "^", "(", ")", "!", "%", bulletDot, multiDot, "*", "/"));
-    public static ArrayList<String> binaryOps = new ArrayList<String>(Arrays.asList("+", "-", "/", "*", multi, divi, "^", "%", Aux.emDash, bulletDot, multiDot));
+    public static ArrayList<String> ops = new ArrayList<>(Arrays.asList("+", "-", multi, divi, sq, "^", "(", ")", "!", "%", bulletDot, multiDot, "*", "/", "log", "ln"));
+    public static ArrayList<String> binaryOps = new ArrayList<String>(Arrays.asList("+", "-", "/", "*", multi, divi, "^", "%", Ax.emDash, bulletDot, multiDot));
 
     //The method's name is a shortened version of "charAt." It's literally just a shortcut for writing "Character.toString(str.charAt(index))"
     public static String chat(String str, int index) {
