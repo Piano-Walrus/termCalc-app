@@ -5013,7 +5013,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (tvTextTest.equals(getTvText()))
                     tv.setSelection(finalCursor);
             }
-        }, 125);
+        }, 350);
 
         try {
             tv.requestFocus();
