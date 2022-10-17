@@ -2093,6 +2093,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             });
 
+            //TODO: Fix this
             //Log Base x
             compBar[5].setOnLongClickListener(new View.OnLongClickListener() {
                 @SuppressLint("SetTextI18n")
@@ -4311,8 +4312,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else if (!before.equals("~") && before.endsWith("(")) {
             for (i=before.length()-2; i >= 0; i--) {
-                if ((Aux.isLetter(Aux.chat(before, i)) && !Aux.chat(before, i).equals("e")) || (i > 0 && (Aux.chat(before, i-1) + Aux.chat(before, i)).equals(Aux.superMinus + Aux.superscripts[1])))
+                if ((Aux.isLetter(Aux.chat(before, i)) && !Aux.chat(before, i).equals("e")))
                     deleteAmt++;
+                else if (i > 1 && (Aux.chat(before, i-1) + Aux.chat(before, i)).equals(Aux.superMinus + Aux.superscripts[1]) && Aux.isLetter(Aux.chat(before, i-2))) {
+                    deleteAmt += 2;
+                    i--;
+                }
                 else
                     break;
             }
@@ -5035,22 +5040,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 //If tv is empty, and the character can logically be placed first, then just type it
                 if (getTvText().trim().replace("\0", "").replace(" ", "").length() < 1) {
-                    isDec = false;
-
                     if (!pressed.equals("!") && !pressed.equals(")") && (!Aux.isBinaryOp(pressed) || pressed.equals("-"))) {
-                        dont = true;
-
                         tv.append(pressed);
 
                         if (Aux.isTrig(pressed) || pressed.equals("ln"))
                             tv.append("(");
+
+                        isDec = false;
+                        tv.setSelection(getTvText().length());
                     }
-                    else
-                        return;
+
+                    return;
                 }
 
                 //Check for too many negative signs
-                if (!(pressed.equals("-") && getTvText().endsWith("-") && Aux.newTrim(getTvText(), 1).endsWith("(")) && !dont) {
+                if (!(pressed.equals("-") && getTvText().endsWith("-") && Aux.newTrim(getTvText(), 1).endsWith("("))) {
                     if (equaled) {
                         if (getTvText().contains("E"))
                             tv.setText("(" + getTvText() + ")");
