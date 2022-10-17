@@ -28,19 +28,23 @@ public class Licenses extends AppCompatActivity {
 
         int i;
 
-        TextView[] headers = {findViewById(R.id.apacheHeader), findViewById(R.id.imgAttributionsHeader), findViewById(R.id.artisticHeader), findViewById(R.id.mitHeader)};
+        TextView[] headers = {findViewById(R.id.apacheHeader), findViewById(R.id.imgAttributionsHeader), findViewById(R.id.artisticHeader),
+                findViewById(R.id.mitHeader)};
+
         TextView[] iconLinks = {findViewById(R.id.twitterLinkTitle)};
 
-        TextView[] titles = {findViewById(R.id.appcompatTitle), findViewById(R.id.constraintLayoutTitle), findViewById(R.id.materialTitle), findViewById(R.id.material2Title),
-                findViewById(R.id.twitterTitle), findViewById(R.id.drawerTitle), findViewById(R.id.navFragTitle), findViewById(R.id.navuiTitle),
-                findViewById(R.id.prefTitle), findViewById(R.id.cardTitle), findViewById(R.id.junitTitle), findViewById(R.id.testTitle), findViewById(R.id.colorTitle), findViewById(R.id.introTitle),
-                findViewById(R.id.mathTitle), findViewById(R.id.currencyTitle), findViewById(R.id.bigDecimalMathTitle), findViewById(R.id.blurViewTitle)};
+        TextView[] titles = {findViewById(R.id.appcompatTitle), findViewById(R.id.constraintLayoutTitle), findViewById(R.id.materialTitle),
+                findViewById(R.id.material2Title), findViewById(R.id.twitterTitle), findViewById(R.id.drawerTitle), findViewById(R.id.navFragTitle),
+                findViewById(R.id.navuiTitle), findViewById(R.id.prefTitle), findViewById(R.id.cardTitle), findViewById(R.id.junitTitle),
+                findViewById(R.id.testTitle), findViewById(R.id.colorTitle), findViewById(R.id.introTitle), findViewById(R.id.mathTitle),
+                findViewById(R.id.currencyTitle), findViewById(R.id.bigDecimalMathTitle), findViewById(R.id.blurViewTitle)};
 
-        TextView[] licenses = {findViewById(R.id.appcompatCopyright), findViewById(R.id.constraintLayoutCopyright), findViewById(R.id.materialCopyright), findViewById(R.id.material2Copyright),
-                findViewById(R.id.twitterLicenseTitle), findViewById(R.id.drawerCopyright), findViewById(R.id.navFragCopyright),
-                findViewById(R.id.navuiCopyright), findViewById(R.id.prefCopyright), findViewById(R.id.cardCopyright), findViewById(R.id.junitCopyright), findViewById(R.id.testCopyright),
-                findViewById(R.id.colorCopyright), findViewById(R.id.introCopyright), findViewById(R.id.mathCopyright),
-                findViewById(R.id.currencyCopyright), findViewById(R.id.bigDecimalMathCopyright), findViewById(R.id.blurViewCopyright)};
+        TextView[] licenses = {findViewById(R.id.appcompatCopyright), findViewById(R.id.constraintLayoutCopyright), findViewById(R.id.materialCopyright),
+                findViewById(R.id.material2Copyright), findViewById(R.id.twitterLicenseTitle), findViewById(R.id.drawerCopyright),
+                findViewById(R.id.navFragCopyright), findViewById(R.id.navuiCopyright), findViewById(R.id.prefCopyright), findViewById(R.id.cardCopyright),
+                findViewById(R.id.junitCopyright), findViewById(R.id.testCopyright), findViewById(R.id.colorCopyright), findViewById(R.id.introCopyright),
+                findViewById(R.id.mathCopyright), findViewById(R.id.currencyCopyright), findViewById(R.id.bigDecimalMathCopyright),
+                findViewById(R.id.blurViewCopyright)};
 
         ConstraintLayout[] cards = {findViewById(R.id.appCompatLayout), findViewById(R.id.constraintLayoutLayout), findViewById(R.id.materialLayout),
                 findViewById(R.id.material2Layout), findViewById(R.id.twitterLayout), findViewById(R.id.drawerLayout), findViewById(R.id.navFragLayout),
@@ -75,7 +79,13 @@ public class Licenses extends AppCompatActivity {
             }
 
             for (i=0; i < cards.length; i++){
-                cards[i].setBackground(getResources().getDrawable(R.drawable.rounded_bg_light));
+                try {
+                    cards[i].setBackground(getResources().getDrawable(R.drawable.rounded_bg_light));
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 titles[i].setTextColor(Color.parseColor("#222222"));
                 licenses[i].setTextColor(Color.parseColor("#222222"));
             }
