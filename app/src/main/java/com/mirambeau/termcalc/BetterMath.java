@@ -256,7 +256,12 @@ public class BetterMath {
                 }
 
                 if (Ax.isFullSignedNum(next)) {
-                    eqArray.set(i, Trig.evaluate(current, next, mc, isRad));
+                    try {
+                        eqArray.set(i, Trig.evaluate(current, next, mc, isRad));
+                    }
+                    catch (ArithmeticException e) {
+                        throw new NaNException("NaN");
+                    }
 
                     String trigTest = eqArray.get(i);
 
@@ -670,11 +675,16 @@ public class BetterMath {
             }
             //TODO: Parse n-th roots properly
             else if (Ax.isOp(current) || current.equals(Ax.pi) || current.equals("e") || Ax.superlist.contains(current) ||
-                    Ax.sublist.contains(current) || current.equals("ₑ")) {
+                    Ax.sublist.contains(current) || current.equals("ₑ") || current.equals(Ax.superMinus)) {
                 String lastItem = eqArray.size() > 0 ? eqArray.get(eqArray.size() - 1) : "";
 
                 if (Ax.isDigit(lastItem) && current.equals(Ax.sq))
                     eqArray.add("*");
+                else if (lastItem != null && current.equals(Ax.superMinus) && Ax.trigList.contains(lastItem) && i < eq.length() - 1 && Ax.chat(eq, i+1) != null && Ax.chat(eq, i+1).equals(Ax.superscripts[1])) {
+                    eqArray.set(eqArray.size() - 1, lastItem + Ax.superMinus + Ax.superscripts[1]);
+                    i++;
+                    continue;
+                }
 
                 eqArray.add(current);
             }
@@ -1108,8 +1118,8 @@ class Ax {
     public static final ArrayList<String> sublistMisc = new ArrayList<>(Arrays.asList(eSub, opSub, cpSub, ".", "₋"));
     public static final ArrayList<String> normalListMisc = new ArrayList<>(Arrays.asList("e", "(", ")", ".", "-"));
 
-    static final String[] trigIn = {"sin", "cos", "tan", "csc", "sec", "cot", "sinh", "cosh", "tanh", "csch", "sech", "coth", "arcsin", "arccos", "arctan", "arccsc", "arcsec", "arccot", "arcsinh", "arccosh", "arctanh", "arccsch", "arcsech", "arccoth"};
-    static final ArrayList<String> trigList = new ArrayList<>(Arrays.asList("sin", "cos", "tan", "csc", "sec", "cot", "sinh", "cosh", "tanh", "csch", "sech", "coth", "arcsin", "arccos", "arctan", "arccsc", "arcsec", "arccot", "arcsinh", "arccosh", "arctanh", "arccsch", "arcsech", "arccoth"));
+    static final String[] trigIn = {"sin", "cos", "tan", "csc", "sec", "cot", "sinh", "cosh", "tanh", "csch", "sech", "coth", "arcsin", "arccos", "arctan", "arccsc", "arcsec", "arccot", "arcsinh", "arccosh", "arctanh", "arccsch", "arcsech", "arccoth", "sin⁻¹", "cos⁻¹", "tan⁻¹", "csc⁻¹", "sec⁻¹", "cot⁻¹"};
+    static final ArrayList<String> trigList = new ArrayList<>(Arrays.asList("sin", "cos", "tan", "csc", "sec", "cot", "sinh", "cosh", "tanh", "csch", "sech", "coth", "arcsin", "arccos", "arctan", "arccsc", "arcsec", "arccot", "arcsinh", "arccosh", "arctanh", "arccsch", "arcsech", "arccoth", "sin⁻¹", "cos⁻¹", "tan⁻¹", "csc⁻¹", "sec⁻¹", "cot⁻¹"));
 
     public static final String divi = "÷";
     public static final String multi = "×";
