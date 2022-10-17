@@ -4,7 +4,7 @@
 There are two ways to modify TermCalc's appearance. The first is through the basic theme menu, which simply allows the user to select a light or dark theme, then an accent color. The second is using the custom theme editor. When using the latter, any item on the home screen of the application can be customized. Both the background and text colors of each element can be modified, either using a color picker, or entering a specific hex code. Entire zones (like the number keypad, for example) can also be modified at once to speed-up theme creation. Custom themes can also intelligently modify the application's nav drawer (adaptively determining which colors in the theme would clash the least with the background color of the nav drawer), and other sections of the application (i.e. Unit Converter). Users can also switch between round, or square/borderless buttons when using either theme editor (round buttons are currently a WIP, but should be an option in the next update). Finally, custom themes can also be saved, restored, and shared with others at any time.
 
 ## Mathematical and Technical Features
-The app uses BigDecimal precision (or rather, will once I finish the next update, sigh) for most calculations (mainly those that would specifically benefit from such precision), and has advanced functionality including:
+The app uses BigDecimal precision (or rather, it will once I finish the next update, sigh) for most calculations (mainly those that would specifically benefit from such precision), and has advanced functionality including:
  - Inverse hyperbolic trigonometry
  - Custom user-created functions (i.e. Compound Interest or Permutation)
  - A list of common constants (i.e. Avogadro's Number), and the ability to add more
