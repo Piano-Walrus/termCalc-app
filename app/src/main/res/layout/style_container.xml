@@ -6,6 +6,7 @@
     android:background="#101217">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/containerBG"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/editor_container_background"
