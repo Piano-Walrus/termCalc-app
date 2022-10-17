@@ -4139,110 +4139,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public final void switchMode(View v){
         final Button keyNum = (Button) v;
+        final String keyText = keyNum.getText().toString();
+
         TinyDB tinydb = new TinyDB(MainActivity.mainActivity);
 
-        if (keyNum.getText().toString().equals("RAD"))
-            keyNum.setText("DEG");
-        else
-            keyNum.setText("RAD");
+        keyNum.setText(keyText.equals("RAD") ? "DEG" : "RAD");
 
-        isRad = keyNum.getText().toString().equals("RAD");
+        isRad = keyText.equals("RAD");
 
         tinydb.putBoolean("isRad", isRad);
 
         try {
             if (Aux.isFullSignedNumE(previousExpression.getText().toString()))
-                previousExpression.setText(evaluate(tv.getText().toString()));
+                previousExpression.setText(evaluate(getTvText()));
         }
         catch (Exception ignored) {}
-    }
-
-    //Cosecant
-    public double arccsc(double n1) {
-        double n = 0, sin, arcsin;
-
-        if (n1 >= 1) {
-            arcsin = 2000000000;
-            n = 0.00001;
-
-            while (arcsin > n1) {
-                sin = Math.sin(Math.toRadians(n));
-                arcsin = 1.0 / sin;
-                n = n + 0.000024;
-            }
-        }
-        else if (n1 <= 1) {
-            arcsin = -2000000000;
-            n = -0.00001;
-
-            while (arcsin < n1) {
-                sin = Math.sin(Math.toRadians(n));
-                arcsin = 1.0 / sin;
-                n = n - 0.000024;
-            }
-        }
-
-        return n;
-    }
-
-    //Secant
-    public double arcsec(double n1) {
-        double n = 0, cos, sec;
-
-        if (n1 > 0) {
-            sec = 0;
-            n = 0.00001;
-
-            while (sec < n1) {
-                cos = Math.cos(Math.toRadians(n));
-                sec = 1.0 / cos;
-                n += 0.000024;
-            }
-        }
-        else if (n1 < 0) {
-            n1 = 1.0 / n1;
-            cos = -2;
-            n = 180;
-
-            while (cos < n1) {
-                cos = Math.cos(Math.toRadians(n));
-                n -= 0.000024;
-            }
-        }
-
-        return n;
-    }
-
-    //Cotangent
-    public double arccot(double n1) {
-        double n = 0;
-        double tan, arctan;
-
-        if (n1 >= 0) {
-            arctan = 2000000000;
-            n = 0.00001;
-
-            while (arctan > n1) {
-                tan = Math.tan(Math.toRadians(n));
-                arctan = 1.0 / (tan);
-                n += 0.000024;
-            }
-        }
-        else if (n1 < 0) {
-            n1 = n1 * -1.0;
-            arctan = 2000000000;
-            n = 0.00001;
-
-            while (arctan > n1) {
-                tan = Math.tan(Math.toRadians(n));
-                arctan = 1.0 / (tan);
-                n += 0.000024;
-            }
-
-            n *= -1.0;
-        }
-
-        return n;
     }
 
     //INV

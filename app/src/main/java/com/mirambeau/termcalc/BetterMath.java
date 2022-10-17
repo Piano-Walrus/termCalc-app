@@ -1072,6 +1072,10 @@ class Trig {
                     case "cos": return isRad ? BigDecimalMath.acos(num, mc).toPlainString() : toDegrees(BigDecimalMath.acos(num, mc)).toPlainString();
                     case "tan": return isRad ? BigDecimalMath.atan(num, mc).toPlainString() : toDegrees(BigDecimalMath.atan(num, mc)).toPlainString();
 
+                    case "csc": return evaluate("sin⁻¹", BigDecimal.ONE.divide(num, mc).toPlainString(), mc, isRad);
+                    case "sec": return evaluate("cos⁻¹", BigDecimal.ONE.divide(num, mc).toPlainString(), mc, isRad);
+                    case "cot": return evaluate("tan⁻¹", BigDecimal.ONE.divide(num, mc).toPlainString(), mc, isRad);
+
                     //TODO: arccsc, arcsec, arccot
                 }
             }
