@@ -34,40 +34,37 @@ public class Licenses extends AppCompatActivity {
         TextView[] titles = {findViewById(R.id.appcompatTitle), findViewById(R.id.constraintLayoutTitle), findViewById(R.id.materialTitle), findViewById(R.id.material2Title),
                 findViewById(R.id.twitterTitle), findViewById(R.id.drawerTitle), findViewById(R.id.navFragTitle), findViewById(R.id.navuiTitle),
                 findViewById(R.id.prefTitle), findViewById(R.id.cardTitle), findViewById(R.id.junitTitle), findViewById(R.id.testTitle), findViewById(R.id.colorTitle), findViewById(R.id.introTitle),
-                findViewById(R.id.mathTitle), findViewById(R.id.currencyTitle), findViewById(R.id.bigDecimalMathTitle)};
+                findViewById(R.id.mathTitle), findViewById(R.id.currencyTitle), findViewById(R.id.bigDecimalMathTitle), findViewById(R.id.blurViewTitle)};
 
         TextView[] licenses = {findViewById(R.id.appcompatCopyright), findViewById(R.id.constraintLayoutCopyright), findViewById(R.id.materialCopyright), findViewById(R.id.material2Copyright),
                 findViewById(R.id.twitterLicenseTitle), findViewById(R.id.drawerCopyright), findViewById(R.id.navFragCopyright),
                 findViewById(R.id.navuiCopyright), findViewById(R.id.prefCopyright), findViewById(R.id.cardCopyright), findViewById(R.id.junitCopyright), findViewById(R.id.testCopyright),
                 findViewById(R.id.colorCopyright), findViewById(R.id.introCopyright), findViewById(R.id.mathCopyright),
-                findViewById(R.id.currencyCopyright), findViewById(R.id.bigDecimalMathCopyright)};
+                findViewById(R.id.currencyCopyright), findViewById(R.id.bigDecimalMathCopyright), findViewById(R.id.blurViewCopyright)};
 
-        ConstraintLayout[] cards = {findViewById(R.id.appCompatLayout), findViewById(R.id.constraintLayoutLayout), findViewById(R.id.materialLayout), findViewById(R.id.material2Layout),
-                findViewById(R.id.twitterLayout), findViewById(R.id.drawerLayout), findViewById(R.id.navFragLayout), findViewById(R.id.navuiLayout),
-                findViewById(R.id.prefLayout), findViewById(R.id.cardLayout), findViewById(R.id.junitLayout), findViewById(R.id.testLayout), findViewById(R.id.colorLayout),
-                findViewById(R.id.introLayout), findViewById(R.id.mathLayout), findViewById(R.id.currencyConverterLayout), findViewById(R.id.bigDecimalMathLayout)};
+        ConstraintLayout[] cards = {findViewById(R.id.appCompatLayout), findViewById(R.id.constraintLayoutLayout), findViewById(R.id.materialLayout),
+                findViewById(R.id.material2Layout), findViewById(R.id.twitterLayout), findViewById(R.id.drawerLayout), findViewById(R.id.navFragLayout),
+                findViewById(R.id.navuiLayout), findViewById(R.id.prefLayout), findViewById(R.id.cardLayout), findViewById(R.id.junitLayout),
+                findViewById(R.id.testLayout), findViewById(R.id.colorLayout), findViewById(R.id.introLayout), findViewById(R.id.mathLayout),
+                findViewById(R.id.currencyConverterLayout), findViewById(R.id.bigDecimalMathLayout), findViewById(R.id.blurViewLayout)};
 
         if (theme == null || theme.equals("\0"))
             theme = "1";
 
         if (theme.equals("1")){
-            if (Build.VERSION.SDK_INT >= 21) {
-                getWindow().setStatusBarColor(Color.parseColor("#16181B"));
-                getWindow().setNavigationBarColor(Color.parseColor("#16181B"));
-            }
+            getWindow().setStatusBarColor(Color.parseColor("#16181B"));
+            getWindow().setNavigationBarColor(Color.parseColor("#16181B"));
         }
         else if (theme.equals("2")){
             setTheme(R.style.LightTheme);
             toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
             main.setBackgroundColor(Color.parseColor("#FFFFFF"));
 
-            if (Build.VERSION.SDK_INT >= 21) {
-                getWindow().setNavigationBarColor(Color.parseColor("#1A1A1B"));
+            getWindow().setNavigationBarColor(Color.parseColor("#1A1A1B"));
 
-                if (Build.VERSION.SDK_INT >= 23) {
-                    main.setFitsSystemWindows(true);
-                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                }
+            if (Build.VERSION.SDK_INT >= 23) {
+                main.setFitsSystemWindows(true);
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             }
 
             for (i=0; i < headers.length; i++){
@@ -87,10 +84,8 @@ public class Licenses extends AppCompatActivity {
             toolbar.setBackgroundColor(Color.parseColor("#000000"));
             main.setBackgroundColor(Color.parseColor("#000000"));
 
-            if (Build.VERSION.SDK_INT >= 21) {
-                getWindow().setNavigationBarColor(Color.parseColor("#000000"));
-                getWindow().setStatusBarColor(Color.parseColor("#000000"));
-            }
+            getWindow().setNavigationBarColor(Color.parseColor("#000000"));
+            getWindow().setStatusBarColor(Color.parseColor("#000000"));
 
             for (i=0; i < cards.length; i++){
                 try {
@@ -119,8 +114,6 @@ public class Licenses extends AppCompatActivity {
         }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        TinyDB tinydb = new TinyDB(this);
     }
 
     @Override
@@ -134,10 +127,7 @@ public class Licenses extends AppCompatActivity {
     }
 
     public void openLink(View v){
-        TextView link = (TextView) v;
-
-        TinyDB tinydb = new TinyDB(this);
-        tinydb.putString("site", link.getText().toString());
+        new TinyDB(this).putString("site", ((TextView) v).getText().toString());
 
         Intent webIntent = new Intent(this, WebViewActivity.class);
         startActivity(webIntent);
