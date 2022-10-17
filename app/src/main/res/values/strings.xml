@@ -19,8 +19,7 @@
     <string name="theme_settings">Settings</string>
 
     <string name="current_changes" translatable="false" tools:ignore="TypographyDashes">
-        1. You can now switch between square buttons and rounded buttons in Theme Settings! This feature can only be used with basic themes for now, but custom
-        rounded themes should be implemented in the near future.
+        1. You can now switch between square buttons and rounded buttons in Theme Settings!
         \n2. The \"Functions\" section has been redesigned to make evaluating functions more convenient.
         \n3. While typing on the Home screen, the result of your expression will now be calculated as you type it!\n
         Note: This behavior can be disabled in settings.
