@@ -1075,8 +1075,6 @@ class Trig {
                     case "csc": return evaluate("sin⁻¹", BigDecimal.ONE.divide(num, mc).toPlainString(), mc, isRad);
                     case "sec": return evaluate("cos⁻¹", BigDecimal.ONE.divide(num, mc).toPlainString(), mc, isRad);
                     case "cot": return evaluate("tan⁻¹", BigDecimal.ONE.divide(num, mc).toPlainString(), mc, isRad);
-
-                    //TODO: arccsc, arcsec, arccot
                 }
             }
             else {
