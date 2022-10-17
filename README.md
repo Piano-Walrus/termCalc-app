@@ -27,7 +27,7 @@ The list below outlines all currently-supported terminal commands that are inten
  - get \[button code]: prints a color in the current theme
  - sym -mod \[any text]: sets the text of the mod button
  - reset \[button code]: resets a color in the current theme to its default value
- - copy \[button code]: copies a color in the current theme to the devices keyboard
+ - copy \[button code]: copies a color in the current theme to the device's clipboard
  - share \[theme name]: export a theme
  - mode \[theme number]: changes the current base theme (light, dark, etc. based on the order of these themes in the Basic theme editor)
  - delete \[theme name]: deletes the selected custom theme
