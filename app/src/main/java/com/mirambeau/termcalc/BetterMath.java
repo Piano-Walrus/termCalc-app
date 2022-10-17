@@ -257,7 +257,7 @@ public class BetterMath {
 
                 if (Ax.isFullSignedNum(next)) {
                     try {
-                        eqArray.set(i, Trig.evaluate(current, next, mc, isRad));
+                        eqArray.set(i, Trig.evaluate(current, next, mc, isRad, scale));
                     }
                     catch (ArithmeticException e) {
                         throw new NaNException("NaN");
@@ -1029,11 +1029,7 @@ class Trig {
         return num.multiply(BigDecimalMath.pi(smolMc), smolMc).divide(parseBigDecimal("180"), smolMc);
     }
 
-    public static String evaluate(String trigOp, String n, boolean isRad) {
-        return evaluate(trigOp, n, smolMc, isRad);
-    }
-
-    public static String evaluate(String trigOp, String n, MathContext mc, boolean isRad) {
+    public static String evaluate(String trigOp, String n, MathContext mc, boolean isRad, int scale) throws NaNException {
         BigDecimal num = parseBigDecimal(n);
 
         String op = trigOp.replace("arc", "").replace(Ax.superMinus + Ax.superscripts[1], "");
@@ -1044,12 +1040,20 @@ class Trig {
         //Hyperbolic
         if (trigOp.contains("h")) {
             if (trigOp.contains("arc") || trigOp.contains(Ax.superMinus + Ax.superscripts[1])) {
+                String cscIdentity = "ln((1/" + n + ")+(1+(1/(" + n + "^2))^0.5)";
+                String secIdentity = null;
+                String cotIdentity = null;
+
+                //TODO: Finish identities
+
                 switch(op) {
                     case "sin": return BigDecimalMath.asinh(num, mc).toPlainString();
                     case "cos": return BigDecimalMath.acosh(num, mc).toPlainString();
                     case "tan": return BigDecimalMath.atanh(num, mc).toPlainString();
 
-                    //TODO: arccsch, arcsech, arccoth
+                    case "csc": return BetterMath.evaluate(cscIdentity, false, isRad, mc, scale, false).toPlainString();
+                    case "sec": return BetterMath.evaluate(secIdentity, false, isRad, mc, scale, false).toPlainString();
+                    case "cot": return BetterMath.evaluate(cotIdentity, false, isRad, mc, scale, false).toPlainString();
                 }
             }
             else {
@@ -1072,9 +1076,9 @@ class Trig {
                     case "cos": return isRad ? BigDecimalMath.acos(num, mc).toPlainString() : toDegrees(BigDecimalMath.acos(num, mc)).toPlainString();
                     case "tan": return isRad ? BigDecimalMath.atan(num, mc).toPlainString() : toDegrees(BigDecimalMath.atan(num, mc)).toPlainString();
 
-                    case "csc": return evaluate("sin⁻¹", BigDecimal.ONE.divide(num, mc).toPlainString(), mc, isRad);
-                    case "sec": return evaluate("cos⁻¹", BigDecimal.ONE.divide(num, mc).toPlainString(), mc, isRad);
-                    case "cot": return evaluate("tan⁻¹", BigDecimal.ONE.divide(num, mc).toPlainString(), mc, isRad);
+                    case "csc": return evaluate("sin⁻¹", BigDecimal.ONE.divide(num, mc).toPlainString(), mc, isRad, scale);
+                    case "sec": return evaluate("cos⁻¹", BigDecimal.ONE.divide(num, mc).toPlainString(), mc, isRad, scale);
+                    case "cot": return evaluate("tan⁻¹", BigDecimal.ONE.divide(num, mc).toPlainString(), mc, isRad, scale);
                 }
             }
             else {
