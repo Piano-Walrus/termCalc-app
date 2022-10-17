@@ -378,7 +378,8 @@ public class BetterMath {
                 if (Ax.isFullNum(eqArray.get(index+1))) {
                     //N-th Root
                     if (index >= 1 && Ax.superlist.contains(eqArray.get(index-1))) {
-                        //TODO: Handle non-integer nth-roots
+                        //TODO: Handle non-integer nth-roots (have parseEq group all superscripts
+                        // in a row so i can just isFullSuperNum(previous)
                         eqArray.set(index-1, newPow(parseBigDecimal(eqArray.get(index+1), mc), BigDecimal.ONE.divide(parseBigDecimal(Integer.toString(Ax.superlist.indexOf(eqArray.get(index-1))), mc), mc)).toPlainString());
 
                         eqArray.remove(index);
