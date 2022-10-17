@@ -11,10 +11,10 @@
             <stroke android:color="#A2FFFFFF"
                 android:width="2dp"/>
 
-            <corners android:topRightRadius="90dp"
-                android:bottomRightRadius="90dp"
-                android:bottomLeftRadius="90dp"
-                android:topLeftRadius="90dp"/>
+            <corners android:topRightRadius="85dp"
+                android:bottomRightRadius="85dp"
+                android:bottomLeftRadius="85dp"
+                android:topLeftRadius="85dp"/>
         </shape>
     </item>
 </layer-list>

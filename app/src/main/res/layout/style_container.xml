@@ -10,7 +10,7 @@
         android:layout_height="0dp"
         android:background="@drawable/editor_container_background"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="72dp"
+        android:layout_marginVertical="84dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
