@@ -2017,8 +2017,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     for (i = eq3.length()-1; i >= 0; i--) {
                         String current = Aux.chat(eq3, i);
 
-                        if (Aux.isDigit(current) || current.equals(".") || current.equals("-") || current.equals(Aux.emDash) || current.equals("e") || current.equals("(") || current.equals(")"))
+                        if (Aux.isDigit(current) || current.equals(".") || (current.equals("-") && (i == 0 || !Aux.isDigit(Aux.chat(eq3, i-1)))) || current.equals("e") || current.equals("(") || current.equals(")"))
                             converted = Aux.numToSuper(current) + converted;
+                        else if (current.equals(Aux.emDash) && (i == 0 || !Aux.isDigit(Aux.chat(eq3, i-1))))
+                            converted = Aux.superMinus + converted;
                         else
                             break;
                     }
