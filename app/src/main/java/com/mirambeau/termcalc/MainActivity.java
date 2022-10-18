@@ -1891,7 +1891,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     String pressed = sin.getText().toString();
 
-                    sin.setText(pressed + "h");
+                    sin.setText(pressed.replace("sin", "sinh"));
                     operation(sin);
                     sin.setText(pressed);
 
@@ -1909,7 +1909,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     String pressed = cos.getText().toString();
 
-                    cos.setText(pressed + "h");
+                    cos.setText(pressed.replace("cos", "cosh"));
                     operation(cos);
                     cos.setText(pressed);
 
@@ -1927,7 +1927,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     String pressed = tan.getText().toString();
 
-                    tan.setText(pressed + "h");
+                    tan.setText(pressed.replace("tan", "tanh"));
                     operation(tan);
                     tan.setText(pressed);
 
@@ -1945,7 +1945,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     String pressed = csc.getText().toString();
 
-                    csc.setText(pressed + "h");
+                    csc.setText(pressed.replace("csc", "csch"));
                     operation(csc);
                     csc.setText(pressed);
 
@@ -1963,7 +1963,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     String pressed = sec.getText().toString();
 
-                    sec.setText(pressed + "h");
+                    sec.setText(pressed.replace("sec", "sech"));
                     operation(sec);
                     sec.setText(pressed);
 
@@ -1981,7 +1981,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     String pressed = cot.getText().toString();
 
-                    cot.setText(pressed + "h");
+                    cot.setText(pressed.replace("cot", "coth"));
                     operation(cot);
                     cot.setText(pressed);
 
