@@ -1881,113 +1881,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
             }
 
-            trigBar[0].setOnLongClickListener(new View.OnLongClickListener() {
-                @SuppressLint("SetTextI18n")
-                @Override
-                public boolean onLongClick(View v) {
-                    Button sin = (Button) v;
+            for (i=0; i < trigBar.length - 1; i++) {
+                trigBar[i].setOnLongClickListener(new View.OnLongClickListener() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public boolean onLongClick(View v) {
+                        Button button = (Button) v;
 
-                    vibe(vibeDuration);
+                        vibe(vibeDuration);
 
-                    String pressed = sin.getText().toString();
+                        String pressed = button.getText().toString();
 
-                    sin.setText(pressed.replace("sin", "sinh"));
-                    operation(sin);
-                    sin.setText(pressed);
+                        button.setText(pressed.replace(pressed.substring(0, 3), pressed.substring(0, 3) + "h"));
+                        onButtonPressed(button);
+                        button.setText(pressed);
 
-                    return true;
-                }
-            });
-
-            trigBar[1].setOnLongClickListener(new View.OnLongClickListener() {
-                @SuppressLint("SetTextI18n")
-                @Override
-                public boolean onLongClick(View v) {
-                    Button cos = (Button) v;
-
-                    vibe(vibeDuration);
-
-                    String pressed = cos.getText().toString();
-
-                    cos.setText(pressed.replace("cos", "cosh"));
-                    operation(cos);
-                    cos.setText(pressed);
-
-                    return true;
-                }
-            });
-
-            trigBar[2].setOnLongClickListener(new View.OnLongClickListener() {
-                @SuppressLint("SetTextI18n")
-                @Override
-                public boolean onLongClick(View v) {
-                    Button tan = (Button) v;
-
-                    vibe(vibeDuration);
-
-                    String pressed = tan.getText().toString();
-
-                    tan.setText(pressed.replace("tan", "tanh"));
-                    operation(tan);
-                    tan.setText(pressed);
-
-                    return true;
-                }
-            });
-
-            trigBar[3].setOnLongClickListener(new View.OnLongClickListener() {
-                @SuppressLint("SetTextI18n")
-                @Override
-                public boolean onLongClick(View v) {
-                    Button csc = (Button) v;
-
-                    vibe(vibeDuration);
-
-                    String pressed = csc.getText().toString();
-
-                    csc.setText(pressed.replace("csc", "csch"));
-                    operation(csc);
-                    csc.setText(pressed);
-
-                    return true;
-                }
-            });
-
-            trigBar[4].setOnLongClickListener(new View.OnLongClickListener() {
-                @SuppressLint("SetTextI18n")
-                @Override
-                public boolean onLongClick(View v) {
-                    Button sec = (Button) v;
-
-                    vibe(vibeDuration);
-
-                    String pressed = sec.getText().toString();
-
-                    sec.setText(pressed.replace("sec", "sech"));
-                    operation(sec);
-                    sec.setText(pressed);
-
-                    return true;
-                }
-            });
-
-            trigBar[5].setOnLongClickListener(new View.OnLongClickListener() {
-                @SuppressLint("SetTextI18n")
-                @Override
-                public boolean onLongClick(View v) {
-                    Button cot = (Button) v;
-
-                    vibe(vibeDuration);
-
-                    String pressed = cot.getText().toString();
-
-                    cot.setText(pressed.replace("cot", "coth"));
-                    operation(cot);
-                    cot.setText(pressed);
-
-                    return true;
-                }
-            });
+                        return true;
+                    }
+                });
+            }
 
             //N-th Root
             compBar[0].setOnLongClickListener(new View.OnLongClickListener() {
@@ -4923,7 +4835,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             e.printStackTrace();
         }
 
-        //TODO: Test new wasSpace behavior
         if (!wasSpace && initLength == getTvText().length())
             cursor = initCursor;
         else if (wasSpace)
