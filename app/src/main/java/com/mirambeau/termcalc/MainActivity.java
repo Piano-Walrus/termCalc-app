@@ -1882,23 +1882,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
             for (i=0; i < trigBar.length - 1; i++) {
-                trigBar[i].setOnLongClickListener(new View.OnLongClickListener() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public boolean onLongClick(View v) {
-                        Button button = (Button) v;
+                try {
+                    if (trigBar[i].getText().toString().equalsIgnoreCase("INV"))
+                        break;
 
-                        vibe(vibeDuration);
+                    trigBar[i].setOnLongClickListener(new View.OnLongClickListener() {
+                        @SuppressLint("SetTextI18n")
+                        @Override
+                        public boolean onLongClick(View v) {
+                            Button button = (Button) v;
 
-                        String pressed = button.getText().toString();
+                            vibe(vibeDuration);
 
-                        button.setText(pressed.replace(pressed.substring(0, 3), pressed.substring(0, 3) + "h"));
-                        onButtonPressed(button);
-                        button.setText(pressed);
+                            String pressed = button.getText().toString();
 
-                        return true;
-                    }
-                });
+                            button.setText(pressed.replace(pressed.substring(0, 3), pressed.substring(0, 3) + "h"));
+                            onButtonPressed(button);
+                            button.setText(pressed);
+
+                            return true;
+                        }
+                    });
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             //N-th Root
