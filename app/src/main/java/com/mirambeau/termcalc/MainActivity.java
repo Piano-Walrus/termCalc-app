@@ -4176,8 +4176,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             else {
                 if (getTvText().length() > 0) {
                     //N-th root
-                    if (tvText.endsWith(Aux.sq) && Aux.isSuperscript(Aux.lastChar(Aux.newTrim(tvText, 1)))) {
-                        //TODO: Backspacing n-th root
+                    if (getTvText().endsWith(Aux.sq) && Aux.isSuperscript(Aux.lastChar(Aux.newTrim(getTvText(), 1)))) {
+                        //TODO: Test this
+                        String output = Aux.newTrim(getTvText(), 1);
+
+                        for (i = output.length() - 1; i >=0; i--) {
+                            String current = Aux.chat(output, i);
+
+                            output = Aux.newTrim(output, 1);
+
+                            if (Aux.isSubscript(current)) {
+                                try {
+                                    output += Aux.superlist.contains(current) ? Aux.superlist.indexOf(current) : Aux.normalListMisc.get(Aux.superlistMisc.indexOf(current));
+                                }
+                                catch (Exception e) {
+                                    e.printStackTrace();
+
+                                    output = Aux.newTrim(getTvText(), 1);
+
+                                    while (Aux.isSubscript(Aux.lastChar(output)))
+                                        output = Aux.newTrim(output, 1);
+
+                                    tv.setText(output);
+
+                                    break;
+                                }
+                            }
+                            else
+                                break;
+                        }
                     }
                     //Log base n
                     else if (tvText.endsWith("(") && Aux.isSubscript(Aux.lastChar(Aux.newTrim(tvText, 1)))) {
@@ -4209,10 +4236,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else {
             try {
-                if (cursor > 1 && Aux.chat(getTvText(), cursor - 1).equals(Aux.sq) && Aux.isSuperscript(Aux.chat(tv.getText().toString(), cursor - 2))) {
+                if (cursor > 1 && Aux.chat(getTvText(), cursor - 1).equals(Aux.sq) && (Aux.isSuperscript(Aux.chat(getTvText(), cursor - 2)) || Aux.superlistMisc.contains(Aux.chat(getTvText(), cursor - 2)))) {
                     tv.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DEL));
 
-                    //TODO: Add a for loop that goes through Aux.countNum() superscripts and sets them back to regular numbers
+                    //TODO: Also test this, lol
+                    String output;
+
+                    try {
+                        output = getTvText().substring(0, cursor);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                        return;
+                    }
+
+                    while (cursor > 0 && (Aux.isSuperscript(Aux.lastChar(output.substring(0, cursor))) || Aux.superlistMisc.contains(Aux.lastChar(output.substring(0, cursor))))) {
+                        cursor--;
+
+                        tv.setText(Aux.newReplace(cursor, getTvText(), Aux.superToNum(Aux.chat(getTvText(), cursor))));
+                    }
                 }
                 else if (cursor > 0){
                     tv.setText(getTvText().substring(0, cursor - deleteAmt) + getTvText().substring(cursor));
@@ -5452,12 +5494,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         public void run() {
                             try {
                                 functionsSheet.recyclerView.scrollToPosition(position + 2);
-                            } catch (Exception e) {
+                            }
+                            catch (Exception e) {
                                 e.printStackTrace();
 
                                 try {
                                     functionsSheet.recyclerView.scrollToPosition(position + 1);
-                                } catch (Exception e2) {
+                                }
+                                catch (Exception e2) {
                                     e2.printStackTrace();
                                 }
                             }

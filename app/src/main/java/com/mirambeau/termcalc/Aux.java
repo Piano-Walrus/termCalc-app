@@ -1202,8 +1202,14 @@ public class Aux {
             if (isNull(full) || full.length() < 1 || i >= full.length())
                 return full;
 
-            if (i == -1)
-                return str + full;
+            if (str != null) {
+                if (i == -1)
+                    return str + full;
+                if (i == 0)
+                    return str + full.substring(1);
+                if (i == full.length() - 1)
+                    return newTrim(full, 1) + str;
+            }
 
             if (str == null || str.equals("") || str.equals("\0"))
                 return full.substring(0, i) + full.substring(i + 1);
