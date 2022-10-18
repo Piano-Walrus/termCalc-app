@@ -2019,9 +2019,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     for (i = eq3.length()-1; i >= 0; i--) {
                         String current = Aux.chat(eq3, i);
 
-                        if (Aux.isDigit(current) || current.equals(".") || (current.equals("-") && (i == 0 || !Aux.isDigit(Aux.chat(eq3, i-1)))) || current.equals("e"))
+                        if (Aux.isDigit(current) || current.equals(".") || current.equals("e"))
                             converted = Aux.numToSuper(current) + converted;
-                        else if (current.equals(Aux.emDash) && (i == 0 || !Aux.isDigit(Aux.chat(eq3, i-1))))
+                        else if ((current.equals(Aux.emDash) || current.equals("-")) && (i == 0 || !Aux.isDigit(Aux.chat(eq3, i-1))) && converted.length() > 0 && !converted.contains(Aux.superMinus))
                             converted = Aux.superMinus + converted;
                         else
                             break;
