@@ -1997,7 +1997,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     int i;
                     int cursor = tv.getSelectionStart();
                     String eq3, converted = "";
-                    String tvText = tv.getText().toString();
+                    String tvText = getTvText();
                     String endText;
                     String output;
 
@@ -2008,8 +2008,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     endText = tv.getSelectionStart() == getTvText().length() ? "" : tvText.substring(cursor);
 
                     if (eq3.endsWith(".")) {
-                        if (Aux.isDigit(Aux.lastChar(Aux.newTrim(eq3, 1))))
+                        if (Aux.isDigit(Aux.lastChar(Aux.newTrim(eq3, 1)))) {
                             eq3 = Aux.newTrim(eq3, 1);
+                            cursor--;
+                        }
                         else
                             return true;
                     }
@@ -2017,7 +2019,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     for (i = eq3.length()-1; i >= 0; i--) {
                         String current = Aux.chat(eq3, i);
 
-                        if (Aux.isDigit(current) || current.equals(".") || (current.equals("-") && (i == 0 || !Aux.isDigit(Aux.chat(eq3, i-1)))) || current.equals("e") || current.equals("(") || current.equals(")"))
+                        if (Aux.isDigit(current) || current.equals(".") || (current.equals("-") && (i == 0 || !Aux.isDigit(Aux.chat(eq3, i-1)))) || current.equals("e"))
                             converted = Aux.numToSuper(current) + converted;
                         else if (current.equals(Aux.emDash) && (i == 0 || !Aux.isDigit(Aux.chat(eq3, i-1))))
                             converted = Aux.superMinus + converted;
