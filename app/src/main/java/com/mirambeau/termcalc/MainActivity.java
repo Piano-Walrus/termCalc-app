@@ -5056,8 +5056,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 for (String current : presses) {
                     if (current != null && !current.equals("\0") && !current.equals(" ") && !Aux.isNull(current)) {
-                        if (Aux.isSuperscript(current))
-                            nums[Integer.parseInt(Aux.superNum)].performClick();
+                        if (Aux.isSuperscript(current)) {
+                            try {
+                                nums[Aux.superlist.contains(current) ? Aux.superlist.indexOf(current) : Aux.superlistMisc.indexOf(current)].performClick();
+                            }
+                            catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
                         else if (Aux.isDigit(current))
                             nums[Integer.parseInt(current)].performClick();
                         else if (current.equals(Aux.pi))
