@@ -2019,6 +2019,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         if (Aux.isDigit(current) || current.equals(".") || current.equals("-") || current.equals(Aux.emDash) || current.equals("e") || current.equals("(") || current.equals(")"))
                             converted = Aux.numToSuper(current) + converted;
+                        else
+                            break;
                     }
 
                     if (converted.equals(""))
