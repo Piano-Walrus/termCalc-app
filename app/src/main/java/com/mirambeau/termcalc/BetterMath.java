@@ -1046,9 +1046,7 @@ class Trig {
             if (trigOp.contains("arc") || trigOp.contains(Ax.superMinus + Ax.superscripts[1])) {
                 String cscIdentity = "ln((1/" + n + ")+(1+(1/(" + n + "^2)))^0.5)";
                 String secIdentity = "ln((1/" + n + ")+((1-2)+(1/(" + n + "^2)))^0.5)";
-                String cotIdentity = null;
-
-                //TODO: Finish identities
+                String cotIdentity = "(ln((1+" + n + ")/(-1+" + n + ")))/2";
 
                 switch(op) {
                     case "sin": return BigDecimalMath.asinh(num, mc).toPlainString();
