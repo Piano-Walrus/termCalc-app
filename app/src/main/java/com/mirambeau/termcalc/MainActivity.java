@@ -5136,7 +5136,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 constantsSheet.cards = constantCards;
                                 constantsSheet.adapter.cards = constantCards;
                                 constantsSheet.adapter.notifyItemInserted(0);
-                                constantsSheet.recyclerView.scrollToPosition(0);
+
+                                try {
+                                    constantsSheet.recyclerView.scrollToPosition(0);
+                                }
+                                catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             }
                             catch (Exception e){
                                 e.printStackTrace();
@@ -5212,7 +5218,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                                 Aux.adapter = functionsSheet.adapter;
 
-                                functionsSheet.recyclerView.scrollToPosition(0);
+                                try {
+                                    functionsSheet.recyclerView.scrollToPosition(0);
+                                }
+                                catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             }
                             catch (Exception e){
                                 e.printStackTrace();
@@ -5435,24 +5446,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 final int cardPosition = position;
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            functionsSheet.recyclerView.scrollToPosition(position + 2);
-                        }
-                        catch (Exception e) {
-                            e.printStackTrace();
-
+                try {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
                             try {
-                                functionsSheet.recyclerView.scrollToPosition(position + 1);
-                            }
-                            catch (Exception e2) {
-                                e2.printStackTrace();
+                                functionsSheet.recyclerView.scrollToPosition(position + 2);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+
+                                try {
+                                    functionsSheet.recyclerView.scrollToPosition(position + 1);
+                                } catch (Exception e2) {
+                                    e2.printStackTrace();
+                                }
                             }
                         }
-                    }
-                }, 200);
+                    }, 200);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 adapter.setOnItemTextChangedListener(new VariablesAdapter.OnItemTextChangedListener() {
                     @Override
