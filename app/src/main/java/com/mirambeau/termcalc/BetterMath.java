@@ -459,7 +459,9 @@ public class BetterMath {
                         lengthCheck = previous.substring(0, previous.indexOf(".")).replace(",", "").replace("-", "").length();
                     }
                     catch (Exception e) {
-                        e.printStackTrace();
+                        if (!debug)
+                            e.printStackTrace();
+
                         lengthCheck = previous.replace(",", "").length();
                     }
 
@@ -467,7 +469,9 @@ public class BetterMath {
                         lengthCheck += next.substring(0, next.indexOf(".")).replace(",", "").replace("-", "").length();
                     }
                     catch (Exception e) {
-                        e.printStackTrace();
+                        if (!debug)
+                            e.printStackTrace();
+
                         lengthCheck += next.replace(",", "").length();
                     }
 
@@ -1040,8 +1044,8 @@ class Trig {
         //Hyperbolic
         if (trigOp.contains("h")) {
             if (trigOp.contains("arc") || trigOp.contains(Ax.superMinus + Ax.superscripts[1])) {
-                String cscIdentity = "ln((1/" + n + ")+(1+(1/(" + n + "^2))^0.5)";
-                String secIdentity = null;
+                String cscIdentity = "ln((1/" + n + ")+(1+(1/(" + n + "^2)))^0.5)";
+                String secIdentity = "ln((1/" + n + ")+((1-2)+(1/(" + n + "^2)))^0.5)";
                 String cotIdentity = null;
 
                 //TODO: Finish identities
@@ -1051,8 +1055,8 @@ class Trig {
                     case "cos": return BigDecimalMath.acosh(num, mc).toPlainString();
                     case "tan": return BigDecimalMath.atanh(num, mc).toPlainString();
 
-                    case "csc": return BetterMath.evaluate(cscIdentity, false, isRad, mc, scale, false).toPlainString();
-                    case "sec": return BetterMath.evaluate(secIdentity, false, isRad, mc, scale, false).toPlainString();
+                    case "csc": return BetterMath.evaluate(cscIdentity, false, isRad, mc, scale, true).toPlainString();
+                    case "sec": return BetterMath.evaluate(secIdentity, false, isRad, mc, scale, true).toPlainString();
                     case "cot": return BetterMath.evaluate(cotIdentity, false, isRad, mc, scale, false).toPlainString();
                 }
             }
@@ -1124,8 +1128,8 @@ class Ax {
     public static final ArrayList<String> sublistMisc = new ArrayList<>(Arrays.asList(eSub, opSub, cpSub, ".", "₋"));
     public static final ArrayList<String> normalListMisc = new ArrayList<>(Arrays.asList("e", "(", ")", ".", "-"));
 
-    static final String[] trigIn = {"sin", "cos", "tan", "csc", "sec", "cot", "sinh", "cosh", "tanh", "csch", "sech", "coth", "arcsin", "arccos", "arctan", "arccsc", "arcsec", "arccot", "arcsinh", "arccosh", "arctanh", "arccsch", "arcsech", "arccoth", "sin⁻¹", "cos⁻¹", "tan⁻¹", "csc⁻¹", "sec⁻¹", "cot⁻¹"};
-    static final ArrayList<String> trigList = new ArrayList<>(Arrays.asList("sin", "cos", "tan", "csc", "sec", "cot", "sinh", "cosh", "tanh", "csch", "sech", "coth", "arcsin", "arccos", "arctan", "arccsc", "arcsec", "arccot", "arcsinh", "arccosh", "arctanh", "arccsch", "arcsech", "arccoth", "sin⁻¹", "cos⁻¹", "tan⁻¹", "csc⁻¹", "sec⁻¹", "cot⁻¹"));
+    static final String[] trigIn = {"sin", "cos", "tan", "csc", "sec", "cot", "sinh", "cosh", "tanh", "csch", "sech", "coth", "arcsin", "arccos", "arctan", "arccsc", "arcsec", "arccot", "arcsinh", "arccosh", "arctanh", "arccsch", "arcsech", "arccoth", "sin⁻¹", "cos⁻¹", "tan⁻¹", "csc⁻¹", "sec⁻¹", "cot⁻¹", "sinh⁻¹", "cosh⁻¹", "tanh⁻¹", "csch⁻¹", "sech⁻¹", "coth⁻¹"};
+    static final ArrayList<String> trigList = new ArrayList<>(Arrays.asList("sin", "cos", "tan", "csc", "sec", "cot", "sinh", "cosh", "tanh", "csch", "sech", "coth", "arcsin", "arccos", "arctan", "arccsc", "arcsec", "arccot", "arcsinh", "arccosh", "arctanh", "arccsch", "arcsech", "arccoth", "sin⁻¹", "cos⁻¹", "tan⁻¹", "csc⁻¹", "sec⁻¹", "cot⁻¹", "sinh⁻¹", "cosh⁻¹", "tanh⁻¹", "csch⁻¹", "sech⁻¹", "coth⁻¹"));
 
     public static final String divi = "÷";
     public static final String multi = "×";
