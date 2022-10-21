@@ -166,6 +166,13 @@ public class EditorActivity extends AppCompatActivity {
 
             newTheme = Aux.getThemeInt();
 
+            findViewById(R.id.saveOptionLayout).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    save();
+                }
+            });
+
             //Initialize BackupCards
             File directory = new File(this.getFilesDir(), "themes");
             File[] files = directory.listFiles();
@@ -1542,7 +1549,7 @@ public class EditorActivity extends AppCompatActivity {
         }
     }
 
-    public void save(View v) {
+    public void save() {
         try {
             final AlertDialog.Builder builder = createAlertDialog("Backup Current Theme\n");
 
@@ -2229,10 +2236,6 @@ public class EditorActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    
-    public void onSaveClick(View v) {
-        save(null);
-    }
 
     public void undoCheck() {
         final ImageButton undo = findViewById(R.id.undo);
@@ -2825,7 +2828,7 @@ public class EditorActivity extends AppCompatActivity {
                 writer.close();
 
                 run("restore " + themeName);
-                save(newTheme);
+                save();
 
                 if ((themeName.startsWith("temp-") || themeTitle.startsWith("temp-")) && Aux.isDigit(Aux.lastChar(themeName)))
                     theme.delete();
