@@ -1,8 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" translatable="false">TermCalc</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
 
     <string name="home_menu_item">Home</string>
 
@@ -86,7 +86,7 @@
     <string name="termHash" translatable="false"><![CDATA[</:]]></string>
     <string name="rad" translatable="false">RAD</string>
     <string name="check_for_updates">Check For Updates</string>
-    <string name="navigation_header">Navigation Header</string>
+    <string name="navigation_header" translatable="false">Navigation Header</string>
     <string name="scientific_calculator">Scientific Calculator</string>
     <string name="domain_error">Domain Error</string>
     <string name="parse_error">Parse Error</string>
@@ -321,13 +321,13 @@
     <string name="constants">Constants</string>
     <string name="functions">Functions</string>
     <string name="geometry">Geometry</string>
-    <string name="area">AREA</string>
+    <string name="area" translatable="false">AREA</string>
     <string name="volume">VOLUME</string>
     <string name="surface_area">SURFACE AREA</string>
 
-    <string name="backups">Backup/Restore</string>
+    <string name="backups" translatable="false">Backup/Restore</string>
     <string name="importNew">Import</string>
-    <string name="backup_current_theme">Backup current theme</string>
+    <string name="backup_current_theme" translatable="false">Backup current theme</string>
 
     <string name="editor_help" translatable="false">
         Tap any button to change its colors.
@@ -347,18 +347,18 @@
     </string>
 
     <!-- home screen launcher shortcut text-->
-    <string name="shortcut_long_label">Terminal</string>
-    <string name="shortcut_short_label">Terminal</string>
+    <string name="shortcut_long_label" translatable="false">Terminal</string>
+    <string name="shortcut_short_label" translatable="false">Terminal</string>
 
-    <string name="terminal_intro_text">Type \"help\" or \"?\" for a list of available commands.\n
+    <string name="terminal_intro_text" translatable="false">Type \"help\" or \"?\" for a list of available commands.\n
 
     </string>
     <string name="new_function">New Function</string>
     <string name="new_constant">New Constant</string>
 
-    <string name="theme_nav_summary">When \"Custom Colors\" is enabled, apply the colors in your theme to the nav drawer.</string>
+    <string name="theme_nav_summary" translatable="false">When \"Custom Colors\" is enabled, apply the colors in your theme to the nav drawer.</string>
     <string name="clear">Clear</string>
-    <string name="focus_summary">Hides system bars to minimize distraction.</string>
+    <string name="focus_summary" translatable="false">Hides system bars to minimize distraction.</string>
     <string name="shape">Shape</string>
     <string name="style">Style &amp; Color</string>
     <string name="editor_options">Options</string>
