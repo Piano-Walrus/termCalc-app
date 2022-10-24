@@ -43,17 +43,59 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/styleColorTitle" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/resetOptionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="?selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/styleColorTitle">
+
+            <TextView
+                android:id="@+id/resetTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:clickable="false"
+                android:focusable="false"
+                android:text="@string/editor_reset"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="@+id/resetIcon"
+                app:layout_constraintStart_toEndOf="@id/resetIcon"
+                app:layout_constraintTop_toTopOf="@+id/resetIcon" />
+
+            <ImageButton
+                android:id="@+id/resetIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@null"
+                android:clickable="false"
+                android:focusable="false"
+                android:padding="8dp"
+                android:src="@drawable/ic_baseline_reset_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <TextView
             android:id="@+id/styleTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:text="@string/style"
             android:textColor="@color/colorAccent"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+            app:layout_constraintTop_toBottomOf="@+id/resetOptionLayout" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/darkCard"
@@ -179,7 +221,6 @@
                     android:text="Black"
                     android:buttonTint="@color/white"
                     android:textColor="@color/white"
-                    android:checked="true"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -276,7 +317,6 @@
                     android:text="Monochrome"
                     android:buttonTint="#303030"
                     android:textColor="#303030"
-                    android:checked="true"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -302,7 +342,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginStart="24dp"
-            android:text="@string/accent_color"
+            android:text="@string/color"
             android:textColor="@color/colorAccent"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"

@@ -415,7 +415,6 @@ public class EditorActivity extends AppCompatActivity {
 
             ConstraintLayout saveLayout = findViewById(R.id.saveOptionLayout);
             ConstraintLayout importLayout = findViewById(R.id.importOptionLayout);
-            ConstraintLayout resetLayout = findViewById(R.id.resetOptionLayout);
             ConstraintLayout advancedLayout = findViewById(R.id.advancedOptionLayout);
 
             drawerButton.setOnClickListener(new View.OnClickListener() {
@@ -444,13 +443,6 @@ public class EditorActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     //TODO: Import layout onClick
-                }
-            });
-
-            resetLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //TODO: Reset layout onClick
                 }
             });
 

@@ -363,11 +363,10 @@
     <string name="style_color">Style &amp; Color</string>
     <string name="style">Style</string>
     <string name="color">Color</string>
-    <string name="accent_color">Accent Color</string>
     <string name="editor_options">Options</string>
     <string name="editor_save">Save</string>
     <string name="saved_themes">Saved Themes</string>
-    <string name="editor_reset">Reset</string>
+    <string name="editor_reset">Reset to Defaults</string>
     <string name="advanced_options">Advanced Options</string>
 
 
