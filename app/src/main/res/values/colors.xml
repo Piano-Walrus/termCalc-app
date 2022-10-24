@@ -22,5 +22,6 @@
     <color name="rippleWhite">#3EFFFFFF</color>
     <color name="rippleDarkGray">#3EFFFFFF</color>
 
+    <color name="monochromeCardTabColor">#24000000</color>
     <color name="editorDrawerBG">#7A000000</color>
 </resources>

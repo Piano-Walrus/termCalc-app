@@ -44,6 +44,7 @@
             app:layout_constraintTop_toTopOf="@+id/styleColorTitle" />
 
         <TextView
+            android:id="@+id/styleTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -53,6 +54,267 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/darkCard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:cardBackgroundColor="@color/darkColorPrimary"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="6dp"
+            app:layout_constraintHeight="parent=0.1"
+            app:layout_constraintEnd_toStartOf="@+id/editorPreviewRightGuide"
+            app:layout_constraintStart_toStartOf="@+id/styleTitle"
+            app:layout_constraintTop_toBottomOf="@+id/styleTitle" >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/darkRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Dark"
+                    android:buttonTint="@color/white"
+                    android:textColor="@color/white"
+                    android:checked="true"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/darkTab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="6dp"
+                    android:background="@drawable/style_tab_background"
+                    android:backgroundTint="@color/colorAccent"
+                    android:src="@drawable/ic_baseline_format_color_text_20"
+                    app:layout_constraintHeight="parent=0.425"
+                    app:layout_constraintWidth="ratio=1.5:1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/lightCard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="24dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="6dp"
+            app:layout_constraintHeight="parent=0.1"
+            app:layout_constraintStart_toEndOf="@+id/editorPreviewRightGuide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/styleTitle" >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/lightRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Light"
+                    android:buttonTint="#222222"
+                    android:textColor="#222222"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/lightTab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="6dp"
+                    android:background="@drawable/style_tab_background"
+                    app:tint="#222222"
+                    android:backgroundTint="@color/colorAccent"
+                    android:src="@drawable/ic_baseline_format_color_text_20"
+                    app:layout_constraintHeight="parent=0.425"
+                    app:layout_constraintWidth="ratio=1.5:1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/blackCard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:cardBackgroundColor="@color/black"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="6dp"
+            app:layout_constraintHeight="parent=0.1"
+            app:layout_constraintEnd_toStartOf="@+id/editorPreviewRightGuide"
+            app:layout_constraintStart_toStartOf="@+id/styleTitle"
+            app:layout_constraintTop_toBottomOf="@+id/darkCard" >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/blackRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Black"
+                    android:buttonTint="@color/white"
+                    android:textColor="@color/white"
+                    android:checked="true"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/blackTab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="6dp"
+                    android:background="@drawable/style_tab_background"
+                    android:backgroundTint="@color/colorAccent"
+                    android:src="@drawable/ic_baseline_format_color_text_20"
+                    app:layout_constraintHeight="parent=0.425"
+                    app:layout_constraintWidth="ratio=1.5:1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/midnightCard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="24dp"
+            app:cardBackgroundColor="@color/black"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="6dp"
+            app:layout_constraintHeight="parent=0.1"
+            app:layout_constraintStart_toEndOf="@+id/editorPreviewRightGuide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/darkCard" >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/midnightRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Midnight"
+                    android:buttonTint="@color/colorAccent"
+                    android:textColor="@color/colorAccent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/midnightTab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="6dp"
+                    android:background="@drawable/style_tab_background"
+                    app:tint="@color/colorAccent"
+                    android:backgroundTint="#1B1B1B"
+                    android:src="@drawable/ic_baseline_format_color_text_20"
+                    app:layout_constraintHeight="parent=0.425"
+                    app:layout_constraintWidth="ratio=1.5:1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/monochromeCard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:cardBackgroundColor="@color/colorAccentDarker"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="6dp"
+            app:layout_constraintHeight="parent=0.1"
+            app:layout_constraintEnd_toStartOf="@+id/editorPreviewRightGuide"
+            app:layout_constraintStart_toStartOf="@+id/styleTitle"
+            app:layout_constraintTop_toBottomOf="@+id/blackCard" >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/monochromeRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Monochrome"
+                    android:buttonTint="#303030"
+                    android:textColor="#303030"
+                    android:checked="true"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/monochromeTab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/style_tab_background"
+                    android:backgroundTint="@color/monochromeCardTabColor"
+                    android:src="@drawable/ic_baseline_format_color_text_20"
+                    app:layout_constraintHeight="parent=0.425"
+                    app:layout_constraintWidth="ratio=1.5:1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/colorTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="24dp"
+            android:text="@string/accent_color"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/monochromeCard" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/editorPreviewRightGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
