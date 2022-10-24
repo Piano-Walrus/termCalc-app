@@ -360,7 +360,10 @@
     <string name="clear">Clear</string>
     <string name="focus_summary" translatable="false">Hides system bars to minimize distraction.</string>
     <string name="shape">Shape</string>
-    <string name="style">Style &amp; Color</string>
+    <string name="style_color">Style &amp; Color</string>
+    <string name="style">Style</string>
+    <string name="color">Color</string>
+    <string name="accent_color">Color</string>
     <string name="editor_options">Options</string>
     <string name="editor_save">Save</string>
     <string name="saved_themes">Saved Themes</string>
