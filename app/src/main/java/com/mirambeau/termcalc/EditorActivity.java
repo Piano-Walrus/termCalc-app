@@ -166,13 +166,6 @@ public class EditorActivity extends AppCompatActivity {
 
             newTheme = Aux.getThemeInt();
 
-            findViewById(R.id.saveOptionLayout).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    save();
-                }
-            });
-
             //Initialize BackupCards
             File directory = new File(this.getFilesDir(), "themes");
             File[] files = directory.listFiles();
@@ -420,10 +413,10 @@ public class EditorActivity extends AppCompatActivity {
 
             ImageButton drawerButton = findViewById(R.id.drawerButton);
 
-            ConstraintLayout saveLayout;
-            ConstraintLayout importLayout;
-            ConstraintLayout resetLayout;
-            ConstraintLayout advancedLayout;
+            ConstraintLayout saveLayout = findViewById(R.id.saveOptionLayout);
+            ConstraintLayout importLayout = findViewById(R.id.importOptionLayout);
+            ConstraintLayout resetLayout = findViewById(R.id.resetOptionLayout);
+            ConstraintLayout advancedLayout = findViewById(R.id.advancedOptionLayout);
 
             drawerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -439,7 +432,35 @@ public class EditorActivity extends AppCompatActivity {
                 }
             });
 
+            //Drawer Options
+            saveLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    save();
+                }
+            });
 
+            importLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //TODO: Import layout onClick
+                }
+            });
+
+            resetLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //TODO: Reset layout onClick
+                }
+            });
+
+            advancedLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(EditorActivity.this, AdvancedThemeOptionsActivity.class);
+                    startActivity(intent);
+                }
+            });
 
             undoCheck();
 
