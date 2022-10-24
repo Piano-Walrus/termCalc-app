@@ -360,6 +360,8 @@
     <string name="clear">Clear</string>
     <string name="focus_summary" translatable="false">Hides system bars to minimize distraction.</string>
     <string name="shape">Shape</string>
+    <string name="shape_square">Square</string>
+    <string name="shape_round">Round</string>
     <string name="style_color">Style &amp; Color</string>
     <string name="style">Style</string>
     <string name="color">Color</string>

@@ -104,12 +104,12 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:cardBackgroundColor="@color/darkColorPrimary"
-            app:cardElevation="8dp"
             app:cardCornerRadius="6dp"
+            app:cardElevation="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/styleCardMiddleGuide"
             app:layout_constraintHeight="parent=0.1"
-            app:layout_constraintEnd_toStartOf="@+id/editorPreviewRightGuide"
             app:layout_constraintStart_toStartOf="@+id/styleTitle"
-            app:layout_constraintTop_toBottomOf="@+id/styleTitle" >
+            app:layout_constraintTop_toBottomOf="@+id/styleTitle">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -121,10 +121,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
-                    android:text="Dark"
                     android:buttonTint="@color/white"
-                    android:textColor="@color/white"
                     android:checked="true"
+                    android:text="Dark"
+                    android:textColor="@color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -132,14 +132,14 @@
                     android:id="@+id/darkTab"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:elevation="6dp"
                     android:background="@drawable/style_tab_background"
                     android:backgroundTint="@color/colorAccent"
+                    android:elevation="6dp"
                     android:src="@drawable/ic_baseline_format_color_text_20"
-                    app:layout_constraintHeight="parent=0.425"
-                    app:layout_constraintWidth="ratio=1.55:1"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight="parent=0.425"
+                    app:layout_constraintWidth="ratio=1.55:1" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -149,16 +149,16 @@
             android:id="@+id/lightCard"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
             app:cardBackgroundColor="@color/white"
-            app:cardElevation="8dp"
             app:cardCornerRadius="6dp"
-            app:layout_constraintHeight="parent=0.1"
-            app:layout_constraintStart_toEndOf="@+id/editorPreviewRightGuide"
+            app:cardElevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/styleTitle" >
+            app:layout_constraintHeight="parent=0.1"
+            app:layout_constraintStart_toEndOf="@+id/styleCardMiddleGuide"
+            app:layout_constraintTop_toBottomOf="@+id/styleTitle">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -170,8 +170,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
-                    android:text="Light"
                     android:buttonTint="#222222"
+                    android:text="Light"
                     android:textColor="#222222"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -180,15 +180,15 @@
                     android:id="@+id/lightTab"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:elevation="6dp"
                     android:background="@drawable/style_tab_background"
-                    app:tint="#222222"
                     android:backgroundTint="@color/colorAccent"
+                    android:elevation="6dp"
                     android:src="@drawable/ic_baseline_format_color_text_20"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight="parent=0.425"
                     app:layout_constraintWidth="ratio=1.55:1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:tint="#222222" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -201,12 +201,12 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:cardBackgroundColor="@color/black"
-            app:cardElevation="8dp"
             app:cardCornerRadius="6dp"
+            app:cardElevation="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/styleCardMiddleGuide"
             app:layout_constraintHeight="parent=0.1"
-            app:layout_constraintEnd_toStartOf="@+id/editorPreviewRightGuide"
             app:layout_constraintStart_toStartOf="@+id/styleTitle"
-            app:layout_constraintTop_toBottomOf="@+id/darkCard" >
+            app:layout_constraintTop_toBottomOf="@+id/darkCard">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -218,8 +218,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
-                    android:text="Black"
                     android:buttonTint="@color/white"
+                    android:text="Black"
                     android:textColor="@color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -228,14 +228,14 @@
                     android:id="@+id/blackTab"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:elevation="6dp"
                     android:background="@drawable/style_tab_background"
                     android:backgroundTint="@color/colorAccent"
+                    android:elevation="6dp"
                     android:src="@drawable/ic_baseline_format_color_text_20"
-                    app:layout_constraintHeight="parent=0.425"
-                    app:layout_constraintWidth="ratio=1.55:1"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight="parent=0.425"
+                    app:layout_constraintWidth="ratio=1.55:1" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -245,16 +245,16 @@
             android:id="@+id/midnightCard"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
             app:cardBackgroundColor="@color/black"
-            app:cardElevation="8dp"
             app:cardCornerRadius="6dp"
-            app:layout_constraintHeight="parent=0.1"
-            app:layout_constraintStart_toEndOf="@+id/editorPreviewRightGuide"
+            app:cardElevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/darkCard" >
+            app:layout_constraintHeight="parent=0.1"
+            app:layout_constraintStart_toEndOf="@+id/styleCardMiddleGuide"
+            app:layout_constraintTop_toBottomOf="@+id/darkCard">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -266,8 +266,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
-                    android:text="Midnight"
                     android:buttonTint="@color/colorAccent"
+                    android:text="Midnight"
                     android:textColor="@color/colorAccent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -276,15 +276,15 @@
                     android:id="@+id/midnightTab"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:elevation="6dp"
                     android:background="@drawable/style_tab_background"
-                    app:tint="@color/colorAccent"
                     android:backgroundTint="#1B1B1B"
+                    android:elevation="6dp"
                     android:src="@drawable/ic_baseline_format_color_text_20"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight="parent=0.425"
                     app:layout_constraintWidth="ratio=1.55:1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:tint="@color/colorAccent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -297,12 +297,12 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:cardBackgroundColor="@color/colorAccentDarker"
-            app:cardElevation="8dp"
             app:cardCornerRadius="6dp"
+            app:cardElevation="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/styleCardMiddleGuide"
             app:layout_constraintHeight="parent=0.1"
-            app:layout_constraintEnd_toStartOf="@+id/editorPreviewRightGuide"
             app:layout_constraintStart_toStartOf="@+id/styleTitle"
-            app:layout_constraintTop_toBottomOf="@+id/blackCard" >
+            app:layout_constraintTop_toBottomOf="@+id/blackCard">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -314,8 +314,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
-                    android:text="Monochrome"
                     android:buttonTint="#303030"
+                    android:text="Monochrome"
                     android:textColor="#303030"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -327,21 +327,28 @@
                     android:background="@drawable/style_tab_background"
                     android:backgroundTint="@color/monochromeCardTabColor"
                     android:src="@drawable/ic_baseline_format_color_text_20"
-                    app:layout_constraintHeight="parent=0.425"
-                    app:layout_constraintWidth="ratio=1.55:1"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight="parent=0.425"
+                    app:layout_constraintWidth="ratio=1.55:1" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/styleCardMiddleGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
         <TextView
             android:id="@+id/colorTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
             android:text="@string/color"
             android:textColor="@color/colorAccent"
             android:textStyle="bold"
@@ -352,261 +359,281 @@
             android:id="@+id/colorsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginHorizontal="16dp"
-            android:clipToPadding="false"
-            android:clipChildren="false"
+            android:layout_marginTop="8dp"
             android:animateLayoutChanges="true"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:paddingVertical="8dp"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/colorTitle"
             app:layout_constraintTop_toBottomOf="@+id/colorTitle">
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/color1Guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.167" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/color2Guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.334" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/color3Guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/color4Guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.668" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/color5Guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.835" />
+
             <ImageButton
-                android:id="@+id/mintButton"
+                android:id="@+id/tealButton"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="@drawable/light_circle"
+                android:background="?selectableItemBackgroundBorderless"
                 android:clickable="false"
                 android:elevation="6dp"
                 android:focusable="false"
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:src="@drawable/inner_accent_circle"
-                android:tag="1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintWidth="parent=0.125"
+                android:src="@drawable/editor_color_circle"
+                android:tintMode="screen"
+                app:layout_constraintEnd_toStartOf="@+id/color1Guide"
                 app:layout_constraintHeight="ratio=1:1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/colorAccentDarker" />
+                app:layout_constraintWidth="parent=0.125"
+                app:tint="#009688" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/tealLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="2dp"
-                android:clickable="true"
+            <ImageButton
+                android:id="@+id/greenButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:clickable="false"
                 android:elevation="6dp"
-                android:focusable="true"
-                android:clipToPadding="false"
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:padding="8dp"
-                android:tag="2"
-                app:layout_constraintBottom_toBottomOf="@id/mintLayout"
-                app:layout_constraintStart_toEndOf="@id/mintLayout"
-                app:layout_constraintTop_toTopOf="@id/mintLayout">
+                android:focusable="false"
+                android:src="@drawable/editor_color_circle"
+                android:tintMode="screen"
+                app:layout_constraintBottom_toBottomOf="@+id/tealButton"
+                app:layout_constraintEnd_toEndOf="@+id/color2Guide"
+                app:layout_constraintHeight="ratio=1:1"
+                app:layout_constraintStart_toEndOf="@id/color1Guide"
+                app:layout_constraintTop_toTopOf="@+id/tealButton"
+                app:layout_constraintWidth="parent=0.125"
+                app:tint="#4CAF50" />
 
-                <ImageButton
-                    android:id="@+id/tealButton"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/light_circle"
-                    android:clickable="false"
-                    android:elevation="6dp"
-                    android:src="@drawable/inner_accent_circle"
-                    android:tint="@color/colorAccentDarker"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/greenLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="2dp"
-                android:clickable="true"
+            <ImageButton
+                android:id="@+id/cyanButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:clickable="false"
                 android:elevation="6dp"
-                android:focusable="true"
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:padding="8dp"
-                android:tag="3"
-                app:layout_constraintBottom_toBottomOf="@id/tealLayout"
-                app:layout_constraintStart_toEndOf="@id/tealLayout"
-                app:layout_constraintTop_toTopOf="@id/tealLayout">
+                android:focusable="false"
+                android:src="@drawable/editor_color_circle"
+                android:tintMode="screen"
+                app:layout_constraintBottom_toBottomOf="@+id/tealButton"
+                app:layout_constraintEnd_toEndOf="@+id/color3Guide"
+                app:layout_constraintHeight="ratio=1:1"
+                app:layout_constraintStart_toEndOf="@id/color2Guide"
+                app:layout_constraintTop_toTopOf="@+id/tealButton"
+                app:layout_constraintWidth="parent=0.125"
+                app:tint="#00BCD4" />
 
-                <ImageButton
-                    android:id="@+id/greenButton"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/light_circle"
-                    android:clickable="false"
-                    android:elevation="6dp"
-                    android:src="@drawable/inner_accent_circle"
-                    android:tint="@color/colorAccentDarker"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cyanLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="2dp"
-                android:clickable="true"
+            <ImageButton
+                android:id="@+id/blueButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:clickable="false"
                 android:elevation="6dp"
-                android:focusable="true"
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:padding="8dp"
-                android:tag="4"
-                app:layout_constraintBottom_toBottomOf="@id/greenLayout"
-                app:layout_constraintStart_toEndOf="@id/greenLayout"
-                app:layout_constraintTop_toTopOf="@id/greenLayout">
+                android:focusable="false"
+                android:src="@drawable/editor_color_circle"
+                android:tintMode="screen"
+                app:layout_constraintBottom_toBottomOf="@+id/greenButton"
+                app:layout_constraintEnd_toEndOf="@+id/color4Guide"
+                app:layout_constraintHeight="ratio=1:1"
+                app:layout_constraintStart_toEndOf="@id/color3Guide"
+                app:layout_constraintTop_toTopOf="@+id/greenButton"
+                app:layout_constraintWidth="parent=0.125"
+                app:tint="#2196F3" />
 
-                <ImageButton
-                    android:id="@+id/cyanButton"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/light_circle"
-                    android:clickable="false"
-                    android:elevation="6dp"
-                    android:src="@drawable/inner_accent_circle"
-                    android:tint="@color/colorAccentDarker"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/babyBlueLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="2dp"
-                android:clickable="true"
+            <ImageButton
+                android:id="@+id/indigoButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:clickable="false"
                 android:elevation="6dp"
-                android:focusable="true"
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:padding="8dp"
-                android:tag="17"
-                app:layout_constraintBottom_toBottomOf="@id/cyanLayout"
-                app:layout_constraintStart_toEndOf="@id/cyanLayout"
-                app:layout_constraintTop_toTopOf="@id/cyanLayout">
+                android:focusable="false"
+                android:src="@drawable/editor_color_circle"
+                android:tintMode="screen"
+                app:layout_constraintBottom_toBottomOf="@+id/cyanButton"
+                app:layout_constraintEnd_toEndOf="@+id/color5Guide"
+                app:layout_constraintHeight="ratio=1:1"
+                app:layout_constraintStart_toEndOf="@id/color4Guide"
+                app:layout_constraintTop_toTopOf="@+id/cyanButton"
+                app:layout_constraintWidth="parent=0.125"
+                app:tint="#3F51B5" />
 
-                <ImageButton
-                    android:id="@+id/babyBlueButton"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/light_circle"
-                    android:clickable="false"
-                    android:elevation="6dp"
-                    android:src="@drawable/inner_accent_circle"
-                    android:tint="@color/colorAccentDarker"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/blueLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="2dp"
-                android:clickable="true"
+            <ImageButton
+                android:id="@+id/purpleButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:clickable="false"
                 android:elevation="6dp"
-                android:focusable="true"
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:padding="8dp"
-                android:tag="5"
-                app:layout_constraintBottom_toBottomOf="@id/babyBlueLayout"
-                app:layout_constraintStart_toEndOf="@id/babyBlueLayout"
-                app:layout_constraintTop_toTopOf="@id/babyBlueLayout">
+                android:focusable="false"
+                android:src="@drawable/editor_color_circle"
+                android:tintMode="screen"
+                app:layout_constraintBottom_toBottomOf="@+id/indigoButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight="ratio=1:1"
+                app:layout_constraintStart_toEndOf="@id/color5Guide"
+                app:layout_constraintTop_toTopOf="@+id/indigoButton"
+                app:layout_constraintWidth="parent=0.125"
+                app:tint="#673AB7" />
 
-                <ImageButton
-                    android:id="@+id/blueButton"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/light_circle"
-                    android:clickable="false"
-                    android:elevation="6dp"
-                    android:src="@drawable/inner_accent_circle"
-                    android:tint="@color/colorAccentDarker"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/navyBlueLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="2dp"
-                android:clickable="true"
+            <ImageButton
+                android:id="@+id/pinkButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="4dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:clickable="false"
                 android:elevation="6dp"
-                android:focusable="true"
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:padding="8dp"
-                android:tag="6"
-                app:layout_constraintBottom_toBottomOf="@id/blueLayout"
-                app:layout_constraintStart_toEndOf="@id/blueLayout"
-                app:layout_constraintTop_toTopOf="@id/blueLayout">
+                android:focusable="false"
+                android:src="@drawable/editor_color_circle"
+                android:tintMode="screen"
+                app:layout_constraintEnd_toStartOf="@+id/color1Guide"
+                app:layout_constraintHeight="ratio=1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tealButton"
+                app:layout_constraintWidth="parent=0.125"
+                app:tint="#E91E63" />
 
-                <ImageButton
-                    android:id="@+id/navyBlueButton"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/light_circle"
-                    android:clickable="false"
-                    android:elevation="6dp"
-                    android:src="@drawable/inner_accent_circle"
-                    android:tint="@color/colorAccentDarker"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/indigoLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="2dp"
-                android:clickable="true"
+            <ImageButton
+                android:id="@+id/redButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:clickable="false"
                 android:elevation="6dp"
-                android:focusable="true"
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:padding="8dp"
-                android:tag="7"
-                app:layout_constraintBottom_toBottomOf="@id/navyBlueLayout"
-                app:layout_constraintStart_toEndOf="@id/navyBlueLayout"
-                app:layout_constraintTop_toTopOf="@id/navyBlueLayout">
+                android:focusable="false"
+                android:src="@drawable/editor_color_circle"
+                android:tintMode="screen"
+                app:layout_constraintBottom_toBottomOf="@+id/pinkButton"
+                app:layout_constraintEnd_toEndOf="@+id/color2Guide"
+                app:layout_constraintHeight="ratio=1:1"
+                app:layout_constraintStart_toEndOf="@id/color1Guide"
+                app:layout_constraintTop_toTopOf="@+id/pinkButton"
+                app:layout_constraintWidth="parent=0.125"
+                app:tint="#F44336" />
 
-                <ImageButton
-                    android:id="@+id/indigoButton"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/light_circle"
-                    android:clickable="false"
-                    android:elevation="6dp"
-                    android:src="@drawable/inner_accent_circle"
-                    android:tint="@color/colorAccentDarker"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <ImageButton
+                android:id="@+id/orangeButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:clickable="false"
+                android:elevation="6dp"
+                android:focusable="false"
+                android:src="@drawable/editor_color_circle"
+                android:tintMode="screen"
+                app:layout_constraintBottom_toBottomOf="@+id/pinkButton"
+                app:layout_constraintEnd_toEndOf="@+id/color3Guide"
+                app:layout_constraintHeight="ratio=1:1"
+                app:layout_constraintStart_toEndOf="@id/color2Guide"
+                app:layout_constraintTop_toTopOf="@+id/pinkButton"
+                app:layout_constraintWidth="parent=0.125"
+                app:tint="#FF9800" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageButton
+                android:id="@+id/yellowButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:clickable="false"
+                android:elevation="6dp"
+                android:focusable="false"
+                android:src="@drawable/editor_color_circle"
+                android:tintMode="screen"
+                app:layout_constraintBottom_toBottomOf="@+id/pinkButton"
+                app:layout_constraintEnd_toEndOf="@+id/color4Guide"
+                app:layout_constraintHeight="ratio=1:1"
+                app:layout_constraintStart_toEndOf="@id/color3Guide"
+                app:layout_constraintTop_toTopOf="@+id/pinkButton"
+                app:layout_constraintWidth="parent=0.125"
+                app:tint="#FFC107" />
+
+            <ImageButton
+                android:id="@+id/brownButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:clickable="false"
+                android:elevation="6dp"
+                android:focusable="false"
+                android:src="@drawable/editor_color_circle"
+                android:tintMode="screen"
+                app:layout_constraintBottom_toBottomOf="@+id/pinkButton"
+                app:layout_constraintEnd_toEndOf="@+id/color5Guide"
+                app:layout_constraintHeight="ratio=1:1"
+                app:layout_constraintStart_toEndOf="@id/color4Guide"
+                app:layout_constraintTop_toTopOf="@+id/pinkButton"
+                app:layout_constraintWidth="parent=0.125"
+                app:tint="#795548" />
+
+            <ImageButton
+                android:id="@+id/blackButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:clickable="false"
+                android:elevation="6dp"
+                android:focusable="false"
+                android:src="@drawable/editor_color_circle"
+                android:tintMode="screen"
+                app:layout_constraintBottom_toBottomOf="@+id/pinkButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight="ratio=1:1"
+                app:layout_constraintStart_toEndOf="@id/color5Guide"
+                app:layout_constraintTop_toTopOf="@+id/pinkButton"
+                app:layout_constraintWidth="parent=0.125"
+                app:tint="@color/black" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/editorPreviewRightGuide"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
+        <com.google.android.material.tabs.TabLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/colorsLayout">
+
+
+        </com.google.android.material.tabs.TabLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
