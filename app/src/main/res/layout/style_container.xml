@@ -137,7 +137,7 @@
                     android:backgroundTint="@color/colorAccent"
                     android:src="@drawable/ic_baseline_format_color_text_20"
                     app:layout_constraintHeight="parent=0.425"
-                    app:layout_constraintWidth="ratio=1.5:1"
+                    app:layout_constraintWidth="ratio=1.55:1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -186,7 +186,7 @@
                     android:backgroundTint="@color/colorAccent"
                     android:src="@drawable/ic_baseline_format_color_text_20"
                     app:layout_constraintHeight="parent=0.425"
-                    app:layout_constraintWidth="ratio=1.5:1"
+                    app:layout_constraintWidth="ratio=1.55:1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -233,7 +233,7 @@
                     android:backgroundTint="@color/colorAccent"
                     android:src="@drawable/ic_baseline_format_color_text_20"
                     app:layout_constraintHeight="parent=0.425"
-                    app:layout_constraintWidth="ratio=1.5:1"
+                    app:layout_constraintWidth="ratio=1.55:1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -282,7 +282,7 @@
                     android:backgroundTint="#1B1B1B"
                     android:src="@drawable/ic_baseline_format_color_text_20"
                     app:layout_constraintHeight="parent=0.425"
-                    app:layout_constraintWidth="ratio=1.5:1"
+                    app:layout_constraintWidth="ratio=1.55:1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -328,7 +328,7 @@
                     android:backgroundTint="@color/monochromeCardTabColor"
                     android:src="@drawable/ic_baseline_format_color_text_20"
                     app:layout_constraintHeight="parent=0.425"
-                    app:layout_constraintWidth="ratio=1.5:1"
+                    app:layout_constraintWidth="ratio=1.55:1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -348,13 +348,265 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/monochromeCard" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/colorsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="16dp"
+            android:clipToPadding="false"
+            android:clipChildren="false"
+            android:animateLayoutChanges="true"
+            android:paddingVertical="8dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/colorTitle"
+            app:layout_constraintTop_toBottomOf="@+id/colorTitle">
+
+            <ImageButton
+                android:id="@+id/mintButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/light_circle"
+                android:clickable="false"
+                android:elevation="6dp"
+                android:focusable="false"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:src="@drawable/inner_accent_circle"
+                android:tag="1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintWidth="parent=0.125"
+                app:layout_constraintHeight="ratio=1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/colorAccentDarker" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/tealLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:clickable="true"
+                android:elevation="6dp"
+                android:focusable="true"
+                android:clipToPadding="false"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:tag="2"
+                app:layout_constraintBottom_toBottomOf="@id/mintLayout"
+                app:layout_constraintStart_toEndOf="@id/mintLayout"
+                app:layout_constraintTop_toTopOf="@id/mintLayout">
+
+                <ImageButton
+                    android:id="@+id/tealButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/light_circle"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:src="@drawable/inner_accent_circle"
+                    android:tint="@color/colorAccentDarker"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/greenLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:clickable="true"
+                android:elevation="6dp"
+                android:focusable="true"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:tag="3"
+                app:layout_constraintBottom_toBottomOf="@id/tealLayout"
+                app:layout_constraintStart_toEndOf="@id/tealLayout"
+                app:layout_constraintTop_toTopOf="@id/tealLayout">
+
+                <ImageButton
+                    android:id="@+id/greenButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/light_circle"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:src="@drawable/inner_accent_circle"
+                    android:tint="@color/colorAccentDarker"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cyanLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:clickable="true"
+                android:elevation="6dp"
+                android:focusable="true"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:tag="4"
+                app:layout_constraintBottom_toBottomOf="@id/greenLayout"
+                app:layout_constraintStart_toEndOf="@id/greenLayout"
+                app:layout_constraintTop_toTopOf="@id/greenLayout">
+
+                <ImageButton
+                    android:id="@+id/cyanButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/light_circle"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:src="@drawable/inner_accent_circle"
+                    android:tint="@color/colorAccentDarker"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/babyBlueLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:clickable="true"
+                android:elevation="6dp"
+                android:focusable="true"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:tag="17"
+                app:layout_constraintBottom_toBottomOf="@id/cyanLayout"
+                app:layout_constraintStart_toEndOf="@id/cyanLayout"
+                app:layout_constraintTop_toTopOf="@id/cyanLayout">
+
+                <ImageButton
+                    android:id="@+id/babyBlueButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/light_circle"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:src="@drawable/inner_accent_circle"
+                    android:tint="@color/colorAccentDarker"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/blueLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:clickable="true"
+                android:elevation="6dp"
+                android:focusable="true"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:tag="5"
+                app:layout_constraintBottom_toBottomOf="@id/babyBlueLayout"
+                app:layout_constraintStart_toEndOf="@id/babyBlueLayout"
+                app:layout_constraintTop_toTopOf="@id/babyBlueLayout">
+
+                <ImageButton
+                    android:id="@+id/blueButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/light_circle"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:src="@drawable/inner_accent_circle"
+                    android:tint="@color/colorAccentDarker"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/navyBlueLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:clickable="true"
+                android:elevation="6dp"
+                android:focusable="true"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:tag="6"
+                app:layout_constraintBottom_toBottomOf="@id/blueLayout"
+                app:layout_constraintStart_toEndOf="@id/blueLayout"
+                app:layout_constraintTop_toTopOf="@id/blueLayout">
+
+                <ImageButton
+                    android:id="@+id/navyBlueButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/light_circle"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:src="@drawable/inner_accent_circle"
+                    android:tint="@color/colorAccentDarker"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/indigoLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:clickable="true"
+                android:elevation="6dp"
+                android:focusable="true"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:tag="7"
+                app:layout_constraintBottom_toBottomOf="@id/navyBlueLayout"
+                app:layout_constraintStart_toEndOf="@id/navyBlueLayout"
+                app:layout_constraintTop_toTopOf="@id/navyBlueLayout">
+
+                <ImageButton
+                    android:id="@+id/indigoButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/light_circle"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:src="@drawable/inner_accent_circle"
+                    android:tint="@color/colorAccentDarker"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/editorPreviewRightGuide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

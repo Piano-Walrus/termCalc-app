@@ -115,6 +115,7 @@ public class EditorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         try {
+            setTheme(Aux.cursorColor);
             setContentView(R.layout.activity_editor);
 
             final TinyDB tinydb = new TinyDB(this);
@@ -142,8 +143,6 @@ public class EditorActivity extends AppCompatActivity {
             catch (Exception e) {
                 e.printStackTrace();
             }
-
-            setTheme(Aux.cursorColor);
 
             getWindow().setStatusBarColor(Color.parseColor("#16181B"));
             getWindow().setNavigationBarColor(Color.parseColor("#16181B"));
