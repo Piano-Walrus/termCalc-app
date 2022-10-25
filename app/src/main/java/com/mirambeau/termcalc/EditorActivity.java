@@ -2,6 +2,7 @@ package com.mirambeau.termcalc;
 
 import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipData;
@@ -494,24 +495,6 @@ public class EditorActivity extends AppCompatActivity {
                     ConstraintLayout styleContainer = (ConstraintLayout) view;
                     ConstraintLayout parent = (ConstraintLayout) styleContainer.getParent();
 
-                    ConstraintSet constraintSet = new ConstraintSet();
-                    constraintSet.clone(parent);
-
-                    if (isOpen) {
-                        constraintSet.connect(R.id.styleContainer, ConstraintSet.TOP, R.id.shapeContainer, ConstraintSet.TOP, 0);
-                        constraintSet.connect(R.id.styleContainer, ConstraintSet.BOTTOM, R.id.shapeContainer, ConstraintSet.BOTTOM, 0);
-                        constraintSet.clear(R.id.styleContainer, ConstraintSet.END);
-                    }
-                    else {
-                        constraintSet.connect(R.id.styleContainer, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 36);
-                        constraintSet.connect(R.id.styleContainer, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 36);
-                        constraintSet.connect(R.id.styleContainer, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 16);
-                    }
-
-                    constraintSet.applyTo(parent);
-
-                    view.setPadding(padding[0], padding[1], padding[2], padding[3]);
-
                     for (int i=0; i < styleContainer.getChildCount(); i++) {
                         final View v = styleContainer.getChildAt(i);
 
@@ -524,16 +507,38 @@ public class EditorActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     v.setVisibility(View.VISIBLE);
+
+                                    ViewGroup.LayoutParams styleContainerParams = styleContainer.getLayoutParams();
+
+                                    ConstraintSet constraintSet = new ConstraintSet();
+                                    constraintSet.clone(parent);
+
+                                    if (isOpen) {
+                                        styleContainerParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+
+                                        constraintSet.connect(R.id.styleContainer, ConstraintSet.TOP, R.id.shapeContainer, ConstraintSet.TOP, 0);
+                                        constraintSet.connect(R.id.styleContainer, ConstraintSet.BOTTOM, R.id.shapeContainer, ConstraintSet.BOTTOM, 0);
+                                        constraintSet.clear(R.id.styleContainer, ConstraintSet.END);
+                                    }
+                                    else {
+                                        styleContainerParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+
+                                        constraintSet.connect(R.id.styleContainer, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 36);
+                                        constraintSet.connect(R.id.styleContainer, ConstraintSet.BOTTOM, R.id.bottomBar, ConstraintSet.TOP, 36);
+                                        constraintSet.connect(R.id.styleContainer, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 16);
+                                    }
+
+                                    constraintSet.applyTo(parent);
+                                    styleContainer.setLayoutParams(styleContainerParams);
+
+                                    view.setPadding(padding[0], padding[1], padding[2], padding[3]);
                                 }
-                            }, 45);
+                            }, 35);
                         }
                     }
 
                     parent.getLayoutTransition()
                             .enableTransitionType(LayoutTransition.CHANGING);
-
-                    styleContainer.getLayoutTransition()
-                            .enableTransitionType(LayoutTransition.DISAPPEARING);
 
                     styleContainer.getLayoutTransition()
                             .enableTransitionType(LayoutTransition.APPEARING);
