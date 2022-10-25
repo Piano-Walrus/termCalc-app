@@ -498,8 +498,9 @@ public class EditorActivity extends AppCompatActivity {
                     for (int i=0; i < styleContainer.getChildCount(); i++) {
                         final View v = styleContainer.getChildAt(i);
 
-                        if (v.getVisibility() != View.GONE)
-                            v.setVisibility(View.GONE);
+                        if (v.getTag() != null && v.getTag().toString().equalsIgnoreCase("container"))
+                            if (v.getVisibility() == View.VISIBLE)
+                                v.setVisibility(View.GONE);
                         else {
                             v.setVisibility(View.INVISIBLE);
 
@@ -508,32 +509,35 @@ public class EditorActivity extends AppCompatActivity {
                                 public void run() {
                                     v.setVisibility(View.VISIBLE);
 
-                                    ViewGroup.LayoutParams styleContainerParams = styleContainer.getLayoutParams();
-
                                     ConstraintSet constraintSet = new ConstraintSet();
                                     constraintSet.clone(parent);
 
                                     if (isOpen) {
-                                        styleContainerParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-
-                                        constraintSet.connect(R.id.styleContainer, ConstraintSet.TOP, R.id.shapeContainer, ConstraintSet.TOP, 0);
-                                        constraintSet.connect(R.id.styleContainer, ConstraintSet.BOTTOM, R.id.shapeContainer, ConstraintSet.BOTTOM, 0);
+                                        constraintSet.connect(R.id.styleContainer, ConstraintSet.TOP, R.id.bottomBar, ConstraintSet.TOP, 8);
+                                        constraintSet.connect(R.id.styleContainer, ConstraintSet.BOTTOM, R.id.bottomBar, ConstraintSet.BOTTOM, 8);
                                         constraintSet.clear(R.id.styleContainer, ConstraintSet.END);
+
+                                        constraintSet.constrainPercentWidth(R.id.styleContainer, 0.41f);
                                     }
                                     else {
-                                        styleContainerParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-
                                         constraintSet.connect(R.id.styleContainer, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 36);
                                         constraintSet.connect(R.id.styleContainer, ConstraintSet.BOTTOM, R.id.bottomBar, ConstraintSet.TOP, 36);
                                         constraintSet.connect(R.id.styleContainer, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 16);
+
+                                        constraintSet.constrainPercentWidth(R.id.styleContainer, 0.9f);
                                     }
 
                                     constraintSet.applyTo(parent);
-                                    styleContainer.setLayoutParams(styleContainerParams);
 
                                     view.setPadding(padding[0], padding[1], padding[2], padding[3]);
                                 }
                             }, 35);
+                        }
+                        else {
+                            if (v.getVisibility() == View.VISIBLE)
+                                v.setVisibility(View.GONE);
+                            else
+                                v.setVisibility(View.VISIBLE);
                         }
                     }
 

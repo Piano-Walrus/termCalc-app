@@ -1194,17 +1194,18 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/styleContainer"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginVertical="8dp"
         android:layout_marginStart="16dp"
         android:animateLayoutChanges="true"
         android:elevation="18dp"
         android:background="@drawable/editor_pill_background"
         android:paddingHorizontal="12dp"
-        android:paddingVertical="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/shapeContainer"
+        app:layout_constraintWidth="parent=0.41"
+        app:layout_constraintBottom_toBottomOf="@+id/bottomBar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/shapeContainer">
+        app:layout_constraintTop_toTopOf="@+id/bottomBar">
 
         <ImageButton
             android:id="@+id/styleThemePlaceholder"
@@ -1263,6 +1264,7 @@
             android:paddingBottom="32dp"
             android:background="@null"
             android:visibility="gone"
+            android:tag="container"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
