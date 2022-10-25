@@ -487,14 +487,26 @@ public class EditorActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     boolean isOpen = ((ConstraintLayout) view).getChildAt(0).getVisibility() == View.GONE;
 
-                    int[] padding = {isOpen ? 0 : 12, 0, isOpen ? 0 : 12, 0};
+                    int paddingHorizontal = isOpen ? 0 : 12;
+                    int paddingVertical = isOpen ? 0 : 8;
+
+                    int[] padding = {paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical};
                     ConstraintLayout styleContainer = (ConstraintLayout) view;
                     ConstraintLayout parent = (ConstraintLayout) styleContainer.getParent();
 
                     ConstraintSet constraintSet = new ConstraintSet();
                     constraintSet.clone(parent);
-                    constraintSet.connect(R.id.styleContainer,ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END,16);
-                    constraintSet.connect(R.id.styleContainer,ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START,16);
+
+                    if (isOpen) {
+                        constraintSet.connect(R.id.styleContainer, ConstraintSet.TOP, R.id.shapeContainer, ConstraintSet.TOP, 0);
+                        constraintSet.connect(R.id.styleContainer, ConstraintSet.BOTTOM, R.id.shapeContainer, ConstraintSet.BOTTOM, 0);
+                        constraintSet.clear(R.id.styleContainer, ConstraintSet.END);
+                    }
+                    else {
+                        constraintSet.connect(R.id.styleContainer, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 36);
+                        constraintSet.connect(R.id.styleContainer, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 36);
+                        constraintSet.connect(R.id.styleContainer, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 16);
+                    }
 
                     constraintSet.applyTo(parent);
 
@@ -1417,13 +1429,23 @@ public class EditorActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         try {
-            ThemeActivity.themeActivity.recreate();
+            MainActivity.mainActivity.recreate();
         }
         catch (Exception e){
             e.printStackTrace();
             Aux.saveStack(e);
             finish();
         }
+
+        ConstraintLayout styleContainer = findViewById(R.id.styleContainer);
+
+        if (styleContainer.getChildAt(0).getVisibility() != View.VISIBLE) {
+            //TODO: Remove styleContainer onClick while isOpen
+
+            styleContainer.performClick();
+            return;
+        }
+
 
         if ((entries.size() > 0 && currentEntry > -1) || themeChanged) {
             AlertDialog.Builder builder = createAlertDialog("Unsaved Changes");
