@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#101217">
@@ -8,9 +9,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/containerBG"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="84dp"
+        android:layout_marginVertical="72dp"
+        android:paddingBottom="32dp"
         android:background="@drawable/editor_container_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -123,13 +125,13 @@
                     android:layout_marginTop="4dp"
                     android:buttonTint="@color/white"
                     android:checked="true"
-                    android:text="Dark"
+                    android:text="@string/dark"
                     android:textColor="@color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
-                    android:id="@+id/darkTab"
+                    android:id="@+id/darkCardTab"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/style_tab_background"
@@ -171,13 +173,13 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:buttonTint="#222222"
-                    android:text="Light"
+                    android:text="@string/light"
                     android:textColor="#222222"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
-                    android:id="@+id/lightTab"
+                    android:id="@+id/lightCardTab"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/style_tab_background"
@@ -219,13 +221,13 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:buttonTint="@color/white"
-                    android:text="Black"
+                    android:text="@string/black"
                     android:textColor="@color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
-                    android:id="@+id/blackTab"
+                    android:id="@+id/blackCardTab"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/style_tab_background"
@@ -267,13 +269,13 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:buttonTint="@color/colorAccent"
-                    android:text="Midnight"
+                    android:text="@string/midnight"
                     android:textColor="@color/colorAccent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
-                    android:id="@+id/midnightTab"
+                    android:id="@+id/midnightCardTab"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/style_tab_background"
@@ -315,13 +317,13 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:buttonTint="#303030"
-                    android:text="Monochrome"
+                    android:text="@string/monochrome"
                     android:textColor="#303030"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
-                    android:id="@+id/monochromeTab"
+                    android:id="@+id/monochromeCardTab"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/style_tab_background"
@@ -357,8 +359,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/colorsLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
             android:animateLayoutChanges="true"
@@ -366,8 +368,9 @@
             android:clipToPadding="false"
             android:paddingVertical="8dp"
             android:visibility="visible"
+            app:layout_constraintHeight="parent=0.15"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/colorTitle"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/colorTitle">
 
             <androidx.constraintlayout.widget.Guideline
@@ -404,6 +407,25 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.835" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/colorHGuide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <ImageView
+                android:id="@+id/colorSelector"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/theme_style_selected"
+                app:layout_constraintBottom_toBottomOf="@+id/colorHGuide"
+                app:layout_constraintEnd_toStartOf="@+id/color1Guide"
+                app:layout_constraintHeight="parent=0.505"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth="ratio=1:1"/>
 
             <ImageButton
                 android:id="@+id/tealButton"
@@ -622,17 +644,174 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/shadeCardLayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginVertical="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardBackgroundColor="#1D1D1D"
+            app:layout_constraintHeight="parent=0.2155"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/colorsLayout">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/shadeTabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:tabTextColor="@color/white"
+                    app:tabSelectedTextColor="@color/white"
+                    app:tabRippleColor="@color/colorAccent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/darkTab"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dark" />
+
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/lightTab"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/light" />
+
+                </com.google.android.material.tabs.TabLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/shadesInnerLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/shadeTabLayout">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/shadeLeftGuide"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.333" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/shadeRightGuide"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.666" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/shadeHGuide"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.5" />
+
+                    <Button
+                        android:id="@+id/shade1"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="#009688"
+                        android:paddingTop="24dp"
+                        android:paddingEnd="4dp"
+                        android:text="#009688"
+                        android:textAlignment="viewEnd"
+                        android:textAllCaps="true"
+                        app:layout_constraintBottom_toBottomOf="@id/shadeHGuide"
+                        app:layout_constraintEnd_toStartOf="@+id/shadeLeftGuide"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/shade2"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="#00897b"
+                        android:paddingTop="24dp"
+                        android:paddingEnd="4dp"
+                        android:text="#00897b"
+                        android:textAlignment="viewEnd"
+                        android:textAllCaps="true"
+                        app:layout_constraintBottom_toBottomOf="@id/shadeHGuide"
+                        app:layout_constraintEnd_toStartOf="@+id/shadeRightGuide"
+                        app:layout_constraintStart_toEndOf="@+id/shadeLeftGuide"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/shade3"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="#00796b"
+                        android:paddingTop="24dp"
+                        android:paddingEnd="4dp"
+                        android:text="#00796b"
+                        android:textAlignment="viewEnd"
+                        android:textAllCaps="true"
+                        app:layout_constraintBottom_toBottomOf="@id/shadeHGuide"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/shadeRightGuide"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <Button
+                        android:id="@+id/shade4"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="#00695c"
+                        android:paddingTop="24dp"
+                        android:paddingEnd="4dp"
+                        android:text="#00695c"
+                        android:textAlignment="viewEnd"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/shadeLeftGuide"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/shadeHGuide" />
+
+                    <Button
+                        android:id="@+id/shade5"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="#004b3d"
+                        android:paddingTop="24dp"
+                        android:paddingEnd="4dp"
+                        android:text="#004b3d"
+                        android:textAlignment="viewEnd"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/shadeRightGuide"
+                        app:layout_constraintStart_toEndOf="@id/shadeLeftGuide"
+                        app:layout_constraintTop_toBottomOf="@id/shadeHGuide" />
+
+                    <Button
+                        android:id="@+id/shade6"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="#004b3d"
+                        android:paddingTop="24dp"
+                        android:paddingEnd="4dp"
+                        android:text="#002b3d"
+                        android:textAlignment="viewEnd"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/shadeRightGuide"
+                        app:layout_constraintTop_toBottomOf="@id/shadeHGuide" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
