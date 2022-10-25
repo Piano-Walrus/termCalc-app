@@ -46,6 +46,9 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -364,7 +367,7 @@ public class EditorActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         //Move the tab selection drawable to the selected tab
-                        ((ViewGroup) selectedTab).getLayoutTransition()
+                        selectedTab.getLayoutTransition()
                                 .enableTransitionType(LayoutTransition.CHANGING);
 
                         ConstraintSet constraintSet = new ConstraintSet();
@@ -479,7 +482,51 @@ public class EditorActivity extends AppCompatActivity {
                 }
             });
 
+            findViewById(R.id.styleContainer).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    boolean isOpen = ((ConstraintLayout) view).getChildAt(0).getVisibility() == View.GONE;
 
+                    int[] padding = {isOpen ? 0 : 12, 0, isOpen ? 0 : 12, 0};
+                    ConstraintLayout styleContainer = (ConstraintLayout) view;
+                    ConstraintLayout parent = (ConstraintLayout) styleContainer.getParent();
+
+                    ConstraintSet constraintSet = new ConstraintSet();
+                    constraintSet.clone(parent);
+                    constraintSet.connect(R.id.styleContainer,ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END,16);
+                    constraintSet.connect(R.id.styleContainer,ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START,16);
+
+                    constraintSet.applyTo(parent);
+
+                    view.setPadding(padding[0], padding[1], padding[2], padding[3]);
+
+                    for (int i=0; i < styleContainer.getChildCount(); i++) {
+                        final View v = styleContainer.getChildAt(i);
+
+                        if (v.getVisibility() != View.GONE)
+                            v.setVisibility(View.GONE);
+                        else {
+                            v.setVisibility(View.INVISIBLE);
+
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    v.setVisibility(View.VISIBLE);
+                                }
+                            }, 45);
+                        }
+                    }
+
+                    parent.getLayoutTransition()
+                            .enableTransitionType(LayoutTransition.CHANGING);
+
+                    styleContainer.getLayoutTransition()
+                            .enableTransitionType(LayoutTransition.DISAPPEARING);
+
+                    styleContainer.getLayoutTransition()
+                            .enableTransitionType(LayoutTransition.APPEARING);
+                }
+            });
 
             //Set colors in current theme
             applyTheme();
