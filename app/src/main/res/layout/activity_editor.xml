@@ -982,7 +982,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.58" />
+            app:layout_constraintGuide_begin="365dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/zonesTopBarGuide"
@@ -1312,7 +1312,7 @@
         android:background="@color/editorDrawerBG"
         android:clickable="true"
         android:focusable="true"
-        android:visibility="visible"
+        android:visibility="invisible"
         android:elevation="18dp"
         android:stateListAnimator="@null"
         android:alpha="0.75"
@@ -1330,7 +1330,7 @@
         app:cardBackgroundColor="@color/darkColorPrimaryDark"
         app:cardCornerRadius="12dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -1338,7 +1338,7 @@
             android:id="@+id/shapeCardLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="invisible">
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/shapeTitle"
@@ -1415,6 +1415,7 @@
             android:id="@+id/styleCardLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="gone"
             android:paddingBottom="24dp">
 
             <TextView
