@@ -1436,12 +1436,8 @@ public class EditorActivity extends AppCompatActivity {
             finish();
         }
 
-        ConstraintLayout styleContainer = findViewById(R.id.styleContainer);
-
-        if (styleContainer.getChildAt(0).getVisibility() != View.VISIBLE) {
-            //TODO: Remove styleContainer onClick while isOpen
-
-            styleContainer.performClick();
+        if (findViewById(R.id.styleShapeDimBG).getVisibility() == View.VISIBLE) {
+            findViewById(R.id.styleShapeDimBG).performClick();
             return;
         }
 

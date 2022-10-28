@@ -1339,7 +1339,8 @@
             android:id="@+id/shapeCardLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone">
+            android:visibility="gone"
+            android:paddingBottom="24dp">
 
             <TextView
                 android:id="@+id/shapeTitle"
@@ -1746,20 +1747,6 @@
                     android:orientation="vertical"
                     app:layout_constraintGuide_percent="0.835" />
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/colorHGuide"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.333" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/colorHGuide2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.666" />
-
                 <ImageView
                     android:id="@+id/colorSelector"
                     android:layout_width="0dp"
@@ -1772,8 +1759,10 @@
 
                 <ImageButton
                     android:id="@+id/mintButton"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:padding="8dp"
                     android:background="?selectableItemBackgroundBorderless"
                     android:clickable="false"
                     android:elevation="6dp"
@@ -1784,7 +1773,6 @@
                     app:layout_constraintHeight="ratio=1:1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="@id/colorHGuide"
                     app:tint="#03DAC5" />
 
                 <ImageButton
@@ -1874,8 +1862,10 @@
 
                 <ImageButton
                     android:id="@+id/navyBlueButton"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:padding="8dp"
                     android:background="?selectableItemBackgroundBorderless"
                     android:clickable="false"
                     android:elevation="6dp"
@@ -1885,8 +1875,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/color1Guide"
                     app:layout_constraintHeight="ratio=1:1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/colorHGuide"
-                    app:layout_constraintBottom_toBottomOf="@id/colorHGuide2"
+                    app:layout_constraintTop_toBottomOf="@id/mintButton"
                     app:tint="#0D2A89" />
 
                 <ImageButton
@@ -1976,8 +1965,10 @@
 
                 <ImageButton
                     android:id="@+id/orangeButton"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:padding="8dp"
                     android:background="?selectableItemBackgroundBorderless"
                     android:clickable="false"
                     android:elevation="6dp"
@@ -1985,9 +1976,8 @@
                     android:src="@drawable/editor_color_circle"
                     android:tintMode="screen"
                     app:layout_constraintEnd_toStartOf="@+id/color1Guide"
-                    app:layout_constraintHeight="ratio=1:1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/colorHGuide2"
+                    app:layout_constraintTop_toBottomOf="@id/navyBlueButton"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:tint="#FF9800" />
 
