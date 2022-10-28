@@ -1187,7 +1187,7 @@
         android:layout_height="0dp"
         android:background="#101217"
         android:paddingVertical="8dp"
-        app:layout_constraintHeight="parent=0.074"
+        app:layout_constraintHeight="parent=0.075"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -1327,10 +1327,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
+        android:clickable="true"
+        android:focusable="false"
         app:cardElevation="18dp"
         app:cardBackgroundColor="@color/darkColorPrimaryDark"
         app:cardCornerRadius="12dp"
         android:visibility="visible"
+        android:animateLayoutChanges="true"
         app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -1340,7 +1343,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"
-            android:paddingBottom="24dp">
+            android:paddingBottom="16dp">
 
             <TextView
                 android:id="@+id/shapeTitle"
@@ -2046,7 +2049,6 @@
                     android:paddingEnd="6dp"
                     android:text="@string/custom"
                     android:textSize="12sp"
-                    android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textAllCaps="false"
                     android:tintMode="screen"

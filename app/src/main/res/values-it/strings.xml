@@ -359,7 +359,7 @@
     <string name="theme_nav_summary" translatable="false">When \"Custom Colors\" is enabled, apply the colors in your theme to the nav drawer.</string>
     <string name="clear">Clear</string>
     <string name="focus_summary" translatable="false">Hides system bars to minimize distraction.</string>
-    <string name="shape">Shape</string>
+    <string name="shape">Button Shape</string>
     <string name="shape_square">Square</string>
     <string name="shape_round">Round</string>
     <string name="style_color">Style &amp; Color</string>
