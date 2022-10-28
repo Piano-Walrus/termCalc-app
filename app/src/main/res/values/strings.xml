@@ -376,6 +376,7 @@
     <string name="midnight">Midnight</string>
     <string name="monochrome">Monochrome</string>
     <string name="custom">Custom</string>
+    <string name="new_theme">New Theme</string>
 
 
 </resources>

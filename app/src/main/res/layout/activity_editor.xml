@@ -2306,7 +2306,7 @@
                             android:clickable="false"
                             android:elevation="10dp"
                             android:focusable="false"
-                            android:text="New Theme"
+                            android:text="@string/new_theme"
                             android:textColor="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
