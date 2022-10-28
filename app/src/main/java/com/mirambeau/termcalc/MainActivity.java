@@ -235,7 +235,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 tinydb.putBoolean("custom", true);
             }
 
+            final SharedPreferences mPrefs = getSharedPreferences("THEME", 0);
+            theme_boolean = mPrefs.getBoolean("theme_boolean", true);
 
+            tinydb.putBoolean("theme_boolean", theme_boolean);
 
             //Start handling theme
             int cursorInt = theme.equals("2") ? 1 : 0;
@@ -244,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             setTheme(Aux.cursorColors[cursorInt][0]);
 
-            final String[] primaryColors = {"#03DAC5", "#009688", "#54AF57", "#00C7E0", "#2196F3", "#0D2A89", "#3F51B5", "LILAC", "PINK", "#F44336", "#E77369", "#FF9800", "#FFC107", "#FEF65B", "#66BB6A", "#873804", "#B8E2F8"};
+            final String[] primaryColors = {"#03DAC5", "#009688", "#54AF57", "#00C7E0", "#2196F3", "#0D2A89", "#3F51B5", theme_boolean ? "#7357C2" : "#6C42B6", theme_boolean ? "#E91E63" : "#E32765", "#F44336", "#E77369", "#FF9800", "#FFC107", "#FEF65B", "#66BB6A", "#873804", theme_boolean ? "#B8E2F8" : "#9BCEE9"};
             final String[][] secondaryColors = {{"#53E2D4", "#4DB6AC", "#77C77B", "#51D6E8", "#64B5F6", "#1336A9", "#7986CB", "#8C6DCA", "#F06292", "#FF5956", "#EC8F87", "#FFB74D", "#FFD54F", "#FBF68D", "#EF5350", "#BD5E1E", "#B8E2F8"}, {"#00B5A3", "#00796B", "#388E3C", "#0097A7", "#1976D2", "#0A2068", "#303F9F", "#5E35B1", "#C2185B", "#D32F2F", "#D96459", "#F57C00", "#FFA000", "#F4E64B", "#EF5350", "#572300", "#9BCEE9"}};
             final String[][] tertiaryColors = {{"#3CDECE", "#26A69A", "#68B86E", "#39CFE3", "#42A5F5", "#0D2F9E", "#5C6BC0", "#7857BA", "#EC407A", "#FA4E4B", "#EB837A", "#FFA726", "#FFCB2E", "#F8F276", "#FF5754", "#A14D15", "#ABDBF4"}, {"#00C5B1", "#00897B", "#43A047", "#00ACC1", "#1E88E5", "#0A2373", "#3949AB", "#663ABD", "#D81B60", "#E33532", "#DE685D", "#FB8C00", "#FFB300", "#FCEE54", "#FF5754", "#612703", "#ABDBF4"}};
 
@@ -282,11 +285,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             // ------------------- Set Content View ------------------- //
             setContentView(roundedButtons && !theme.equals("5") ? R.layout.activity_main_round : R.layout.activity_main);
-
-            final SharedPreferences mPrefs = getSharedPreferences("THEME", 0);
-            theme_boolean = mPrefs.getBoolean("theme_boolean", true);
-
-            tinydb.putBoolean("theme_boolean", theme_boolean);
 
             mainActivity = this;
             drawer = findViewById(R.id.drawer_layout);
@@ -708,41 +706,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (!isCustomTheme) {
                 primary = primaryColors[Integer.parseInt(color) - 1];
 
-                //Light
-                if (!theme_boolean) {
-                    secondary = secondaryColors[0][Integer.parseInt(color) - 1];
-                    tertiary = tertiaryColors[0][Integer.parseInt(color) - 1];
-                }
-                //Dark
-                else {
-                    secondary = secondaryColors[1][Integer.parseInt(color) - 1];
-                    tertiary = tertiaryColors[1][Integer.parseInt(color) - 1];
-                }
-
-                switch (primary) {
-                    case "LILAC":
-                        if (!theme_boolean)
-                            primary = "#6C42B6";
-                        else
-                            primary = "#7357C2";
-                        break;
-
-                    case "PINK":
-                        if (!theme_boolean)
-                            primary = "#E32765";
-                        else
-                            primary = "#E91E63";
-                        break;
-
-                    case "#B8E2F8":
-                        if (!theme_boolean)
-                            primary = "#9BCEE9";
-                        else
-                            primary = "#B8E2F8";
-                        break;
-                }
+                //Dark theme when theme_boolean is true, light when false
+                secondary = secondaryColors[theme_boolean ? 1 : 0][Integer.parseInt(color) - 1];
+                tertiary = tertiaryColors[theme_boolean ? 1 : 0][Integer.parseInt(color) - 1];
             }
-            //Custom
+            //Custom Theme
             else {
                 String cPrimary = tinydb.getString("cPrimary");
                 String cSecondary = tinydb.getString("cSecondary");
@@ -779,12 +747,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
 
-            //Light
-            if (!theme_boolean)
-                initSecondary = secondaryColors[0][Integer.parseInt(color) - 1];
-            //Dark
-            else
-                initSecondary = secondaryColors[1][Integer.parseInt(color) - 1];
+            //Dark theme when theme_boolean is true, light when false
+            initSecondary = secondaryColors[theme_boolean ? 1 : 0][Integer.parseInt(color) - 1];
 
             primaryColor = Color.parseColor(primary);
             secondaryColor = Color.parseColor(secondary);
