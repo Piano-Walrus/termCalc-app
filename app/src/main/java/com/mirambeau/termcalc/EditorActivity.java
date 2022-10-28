@@ -483,69 +483,59 @@ public class EditorActivity extends AppCompatActivity {
                 }
             });
 
-            findViewById(R.id.styleContainer).setOnClickListener(new View.OnClickListener() {
+            ConstraintLayout styleContainer = findViewById(R.id.styleContainer);
+            ConstraintLayout shapeContainer = findViewById(R.id.shapeContainer);
+            ConstraintLayout bgDimmer = findViewById(R.id.styleShapeDimBG);
+            ConstraintLayout parent = findViewById(R.id.editorBG);
+
+            View.OnClickListener onBottomChipClick = new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    boolean isOpen = ((ConstraintLayout) view).getChildAt(0).getVisibility() == View.GONE;
+                    if (bgDimmer.getVisibility() != View.VISIBLE) {
+                        bgDimmer.setVisibility(View.VISIBLE);
 
-                    int paddingHorizontal = isOpen ? 0 : 12;
-                    int paddingVertical = isOpen ? 0 : 8;
+                        String tag = view.getTag() != null ? view.getTag().toString() : "style";
 
-                    int[] padding = {paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical};
-                    ConstraintLayout styleContainer = (ConstraintLayout) view;
-                    ConstraintLayout parent = (ConstraintLayout) styleContainer.getParent();
+                        if (tag.equalsIgnoreCase("style"))
+                            findViewById(R.id.styleCardLayout).setVisibility(View.VISIBLE);
+                        else if (tag.equalsIgnoreCase("shape"))
+                            findViewById(R.id.shapeCardLayout).setVisibility(View.VISIBLE);
 
-                    for (int i=0; i < styleContainer.getChildCount(); i++) {
-                        final View v = styleContainer.getChildAt(i);
+                        ConstraintSet constraintSet = new ConstraintSet();
+                        constraintSet.clone(parent);
 
-                        if (v.getTag() != null && v.getTag().toString().equalsIgnoreCase("container"))
-                            if (v.getVisibility() == View.VISIBLE)
-                                v.setVisibility(View.GONE);
-                        else {
-                            v.setVisibility(View.INVISIBLE);
+                        constraintSet.connect(R.id.styleShapeCard, ConstraintSet.BOTTOM, R.id.editorBG, ConstraintSet.BOTTOM, 12);
+                        constraintSet.clear(R.id.styleContainer, ConstraintSet.TOP);
 
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    v.setVisibility(View.VISIBLE);
+                        constraintSet.applyTo(parent);
 
-                                    ConstraintSet constraintSet = new ConstraintSet();
-                                    constraintSet.clone(parent);
-
-                                    if (isOpen) {
-                                        constraintSet.connect(R.id.styleContainer, ConstraintSet.TOP, R.id.bottomBar, ConstraintSet.TOP, 8);
-                                        constraintSet.connect(R.id.styleContainer, ConstraintSet.BOTTOM, R.id.bottomBar, ConstraintSet.BOTTOM, 8);
-                                        constraintSet.clear(R.id.styleContainer, ConstraintSet.END);
-
-                                        constraintSet.constrainPercentWidth(R.id.styleContainer, 0.41f);
-                                    }
-                                    else {
-                                        constraintSet.connect(R.id.styleContainer, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 36);
-                                        constraintSet.connect(R.id.styleContainer, ConstraintSet.BOTTOM, R.id.bottomBar, ConstraintSet.TOP, 36);
-                                        constraintSet.connect(R.id.styleContainer, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 16);
-
-                                        constraintSet.constrainPercentWidth(R.id.styleContainer, 0.9f);
-                                    }
-
-                                    constraintSet.applyTo(parent);
-
-                                    view.setPadding(padding[0], padding[1], padding[2], padding[3]);
-                                }
-                            }, 35);
-                        }
-                        else {
-                            if (v.getVisibility() == View.VISIBLE)
-                                v.setVisibility(View.GONE);
-                            else
-                                v.setVisibility(View.VISIBLE);
-                        }
+                        parent.getLayoutTransition()
+                                .enableTransitionType(LayoutTransition.CHANGING);
                     }
+                }
+            };
+
+            styleContainer.setOnClickListener(onBottomChipClick);
+            shapeContainer.setOnClickListener(onBottomChipClick);
+
+            bgDimmer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    bgDimmer.setVisibility(View.INVISIBLE);
+
+                    findViewById(R.id.styleCardLayout).setVisibility(View.GONE);
+                    findViewById(R.id.shapeCardLayout).setVisibility(View.GONE);
+
+                    ConstraintSet constraintSet = new ConstraintSet();
+                    constraintSet.clone(parent);
+
+                    constraintSet.connect(R.id.styleShapeCard, ConstraintSet.TOP, R.id.editorBG, ConstraintSet.BOTTOM, 12);
+                    constraintSet.clear(R.id.styleContainer, ConstraintSet.BOTTOM);
+
+                    constraintSet.applyTo(parent);
 
                     parent.getLayoutTransition()
                             .enableTransitionType(LayoutTransition.CHANGING);
-
-                    styleContainer.getLayoutTransition()
-                            .enableTransitionType(LayoutTransition.APPEARING);
                 }
             });
 

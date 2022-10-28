@@ -1201,6 +1201,7 @@
         android:elevation="18dp"
         android:background="@drawable/editor_pill_background"
         android:paddingHorizontal="12dp"
+        android:tag="style"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/bottomBar">
@@ -1267,6 +1268,7 @@
         android:paddingVertical="8dp"
         android:paddingHorizontal="12dp"
         android:background="@drawable/editor_pill_background"
+        android:tag="shape"
         app:layout_constraintStart_toEndOf="@id/styleContainer"
         app:layout_constraintTop_toTopOf="@id/bottomBar"
         app:layout_constraintBottom_toBottomOf="parent">
