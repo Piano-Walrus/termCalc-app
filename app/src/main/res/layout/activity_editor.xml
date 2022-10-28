@@ -336,7 +336,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.75" />
+                app:layout_constraintGuide_begin="198dp" />
 
             <Button
                 android:id="@+id/eB1"
@@ -1330,7 +1330,6 @@
         app:cardBackgroundColor="@color/darkColorPrimaryDark"
         app:cardCornerRadius="12dp"
         android:visibility="visible"
-        app:layout_constraintHeight="parent=0.2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -1415,7 +1414,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/styleCardLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="24dp">
 
             <TextView
                 android:id="@+id/styleColorTitle"
@@ -1434,7 +1434,7 @@
                 android:id="@+id/resetOptionLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="4dp"
                 android:background="?selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
@@ -1469,6 +1469,601 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/themeStyleLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:paddingTop="8dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/resetOptionLayout">
+
+                <TextView
+                    android:id="@+id/themeStyleTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:text="@string/style"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/themeCircleLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="16dp"
+                    app:layout_constraintStart_toStartOf="@+id/themeStyleTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/themeStyleTitle">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/darkLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:clickable="true"
+                        android:elevation="6dp"
+                        android:focusable="true"
+                        android:foreground="?selectableItemBackgroundBorderless"
+                        android:padding="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageButton
+                            android:id="@+id/themeStyleDark"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/dark_circle"
+                            android:clickable="false"
+                            android:elevation="6dp"
+                            android:src="@drawable/ic_baseline_dot_12"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/lightLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="4dp"
+                        android:clickable="true"
+                        android:elevation="6dp"
+                        android:focusable="true"
+                        android:foreground="?selectableItemBackgroundBorderless"
+                        android:padding="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/darkLayout"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageButton
+                            android:id="@+id/themeStyleLight"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/light_circle"
+                            android:clickable="false"
+                            android:elevation="6dp"
+                            android:src="@drawable/ic_baseline_dot_12"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#222222" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/blackLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="4dp"
+                        android:clickable="true"
+                        android:elevation="6dp"
+                        android:focusable="true"
+                        android:foreground="?selectableItemBackgroundBorderless"
+                        android:padding="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/lightLayout"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageButton
+                            android:id="@+id/themeStyleBlack"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/black_circle"
+                            android:clickable="false"
+                            android:elevation="6dp"
+                            android:src="@drawable/ic_baseline_dot_12"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/blackButtonsLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="4dp"
+                        android:clickable="true"
+                        android:elevation="6dp"
+                        android:focusable="true"
+                        android:foreground="?selectableItemBackgroundBorderless"
+                        android:padding="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/blackLayout"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageButton
+                            android:id="@+id/themeStyleBlackButtons"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/black_circle"
+                            android:clickable="false"
+                            android:elevation="6dp"
+                            android:src="@drawable/ic_baseline_dot_12"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/colorAccent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/monochromeLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="4dp"
+                        android:clickable="true"
+                        android:elevation="6dp"
+                        android:focusable="true"
+                        android:foreground="?selectableItemBackgroundBorderless"
+                        android:padding="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/blackButtonsLayout"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/themeStyleMonochrome"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageButton
+                                android:id="@+id/monochromeBG"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:background="@drawable/light_circle"
+                                android:clickable="false"
+                                android:elevation="6dp"
+                                android:padding="2dp"
+                                android:src="@drawable/light_circle"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/colorAccentDarker" />
+
+                            <ImageButton
+                                android:id="@+id/monochromeText"
+                                android:layout_width="9dp"
+                                android:layout_height="9dp"
+                                android:background="@null"
+                                android:clickable="false"
+                                android:elevation="6dp"
+                                android:src="@drawable/ic_baseline_dot_12"
+                                app:layout_constraintBottom_toBottomOf="@id/monochromeBG"
+                                app:layout_constraintEnd_toEndOf="@id/monochromeBG"
+                                app:layout_constraintStart_toStartOf="@id/monochromeBG"
+                                app:layout_constraintTop_toTopOf="@id/monochromeBG"
+                                app:tint="#303030" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/colorTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="@string/color"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/themeStyleLayout" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/colorsLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="8dp"
+                android:animateLayoutChanges="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:paddingTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/colorTitle">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/color1Guide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.167" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/color2Guide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.334" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/color3Guide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/color4Guide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.668" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/color5Guide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.835" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/colorHGuide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.333" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/colorHGuide2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.666" />
+
+                <ImageView
+                    android:id="@+id/colorSelector"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/theme_style_selected"
+                    app:layout_constraintBottom_toBottomOf="@id/mintButton"
+                    app:layout_constraintEnd_toEndOf="@+id/mintButton"
+                    app:layout_constraintStart_toStartOf="@id/mintButton"
+                    app:layout_constraintTop_toTopOf="@id/mintButton" />
+
+                <ImageButton
+                    android:id="@+id/mintButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:focusable="false"
+                    android:src="@drawable/editor_color_circle"
+                    android:tintMode="screen"
+                    app:layout_constraintEnd_toStartOf="@+id/color1Guide"
+                    app:layout_constraintHeight="ratio=1:1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/colorHGuide"
+                    app:tint="#03DAC5" />
+
+                <ImageButton
+                    android:id="@+id/tealButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:focusable="false"
+                    android:src="@drawable/editor_color_circle"
+                    android:tintMode="screen"
+                    app:layout_constraintBottom_toBottomOf="@+id/mintButton"
+                    app:layout_constraintEnd_toEndOf="@+id/color2Guide"
+                    app:layout_constraintHeight="ratio=1:1"
+                    app:layout_constraintStart_toEndOf="@id/color1Guide"
+                    app:layout_constraintTop_toTopOf="@+id/mintButton"
+                    app:tint="#009688" />
+
+                <ImageButton
+                    android:id="@+id/greenButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:focusable="false"
+                    android:src="@drawable/editor_color_circle"
+                    android:tintMode="screen"
+                    app:layout_constraintBottom_toBottomOf="@+id/mintButton"
+                    app:layout_constraintEnd_toEndOf="@+id/color3Guide"
+                    app:layout_constraintHeight="ratio=1:1"
+                    app:layout_constraintStart_toEndOf="@id/color2Guide"
+                    app:layout_constraintTop_toTopOf="@+id/mintButton"
+                    app:tint="#54AF57" />
+
+                <ImageButton
+                    android:id="@+id/cyanButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:focusable="false"
+                    android:src="@drawable/editor_color_circle"
+                    android:tintMode="screen"
+                    app:layout_constraintBottom_toBottomOf="@+id/mintButton"
+                    app:layout_constraintEnd_toEndOf="@+id/color4Guide"
+                    app:layout_constraintHeight="ratio=1:1"
+                    app:layout_constraintStart_toEndOf="@id/color3Guide"
+                    app:layout_constraintTop_toTopOf="@+id/mintButton"
+                    app:tint="#00C7E0" />
+
+                <ImageButton
+                    android:id="@+id/babyBlueButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:focusable="false"
+                    android:src="@drawable/editor_color_circle"
+                    android:tintMode="screen"
+                    app:layout_constraintBottom_toBottomOf="@+id/mintButton"
+                    app:layout_constraintEnd_toEndOf="@id/color5Guide"
+                    app:layout_constraintHeight="ratio=1:1"
+                    app:layout_constraintStart_toEndOf="@id/color4Guide"
+                    app:layout_constraintTop_toTopOf="@+id/mintButton"
+                    app:tint="#B8E2F8" />
+
+                <ImageButton
+                    android:id="@+id/blueButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:focusable="false"
+                    android:src="@drawable/editor_color_circle"
+                    android:tintMode="screen"
+                    app:layout_constraintBottom_toBottomOf="@+id/mintButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight="ratio=1:1"
+                    app:layout_constraintStart_toEndOf="@id/color5Guide"
+                    app:layout_constraintTop_toTopOf="@+id/mintButton"
+                    app:tint="#2196F3" />
+
+                <ImageButton
+                    android:id="@+id/navyBlueButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:focusable="false"
+                    android:src="@drawable/editor_color_circle"
+                    android:tintMode="screen"
+                    app:layout_constraintEnd_toStartOf="@+id/color1Guide"
+                    app:layout_constraintHeight="ratio=1:1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/colorHGuide"
+                    app:layout_constraintBottom_toBottomOf="@id/colorHGuide2"
+                    app:tint="#0D2A89" />
+
+                <ImageButton
+                    android:id="@+id/indigoButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:focusable="false"
+                    android:src="@drawable/editor_color_circle"
+                    android:tintMode="screen"
+                    app:layout_constraintEnd_toStartOf="@+id/color2Guide"
+                    app:layout_constraintHeight="ratio=1:1"
+                    app:layout_constraintStart_toStartOf="@id/color1Guide"
+                    app:layout_constraintTop_toTopOf="@id/navyBlueButton"
+                    app:layout_constraintBottom_toBottomOf="@id/navyBlueButton"
+                    app:tint="#3F51B5" />
+
+                <ImageButton
+                    android:id="@+id/purpleButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:focusable="false"
+                    android:src="@drawable/editor_color_circle"
+                    android:tintMode="screen"
+                    app:layout_constraintBottom_toBottomOf="@+id/indigoButton"
+                    app:layout_constraintEnd_toEndOf="@+id/color3Guide"
+                    app:layout_constraintHeight="ratio=1:1"
+                    app:layout_constraintStart_toEndOf="@id/color2Guide"
+                    app:layout_constraintTop_toTopOf="@+id/indigoButton"
+                    app:tint="#7357C2" />
+
+                <ImageButton
+                    android:id="@+id/pinkButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:focusable="false"
+                    android:src="@drawable/editor_color_circle"
+                    android:tintMode="screen"
+                    app:layout_constraintBottom_toBottomOf="@+id/indigoButton"
+                    app:layout_constraintEnd_toEndOf="@+id/color4Guide"
+                    app:layout_constraintHeight="ratio=1:1"
+                    app:layout_constraintStart_toEndOf="@id/color3Guide"
+                    app:layout_constraintTop_toTopOf="@+id/indigoButton"
+                    app:tint="#E91E63" />
+
+                <ImageButton
+                    android:id="@+id/redButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:focusable="false"
+                    android:src="@drawable/editor_color_circle"
+                    android:tintMode="screen"
+                    app:layout_constraintBottom_toBottomOf="@+id/indigoButton"
+                    app:layout_constraintEnd_toEndOf="@+id/color5Guide"
+                    app:layout_constraintHeight="ratio=1:1"
+                    app:layout_constraintStart_toEndOf="@id/color4Guide"
+                    app:layout_constraintTop_toTopOf="@+id/indigoButton"
+                    app:tint="#F44336" />
+
+                <ImageButton
+                    android:id="@+id/coralButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:focusable="false"
+                    android:src="@drawable/editor_color_circle"
+                    android:tintMode="screen"
+                    app:layout_constraintBottom_toBottomOf="@+id/indigoButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight="ratio=1:1"
+                    app:layout_constraintStart_toEndOf="@id/color5Guide"
+                    app:layout_constraintTop_toTopOf="@+id/indigoButton"
+                    app:tint="#E77369" />
+
+                <ImageButton
+                    android:id="@+id/orangeButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:focusable="false"
+                    android:src="@drawable/editor_color_circle"
+                    android:tintMode="screen"
+                    app:layout_constraintEnd_toStartOf="@+id/color1Guide"
+                    app:layout_constraintHeight="ratio=1:1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/colorHGuide2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:tint="#FF9800" />
+
+                <ImageButton
+                    android:id="@+id/honeyButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:focusable="false"
+                    android:src="@drawable/editor_color_circle"
+                    android:tintMode="screen"
+                    app:layout_constraintEnd_toStartOf="@+id/color2Guide"
+                    app:layout_constraintHeight="ratio=1:1"
+                    app:layout_constraintStart_toStartOf="@id/color1Guide"
+                    app:layout_constraintTop_toTopOf="@id/orangeButton"
+                    app:layout_constraintBottom_toBottomOf="@id/orangeButton"
+                    app:tint="#FFC107" />
+
+                <ImageButton
+                    android:id="@+id/yellowButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:focusable="false"
+                    android:src="@drawable/editor_color_circle"
+                    android:tintMode="screen"
+                    app:layout_constraintBottom_toBottomOf="@+id/orangeButton"
+                    app:layout_constraintEnd_toEndOf="@+id/color3Guide"
+                    app:layout_constraintHeight="ratio=1:1"
+                    app:layout_constraintStart_toEndOf="@id/color2Guide"
+                    app:layout_constraintTop_toTopOf="@+id/orangeButton"
+                    app:tint="#FEF65B" />
+
+                <ImageButton
+                    android:id="@+id/brownButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:focusable="false"
+                    android:src="@drawable/editor_color_circle"
+                    android:tintMode="screen"
+                    app:layout_constraintBottom_toBottomOf="@+id/orangeButton"
+                    app:layout_constraintEnd_toEndOf="@+id/color4Guide"
+                    app:layout_constraintHeight="ratio=1:1"
+                    app:layout_constraintStart_toEndOf="@id/color3Guide"
+                    app:layout_constraintTop_toTopOf="@+id/orangeButton"
+                    app:tint="#873804" />
+
+                <Button
+                    android:id="@+id/customColorButton"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:elevation="6dp"
+                    android:focusable="false"
+                    android:background="@drawable/editor_custom_color_circle"
+                    android:drawableStart="@drawable/ic_baseline_palette_20"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="6dp"
+                    android:text="@string/custom"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:tintMode="screen"
+                    android:layout_marginHorizontal="15.5dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/orangeButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/color4Guide"
+                    app:layout_constraintTop_toTopOf="@+id/orangeButton"
+                    app:tint="@color/black" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
