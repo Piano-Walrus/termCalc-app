@@ -505,7 +505,7 @@ public class EditorActivity extends AppCompatActivity {
                         constraintSet.clone(parent);
 
                         constraintSet.connect(R.id.styleShapeCard, ConstraintSet.BOTTOM, R.id.editorBG, ConstraintSet.BOTTOM, 12);
-                        constraintSet.clear(R.id.styleContainer, ConstraintSet.TOP);
+                        constraintSet.clear(R.id.styleShapeCard, ConstraintSet.TOP);
 
                         constraintSet.applyTo(parent);
 
@@ -530,7 +530,7 @@ public class EditorActivity extends AppCompatActivity {
                     constraintSet.clone(parent);
 
                     constraintSet.connect(R.id.styleShapeCard, ConstraintSet.TOP, R.id.editorBG, ConstraintSet.BOTTOM, 12);
-                    constraintSet.clear(R.id.styleContainer, ConstraintSet.BOTTOM);
+                    constraintSet.clear(R.id.styleShapeCard, ConstraintSet.BOTTOM);
 
                     constraintSet.applyTo(parent);
 
