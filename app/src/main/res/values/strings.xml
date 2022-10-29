@@ -387,4 +387,6 @@
     <string name="older">Older</string>
     <string name="buttons">Buttons</string>
     <string name="zones">Zones</string>
+    <string name="color_picker">Color Picker</string>
+    <string name="clipboard">Clipboard</string>
 </resources>

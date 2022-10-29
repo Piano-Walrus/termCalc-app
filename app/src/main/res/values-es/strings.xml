@@ -75,4 +75,6 @@
     <string name="older">Más Viejo</string>
     <string name="buttons">Botones</string>
     <string name="zones">Zonas</string>
+    <string name="color_picker">Selector de Color</string>
+    <string name="clipboard">Portapapeles</string>
 </resources>
