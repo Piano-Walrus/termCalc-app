@@ -5,12 +5,12 @@
     <item
         android:id="@+id/editCustom"
         android:orderInCategory="0"
-        android:title="Edit"
+        android:title="@string/edit"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/deleteCustom"
         android:orderInCategory="1"
-        android:title="Delete"
+        android:title="@string/delete"
         app:showAsAction="never"/>
 </menu>
