@@ -495,4 +495,11 @@
     <string name="live_expression_eval">Live Expression Evaluation</string>
     <string name="exchange_rate_frequency_title">When to Fetch Exchange Rates</string>
     <string name="prioritize_coefficients_title">Prioritize Coefficients</string>
+    <string name="distance">DISTANCE</string>
+    <string name="mass">MASS</string>
+    <string name="time">TIME</string>
+    <string name="currency">CURRENCY</string>
+    <string name="speed">SPEED</string>
+    <string name="temperature_abbreviated">TEMP.</string>
+    <string name="base_representation">BASE</string>
 </resources>
