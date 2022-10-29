@@ -148,7 +148,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.58" />
+            app:layout_constraintGuide_percent="0.585" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/editorKeypad"
@@ -336,7 +336,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="198dp" />
+                app:layout_constraintGuide_percent="0.75" />
 
             <Button
                 android:id="@+id/eB1"
@@ -982,7 +982,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="365dp" />
+            app:layout_constraintGuide_percent="0.585" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/zonesTopBarGuide"
