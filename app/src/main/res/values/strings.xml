@@ -403,4 +403,17 @@
     <string name="octagon">Octagon</string>
     <string name="nonagon">Nonagon</string>
     <string name="decagon">Decagon</string>
+    <string name="cube">Cube</string>
+    <string name="rectangular_prism">Rectangular Prism</string>
+    <string name="sphere">Sphere</string>
+    <string name="hemisphere">Hemisphere</string>
+    <string name="triangular_prism">Triangular Prism</string>
+    <string name="pyramid_triangular_base">Pyramid (Triangular Base)</string>
+    <string name="pyramid_rectangular_base">Pyramid (Rectangular Base)</string>
+    <string name="pentagonal_prism">Pentagonal Prism</string>
+    <string name="cone">Cone</string>
+    <string name="cylinder">Cylinder</string>
+    <string name="regular_octahedron">Regular Octahedron</string>
+    <string name="dodecahedron">Dodecahedron</string>
+    <string name="torus">Torus</string>
 </resources>
