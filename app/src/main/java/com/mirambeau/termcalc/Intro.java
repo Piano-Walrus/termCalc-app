@@ -40,6 +40,8 @@ public class Intro<isColorTransitionsEnabled> extends AppIntro {
 
                 setNavBarColor(Color.parseColor("#000000"));
 
+                //TODO: Localize these strings
+
                 addSlide(AppIntroFragment.newInstance("Welcome!",
                         "Before you start using TermCalc, let's run through a few things it can do!", R.drawable.cheat_the_system, Color.parseColor("#00BEA4")));
 

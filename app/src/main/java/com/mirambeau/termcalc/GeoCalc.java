@@ -49,7 +49,7 @@ public class GeoCalc extends Ax {
         String[] polygons = {"pentagon", "hexagon", "heptagon", "octagon", "nonagon", "decagon"};
 
         for (i=0; i < polygons.length; i++){
-            if (shape.equals(polygons[i])){
+            if (shape.equalsIgnoreCase(polygons[i])){
                 return i + 5;
             }
         }
@@ -76,7 +76,7 @@ public class GeoCalc extends Ax {
     public static double area(String shape, String[] inputs){
         double[] n = getInputs(inputs);
 
-        switch (shape) {
+        switch (correctShapeTitle(shape)) {
             case "square": return Math.pow(n[0], 2);
             case "rectangle": return n[0] * n[1];
             case "circle": return Math.pow(n[0], 2) * pi;

@@ -153,7 +153,7 @@ public class EditorActivity extends AppCompatActivity {
 
             final Toolbar toolbar = findViewById(R.id.editorToolbar);
 
-            toolbar.setTitle("Theme");
+            toolbar.setTitle(getString(R.string.term_menu_item));
             toolbar.showOverflowMenu();
             setSupportActionBar(toolbar);
 

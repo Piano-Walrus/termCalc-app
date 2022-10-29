@@ -5,79 +5,79 @@
     <item
         android:id="@+id/cube"
         android:orderInCategory="0"
-        android:title="Cube"
+        android:title="@string/cube"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/rectangularPrism"
         android:orderInCategory="0"
-        android:title="Rectangular Prism"
+        android:title="@string/rectangular_prism"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/sphere"
         android:orderInCategory="2"
-        android:title="Sphere"
+        android:title="@string/sphere"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/hemisphere"
         android:orderInCategory="3"
-        android:title="Hemisphere"
+        android:title="@string/hemisphere"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/triangularPrism"
         android:orderInCategory="4"
-        android:title="Triangular Prism"
+        android:title="@string/triangular_prism"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/triangularPyramid"
         android:orderInCategory="5"
-        android:title="Pyramid (Triangular Base)"
+        android:title="@string/pyramid_triangular_base"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/squarePyramid"
         android:orderInCategory="6"
-        android:title="Pyramid (Rectangular Base)"
+        android:title="@string/pyramid_rectangular_base"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/hexagon"
         android:orderInCategory="7"
-        android:title="Pentagonal Prism"
+        android:title="@string/pentagonal_prism"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/heptagon"
         android:orderInCategory="8"
-        android:title="Cone"
+        android:title="@string/cone"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/octagon"
         android:orderInCategory="9"
-        android:title="Cylinder"
+        android:title="@string/cylinder"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/nonagon"
         android:orderInCategory="10"
-        android:title="Regular Octahedron"
+        android:title="@string/regular_octahedron"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/decagon"
         android:orderInCategory="12"
-        android:title="Dodecahedron"
+        android:title="@string/dodecahedron"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/torus"
         android:orderInCategory="12"
-        android:title="Torus"
+        android:title="@string/torus"
         app:showAsAction="never"/>
 
 </menu>

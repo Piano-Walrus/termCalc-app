@@ -430,6 +430,8 @@ public class GeometryFragmentNew extends Fragment {
                 }
             }
 
+            //TODO: Somehow make this work with other languages
+
             if (!arraysAreEqual && Ax.isFullNum(inputs[0])) {
                 if (allCards.get(tab).get(0).getShapeTitle().equalsIgnoreCase("square")) {
                     if (GeoCalc.area(card.getShapeTitle().toLowerCase(), inputs) != 0.0)
