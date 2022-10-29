@@ -80,4 +80,7 @@
     <string name="top_bar_left">TOP BAR (LEFT)</string>
     <string name="main_background">MAIN BACKGROUND</string>
     <string name="theme_name">Theme Name</string>
+    <string name="contact_me">Contact Me:</string>
+    <string name="support_development">Support Development:</string>
+    <string name="feedback">Feedback:</string>
 </resources>

@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="TermCalc"
+            android:text="@string/app_name"
             android:textColor="#222222"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -102,11 +102,11 @@
                 android:background="@null"
                 android:onClick="openWebView"
                 android:src="@drawable/ic_vertical_align_bottom_24"
-                android:tint="@color/colorAccent"
                 app:layout_constraintBottom_toBottomOf="@+id/updateCheck"
                 app:layout_constraintEnd_toStartOf="@+id/updateCheck"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/updateCheck" />
+                app:layout_constraintTop_toTopOf="@+id/updateCheck"
+                app:tint="@color/colorAccent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -145,7 +145,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
-                    android:text="Contact Me:"
+                    android:text="@string/contact_me"
                     android:textColor="#222222"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -176,11 +176,11 @@
                     android:background="?selectableItemBackgroundBorderless"
                     android:onClick="linkHelper"
                     android:tag="twitter"
-                    android:tint="#222222"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/feedbackTitle"
                     app:layout_constraintTop_toBottomOf="@+id/feedbackTitle"
-                    app:srcCompat="@drawable/ic_twitter_24" />
+                    app:srcCompat="@drawable/ic_twitter_24"
+                    app:tint="#222222" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -203,7 +203,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
-                    android:text="Support Development:"
+                    android:text="@string/support_development"
                     android:textColor="#222222"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -234,11 +234,11 @@
                     android:background="?selectableItemBackgroundBorderless"
                     android:onClick="linkHelper"
                     android:tag="spotify"
-                    android:tint="#222222"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/donateTitle"
                     app:layout_constraintTop_toBottomOf="@+id/donateTitle"
-                    app:srcCompat="@drawable/ic_spotify_logo" />
+                    app:srcCompat="@drawable/ic_spotify_logo"
+                    app:tint="#222222" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -262,7 +262,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
-                    android:text="Feedback:"
+                    android:text="@string/feedback"
                     android:textColor="#222222"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -292,11 +292,11 @@
                     android:layout_marginBottom="24dp"
                     android:background="?selectableItemBackgroundBorderless"
                     android:onClick="openBugReport"
-                    android:tint="#222222"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/communityTitle"
                     app:layout_constraintTop_toBottomOf="@+id/communityTitle"
-                    app:srcCompat="@drawable/ic_baseline_bug_report_24" />
+                    app:srcCompat="@drawable/ic_baseline_bug_report_24"
+                    app:tint="#222222" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
