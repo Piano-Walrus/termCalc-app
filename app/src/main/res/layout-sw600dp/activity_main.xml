@@ -955,7 +955,7 @@
                 android:elevation="4dp"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="4dp"
-                android:text="Functions"
+                android:text="@string/functions"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@id/functionsSpacer"
                 app:layout_constraintEnd_toStartOf="@id/functionsSpacer"
