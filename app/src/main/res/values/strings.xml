@@ -391,4 +391,16 @@
     <string name="clipboard">Clipboard</string>
     <string name="background">Background</string>
     <string name="text">Text</string>
+    <string name="rectangle">Rectangle</string>
+    <string name="circle">Circle</string>
+    <string name="ellipse">Ellipse</string>
+    <string name="triangle">Triangle</string>
+    <string name="trapezoid">Trapezoid</string>
+    <string name="parallelogram">Parallelogram</string>
+    <string name="pentagon">Pentagon</string>
+    <string name="hexagon">Hexagon</string>
+    <string name="heptagon">Heptagon</string>
+    <string name="octagon">Octagon</string>
+    <string name="nonagon">Nonagon</string>
+    <string name="decagon">Decagon</string>
 </resources>

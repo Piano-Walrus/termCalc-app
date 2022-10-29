@@ -79,4 +79,16 @@
     <string name="clipboard">Portapapeles</string>
     <string name="background">Fondo</string>
     <string name="text">Texto</string>
+    <string name="rectangle">Rectángulo</string>
+    <string name="circle">Circulo</string>
+    <string name="ellipse">Elipse</string>
+    <string name="triangle">Triángulo</string>
+    <string name="trapezoid">Trapezoide</string>
+    <string name="parallelogram">Paralelogramo</string>
+    <string name="pentagon">Pentágono</string>
+    <string name="hexagon">Hexágono</string>
+    <string name="heptagon">Heptágono</string>
+    <string name="octagon">Octágono</string>
+    <string name="nonagon">Nonágono</string>
+    <string name="decagon">Decágono</string>
 </resources>
