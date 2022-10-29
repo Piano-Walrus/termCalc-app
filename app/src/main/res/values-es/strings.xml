@@ -172,4 +172,8 @@
     <string name="always_dark_nav">Always set the nav drawer to dark mode.</string>
     <string name="darken_status_bar">Darken the status bar slightly when using a custom dark theme.</string>
     <string name="darken_tab">Slightly darken the tab above the top bar.</string>
+    <string name="dynamic_precision_description">Let TermCalc determine the number of decimal places to display based on your input.</string>
+    <string name="max_decimals_description">Note: Some complex operations may take noticeably longer to complete if this value is greater than 10.</string>
+    <string name="live_expression_description">Calculate and display expression results before pressing the equals button.</string>
+    <string name="ignore_pemdas_description">Ignore PEMDAS and prioritize evaluating coefficients in front of parentheses.\n(WARNING: Only enable this if you know what you\'re doing! Enabling this can yield incorrect calculation results)</string>
 </resources>
