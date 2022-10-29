@@ -3132,7 +3132,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ConversionsFragmentNew(), "conversions").commit();
 
-                toolbar.setTitle("Conversions");
+                toolbar.setTitle(getString(R.string.conversions_menu_item));
                 tinydb.putString("fragTag", "Conversions");
 
                 break;
@@ -3151,7 +3151,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new DateFragment(), "date").commit();
 
-                toolbar.setTitle("Date");
+                toolbar.setTitle(R.string.date_toolbar_title);
                 tinydb.putString("fragTag", "Date");
 
                 break;
@@ -3169,7 +3169,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new GeometryFragmentNew(), "geometry").commit();
 
-                toolbar.setTitle("Geometry");
+                toolbar.setTitle(getString(R.string.geometry));
                 tinydb.putString("fragTag", "Geometry");
 
                 break;

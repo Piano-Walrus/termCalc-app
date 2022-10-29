@@ -84,10 +84,8 @@ public class DateFragment extends Fragment {
                 }
             }
 
-            assert color != null;
-            if (color.equals("\0")) {
+            if (color == null || color.equals("\0"))
                 color = "1";
-            }
 
             if (!isCustomTheme) {
                 primary = primaryColors[Integer.parseInt(color) - 1];

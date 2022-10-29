@@ -502,4 +502,5 @@
     <string name="speed">SPEED</string>
     <string name="temperature_abbreviated">TEMP.</string>
     <string name="base_representation">BASE</string>
+    <string name="date_toolbar_title">Date</string>
 </resources>
