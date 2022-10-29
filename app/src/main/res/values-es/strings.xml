@@ -94,7 +94,7 @@
     <string name="cube">Cubo</string>
     <string name="rectangular_prism">Prisma Rectangular</string>
     <string name="sphere">Esfera</string>
-    <string name="hemisphere">Hemisphere</string>
+    <string name="hemisphere">Hemisferio</string>
     <string name="triangular_prism">Triangular Prism</string>
     <string name="pyramid_triangular_base">Pyramid (Triangular Base)</string>
     <string name="pyramid_rectangular_base">Pyramid (Rectangular Base)</string>
@@ -104,4 +104,22 @@
     <string name="regular_octahedron">Regular Octahedron</string>
     <string name="dodecahedron">Dodecahedron</string>
     <string name="torus">Torus</string>
+    <string name="side_length">Side Length</string>
+    <string name="length">Length</string>
+    <string name="width">Width</string>
+    <string name="radius">Radius</string>
+    <string name="major_radius">Major Radius</string>
+    <string name="minor_radius">Minor Radius</string>
+    <string name="base_length">Base Length</string>
+    <string name="height">Height</string>
+    <string name="lower_base">Lower Base</string>
+    <string name="upper_base">Upper Base</string>
+    <string name="apothem">Apothem</string>
+    <string name="base_length_2">Base</string>
+    <string name="base_area">Base Area</string>
+    <string name="pyramid_height">Pyramid Height</string>
+    <string name="prism_height">Prism Height</string>
+    <string name="base_width">Base Width</string>
+    <string name="base_perimeter">Base Perimeter</string>
+    <string name="slant_height">Slant Height</string>
 </resources>
