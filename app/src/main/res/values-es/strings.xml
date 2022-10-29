@@ -163,4 +163,7 @@
     <string name="volume_quarts">Quarts</string>
     <string name="volume_gallons">Gallons</string>
     <string name="calculate">CALCULATE</string>
+    <string name="years">YEARS</string>
+    <string name="months">MONTHS</string>
+    <string name="days">DAYS</string>
 </resources>
