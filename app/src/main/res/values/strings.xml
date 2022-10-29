@@ -86,7 +86,6 @@
     <string name="termHash" translatable="false"><![CDATA[</:]]></string>
     <string name="rad" translatable="false">RAD</string>
     <string name="check_for_updates">Check For Updates</string>
-    <string name="navigation_header">Navigation Header</string>
     <string name="scientific_calculator">Scientific Calculator</string>
     <string name="domain_error">Domain Error</string>
     <string name="parse_error">Parse Error</string>
@@ -284,11 +283,6 @@
 
     </string>
 
-    <string name="custom_editor" translatable="false">
-        Enables the ability to change individual zone/button colors in your theme.
-
-    </string>
-
     <string name="unsaved_confirmation">Do you want to apply your changes to the current theme?</string>
 
 
@@ -347,8 +341,8 @@
     </string>
 
     <!-- home screen launcher shortcut text-->
-    <string name="shortcut_long_label">Terminal</string>
-    <string name="shortcut_short_label">Terminal</string>
+    <string name="shortcut_long_label" translatable="false">Terminal</string>
+    <string name="shortcut_short_label" translatable="false">Terminal</string>
 
     <string name="terminal_intro_text">Type \"help\" or \"?\" for a list of available commands.\n
 
@@ -356,7 +350,7 @@
     <string name="new_function">New Function</string>
     <string name="new_constant">New Constant</string>
 
-    <string name="theme_nav_summary">When \"Custom Colors\" is enabled, apply the colors in your theme to the nav drawer.</string>
+    <string name="theme_nav_summary">Apply the colors in your theme to the nav drawer.</string>
     <string name="clear">Clear</string>
     <string name="focus_summary">Hides system bars to minimize distraction.</string>
     <string name="shape">Button Shape</string>
@@ -382,6 +376,5 @@
     <string name="top_bar_right">TOP BAR (RIGHT)</string>
     <string name="top_bar_left">TOP BAR (LEFT)</string>
     <string name="main_background">MAIN BACKGROUND</string>
-
-
+    <string name="theme_name">Theme Name</string>
 </resources>

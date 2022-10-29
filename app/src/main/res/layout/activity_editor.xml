@@ -2064,14 +2064,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
-        android:elevation="12dp"
+        android:elevation="18dp"
         android:visibility="invisible"
         app:blurOverlayColor="@color/editorDrawerBG"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/editorDrawerLayout"
@@ -2083,7 +2082,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:animateLayoutChanges="true"
-                android:elevation="13dp"
+                android:elevation="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

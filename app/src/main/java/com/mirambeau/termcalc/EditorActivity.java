@@ -4416,41 +4416,19 @@ public class EditorActivity extends AppCompatActivity {
         String tag = view.getTag() != null ? view.getTag().toString() : "style";
         View layout = tag.equalsIgnoreCase("shape") ? findViewById(R.id.shapeCardLayout) : findViewById(R.id.styleCardLayout);
 
-        int delay = 300;
+        findViewById(R.id.styleShapeDimBG).setVisibility(View.VISIBLE);
+        layout.setVisibility(View.VISIBLE);
 
-        layout.setVisibility(View.INVISIBLE);
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(parent);
 
-        //parent.getLayoutTransition().disableTransitionType(LayoutTransition.CHANGING);
+        constraintSet.clear(R.id.styleShapeCard, ConstraintSet.TOP);
+        constraintSet.connect(R.id.styleShapeCard, ConstraintSet.BOTTOM, R.id.editorBG, ConstraintSet.BOTTOM, 36);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                findViewById(R.id.styleShapeDimBG).setVisibility(View.VISIBLE);
+        constraintSet.applyTo(parent);
 
-                ConstraintSet constraintSet = new ConstraintSet();
-                constraintSet.clone(parent);
-
-                constraintSet.connect(R.id.styleShapeCard, ConstraintSet.BOTTOM, R.id.editorBG, ConstraintSet.BOTTOM, 12);
-                constraintSet.clear(R.id.styleShapeCard, ConstraintSet.TOP);
-
-                constraintSet.applyTo(parent);
-
-                parent.getLayoutTransition()
-                        .enableTransitionType(LayoutTransition.CHANGING);
-            }
-        }, delay / 2);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                layout.setVisibility(View.VISIBLE);
-
-                parent.getLayoutTransition()
-                        .enableTransitionType(LayoutTransition.CHANGING);
-            }
-        }, delay);
-
-        //parent.getLayoutTransition().disableTransitionType(LayoutTransition.CHANGING);
+        parent.getLayoutTransition()
+                .enableTransitionType(LayoutTransition.CHANGING);
     }
 
     public void closeStyleShapeCard() {

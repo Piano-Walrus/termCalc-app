@@ -28,7 +28,6 @@
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:elevation="5dp"
-            android:contentDescription="@string/navigation_header"
             app:srcCompat="@drawable/ic_termcalc_icon" />
     </androidx.cardview.widget.CardView>
 
@@ -36,7 +35,6 @@
         android:id="@+id/navHeaderIcon"
         android:layout_width="44dp"
         android:layout_height="44dp"
-        android:contentDescription="@string/navigation_header"
         android:elevation="50dp"
         android:layout_marginStart="5dp"
         app:srcCompat="@drawable/ic_termcalc_icon"

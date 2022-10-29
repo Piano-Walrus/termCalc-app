@@ -45,7 +45,6 @@
             android:id="@+id/aboutIcon"
             android:layout_width="56dp"
             android:layout_height="56dp"
-            android:contentDescription="Navigation Header"
             android:elevation="10dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +68,6 @@
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:elevation="5dp"
-                android:contentDescription="@string/navigation_header"
                 app:srcCompat="@drawable/ic_termcalc_icon" />
         </androidx.cardview.widget.CardView>
 

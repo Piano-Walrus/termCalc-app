@@ -3209,7 +3209,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 tinydb.putBoolean("tempIsGradMain", tinydb.getBoolean("isGradMain"));
 
                 Intent intent;
-                intent = new Intent(this, ThemeActivity.class);
+                intent = new Intent(this, EditorActivity.class);
 
                 startActivity(intent);
 

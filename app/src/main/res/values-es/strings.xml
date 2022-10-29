@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="configuration_menu_header" translatable="false">Personalización</string>
-    <string name="history" translatable="false">Historia</string>
-    <string name="date_menu_item" translatable="false">Cálculo de Fecha</string>
-    <string name="about_menu_item" translatable="false">Información</string>
-    <string name="scientific_calculator" translatable="false">Calculadora Científica</string>
-    <string name="other_menu_header" translatable="false">Más</string>
-    <string name="theme_settings" translatable="false">Configuración</string>
-    <string name="home_menu_item" translatable="false">Pantalla Principal</string>
+    <string name="configuration_menu_header">Personalización</string>
+    <string name="history">Historia</string>
+    <string name="date_menu_item">Cálculo de Fecha</string>
+    <string name="about_menu_item">Información</string>
+    <string name="scientific_calculator">Calculadora Científica</string>
+    <string name="other_menu_header">Más</string>
+    <string name="theme_settings">Configuración</string>
+    <string name="home_menu_item">Pantalla Principal</string>
     <string name="parse_error">Error de Análisis</string>
     <string name="domain_error">Error de Dominio</string>
     <string name="dec_frac_menu_item">Decimal a Fracción</string>
@@ -21,9 +21,10 @@
     <string name="changelog">Registro de Cambios</string>
     <string name="licenses_title">Licencias</string>
     <string name="geometry">Geometry</string>
+    <string name="area">ÁREA</string>
     <string name="volume">VOLUMEN</string>
     <string name="surface_area">ÁREA DE SUPERFICIE</string>
-    <string name="term_menu_item" translatable="false">Tema</string>
+    <string name="term_menu_item">Tema</string>
     <string name="unsaved_confirmation">¿Desea aplicar sus cambios al tema actual?</string>
     <string name="twitter_title">Icono De Twitter por \"Pixel Perfect\"</string>
     <string name="apache_licenses">Licencias Apache 2.0:</string>
@@ -57,4 +58,12 @@
     <string name="top_bar_right">TOP BAR (RIGHT)</string>
     <string name="top_bar_left">TOP BAR (LEFT)</string>
     <string name="main_background">MAIN BACKGROUND</string>
+    <string name="theme_name">Nombre del Tema</string>
+
+    <string name="backup_current_theme">Guardar Tema Actual</string>
+    <string name="focus_summary">Oculte las barras del sistema para minimizar la distracción.</string>
+    <string name="theme_nav_summary">Aplica los colores de tu tema al cajón de navegación.</string>
+    <string name="terminal_intro_text">Escriba \"ayuda\" o \"?\" para obtener una lista de los comandos disponibles.\n</string>
+    <string name="navigation_drawer_open">Abrir cajón de navegación</string>
+    <string name="navigation_drawer_close">Cerrar cajón de navegación</string>
 </resources>
