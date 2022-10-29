@@ -87,8 +87,8 @@ public class EditorActivity extends AppCompatActivity {
     ViewGroup[] containers;
     Button[] zoneButtons;
 
-    ImageButton[] themeStyleButtons;
-    Button[] themeColorButtons;
+    View[] themeStyleButtons;
+    ImageButton[] themeColorButtons;
 
     //Keypad, Primary, Secondary, Secondary, Tertiary, Main
     String[][] defaultBGByTheme = {{}, {"#202227", "#03DAC5", "#00B5A3", "#00B5A3", "#00C5B1", "#272C33"}, {"#FFFFFF", "#03DAC5", "#53E2D4", "#53E2D4", "#3CDECE", "#FFFFFF"},
@@ -399,11 +399,13 @@ public class EditorActivity extends AppCompatActivity {
                 });
             }
 
-            themeStyleButtons = new ImageButton[]{null, findViewById(R.id.themeStyleDark), findViewById(R.id.themeStyleLight), findViewById(R.id.themeStyleBlack),
+            themeStyleButtons = new View[]{null, findViewById(R.id.themeStyleDark), findViewById(R.id.themeStyleLight), findViewById(R.id.themeStyleBlack),
                     findViewById(R.id.themeStyleBlackButtons), findViewById(R.id.themeStyleMonochrome)};
-            themeColorButtons = new Button[]{null, findViewById(R.id.mintButton), findViewById(R.id.tealButton), findViewById(R.id.greenButton), findViewById(R.id.cyanButton), findViewById(R.id.babyBlueButton),
+            themeColorButtons = new ImageButton[]{null, findViewById(R.id.mintButton), findViewById(R.id.tealButton), findViewById(R.id.greenButton), findViewById(R.id.cyanButton), findViewById(R.id.babyBlueButton),
                     findViewById(R.id.blueButton), findViewById(R.id.navyBlueButton), findViewById(R.id.indigoButton), findViewById(R.id.purpleButton), findViewById(R.id.pinkButton), findViewById(R.id.redButton),
                     findViewById(R.id.coralButton), findViewById(R.id.orangeButton), findViewById(R.id.honeyButton), findViewById(R.id.yellowButton), findViewById(R.id.brownButton)};
+
+            ((ConstraintLayout) themeStyleButtons[Integer.parseInt(tinydb.getString("theme"))].getParent()).setBackground(Ax.getDrawable(R.drawable.theme_toggle_selected));
 
             //Handle Theme Style Buttons
             for (i=0; i < themeStyleButtons.length; i++) {
@@ -416,10 +418,9 @@ public class EditorActivity extends AppCompatActivity {
                             int j;
 
                             //TODO: Make this work properly (change theme temporarily until apply is pressed, etc.)
-                            tinydb.putString("theme", Integer.toString(fi + 1));
+                            tinydb.putString("theme", Integer.toString(fi));
 
                             recreate();
-                            MainActivity.mainActivity.recreate();
 
                             ((ConstraintLayout) themeStyleButtons[fi].getParent()).setBackground(Ax.getDrawable(R.drawable.theme_toggle_selected));
 

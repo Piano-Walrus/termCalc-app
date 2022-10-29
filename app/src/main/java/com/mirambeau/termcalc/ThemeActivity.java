@@ -38,7 +38,6 @@ public class ThemeActivity extends AppCompatActivity {
 
     float minimumWidth = 411;
 
-    View[] themeStyleButtons;
     ConstraintLayout[] themeColorButtons;
 
     Button[] standardButtons, customButtons;
@@ -96,38 +95,6 @@ public class ThemeActivity extends AppCompatActivity {
 
             tinydb.putString("tempTheme", tinydb.getString("basicTheme"));
             tinydb.putString("tempColor", tinydb.getString("color"));
-
-            themeStyleButtons = new View[]{null, findViewById(R.id.themeStyleDark), findViewById(R.id.themeStyleLight), findViewById(R.id.themeStyleBlack),
-                    findViewById(R.id.themeStyleBlackButtons), findViewById(R.id.themeStyleMonochrome)};
-
-            //Handle Theme Style Buttons
-            for (i=0; i < themeStyleButtons.length; i++) {
-                if (themeStyleButtons[i] != null) {
-                    final int fi = i;
-
-                    ((ConstraintLayout) themeStyleButtons[i].getParent()).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            int j;
-
-                            tinydb.putString("basicTheme", Integer.toString(fi));
-
-                            basicTheme = fi;
-                            isMonochrome = (fi == 5);
-                            applyTheme();
-
-                            shouldRecreateMain = true;
-
-                            ((ConstraintLayout) themeStyleButtons[basicTheme].getParent()).setBackground(Ax.getDrawable(R.drawable.theme_toggle_selected));
-
-                            for (j=0; j < themeStyleButtons.length; j++) {
-                                if (j != fi && themeStyleButtons[j] != null)
-                                    ((ConstraintLayout) themeStyleButtons[j].getParent()).setBackground(null);
-                            }
-                        }
-                    });
-                }
-            }
 
             //Handle Accent Color Buttons
             for (i=0; i < themeColorButtons.length; i++) {
@@ -317,10 +284,6 @@ public class ThemeActivity extends AppCompatActivity {
             int i;
 
             TinyDB tinydb = new TinyDB(MainActivity.mainActivity);
-            ((ImageButton) themeStyleButtons[4]).setColorFilter(primary);
-            ((ImageButton) ((ConstraintLayout) themeStyleButtons[5]).getChildAt(0)).setColorFilter(tertiary);
-
-            ((ConstraintLayout) themeStyleButtons[basicTheme].getParent()).setBackground(Ax.getDrawable(R.drawable.theme_toggle_selected));
 
             //Handle Standard Buttons
             if (basicTheme == 2) {
