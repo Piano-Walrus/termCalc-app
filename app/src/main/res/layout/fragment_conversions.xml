@@ -9,8 +9,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/scrollBarConv"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="#00B5A3"
+        android:layout_height="0dp"
+        android:background="?colorAccent"
+        app:layout_constraintHeight="parent=0.0835"
         app:layout_constraintBottom_toTopOf="@+id/buttonViewConv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -31,45 +32,52 @@
 
                 <Button
                     android:id="@+id/bDistance"
-                    android:layout_width="90dp"
+                    android:layout_width="102.75dp"
                     android:layout_height="match_parent"
-                    android:background="@null"
-                    android:elevation="10dp"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:text="DISTANCE"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="8dp"
+                    android:drawableTop="@drawable/ic_baseline_square_foot_24"
+                    android:text="@string/distance"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp" />
 
                 <Button
                     android:id="@+id/bMass"
-                    android:layout_width="90dp"
+                    android:layout_width="102.75dp"
                     android:layout_height="match_parent"
-                    android:background="@null"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:text="MASS"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="8dp"
+                    android:drawableTop="@drawable/ic_baseline_balance_24"
+                    android:text="@string/mass"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp" />
 
                 <Button
                     android:id="@+id/bVolume"
-                    android:layout_width="90dp"
+                    android:layout_width="102.75dp"
                     android:layout_height="match_parent"
-                    android:background="@null"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:text="VOLUME"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="8dp"
+                    android:drawableTop="@drawable/ic_baseline_coffee_24"
+                    android:text="@string/volume_lower"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp" />
 
                 <Button
                     android:id="@+id/bTime"
-                    android:layout_width="90dp"
+                    android:layout_width="102.75dp"
                     android:layout_height="match_parent"
-                    android:background="@null"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:text="TIME"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="8dp"
+                    android:drawableTop="@drawable/ic_baseline_access_time_24"
+                    android:text="@string/time"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
@@ -77,11 +85,13 @@
 
                 <Button
                     android:id="@+id/bCurrency"
-                    android:layout_width="90dp"
+                    android:layout_width="102.75dp"
                     android:layout_height="match_parent"
-                    android:background="@null"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:text="CURRENCY"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="8dp"
+                    android:drawableTop="@drawable/ic_baseline_attach_money_24"
+                    android:text="@string/currency"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
@@ -89,11 +99,13 @@
 
                 <Button
                     android:id="@+id/bSpeed"
-                    android:layout_width="90dp"
+                    android:layout_width="102.75dp"
                     android:layout_height="match_parent"
-                    android:background="@null"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:text="SPEED"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="8dp"
+                    android:drawableTop="@drawable/ic_baseline_speed_24"
+                    android:text="@string/speed"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
@@ -101,11 +113,13 @@
 
                 <Button
                     android:id="@+id/bTemp"
-                    android:layout_width="90dp"
+                    android:layout_width="102.75dp"
                     android:layout_height="match_parent"
-                    android:background="@null"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:text="TEMP."
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="8dp"
+                    android:drawableTop="@drawable/ic_baseline_thermostat_24"
+                    android:text="@string/temperature_abbreviated"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
@@ -113,12 +127,13 @@
 
                 <Button
                     android:id="@+id/bBase"
-                    android:layout_width="90dp"
+                    android:layout_width="102.75dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:text="BASE"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="8dp"
+                    android:drawableTop="@drawable/ic_baseline_numbers_24"
+                    android:text="@string/base_representation"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
@@ -128,195 +143,232 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/conversionsKeypadGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.59" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/buttonViewConv"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="0dp"
         android:background="@color/darkColorPrimaryDark"
         android:elevation="4dp"
         android:fitsSystemWindows="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/conversionsKeypadGuide">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/conversionsKeypadTopGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.25" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/conversionsKeypadMiddleHGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/conversionsKeypadLeftGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.333" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/conversionsKeypadRightGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.666" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/conversionsKeypadBottomGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.75" />
 
         <Button
             android:id="@+id/bEqualsConv"
-            android:layout_width="120dp"
-            android:layout_height="80dp"
-            android:background="@null"
-            android:foreground="?attr/selectableItemBackground"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?selectableItemBackground"
             android:hapticFeedbackEnabled="true"
             android:text="="
             android:textColor="@color/colorAccent"
             android:textSize="30sp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/b3C"
-            app:layout_constraintTop_toTopOf="@+id/bDecC" />
+            app:layout_constraintStart_toStartOf="@+id/conversionsKeypadRightGuide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/conversionsKeypadBottomGuide" />
 
         <Button
             android:id="@+id/b5C"
-            android:layout_width="120dp"
-            android:layout_height="80dp"
-            android:background="@null"
-            android:foreground="?attr/selectableItemBackground"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?selectableItemBackground"
             android:hapticFeedbackEnabled="true"
             android:text="5"
             android:textColor="@color/darkColorText"
-            android:textColorHint="#3F51B5"
             android:textSize="30sp"
-            app:layout_constraintStart_toEndOf="@+id/b4C"
-            app:layout_constraintTop_toBottomOf="@+id/b9C" />
+            app:layout_constraintBottom_toTopOf="@+id/conversionsKeypadMiddleHGuide"
+            app:layout_constraintEnd_toStartOf="@+id/conversionsKeypadRightGuide"
+            app:layout_constraintStart_toStartOf="@+id/conversionsKeypadLeftGuide"
+            app:layout_constraintTop_toTopOf="@+id/conversionsKeypadTopGuide" />
 
         <Button
             android:id="@+id/b8C"
-            android:layout_width="120dp"
-            android:layout_height="80dp"
-            android:background="@null"
-            android:elevation="8dp"
-            android:foreground="?attr/selectableItemBackground"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?selectableItemBackground"
             android:hapticFeedbackEnabled="true"
             android:text="8"
             android:textColor="@color/darkColorText"
-            android:textColorHint="#3F51B5"
             android:textSize="30sp"
-            app:layout_constraintStart_toEndOf="@+id/b1C"
+            app:layout_constraintBottom_toTopOf="@+id/conversionsKeypadTopGuide"
+            app:layout_constraintEnd_toStartOf="@+id/conversionsKeypadRightGuide"
+            app:layout_constraintStart_toStartOf="@+id/conversionsKeypadLeftGuide"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/b3C"
-            android:layout_width="120dp"
-            android:layout_height="80dp"
-            android:background="@null"
-            android:foreground="?attr/selectableItemBackground"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?selectableItemBackground"
             android:hapticFeedbackEnabled="true"
             android:text="3"
             android:textColor="@color/darkColorText"
-            android:textColorHint="#3F51B5"
             android:textSize="30sp"
-            app:layout_constraintStart_toEndOf="@+id/b8C"
-            app:layout_constraintTop_toBottomOf="@+id/b6C" />
+            app:layout_constraintBottom_toBottomOf="@id/conversionsKeypadBottomGuide"
+            app:layout_constraintStart_toStartOf="@+id/conversionsKeypadRightGuide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/conversionsKeypadMiddleHGuide" />
 
         <Button
             android:id="@+id/b2C"
-            android:layout_width="120dp"
-            android:layout_height="80dp"
-            android:background="@null"
-            android:foreground="?attr/selectableItemBackground"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?selectableItemBackground"
             android:hapticFeedbackEnabled="true"
             android:text="2"
             android:textColor="@color/darkColorText"
-            android:textColorHint="#3F51B5"
             android:textSize="30sp"
-            app:layout_constraintBottom_toTopOf="@+id/bDecC"
-            app:layout_constraintStart_toEndOf="@+id/b7C"
-            app:layout_constraintTop_toBottomOf="@+id/b6C" />
+            app:layout_constraintBottom_toBottomOf="@id/conversionsKeypadBottomGuide"
+            app:layout_constraintStart_toStartOf="@+id/conversionsKeypadLeftGuide"
+            app:layout_constraintEnd_toEndOf="@id/conversionsKeypadRightGuide"
+            app:layout_constraintTop_toTopOf="@+id/conversionsKeypadMiddleHGuide" />
 
         <Button
             android:id="@+id/b7C"
-            android:layout_width="120dp"
-            android:layout_height="80dp"
-            android:background="@null"
-            android:elevation="8dp"
-            android:foreground="?attr/selectableItemBackground"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?selectableItemBackground"
             android:hapticFeedbackEnabled="true"
             android:text="7"
             android:textColor="@color/darkColorText"
-            android:textColorHint="#3F51B5"
             android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/conversionsKeypadTopGuide"
+            app:layout_constraintEnd_toStartOf="@+id/conversionsKeypadLeftGuide"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/b6C"
-            android:layout_width="120dp"
-            android:layout_height="80dp"
-            android:background="@null"
-            android:foreground="?attr/selectableItemBackground"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?selectableItemBackground"
             android:hapticFeedbackEnabled="true"
             android:text="6"
             android:textColor="@color/darkColorText"
-            android:textColorHint="#3F51B5"
             android:textSize="30sp"
-            app:layout_constraintStart_toEndOf="@+id/b5C"
-            app:layout_constraintTop_toBottomOf="@+id/b9C" />
+            app:layout_constraintBottom_toTopOf="@+id/conversionsKeypadMiddleHGuide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/conversionsKeypadRightGuide"
+            app:layout_constraintTop_toTopOf="@+id/conversionsKeypadTopGuide" />
 
         <Button
             android:id="@+id/b0C"
-            android:layout_width="120dp"
-            android:layout_height="80dp"
-            android:background="@null"
-            android:foreground="?attr/selectableItemBackground"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?selectableItemBackground"
             android:hapticFeedbackEnabled="true"
             android:text="0"
             android:textColor="@color/darkColorText"
-            android:textColorHint="#3F51B5"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/b1C" />
+            app:layout_constraintEnd_toEndOf="@id/conversionsKeypadLeftGuide"
+            app:layout_constraintTop_toTopOf="@+id/conversionsKeypadBottomGuide" />
 
         <Button
             android:id="@+id/bDecC"
-            android:layout_width="120dp"
-            android:layout_height="80dp"
-            android:background="@null"
-            android:foreground="?attr/selectableItemBackground"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?selectableItemBackground"
             android:hapticFeedbackEnabled="true"
             android:text="."
             android:textColor="@color/darkColorText"
-            android:textColorHint="#3F51B5"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/b0C"
-            app:layout_constraintTop_toTopOf="@+id/b0C" />
+            app:layout_constraintStart_toStartOf="@id/conversionsKeypadLeftGuide"
+            app:layout_constraintEnd_toEndOf="@id/conversionsKeypadRightGuide"
+            app:layout_constraintTop_toTopOf="@+id/conversionsKeypadBottomGuide" />
 
         <Button
             android:id="@+id/b9C"
-            android:layout_width="120dp"
-            android:layout_height="80dp"
-            android:background="@null"
-            android:elevation="8dp"
-            android:foreground="?attr/selectableItemBackground"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?selectableItemBackground"
             android:hapticFeedbackEnabled="true"
             android:text="9"
             android:textColor="@color/darkColorText"
-            android:textColorHint="#3F51B5"
             android:textSize="30sp"
-            app:layout_constraintStart_toEndOf="@+id/b2C"
+            app:layout_constraintBottom_toTopOf="@+id/conversionsKeypadTopGuide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/conversionsKeypadRightGuide"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/b1C"
-            android:layout_width="120dp"
-            android:layout_height="80dp"
-            android:background="@null"
-            android:foreground="?attr/selectableItemBackground"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?selectableItemBackground"
             android:hapticFeedbackEnabled="true"
             android:text="1"
             android:textColor="@color/darkColorText"
-            android:textColorHint="#3F51B5"
             android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/conversionsKeypadBottomGuide"
+            app:layout_constraintEnd_toEndOf="@id/conversionsKeypadLeftGuide"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/b4C" />
+            app:layout_constraintTop_toTopOf="@+id/conversionsKeypadMiddleHGuide" />
 
         <Button
             android:id="@+id/b4C"
-            android:layout_width="120dp"
-            android:layout_height="80dp"
-            android:background="@null"
-            android:foreground="?attr/selectableItemBackground"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?selectableItemBackground"
             android:hapticFeedbackEnabled="true"
             android:text="4"
             android:textColor="@color/darkColorText"
-            android:textColorHint="#3F51B5"
             android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/conversionsKeypadMiddleHGuide"
+            app:layout_constraintEnd_toStartOf="@+id/conversionsKeypadLeftGuide"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/b7C" />
+            app:layout_constraintTop_toTopOf="@+id/conversionsKeypadTopGuide" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.appcompat.widget.Toolbar
+    <Toolbar
         android:id="@+id/toolbar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -346,7 +398,7 @@
                 android:id="@+id/fromLabelConv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="From:"
+                android:text="@string/from"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -395,7 +447,7 @@
                 android:id="@+id/toLabelConv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="To:"
+                android:text="@string/to"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -435,8 +487,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/unitsLayout"
         android:layout_width="match_parent"
-        android:layout_height="54dp"
+        android:layout_height="0dp"
         android:background="@color/colorDarkest"
+        app:layout_constraintHeight="parent=0.063"
         app:layout_constraintBottom_toTopOf="@+id/scrollBarConv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -475,7 +528,7 @@
                 android:id="@+id/fromUnitLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="From:"
+                android:text="@string/from"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -486,7 +539,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:paddingVertical="8dp"
-                android:text="Inches"
+                android:text="@string/distance_inches"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/fromUnitLabel"
                 app:layout_constraintStart_toEndOf="@+id/fromUnitLabel"
@@ -528,7 +581,7 @@
                 android:id="@+id/toUnitLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="To:"
+                android:text="@string/to"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -539,7 +592,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:paddingVertical="8dp"
-                android:text="Feet"
+                android:text="@string/distance_feet"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/toUnitLabel"
                 app:layout_constraintStart_toEndOf="@+id/toUnitLabel"

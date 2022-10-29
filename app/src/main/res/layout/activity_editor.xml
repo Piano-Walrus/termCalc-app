@@ -1227,7 +1227,7 @@
             android:clickable="false"
             android:elevation="6dp"
             android:src="@drawable/editor_inner_accent_circle"
-            app:tint="@color/colorAccent"
+            app:tint="?colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/styleThemePlaceholder"
             app:layout_constraintTop_toTopOf="parent" />

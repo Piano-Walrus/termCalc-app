@@ -8,160 +8,169 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/scrollBarConv"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="?colorAccent"
-        app:layout_constraintHeight="parent=0.083"
-        app:layout_constraintBottom_toTopOf="@+id/buttonViewConv"
+        android:background="#00B5A3"
+        app:layout_constraintWidth="parent=0.226"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintTop_toTopOf="@+id/buttonViewConv">
 
-        <HorizontalScrollView
-            android:id="@+id/horizontalConv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <Button
+            android:id="@+id/bDistance"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth="parent=0.5"
+            app:layout_constraintHeight="parent=0.25"
+            android:background="?attr/selectableItemBackground"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:drawableTop="@drawable/ic_baseline_square_foot_24"
+            android:text="@string/distance"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/bMass"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/bMass"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth="parent=0.5"
+            app:layout_constraintHeight="parent=0.25"
+            android:background="?attr/selectableItemBackground"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:drawableTop="@drawable/ic_baseline_balance_24"
+            android:text="@string/mass"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+        <Button
+            android:id="@+id/bVolume"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth="parent=0.5"
+            app:layout_constraintHeight="parent=0.25"
+            android:background="?attr/selectableItemBackground"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:drawableTop="@drawable/ic_baseline_coffee_24"
+            android:text="@string/volume_lower"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bDistance" />
 
-                <Button
-                    android:id="@+id/bDistance"
-                    android:layout_width="102.75dp"
-                    android:layout_height="match_parent"
-                    android:elevation="10dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:paddingTop="12dp"
-                    android:paddingBottom="8dp"
-                    android:drawableTop="@drawable/ic_baseline_square_foot_24"
-                    android:text="@string/distance"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp" />
+        <Button
+            android:id="@+id/bTime"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth="parent=0.5"
+            app:layout_constraintHeight="parent=0.25"
+            android:background="?attr/selectableItemBackground"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:drawableTop="@drawable/ic_baseline_access_time_24"
+            android:text="@string/time"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bMass" />
 
-                <Button
-                    android:id="@+id/bMass"
-                    android:layout_width="102.75dp"
-                    android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackground"
-                    android:paddingTop="12dp"
-                    android:paddingBottom="8dp"
-                    android:drawableTop="@drawable/ic_baseline_balance_24"
-                    android:text="@string/mass"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp" />
+        <Button
+            android:id="@+id/bCurrency"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth="parent=0.5"
+            app:layout_constraintHeight="parent=0.25"
+            android:background="?attr/selectableItemBackground"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:drawableTop="@drawable/ic_baseline_attach_money_24"
+            android:text="@string/currency"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bVolume" />
 
-                <Button
-                    android:id="@+id/bVolume"
-                    android:layout_width="102.75dp"
-                    android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackground"
-                    android:paddingTop="12dp"
-                    android:paddingBottom="8dp"
-                    android:drawableTop="@drawable/ic_baseline_coffee_24"
-                    android:text="@string/volume_lower"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp" />
+        <Button
+            android:id="@+id/bSpeed"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth="parent=0.5"
+            app:layout_constraintHeight="parent=0.25"
+            android:background="?attr/selectableItemBackground"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:drawableTop="@drawable/ic_baseline_speed_24"
+            android:text="@string/speed"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bTime" />
 
-                <Button
-                    android:id="@+id/bTime"
-                    android:layout_width="102.75dp"
-                    android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackground"
-                    android:paddingTop="12dp"
-                    android:paddingBottom="8dp"
-                    android:drawableTop="@drawable/ic_baseline_access_time_24"
-                    android:text="@string/time"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp" />
+        <Button
+            android:id="@+id/bTemp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth="parent=0.5"
+            app:layout_constraintHeight="parent=0.25"
+            android:background="?attr/selectableItemBackground"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:drawableTop="@drawable/ic_baseline_thermostat_24"
+            android:text="@string/temperature_abbreviated"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bCurrency" />
 
-                <Button
-                    android:id="@+id/bCurrency"
-                    android:layout_width="102.75dp"
-                    android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackground"
-                    android:paddingTop="12dp"
-                    android:paddingBottom="8dp"
-                    android:drawableTop="@drawable/ic_baseline_attach_money_24"
-                    android:text="@string/currency"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp" />
-
-                <Button
-                    android:id="@+id/bSpeed"
-                    android:layout_width="102.75dp"
-                    android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackground"
-                    android:paddingTop="12dp"
-                    android:paddingBottom="8dp"
-                    android:drawableTop="@drawable/ic_baseline_speed_24"
-                    android:text="@string/speed"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp" />
-
-                <Button
-                    android:id="@+id/bTemp"
-                    android:layout_width="102.75dp"
-                    android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackground"
-                    android:paddingTop="12dp"
-                    android:paddingBottom="8dp"
-                    android:drawableTop="@drawable/ic_baseline_thermostat_24"
-                    android:text="@string/temperature_abbreviated"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp" />
-
-                <Button
-                    android:id="@+id/bBase"
-                    android:layout_width="102.75dp"
-                    android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackground"
-                    android:paddingTop="12dp"
-                    android:paddingBottom="8dp"
-                    android:drawableTop="@drawable/ic_baseline_numbers_24"
-                    android:text="@string/base_representation"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp" />
-            </LinearLayout>
-        </HorizontalScrollView>
+        <Button
+            android:id="@+id/bBase"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth="parent=0.5"
+            app:layout_constraintHeight="parent=0.25"
+            android:background="?attr/selectableItemBackground"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:drawableTop="@drawable/ic_baseline_numbers_24"
+            android:text="@string/base_representation"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bSpeed" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/conversionsKeypadGuide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.59" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/buttonViewConv"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/darkColorPrimaryDark"
         android:elevation="4dp"
         android:fitsSystemWindows="true"
+        app:layout_constraintHeight="parent=0.53"
+        app:layout_constraintWidth="parent=0.5"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/conversionsKeypadGuide">
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/conversionsKeypadTopGuide"
@@ -369,6 +378,138 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/unitsLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorDarkest"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/scrollBarConv"
+        app:layout_constraintStart_toEndOf="@+id/buttonViewConv"
+        app:layout_constraintTop_toTopOf="@+id/buttonViewConv">
+
+        <ImageButton
+            android:id="@+id/swap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="8dp"
+            android:src="@drawable/ic_baseline_swap_vert_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fromUnitLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/swap"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/expandFrom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:paddingTop="2dp"
+                app:layout_constraintBottom_toBottomOf="@+id/fromSelectedUnit"
+                app:layout_constraintStart_toEndOf="@+id/fromSelectedUnit"
+                app:layout_constraintTop_toTopOf="@+id/fromSelectedUnit"
+                app:srcCompat="@drawable/ic_outline_arrow_drop_down_24" />
+
+            <TextView
+                android:id="@+id/fromUnitLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="From:"
+                app:layout_constraintBottom_toTopOf="@id/expandFrom"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fromSelectedUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="7.5dp"
+                android:text="Inches"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/fromBase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:paddingVertical="8dp"
+                android:text="10"
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/fromUnitLabel"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/toUnitLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/swap">
+
+            <ImageButton
+                android:id="@+id/expandTo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:paddingTop="2dp"
+                app:layout_constraintBottom_toBottomOf="@+id/toSelectedUnit"
+                app:layout_constraintStart_toEndOf="@+id/toSelectedUnit"
+                app:layout_constraintTop_toTopOf="@+id/toSelectedUnit"
+                app:srcCompat="@drawable/ic_outline_arrow_drop_down_24" />
+
+            <TextView
+                android:id="@+id/toUnitLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="To:"
+                app:layout_constraintBottom_toTopOf="@id/expandTo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/toSelectedUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="7.5dp"
+                android:text="Feet"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/toBase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:paddingVertical="8dp"
+                android:text="2"
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/toUnitLabel"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <Toolbar
         android:id="@+id/toolbar2"
         android:layout_width="match_parent"
@@ -381,7 +522,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/unitsLayout"
+        app:layout_constraintBottom_toTopOf="@+id/buttonViewConv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar2">
@@ -391,7 +532,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/convNumSpacer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -399,7 +541,7 @@
                 android:id="@+id/fromLabelConv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/from"
+                android:text="From:"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -439,16 +581,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="28dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fromLayout">
+            app:layout_constraintStart_toEndOf="@+id/convNumSpacer"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/toLabelConv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/to"
+                android:text="To:"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -483,135 +625,12 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/unitsLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/colorDarkest"
-        app:layout_constraintHeight="parent=0.063"
-        app:layout_constraintBottom_toTopOf="@+id/scrollBarConv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageButton
-            android:id="@+id/swap"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/convNumSpacer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="7dp"
-            android:background="?selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_baseline_swap_horiz_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/fromUnitLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:layout_constraintEnd_toStartOf="@+id/swap"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <ImageButton
-                android:id="@+id/expandFrom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:paddingTop="2dp"
-                app:layout_constraintBottom_toBottomOf="@+id/fromSelectedUnit"
-                app:layout_constraintStart_toEndOf="@+id/fromSelectedUnit"
-                app:layout_constraintTop_toTopOf="@+id/fromSelectedUnit"
-                app:srcCompat="@drawable/ic_outline_arrow_drop_down_24" />
-
-            <TextView
-                android:id="@+id/fromUnitLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/from"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/fromSelectedUnit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:paddingVertical="8dp"
-                android:text="@string/distance_inches"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/fromUnitLabel"
-                app:layout_constraintStart_toEndOf="@+id/fromUnitLabel"
-                app:layout_constraintTop_toTopOf="@+id/fromUnitLabel" />
-
-            <EditText
-                android:id="@+id/fromBase"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:paddingVertical="8dp"
-                android:text="10"
-                android:textSize="14sp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/fromUnitLabel"
-                app:layout_constraintStart_toEndOf="@+id/fromUnitLabel"
-                app:layout_constraintTop_toTopOf="@+id/fromUnitLabel" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/toUnitLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/swap">
-
-            <ImageButton
-                android:id="@+id/expandTo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:paddingTop="2dp"
-                app:layout_constraintBottom_toBottomOf="@+id/toSelectedUnit"
-                app:layout_constraintStart_toEndOf="@+id/toSelectedUnit"
-                app:layout_constraintTop_toTopOf="@+id/toSelectedUnit"
-                app:srcCompat="@drawable/ic_outline_arrow_drop_down_24" />
-
-            <TextView
-                android:id="@+id/toUnitLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/to"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/toSelectedUnit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:paddingVertical="8dp"
-                android:text="@string/distance_feet"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/toUnitLabel"
-                app:layout_constraintStart_toEndOf="@+id/toUnitLabel"
-                app:layout_constraintTop_toTopOf="@+id/toUnitLabel" />
-
-            <EditText
-                android:id="@+id/toBase"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:paddingVertical="8dp"
-                android:text="2"
-                android:textSize="14sp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/toUnitLabel"
-                app:layout_constraintStart_toEndOf="@+id/toUnitLabel"
-                app:layout_constraintTop_toTopOf="@+id/toUnitLabel" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
