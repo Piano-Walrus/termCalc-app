@@ -481,4 +481,7 @@
     <string name="from">From:</string>
     <string name="to">To:</string>
     <string name="select_shortcut_key">Select the number key(s) to which you would like to assign</string>
+    <string name="always_dark_nav">Always set the nav drawer to dark mode.</string>
+    <string name="darken_status_bar">Darken the status bar slightly when using a custom dark theme.</string>
+    <string name="darken_tab">Slightly darken the tab above the top bar.</string>
 </resources>

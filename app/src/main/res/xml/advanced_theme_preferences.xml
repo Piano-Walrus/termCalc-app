@@ -13,21 +13,21 @@
 
         <SwitchPreference
             app:title="Force Dark Nav Drawer"
-            android:summary="Always set the nav drawer to dark mode."
+            android:summary="@string/always_dark_nav"
             android:key="isAlwaysDarkNav"
             android:defaultValue="false"
             app:icon="@drawable/ic_baseline_dark_mode_24" />
 
         <SwitchPreference
             app:title="Darken Dark Mode Status Bar"
-            android:summary="Darken the status bar slightly when using a custom dark theme."
+            android:summary="@string/darken_status_bar"
             android:key="darkStatusBar"
             android:defaultValue="false"
             app:icon="@drawable/ic_baseline_opacity_24" />
 
         <SwitchPreference
             app:title="Darken Top Bar Tab"
-            android:summary="Slightly darken the tab above the top bar."
+            android:summary="@string/darken_tab"
             android:key="isDarkTab"
             android:defaultValue="true"
             app:icon="@drawable/ic_baseline_expand_up_light_24" />

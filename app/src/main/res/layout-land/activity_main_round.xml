@@ -994,7 +994,7 @@
             android:layout_marginEnd="4dp"
             android:onClick="switchMode"
             android:background="@null"
-            android:text="RAD"
+            android:text="@string/rad"
             android:textColor="#FFFFFF"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
