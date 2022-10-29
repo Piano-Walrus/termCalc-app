@@ -73,4 +73,6 @@
     <string name="yesterday">Ayer</string>
     <string name="last_week">La Semana Pasada</string>
     <string name="older">Más Viejo</string>
+    <string name="buttons">Botones</string>
+    <string name="zones">Zonas</string>
 </resources>
