@@ -377,6 +377,10 @@
     <string name="monochrome">Monochrome</string>
     <string name="custom">Custom</string>
     <string name="new_theme">New Theme</string>
+    <string name="keypad">KEYPAD</string>
+    <string name="primary">PRIMARY</string>
+    <string name="top_bar_right">TOP BAR (RIGHT)</string>
+    <string name="top_bar_left">TOP BAR (LEFT)</string>
 
 
 </resources>

@@ -480,6 +480,13 @@ public class EditorActivity extends AppCompatActivity {
                 }
             });
 
+            apply.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onApplyClick(view);
+                }
+            });
+
             final ConstraintLayout styleContainer = findViewById(R.id.styleContainer);
             final ConstraintLayout shapeContainer = findViewById(R.id.shapeContainer);
             final ConstraintLayout bgDimmer = findViewById(R.id.styleShapeDimBG);
