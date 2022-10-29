@@ -4414,29 +4414,13 @@ public class EditorActivity extends AppCompatActivity {
         ConstraintLayout parent = findViewById(R.id.editorBG);
 
         String tag = view.getTag() != null ? view.getTag().toString() : "style";
+        View layout = tag.equalsIgnoreCase("shape") ? findViewById(R.id.shapeCardLayout) : findViewById(R.id.styleCardLayout);
 
         int delay = 300;
 
-        if (tag.equalsIgnoreCase("style")) {
-            findViewById(R.id.styleCardLayout).setVisibility(View.INVISIBLE);
+        layout.setVisibility(View.INVISIBLE);
 
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    findViewById(R.id.styleCardLayout).setVisibility(View.VISIBLE);
-                }
-            }, delay);
-        }
-        else if (tag.equalsIgnoreCase("shape")) {
-            findViewById(R.id.shapeCardLayout).setVisibility(View.INVISIBLE);
-
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    findViewById(R.id.shapeCardLayout).setVisibility(View.VISIBLE);
-                }
-            }, delay);
-        }
+        //parent.getLayoutTransition().disableTransitionType(LayoutTransition.CHANGING);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -4456,8 +4440,17 @@ public class EditorActivity extends AppCompatActivity {
             }
         }, delay / 2);
 
-        parent.getLayoutTransition()
-                .disableTransitionType(LayoutTransition.CHANGING);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                layout.setVisibility(View.VISIBLE);
+
+                parent.getLayoutTransition()
+                        .enableTransitionType(LayoutTransition.CHANGING);
+            }
+        }, delay);
+
+        //parent.getLayoutTransition().disableTransitionType(LayoutTransition.CHANGING);
     }
 
     public void closeStyleShapeCard() {
