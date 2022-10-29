@@ -46,7 +46,7 @@
     <string name="surface_area">SURFACE AREA</string>
 
     <string name="importNew">Import</string>
-    <string name="backup_current_theme">Backup current theme</string>
+    <string name="backup_current_theme">Save current theme</string>
 
     <string name="terminal_intro_text">Type \"help\" or \"?\" for a list of available commands.\n
 
@@ -207,4 +207,20 @@
     <string name="date_toolbar_title">Date</string>
     <string name="base_representation">Base</string>
     <string name="volume_lower">Volume</string>
+    <string name="select_color">Select Color</string>
+    <string name="background_color">Background Color</string>
+    <string name="text_color">Text Color</string>
+    <string name="set_color">Set Color</string>
+    <string name="cancel">Cancel</string>
+    <string name="invalid_hex_error">Error: Invalid hex code</string>
+    <string name="confirm">Confirm</string>
+    <string name="delete_theme_confirmation">Are you sure you want to delete \"</string>
+    <string name="successfully_deleted_theme">Successfully deleted \"</string>
+    <string name="successfully_restored_theme">Successfully applied \"</string>
+    <string name="reset_color">Reset</string>
+    <string name="to_default">\?</string>
+    <string name="copied_to_clipboard">copied to clipboard</string>
+    <string name="unsaved_changes">Unsaved Changes</string>
+    <string name="apply">Apply</string>
+    <string name="dont_apply">Don\'t Apply</string>
 </resources>

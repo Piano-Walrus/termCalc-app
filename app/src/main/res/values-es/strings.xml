@@ -192,4 +192,20 @@
     <string name="base_representation">Base</string>
     <string name="date_toolbar_title">Cálculo de Fecha</string>
     <string name="volume_lower">Volumen</string>
+    <string name="select_color">Select Color</string>
+    <string name="background_color">Background Color</string>
+    <string name="text_color">Text Color</string>
+    <string name="set_color">Set Color</string>
+    <string name="cancel">Cancel</string>
+    <string name="invalid_hex_error">Error: Invalid hex code</string>
+    <string name="confirm">Confirm</string>
+    <string name="delete_theme_confirmation">¿Estás seguro que quieres eliminar \"</string>
+    <string name="successfully_deleted_theme">Eliminó con éxito \"</string>
+    <string name="successfully_restored_theme">Aplicado con éxito \"</string>
+    <string name="reset_color">Reajustar</string>
+    <string name="to_default">\?</string>
+    <string name="copied_to_clipboard">copied to clipboard</string>
+    <string name="unsaved_changes">Unsaved Changes</string>
+    <string name="apply">Apply</string>
+    <string name="dont_apply">Don\'t Apply</string>
 </resources>

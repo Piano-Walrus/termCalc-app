@@ -246,9 +246,9 @@ public class EditorActivity extends AppCompatActivity {
                     final String title = cards.get(position).getThemeName();
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(EditorActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
-                    builder.setTitle("Are you sure you want to delete \"" + title + "\"?\n");
+                    builder.setTitle(getString(R.string.delete_theme_confirmation) + title + "\"?\n");
 
-                    builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -256,7 +256,7 @@ public class EditorActivity extends AppCompatActivity {
                             try {
                                 run("delete " + title);
                                 removeItem(position);
-                                Toast.makeText(EditorActivity.this, "Successfully deleted \"" + title + "\"", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditorActivity.this, getString(R.string.successfully_deleted_theme) + title + "\"", Toast.LENGTH_SHORT).show();
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -278,7 +278,7 @@ public class EditorActivity extends AppCompatActivity {
 
                     tinydb.putBoolean("custom", true);
 
-                    Toast.makeText(EditorActivity.this, "Successfully restored \"" + title + "\"", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditorActivity.this, getString(R.string.successfully_restored_theme) + title + "\"", Toast.LENGTH_SHORT).show();
 
                     newRun("reset all");
                     newRun("restore " + title);
@@ -609,14 +609,14 @@ public class EditorActivity extends AppCompatActivity {
                         int o;
                         int defaultTextColor = fi == 0 && theme == 2 ? darkGray : Color.WHITE;
 
-                        final AlertDialog.Builder builder = createAlertDialog("Select Color");
+                        final AlertDialog.Builder builder = createAlertDialog(getString(R.string.select_color));
 
                         final View viewInflated = LayoutInflater.from(EditorActivity.this).inflate(R.layout.bg_text_dialog, (ViewGroup) findViewById(R.id.editorBG), false);
 
                         builder.setView(viewInflated);
 
                         final String[] codes = view.getTag().toString().split(" ");
-                        final String[] titles = {"Background Color", "Text Color"};
+                        final String[] titles = {getString(R.string.background_color), getString(R.string.text_color)};
 
                         final ImageButton bgCircle = viewInflated.findViewById(R.id.bg);
                         final ImageButton bgIcon = viewInflated.findViewById(R.id.bgIcon);
@@ -644,7 +644,7 @@ public class EditorActivity extends AppCompatActivity {
                                 public void onClick(View view) {
                                     alertDialog.dismiss();
 
-                                    openCPAlertDialog(R.layout.new_cpdialog, titles[fo], "Set Color", "Cancel", codes[fo], button, fo);
+                                    openCPAlertDialog(R.layout.new_cpdialog, titles[fo], getString(R.string.set_color), getString(R.string.cancel), codes[fo], button, fo);
                                 }
                             });
                         }
@@ -672,14 +672,14 @@ public class EditorActivity extends AppCompatActivity {
 
                                     int o;
 
-                                    final AlertDialog.Builder builder = createAlertDialog("Set Color");
+                                    final AlertDialog.Builder builder = createAlertDialog(getString(R.string.set_color));
 
                                     final View viewInflated = LayoutInflater.from(EditorActivity.this).inflate(R.layout.bg_text_dialog, (ViewGroup) findViewById(R.id.editorBG), false);
 
                                     builder.setView(viewInflated);
 
                                     final String[] codes = {bgCode, textCode};
-                                    final String[] titles = {"Background Color", "Text Color"};
+                                    final String[] titles = {getString(R.string.background_color), getString(R.string.text_color)};
 
                                     final ImageButton bgCircle = viewInflated.findViewById(R.id.bg);
                                     final ImageButton textIcon = viewInflated.findViewById(R.id.txtIcon);
@@ -699,7 +699,7 @@ public class EditorActivity extends AppCompatActivity {
                                             public void onClick(View view) {
                                                 alertDialog.dismiss();
 
-                                                openCPAlertDialog(R.layout.new_cpdialog, titles[fo], "Set Color", "Cancel", codes[fo], button, fo);
+                                                openCPAlertDialog(R.layout.new_cpdialog, titles[fo], getString(R.string.set_color), getString(R.string.cancel), codes[fo], button, fo);
                                             }
                                         });
                                     }
@@ -765,7 +765,7 @@ public class EditorActivity extends AppCompatActivity {
                         builder.setView(viewInflated);
 
                         final String[] codes = {fabBGCodes[fi], fabTextCodes[fi]};
-                        final String[] titles = {"Background Color", "Text Color"};
+                        final String[] titles = {getString(R.string.background_color), getString(R.string.text_color)};
 
                         final ImageButton bgCircle = viewInflated.findViewById(R.id.bg);
                         final ImageButton textIcon = viewInflated.findViewById(R.id.txtIcon);
@@ -796,7 +796,7 @@ public class EditorActivity extends AppCompatActivity {
                                 public void onClick(View view) {
                                     alertDialog.dismiss();
 
-                                    openCPAlertDialog(R.layout.new_cpdialog, titles[fo], "Set Color", "Cancel", codes[fo], fabs[fi], fo);
+                                    openCPAlertDialog(R.layout.new_cpdialog, titles[fo], getString(R.string.set_color), getString(R.string.cancel), codes[fo], fabs[fi], fo);
                                 }
                             });
                         }
@@ -1210,7 +1210,7 @@ public class EditorActivity extends AppCompatActivity {
                             dialog.dismiss();
                         }
                         else {
-                            Ax.makeLongToast("Error: Invalid hex code");
+                            Ax.makeLongToast(getString(R.string.invalid_hex_error));
                         }
 
                         try {
@@ -1236,20 +1236,20 @@ public class EditorActivity extends AppCompatActivity {
                 }
             });
 
-            if (positive.equals("Set Color") && negative.equals("Cancel")) {
-                builder.setNegativeButton("Reset", new DialogInterface.OnClickListener() {
+            if (positive.equals(getString(R.string.set_color)) && negative.equals(getString(R.string.cancel))) {
+                builder.setNegativeButton(R.string.reset_color, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        final AlertDialog.Builder confirmation = createAlertDialog("Reset " + title.toLowerCase() + " to default?");
+                        final AlertDialog.Builder confirmation = createAlertDialog(getString(R.string.reset_color) + " " + title.toLowerCase() + getString(R.string.to_default));
 
-                        confirmation.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        confirmation.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
                             }
                         });
 
-                        confirmation.setPositiveButton("Reset", new DialogInterface.OnClickListener() {
+                        confirmation.setPositiveButton(getString(R.string.reset_color), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 try {
@@ -1333,7 +1333,7 @@ public class EditorActivity extends AppCompatActivity {
                         ClipData clip = ClipData.newPlainText("color", color);
                         clipboard.setPrimaryClip(clip);
 
-                        Ax.makeToast("\"" + color + "\" copied to clipboard", EditorActivity.editorActivity, 0);
+                        Ax.makeToast("\"" + color + "\" " + getString(R.string.copied_to_clipboard), EditorActivity.editorActivity, 0);
                     }
                 }
             });
@@ -1490,10 +1490,10 @@ public class EditorActivity extends AppCompatActivity {
 
 
         if ((entries.size() > 0 && currentEntry > -1) || themeChanged) {
-            AlertDialog.Builder builder = createAlertDialog("Unsaved Changes");
+            AlertDialog.Builder builder = createAlertDialog(getString(R.string.unsaved_changes));
             builder.setMessage(getString(R.string.unsaved_confirmation));
 
-            builder.setPositiveButton("Apply", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(getString(R.string.apply), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
@@ -1504,7 +1504,7 @@ public class EditorActivity extends AppCompatActivity {
                 }
             });
 
-            builder.setNegativeButton("Don't Apply", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton(getString(R.string.dont_apply), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
@@ -1513,7 +1513,7 @@ public class EditorActivity extends AppCompatActivity {
                 }
             });
 
-            builder.setNeutralButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            builder.setNeutralButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();
@@ -1674,7 +1674,7 @@ public class EditorActivity extends AppCompatActivity {
 
     public void save() {
         try {
-            final AlertDialog.Builder builder = createAlertDialog("Backup Current Theme\n");
+            final AlertDialog.Builder builder = createAlertDialog(getString(R.string.save_current_theme) + "\n");
 
             View viewInflated = LayoutInflater.from(this).inflate(R.layout.content, (ViewGroup) findViewById(R.id.editorBG), false);
 
@@ -2433,7 +2433,7 @@ public class EditorActivity extends AppCompatActivity {
             if (isZone) {
                 int initEntry = currentEntry;
 
-                AlertDialog alertDialog = openCPAlertDialog(R.layout.new_cpdialog, " ", "Set color", "Cancel", buttonCode, view, option);
+                AlertDialog alertDialog = openCPAlertDialog(R.layout.new_cpdialog, " ", getString(R.string.set_color), getString(R.string.cancel), buttonCode, view, option);
 
                 ((EditText) alertDialog.findViewById(R.id.hexField)).setText(Ax.toColorString(defaultZoneColor));
 
