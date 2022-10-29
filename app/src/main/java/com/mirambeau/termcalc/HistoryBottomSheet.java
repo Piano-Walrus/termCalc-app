@@ -45,7 +45,7 @@ public class HistoryBottomSheet extends BottomSheetDialogFragment {
     ArrayList<ArrayList<HistoryEntry>> entries = new ArrayList<>();
 
     ArrayList<String> titleList = new ArrayList<>();
-    String[] titles = {"Today", "Yesterday", "Last Week", "Older"};
+    String[] titles;
 
     Activity main = MainActivity.mainActivity;
 
@@ -70,6 +70,8 @@ public class HistoryBottomSheet extends BottomSheetDialogFragment {
         int theme = Ax.getThemeInt();
         final ImageButton overflow = view.findViewById(R.id.historyOverflow);
         final TextView tvEmpty = view.findViewById(R.id.historyEmpty);
+
+        titles = new String[]{getString(R.string.today), getString(R.string.yesterday), getString(R.string.last_week), getString(R.string.older)};
 
         view.findViewById(R.id.historyMainBG).setBackground(Ax.getSheetBackground(theme));
 

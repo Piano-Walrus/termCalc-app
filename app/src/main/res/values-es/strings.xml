@@ -69,4 +69,8 @@
     <string name="support_development">Apoyar Desarrollo:</string>
     <string name="feedback">Retroalimentación:</string>
     <string name="help">Ayuda</string>
+    <string name="today">Hoy</string>
+    <string name="yesterday">Ayer</string>
+    <string name="last_week">La Semana Pasada</string>
+    <string name="older">Más Viejo</string>
 </resources>
