@@ -166,4 +166,6 @@
     <string name="years">YEARS</string>
     <string name="months">MONTHS</string>
     <string name="days">DAYS</string>
+    <string name="from">From:</string>
+    <string name="to">To:</string>
 </resources>

@@ -17,8 +17,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="413dp"
-            android:layout_height="662dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -63,32 +63,49 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/input"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="0dp"
                 android:background="@color/darkColorPrimaryDark"
                 android:elevation="10dp"
+                app:layout_constraintHeight="parent=0.54"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/dateInputFromGuide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.19" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/dateInputToGuide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.465" />
 
                 <TextView
                     android:id="@+id/fromLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="58dp"
-                    android:text="From:"
+                    android:text="@string/from"
                     android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toTopOf="@+id/dateInputFromGuide"
                     app:layout_constraintStart_toStartOf="@+id/fromInput"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@+id/dateInputFromGuide" />
 
                 <EditText
                     android:id="@+id/fromInput"
-                    android:layout_width="320dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#FFFFFF"
                     android:ems="10"
+                    android:focusable="false"
                     android:inputType="date"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF"
+                    app:layout_constraintWidth="parent=0.76"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fromLabel" />
@@ -97,24 +114,26 @@
                     android:id="@+id/toLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="To:"
+                    android:text="@string/to"
                     android:textColor="#FFFFFF"
-                    app:layout_constraintBottom_toTopOf="@+id/toInput"
-                    app:layout_constraintStart_toStartOf="@+id/toInput" />
+                    app:layout_constraintBottom_toTopOf="@+id/dateInputToGuide"
+                    app:layout_constraintStart_toStartOf="@+id/toInput"
+                    app:layout_constraintTop_toTopOf="@+id/dateInputToGuide" />
 
                 <EditText
                     android:id="@+id/toInput"
-                    android:layout_width="320dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="54dp"
                     android:backgroundTint="#FFFFFF"
                     android:ems="10"
+                    android:focusable="false"
                     android:inputType="date"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF"
                     app:layout_constraintEnd_toEndOf="@+id/fromInput"
                     app:layout_constraintStart_toStartOf="@+id/fromInput"
-                    app:layout_constraintTop_toBottomOf="@+id/fromInput" />
+                    app:layout_constraintTop_toBottomOf="@+id/toLabel"
+                    app:layout_constraintWidth="parent=0.76" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/dateEquals"
@@ -131,8 +150,8 @@
 
                 <Button
                     android:id="@+id/fromButton"
-                    android:layout_width="335dp"
-                    android:layout_height="50dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:background="@null"
                     android:onClick="openDatePicker"
                     app:layout_constraintBottom_toBottomOf="@+id/fromInput"
@@ -142,8 +161,8 @@
 
                 <Button
                     android:id="@+id/toButton"
-                    android:layout_width="329dp"
-                    android:layout_height="49dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:background="@null"
                     android:onClick="openDatePicker"
                     app:layout_constraintBottom_toBottomOf="@+id/toInput"
@@ -153,45 +172,64 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/dateLeftGuide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.15" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/dateMiddleGuide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/dateRightGuide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.85" />
+
             <TextView
                 android:id="@+id/daysLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="40dp"
-                android:text="DAYS"
+                android:text="@string/days"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/monthsLabel"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/dateRightGuide"
+                app:layout_constraintStart_toStartOf="@+id/dateRightGuide"
                 app:layout_constraintTop_toTopOf="@+id/monthsLabel" />
 
             <TextView
                 android:id="@+id/monthsLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
                 android:layout_marginBottom="24dp"
-                android:text="MONTHS"
+                android:text="@string/months"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toTopOf="@+id/input"
-                app:layout_constraintEnd_toStartOf="@+id/daysLabel"
-                app:layout_constraintStart_toEndOf="@+id/yearsLabel" />
+                app:layout_constraintEnd_toStartOf="@+id/dateMiddleGuide"
+                app:layout_constraintStart_toStartOf="@+id/dateMiddleGuide" />
 
             <TextView
                 android:id="@+id/yearsLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:text="YEARS"
+                android:text="@string/years"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/monthsLabel"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/dateLeftGuide"
+                app:layout_constraintStart_toStartOf="@+id/dateLeftGuide"
                 app:layout_constraintTop_toTopOf="@+id/monthsLabel" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
