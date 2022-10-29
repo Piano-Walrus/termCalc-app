@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -483,34 +484,52 @@ public class EditorActivity extends AppCompatActivity {
                 }
             });
 
-            ConstraintLayout styleContainer = findViewById(R.id.styleContainer);
-            ConstraintLayout shapeContainer = findViewById(R.id.shapeContainer);
-            ConstraintLayout bgDimmer = findViewById(R.id.styleShapeDimBG);
-            ConstraintLayout parent = findViewById(R.id.editorBG);
+            final ConstraintLayout styleContainer = findViewById(R.id.styleContainer);
+            final ConstraintLayout shapeContainer = findViewById(R.id.shapeContainer);
+            final ConstraintLayout bgDimmer = findViewById(R.id.styleShapeDimBG);
+
+            final RadioButton squareRadioButton = findViewById(R.id.squareRadioButton);
+            final RadioButton roundRadioButton = findViewById(R.id.roundRadioButton);
+
+            final ConstraintLayout shapeCardLayout = findViewById(R.id.shapeCardLayout);
+
+            final TextView shapeLabel = findViewById(R.id.shapeLabel);
+
+            String buttonShape = tinydb.getString("buttonShape");
+
+            squareRadioButton.setChecked(buttonShape.equals("1"));
+            roundRadioButton.setChecked(buttonShape.equals("2"));
+
+            if (buttonShape.equals("2"))
+                shapeLabel.setText(getString(R.string.shape_square));
+            else if (buttonShape.equals("1"))
+                shapeLabel.setText(getString(R.string.shape_round));
+
+            for (i=0; i < shapeCardLayout.getChildCount(); i++) {
+                View view = shapeCardLayout.getChildAt(i);
+
+                if (view.getClass() == androidx.constraintlayout.widget.ConstraintLayout.class) {
+                    view.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String tag = view.getTag() != null ? view.getTag().toString() : "square";
+
+                            squareRadioButton.setChecked(tag.equalsIgnoreCase("square"));
+                            roundRadioButton.setChecked(tag.equalsIgnoreCase("round"));
+
+                            tinydb.putString("buttonShape", squareRadioButton.isChecked() ? "1" : "2");
+
+                            closeStyleShapeCard();
+                        }
+                    });
+                }
+            }
 
             View.OnClickListener onBottomChipClick = new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (bgDimmer.getVisibility() != View.VISIBLE) {
-                        bgDimmer.setVisibility(View.VISIBLE);
-
-                        String tag = view.getTag() != null ? view.getTag().toString() : "style";
-
-                        if (tag.equalsIgnoreCase("style"))
-                            findViewById(R.id.styleCardLayout).setVisibility(View.VISIBLE);
-                        else if (tag.equalsIgnoreCase("shape"))
-                            findViewById(R.id.shapeCardLayout).setVisibility(View.VISIBLE);
-
-                        ConstraintSet constraintSet = new ConstraintSet();
-                        constraintSet.clone(parent);
-
-                        constraintSet.connect(R.id.styleShapeCard, ConstraintSet.BOTTOM, R.id.editorBG, ConstraintSet.BOTTOM, 12);
-                        constraintSet.clear(R.id.styleShapeCard, ConstraintSet.TOP);
-
-                        constraintSet.applyTo(parent);
-
-                        parent.getLayoutTransition()
-                                .enableTransitionType(LayoutTransition.CHANGING);
+                        openStyleShapeCard(view);
                     }
                 }
             };
@@ -521,21 +540,7 @@ public class EditorActivity extends AppCompatActivity {
             bgDimmer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    bgDimmer.setVisibility(View.INVISIBLE);
-
-                    findViewById(R.id.styleCardLayout).setVisibility(View.GONE);
-                    findViewById(R.id.shapeCardLayout).setVisibility(View.GONE);
-
-                    ConstraintSet constraintSet = new ConstraintSet();
-                    constraintSet.clone(parent);
-
-                    constraintSet.connect(R.id.styleShapeCard, ConstraintSet.TOP, R.id.editorBG, ConstraintSet.BOTTOM, 12);
-                    constraintSet.clear(R.id.styleShapeCard, ConstraintSet.BOTTOM);
-
-                    constraintSet.applyTo(parent);
-
-                    parent.getLayoutTransition()
-                            .enableTransitionType(LayoutTransition.CHANGING);
+                    closeStyleShapeCard();
                 }
             });
 
@@ -4398,5 +4403,49 @@ public class EditorActivity extends AppCompatActivity {
         }
 
         return output;
+    }
+
+    public void openStyleShapeCard(View view) {
+        ConstraintLayout parent = findViewById(R.id.editorBG);
+
+        findViewById(R.id.styleShapeDimBG).setVisibility(View.VISIBLE);
+
+        String tag = view.getTag() != null ? view.getTag().toString() : "style";
+
+        if (tag.equalsIgnoreCase("style"))
+            findViewById(R.id.styleCardLayout).setVisibility(View.VISIBLE);
+        else if (tag.equalsIgnoreCase("shape"))
+            findViewById(R.id.shapeCardLayout).setVisibility(View.VISIBLE);
+
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(parent);
+
+        constraintSet.connect(R.id.styleShapeCard, ConstraintSet.BOTTOM, R.id.editorBG, ConstraintSet.BOTTOM, 12);
+        constraintSet.clear(R.id.styleShapeCard, ConstraintSet.TOP);
+
+        constraintSet.applyTo(parent);
+
+        parent.getLayoutTransition()
+                .enableTransitionType(LayoutTransition.CHANGING);
+    }
+
+    public void closeStyleShapeCard() {
+        ConstraintLayout parent = findViewById(R.id.editorBG);
+
+        findViewById(R.id.styleShapeDimBG).setVisibility(View.INVISIBLE);
+
+        findViewById(R.id.styleCardLayout).setVisibility(View.GONE);
+        findViewById(R.id.shapeCardLayout).setVisibility(View.GONE);
+
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(parent);
+
+        constraintSet.connect(R.id.styleShapeCard, ConstraintSet.TOP, R.id.editorBG, ConstraintSet.BOTTOM, 12);
+        constraintSet.clear(R.id.styleShapeCard, ConstraintSet.BOTTOM);
+
+        constraintSet.applyTo(parent);
+
+        parent.getLayoutTransition()
+                .enableTransitionType(LayoutTransition.CHANGING);
     }
 }
