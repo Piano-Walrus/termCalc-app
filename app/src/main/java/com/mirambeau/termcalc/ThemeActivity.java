@@ -3,22 +3,18 @@ package com.mirambeau.termcalc;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.content.res.ResourcesCompat;
 
 public class ThemeActivity extends AppCompatActivity {
@@ -38,13 +34,9 @@ public class ThemeActivity extends AppCompatActivity {
     int darkGray, monochromeTextColor;
     int primary, secondary, tertiary;
 
-    int themeTypeClicks = 0;
-
     boolean isMonochrome;
 
     float minimumWidth = 411;
-
-    ConstraintLayout standardLayout, customLayout;
 
     View[] themeStyleButtons;
     ConstraintLayout[] themeColorButtons;
@@ -58,7 +50,9 @@ public class ThemeActivity extends AppCompatActivity {
         try {
             int i;
 
-            setContentView(R.layout.activity_theme_settings);
+            //Placeholders until I delete this class, just so it doesn't throw errors during testing
+            setContentView(R.layout.activity_editor);
+            Toolbar toolbar = findViewById(R.id.editorToolbar);
 
             final TinyDB tinydb = new TinyDB(this);
             themeActivity = this;
@@ -67,8 +61,6 @@ public class ThemeActivity extends AppCompatActivity {
 
             getWindow().setStatusBarColor(Color.parseColor("#16181B"));
             getWindow().setNavigationBarColor(Color.parseColor("#16181B"));
-
-            Toolbar toolbar = findViewById(R.id.themeToolbar);
 
             toolbar.setTitle("Theme Editor");
             toolbar.showOverflowMenu();
@@ -107,9 +99,6 @@ public class ThemeActivity extends AppCompatActivity {
 
             themeStyleButtons = new View[]{null, findViewById(R.id.themeStyleDark), findViewById(R.id.themeStyleLight), findViewById(R.id.themeStyleBlack),
                     findViewById(R.id.themeStyleBlackButtons), findViewById(R.id.themeStyleMonochrome)};
-            themeColorButtons = new ConstraintLayout[]{null, findViewById(R.id.mintLayout), findViewById(R.id.tealLayout), findViewById(R.id.greenLayout), findViewById(R.id.cyanLayout), findViewById(R.id.babyBlueLayout),
-                    findViewById(R.id.blueLayout), findViewById(R.id.navyBlueLayout), findViewById(R.id.indigoLayout), findViewById(R.id.lilacLayout), findViewById(R.id.pinkLayout), findViewById(R.id.redLayout),
-                    findViewById(R.id.coralLayout), findViewById(R.id.orangeLayout), findViewById(R.id.honeyLayout), findViewById(R.id.dodieYellowLayout), findViewById(R.id.brownLayout)};
 
             //Handle Theme Style Buttons
             for (i=0; i < themeStyleButtons.length; i++) {
@@ -177,43 +166,7 @@ public class ThemeActivity extends AppCompatActivity {
                 }
             }
 
-            //Handle Standard/Custom Toggle Preview Colors
-            standardLayout = findViewById(R.id.standardLayout);
-            customLayout = findViewById(R.id.customLayout);
-
-            getSupportFragmentManager().beginTransaction().replace(R.id.buttonShapeLayout,
-                    new ButtonShapePreferenceActivity.SettingsFragment(), "buttonShape").commit();
-
-            standardButtons = new Button[]{findViewById(R.id.standardEquals), findViewById(R.id.standardPlus), findViewById(R.id.standardParenthesisClose),
-                    findViewById(R.id.standardParenthesisOpen), findViewById(R.id.standardPi)};
-            customButtons = new Button[]{findViewById(R.id.customEquals), findViewById(R.id.customPlus), findViewById(R.id.customParenthesisClose),
-                    findViewById(R.id.customParenthesisOpen), findViewById(R.id.customPi)};
-
-            isMonochrome = basicTheme == 5;
-
-            ConstraintLayout themeColorLayout = findViewById(R.id.themeColorLayout);
-
-            //Wrap Brown & Indigo if screen is too narrow
-            if (minimumWidth <= 400) {
-                ConstraintSet constraintSet = new ConstraintSet();
-                constraintSet.clone(themeColorLayout);
-
-                constraintSet.connect(R.id.brownLayout, ConstraintSet.START, R.id.lilacLayout, ConstraintSet.START, 0);
-                constraintSet.connect(R.id.brownLayout, ConstraintSet.END, R.id.lilacLayout, ConstraintSet.END, 0);
-                constraintSet.connect(R.id.brownLayout, ConstraintSet.TOP, R.id.lilacLayout, ConstraintSet.BOTTOM, 16);
-                constraintSet.clear(R.id.brownLayout, ConstraintSet.BOTTOM);
-
-                constraintSet.connect(R.id.indigoLayout, ConstraintSet.START, R.id.pinkLayout, ConstraintSet.START, 0);
-                constraintSet.connect(R.id.indigoLayout, ConstraintSet.END, R.id.pinkLayout, ConstraintSet.END, 0);
-                constraintSet.connect(R.id.indigoLayout, ConstraintSet.TOP, R.id.pinkLayout, ConstraintSet.BOTTOM, 16);
-                constraintSet.clear(R.id.indigoLayout, ConstraintSet.BOTTOM);
-
-                constraintSet.applyTo(themeColorLayout);
-            }
-
             applyTheme();
-
-            onThemeTypeClick(tinydb.getBoolean("custom") ? customLayout : standardLayout);
 
             shouldRecreateMain = false;
 
@@ -352,57 +305,6 @@ public class ThemeActivity extends AppCompatActivity {
         try {
             Ax.tinydb().putBoolean("wasCustom", Ax.tinydb().getBoolean("custom"));
             startActivity(new Intent(this, Backups.class));
-        }
-        catch (Exception e) {
-            Ax.saveStack(e);
-            finish();
-        }
-    }
-
-    public void onThemeTypeClick (View v) {
-        try {
-            int i;
-
-            String tag = v.getTag().toString();
-
-            ConstraintLayout mt = findViewById(R.id.themeStyleLayout);
-            ConstraintLayout ac = findViewById(R.id.themeColorLayout);
-
-            FrameLayout buttonShapeLayout = findViewById(R.id.buttonShapeLayout);
-
-            ConstraintLayout editor = findViewById(R.id.themeEditorLayout);
-            ConstraintLayout savedThemes = findViewById(R.id.backupsLayout);
-
-            ConstraintLayout[] toggleButtons = {findViewById(R.id.standardLayout), findViewById(R.id.customLayout)};
-            RadioButton[] toggleRadioButtons = {findViewById(R.id.standardRadioButton), findViewById(R.id.customRadioButton)};
-            boolean[] toggleStates = {false, true};
-            int[] visibilities = {View.GONE, View.VISIBLE};
-
-            if(themeTypeClicks >= 2)
-                shouldRecreateMain = true;
-
-            for (i=0; i < toggleButtons.length; i++) {
-                if (toggleButtons[i] != null && toggleButtons[i].getTag().toString().equals(tag)) {
-                    toggleButtons[i].setBackground(Ax.getDrawable(R.drawable.theme_toggle_selected));
-                    toggleButtons[Math.abs(i-1)].setBackground(null);
-
-                    toggleRadioButtons[i].setChecked(true);
-                    toggleRadioButtons[Math.abs(i-1)].setChecked(false);
-
-                    mt.setVisibility(visibilities[Math.abs(i-1)]);
-                    ac.setVisibility(visibilities[Math.abs(i-1)]);
-                    buttonShapeLayout.setVisibility(visibilities[Math.abs(i-1)]);
-
-                    editor.setVisibility(visibilities[i]);
-                    savedThemes.setVisibility(visibilities[i]);
-
-                    Ax.tinydb().putBoolean("custom", toggleStates[i]);
-
-                    shouldRecreateMain = true;
-                }
-            }
-
-            themeTypeClicks++;
         }
         catch (Exception e) {
             Ax.saveStack(e);
