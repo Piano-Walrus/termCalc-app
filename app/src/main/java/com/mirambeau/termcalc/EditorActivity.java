@@ -500,9 +500,9 @@ public class EditorActivity extends AppCompatActivity {
             squareRadioButton.setChecked(buttonShape.equals("1"));
             roundRadioButton.setChecked(buttonShape.equals("2"));
 
-            if (buttonShape.equals("2"))
+            if (buttonShape.equals("1"))
                 shapeLabel.setText(getString(R.string.shape_square));
-            else if (buttonShape.equals("1"))
+            else if (buttonShape.equals("2"))
                 shapeLabel.setText(getString(R.string.shape_round));
 
             for (i=0; i < shapeCardLayout.getChildCount(); i++) {
@@ -518,6 +518,8 @@ public class EditorActivity extends AppCompatActivity {
                             roundRadioButton.setChecked(tag.equalsIgnoreCase("round"));
 
                             tinydb.putString("buttonShape", squareRadioButton.isChecked() ? "1" : "2");
+
+                            shapeLabel.setText(squareRadioButton.isChecked() ? getString(R.string.shape_square) : getString(R.string.shape_round));
 
                             closeStyleShapeCard();
                         }
