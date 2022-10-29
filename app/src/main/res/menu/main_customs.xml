@@ -11,18 +11,18 @@
     <item
         android:id="@+id/constants"
         android:orderInCategory="104"
-        android:title="Constants"
+        android:title="@string/constants"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/functions"
         android:orderInCategory="105"
-        android:title="Functions"
+        android:title="@string/functions"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/help"
         android:orderInCategory="106"
-        android:title="Help"
+        android:title="@string/help"
         app:showAsAction="never"/>
 </menu>

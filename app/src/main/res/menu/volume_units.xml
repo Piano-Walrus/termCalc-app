@@ -5,49 +5,49 @@
     <item
         android:id="@+id/square"
         android:orderInCategory="0"
-        android:title="Milliliters"
+        android:title="@string/volume_milliliters"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/rectangle"
         android:orderInCategory="1"
-        android:title="Liters"
+        android:title="@string/volume_liters"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/circle"
         android:orderInCategory="2"
-        android:title="Cubic Meters"
+        android:title="@string/volume_cubic_meters"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/ellipse"
         android:orderInCategory="3"
-        android:title="Ounces"
+        android:title="@string/volume_ounces"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/triangle"
         android:orderInCategory="4"
-        android:title="Cups"
+        android:title="@string/volume_cups"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/trapezoid"
         android:orderInCategory="5"
-        android:title="Pints"
+        android:title="@string/volume_pints"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/Parallelogram"
         android:orderInCategory="6"
-        android:title="Quarts"
+        android:title="@string/volume_quarts"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/pentagon"
         android:orderInCategory="7"
-        android:title="Gallons"
+        android:title="@string/volume_gallons"
         app:showAsAction="never"/>
 
 </menu>

@@ -5,19 +5,19 @@
     <item
         android:id="@+id/square"
         android:orderInCategory="0"
-        android:title="Fahrenheit"
+        android:title="@string/temp_fahrenheit"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/rectangle"
         android:orderInCategory="1"
-        android:title="Celsius"
+        android:title="@string/temp_celsius"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/circle"
         android:orderInCategory="2"
-        android:title="Kelvin"
+        android:title="@string/temp_kelvin"
         app:showAsAction="never"/>
 
 </menu>

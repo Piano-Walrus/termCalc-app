@@ -5,49 +5,49 @@
     <item
         android:id="@+id/square"
         android:orderInCategory="0"
-        android:title="Nanoseconds"
+        android:title="@string/time_nanoseconds"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/rectangle"
         android:orderInCategory="1"
-        android:title="Microseconds"
+        android:title="@string/time_microseconds"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/circle"
         android:orderInCategory="2"
-        android:title="Milliseconds"
+        android:title="@string/time_milliseconds"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/ellipse"
         android:orderInCategory="3"
-        android:title="Seconds"
+        android:title="@string/time_seconds"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/triangle"
         android:orderInCategory="4"
-        android:title="Minutes"
+        android:title="@string/time_minutes"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/trapezoid"
         android:orderInCategory="5"
-        android:title="Hours"
+        android:title="@string/time_hours"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/Parallelogram"
         android:orderInCategory="6"
-        android:title="Days"
+        android:title="@string/time_days"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/pentagon"
         android:orderInCategory="7"
-        android:title="Weeks"
+        android:title="@string/time_weeks"
         app:showAsAction="never"/>
 
 </menu>

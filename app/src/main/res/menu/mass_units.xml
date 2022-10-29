@@ -5,55 +5,55 @@
     <item
         android:id="@+id/micrograms"
         android:orderInCategory="0"
-        android:title="Micrograms"
+        android:title="@string/mass_micrograms"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/milligrams"
         android:orderInCategory="1"
-        android:title="Milligrams"
+        android:title="@string/mass_milligrams"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/centigrams"
         android:orderInCategory="2"
-        android:title="Centigrams"
+        android:title="@string/mass_centigrams"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/grams"
         android:orderInCategory="3"
-        android:title="Grams"
+        android:title="@string/mass_grams"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/kilograms"
         android:orderInCategory="4"
-        android:title="Kilograms"
+        android:title="@string/mass_kilograms"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/ounces"
         android:orderInCategory="5"
-        android:title="Ounces"
+        android:title="@string/mass_ounces"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/pounds"
         android:orderInCategory="6"
-        android:title="Pounds"
+        android:title="@string/mass_pounds"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/newtons"
         android:orderInCategory="7"
-        android:title="Newtons"
+        android:title="@string/mass_newtons"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/stones"
         android:orderInCategory="8"
-        android:title="Stones"
+        android:title="@string/mass_stones"
         app:showAsAction="never"/>
 
 </menu>

@@ -5,49 +5,49 @@
     <item
         android:id="@+id/square"
         android:orderInCategory="0"
-        android:title="Inches"
+        android:title="@string/distance_inches"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/rectangle"
         android:orderInCategory="1"
-        android:title="Feet"
+        android:title="@string/distance_feet"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/circle"
         android:orderInCategory="2"
-        android:title="Yards"
+        android:title="@string/distance_yards"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/ellipse"
         android:orderInCategory="3"
-        android:title="Miles"
+        android:title="@string/distance_miles"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/triangle"
         android:orderInCategory="4"
-        android:title="Millimeters"
+        android:title="@string/distance_millimeters"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/trapezoid"
         android:orderInCategory="5"
-        android:title="Centimeters"
+        android:title="@string/distance_centimeters"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/Parallelogram"
         android:orderInCategory="6"
-        android:title="Meters"
+        android:title="@string/distance_meters"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/pentagon"
         android:orderInCategory="7"
-        android:title="Kilometers"
+        android:title="@string/distance_kilometers"
         app:showAsAction="never"/>
 
 </menu>

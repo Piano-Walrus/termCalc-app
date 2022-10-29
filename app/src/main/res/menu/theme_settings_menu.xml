@@ -5,7 +5,7 @@
     <item
         android:id="@+id/advancedOptions"
         android:orderInCategory="107"
-        android:title="Advanced Options"
+        android:title="@string/advanced_options"
         app:showAsAction="never"/>
 
 </menu>

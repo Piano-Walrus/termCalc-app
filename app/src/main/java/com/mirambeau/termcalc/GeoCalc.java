@@ -3,6 +3,7 @@ package com.mirambeau.termcalc;
 public class GeoCalc extends Ax {
     static final double pi = 3.141592;
 
+    //TODO: Make two separate ArrayLists that just point to the string resources of each of these, then do like, "if .contains(resourceString), then change it to the english counterpart"
     final static String[] twoD = {"Square", "Rectangle", "Circle", "Ellipse", "Triangle", "Trapezoid", "Parallelogram", "Pentagon", "Hexagon", "Heptagon", "Octagon", "Nonagon", "Decagon"};
     final static String[] threeD = {"Cube", "Rectangular Prism", "Sphere", "Hemisphere", "Triangular Prism", "Pyramid (Triangular Base)", "Pyramid (Rectangular Base)",
             "Pentagonal Prism", "Cone", "Cylinder", "Regular Octahedron", "Dodecahedron", "Torus"};

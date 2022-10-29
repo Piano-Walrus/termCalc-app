@@ -5,7 +5,7 @@
     <item
         android:id="@+id/terminal"
         android:orderInCategory="104"
-        android:title="Open Terminal"
+        android:title="@string/open_terminal"
         android:icon="@drawable/ic_code_24"
         app:showAsAction="ifRoom"/>
 
