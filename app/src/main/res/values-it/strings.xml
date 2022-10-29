@@ -229,4 +229,7 @@
     <string name="overwrite_theme_confirmation">A theme with that name already exists. Do you want to overwrite it?</string>
     <string name="successfully_renamed">Successfully renamed</string>
     <string name="import_file_not_found_error">Error: Either the specified file could not be found, or access was denied.</string>
+
+    <!-- "custom" cannot be longer than 7 characters due to layout size constraints. -->
+    <string name="custom">Custom</string>
 </resources>
