@@ -2034,7 +2034,6 @@
                     android:id="@+id/customColorButton"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
-                    android:foreground="?selectableItemBackgroundBorderless"
                     android:elevation="6dp"
                     android:background="@drawable/editor_custom_color_circle"
                     android:drawableStart="@drawable/ic_baseline_palette_20"

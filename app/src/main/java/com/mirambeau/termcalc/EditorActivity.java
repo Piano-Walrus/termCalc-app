@@ -396,6 +396,39 @@ public class EditorActivity extends AppCompatActivity {
                 });
             }
 
+            final View[] themeStyleButtons = new View[]{null, findViewById(R.id.themeStyleDark), findViewById(R.id.themeStyleLight), findViewById(R.id.themeStyleBlack),
+                    findViewById(R.id.themeStyleBlackButtons), findViewById(R.id.themeStyleMonochrome)};
+            final View[] themeColorButtons = new ConstraintLayout[]{null, findViewById(R.id.mintButton), findViewById(R.id.tealButton), findViewById(R.id.greenButton), findViewById(R.id.cyanButton), findViewById(R.id.babyBlueButton),
+                    findViewById(R.id.blueButton), findViewById(R.id.navyBlueButton), findViewById(R.id.indigoButton), findViewById(R.id.purpleButton), findViewById(R.id.pinkButton), findViewById(R.id.redButton),
+                    findViewById(R.id.coralButton), findViewById(R.id.orangeButton), findViewById(R.id.honeyButton), findViewById(R.id.yellowButton), findViewById(R.id.brownButton), findViewById(R.id.customColorButton)};
+
+            //Handle Theme Style Buttons
+            for (i=0; i < themeStyleButtons.length; i++) {
+                if (themeStyleButtons[i] != null) {
+                    final int fi = i;
+
+                    ((ConstraintLayout) themeStyleButtons[i].getParent()).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            int j;
+
+                            //TODO: Make this work properly (change theme temporarily until apply is pressed, etc.)
+                            tinydb.putString("theme", Integer.toString(fi + 1));
+
+                            recreate();
+                            MainActivity.mainActivity.recreate();
+
+                            ((ConstraintLayout) themeStyleButtons[fi].getParent()).setBackground(Ax.getDrawable(R.drawable.theme_toggle_selected));
+
+                            for (j=0; j < themeStyleButtons.length; j++) {
+                                if (j != fi && themeStyleButtons[j] != null)
+                                    ((ConstraintLayout) themeStyleButtons[j].getParent()).setBackground(null);
+                            }
+                        }
+                    });
+                }
+            }
+
             BlurView blurView = findViewById(R.id.editorBlurView);
             float blurRadius = 12f;
 

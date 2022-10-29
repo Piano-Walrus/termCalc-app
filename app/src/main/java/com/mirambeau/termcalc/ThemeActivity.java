@@ -65,10 +65,8 @@ public class ThemeActivity extends AppCompatActivity {
 
             buttonShape = tinydb.getString("buttonShape");
 
-            if (Build.VERSION.SDK_INT >= 21) {
-                getWindow().setStatusBarColor(Color.parseColor("#16181B"));
-                getWindow().setNavigationBarColor(Color.parseColor("#16181B"));
-            }
+            getWindow().setStatusBarColor(Color.parseColor("#16181B"));
+            getWindow().setNavigationBarColor(Color.parseColor("#16181B"));
 
             Toolbar toolbar = findViewById(R.id.themeToolbar);
 
