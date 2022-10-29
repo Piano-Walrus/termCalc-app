@@ -77,4 +77,6 @@
     <string name="zones">Zonas</string>
     <string name="color_picker">Selector de Color</string>
     <string name="clipboard">Portapapeles</string>
+    <string name="background">Fondo</string>
+    <string name="text">Texto</string>
 </resources>

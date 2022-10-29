@@ -92,4 +92,6 @@
     <string name="zones">Zones</string>
     <string name="color_picker">Color Picker</string>
     <string name="clipboard">Clipboard</string>
+    <string name="background">Background</string>
+    <string name="text">Text</string>
 </resources>
