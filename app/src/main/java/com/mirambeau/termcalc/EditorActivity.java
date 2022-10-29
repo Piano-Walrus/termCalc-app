@@ -4413,25 +4413,51 @@ public class EditorActivity extends AppCompatActivity {
     public void openStyleShapeCard(View view) {
         ConstraintLayout parent = findViewById(R.id.editorBG);
 
-        findViewById(R.id.styleShapeDimBG).setVisibility(View.VISIBLE);
-
         String tag = view.getTag() != null ? view.getTag().toString() : "style";
 
-        if (tag.equalsIgnoreCase("style"))
-            findViewById(R.id.styleCardLayout).setVisibility(View.VISIBLE);
-        else if (tag.equalsIgnoreCase("shape"))
-            findViewById(R.id.shapeCardLayout).setVisibility(View.VISIBLE);
+        int delay = 300;
 
-        ConstraintSet constraintSet = new ConstraintSet();
-        constraintSet.clone(parent);
+        if (tag.equalsIgnoreCase("style")) {
+            findViewById(R.id.styleCardLayout).setVisibility(View.INVISIBLE);
 
-        constraintSet.connect(R.id.styleShapeCard, ConstraintSet.BOTTOM, R.id.editorBG, ConstraintSet.BOTTOM, 12);
-        constraintSet.clear(R.id.styleShapeCard, ConstraintSet.TOP);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    findViewById(R.id.styleCardLayout).setVisibility(View.VISIBLE);
+                }
+            }, delay);
+        }
+        else if (tag.equalsIgnoreCase("shape")) {
+            findViewById(R.id.shapeCardLayout).setVisibility(View.INVISIBLE);
 
-        constraintSet.applyTo(parent);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    findViewById(R.id.shapeCardLayout).setVisibility(View.VISIBLE);
+                }
+            }, delay);
+        }
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                findViewById(R.id.styleShapeDimBG).setVisibility(View.VISIBLE);
+
+                ConstraintSet constraintSet = new ConstraintSet();
+                constraintSet.clone(parent);
+
+                constraintSet.connect(R.id.styleShapeCard, ConstraintSet.BOTTOM, R.id.editorBG, ConstraintSet.BOTTOM, 12);
+                constraintSet.clear(R.id.styleShapeCard, ConstraintSet.TOP);
+
+                constraintSet.applyTo(parent);
+
+                parent.getLayoutTransition()
+                        .enableTransitionType(LayoutTransition.CHANGING);
+            }
+        }, delay / 2);
 
         parent.getLayoutTransition()
-                .enableTransitionType(LayoutTransition.CHANGING);
+                .disableTransitionType(LayoutTransition.CHANGING);
     }
 
     public void closeStyleShapeCard() {
