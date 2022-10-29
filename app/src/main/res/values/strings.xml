@@ -474,4 +474,5 @@
     <string name="volume_pints">Pints</string>
     <string name="volume_quarts">Quarts</string>
     <string name="volume_gallons">Gallons</string>
+    <string name="calculate">CALCULATE</string>
 </resources>

@@ -60,7 +60,7 @@
                 android:id="@+id/param1Input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Side Length"
+                android:hint="@string/side_length"
                 android:inputType="numberDecimal"
                 android:textSize="14sp" />
 
@@ -81,7 +81,7 @@
                 android:id="@+id/param2Input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Side Length"
+                android:hint="@string/side_length"
                 android:inputType="numberDecimal"
                 android:textSize="14sp" />
 
@@ -102,7 +102,7 @@
                 android:id="@+id/param3Input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Side Length"
+                android:hint="@string/side_length"
                 android:inputType="numberDecimal"
                 android:textSize="14sp" />
 
@@ -129,7 +129,7 @@
             android:background="@null"
             android:onClick="equalsGeo"
             android:tag="square"
-            android:text="CALCULATE"
+            android:text="@string/calculate"
             android:textColor="#007BFF"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
