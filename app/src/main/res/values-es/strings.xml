@@ -56,4 +56,5 @@
     <string name="primary">PRIMARY</string>
     <string name="top_bar_right">TOP BAR (RIGHT)</string>
     <string name="top_bar_left">TOP BAR (LEFT)</string>
+    <string name="main_background">MAIN BACKGROUND</string>
 </resources>

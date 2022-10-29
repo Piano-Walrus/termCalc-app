@@ -961,7 +961,7 @@
             android:layout_margin="6dp"
             android:background="@drawable/editor_zone_background"
             android:elevation="16dp"
-            android:text="MAIN BACKGROUND"
+            android:text="@string/main_background"
             android:tag="cMain -mt 4"
             android:textColor="@color/white"
             android:foreground="?selectableItemBackgroundBorderless"
