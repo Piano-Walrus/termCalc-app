@@ -480,4 +480,5 @@
     <string name="days">DAYS</string>
     <string name="from">From:</string>
     <string name="to">To:</string>
+    <string name="select_shortcut_key">Select the number key(s) to which you would like to assign</string>
 </resources>

@@ -16,7 +16,7 @@
             android:id="@+id/assignInstructions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select the number key(s) to which you would like to assign "
+            android:text="@string/select_shortcut_key"
             android:paddingHorizontal="24dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
