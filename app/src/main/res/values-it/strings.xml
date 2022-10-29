@@ -45,7 +45,6 @@
     <string name="volume">VOLUME</string>
     <string name="surface_area">SURFACE AREA</string>
 
-    <string name="backups" translatable="false">Backup/Restore</string>
     <string name="importNew">Import</string>
     <string name="backup_current_theme">Backup current theme</string>
 
