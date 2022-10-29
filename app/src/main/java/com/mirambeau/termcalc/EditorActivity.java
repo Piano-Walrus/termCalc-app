@@ -1674,7 +1674,7 @@ public class EditorActivity extends AppCompatActivity {
 
     public void save() {
         try {
-            final AlertDialog.Builder builder = createAlertDialog(getString(R.string.save_current_theme) + "\n");
+            final AlertDialog.Builder builder = createAlertDialog(getString(R.string.backup_current_theme) + "\n");
 
             View viewInflated = LayoutInflater.from(this).inflate(R.layout.content, (ViewGroup) findViewById(R.id.editorBG), false);
 
@@ -1695,9 +1695,9 @@ public class EditorActivity extends AppCompatActivity {
                         if (themeExists(themeName)) {
                             AlertDialog.Builder builder2 = new AlertDialog.Builder(EditorActivity.editorActivity, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
 
-                            builder2.setTitle("A theme with that name already exists. Do you want to overwrite it?\n");
+                            builder2.setTitle("A theme with that name already exists. Do you want to overwrite it?" + "\n");
 
-                            builder2.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                            builder2.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();
@@ -1708,7 +1708,7 @@ public class EditorActivity extends AppCompatActivity {
 
                                     bigTheme = "N/A";
 
-                                    Toast.makeText(EditorActivity.this, "Successfully backed up \"" + input.getText().toString() + "\"", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(EditorActivity.this, getString(R.string.successfully_saved)  + " \"" + input.getText().toString() + "\"", Toast.LENGTH_SHORT).show();
 
                                     recreate();
                                 }
@@ -1729,13 +1729,13 @@ public class EditorActivity extends AppCompatActivity {
 
                             bigTheme = "N/A";
 
-                            Toast.makeText(EditorActivity.this, "Successfully backed up \"" + input.getText().toString() + "\"", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditorActivity.this, getString(R.string.successfully_saved) + " \"" + input.getText().toString() + "\"", Toast.LENGTH_SHORT).show();
 
                             recreate();
                         }
                     }
                     else
-                        Toast.makeText(EditorActivity.this, "Error: Theme name cannot be empty", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditorActivity.this, R.string.empty_theme_name_error, Toast.LENGTH_SHORT).show();
                 }
             });
             builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -2575,7 +2575,7 @@ public class EditorActivity extends AppCompatActivity {
         try {
             AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
 
-            builder.setTitle("Rename Theme\n");
+            builder.setTitle(getString(R.string.rename_theme) + "\n");
 
             View viewInflated = LayoutInflater.from(this).inflate(R.layout.rename, (ViewGroup) findViewById(R.id.mainBackup), false);
 
@@ -2594,7 +2594,7 @@ public class EditorActivity extends AppCompatActivity {
                     if (themeExists(themeName)) {
                         AlertDialog.Builder builder2 = new AlertDialog.Builder(EditorActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
 
-                        builder2.setTitle("A theme with that name already exists. Do you want to overwrite it?\n");
+                        builder2.setTitle(getString(R.string.overwrite_theme_confirmation) + "\n");
 
                         builder2.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                             @Override
@@ -2611,9 +2611,7 @@ public class EditorActivity extends AppCompatActivity {
                                 File newTheme = new File(directory, themeName + ".txt");
 
                                 if (theme.renameTo(newTheme)) {
-                                    int i;
-
-                                    Toast.makeText(EditorActivity.this, "Successfully renamed \"" + old + "\" to \"" + themeName + "\"", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(EditorActivity.this, getString(R.string.successfully_renamed) + " \"" + old + "\" to \"" + themeName + "\"", Toast.LENGTH_SHORT).show();
 
                                     replaceItem(themeName, getCardPosition(themeName));
                                     backupsRv.scrollToPosition(getCardPosition(themeName));
@@ -2637,7 +2635,7 @@ public class EditorActivity extends AppCompatActivity {
                         if (theme.renameTo(newTheme)) {
                             int i;
 
-                            Toast.makeText(EditorActivity.this, "Successfully renamed \"" + old + "\" to \"" + themeName + "\"", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditorActivity.this, getString(R.string.successfully_renamed) + " \"" + old + "\" to \"" + themeName + "\"", Toast.LENGTH_SHORT).show();
 
                             String[] colors = new String[0];
 
@@ -2830,7 +2828,7 @@ public class EditorActivity extends AppCompatActivity {
                 process(uri);
             } catch (Exception e) {
                 e.printStackTrace();
-                Ax.makeLongToast("Error: Either the specified file could not be found, or access was denied.");
+                Ax.makeLongToast(getString(R.string.import_file_not_found_error));
             }
         }
     }

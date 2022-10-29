@@ -223,4 +223,10 @@
     <string name="unsaved_changes">Unsaved Changes</string>
     <string name="apply">Apply</string>
     <string name="dont_apply">Don\'t Apply</string>
+    <string name="successfully_saved">Successfully saved</string>
+    <string name="empty_theme_name_error">Error: Theme name cannot be empty</string>
+    <string name="rename_theme">Rename Theme</string>
+    <string name="overwrite_theme_confirmation">A theme with that name already exists. Do you want to overwrite it?</string>
+    <string name="successfully_renamed">Successfully renamed</string>
+    <string name="import_file_not_found_error">Error: Either the specified file could not be found, or access was denied.</string>
 </resources>
