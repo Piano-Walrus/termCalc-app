@@ -434,4 +434,7 @@
     <string name="base_width">Base Width</string>
     <string name="base_perimeter">Base Perimeter</string>
     <string name="slant_height">Slant Height</string>
+    <string name="edit">Edit</string>
+    <string name="shortcuts">Shortcuts</string>
+    <string name="delete">Delete</string>
 </resources>

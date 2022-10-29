@@ -5,18 +5,18 @@
     <item
         android:id="@+id/editCustom"
         android:orderInCategory="0"
-        android:title="Edit"
+        android:title="@string/edit"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/assignShortcutCustom"
         android:orderInCategory="1"
-        android:title="Shortcuts"
+        android:title="@string/shortcuts"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/deleteCustom"
         android:orderInCategory="2"
-        android:title="Delete"
+        android:title="@string/delete"
         app:showAsAction="never"/>
 </menu>
