@@ -17,10 +17,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="662dp"
-            android:layout_height="413dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/numDays"
@@ -58,34 +60,71 @@
                 app:layout_constraintEnd_toEndOf="@+id/yearsLabel"
                 app:layout_constraintStart_toStartOf="@+id/yearsLabel" />
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/dateYearsGuide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.2" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/dateMonthsGuide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/dateDaysGuide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.8" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/input"
                 android:layout_width="413dp"
-                android:layout_height="405dp"
+                android:layout_height="match_parent"
                 android:background="@color/darkColorPrimaryDark"
                 android:elevation="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth="parent=0.49">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/dateFromGuide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.21" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/dateToGuide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.5" />
 
                 <TextView
                     android:id="@+id/fromLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="58dp"
-                    android:text="From:"
+                    android:text="@string/from"
                     android:textColor="#FFFFFF"
                     app:layout_constraintStart_toStartOf="@+id/fromInput"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@+id/dateFromGuide" />
 
                 <EditText
                     android:id="@+id/fromInput"
-                    android:layout_width="320dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#FFFFFF"
                     android:ems="10"
                     android:inputType="date"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF"
+                    app:layout_constraintWidth="parent=0.76"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fromLabel" />
@@ -94,24 +133,24 @@
                     android:id="@+id/toLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="To:"
+                    android:text="@string/to"
                     android:textColor="#FFFFFF"
                     app:layout_constraintBottom_toTopOf="@+id/toInput"
                     app:layout_constraintStart_toStartOf="@+id/toInput" />
 
                 <EditText
                     android:id="@+id/toInput"
-                    android:layout_width="320dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="54dp"
                     android:backgroundTint="#FFFFFF"
                     android:ems="10"
                     android:inputType="date"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF"
+                    app:layout_constraintWidth="parent=0.76"
                     app:layout_constraintEnd_toEndOf="@+id/fromInput"
                     app:layout_constraintStart_toStartOf="@+id/fromInput"
-                    app:layout_constraintTop_toBottomOf="@+id/fromInput" />
+                    app:layout_constraintTop_toBottomOf="@id/dateToGuide" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/dateEquals"
@@ -124,14 +163,16 @@
                     app:layout_constraintEnd_toEndOf="@+id/toInput"
                     app:layout_constraintStart_toStartOf="@+id/toInput"
                     app:layout_constraintTop_toBottomOf="@+id/toInput"
-                    app:srcCompat="@drawable/ic_check_24" />
+                    app:srcCompat="@drawable/ic_check_24"
+                    android:focusable="true" />
 
                 <Button
                     android:id="@+id/fromButton"
-                    android:layout_width="335dp"
-                    android:layout_height="50dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:background="@null"
                     android:onClick="openDatePicker"
+                    app:layout_constraintWidth="parent=0.8"
                     app:layout_constraintBottom_toBottomOf="@+id/fromInput"
                     app:layout_constraintEnd_toEndOf="@+id/fromInput"
                     app:layout_constraintStart_toStartOf="@+id/fromInput"
@@ -139,10 +180,11 @@
 
                 <Button
                     android:id="@+id/toButton"
-                    android:layout_width="329dp"
-                    android:layout_height="49dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:background="@null"
                     android:onClick="openDatePicker"
+                    app:layout_constraintWidth="parent=0.8"
                     app:layout_constraintBottom_toBottomOf="@+id/toInput"
                     app:layout_constraintEnd_toEndOf="@+id/toInput"
                     app:layout_constraintStart_toStartOf="@+id/toInput"
@@ -154,44 +196,37 @@
                 android:id="@+id/daysLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="40dp"
-                android:text="DAYS"
+                android:text="@string/days"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/monthsLabel"
-                app:layout_constraintStart_toStartOf="@+id/monthsLabel" />
+                app:layout_constraintStart_toStartOf="@+id/monthsLabel"
+                app:layout_constraintTop_toTopOf="@+id/dateDaysGuide" />
 
             <TextView
                 android:id="@+id/monthsLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="28dp"
-                android:text="MONTHS"
+                android:text="@string/months"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/input"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.531" />
+                app:layout_constraintTop_toTopOf="@+id/dateMonthsGuide" />
 
             <TextView
                 android:id="@+id/yearsLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:text="YEARS"
+                android:text="@string/years"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp"
-                app:layout_constraintBottom_toTopOf="@+id/monthsLabel"
                 app:layout_constraintEnd_toEndOf="@+id/monthsLabel"
-                app:layout_constraintHorizontal_bias="0.764"
                 app:layout_constraintStart_toStartOf="@+id/monthsLabel"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.318" />
+                app:layout_constraintTop_toTopOf="@+id/dateYearsGuide" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
