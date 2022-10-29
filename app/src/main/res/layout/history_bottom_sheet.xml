@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="2dp"
-        android:text="History"
+        android:text="@string/history"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
