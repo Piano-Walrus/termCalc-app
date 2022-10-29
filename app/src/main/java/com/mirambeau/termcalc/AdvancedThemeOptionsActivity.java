@@ -2,7 +2,6 @@ package com.mirambeau.termcalc;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,7 +23,7 @@ public class AdvancedThemeOptionsActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.themeToolbar);
 
-        setTheme(Aux.switchColors[Aux.isFullNum(tinydb.getString("color")) ? (Integer.parseInt(tinydb.getString("color")) - 1) : 0]);
+        setTheme(Ax.switchColors[Ax.isFullNum(tinydb.getString("color")) ? (Integer.parseInt(tinydb.getString("color")) - 1) : 0]);
 
         toolbar.setTitle("Advanced Options");
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));

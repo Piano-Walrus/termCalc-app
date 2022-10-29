@@ -46,7 +46,7 @@ public class HistoryDateGroupAdapter extends RecyclerView.Adapter<HistoryDateGro
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        TinyDB tinydb = Aux.tinydb();
+        TinyDB tinydb = Ax.tinydb();
         String theme = tinydb.getString("theme");
 
         final int darkGray = Color.parseColor("#3C4043");
@@ -54,9 +54,9 @@ public class HistoryDateGroupAdapter extends RecyclerView.Adapter<HistoryDateGro
         holder.title.setText(groupTitles.get(position));
 
         if (tinydb.getBoolean("custom"))
-            holder.title.setTextColor(Color.parseColor(Aux.getNavAccentColor()));
+            holder.title.setTextColor(Color.parseColor(Ax.getNavAccentColor()));
         else {
-            if (Aux.isColor(tinydb.getString("accentPrimary")))
+            if (Ax.isColor(tinydb.getString("accentPrimary")))
                 holder.title.setTextColor(Color.parseColor(tinydb.getString("accentPrimary")));
             else {
                 if (theme.equals("2"))

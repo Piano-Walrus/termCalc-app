@@ -18,7 +18,7 @@ public class SplashScreen extends AppCompatActivity {
         TinyDB tinydb = new TinyDB(this);
         String theme = tinydb.getString("theme");
 
-        if (Aux.isNull(theme))
+        if (Ax.isNull(theme))
             theme = "1";
 
         if (theme.equals("1"))

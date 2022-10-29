@@ -149,9 +149,9 @@ public class BackupAdapter extends RecyclerView.Adapter<BackupAdapter.BackupView
             holder.titleBG.setBackgroundColor(Color.parseColor(colors[4]));
             holder.buttonBG.setBackgroundColor(Color.parseColor(colors[0]));
 
-            if (Aux.isColor(cEquals) && !cEquals.equals(colors[4])) {
-                if (Aux.getAverageBrightness(cEquals) == Aux.getAverageBrightness(colors[4])) {
-                    if (Aux.getAverageBrightness(colors[4]) < 6) {
+            if (Ax.isColor(cEquals) && !cEquals.equals(colors[4])) {
+                if (Ax.getAverageBrightness(cEquals) == Ax.getAverageBrightness(colors[4])) {
+                    if (Ax.getAverageBrightness(colors[4]) < 6) {
                         holder.apply.setTextColor(Color.WHITE);
                     }
                     else {
@@ -163,8 +163,8 @@ public class BackupAdapter extends RecyclerView.Adapter<BackupAdapter.BackupView
                 }
             }
             else {
-                if (Aux.getAverageBrightness(colors[5]) == Aux.getAverageBrightness(colors[4])) {
-                    if (Aux.getAverageBrightness(colors[4]) < 6) {
+                if (Ax.getAverageBrightness(colors[5]) == Ax.getAverageBrightness(colors[4])) {
+                    if (Ax.getAverageBrightness(colors[4]) < 6) {
                         holder.apply.setTextColor(Color.WHITE);
                     }
                     else {
@@ -182,8 +182,8 @@ public class BackupAdapter extends RecyclerView.Adapter<BackupAdapter.BackupView
             holder.rename.setColorFilter(Color.parseColor(colors[1]));
             holder.favorite.setColorFilter(Color.parseColor(colors[1]));
 
-            if (Aux.getAverageBrightness(colors[5]) == Aux.getAverageBrightness(colors[4])) {
-                if (Aux.getAverageBrightness(colors[4]) < 6) {
+            if (Ax.getAverageBrightness(colors[5]) == Ax.getAverageBrightness(colors[4])) {
+                if (Ax.getAverageBrightness(colors[4]) < 6) {
                     holder.title.setTextColor(Color.WHITE);
                 }
                 else {
@@ -193,31 +193,31 @@ public class BackupAdapter extends RecyclerView.Adapter<BackupAdapter.BackupView
         }
         catch (NullPointerException | IndexOutOfBoundsException e) {
             try {
-                if (Aux.isColor(tinydb.getString("cKeypad")))
+                if (Ax.isColor(tinydb.getString("cKeypad")))
                     holder.titleBG.setBackgroundColor(Color.parseColor(tinydb.getString("cKeypad")));
-                if (Aux.isColor(tinydb.getString("cPrimary")))
+                if (Ax.isColor(tinydb.getString("cPrimary")))
                     holder.buttonBG.setBackgroundColor(Color.parseColor(tinydb.getString("cPrimary")));
 
-                if (Aux.isColor(tinydb.getString("-b=t")))
+                if (Ax.isColor(tinydb.getString("-b=t")))
                     holder.apply.setTextColor(Color.parseColor(tinydb.getString("-b=t")));
-                else if (Aux.isColor(tinydb.getString("cNum")))
+                else if (Ax.isColor(tinydb.getString("cNum")))
                     holder.apply.setTextColor(Color.parseColor(tinydb.getString("cNum")));
 
-                if (Aux.isColor(tinydb.getString("cNum")))
+                if (Ax.isColor(tinydb.getString("cNum")))
                     holder.title.setTextColor(Color.parseColor(tinydb.getString("cNum")));
 
                 //What even is this
-                if ((Aux.isTinyColor("cNum") && Aux.isTinyColor("cKeypad") && Aux.getTinyColor("cNum") == Aux.getTinyColor("cKeypad")) ||
-                    Aux.getAverageBrightness(tinydb.getString("cNum")) == Aux.getAverageBrightness(tinydb.getString("cKeypad"))) {
-                    if (Aux.getAverageBrightness(tinydb.getString("cKeypad")) < 6) {
+                if ((Ax.isTinyColor("cNum") && Ax.isTinyColor("cKeypad") && Ax.getTinyColor("cNum") == Ax.getTinyColor("cKeypad")) ||
+                    Ax.getAverageBrightness(tinydb.getString("cNum")) == Ax.getAverageBrightness(tinydb.getString("cKeypad"))) {
+                    if (Ax.getAverageBrightness(tinydb.getString("cKeypad")) < 6) {
                         holder.title.setTextColor(Color.WHITE);
                     }
                     else {
                         holder.title.setTextColor(Color.parseColor("#222222"));
                     }
                 }
-                else if (!Aux.isTinyColor("cKeypad") && !Aux.isTinyColor("cNum")){
-                    int theme = Aux.getThemeInt();
+                else if (!Ax.isTinyColor("cKeypad") && !Ax.isTinyColor("cNum")){
+                    int theme = Ax.getThemeInt();
                     if (theme == 2) {
                         holder.title.setTextColor(Color.parseColor("#222222"));
                     }
@@ -229,11 +229,11 @@ public class BackupAdapter extends RecyclerView.Adapter<BackupAdapter.BackupView
                     }
                 }
 
-                if (Aux.isColor(tinydb.getString("-b" + Aux.divi + "t")))
-                    holder.share.setColorFilter(Color.parseColor(tinydb.getString("-b" + Aux.divi + "t")));
-                if (Aux.isColor(tinydb.getString("-b" + Aux.multi + "t")))
-                    holder.delete.setColorFilter(Color.parseColor(tinydb.getString("-b" + Aux.multi + "t")));
-                if (Aux.isColor(tinydb.getString("-b-t"))) {
+                if (Ax.isColor(tinydb.getString("-b" + Ax.divi + "t")))
+                    holder.share.setColorFilter(Color.parseColor(tinydb.getString("-b" + Ax.divi + "t")));
+                if (Ax.isColor(tinydb.getString("-b" + Ax.multi + "t")))
+                    holder.delete.setColorFilter(Color.parseColor(tinydb.getString("-b" + Ax.multi + "t")));
+                if (Ax.isColor(tinydb.getString("-b-t"))) {
                     holder.rename.setColorFilter(Color.parseColor(tinydb.getString("-b-t")));
                     holder.favorite.setColorFilter(Color.parseColor(tinydb.getString("-b-t")));
                 }

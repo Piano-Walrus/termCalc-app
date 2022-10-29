@@ -87,7 +87,7 @@ public class ThemeActivity extends AppCompatActivity {
             toolbar.setOverflowIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_overflow_menu, null));
 
             try {
-                minimumWidth = Aux.getMinimumWidth(this);
+                minimumWidth = Ax.getMinimumWidth(this);
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -96,8 +96,8 @@ public class ThemeActivity extends AppCompatActivity {
             //Establish Predefined Colors
             updateColors();
 
-            basicTheme = Aux.getThemeInt("basicTheme");
-            customTheme = Aux.getThemeInt("customTheme");
+            basicTheme = Ax.getThemeInt("basicTheme");
+            customTheme = Ax.getThemeInt("customTheme");
 
             darkGray = Color.parseColor("#222222");
             monochromeTextColor = Color.parseColor("#303030");
@@ -131,7 +131,7 @@ public class ThemeActivity extends AppCompatActivity {
 
                             shouldRecreateMain = true;
 
-                            ((ConstraintLayout) themeStyleButtons[basicTheme].getParent()).setBackground(Aux.getDrawable(R.drawable.theme_toggle_selected));
+                            ((ConstraintLayout) themeStyleButtons[basicTheme].getParent()).setBackground(Ax.getDrawable(R.drawable.theme_toggle_selected));
 
                             for (j=0; j < themeStyleButtons.length; j++) {
                                 if (j != fi && themeStyleButtons[j] != null)
@@ -152,7 +152,7 @@ public class ThemeActivity extends AppCompatActivity {
 
                             tinydb.putString("color", v.getTag().toString());
 
-                            v.setBackground(Aux.getDrawable(R.drawable.theme_style_selected));
+                            v.setBackground(Ax.getDrawable(R.drawable.theme_style_selected));
 
                             for (j=0; j < themeColorButtons.length; j++) {
                                 if (themeColorButtons[j] != null && themeColorButtons[j] != v)
@@ -173,7 +173,7 @@ public class ThemeActivity extends AppCompatActivity {
 
                 if (themeColorButtons[i] != null) {
                     if (color.equals(themeColorButtons[i].getTag().toString())) {
-                        themeColorButtons[i].setBackground(Aux.getDrawable(R.drawable.theme_style_selected, ThemeActivity.this));
+                        themeColorButtons[i].setBackground(Ax.getDrawable(R.drawable.theme_style_selected, ThemeActivity.this));
                         break;
                     }
                 }
@@ -222,15 +222,15 @@ public class ThemeActivity extends AppCompatActivity {
             tinydb.putBoolean("closeDrawer", true);
         }
         catch (Exception e){
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
 
         try {
-            if (Aux.restored) {
-                Aux.restored = false;
+            if (Ax.restored) {
+                Ax.restored = false;
 
-                if (!Aux.tinydb().getBoolean("wasCustom")) {
+                if (!Ax.tinydb().getBoolean("wasCustom")) {
                     super.onBackPressed();
                     startActivity(new Intent(MainActivity.mainActivity, ThemeActivity.class));
                 }
@@ -249,7 +249,7 @@ public class ThemeActivity extends AppCompatActivity {
             inflater.inflate(R.menu.theme_settings_menu, menu);
         }
         catch (Exception e){
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
 
@@ -269,7 +269,7 @@ public class ThemeActivity extends AppCompatActivity {
             }
         }
         catch (Exception e){
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
 
@@ -304,7 +304,7 @@ public class ThemeActivity extends AppCompatActivity {
                 shouldRecreateMain = false;
             }
             catch (Exception e2) {
-                Aux.saveStack(e2);
+                Ax.saveStack(e2);
                 finish();
             }
         }
@@ -325,7 +325,7 @@ public class ThemeActivity extends AppCompatActivity {
             String theme = tinydb.getString("theme");
             String customTheme = tinydb.getString("customTheme");
 
-            if (Aux.isDigit(customTheme)) {
+            if (Ax.isDigit(customTheme)) {
                 if (customTheme.equals("5"))
                     customTheme = "2";
                 else if (customTheme.equals("1") || customTheme.equals("4"))
@@ -345,18 +345,18 @@ public class ThemeActivity extends AppCompatActivity {
             startActivity(new Intent(this, EditorActivity.class));
         }
         catch (Exception e2) {
-            Aux.saveStack(e2);
+            Ax.saveStack(e2);
             finish();
         }
     }
 
     public void openBackups(View v) {
         try {
-            Aux.tinydb().putBoolean("wasCustom", Aux.tinydb().getBoolean("custom"));
+            Ax.tinydb().putBoolean("wasCustom", Ax.tinydb().getBoolean("custom"));
             startActivity(new Intent(this, Backups.class));
         }
         catch (Exception e) {
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
     }
@@ -385,7 +385,7 @@ public class ThemeActivity extends AppCompatActivity {
 
             for (i=0; i < toggleButtons.length; i++) {
                 if (toggleButtons[i] != null && toggleButtons[i].getTag().toString().equals(tag)) {
-                    toggleButtons[i].setBackground(Aux.getDrawable(R.drawable.theme_toggle_selected));
+                    toggleButtons[i].setBackground(Ax.getDrawable(R.drawable.theme_toggle_selected));
                     toggleButtons[Math.abs(i-1)].setBackground(null);
 
                     toggleRadioButtons[i].setChecked(true);
@@ -398,7 +398,7 @@ public class ThemeActivity extends AppCompatActivity {
                     editor.setVisibility(visibilities[i]);
                     savedThemes.setVisibility(visibilities[i]);
 
-                    Aux.tinydb().putBoolean("custom", toggleStates[i]);
+                    Ax.tinydb().putBoolean("custom", toggleStates[i]);
 
                     shouldRecreateMain = true;
                 }
@@ -407,7 +407,7 @@ public class ThemeActivity extends AppCompatActivity {
             themeTypeClicks++;
         }
         catch (Exception e) {
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
     }
@@ -420,7 +420,7 @@ public class ThemeActivity extends AppCompatActivity {
             ((ImageButton) themeStyleButtons[4]).setColorFilter(primary);
             ((ImageButton) ((ConstraintLayout) themeStyleButtons[5]).getChildAt(0)).setColorFilter(tertiary);
 
-            ((ConstraintLayout) themeStyleButtons[basicTheme].getParent()).setBackground(Aux.getDrawable(R.drawable.theme_toggle_selected));
+            ((ConstraintLayout) themeStyleButtons[basicTheme].getParent()).setBackground(Ax.getDrawable(R.drawable.theme_toggle_selected));
 
             //Handle Standard Buttons
             if (basicTheme == 2) {
@@ -470,24 +470,24 @@ public class ThemeActivity extends AppCompatActivity {
 
             //Handle Equals Custom Button Semi-Defaults
             if (customTheme != 1)
-                customButtons[0].setBackgroundColor(Aux.isTinyColor("cKeypad") ? Aux.getTinyColor("cKeypad") : customTheme == 2 ? Color.WHITE : Color.BLACK);
+                customButtons[0].setBackgroundColor(Ax.isTinyColor("cKeypad") ? Ax.getTinyColor("cKeypad") : customTheme == 2 ? Color.WHITE : Color.BLACK);
 
-            customButtons[0].setTextColor(Aux.isTinyColor("cNum") ? Aux.getTinyColor("cNum") :
-                    (Aux.isTinyColor("cPrimary") ? Aux.getTinyColor("cPrimary") : customTheme == 2 ? darkGray : Color.WHITE));
+            customButtons[0].setTextColor(Ax.isTinyColor("cNum") ? Ax.getTinyColor("cNum") :
+                    (Ax.isTinyColor("cPrimary") ? Ax.getTinyColor("cPrimary") : customTheme == 2 ? darkGray : Color.WHITE));
 
             //Handle Custom Buttons
             for (i=0; i < customButtons.length; i++) {
                 customButtons[i].setClickable(false);
                 customButtons[i].setFocusable(false);
 
-                if (Aux.isTinyColor(bgCodes[i]))
-                    customButtons[i].setBackgroundColor(Aux.getTinyColor(bgCodes[i]));
-                if (Aux.isTinyColor(textCodes[i]))
-                    customButtons[i].setTextColor(Aux.getTinyColor(textCodes[i]));
+                if (Ax.isTinyColor(bgCodes[i]))
+                    customButtons[i].setBackgroundColor(Ax.getTinyColor(bgCodes[i]));
+                if (Ax.isTinyColor(textCodes[i]))
+                    customButtons[i].setTextColor(Ax.getTinyColor(textCodes[i]));
             }
 
-            if (Aux.isTinyColor("-b="))
-                customButtons[0].setBackgroundColor(Aux.getTinyColor("-b="));
+            if (Ax.isTinyColor("-b="))
+                customButtons[0].setBackgroundColor(Ax.getTinyColor("-b="));
 
             //Handle Accent Color Buttons
             for (i=0; i < themeColorButtons.length; i++) {
@@ -504,7 +504,7 @@ public class ThemeActivity extends AppCompatActivity {
             }
         }
         catch (Exception e) {
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
     }
@@ -516,7 +516,7 @@ public class ThemeActivity extends AppCompatActivity {
             tinydb = new TinyDB(MainActivity.mainActivity);
         }
         catch (Exception e) {
-            tinydb = Aux.tinydb(ThemeActivity.themeActivity);
+            tinydb = Ax.tinydb(ThemeActivity.themeActivity);
         }
 
         try {
@@ -525,12 +525,12 @@ public class ThemeActivity extends AppCompatActivity {
         catch (Exception e) {
             accentColor = 1;
 
-            if (!Aux.isFullNum(tinydb.getString("color")))
+            if (!Ax.isFullNum(tinydb.getString("color")))
                 tinydb.putString("color", "1");
         }
 
         primary = Color.parseColor(primaryColors[accentColor]);
-        secondary = Color.parseColor(Aux.hexAdd(primaryColors[accentColor], -16));
-        tertiary = Color.parseColor(Aux.hexAdd(primaryColors[accentColor], -8));
+        secondary = Color.parseColor(Ax.hexAdd(primaryColors[accentColor], -16));
+        tertiary = Color.parseColor(Ax.hexAdd(primaryColors[accentColor], -8));
     }
 }

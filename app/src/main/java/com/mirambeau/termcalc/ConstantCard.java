@@ -9,7 +9,7 @@ public class ConstantCard {
         if (title == null || title.equals("\0"))
             this.title = " ";
 
-        this.constant = constant.replace("*", Aux.multi).replace("/", Aux.divi);
+        this.constant = constant.replace("*", Ax.multi).replace("/", Ax.divi);
 
         if (constant == null || constant.equals("\0"))
             this.constant = " ";

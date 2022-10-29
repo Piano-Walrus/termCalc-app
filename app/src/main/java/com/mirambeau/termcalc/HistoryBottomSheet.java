@@ -67,11 +67,11 @@ public class HistoryBottomSheet extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.history_bottom_sheet, container, false);
 
-        int theme = Aux.getThemeInt();
+        int theme = Ax.getThemeInt();
         final ImageButton overflow = view.findViewById(R.id.historyOverflow);
         final TextView tvEmpty = view.findViewById(R.id.historyEmpty);
 
-        view.findViewById(R.id.historyMainBG).setBackground(Aux.getSheetBackground(theme));
+        view.findViewById(R.id.historyMainBG).setBackground(Ax.getSheetBackground(theme));
 
         if (theme == 2) {
             int darkGray = Color.parseColor("#3C4043");
@@ -97,9 +97,9 @@ public class HistoryBottomSheet extends BottomSheetDialogFragment {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         if (tvEmpty.getVisibility() == View.VISIBLE)
-                            Aux.makeToast("History is already empty", 0);
+                            Ax.makeToast("History is already empty", 0);
                         else {
-                            final TinyDB tinydb = Aux.tinydb();
+                            final TinyDB tinydb = Ax.tinydb();
 
                             final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.mainActivity, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
 
@@ -265,7 +265,7 @@ public class HistoryBottomSheet extends BottomSheetDialogFragment {
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             main.finishAffinity();
         }
 

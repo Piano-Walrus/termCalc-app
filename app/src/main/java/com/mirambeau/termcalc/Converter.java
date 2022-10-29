@@ -8,7 +8,7 @@ public class Converter {
     public double convert (double fromDub, int type, int from, int to){
         final double[] result = {0};
 
-        String[][] allUnits = {{"IN", "FT", "YD", "MI", "MM", "CM", "M", "KM"}, {"µG", "MG", "CG", "G", "KG", "OZ", "LB", "N", "Stones"}, {"ML", "L", "M³", " OZ ", "CUP", "PT", "QT", "GAL"}, {"NS", "µS", "MS", "S", "MIN", "HR", "DAY", "WEEK"}, Aux.currencyCodes, {"MPH", "KM/H", "M/S", "FT/S", "KNOT", "-1", "-1", "-1"}, {"°F", "°C", "K", "-1", "-1", "-1", "-1", "-1"}, {"2", "3", "4", "6", "8", "10", "16", "32"}};
+        String[][] allUnits = {{"IN", "FT", "YD", "MI", "MM", "CM", "M", "KM"}, {"µG", "MG", "CG", "G", "KG", "OZ", "LB", "N", "Stones"}, {"ML", "L", "M³", " OZ ", "CUP", "PT", "QT", "GAL"}, {"NS", "µS", "MS", "S", "MIN", "HR", "DAY", "WEEK"}, Ax.currencyCodes, {"MPH", "KM/H", "M/S", "FT/S", "KNOT", "-1", "-1", "-1"}, {"°F", "°C", "K", "-1", "-1", "-1", "-1", "-1"}, {"2", "3", "4", "6", "8", "10", "16", "32"}};
 
         final String selectedFrom = allUnits[type][from];
         final String selectedTo = allUnits[type][to];
@@ -18,11 +18,11 @@ public class Converter {
                 try {
                     String answer = outputFormat.format(calculate(fromDub, selectedFrom, selectedTo));
 
-                    while (!Aux.isDigit(Aux.chat(answer, 0)))
+                    while (!Ax.isDigit(Ax.chat(answer, 0)))
                         answer = answer.substring(1);
 
-                    while (!Aux.isDigit(Aux.chat(answer, answer.length() - 1)))
-                        answer = Aux.newTrim(answer, 1);
+                    while (!Ax.isDigit(Ax.chat(answer, answer.length() - 1)))
+                        answer = Ax.newTrim(answer, 1);
 
                     answer = answer.replace(",", "");
 
@@ -413,13 +413,13 @@ public class Converter {
         int i;
         boolean valueFound = false, desiredFound = false;
 
-        for (i=0; i < Aux.currencyCodes.length; i++){
-            if (!valueFound && valueCurrency.equals(Aux.currencyCodes[i])) {
-                rateValue = Aux.rates[i];
+        for (i=0; i < Ax.currencyCodes.length; i++){
+            if (!valueFound && valueCurrency.equals(Ax.currencyCodes[i])) {
+                rateValue = Ax.rates[i];
                 valueFound = true;
             }
-            if (!desiredFound && desiredCurrency.equals(Aux.currencyCodes[i])) {
-                rateDesired = Aux.rates[i];
+            if (!desiredFound && desiredCurrency.equals(Ax.currencyCodes[i])) {
+                rateDesired = Ax.rates[i];
                 desiredFound = true;
             }
 

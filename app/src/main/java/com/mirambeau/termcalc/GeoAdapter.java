@@ -2,15 +2,7 @@ package com.mirambeau.termcalc;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.PorterDuff;
-import android.os.Build;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -143,25 +133,25 @@ public class GeoAdapter extends RecyclerView.Adapter<GeoAdapter.GeoViewHolder> {
 
         boolean isCustomTheme = tinydb.getBoolean("custom");
 
-        if (!isCustomTheme && Aux.isColor(tinydb.getString("accentPrimary")))
+        if (!isCustomTheme && Ax.isColor(tinydb.getString("accentPrimary")))
             accentColor = tinydb.getString("accentPrimary");
 
         String bigColor = accentColor;
 
-        if (theme.equals("5") && Aux.isColor(tinydb.getString("accentPrimary")) && !isCustomTheme)
+        if (theme.equals("5") && Ax.isColor(tinydb.getString("accentPrimary")) && !isCustomTheme)
             bigColor = tinydb.getString("accentPrimary");
         else if (isCustomTheme) {
-            if (Aux.isColor(tinydb.getString("cPrimary")) && !Aux.isGray(tinydb.getString("cPrimary")))
+            if (Ax.isColor(tinydb.getString("cPrimary")) && !Ax.isGray(tinydb.getString("cPrimary")))
                 bigColor = tinydb.getString("cPrimary");
-            else if (Aux.isColor(tinydb.getString("cSecondary")) && !Aux.isGray(tinydb.getString("cSecondary")))
+            else if (Ax.isColor(tinydb.getString("cSecondary")) && !Ax.isGray(tinydb.getString("cSecondary")))
                 bigColor = tinydb.getString("cSecondary");
-            else if (Aux.isColor(tinydb.getString("-b=t")) && !Aux.isGray(tinydb.getString("-b=t")))
+            else if (Ax.isColor(tinydb.getString("-b=t")) && !Ax.isGray(tinydb.getString("-b=t")))
                 bigColor = tinydb.getString("-b=t");
-            else if (Aux.isColor(tinydb.getString("cTop")) && !Aux.isGray(tinydb.getString("cTop")))
+            else if (Ax.isColor(tinydb.getString("cTop")) && !Ax.isGray(tinydb.getString("cTop")))
                 bigColor = tinydb.getString("cTop");
-            else if (Aux.isColor(tinydb.getString("cTertiary")) && !Aux.isGray(tinydb.getString("cTertiary")))
+            else if (Ax.isColor(tinydb.getString("cTertiary")) && !Ax.isGray(tinydb.getString("cTertiary")))
                 bigColor = tinydb.getString("cTertiary");
-            else if (Aux.isColor(tinydb.getString("-b+t")) && !Aux.isGray(tinydb.getString("-b+t")))
+            else if (Ax.isColor(tinydb.getString("-b+t")) && !Ax.isGray(tinydb.getString("-b+t")))
                 bigColor = tinydb.getString("-b+t");
         }
 

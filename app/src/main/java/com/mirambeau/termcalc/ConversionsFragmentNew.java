@@ -230,7 +230,7 @@ public class ConversionsFragmentNew extends Fragment {
                 new Handler(thread.getLooper()).postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        while (!Aux.checkRates()) {
+                        while (!Ax.checkRates()) {
                             CurrencyConverter.calculate(1.5, "USD", "EUR", new CurrencyConverter.Callback() {
                                 @Override
                                 public void onValueCalculated(Double value, Exception e) {
@@ -238,7 +238,7 @@ public class ConversionsFragmentNew extends Fragment {
                                 }
                             });
 
-                            CurrencyConverter.sendRatesToAux(Aux.currencyCodes);
+                            CurrencyConverter.sendRatesToAux(Ax.currencyCodes);
                         }
 
                         thread.quitSafely();
@@ -401,14 +401,14 @@ public class ConversionsFragmentNew extends Fragment {
             if (isCustomTheme) {
                 for (i = 0; i < scrollConvKeys.length; i++) {
                     if (scrollConvKeys[i] != null) {
-                        if (!Aux.isNull(cTop) && Aux.isColor(cTop))
+                        if (!Ax.isNull(cTop) && Ax.isColor(cTop))
                             scrollConvKeys[i].setTextColor(Color.parseColor(cTop));
 
-                        if (!Aux.isNull(cSecondary) && Aux.isColor(cSecondary)) {
+                        if (!Ax.isNull(cSecondary) && Ax.isColor(cSecondary)) {
                             scrollConvKeys[i].setBackgroundColor(Color.parseColor(cSecondary));
 
                             if (i == 0)
-                                scrollConvKeys[0].setBackgroundColor(Color.parseColor(Aux.hexAdd(cSecondary, -16)));
+                                scrollConvKeys[0].setBackgroundColor(Color.parseColor(Ax.hexAdd(cSecondary, -16)));
                         }
                     }
                 }
@@ -446,19 +446,19 @@ public class ConversionsFragmentNew extends Fragment {
             }
 
             if (isCustomTheme) {
-                if (Aux.isColor(cMain)) {
+                if (Ax.isColor(cMain)) {
                     bgConv.setBackgroundColor(Color.parseColor(cMain));
                 }
-                if (Aux.isColor(cKeypad) && keypadConv != null) {
+                if (Ax.isColor(cKeypad) && keypadConv != null) {
                     keypadConv.setBackgroundColor(Color.parseColor(cKeypad));
                 }
-                if (Aux.isColor(cKeytext)) {
+                if (Ax.isColor(cKeytext)) {
                     for (j = 0; j < 11; j++) {
                         if (convKeys[j] != null)
                             convKeys[j].setTextColor(Color.parseColor(cKeytext));
                     }
                 }
-                if (Aux.isColor(cEquals)) {
+                if (Ax.isColor(cEquals)) {
                     if (bEqualsConv != null)
                         bEqualsConv.setTextColor(Color.parseColor(cEquals));
                 }
@@ -517,7 +517,7 @@ public class ConversionsFragmentNew extends Fragment {
                                     bgColor = secondary;
                             }
 
-                            if (isCustomTheme && !Aux.isNull(cMain) && Aux.isColor(cMain))
+                            if (isCustomTheme && !Ax.isNull(cMain) && Ax.isColor(cMain))
                                 bgColor = cMain;
 
                             unitDefault = bgColor;
@@ -526,19 +526,19 @@ public class ConversionsFragmentNew extends Fragment {
                             if (theme != null && !theme.equals("\0")) {
                                 if (isCustomTheme) {
                                     if (theme.equals("1") || theme.equals("3") || theme.equals("4"))
-                                        unitSelected = Aux.hexAdd(unitDefault, 18);
+                                        unitSelected = Ax.hexAdd(unitDefault, 18);
                                     else
-                                        unitSelected = Aux.hexAdd(unitDefault, -15);
+                                        unitSelected = Ax.hexAdd(unitDefault, -15);
                                 }
                                 else {
                                     if (theme.equals("1"))
-                                        unitSelected = Aux.hexAdd(unitDefault, 18);
+                                        unitSelected = Ax.hexAdd(unitDefault, 18);
                                     else if (theme.equals("3") || theme.equals("4"))
-                                        unitSelected = Aux.hexAdd(unitDefault, 28);
+                                        unitSelected = Ax.hexAdd(unitDefault, 28);
                                     else if (theme.equals("2"))
                                         unitSelected = "#E0E0E0";
                                     else
-                                        unitSelected = Aux.hexAdd(unitDefault, -15);
+                                        unitSelected = Ax.hexAdd(unitDefault, -15);
                                 }
                             }
 
@@ -567,19 +567,19 @@ public class ConversionsFragmentNew extends Fragment {
                                 }
 
                                 if (theme.equals("4"))
-                                    unitSelected = Aux.hexAdd(unitSelected, -1);
+                                    unitSelected = Ax.hexAdd(unitSelected, -1);
 
                                 if (selectedType != fj) {
                                     if (theme.equals("5") || theme.equals("4"))
                                         type.setBackgroundColor(Color.parseColor(unitSelected));
                                     else if (theme.equals("2")) {
                                         if (isCustomTheme)
-                                            type.setBackgroundColor(Color.parseColor(Aux.hexAdd(secondary, -15)));
+                                            type.setBackgroundColor(Color.parseColor(Ax.hexAdd(secondary, -15)));
                                         else
-                                            type.setBackgroundColor(Color.parseColor(Aux.hexAdd(primary, -15)));
+                                            type.setBackgroundColor(Color.parseColor(Ax.hexAdd(primary, -15)));
                                     }
                                     else
-                                        type.setBackgroundColor(Color.parseColor(Aux.hexAdd(secondary, -15)));
+                                        type.setBackgroundColor(Color.parseColor(Ax.hexAdd(secondary, -15)));
                                 }
                             }
 
@@ -632,7 +632,7 @@ public class ConversionsFragmentNew extends Fragment {
                                 new Handler(thread.getLooper()).postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        while (!Aux.checkRates()) {
+                                        while (!Ax.checkRates()) {
                                             CurrencyConverter.calculate(1.5, "USD", "EUR", new CurrencyConverter.Callback() {
                                                 @Override
                                                 public void onValueCalculated(Double value, Exception e) {
@@ -640,7 +640,7 @@ public class ConversionsFragmentNew extends Fragment {
                                                 }
                                             });
 
-                                            CurrencyConverter.sendRatesToAux(Aux.currencyCodes);
+                                            CurrencyConverter.sendRatesToAux(Ax.currencyCodes);
                                         }
 
                                         thread.quitSafely();
@@ -698,10 +698,10 @@ public class ConversionsFragmentNew extends Fragment {
                             if (eq.endsWith(".") && isConvDec)
                                 isConvDec = false;
 
-                            eqConv = Aux.newTrim(eqConv, 1);
+                            eqConv = Ax.newTrim(eqConv, 1);
 
                             if (eqConv.length() > 3 && !isConvDec && selectedType != 7)
-                                eqConv = Aux.checkCommas(eqConv);
+                                eqConv = Ax.checkCommas(eqConv);
 
                             tv.setText(eqConv);
                         }
@@ -767,34 +767,34 @@ public class ConversionsFragmentNew extends Fragment {
                     if (allButtons[a] != null) {
                         String buttonText = allButtons[a].getText().toString();
 
-                        if (Aux.isColor(tinydb.getString("-b" + buttonText))) {
+                        if (Ax.isColor(tinydb.getString("-b" + buttonText))) {
                             allButtons[a].setBackgroundColor(Color.parseColor(tinydb.getString("-b" + buttonText)));
                         }
-                        if (Aux.isColor(tinydb.getString("-b" + buttonText + "t"))) {
+                        if (Ax.isColor(tinydb.getString("-b" + buttonText + "t"))) {
                             allButtons[a].setTextColor(Color.parseColor(tinydb.getString("-b" + buttonText + "t")));
                         }
                     }
                 }
 
                 if (bEqualsConv != null) {
-                    if (Aux.isColor(tinydb.getString("-b=t")))
+                    if (Ax.isColor(tinydb.getString("-b=t")))
                         bEqualsConv.setTextColor(Color.parseColor(tinydb.getString("-b=t")));
-                    else if (Aux.isColor(tinydb.getString("cNum")))
+                    else if (Ax.isColor(tinydb.getString("cNum")))
                         bEqualsConv.setTextColor(Color.parseColor(tinydb.getString("cNum")));
-                    else if (Aux.isColor(tinydb.getString("cPrimary")))
+                    else if (Ax.isColor(tinydb.getString("cPrimary")))
                         bEqualsConv.setTextColor(Color.parseColor(tinydb.getString("cPrimary")));
                 }
 
                 if (unitLayout != null) {
-                    if (Aux.isColor(tinydb.getString("cFab")))
+                    if (Ax.isColor(tinydb.getString("cFab")))
                         unitLayout.setBackgroundColor(Color.parseColor(tinydb.getString("cFab")));
-                    else if (!theme.equals("4") && Aux.isColor(tinydb.getString("cPrimary")))
+                    else if (!theme.equals("4") && Ax.isColor(tinydb.getString("cPrimary")))
                         unitLayout.setBackgroundColor(Color.parseColor(tinydb.getString("cPrimary")));
                     else
                         unitLayout.setBackgroundColor(darkGray);
                 }
 
-                if (Aux.isColor(tinydb.getString("cFabText"))) {
+                if (Ax.isColor(tinydb.getString("cFabText"))) {
                     int fabText = Color.parseColor(tinydb.getString("cFabText"));
 
                     if (expandFrom != null)
@@ -832,8 +832,8 @@ public class ConversionsFragmentNew extends Fragment {
                         clear.setColorFilter(monochromeTextColor);
                 }
 
-                if (Aux.isTinyColor("-mt")){
-                    int uiTextColor = Aux.getTinyColor("-mt");
+                if (Ax.isTinyColor("-mt")){
+                    int uiTextColor = Ax.getTinyColor("-mt");
 
                     if (clear != null)
                         clear.setColorFilter(uiTextColor);
@@ -919,7 +919,7 @@ public class ConversionsFragmentNew extends Fragment {
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             MainActivity.mainActivity.finishAffinity();
         }
     }
@@ -986,14 +986,14 @@ public class ConversionsFragmentNew extends Fragment {
                 eqConv += pressed;
 
                 if (eqConv.length() > 3 && !isConvDec && selectedType != 7)
-                    eqConv = Aux.checkCommas(eqConv);
+                    eqConv = Ax.checkCommas(eqConv);
 
                 tv.setText(eqConv);
             }
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             MainActivity.mainActivity.finishAffinity();
         }
     }
@@ -1013,7 +1013,7 @@ public class ConversionsFragmentNew extends Fragment {
         }
         catch (NullPointerException ignored) {}
 
-        if (!Aux.isNull(from)) {
+        if (!Ax.isNull(from)) {
             String fromStr = "";
 
             try {
@@ -1038,7 +1038,7 @@ public class ConversionsFragmentNew extends Fragment {
                     to.setText("Error");
                 }
                 else {
-                    if (!Aux.isNull(fromStr) && fromStr.length() > 0) {
+                    if (!Ax.isNull(fromStr) && fromStr.length() > 0) {
                         input = Integer.parseInt(fromStr);
 
                         try {
@@ -1055,7 +1055,7 @@ public class ConversionsFragmentNew extends Fragment {
                 }
             }
             else if (!from.getText().toString().equals("\0.") && !from.getText().toString().equals(".")) {
-                    if (from.length() > 0 && !Aux.isNull(from)) {
+                    if (from.length() > 0 && !Ax.isNull(from)) {
                         try {
                             fromDub = Double.parseDouble(fromStr);
                         }
@@ -1104,7 +1104,7 @@ public class ConversionsFragmentNew extends Fragment {
                         result = converter.convert(fromDub, selectedType, selectedFrom, selectedTo);
 
                         if (selectedType == 4) {
-                            if (internetChecked || Aux.ratesChecked || internetIsConnected()) {
+                            if (internetChecked || Ax.ratesChecked || internetIsConnected()) {
                                 internetChecked = true;
 
                                 if (result == -1 || (result == 0 && fromDub != 0)) {
@@ -1139,7 +1139,7 @@ public class ConversionsFragmentNew extends Fragment {
                         if (selectedType == 4) {
                             final DecimalFormat outputFormat = new DecimalFormat("#,###.##");
 
-                            if (Aux.newTrim(Double.toString(result), 1).endsWith("."))
+                            if (Ax.newTrim(Double.toString(result), 1).endsWith("."))
                                 to.setText(outputFormat.format(result) + "0");
                             else
                                 to.setText(outputFormat.format(result));

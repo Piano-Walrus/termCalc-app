@@ -85,7 +85,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(MainActivity.mainActivity);
         String theme = sp.getString(SettingsActivity.KEY_PREF_THEME, "1");
 
-        if (theme == null || !Aux.isDigit(theme))
+        if (theme == null || !Ax.isDigit(theme))
             theme = "1";
 
         if (theme.equals("2")) {

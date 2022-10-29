@@ -84,7 +84,7 @@ public class CurrencyConverter extends AsyncTask<Void, Void, Exception> {
     @Override
     protected Exception doInBackground(Void... params) {
         try {
-            if (!Aux.ratesChecked) {
+            if (!Ax.ratesChecked) {
                 generateRatesFromFloatRates();
                 returnValue = calculate(value, valueCurrency, desiredCurrency);
             }
@@ -285,13 +285,13 @@ public class CurrencyConverter extends AsyncTask<Void, Void, Exception> {
         int i;
         boolean valueFound = false, desiredFound = false;
 
-        for (i=0; i < Aux.currencyCodes.length; i++){
-            if (!valueFound && valueCurrency.equals(Aux.currencyCodes[i])) {
-                rateValue = Aux.rates[i];
+        for (i=0; i < Ax.currencyCodes.length; i++){
+            if (!valueFound && valueCurrency.equals(Ax.currencyCodes[i])) {
+                rateValue = Ax.rates[i];
                 valueFound = true;
             }
-            if (!desiredFound && desiredCurrency.equals(Aux.currencyCodes[i])) {
-                rateDesired = Aux.rates[i];
+            if (!desiredFound && desiredCurrency.equals(Ax.currencyCodes[i])) {
+                rateDesired = Ax.rates[i];
                 desiredFound = true;
             }
 
@@ -313,8 +313,8 @@ public class CurrencyConverter extends AsyncTask<Void, Void, Exception> {
 
         for (i=0; i < codes.length; i++){
             try {
-                if (Aux.rates[i] < 0)
-                    Aux.rates[i] = rates.get(codes[i]);
+                if (Ax.rates[i] < 0)
+                    Ax.rates[i] = rates.get(codes[i]);
             }
             catch (NullPointerException ignored) {}
         }

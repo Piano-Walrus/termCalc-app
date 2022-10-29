@@ -10,7 +10,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -109,7 +108,7 @@ public class AboutActivity extends AppCompatActivity {
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
     }

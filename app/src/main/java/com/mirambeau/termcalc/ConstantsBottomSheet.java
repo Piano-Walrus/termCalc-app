@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -33,7 +32,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ConstantsBottomSheet extends BottomSheetDialogFragment {
@@ -67,10 +65,10 @@ public class ConstantsBottomSheet extends BottomSheetDialogFragment {
             }
         });
 
-        final int theme = Aux.getThemeInt();
+        final int theme = Ax.getThemeInt();
         final int darkGray = Color.parseColor("#3C4043");
 
-        view.findViewById(R.id.constantsMainBG).setBackground(Aux.getSheetBackground(theme));
+        view.findViewById(R.id.constantsMainBG).setBackground(Ax.getSheetBackground(theme));
 
         if (theme == 2) {
             ((TextView) view.findViewById(R.id.constantsTitle)).setTextColor(darkGray);
@@ -126,7 +124,7 @@ public class ConstantsBottomSheet extends BottomSheetDialogFragment {
                                         }
                                     }
 
-                                    if (!inputExists && numInput.getText() != null && (Aux.isFullNum(numInput.getText().toString()) || Aux.containsBinaryOperator(numInput.getText().toString())) && titleInput.getText() != null) {
+                                    if (!inputExists && numInput.getText() != null && (Ax.isFullNum(numInput.getText().toString()) || Ax.containsBinaryOperator(numInput.getText().toString())) && titleInput.getText() != null) {
                                         dialog.dismiss();
 
                                         for (i=0; i < 9; i++) {
@@ -149,7 +147,7 @@ public class ConstantsBottomSheet extends BottomSheetDialogFragment {
                                         adapter.notifyItemChanged(position);
                                     }
                                     else if (inputExists) {
-                                        Aux.makeLongToast("Error: Constant value has already been saved.");
+                                        Ax.makeLongToast("Error: Constant value has already been saved.");
                                     }
                                     else if (titleInput.getText() == null) {
                                         Toast.makeText(MainActivity.mainActivity, "Error: Constant title cannot be blank.", Toast.LENGTH_LONG).show();
@@ -204,16 +202,16 @@ public class ConstantsBottomSheet extends BottomSheetDialogFragment {
                                 String bgColor;
 
                                 //Background colors
-                                if (Aux.isTinyColor("-b" + (i + 1)))
+                                if (Ax.isTinyColor("-b" + (i + 1)))
                                     bgColor = tinydb.getString("-b" + (i+1));
-                                else if (Aux.isTinyColor("cKeypad"))
+                                else if (Ax.isTinyColor("cKeypad"))
                                     bgColor = tinydb.getString("cKeypad");
                                 else {
                                     if (theme == 2) {
                                         bgColor = "#FFFFFF";
                                     }
                                     else if (theme == 5) {
-                                        bgColor = Aux.hexAdd(tinydb.getString("accentSecondary"), -6);
+                                        bgColor = Ax.hexAdd(tinydb.getString("accentSecondary"), -6);
                                     }
                                     else if (theme == 1) {
                                         bgColor = "#202227";
@@ -226,16 +224,16 @@ public class ConstantsBottomSheet extends BottomSheetDialogFragment {
                                 nums[i].setBackgroundColor(Color.parseColor(bgColor));
 
                                 if (tinydb.getString("shortcut" + (i+1)).equals(constantNums.get(position))) {
-                                    nums[i].setBackgroundColor(Color.parseColor(Aux.hexAdd(bgColor, addAmt)));
+                                    nums[i].setBackgroundColor(Color.parseColor(Ax.hexAdd(bgColor, addAmt)));
                                     initSelected.add("" + (i+1));
                                     selected.add("" + (i+1));
                                 }
 
                                 //Text Colors
-                                if (Aux.isTinyColor("-b" + (i + 1) + "t"))
-                                    nums[i].setTextColor(Aux.getTinyColor("-b" + (i+1) + "t"));
-                                else if (Aux.isTinyColor("cNum"))
-                                    nums[i].setTextColor(Aux.getTinyColor("cNum"));
+                                if (Ax.isTinyColor("-b" + (i + 1) + "t"))
+                                    nums[i].setTextColor(Ax.getTinyColor("-b" + (i+1) + "t"));
+                                else if (Ax.isTinyColor("cNum"))
+                                    nums[i].setTextColor(Ax.getTinyColor("cNum"));
                                 else {
                                     if (theme == 2) {
                                         nums[i].setTextColor(darkGray);
@@ -256,7 +254,7 @@ public class ConstantsBottomSheet extends BottomSheetDialogFragment {
                                     public void onClick(View v) {
                                         if (!selected.contains("" + (fi+1))) {
                                             selected.add("" + (fi+1));
-                                            nums[fi].setBackgroundColor(Color.parseColor(Aux.hexAdd(finalBgColor, addAmt)));
+                                            nums[fi].setBackgroundColor(Color.parseColor(Ax.hexAdd(finalBgColor, addAmt)));
                                         }
                                         else {
                                             selected.remove("" + (fi+1));
@@ -274,21 +272,21 @@ public class ConstantsBottomSheet extends BottomSheetDialogFragment {
                                     int i;
 
                                     for (i = 0; i < selected.toString().length(); i++) {
-                                        tinydb.putString("shortcut" + Aux.chat(selected.toString(), i), constantNums.get(position));
+                                        tinydb.putString("shortcut" + Ax.chat(selected.toString(), i), constantNums.get(position));
 
-                                        if (initSelected.contains(Aux.chat(selected.toString(), i)))
-                                            initSelected.remove(Aux.chat(selected.toString(), i));
+                                        if (initSelected.contains(Ax.chat(selected.toString(), i)))
+                                            initSelected.remove(Ax.chat(selected.toString(), i));
                                     }
 
                                     for (i = 0; i < initSelected.length(); i++) {
-                                        tinydb.putString("shortcut" + Aux.chat(initSelected.toString(), i), "");
+                                        tinydb.putString("shortcut" + Ax.chat(initSelected.toString(), i), "");
                                     }
 
 
                                     if (tinydb.getInt("shortcutsAssigned") < 3)
-                                        Aux.makeLongToast("Shortcuts updated. Long-press your selected number(s) to insert the selected constant");
+                                        Ax.makeLongToast("Shortcuts updated. Long-press your selected number(s) to insert the selected constant");
                                     else
-                                        Aux.makeToast("Shortcuts updated", 0);
+                                        Ax.makeToast("Shortcuts updated", 0);
 
                                     tinydb.putInt("shortcutsAssigned", tinydb.getInt("shortcutsAssigned") + 1);
                                 }
@@ -317,7 +315,7 @@ public class ConstantsBottomSheet extends BottomSheetDialogFragment {
                                 builder.setTitle("Are you sure you want to delete \"" + constantTitles.get(position) + "\"?\n");
                             }
                             catch (Exception e){
-                                Aux.makeLongToast("Error: Something went wrong. Please try again.");
+                                Ax.makeLongToast("Error: Something went wrong. Please try again.");
                                 shouldCloseDialog = true;
                                 dismiss();
                             }
@@ -421,7 +419,7 @@ public class ConstantsBottomSheet extends BottomSheetDialogFragment {
         int i;
 
         try {
-            TinyDB tinydb = Aux.tinydb();
+            TinyDB tinydb = Ax.tinydb();
 
             constantTitles = tinydb.getListString("constantTitles");
             constantNums = tinydb.getListString("constantNums");
@@ -445,7 +443,7 @@ public class ConstantsBottomSheet extends BottomSheetDialogFragment {
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             main.finishAffinity();
         }
     }
@@ -499,7 +497,7 @@ public class ConstantsBottomSheet extends BottomSheetDialogFragment {
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             main.finishAffinity();
         }
     }

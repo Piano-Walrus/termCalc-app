@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static final String[] initConstantUnits = {"mol⁻¹", "kg", "J·s", "C", "J·K⁻¹·mol⁻¹", "C/mol", "m/s²"};
 
     static final String[] initFunctionTitles = {"Compound Interest", "Simple Interest", "Pythagorean Theorem"};
-    static final String[] initFunctionTexts = {"P(1 + (r/n))^nt", "P(1 + rt)", Aux.sq + "(a^2 + b^2)"};
+    static final String[] initFunctionTexts = {"P(1 + (r/n))^nt", "P(1 + rt)", Ax.sq + "(a^2 + b^2)"};
     static final String[] initFunctionVariables = {"P`r`n`t", "P`r`t", "a`b"};
 
     ArrayList<String> constantTitles, constantNums, constantUnits;
@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             String theme = isCustomTheme ? tinydb.getString("customTheme") : tinydb.getString("basicTheme");
 
             try {
-                if (!Aux.isDigit(theme) || Integer.parseInt(theme) < 1) {
+                if (!Ax.isDigit(theme) || Integer.parseInt(theme) < 1) {
                     if (isCustomTheme)
                         tinydb.putString("customTheme", "1");
                     else
@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             isDarkTab = tinydb.getBoolean("isDarkTab");
 
             //If basic theme style is not set, set it to Dark
-            if (!Aux.isDigit(tinydb.getString("basicTheme")))
+            if (!Ax.isDigit(tinydb.getString("basicTheme")))
                 tinydb.putString("basicTheme", "1");
 
             if (!isDynamic) {
@@ -227,7 +227,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
             int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 
-            if (Aux.isNull(color))
+            if (Ax.isNull(color))
                 color = "1";
             else if (color.equals("18")) {
                 color = "1";
@@ -242,10 +242,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             //Start handling theme
             int cursorInt = theme.equals("2") ? 1 : 0;
-            Aux.cursorColors = new int[][]{{R.style.d_03DAC5, R.style.d_009688, R.style.d_54AF57, R.style.d_00C7E0, R.style.d_2196F3, R.style.d_0D2A89, R.style.d_3F51B5, R.style.d_6C42B6, R.style.d_E32765, R.style.d_F44336, R.style.d_E77369, R.style.d_FF9800, R.style.d_FFC107, R.style.d_FEF65B, R.style.d_66BB6A, R.style.d_873804, R.style.d_9BCEE9}, {R.style.l_03DAC5, R.style.l_009688, R.style.l_54AF57, R.style.l_00C7E0, R.style.l_2196F3, R.style.l_0D2A89, R.style.l_3F51B5, R.style.l_6C42B6, R.style.l_E32765, R.style.l_F44336, R.style.l_E77369, R.style.l_FF9800, R.style.l_FFC107, R.style.l_FEF65B, R.style.l_66BB6A, R.style.l_873804, R.style.l_9BCEE9}};
-            Aux.switchColors = new int[]{R.style.ds_03DAC5, R.style.ds_009688, R.style.ds_54AF57, R.style.ds_00C7E0, R.style.ds_2196F3, R.style.ds_0D2A89, R.style.ds_3F51B5, R.style.ds_6C42B6, R.style.ds_E32765, R.style.ds_F44336, R.style.ds_E77369, R.style.ds_FF9800, R.style.ds_FFC107, R.style.ds_FEF65B, R.style.ds_66BB6A, R.style.ds_873804, R.style.ds_9BCEE9};
+            Ax.cursorColors = new int[][]{{R.style.d_03DAC5, R.style.d_009688, R.style.d_54AF57, R.style.d_00C7E0, R.style.d_2196F3, R.style.d_0D2A89, R.style.d_3F51B5, R.style.d_6C42B6, R.style.d_E32765, R.style.d_F44336, R.style.d_E77369, R.style.d_FF9800, R.style.d_FFC107, R.style.d_FEF65B, R.style.d_66BB6A, R.style.d_873804, R.style.d_9BCEE9}, {R.style.l_03DAC5, R.style.l_009688, R.style.l_54AF57, R.style.l_00C7E0, R.style.l_2196F3, R.style.l_0D2A89, R.style.l_3F51B5, R.style.l_6C42B6, R.style.l_E32765, R.style.l_F44336, R.style.l_E77369, R.style.l_FF9800, R.style.l_FFC107, R.style.l_FEF65B, R.style.l_66BB6A, R.style.l_873804, R.style.l_9BCEE9}};
+            Ax.switchColors = new int[]{R.style.ds_03DAC5, R.style.ds_009688, R.style.ds_54AF57, R.style.ds_00C7E0, R.style.ds_2196F3, R.style.ds_0D2A89, R.style.ds_3F51B5, R.style.ds_6C42B6, R.style.ds_E32765, R.style.ds_F44336, R.style.ds_E77369, R.style.ds_FF9800, R.style.ds_FFC107, R.style.ds_FEF65B, R.style.ds_66BB6A, R.style.ds_873804, R.style.ds_9BCEE9};
 
-            setTheme(Aux.cursorColors[cursorInt][0]);
+            setTheme(Ax.cursorColors[cursorInt][0]);
 
             final String[] primaryColors = {"#03DAC5", "#009688", "#54AF57", "#00C7E0", "#2196F3", "#0D2A89", "#3F51B5", theme_boolean ? "#7357C2" : "#6C42B6", theme_boolean ? "#E91E63" : "#E32765", "#F44336", "#E77369", "#FF9800", "#FFC107", "#FEF65B", "#66BB6A", "#873804", theme_boolean ? "#B8E2F8" : "#9BCEE9"};
             final String[][] secondaryColors = {{"#53E2D4", "#4DB6AC", "#77C77B", "#51D6E8", "#64B5F6", "#1336A9", "#7986CB", "#8C6DCA", "#F06292", "#FF5956", "#EC8F87", "#FFB74D", "#FFD54F", "#FBF68D", "#EF5350", "#BD5E1E", "#B8E2F8"}, {"#00B5A3", "#00796B", "#388E3C", "#0097A7", "#1976D2", "#0A2068", "#303F9F", "#5E35B1", "#C2185B", "#D32F2F", "#D96459", "#F57C00", "#FFA000", "#F4E64B", "#EF5350", "#572300", "#9BCEE9"}};
@@ -261,9 +261,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             boolean isCustomNav = tinydb.getBoolean("navTheme");
             boolean isAlwaysDarkNav = tinydb.getBoolean("isAlwaysDarkNav");
 
-            Aux.cursorColor = isAlwaysDarkNav ? Aux.cursorColors[0][Integer.parseInt(color)-1] : Aux.cursorColors[cursorInt][Integer.parseInt(color)-1];
+            Ax.cursorColor = isAlwaysDarkNav ? Ax.cursorColors[0][Integer.parseInt(color)-1] : Ax.cursorColors[cursorInt][Integer.parseInt(color)-1];
 
-            setTheme(Aux.cursorColor);
+            setTheme(Ax.cursorColor);
 
             String navBG;
             String tempTheme = theme;
@@ -278,7 +278,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             else
                 navBG = "#191919";
 
-            if (isCustomTheme && isCustomNav && Aux.isColor(tinydb.getString("cMain")) && theme.equals("2"))
+            if (isCustomTheme && isCustomNav && Ax.isColor(tinydb.getString("cMain")) && theme.equals("2"))
                 navBG = tinydb.getString("cMain");
 
             theme = tempTheme;
@@ -333,14 +333,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 setSupportActionBar(toolbar);
             }
             catch (Exception e) {
-                Aux.saveStack(e);
+                Ax.saveStack(e);
             }
 
             try {
                 getSupportActionBar().setTitle(getResources().getString(R.string.home_menu_item));
             }
             catch (NullPointerException except) {
-                Aux.saveStack(except);
+                Ax.saveStack(except);
                 finish();
             }
 
@@ -350,7 +350,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             try {
                 navigationView.setNavigationItemSelectedListener(this);
             } catch (NullPointerException except) {
-                Aux.saveStack(except);
+                Ax.saveStack(except);
                 finish();
             }
 
@@ -376,28 +376,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 int unchecked = theme.equals("2") ? darkGray : Color.WHITE;
                 int checked;
 
-                if (Aux.isTinyColor("-mt") && Aux.isGray(tinydb.getString("-mt"))) {
+                if (Ax.isTinyColor("-mt") && Ax.isGray(tinydb.getString("-mt"))) {
                     if (theme.equals("2")) {
-                        if (Aux.getAverageBrightness(tinydb.getString("-mt")) <= 9)
-                            unchecked = Aux.getTinyColor("-mt");
+                        if (Ax.getAverageBrightness(tinydb.getString("-mt")) <= 9)
+                            unchecked = Ax.getTinyColor("-mt");
                     }
                     else {
-                        if (Aux.getAverageBrightness(tinydb.getString("-mt")) > 9)
-                            unchecked = Aux.getTinyColor("-mt");
+                        if (Ax.getAverageBrightness(tinydb.getString("-mt")) > 9)
+                            unchecked = Ax.getTinyColor("-mt");
                     }
                 }
 
-                String navAccentColor = Aux.getNavAccentColor();
+                String navAccentColor = Ax.getNavAccentColor();
 
                 if (theme.equals("2")) {
-                    if (Aux.getAverageBrightness(navAccentColor) > 12)
-                        navAccentColor = Aux.hexAdd(navAccentColor, -96);
-                    else if (Aux.getAverageBrightness(navAccentColor) > 11)
-                        navAccentColor = Aux.hexAdd(navAccentColor, -84);
+                    if (Ax.getAverageBrightness(navAccentColor) > 12)
+                        navAccentColor = Ax.hexAdd(navAccentColor, -96);
+                    else if (Ax.getAverageBrightness(navAccentColor) > 11)
+                        navAccentColor = Ax.hexAdd(navAccentColor, -84);
                 }
                 else {
-                    if (Aux.getAverageBrightness(navAccentColor) < 5)
-                        navAccentColor = Aux.hexAdd(navAccentColor, 32);
+                    if (Ax.getAverageBrightness(navAccentColor) < 5)
+                        navAccentColor = Ax.hexAdd(navAccentColor, 32);
                 }
 
                 checked = Color.parseColor(navAccentColor);
@@ -454,14 +454,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     navBg.setBackground(ContextCompat.getDrawable(this, R.drawable.dark_drawer_header_rounded));
 
                 if (theme.equals("2")) {
-                    if (Aux.isTinyColor("-mt") && Aux.isGray(tinydb.getString("-mt")))
-                        ((TextView) header.findViewById(R.id.navHeaderTitle)).setTextColor(Aux.getTinyColor("-mt"));
+                    if (Ax.isTinyColor("-mt") && Ax.isGray(tinydb.getString("-mt")))
+                        ((TextView) header.findViewById(R.id.navHeaderTitle)).setTextColor(Ax.getTinyColor("-mt"));
                     else
                         ((TextView) header.findViewById(R.id.navHeaderTitle)).setTextColor(darkGray);
 
                     try {
-                        if (Aux.isTinyColor("-mt") && Aux.isGray(tinydb.getString("-mt")))
-                            ((TextView) header.findViewById(R.id.navHeaderSubtitle)).setTextColor(Aux.getTinyColor("-mt"));
+                        if (Ax.isTinyColor("-mt") && Ax.isGray(tinydb.getString("-mt")))
+                            ((TextView) header.findViewById(R.id.navHeaderSubtitle)).setTextColor(Ax.getTinyColor("-mt"));
                         else
                             ((TextView) header.findViewById(R.id.navHeaderSubtitle)).setTextColor(darkGray);
                     } catch (Exception e) {
@@ -471,9 +471,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 boolean isDarkened = false;
 
-                if (Aux.isTinyColor("cKeypad")) {
-                    if (Aux.isTinyColor("cMain") && Aux.getTinyColor("cKeypad") == Aux.getTinyColor("cMain")) {
-                        cLeft = Aux.hexAdd(tinydb.getString("cKeypad"), -12);
+                if (Ax.isTinyColor("cKeypad")) {
+                    if (Ax.isTinyColor("cMain") && Ax.getTinyColor("cKeypad") == Ax.getTinyColor("cMain")) {
+                        cLeft = Ax.hexAdd(tinydb.getString("cKeypad"), -12);
                         isDarkened = true;
                     }
                     else
@@ -490,13 +490,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         cLeft = "#272C33";
                 }
 
-                if (Aux.isTinyColor("cPrimary")) {
+                if (Ax.isTinyColor("cPrimary")) {
                     int dimTop, dimBottom;
-                    int primaryInt = Aux.getTinyColor("cPrimary");
+                    int primaryInt = Ax.getTinyColor("cPrimary");
                     String primaryStr = tinydb.getString("cPrimary");
 
-                    if (Aux.isTinyColor("cKeypad")) {
-                        if (Aux.getTinyColor("cKeypad") == primaryInt) {
+                    if (Ax.isTinyColor("cKeypad")) {
+                        if (Ax.getTinyColor("cKeypad") == primaryInt) {
                             if (isDarkened) {
                                 dimTop = -12;
                                 dimBottom = -12;
@@ -524,36 +524,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         }
                     }
 
-                    cbRight = Aux.hexAdd(primaryStr, dimBottom);
-                    cRight = Aux.hexAdd(primaryStr, dimTop);
+                    cbRight = Ax.hexAdd(primaryStr, dimBottom);
+                    cRight = Ax.hexAdd(primaryStr, dimTop);
                 }
 
-                if (Aux.isTinyColor("cNum"))
+                if (Ax.isTinyColor("cNum"))
                     cLeftText = tinydb.getString("cNum");
                 else
                     cLeftText = theme.equals("2") ? "#222222" : "#FFFFFF";
 
                 boolean isKeyText;
-                String[] topOps = {"-b" + Aux.divi + "t", "-b" + Aux.multi + "t"};
+                String[] topOps = {"-b" + Ax.divi + "t", "-b" + Ax.multi + "t"};
                 String[] bottomOps = {"-b+t", "-b-t"};
 
                 for (i = 0; i < topOps.length; i++) {
-                    if (Aux.isTinyColor(topOps[i]))
-                        isKeyText = Aux.isTinyColor("cNum") ? Aux.getTinyColor(topOps[i]) == Aux.getTinyColor("cNum") : Aux.getTinyColor(topOps[i]) == Color.WHITE;
+                    if (Ax.isTinyColor(topOps[i]))
+                        isKeyText = Ax.isTinyColor("cNum") ? Ax.getTinyColor(topOps[i]) == Ax.getTinyColor("cNum") : Ax.getTinyColor(topOps[i]) == Color.WHITE;
                     else
                         isKeyText = true;
 
-                    if ((!isKeyText || i == topOps.length - 1) && Aux.isTinyColor(topOps[i])) {
+                    if ((!isKeyText || i == topOps.length - 1) && Ax.isTinyColor(topOps[i])) {
                         cRightText = tinydb.getString(topOps[i]);
 
-                        if (Aux.isTinyColor(Aux.newTrim(topOps[i], 1)))
-                            cRight = tinydb.getString(Aux.newTrim(topOps[i], 1));
+                        if (Ax.isTinyColor(Ax.newTrim(topOps[i], 1)))
+                            cRight = tinydb.getString(Ax.newTrim(topOps[i], 1));
 
                         break;
                     }
                 }
 
-                if (Aux.isTinyColor("-bop")) {
+                if (Ax.isTinyColor("-bop")) {
                     String primaryTextColor = tinydb.getString("-bop");
 
                     cRightText = primaryTextColor;
@@ -561,20 +561,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
 
                 for (i = 0; i < bottomOps.length; i++) {
-                    if (Aux.isTinyColor(bottomOps[i])) {
-                        if (Aux.isTinyColor("cNum"))
-                            isKeyText = Aux.getTinyColor(bottomOps[i]) == Aux.getTinyColor("cNum");
+                    if (Ax.isTinyColor(bottomOps[i])) {
+                        if (Ax.isTinyColor("cNum"))
+                            isKeyText = Ax.getTinyColor(bottomOps[i]) == Ax.getTinyColor("cNum");
                         else
-                            isKeyText = Aux.getTinyColor(bottomOps[i]) == Color.WHITE;
+                            isKeyText = Ax.getTinyColor(bottomOps[i]) == Color.WHITE;
                     }
                     else
                         isKeyText = true;
 
-                    if ((!isKeyText || i == bottomOps.length - 1) && Aux.isTinyColor(bottomOps[i])) {
+                    if ((!isKeyText || i == bottomOps.length - 1) && Ax.isTinyColor(bottomOps[i])) {
                         cbRightText = tinydb.getString(bottomOps[i]);
 
-                        if (Aux.isTinyColor(Aux.newTrim(bottomOps[i], 1)))
-                            cbRight = tinydb.getString(Aux.newTrim(bottomOps[i], 1));
+                        if (Ax.isTinyColor(Ax.newTrim(bottomOps[i], 1)))
+                            cbRight = tinydb.getString(Ax.newTrim(bottomOps[i], 1));
 
                         break;
                     }
@@ -585,19 +585,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 String[] colors = {cLeft, cLeftText, cRight, cRightText, cbRight, cbRightText};
 
                 for (i = 0; i < colors.length; i++) {
-                    if (Aux.isColor(colors[i]) && !Aux.isGray(colors[i])) {
+                    if (Ax.isColor(colors[i]) && !Ax.isGray(colors[i])) {
                         isAllGray = false;
                         break;
                     }
                 }
 
-                if (isAllGray && Aux.isTinyColor("cFab") && Aux.isTinyColor("cFabText") && (!Aux.isGray(tinydb.getString("cFab")) || !Aux.isGray(tinydb.getString("cFabText")))) {
+                if (isAllGray && Ax.isTinyColor("cFab") && Ax.isTinyColor("cFabText") && (!Ax.isGray(tinydb.getString("cFab")) || !Ax.isGray(tinydb.getString("cFabText")))) {
                     colors[4] = tinydb.getString("cFab");
                     colors[5] = tinydb.getString("cFabText");
                 }
 
                 for (i = 0; i < zones.length; i++) {
-                    if (Aux.isColor(colors[i]))
+                    if (Ax.isColor(colors[i]))
                         zones[i].setColorFilter(Color.parseColor(colors[i]));
                 }
             }
@@ -669,7 +669,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
             try {
-                Aux.adapter = new FunctionsAdapter(functionCards, adapters);
+                Ax.adapter = new FunctionsAdapter(functionCards, adapters);
             } catch (NullPointerException e) {
                 e.printStackTrace();
             }
@@ -717,7 +717,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 String cTertiary = tinydb.getString("cTertiary");
 
                 //Primary
-                if (Aux.isColor(cPrimary)) {
+                if (Ax.isColor(cPrimary)) {
                     primary = cPrimary;
                 }
                 else {
@@ -727,7 +727,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
 
                 //Secondary
-                if (Aux.isColor(cSecondary)) {
+                if (Ax.isColor(cSecondary)) {
                     secondary = cSecondary;
                 }
                 else {
@@ -737,7 +737,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
 
                 //Tertiary
-                if (Aux.isColor(cTertiary)) {
+                if (Ax.isColor(cTertiary)) {
                     tertiary = cTertiary;
                 }
                 else {
@@ -793,15 +793,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
             if (!roundedButtons)
-                scrollBar.setBackgroundColor(theme.equals("5") ? Color.parseColor(isDarkTab ? Aux.hexAdd(secondary, -6) : secondary) : secondaryColor);
+                scrollBar.setBackgroundColor(theme.equals("5") ? Color.parseColor(isDarkTab ? Ax.hexAdd(secondary, -6) : secondary) : secondaryColor);
 
             if (!isBig) {
                 if (theme.equals("2"))
-                    setExpandBGColor(Aux.hexAdd(secondary, 0));
+                    setExpandBGColor(Ax.hexAdd(secondary, 0));
                 else if (theme.equals("4"))
                     setExpandBGColor("#000000");
                 else
-                    setExpandBGColor(isDarkTab ? Aux.hexAdd(secondary, -6) : secondary);
+                    setExpandBGColor(isDarkTab ? Ax.hexAdd(secondary, -6) : secondary);
             }
 
             final int orientation = this.getResources().getConfiguration().orientation;
@@ -865,7 +865,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     frame.setFitsSystemWindows(true);
                 }
 
-                getWindow().setNavigationBarColor(Color.parseColor(Aux.hexAdd(bgColor, -15)));
+                getWindow().setNavigationBarColor(Color.parseColor(Ax.hexAdd(bgColor, -15)));
 
                 setMTColor(Color.WHITE);
             }
@@ -934,7 +934,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 final Button inv2 = findViewById(R.id.bInv2);
 
                 if (inv2 != null) {
-                    inv2.setTextColor(Aux.isTinyColor("-bINV2t") && isCustomTheme ? Aux.getTinyColor("-bINV2t") : tertiaryColor);
+                    inv2.setTextColor(Ax.isTinyColor("-bINV2t") && isCustomTheme ? Ax.getTinyColor("-bINV2t") : tertiaryColor);
                 }
 
                 bParenthesisOpen.setTextColor(tertiaryColor);
@@ -962,7 +962,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             else if (theme.equals("5")) {
                 bgColor = secondary;
 
-                secondary = isDarkTab ? Aux.hexAdd(secondary, -6) : secondary;
+                secondary = isDarkTab ? Ax.hexAdd(secondary, -6) : secondary;
 
                 bTextColor = "#303030";
                 keypadColor = secondary;
@@ -1190,16 +1190,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             if (isCustomTheme || (color.equals("1") && (!cPlus.equals("\0") || !cMinus.equals("\0") || !cMulti.equals("\0") || !cDiv.equals("\0")))) {
                 if (isCustom) {
-                    if (Aux.isColor(cPlus)) {
+                    if (Ax.isColor(cPlus)) {
                         mainOps[0].setTextColor(Color.parseColor(cPlus));
                     }
-                    if (Aux.isColor(cMinus)) {
+                    if (Ax.isColor(cMinus)) {
                         mainOps[1].setTextColor(Color.parseColor(cMinus));
                     }
-                    if (Aux.isColor(cMulti)) {
+                    if (Ax.isColor(cMulti)) {
                         mainOps[2].setTextColor(Color.parseColor(cMulti));
                     }
-                    if (Aux.isColor(cDiv)) {
+                    if (Ax.isColor(cDiv)) {
                         mainOps[3].setTextColor(Color.parseColor(cDiv));
                     }
                 }
@@ -1232,8 +1232,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     bgAnim.setBackgroundColor(Color.parseColor(cMain));
                 }
 
-                if (Aux.isTinyColor("cTop")) {
-                    int cTop = Aux.getTinyColor("cTop");
+                if (Ax.isTinyColor("cTop")) {
+                    int cTop = Ax.getTinyColor("cTop");
 
                     for (l = 0; l < compBar.length; l++) {
                         if (compBar[l] != null)
@@ -1255,10 +1255,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         Button inv2 = findViewById(R.id.bInv2);
 
                         if (inv2 != null) {
-                            if (Aux.isTinyColor("-bINV2t"))
-                                inv2.setTextColor(Aux.getTinyColor("-bINV2t"));
-                            else if (Aux.isTinyColor("-btt"))
-                                inv2.setTextColor(Aux.getTinyColor("-btt"));
+                            if (Ax.isTinyColor("-bINV2t"))
+                                inv2.setTextColor(Ax.getTinyColor("-bINV2t"));
+                            else if (Ax.isTinyColor("-btt"))
+                                inv2.setTextColor(Ax.getTinyColor("-btt"));
                         }
                     }
                 }
@@ -1563,7 +1563,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             String fabTextColorStr;
 
             if (isCustomTheme) {
-                if (Aux.isColor(tinydb.getString("cFabText")))
+                if (Ax.isColor(tinydb.getString("cFabText")))
                     fabTextColorStr = tinydb.getString("cFabText");
                 else
                     fabTextColorStr = "#FFFFFF";
@@ -1583,9 +1583,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             String fabColor;
 
             if (isCustomTheme) {
-                if (Aux.isColor(tinydb.getString("cFab")))
+                if (Ax.isColor(tinydb.getString("cFab")))
                     fabColor = tinydb.getString("cFab");
-                else if (!theme.equals("4") && Aux.isColor(tinydb.getString("cPrimary")))
+                else if (!theme.equals("4") && Ax.isColor(tinydb.getString("cPrimary")))
                     fabColor = tinydb.getString("cPrimary");
                 else if (theme.equals("4"))
                     fabColor = "#222222";
@@ -1660,14 +1660,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     customFabs[0].setOnClickListener(expandFabs);
 
                 if (!roundedButtons) {
-                    if (Aux.getThemeInt() != 2) {
+                    if (Ax.getThemeInt() != 2) {
                         for (i = 1; i < customLabels.length; i++) {
-                            if (!isCustomTheme && Aux.getThemeInt() == 5)
+                            if (!isCustomTheme && Ax.getThemeInt() == 5)
                                 customLabels[i].setBackgroundTintList(ColorStateList.valueOf(monochromeTextColor));
-                            else if (isCustomTheme && Aux.isGray(fabColor) && Aux.isDigit(Aux.chat(fabColor, 1)) && Integer.parseInt(Aux.chat(fabColor, 1)) < 9)
+                            else if (isCustomTheme && Ax.isGray(fabColor) && Ax.isDigit(Ax.chat(fabColor, 1)) && Integer.parseInt(Ax.chat(fabColor, 1)) < 9)
                                 customLabels[i].setBackgroundTintList(fabCsl);
 
-                            if (isCustomTheme && Aux.isGray(fabTextColorStr) && Aux.isLetter(Aux.chat(fabTextColorStr, 1)))
+                            if (isCustomTheme && Ax.isGray(fabTextColorStr) && Ax.isLetter(Ax.chat(fabTextColorStr, 1)))
                                 customLabels[i].setTextColor(fabTextColor);
                             else
                                 customLabels[i].setTextColor(Color.WHITE);
@@ -1675,12 +1675,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                     else {
                         for (i = 1; i < customLabels.length; i++) {
-                            if (isCustomTheme && Aux.isGray(fabTextColorStr) && Aux.isDigit(Aux.chat(fabTextColorStr, 1)) && Integer.parseInt(Aux.chat(fabTextColorStr, 1)) < 9)
+                            if (isCustomTheme && Ax.isGray(fabTextColorStr) && Ax.isDigit(Ax.chat(fabTextColorStr, 1)) && Integer.parseInt(Ax.chat(fabTextColorStr, 1)) < 9)
                                 customLabels[i].setTextColor(fabTextColor);
                             else
                                 customLabels[i].setTextColor(darkGray);
 
-                            if (isCustomTheme && Aux.isGray(fabColor) && Aux.isLetter(Aux.chat(fabColor, 1)))
+                            if (isCustomTheme && Ax.isGray(fabColor) && Ax.isLetter(Ax.chat(fabColor, 1)))
                                 customLabels[i].setBackgroundTintList(fabCsl);
                             else {
                                 try {
@@ -1688,7 +1688,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     int labelColor;
 
                                     if (isCustomTheme)
-                                        labelColor = Aux.safeParseColor(tinydb.getString("cMain"), null);
+                                        labelColor = Ax.safeParseColor(tinydb.getString("cMain"), null);
                                     else
                                         labelColor = Color.WHITE;
 
@@ -1747,7 +1747,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 e.printStackTrace();
             }
 
-            Aux.adapter.setOnItemClickListener(functionItemClickListener);
+            Ax.adapter.setOnItemClickListener(functionItemClickListener);
 
 
 
@@ -1795,21 +1795,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         public boolean onLongClick(View v) {
                             String constant = tinydb.getString("shortcut" + fi);
 
-                            if (constant != null && !constant.equals("") && (Aux.isDigit(Aux.chat(constant, 0)) || constant.startsWith(Aux.sq) ||
+                            if (constant != null && !constant.equals("") && (Ax.isDigit(Ax.chat(constant, 0)) || constant.startsWith(Ax.sq) ||
                                     constant.startsWith("(")) || constant.startsWith("a") || constant.startsWith("l") || constant.startsWith("s") ||
                                     constant.startsWith("c") || constant.startsWith("t")) {
                                 int j;
                                 boolean isExponent = false;
 
                                 for (j = 0; j < constant.length(); j++) {
-                                    if (Aux.isSuperscript(Aux.chat(constant, j))) {
+                                    if (Ax.isSuperscript(Ax.chat(constant, j))) {
                                         if (!isExponent) {
-                                            constant = Aux.newReplace(j, constant, "^" + Aux.chat(constant, j));
+                                            constant = Ax.newReplace(j, constant, "^" + Ax.chat(constant, j));
 
                                             isExponent = true;
                                         }
                                         else {
-                                            constant = Aux.newReplace(j, constant, Aux.fromSuper(Aux.chat(constant, j)));
+                                            constant = Ax.newReplace(j, constant, Ax.fromSuper(Ax.chat(constant, j)));
                                         }
                                     }
                                     else {
@@ -1817,13 +1817,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     }
                                 }
 
-                                if (!Aux.isFullNum(constant) && !Aux.isNum(constant))
+                                if (!Ax.isFullNum(constant) && !Ax.isNum(constant))
                                     constant = "(" + constant + ")";
 
-                                if (constant != null && !constant.equals("") && (Aux.isDigit(Aux.chat(constant, 0)) || constant.startsWith(Aux.sq) ||
+                                if (constant != null && !constant.equals("") && (Ax.isDigit(Ax.chat(constant, 0)) || constant.startsWith(Ax.sq) ||
                                         constant.startsWith("(")) || constant.startsWith("a") || constant.startsWith("l") || constant.startsWith("s") ||
                                         constant.startsWith("c") || constant.startsWith("t"))
-                                    enterStr(Aux.parseEq(constant));
+                                    enterStr(Ax.parseEq(constant));
                             }
 
                             return true;
@@ -1892,8 +1892,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     endText = tv.getSelectionStart() == getTvText().length() ? "" : tvText.substring(cursor);
 
                     if (eq3.endsWith(".")) {
-                        if (Aux.isDigit(Aux.lastChar(Aux.newTrim(eq3, 1)))) {
-                            eq3 = Aux.newTrim(eq3, 1);
+                        if (Ax.isDigit(Ax.lastChar(Ax.newTrim(eq3, 1)))) {
+                            eq3 = Ax.newTrim(eq3, 1);
                             cursor--;
                         }
                         else
@@ -1901,12 +1901,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
 
                     for (i = eq3.length()-1; i >= 0; i--) {
-                        String current = Aux.chat(eq3, i);
+                        String current = Ax.chat(eq3, i);
 
-                        if (Aux.isDigit(current) || current.equals(".") || current.equals("e"))
-                            converted = Aux.numToSuper(current) + converted;
-                        else if ((current.equals(Aux.emDash) || current.equals("-")) && (i == 0 || !Aux.isDigit(Aux.chat(eq3, i-1))) && converted.length() > 0 && !converted.contains(Aux.superMinus))
-                            converted = Aux.superMinus + converted;
+                        if (Ax.isDigit(current) || current.equals(".") || current.equals("e"))
+                            converted = Ax.numToSuper(current) + converted;
+                        else if ((current.equals(Ax.emDash) || current.equals("-")) && (i == 0 || !Ax.isDigit(Ax.chat(eq3, i-1))) && converted.length() > 0 && !converted.contains(Ax.superMinus))
+                            converted = Ax.superMinus + converted;
                         else
                             break;
                     }
@@ -1914,12 +1914,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     if (converted.equals(""))
                         return true;
                     else
-                        converted += Aux.sq;
+                        converted += Ax.sq;
 
                     if (cursor == getTvText().length())
-                        output = Aux.newTrim(getTvText(), converted.length() - 1) + converted;
+                        output = Ax.newTrim(getTvText(), converted.length() - 1) + converted;
                     else if (cursor > 0)
-                        output = Aux.newTrim(getTvText().substring(0, cursor), converted.length() - 1) + converted + endText;
+                        output = Ax.newTrim(getTvText().substring(0, cursor), converted.length() - 1) + converted + endText;
                     else
                         return true;
 
@@ -1947,10 +1947,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 bMod.setText(tinydb.getString("modSymbol"));
 
             if (isCustomTheme) {
-                if (Aux.isTinyColor("-b%"))
-                    bMod.setBackgroundColor(Aux.getTinyColor("-b%"));
-                if (Aux.isTinyColor("-b%t"))
-                    bMod.setTextColor(Aux.getTinyColor("-b%t"));
+                if (Ax.isTinyColor("-b%"))
+                    bMod.setBackgroundColor(Ax.getTinyColor("-b%"));
+                if (Ax.isTinyColor("-b%t"))
+                    bMod.setTextColor(Ax.getTinyColor("-b%t"));
             }
 
             //Mod
@@ -1995,32 +1995,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     if (equaled)
                         getEqualed();
 
-                    if (!Aux.isNull(eq3) && Aux.isNum(Aux.lastChar(eq3))) {
+                    if (!Ax.isNull(eq3) && Ax.isNum(Ax.lastChar(eq3))) {
                         vibe(vibeDuration);
 
                         int n;
-                        int numChars = Aux.countNums(eq3);
-                        String number = Aux.getLast(eq3, numChars);
+                        int numChars = Ax.countNums(eq3);
+                        String number = Ax.getLast(eq3, numChars);
 
-                        eq3 = Aux.newTrim(eq3, numChars);
+                        eq3 = Ax.newTrim(eq3, numChars);
 
                         pressed.setText("log");
                         operation(pressed);
 
-                        eq3 = Aux.newTrim(eq3, 1);
+                        eq3 = Ax.newTrim(eq3, 1);
 
                         for (n = 0; n < numChars; n++) {
-                            if (Aux.isDigit(Aux.chat(number, n)))
-                                eq3 += subscripts[Integer.parseInt(Aux.chat(number, n))];
-                            else if (Aux.chat(number, n).equals("e"))
+                            if (Ax.isDigit(Ax.chat(number, n)))
+                                eq3 += subscripts[Integer.parseInt(Ax.chat(number, n))];
+                            else if (Ax.chat(number, n).equals("e"))
                                 eq3 += "ₑ";
-                            else if (Aux.chat(number, n).equals("π")) {
+                            else if (Ax.chat(number, n).equals("π")) {
                                 if (number.length() == 1)
                                     eq3 += subscripts[3] + "  ̣" + subscripts[1] + subscripts[4] + subscripts[1] + subscripts[5] + subscripts[9] + subscripts[2] + subscripts[6];
                                 else
                                     eq3 += "₍" + subscripts[3] + "  ̣" + subscripts[1] + subscripts[4] + subscripts[1] + subscripts[5] + subscripts[9] + subscripts[2] + subscripts[6] + "₎";
                             }
-                            else if (Aux.chat(number, n).equals("."))
+                            else if (Ax.chat(number, n).equals("."))
                                 eq3 += "  ̣";
                         }
 
@@ -2049,7 +2049,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         }
                     }
 
-                    String tvText = Aux.updateCommas(getTvText().replace("\n", ""));
+                    String tvText = Ax.updateCommas(getTvText().replace("\n", ""));
 
                     if (tvText.length() < 1) {
                         tv.setText(" ");
@@ -2069,7 +2069,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 final MathContext newMc = new MathContext(tinydb.getBoolean("isDynamic") ? maxPrecision : (Math.min(precision, (maxPrecision / 2)) * 2), RoundingMode.HALF_UP);
 
                                 final String tvText = getTvText().trim();
-                                final String eq = Aux.isBinaryOp(Aux.lastChar(tvText)) ? Aux.newTrim(tvText, 1) : tvText;
+                                final String eq = Ax.isBinaryOp(Ax.lastChar(tvText)) ? Ax.newTrim(tvText, 1) : tvText;
 
                                 BigDecimal result;
 
@@ -2094,9 +2094,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     resultStr = BetterMath.formatResult(result, newMc, scale++).trim();
 
                                 while ((resultStr.endsWith("0") && resultStr.contains(".")) || resultStr.endsWith(".") || resultStr.endsWith("0E"))
-                                    resultStr = Aux.newTrim(resultStr, 1);
+                                    resultStr = Ax.newTrim(resultStr, 1);
 
-                                if (!equaled && getTvText().replace(",", "").trim().equals(tvText.replace(",", "").trim()) && !resultStr.equals(eq) && Aux.isFullSignedNumE(resultStr) && (!Aux.isFullNum(tvText) || tvText.equals("e") || tvText.equals(Aux.pi))) {
+                                if (!equaled && getTvText().replace(",", "").trim().equals(tvText.replace(",", "").trim()) && !resultStr.equals(eq) && Ax.isFullSignedNumE(resultStr) && (!Ax.isFullNum(tvText) || tvText.equals("e") || tvText.equals(Ax.pi))) {
                                     try {
                                         previousExpression.setText(resultStr);
                                     }
@@ -2178,7 +2178,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             String cPrimary = tinydb.getString("cPrimary");
 
             if (isCustomTheme) {
-                if (Aux.isColor(cPrimary) && !cPrimary.equals("#reset0") && Aux.isColor(cKeypad) && !cKeypad.equals("#reset0") && Color.parseColor(cPrimary) == Color.parseColor(cKeypad)) {
+                if (Ax.isColor(cPrimary) && !cPrimary.equals("#reset0") && Ax.isColor(cKeypad) && !cKeypad.equals("#reset0") && Color.parseColor(cPrimary) == Color.parseColor(cKeypad)) {
                     final Button[] mainOps = {findViewById(R.id.sPlus), findViewById(R.id.sMinus), findViewById(R.id.sMulti), findViewById(R.id.sDiv)};
 
                     for (i = 0; i < mainOps.length; i++) {
@@ -2192,8 +2192,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     String eqStr = tinydb.getString("cbEquals");
                     String cNum = tinydb.getString("cNum");
 
-                    if (Aux.isNull(eqStr) || eqStr.equals("#reset0")) {
-                        if (!Aux.isNull(cNum) && Aux.isColor(cNum)) {
+                    if (Ax.isNull(eqStr) || eqStr.equals("#reset0")) {
+                        if (!Ax.isNull(cNum) && Ax.isColor(cNum)) {
                             tinydb.putString("cbEquals", tinydb.getString("cNum"));
                             bEquals.setTextColor(Color.parseColor(cNum));
                         }
@@ -2220,8 +2220,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
             if (!roundedButtons) {
-                if (isCustomTheme && Aux.isTinyColor("cFabText"))
-                    bDel.setColorFilter(Aux.getTinyColor("cFabText"));
+                if (isCustomTheme && Ax.isTinyColor("cFabText"))
+                    bDel.setColorFilter(Ax.getTinyColor("cFabText"));
                 else if (theme.equals("5"))
                     bDel.setColorFilter(secondaryColor);
                 else if (theme != null && color != null && ((color.equals("14") && !theme.equals("4")) || (color.equals("17") && (theme.equals("3") || theme.equals("1")))))
@@ -2279,9 +2279,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
 
                 if (isCustomTheme && fragTag.equals("Geometry")) {
-                    if (!Aux.isNull(cMain) && Aux.isColor(cMain))
+                    if (!Ax.isNull(cMain) && Ax.isColor(cMain))
                         drawer.setBackgroundColor(Color.parseColor(cMain));
-                    else if (Aux.isColor(bgColor))
+                    else if (Ax.isColor(bgColor))
                         drawer.setBackgroundColor(Color.parseColor(bgColor));
                     else
                         drawer.setBackgroundColor(Color.BLACK);
@@ -2292,12 +2292,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             if (isCustomTheme) {
                 for (i = 0; i < 10; i++) {
-                    if (Aux.isColor(tinydb.getString("-b" + i)))
-                        nums[i].setTextColor(Aux.getTinyColor("-b" + i));
+                    if (Ax.isColor(tinydb.getString("-b" + i)))
+                        nums[i].setTextColor(Ax.getTinyColor("-b" + i));
                 }
 
-                if (Aux.isColor(tinydb.getString("-bDec")))
-                    bDec.setTextColor(Aux.getTinyColor("-bDec"));
+                if (Ax.isColor(tinydb.getString("-bDec")))
+                    bDec.setTextColor(Ax.getTinyColor("-bDec"));
             }
 
             //Individual Button Colors
@@ -2310,7 +2310,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 //Main Ops Text Color
                 String moTextColor;
 
-                if (theme.equals("2") || Aux.isNull(cbTextColor))
+                if (theme.equals("2") || Ax.isNull(cbTextColor))
                     cbTextColor = "#FFFFFF";
                 else if (theme.equals("4"))
                     cbTextColor = secondary;
@@ -2328,7 +2328,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             String buttonText = allButtons[a][b].getText().toString();
 
                             try {
-                                if (inv2 == null && (buttonText.equals("(") || buttonText.equals(")")) && Aux.isTinyColor("cTop") && !Aux.tinyEquals("cSecondary", "cTertiary"))
+                                if (inv2 == null && (buttonText.equals("(") || buttonText.equals(")")) && Ax.isTinyColor("cTop") && !Ax.tinyEquals("cSecondary", "cTertiary"))
                                     continue;
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -2338,23 +2338,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 buttonText = "ⁿ√";
 
                             //Background Colors
-                            if (Aux.isTinyColor("-b" + buttonText)) {
+                            if (Ax.isTinyColor("-b" + buttonText)) {
                                 if (!(orientation == Configuration.ORIENTATION_LANDSCAPE && a == 2 && b == allButtons[a].length - 1))
-                                    allButtons[a][b].setBackgroundColor(Aux.getTinyColor("-b" + buttonText));
+                                    allButtons[a][b].setBackgroundColor(Ax.getTinyColor("-b" + buttonText));
 
-                                if (a == 2 && b == allButtons[a].length - 1 && inv2 != null && !Aux.isTinyColor("-bINV2"))
-                                    inv2.setBackgroundColor(Aux.getTinyColor("-b" + buttonText));
+                                if (a == 2 && b == allButtons[a].length - 1 && inv2 != null && !Ax.isTinyColor("-bINV2"))
+                                    inv2.setBackgroundColor(Ax.getTinyColor("-b" + buttonText));
                             }
 
                             //Text Colors
-                            if (Aux.isTinyColor("-b" + buttonText + "t")) {
-                                allButtons[a][b].setTextColor(Aux.getTinyColor("-b" + buttonText + "t"));
+                            if (Ax.isTinyColor("-b" + buttonText + "t")) {
+                                allButtons[a][b].setTextColor(Ax.getTinyColor("-b" + buttonText + "t"));
 
-                                if (a == 2 && b == allButtons[a].length - 1 && inv2 != null && !Aux.isTinyColor("-bINV2t"))
-                                    inv2.setTextColor(Aux.getTinyColor("-b" + buttonText + "t"));
+                                if (a == 2 && b == allButtons[a].length - 1 && inv2 != null && !Ax.isTinyColor("-bINV2t"))
+                                    inv2.setTextColor(Ax.getTinyColor("-b" + buttonText + "t"));
                             }
-                            else if (Aux.isTinyColor("cNum") && (a == 0 || (a == 4 && (b == 0 || b == 3)))) {
-                                allButtons[a][b].setTextColor(Aux.getTinyColor("cNum"));
+                            else if (Ax.isTinyColor("cNum") && (a == 0 || (a == 4 && (b == 0 || b == 3)))) {
+                                allButtons[a][b].setTextColor(Ax.getTinyColor("cNum"));
                             }
                             //Equals Button Default
                             else if (a == 4 && b == 3 && !theme.equals("5")) {
@@ -2364,19 +2364,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             else {
                                 //Top Bar (Left)
                                 if ((a == 1 || a == 2)) {
-                                    if (!Aux.isTinyColor("cTop") && Aux.isColor(cbTextColor))
+                                    if (!Ax.isTinyColor("cTop") && Ax.isColor(cbTextColor))
                                         allButtons[a][b].setTextColor(Color.parseColor(cbTextColor));
                                 }
                                 //Top Bar (Right)
                                 else if ((a == 4 && (b == 1 || b == 2 || b == 4))) {
-                                    if (!Aux.isTinyColor("-btt") && Aux.isColor(cbTextColor))
+                                    if (!Ax.isTinyColor("-btt") && Ax.isColor(cbTextColor))
                                         allButtons[a][b].setTextColor(Color.parseColor(cbTextColor));
                                 }
                                 //Main Ops
-                                else if (a == 3 && Aux.isColor(moTextColor)) {
+                                else if (a == 3 && Ax.isColor(moTextColor)) {
                                     allButtons[a][b].setTextColor(Color.parseColor(moTextColor));
                                 }
-                                else if (Aux.isColor(bTextColor))
+                                else if (Ax.isColor(bTextColor))
                                     allButtons[a][b].setTextColor(bTextColorInt);
                             }
                         }
@@ -2388,25 +2388,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     nums[i].setStateListAnimator(null);
                 }
 
-                if (Aux.isTinyColor("-mt")) {
-                    setMTColor(Aux.getTinyColor("-mt"));
+                if (Ax.isTinyColor("-mt")) {
+                    setMTColor(Ax.getTinyColor("-mt"));
 
                     if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
                         Button inv = findViewById(R.id.bInv);
 
-                        inv.setTextColor(Aux.getTinyColor("-mt"));
+                        inv.setTextColor(Ax.getTinyColor("-mt"));
                     }
                 }
 
                 try {
-                    if (Aux.isTinyColor("cSecondary")) {
-                        int secondary = Aux.getTinyColor("cSecondary");
+                    if (Ax.isTinyColor("cSecondary")) {
+                        int secondary = Ax.getTinyColor("cSecondary");
                         int secondaryDarker;
 
-                        if (Aux.isTinyColor("cMain") && secondary == Aux.getTinyColor("cMain"))
+                        if (Ax.isTinyColor("cMain") && secondary == Ax.getTinyColor("cMain"))
                             secondaryDarker = secondary;
                         else
-                            secondaryDarker = Color.parseColor(Aux.hexAdd(tinydb.getString("cSecondary"), -6));
+                            secondaryDarker = Color.parseColor(Ax.hexAdd(tinydb.getString("cSecondary"), -6));
 
                         int ebgColor = isDarkTab ? secondaryDarker : secondary;
 
@@ -2420,28 +2420,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     e.printStackTrace();
                 }
 
-                if (Aux.isTinyColor("-bop")) {
+                if (Ax.isTinyColor("-bop")) {
                     for (i=0; i < mainOps.length; i++) {
                         String code = "-b" + mainOps[i].getText().toString() + "t";
-                        mainOps[i].setTextColor(Aux.isTinyColor(code) ? Aux.getTinyColor(code) : Aux.getTinyColor("-bop"));
+                        mainOps[i].setTextColor(Ax.isTinyColor(code) ? Ax.getTinyColor(code) : Ax.getTinyColor("-bop"));
                     }
                 }
 
-                if (Aux.isTinyColor("-btt")) {
+                if (Ax.isTinyColor("-btt")) {
                     final Button[] tertiaryBtns = {findViewById(R.id.bInv2), findViewById(R.id.bParenthesisOpen), findViewById(R.id.bParenthesisClose)};
 
                     for (i=0; i < tertiaryBtns.length; i++) {
                         if (tertiaryBtns[i] != null) {
                             String code = ("-b" + tertiaryBtns[i].getText().toString() + "t").replace("-bINVt", "-bINV2t");
 
-                            tertiaryBtns[i].setTextColor(Aux.isTinyColor(code) ? Aux.getTinyColor(code) : Aux.getTinyColor("-btt"));
+                            tertiaryBtns[i].setTextColor(Ax.isTinyColor(code) ? Ax.getTinyColor(code) : Ax.getTinyColor("-btt"));
                         }
                     }
                 }
 
                 try {
-                    if (Aux.isTinyColor("-bINV2") && isCustomTheme)
-                        inv2.setBackgroundColor(Aux.getTinyColor("-bINV2"));
+                    if (Ax.isTinyColor("-bINV2") && isCustomTheme)
+                        inv2.setBackgroundColor(Ax.getTinyColor("-bINV2"));
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -2466,25 +2466,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
             if (isCustomTheme) {
-                if (Aux.isColor(tinydb.getString("cDiv")) && !Aux.isColor(tinydb.getString("-b÷t"))) {
+                if (Ax.isColor(tinydb.getString("cDiv")) && !Ax.isColor(tinydb.getString("-b÷t"))) {
                     tinydb.putString("-b÷t", tinydb.getString("cDiv"));
                     mainOps[3].setTextColor(Color.parseColor(tinydb.getString("-b÷t")));
                 }
-                if (Aux.isColor(tinydb.getString("cMulti")) && !Aux.isColor(tinydb.getString("-b×t"))) {
+                if (Ax.isColor(tinydb.getString("cMulti")) && !Ax.isColor(tinydb.getString("-b×t"))) {
                     tinydb.putString("-b×t", tinydb.getString("cMulti"));
                     mainOps[2].setTextColor(Color.parseColor(tinydb.getString("-b×t")));
                 }
-                if (Aux.isColor(tinydb.getString("cMinus")) && !Aux.isColor(tinydb.getString("-b-t"))) {
+                if (Ax.isColor(tinydb.getString("cMinus")) && !Ax.isColor(tinydb.getString("-b-t"))) {
                     tinydb.putString("-b-t", tinydb.getString("cMinus"));
                     mainOps[1].setTextColor(Color.parseColor(tinydb.getString("-b-t")));
                 }
-                if (Aux.isColor(tinydb.getString("cPlus")) && !Aux.isColor(tinydb.getString("-b+t"))) {
+                if (Ax.isColor(tinydb.getString("cPlus")) && !Ax.isColor(tinydb.getString("-b+t"))) {
                     tinydb.putString("-b+t", tinydb.getString("cPlus"));
                     mainOps[0].setTextColor(Color.parseColor(tinydb.getString("-b+t")));
                 }
 
-                if (theme.equals("1") && Aux.isColor(tinydb.getString("cMain")))
-                    main.setBackgroundColor(Color.parseColor(Aux.hexAdd(tinydb.getString("cMain"), -12)));
+                if (theme.equals("1") && Ax.isColor(tinydb.getString("cMain")))
+                    main.setBackgroundColor(Color.parseColor(Ax.hexAdd(tinydb.getString("cMain"), -12)));
             }
 
             tinydb.putString("accentPrimary", primary);
@@ -2498,7 +2498,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 new Handler(thread.getLooper()).postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        while (!Aux.checkRates()) {
+                        while (!Ax.checkRates()) {
                             CurrencyConverter.calculate(1.5, "USD", "EUR", new CurrencyConverter.Callback() {
                                 @Override
                                 public void onValueCalculated(Double value, Exception e) {
@@ -2506,7 +2506,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 }
                             });
 
-                            CurrencyConverter.sendRatesToAux(Aux.currencyCodes);
+                            CurrencyConverter.sendRatesToAux(Ax.currencyCodes);
                         }
 
                         thread.quitSafely();
@@ -2540,10 +2540,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 customFabs[0].setVisibility(View.GONE);
 
             //Set custom labels to -ft if -ft is equal to -mt and if -m is black
-            if (isCustomTheme && Aux.isTinyColor("-mt") && Aux.isTinyColor("cFabText") && Aux.getTinyColor("-mt") == Aux.getTinyColor("cFabText") && Aux.isTinyColor("cMain") && tinydb.getString("cMain").equals("#000000")) {
+            if (isCustomTheme && Ax.isTinyColor("-mt") && Ax.isTinyColor("cFabText") && Ax.getTinyColor("-mt") == Ax.getTinyColor("cFabText") && Ax.isTinyColor("cMain") && tinydb.getString("cMain").equals("#000000")) {
                 for (TextView label : customLabels) {
                     if (label != null)
-                        label.setTextColor(Aux.getTinyColor("cFabText"));
+                        label.setTextColor(Ax.getTinyColor("cFabText"));
                 }
             }
 
@@ -2572,7 +2572,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     final GradientDrawable.Orientation vertical = GradientDrawable.Orientation.TOP_BOTTOM;
 
                     String direction = tinydb.getString("gradDirectMain");
-                    int[] gradColors = {Aux.getTinyColor("gradStartMain"), Aux.getTinyColor("gradEndMain")};
+                    int[] gradColors = {Ax.getTinyColor("gradStartMain"), Ax.getTinyColor("gradEndMain")};
                     GradientDrawable.Orientation gradDirection;
 
                     if (direction.equalsIgnoreCase("horizontal"))
@@ -2614,24 +2614,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 try {
                     final FloatingActionButton[] fabs = {bDel, findViewById(R.id.expandCustoms), customFabs[1], customFabs[2]};
 
-                    if (!Aux.isTinyColor("cFabText") && Aux.isTinyColor("-bop"))
-                        fabs[0].setColorFilter(Aux.getTinyColor("-bop"));
+                    if (!Ax.isTinyColor("cFabText") && Ax.isTinyColor("-bop"))
+                        fabs[0].setColorFilter(Ax.getTinyColor("-bop"));
 
                     for (i=1; i < fabs.length; i++) {
-                        if (Aux.isTinyColor("-bfc"))
-                            fabs[i].setBackgroundTintList(ColorStateList.valueOf(Aux.getTinyColor("-bfc")));
+                        if (Ax.isTinyColor("-bfc"))
+                            fabs[i].setBackgroundTintList(ColorStateList.valueOf(Ax.getTinyColor("-bfc")));
 
-                        if (Aux.isTinyColor("-bfct"))
-                            fabs[i].setColorFilter(Aux.getTinyColor("-bfct"));
-                        else if (Aux.isTinyColor("cFabText"))
-                            fabs[i].setColorFilter(Aux.getTinyColor("cFabText"));
-                        else if (Aux.isTinyColor("-bop"))
-                            fabs[i].setColorFilter(Aux.getTinyColor("-bop"));
+                        if (Ax.isTinyColor("-bfct"))
+                            fabs[i].setColorFilter(Ax.getTinyColor("-bfct"));
+                        else if (Ax.isTinyColor("cFabText"))
+                            fabs[i].setColorFilter(Ax.getTinyColor("cFabText"));
+                        else if (Ax.isTinyColor("-bop"))
+                            fabs[i].setColorFilter(Ax.getTinyColor("-bop"));
                     }
 
                     try {
-                        int previousColor = Aux.isTinyColor("-mt") ? Aux.getTinyColor("-mt") :
-                                Aux.getThemeInt() == 2 ? Color.BLACK : Aux.getThemeInt() == 5 ? Color.parseColor("#303030") : Color.WHITE;
+                        int previousColor = Ax.isTinyColor("-mt") ? Ax.getTinyColor("-mt") :
+                                Ax.getThemeInt() == 2 ? Color.BLACK : Ax.getThemeInt() == 5 ? Color.parseColor("#303030") : Color.WHITE;
 
                         previousExpression.setTextColor(previousColor);
                     }
@@ -2667,7 +2667,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //Handle Rounded Button Theme Colors
             if (roundedButtons && !theme.equals("5")) {
                 ImageButton swapTopBar = findViewById(R.id.swapTopBar);
-                int textColor = theme.equals("2") ? darkGray : Color.parseColor(Aux.hexAdd(tertiary, 230));
+                int textColor = theme.equals("2") ? darkGray : Color.parseColor(Ax.hexAdd(tertiary, 230));
 
                 Button inv = findViewById(R.id.bInv);
 
@@ -2724,16 +2724,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 String buttonText = button.getText().toString();
 
                                 if (!buttonText.equals("=")) {
-                                    if (!theme.equals("2") && (color.equals("14") || color.equals("17")) && !Aux.isDigit(buttonText) && !buttonText.equals("."))
+                                    if (!theme.equals("2") && (color.equals("14") || color.equals("17")) && !Ax.isDigit(buttonText) && !buttonText.equals("."))
                                         button.setTextColor(darkGray);
                                     else
                                         button.setTextColor(textColor);
                                 }
                                 else if (theme.equals("2"))
-                                    button.setTextColor(Color.parseColor(Aux.hexAdd(primary, -28)));
+                                    button.setTextColor(Color.parseColor(Ax.hexAdd(primary, -28)));
 
                                 if (button.getParent() == keypad && theme.equals("2")) {
-                                    button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(Aux.hexAdd(primary, 16))));
+                                    button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(Ax.hexAdd(primary, 16))));
 
                                     Drawable background = button.getBackground();
                                     background.setAlpha(26);
@@ -2772,7 +2772,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         catch (Exception e) {
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
     }
@@ -2970,7 +2970,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         boolean isAlwaysDarkNav = tinydb.getBoolean("isAlwaysDarkNav");
 
-        if (theme == null || !Aux.isFullNum(theme))
+        if (theme == null || !Ax.isFullNum(theme))
             theme = "1";
 
         // - Change Button Colors According to Theme -
@@ -2979,10 +2979,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String[][] secondaryColors = {{"#53E2D4", "#4DB6AC", "#77C77B", "#51D6E8", "#64B5F6", "#1336A9", "#7986CB", "#8C6DCA", "#F06292", "#FF5956", "#EC8F87", "#FFB74D", "#FFD54F", "#FBF68D", "#EF5350", "#BD5E1E", "#B8E2F8"}, {"#00B5A3", "#00796B", "#388E3C", "#0097A7", "#1976D2", "#0A2068", "#303F9F", "#5E35B1", "#C2185B", "#D32F2F", "#D96459", "#F57C00", "#FFA000", "#F4E64B", "#EF5350", "#572300", "#9BCEE9"}};
         String[][] tertiaryColors = {{"#3CDECE", "#26A69A", "#68B86E", "#39CFE3", "#42A5F5", "#0D2F9E", "#5C6BC0", "#7857BA", "#EC407A", "#FA4E4B", "#EB837A", "#FFA726", "#FFCB2E", "#F8F276", "#FF5754", "#A14D15", "#ABDBF4"}, {"#00C5B1", "#00897B", "#43A047", "#00ACC1", "#1E88E5", "#0A2373", "#3949AB", "#663ABD", "#D81B60", "#E33532", "#DE685D", "#FB8C00", "#FFB300", "#FCEE54", "#FF5754", "#612703", "#ABDBF4"}};
 
-        if (color == null || !Aux.isFullNum(color))
+        if (color == null || !Ax.isFullNum(color))
             color = "1";
 
-        setTheme(Aux.cursorColors[cursorInt][Integer.parseInt(color)-1]);
+        setTheme(Ax.cursorColors[cursorInt][Integer.parseInt(color)-1]);
 
         if (!isCustomTheme) {
             primary = primaryColors[Integer.parseInt(color) - 1];
@@ -3063,8 +3063,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (isFabExpanded && !roundedButtons)
             findViewById(R.id.expandCustoms).performClick();
 
-        if (item.getItemId() != R.id.nav_geo && theme.equals("1") && isCustomTheme && Aux.isColor(cMain))
-            main.setBackgroundColor(Color.parseColor(Aux.hexAdd(cMain, -12)));
+        if (item.getItemId() != R.id.nav_geo && theme.equals("1") && isCustomTheme && Ax.isColor(cMain))
+            main.setBackgroundColor(Color.parseColor(Ax.hexAdd(cMain, -12)));
 
         if (equaled && !(toolbar.getTitle().equals("Home") && item.getItemId() == R.id.nav_home)) {
             if (!isCustomTheme && (finalColor.equals("14") && !finalTheme.equals("4") || finalColor.equals("17") && (finalTheme.equals("3") || finalTheme.equals("1")))) {
@@ -3079,7 +3079,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (!finalTheme.equals("5"))
                     bDel.setColorFilter(Color.WHITE);
 
-                if (isCustomTheme && !Aux.isTinyColor("cFabText"))
+                if (isCustomTheme && !Ax.isTinyColor("cFabText"))
                     bDel.setColorFilter(Color.WHITE);
             }
         }
@@ -3093,14 +3093,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.fragment_container)).commit();
 
                 if (isAlwaysDarkNav)
-                    setTheme(Aux.cursorColors[0][Integer.parseInt(color)-1]);
+                    setTheme(Ax.cursorColors[0][Integer.parseInt(color)-1]);
                 else
-                    setTheme(Aux.cursorColors[cursorInt][Integer.parseInt(color)-1]);
+                    setTheme(Ax.cursorColors[cursorInt][Integer.parseInt(color)-1]);
 
                 if (isCustomTheme) {
-                    if (!Aux.isNull(cMain) && Aux.isColor(cMain))
+                    if (!Ax.isNull(cMain) && Ax.isColor(cMain))
                         drawer.setBackgroundColor(Color.parseColor(cMain));
-                    else if (!Aux.isNull(bgColor))
+                    else if (!Ax.isNull(bgColor))
                         drawer.setBackgroundColor(Color.parseColor(bgColor));
                 }
 
@@ -3123,9 +3123,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 frame.setVisibility(View.VISIBLE);
 
                 if (isCustomTheme) {
-                    if (!Aux.isNull(cMain) && Aux.isColor(cMain))
+                    if (!Ax.isNull(cMain) && Ax.isColor(cMain))
                         drawer.setBackgroundColor(Color.parseColor(cMain));
-                    else if (!Aux.isNull(bgColor))
+                    else if (!Ax.isNull(bgColor))
                         drawer.setBackgroundColor(Color.parseColor(bgColor));
                 }
 
@@ -3142,9 +3142,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 frame.setVisibility(View.VISIBLE);
 
                 if (isCustomTheme) {
-                    if (!Aux.isNull(cMain) && Aux.isColor(cMain))
+                    if (!Ax.isNull(cMain) && Ax.isColor(cMain))
                         drawer.setBackgroundColor(Color.parseColor(cMain));
-                    else if (!Aux.isNull(bgColor))
+                    else if (!Ax.isNull(bgColor))
                         drawer.setBackgroundColor(Color.parseColor(bgColor));
                 }
 
@@ -3218,7 +3218,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
 
-        if (item.getItemId() == R.id.nav_geo && isCustomTheme && Aux.isColor(cMain)) {
+        if (item.getItemId() == R.id.nav_geo && isCustomTheme && Ax.isColor(cMain)) {
             if (theme.equals("2"))
                 main.setBackgroundColor(Color.WHITE);
             else if (theme.equals("5"))
@@ -3226,9 +3226,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             else
                 main.setBackgroundColor(Color.BLACK);
         }
-        else if (isCustomTheme && Aux.isColor(cMain)) {
+        else if (isCustomTheme && Ax.isColor(cMain)) {
             if (theme.equals("1"))
-                main.setBackgroundColor(Color.parseColor(Aux.hexAdd(cMain, -12)));
+                main.setBackgroundColor(Color.parseColor(Ax.hexAdd(cMain, -12)));
             else
                 main.setBackgroundColor(Color.parseColor(cMain));
         }
@@ -3240,8 +3240,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else
             findViewById(R.id.bDegRad).setVisibility(View.VISIBLE);
 
-        if (item.getItemId() != R.id.nav_geo && isCustomTheme && Aux.isTinyColor("-mt"))
-            setMTColor(Aux.getTinyColor("-mt"));
+        if (item.getItemId() != R.id.nav_geo && isCustomTheme && Ax.isTinyColor("-mt"))
+            setMTColor(Ax.getTinyColor("-mt"));
         else
             setMTColor(Color.parseColor(bTextColor));
 
@@ -3264,7 +3264,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         View numDivider = findViewById(R.id.numeratorDivider);
         View denDivider = findViewById(R.id.denominatorDivider);
 
-        if (Aux.getThemeInt() == 2 && !isCustomTheme && Aux.getOrientation(MainActivity.mainActivity) == Configuration.ORIENTATION_LANDSCAPE)
+        if (Ax.getThemeInt() == 2 && !isCustomTheme && Ax.getOrientation(MainActivity.mainActivity) == Configuration.ORIENTATION_LANDSCAPE)
             ((Button) findViewById(R.id.bInv)).setTextColor(color);
 
         try {
@@ -3315,8 +3315,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 ColorStateList bgColor;
 
-                if (isCustomTheme && Aux.isTinyColor("cMain"))
-                    bgColor = ColorStateList.valueOf(Aux.getTinyColor("cMain"));
+                if (isCustomTheme && Ax.isTinyColor("cMain"))
+                    bgColor = ColorStateList.valueOf(Ax.getTinyColor("cMain"));
                 else if (theme.equals("2"))
                     bgColor = ColorStateList.valueOf(Color.WHITE);
                 else if (theme.equals("1"))
@@ -3341,9 +3341,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         if (!isBig) {
-            if (isCustomTheme && Aux.isTinyColor("cTop")) {
+            if (isCustomTheme && Ax.isTinyColor("cTop")) {
                 try {
-                    ((ImageButton) findViewById(R.id.expand)).setColorFilter(Aux.getTinyColor("cTop"));
+                    ((ImageButton) findViewById(R.id.expand)).setColorFilter(Ax.getTinyColor("cTop"));
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -3351,7 +3351,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
             else if (isCustomTheme) {
                 try {
-                    int theme = Aux.getThemeInt();
+                    int theme = Ax.getThemeInt();
 
                     if (theme == 5)
                         ((ImageButton) findViewById(R.id.expand)).setColorFilter(monochromeTextColor);
@@ -3438,7 +3438,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void setExpandBGColor(String color) {
-        if (Aux.isColor(color) && !isBig && !roundedButtons) {
+        if (Ax.isColor(color) && !isBig && !roundedButtons) {
             int ebgColor = Color.parseColor(color);
 
             try {
@@ -3522,7 +3522,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     if (theme != null) {
                         if (theme.equals("5")) {
-                            int tertiaryColor = Color.parseColor(isDarkTab ? Aux.hexAdd(secondary, -6) : secondary);
+                            int tertiaryColor = Color.parseColor(isDarkTab ? Ax.hexAdd(secondary, -6) : secondary);
 
                             bOpen.setBackgroundColor(tertiaryColor);
                             bClose.setBackgroundColor(tertiaryColor);
@@ -3637,7 +3637,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.menu = menu;
 
         try {
-            if (!Aux.tinydb().getString("whereCustom").equals("1") || this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+            if (!Ax.tinydb().getString("whereCustom").equals("1") || this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
                 inflater.inflate(R.menu.main_customs, menu);
             else
                 inflater.inflate(R.menu.main, menu);
@@ -3686,10 +3686,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         recreate();
 
         if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            setContentView(roundedButtons && Aux.getThemeInt() != 5 ? R.layout.activity_main_round : R.layout.activity_main);
+            setContentView(roundedButtons && Ax.getThemeInt() != 5 ? R.layout.activity_main_round : R.layout.activity_main);
         }
         else if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            setContentView(roundedButtons && Aux.getThemeInt() != 5 ? R.layout.activity_main_round : R.layout.activity_main);
+            setContentView(roundedButtons && Ax.getThemeInt() != 5 ? R.layout.activity_main_round : R.layout.activity_main);
 
             if (theme != null && theme.equals("2")){
                 Button inv = findViewById(R.id.bInv);
@@ -3801,7 +3801,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         try {
             for (i = 0; i < trig.length; i++) {
-                trigButtons[i].setText(isInv ? trig[i] + Aux.superMinus + Aux.superscripts[1] : trig[i]);
+                trigButtons[i].setText(isInv ? trig[i] + Ax.superMinus + Ax.superscripts[1] : trig[i]);
             }
         }
         catch (Exception e) {
@@ -4040,7 +4040,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tinydb.putBoolean("isRad", isRad);
 
         try {
-            if (Aux.isFullSignedNumE(previousExpression.getText().toString()))
+            if (Ax.isFullSignedNumE(previousExpression.getText().toString()))
                 previousExpression.setText(evaluate(getTvText()));
         }
         catch (Exception ignored) {}
@@ -4053,7 +4053,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int orientation;
 
         try {
-            orientation = Aux.getOrientation(this);
+            orientation = Ax.getOrientation(this);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -4113,9 +4113,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else if (!before.equals("~") && before.endsWith("(")) {
             for (i=before.length()-2; i >= 0; i--) {
-                if ((Aux.isLetter(Aux.chat(before, i)) && !Aux.chat(before, i).equals("e")))
+                if ((Ax.isLetter(Ax.chat(before, i)) && !Ax.chat(before, i).equals("e")))
                     deleteAmt++;
-                else if (i > 1 && (Aux.chat(before, i-1) + Aux.chat(before, i)).equals(Aux.superMinus + Aux.superscripts[1]) && Aux.isLetter(Aux.chat(before, i-2))) {
+                else if (i > 1 && (Ax.chat(before, i-1) + Ax.chat(before, i)).equals(Ax.superMinus + Ax.superscripts[1]) && Ax.isLetter(Ax.chat(before, i-2))) {
                     deleteAmt += 2;
                     i--;
                 }
@@ -4125,7 +4125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         try {
-            if (cursor < tvText.length() && tvText.substring(0, cursor + 1).endsWith(",") && Aux.isDigit(Aux.chat(tvText, cursor-1)) && (cursor < 2 || !Aux.isDigit(Aux.chat(tvText, cursor-2))))
+            if (cursor < tvText.length() && tvText.substring(0, cursor + 1).endsWith(",") && Ax.isDigit(Ax.chat(tvText, cursor-1)) && (cursor < 2 || !Ax.isDigit(Ax.chat(tvText, cursor-2))))
                 endOffset--;
             else if (tvText.substring(0, cursor).endsWith(","))
                 deleteAmt++;
@@ -4140,26 +4140,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             else {
                 if (getTvText().length() > 0) {
                     //N-th root
-                    if (getTvText().endsWith(Aux.sq) && Aux.isSuperscript(Aux.lastChar(Aux.newTrim(getTvText(), 1)))) {
+                    if (getTvText().endsWith(Ax.sq) && Ax.isSuperscript(Ax.lastChar(Ax.newTrim(getTvText(), 1)))) {
                         //TODO: Test this
-                        String output = Aux.newTrim(getTvText(), 1);
+                        String output = Ax.newTrim(getTvText(), 1);
 
                         for (i = output.length() - 1; i >=0; i--) {
-                            String current = Aux.chat(output, i);
+                            String current = Ax.chat(output, i);
 
-                            output = Aux.newTrim(output, 1);
+                            output = Ax.newTrim(output, 1);
 
-                            if (Aux.isSubscript(current)) {
+                            if (Ax.isSubscript(current)) {
                                 try {
-                                    output += Aux.superlist.contains(current) ? Aux.superlist.indexOf(current) : Aux.normalListMisc.get(Aux.superlistMisc.indexOf(current));
+                                    output += Ax.superlist.contains(current) ? Ax.superlist.indexOf(current) : Ax.normalListMisc.get(Ax.superlistMisc.indexOf(current));
                                 }
                                 catch (Exception e) {
                                     e.printStackTrace();
 
-                                    output = Aux.newTrim(getTvText(), 1);
+                                    output = Ax.newTrim(getTvText(), 1);
 
-                                    while (Aux.isSubscript(Aux.lastChar(output)))
-                                        output = Aux.newTrim(output, 1);
+                                    while (Ax.isSubscript(Ax.lastChar(output)))
+                                        output = Ax.newTrim(output, 1);
 
                                     tv.setText(output);
 
@@ -4171,36 +4171,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         }
                     }
                     //Log base n
-                    else if (tvText.endsWith("(") && Aux.isSubscript(Aux.lastChar(Aux.newTrim(tvText, 1)))) {
+                    else if (tvText.endsWith("(") && Ax.isSubscript(Ax.lastChar(Ax.newTrim(tvText, 1)))) {
                         //TODO: Backspacing log base n
                     }
                     else {
                         //Delete trig, log, or ln
                         if (getTvText().endsWith("(")) {
-                            tv.setText(Aux.newTrim(getTvText(), 1));
+                            tv.setText(Ax.newTrim(getTvText(), 1));
 
-                            if (getTvText().endsWith(Aux.superMinus + Aux.superscripts[1]) && Aux.isLetter(Aux.lastChar(Aux.newTrim(getTvText(), 2))))
-                                tv.setText(Aux.newTrim(getTvText(), 2));
+                            if (getTvText().endsWith(Ax.superMinus + Ax.superscripts[1]) && Ax.isLetter(Ax.lastChar(Ax.newTrim(getTvText(), 2))))
+                                tv.setText(Ax.newTrim(getTvText(), 2));
 
-                            while (Aux.isLetter(Aux.lastChar(getTvText()))) {
-                                tv.setText(Aux.newTrim(getTvText(), 1));
+                            while (Ax.isLetter(Ax.lastChar(getTvText()))) {
+                                tv.setText(Ax.newTrim(getTvText(), 1));
                             }
                         }
                         //Normal backspace
                         else
-                            tv.setText(Aux.newTrim(getTvText(), 1));
+                            tv.setText(Ax.newTrim(getTvText(), 1));
                     }
                 }
 
                 tv.setSelection(getTvText().length());
 
-                if (!Aux.isNull(getTvText()) && getTvText().endsWith("."))
+                if (!Ax.isNull(getTvText()) && getTvText().endsWith("."))
                     isDec = true;
             }
         }
         else {
             try {
-                if (cursor > 1 && Aux.chat(getTvText(), cursor - 1).equals(Aux.sq) && (Aux.isSuperscript(Aux.chat(getTvText(), cursor - 2)) || Aux.superlistMisc.contains(Aux.chat(getTvText(), cursor - 2)))) {
+                if (cursor > 1 && Ax.chat(getTvText(), cursor - 1).equals(Ax.sq) && (Ax.isSuperscript(Ax.chat(getTvText(), cursor - 2)) || Ax.superlistMisc.contains(Ax.chat(getTvText(), cursor - 2)))) {
                     tv.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DEL));
 
                     //TODO: Also test this, lol
@@ -4214,17 +4214,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         return;
                     }
 
-                    while (cursor > 0 && (Aux.isSuperscript(Aux.lastChar(output.substring(0, cursor))) || Aux.superlistMisc.contains(Aux.lastChar(output.substring(0, cursor))))) {
+                    while (cursor > 0 && (Ax.isSuperscript(Ax.lastChar(output.substring(0, cursor))) || Ax.superlistMisc.contains(Ax.lastChar(output.substring(0, cursor))))) {
                         cursor--;
 
-                        tv.setText(Aux.newReplace(cursor, getTvText(), Aux.superToNum(Aux.chat(getTvText(), cursor))));
+                        tv.setText(Ax.newReplace(cursor, getTvText(), Ax.superToNum(Ax.chat(getTvText(), cursor))));
                     }
                 }
                 else if (cursor > 0){
                     tv.setText(getTvText().substring(0, cursor - deleteAmt) + getTvText().substring(cursor));
                 }
 
-                tv.setText(Aux.updateCommas(getTvText()));
+                tv.setText(Ax.updateCommas(getTvText()));
 
                 cursor = getTvText().length() - endOffset;
 
@@ -4357,7 +4357,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 tv.append(buttonText);
             }
-            else if (buttonText.equals("(") || (!equaled && (buttonText.equals(")") && Aux.countChars(getTvText(), "(") > Aux.countChars(getTvText(), ")")) && !(getTvText().trim().replace("\0", "").equals(".") || getTvText().endsWith("(") || Aux.isBinaryOp(Aux.lastChar(getTvText())) || getTvText().endsWith("√")))) {
+            else if (buttonText.equals("(") || (!equaled && (buttonText.equals(")") && Ax.countChars(getTvText(), "(") > Ax.countChars(getTvText(), ")")) && !(getTvText().trim().replace("\0", "").equals(".") || getTvText().endsWith("(") || Ax.isBinaryOp(Ax.lastChar(getTvText())) || getTvText().endsWith("√")))) {
                 tv.append(buttonText);
             }
         }
@@ -4380,7 +4380,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             tvText = getTvText();
 
             if (cursor > 0)
-                tv.setText(Aux.newReplace(cursor - 1, tvText, Aux.chat(tvText, cursor - 1) + buttonText));
+                tv.setText(Ax.newReplace(cursor - 1, tvText, Ax.chat(tvText, cursor - 1) + buttonText));
             else if (buttonText.equals("("))
                 tv.setText(buttonText + tvText.trim().replace("\0", "").replace(" ", "").trim());
 
@@ -4407,20 +4407,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (tv.getText() == null)
                 return;
 
-            if (Aux.isBinaryOp(Aux.lastChar(getTvText())))
-                tv.setText(Aux.newTrim(getTvText(), 1));
+            if (Ax.isBinaryOp(Ax.lastChar(getTvText())))
+                tv.setText(Ax.newTrim(getTvText(), 1));
 
             if (getTvText().equals("\0") || getTvText().equals("") || getTvText().equals(" "))
                 return;
 
             if (getTvText().endsWith("\0") || getTvText().endsWith(" "))
-                tv.setText(Aux.newTrim(tv.getText().toString(), 1));
+                tv.setText(Ax.newTrim(tv.getText().toString(), 1));
 
             if (tv.getText() == null || getTvText().equals("\0") || getTvText().equals("") || getTvText().equals(" "))
                 return;
 
             //Error if tv contains negative square root
-            if (getTvText().contains(Aux.sq + "-") || getTvText().contains(Aux.sq + Aux.emDash))
+            if (getTvText().contains(Ax.sq + "-") || getTvText().contains(Ax.sq + Ax.emDash))
                 error = true;
 
             if (!(tv.getText().toString().equals(".") || tv.getText().toString().equals(" .") || tv.getText().toString().equals("\0.") ||
@@ -4453,14 +4453,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             String historyTemp = getTvText();
 
                             // Add remaining parenthesis
-                            int missing = Aux.countChars(tvText, "(") - Aux.countChars(tvText, ")");
+                            int missing = Ax.countChars(tvText, "(") - Ax.countChars(tvText, ")");
 
                             for (i = 0; i < missing; i++) {
                                 tv.append(")");
                             }
 
                             try {
-                                if (previousExpression != null && Aux.isFullSignedNumE(previousExpression.getText().toString()))
+                                if (previousExpression != null && Ax.isFullSignedNumE(previousExpression.getText().toString()))
                                     resultStr = previousExpression.getText().toString();
                             }
                             catch (Exception e) {
@@ -4469,9 +4469,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                             isDec = false;
 
-                            String lastChar = Aux.lastChar(getTvText());
+                            String lastChar = Ax.lastChar(getTvText());
 
-                            if (lastChar != null && ((lastChar.equals("!") || lastChar.equals(")") || lastChar.equals("π") || lastChar.equals("e") || lastChar.equals("∞") || Aux.isDigit(lastChar)))) {
+                            if (lastChar != null && ((lastChar.equals("!") || lastChar.equals(")") || lastChar.equals("π") || lastChar.equals("e") || lastChar.equals("∞") || Ax.isDigit(lastChar)))) {
                                 if (error)
                                     error();
                                 else {
@@ -4490,7 +4490,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                                     //Set text of previous expression TextView
                                     try {
-                                        if (previousExpression != null && tinydb.getBoolean("showPreviousExpression") && !resultStr.equals(" ") && !resultStr.equals("") && !resultStr.equals("\0") && Aux.isFullSignedNumE(resultStr)) {
+                                        if (previousExpression != null && tinydb.getBoolean("showPreviousExpression") && !resultStr.equals(" ") && !resultStr.equals("") && !resultStr.equals("\0") && Ax.isFullSignedNumE(resultStr)) {
                                             if (!isBig) {
                                                 ((ViewGroup) findViewById(R.id.equationLayout)).getLayoutTransition()
                                                         .disableTransitionType(LayoutTransition.CHANGING);
@@ -4513,9 +4513,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                                 resultStr = BetterMath.formatResult(result, newMc, scale++).trim();
 
                                             while ((resultStr.endsWith("0") && resultStr.contains(".")) || resultStr.endsWith(".") || resultStr.endsWith("0E"))
-                                                resultStr = Aux.newTrim(resultStr, 1);
+                                                resultStr = Ax.newTrim(resultStr, 1);
 
-                                            if (!resultStr.equals(getTvText().trim()) && Aux.isFullSignedNumE(resultStr)) {
+                                            if (!resultStr.equals(getTvText().trim()) && Ax.isFullSignedNumE(resultStr)) {
                                                 tv.setText(resultStr);
                                             }
                                         }
@@ -4556,7 +4556,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                             tv.setText("NaN");
                                     }
 
-                                    if (!Aux.isFullSignedNumE(getTvText())) {
+                                    if (!Ax.isFullSignedNumE(getTvText())) {
                                         if (!getTvText().equals("NaN"))
                                             tv.setText(R.string.parse_error);
 
@@ -4618,7 +4618,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         catch (Exception e) {
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
     }
@@ -4661,7 +4661,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 String tvText = tv.getText().toString();
 
                 if (cursor > 0) {
-                    tv.setText(Aux.newReplace(cursor - 1, tv.getText().toString(), Aux.chat(tv.getText().toString(), cursor - 1) + keyNum.getText().toString()));
+                    tv.setText(Ax.newReplace(cursor - 1, tv.getText().toString(), Ax.chat(tv.getText().toString(), cursor - 1) + keyNum.getText().toString()));
                     tv.setSelection(cursor + 1);
                 }
                 else {
@@ -4677,7 +4677,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
     }
@@ -4734,7 +4734,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 tvText = getTvText();
 
                 if (cursor > 0)
-                    output = Aux.newReplace(cursor - 1, getTvText(), Aux.chat(getTvText(), cursor - 1) + ((Button) v).getText().toString()).replace(" ", "");
+                    output = Ax.newReplace(cursor - 1, getTvText(), Ax.chat(getTvText(), cursor - 1) + ((Button) v).getText().toString()).replace(" ", "");
                 else
                     output = (keyNum.getText().toString() + tvText.trim()).replace("\0", "").replace(" ", "").replace(" ", "");
 
@@ -4750,7 +4750,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
     }
@@ -4771,7 +4771,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (tv.getText() != null && getTvText().length() > 0) {
                     String tvText = getTvText();
 
-                    tv.setText(tvText.replace("E", Aux.multi + "10^"));
+                    tv.setText(tvText.replace("E", Ax.multi + "10^"));
 
                     clear(clear);
 
@@ -4787,7 +4787,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
     }
@@ -4823,16 +4823,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         boolean wasSpace = getTvText().equals(" ");
 
         try {
-            if (getTvText().length() > 1 && Aux.chat(getTvText(), cursor).equals(","))
+            if (getTvText().length() > 1 && Ax.chat(getTvText(), cursor).equals(","))
                 endOffset--;
-            else if (getTvText().length() > 1 && Aux.chat(getTvText(), cursor-1).equals(","))
+            else if (getTvText().length() > 1 && Ax.chat(getTvText(), cursor-1).equals(","))
                 beforeComma = true;
         }
         catch (Exception e) {
             e.printStackTrace();
         }
 
-        if (Aux.isNum(buttonText))
+        if (Ax.isNum(buttonText))
             number(v);
         else if (buttonText.equals("."))
             decimal(v);
@@ -4844,7 +4844,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         cursor = getTvText().length() - (wasSpace ? 0 : endOffset);
 
         try {
-            if (!beforeComma && getTvText().length() > 1 && Aux.chat(getTvText(), cursor - 1).equals(","))
+            if (!beforeComma && getTvText().length() > 1 && Ax.chat(getTvText(), cursor - 1).equals(","))
                 cursor--;
         }
         catch (Exception e) {
@@ -4882,10 +4882,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 //If tv is empty, and the character can logically be placed first, then just type it
                 if (getTvText().trim().replace("\0", "").replace(" ", "").length() < 1) {
-                    if (!pressed.equals("!") && !pressed.equals(")") && (!Aux.isBinaryOp(pressed) || pressed.equals("-"))) {
+                    if (!pressed.equals("!") && !pressed.equals(")") && (!Ax.isBinaryOp(pressed) || pressed.equals("-"))) {
                         tv.append(pressed);
 
-                        if (Aux.isTrig(pressed) || pressed.equals("ln"))
+                        if (Ax.isTrig(pressed) || pressed.equals("ln"))
                             tv.append("(");
 
                         isDec = false;
@@ -4896,7 +4896,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
 
                 //Check for too many negative signs
-                if (!(pressed.equals("-") && getTvText().endsWith("-") && Aux.newTrim(getTvText(), 1).endsWith("("))) {
+                if (!(pressed.equals("-") && getTvText().endsWith("-") && Ax.newTrim(getTvText(), 1).endsWith("("))) {
                     if (equaled) {
                         if (getTvText().contains("E"))
                             tv.setText("(" + getTvText() + ")");
@@ -4904,18 +4904,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         getEqualed();
                     }
 
-                    if (!(pressed.equals("!") && (Aux.lastChar(getTvText()).equals("!") || Aux.lastChar(getTvText()).equals("-")))) {
-                        if (Aux.isOp(pressed) || pressed.equals("log") || pressed.equals("ln") || Aux.isTrig(pressed)) {
-                            if (Aux.isBinaryOp(pressed) && !pressed.equals("-") && !pressed.equals(Aux.emDash) && Aux.isBinaryOp(Aux.lastChar(getTvText())))
+                    if (!(pressed.equals("!") && (Ax.lastChar(getTvText()).equals("!") || Ax.lastChar(getTvText()).equals("-")))) {
+                        if (Ax.isOp(pressed) || pressed.equals("log") || pressed.equals("ln") || Ax.isTrig(pressed)) {
+                            if (Ax.isBinaryOp(pressed) && !pressed.equals("-") && !pressed.equals(Ax.emDash) && Ax.isBinaryOp(Ax.lastChar(getTvText())))
                                 removeLast();
 
                             if (!getTvText().equals("\0") && (getTvText().endsWith(".") && pressed.equals("(")))
                                 dont = true;
-                            else if (!getTvText().equals("\0") && (getTvText().endsWith("(") && (pressed.equals("!") || (Aux.isBinaryOp(pressed) && !pressed.equals("-") && !pressed.equals(Aux.emDash)))))
+                            else if (!getTvText().equals("\0") && (getTvText().endsWith("(") && (pressed.equals("!") || (Ax.isBinaryOp(pressed) && !pressed.equals("-") && !pressed.equals(Ax.emDash)))))
                                 dont = true;
-                            else if (!getTvText().equals("\0") && (getTvText().equals("-") || getTvText().equals(" -") || getTvText().equals("- ")) && (Aux.isBinaryOp(pressed) || pressed.equals(")")))
+                            else if (!getTvText().equals("\0") && (getTvText().equals("-") || getTvText().equals(" -") || getTvText().equals("- ")) && (Ax.isBinaryOp(pressed) || pressed.equals(")")))
                                 dont = true;
-                            else if (!getTvText().equals("\0") && getTvText().endsWith("√") && ((Aux.isBinaryOp(pressed) && !pressed.equals("-")) || pressed.equals("!")))
+                            else if (!getTvText().equals("\0") && getTvText().endsWith("√") && ((Ax.isBinaryOp(pressed) && !pressed.equals("-")) || pressed.equals("!")))
                                 dont = true;
                             else if (getTvText().endsWith("--") && pressed.equals("-"))
                                 dont = true;
@@ -4925,7 +4925,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                                 tv.append(pressed);
 
-                                if (Aux.isTrig(pressed) || pressed.equals("ln"))
+                                if (Ax.isTrig(pressed) || pressed.equals("ln"))
                                     tv.append("(");
                             }
                         }
@@ -4960,15 +4960,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 //Cursor is not at the beginning
                 if (cursor > 0)
-                    tv.setText(Aux.newReplace(cursor - 1, tvText, Aux.chat(tvText, cursor - 1) + pressed));
+                    tv.setText(Ax.newReplace(cursor - 1, tvText, Ax.chat(tvText, cursor - 1) + pressed));
                 //Cursor is at the beginning, AND pressed is something that can exist in the beginning of an expression
-                else if ((!Aux.isBinaryOp(pressed) || pressed.equals("-")) && !pressed.equals("!") && !pressed.equals(")"))
+                else if ((!Ax.isBinaryOp(pressed) || pressed.equals("-")) && !pressed.equals("!") && !pressed.equals(")"))
                     tv.setText((pressed + tvText.trim()).replace("\0", "").replace(" ", "").trim());
             }
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
     }
@@ -4980,25 +4980,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 int k = 0;
 
                 for (String current : presses) {
-                    if (current != null && !current.equals("\0") && !current.equals(" ") && !Aux.isNull(current)) {
-                        if (Aux.isSuperscript(current)) {
+                    if (current != null && !current.equals("\0") && !current.equals(" ") && !Ax.isNull(current)) {
+                        if (Ax.isSuperscript(current)) {
                             try {
-                                nums[Aux.superlist.contains(current) ? Aux.superlist.indexOf(current) : Aux.superlistMisc.indexOf(current)].performClick();
+                                nums[Ax.superlist.contains(current) ? Ax.superlist.indexOf(current) : Ax.superlistMisc.indexOf(current)].performClick();
                             }
                             catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
-                        else if (Aux.isDigit(current))
+                        else if (Ax.isDigit(current))
                             nums[Integer.parseInt(current)].performClick();
-                        else if (current.equals(Aux.pi))
+                        else if (current.equals(Ax.pi))
                             compBar[3].performClick();
                         else if (current.equals("e"))
                             compBar[4].performClick();
                         else if (current.equals("E"))
                             compBar[1].performClick();
                         else if (current.equals("√")) {
-                            if (k > 0 && Aux.isSuperscript(presses[k - 1]))
+                            if (k > 0 && Ax.isSuperscript(presses[k - 1]))
                                 findViewById(R.id.bSqrt).performLongClick();
                             else
                                 findViewById(R.id.bSqrt).performClick();
@@ -5017,12 +5017,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     findViewById(R.id.bInv).performClick();
 
                                 if (current.endsWith("⁻¹"))
-                                    current = "arc" + Aux.newTrim(current, 2);
+                                    current = "arc" + Ax.newTrim(current, 2);
                             }
 
                             if (current.endsWith("h")) {
                                 isHyper = true;
-                                current = Aux.newTrim(current, 1);
+                                current = Ax.newTrim(current, 1);
                             }
 
                             for (i = 0; i < trigBar.length; i++) {
@@ -5077,7 +5077,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
     }
@@ -5086,7 +5086,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         findViewById(R.id.addCustom).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final TinyDB tinydb = Aux.tinydb();
+                final TinyDB tinydb = Ax.tinydb();
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.mainActivity, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
 
                 builder.setTitle("New Constant");
@@ -5121,7 +5121,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             }
                         }
 
-                        if (!inputExists && (input != null && (Aux.isFullNum(input) || Aux.containsBinaryOperator(input))) && titleInput.getText() != null) {
+                        if (!inputExists && (input != null && (Ax.isFullNum(input) || Ax.containsBinaryOperator(input))) && titleInput.getText() != null) {
                             dialog.dismiss();
 
                             constantTitles.add(0, titleInput.getText().toString());
@@ -5155,7 +5155,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             }
                         }
                         else if (inputExists) {
-                            Aux.makeLongToast("Error: Constant value has already been saved.");
+                            Ax.makeLongToast("Error: Constant value has already been saved.");
                         }
                         else if (titleInput.getText() == null) {
                             Toast.makeText(MainActivity.mainActivity, "Error: Constant title cannot be blank.", Toast.LENGTH_LONG).show();
@@ -5184,7 +5184,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         findViewById(R.id.addCustom).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final TinyDB tinydb = Aux.tinydb();
+                final TinyDB tinydb = Ax.tinydb();
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.mainActivity, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
 
                 builder.setTitle("New Function");
@@ -5199,12 +5199,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (expressionInput.getText() != null && titleInput.getText() != null && titleInput.getText().toString().length() > 0 && !Aux.parseVars(expressionInput.getText().toString()).equals("0")) {
+                        if (expressionInput.getText() != null && titleInput.getText() != null && titleInput.getText().toString().length() > 0 && !Ax.parseVars(expressionInput.getText().toString()).equals("0")) {
                             dialog.dismiss();
 
                             functionTitles.add(0, titleInput.getText().toString());
                             functionTexts.add(0, expressionInput.getText().toString());
-                            functionVariables.add(0, Aux.parseVars(expressionInput.getText().toString()));
+                            functionVariables.add(0, Ax.parseVars(expressionInput.getText().toString()));
                             functionCards.add(0, new FunctionCard(functionTitles.get(0), functionTexts.get(0), functionVariables.get(0)));
 
                             tinydb.putListString("functionTitles", functionTitles);
@@ -5222,7 +5222,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 functionsSheet.adapter.adapters.add(0, new VariablesAdapter(functionVariables.get(0).split("`"), 0));
                                 functionsSheet.adapter.notifyItemInserted(0);
 
-                                Aux.adapter = functionsSheet.adapter;
+                                Ax.adapter = functionsSheet.adapter;
 
                                 try {
                                     functionsSheet.recyclerView.scrollToPosition(0);
@@ -5235,8 +5235,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 e.printStackTrace();
                             }
                         }
-                        else if (expressionInput.getText() != null && expressionInput.getText().toString().length() > 0 && Aux.parseVars(expressionInput.getText().toString()).equals("0"))
-                            Aux.makeLongToast("Error: Function must contain at least one variable.");
+                        else if (expressionInput.getText() != null && expressionInput.getText().toString().length() > 0 && Ax.parseVars(expressionInput.getText().toString()).equals("0"))
+                            Ax.makeLongToast("Error: Function must contain at least one variable.");
                         else
                             Toast.makeText(MainActivity.mainActivity, "Error: All fields must be filled to add a new function.", Toast.LENGTH_LONG).show();
                     }
@@ -5325,7 +5325,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             MenuInflater inflater = popup.getMenuInflater();
             inflater.inflate(R.menu.function_overflow, popup.getMenu());
 
-            final TinyDB tinydb = Aux.tinydb();
+            final TinyDB tinydb = Ax.tinydb();
 
             popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 @Override
@@ -5362,7 +5362,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                                     functionsSheet.adapter.adapters.remove(position);
 
-                                    Aux.adapter = functionsSheet.adapter;
+                                    Ax.adapter = functionsSheet.adapter;
 
                                     functionsSheet.adapter.notifyItemRemoved(position);
                                 }
@@ -5401,12 +5401,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if (expressionInput.getText() != null && titleInput.getText() != null && titleInput.getText().toString().length() > 0 && !Aux.parseVars(expressionInput.getText().toString()).equals("0")) {
+                                if (expressionInput.getText() != null && titleInput.getText() != null && titleInput.getText().toString().length() > 0 && !Ax.parseVars(expressionInput.getText().toString()).equals("0")) {
                                     dialog.dismiss();
 
                                     functionTitles.set(position, titleInput.getText().toString());
                                     functionTexts.set(position, expressionInput.getText().toString());
-                                    functionVariables.set(position, Aux.parseVars(expressionInput.getText().toString()));
+                                    functionVariables.set(position, Ax.parseVars(expressionInput.getText().toString()));
 
                                     functionCards.set(position, new FunctionCard(functionTitles.get(position), functionTexts.get(position), functionVariables.get(position)));
 
@@ -5422,8 +5422,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     functionsSheet.adapter.cards = functionCards;
                                     functionsSheet.adapter.notifyItemChanged(position);
                                 }
-                                else if (expressionInput.getText() != null && expressionInput.getText().toString().length() > 0 && Aux.parseVars(expressionInput.getText().toString()).equals("0"))
-                                    Aux.makeLongToast("Error: Function must contain at least one variable.");
+                                else if (expressionInput.getText() != null && expressionInput.getText().toString().length() > 0 && Ax.parseVars(expressionInput.getText().toString()).equals("0"))
+                                    Ax.makeLongToast("Error: Function must contain at least one variable.");
                                 else
                                     Toast.makeText(MainActivity.mainActivity, "Error: All fields must be filled.", Toast.LENGTH_LONG).show();
                             }
@@ -5447,7 +5447,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         public void onCardClick(final int position, final RecyclerView recyclerView, final CardView card, final TextView functionTv, final Button insert, final ImageButton copy, final ImageButton expand) {
             try {
-                final VariablesAdapter adapter = Aux.adapter.adapters.get(position);
+                final VariablesAdapter adapter = Ax.adapter.adapters.get(position);
                 final String initFunctionText = functionTv.getText().toString();
 
                 final int cardPosition = position;
@@ -5489,15 +5489,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                             if (value == null || value.equals("\0"))
                                 break;
-                            else if (value.startsWith("-") && !Aux.isFullNum(value.substring(1)))
+                            else if (value.startsWith("-") && !Ax.isFullNum(value.substring(1)))
                                 break;
-                            else if (!Aux.isFullNum(value))
+                            else if (!Ax.isFullNum(value))
                                 break;
                         }
 
                         //Replace variables and calculate function result
                         if (i == adapter.values.length) {
-                            String functionText = Aux.adapter.cards.get(cardPosition).function;
+                            String functionText = Ax.adapter.cards.get(cardPosition).function;
 
                             insert.setAlpha(1.0f);
                             insert.setEnabled(true);
@@ -5517,9 +5517,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     @Override
                                     public void onClick(View v) {
                                         try {
-                                            Aux.copy(finalFunctionText, MainActivity.mainActivity);
+                                            Ax.copy(finalFunctionText, MainActivity.mainActivity);
 
-                                            Aux.makeToast("Copied \"" + finalFunctionText + "\" to clipboard", 0);
+                                            Ax.makeToast("Copied \"" + finalFunctionText + "\" to clipboard", 0);
                                         }
                                         catch (Exception e) {
                                             e.printStackTrace();
@@ -5584,7 +5584,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             }
                         }
                         else {
-                            functionTv.setText(initFunctionText.replace("*", Aux.multiDot));
+                            functionTv.setText(initFunctionText.replace("*", Ax.multiDot));
 
                             copy.setVisibility(View.GONE);
 
@@ -5626,7 +5626,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     copy.setVisibility(View.GONE);
 
                     try {
-                        functionTv.setText(Aux.adapter.cards.get(cardPosition).function);
+                        functionTv.setText(Ax.adapter.cards.get(cardPosition).function);
                     }
                     catch (Exception e) {
                         e.printStackTrace();
@@ -5634,7 +5634,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
             catch (Exception e) {
-                Aux.saveStack(e);
+                Ax.saveStack(e);
                 finish();
             }
         }
@@ -5659,7 +5659,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (!eq2.equals(".") && !eq2.equals(" .") && !eq2.equals("\0.")) {
                     String outNum, outDen;
 
-                    if (eq2.length() > 16 && eq2.contains(",") && Aux.countChars(eq2, ",") > 3) {
+                    if (eq2.length() > 16 && eq2.contains(",") && Ax.countChars(eq2, ",") > 3) {
                         outNum = "Error:";
                         outDen = "Number too large";
 
@@ -5700,11 +5700,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     if (dec.length() > 1) {
                         boolean isRepeating = false;
 
-                        if (Aux.onlyContains(dec, "3")) {
+                        if (Ax.onlyContains(dec, "3")) {
                             fraction = new BigDecimal[]{new BigDecimal("1"), new BigDecimal("3")};
                             isRepeating = true;
                         }
-                        else if (Aux.onlyContains(dec, "6") || (dec.endsWith("7") && Aux.onlyContains(Aux.newTrim(dec, 1), "6"))) {
+                        else if (Ax.onlyContains(dec, "6") || (dec.endsWith("7") && Ax.onlyContains(Ax.newTrim(dec, 1), "6"))) {
                             fraction = new BigDecimal[]{new BigDecimal("2"), new BigDecimal("3")};
                             isRepeating = true;
                         }
@@ -5834,7 +5834,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             MainActivity.mainActivity.finishAffinity();
         }
     }
@@ -5860,8 +5860,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //If input is a whole number
             if (!num1.contains("."))
                 return new BigDecimal[]{new BigDecimal(num1), BigDecimal.ONE};
-            if (num1.contains(".") && !num1.startsWith(".") && Aux.onlyContains(num1.substring(Aux.searchFor(num1, ".") + 1), "0")) {
-                return new BigDecimal[]{new BigDecimal(num1.substring(0, Aux.searchFor(num1, "."))), BigDecimal.ONE};
+            if (num1.contains(".") && !num1.startsWith(".") && Ax.onlyContains(num1.substring(Ax.searchFor(num1, ".") + 1), "0")) {
+                return new BigDecimal[]{new BigDecimal(num1.substring(0, Ax.searchFor(num1, "."))), BigDecimal.ONE};
             }
         }
         catch (NullPointerException | NumberFormatException e){
@@ -5903,9 +5903,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             String input = dec1.toString();
 
             if (input.contains(".")) {
-                input = input.substring(0, Aux.searchFor(input, "."));
+                input = input.substring(0, Ax.searchFor(input, "."));
 
-                if (Aux.isFullNum(input) && !input.contains("."))
+                if (Ax.isFullNum(input) && !input.contains("."))
                     subAmt = Integer.parseInt(input);
             }
 
@@ -5961,7 +5961,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     while (dec.compareTo(frac) != 0 && num.compareTo(maxNum) < 0) {
                         frac = num.divide(den, mc);
 
-                        if (frac.toString().length() > num1.length() + 1 && Aux.isDigit(frac.toString().substring(num1.length(), num1.length() + 1))) {
+                        if (frac.toString().length() > num1.length() + 1 && Ax.isDigit(frac.toString().substring(num1.length(), num1.length() + 1))) {
                             if (Integer.parseInt(frac.toString().substring(num1.length(), num1.length() + 1)) > 4)
                                 roundAmt = -1;
                             else
@@ -5972,13 +5972,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             answerFound = true;
                             break bigLoop;
                         }
-                        else if (num1.length() > 4 && (frac.toString().startsWith(num1 + "0") || (Aux.isDigit(Aux.lastChar(num1)) && (frac.toString().length() > num1.length() && frac.toString().startsWith(Aux.newTrim(num1, 1) + (Integer.parseInt(Aux.lastChar(num1)) + roundAmt)))))) {
+                        else if (num1.length() > 4 && (frac.toString().startsWith(num1 + "0") || (Ax.isDigit(Ax.lastChar(num1)) && (frac.toString().length() > num1.length() && frac.toString().startsWith(Ax.newTrim(num1, 1) + (Integer.parseInt(Ax.lastChar(num1)) + roundAmt)))))) {
                             try {
                                 if (frac.toString().startsWith(num1)) {
                                     if (frac.toString().length() > num1.length()) {
-                                        String last = Aux.lastChar(frac.toString().substring(0, num1.length() + 1));
+                                        String last = Ax.lastChar(frac.toString().substring(0, num1.length() + 1));
 
-                                        if ((Aux.isDigit(last) && Integer.parseInt(last) > 4) || !Aux.lastChar(frac.toString().substring(0, num1.length())).equals(Aux.lastChar(num1))) {
+                                        if ((Ax.isDigit(last) && Integer.parseInt(last) > 4) || !Ax.lastChar(frac.toString().substring(0, num1.length())).equals(Ax.lastChar(num1))) {
                                             num = BigDecimal.ONE;
                                             den = den.add(BigDecimal.ONE);
                                             continue;
@@ -6066,9 +6066,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             if (numSimplified.contains(".")) {
                 for (j = numSimplified.length() - 1; j > 0; j--) {
-                    if (Aux.chat(numSimplified, j) != null && Aux.chat(numSimplified, j).equals("0"))
-                        numSimplified = Aux.newTrim(numSimplified, 1);
-                    else if (Aux.chat(numSimplified, j) != null && Aux.chat(numSimplified, j).equals(".")) {
+                    if (Ax.chat(numSimplified, j) != null && Ax.chat(numSimplified, j).equals("0"))
+                        numSimplified = Ax.newTrim(numSimplified, 1);
+                    else if (Ax.chat(numSimplified, j) != null && Ax.chat(numSimplified, j).equals(".")) {
                         isIntNum = true;
                         break;
                     }
@@ -6081,9 +6081,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             if (denSimplified.contains(".") && isIntNum) {
                 for (j = denSimplified.length() - 1; j > 0; j--) {
-                    if (Aux.chat(denSimplified, j) != null && Aux.chat(denSimplified, j).equals("0"))
-                        denSimplified = Aux.newTrim(denSimplified, 1);
-                    else if (Aux.chat(denSimplified, j) != null && Aux.chat(denSimplified, j).equals(".")) {
+                    if (Ax.chat(denSimplified, j) != null && Ax.chat(denSimplified, j).equals("0"))
+                        denSimplified = Ax.newTrim(denSimplified, 1);
+                    else if (Ax.chat(denSimplified, j) != null && Ax.chat(denSimplified, j).equals(".")) {
                         isIntDen = true;
                         break;
                     }
@@ -6129,7 +6129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             resultStr = BetterMath.formatResult(result, newMc, scale++).trim();
 
         while ((resultStr.endsWith("0") && resultStr.contains(".")) || resultStr.endsWith(".") || resultStr.endsWith("0E"))
-            resultStr = Aux.newTrim(resultStr, 1);
+            resultStr = Ax.newTrim(resultStr, 1);
 
         return resultStr;
     }
@@ -6159,7 +6159,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             final Vibrator vibe = (Vibrator) MainActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
 
             try {
-                Aux.removeCommas(tv.getText().toString());
+                Ax.removeCommas(tv.getText().toString());
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -6257,28 +6257,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             String previous = tvText.substring(cursor-1, cursor);
             String next = tvText.substring(cursor, cursor+1);
 
-            if ((Aux.isLetter(previous) && !previous.equals("e")) && ((Aux.isLetter(next) || next.equals("(")) && !next.equals("e"))) {
+            if ((Ax.isLetter(previous) && !previous.equals("e")) && ((Ax.isLetter(next) || next.equals("(")) && !next.equals("e"))) {
                 if (next.equals("("))
                     cursor++;
                 else {
                     int i;
 
                     for (i = cursor + 1; i < tvText.length(); i++) {
-                        if (!Aux.chat(tvText, i).equals("("))
+                        if (!Ax.chat(tvText, i).equals("("))
                             right++;
                     }
 
                     for (i = cursor-1; i >= 0; i--) {
-                        String current = Aux.chat(tvText, i);
+                        String current = Ax.chat(tvText, i);
 
-                        if (Aux.isLetter(current) && !current.equals("e"))
+                        if (Ax.isLetter(current) && !current.equals("e"))
                             left--;
                     }
 
                     cursor += Math.abs(left) < right ? left : right;
                 }
             }
-            else if (Aux.isSuperscript(previous) || Aux.isSuperscript(next))
+            else if (Ax.isSuperscript(previous) || Ax.isSuperscript(next))
                 cursor += tvText.substring(cursor).indexOf("(") + 1;
         }
         else if (cursor != 0)

@@ -2,29 +2,17 @@ package com.mirambeau.termcalc;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.FileProvider;
-
-import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -73,7 +61,7 @@ public class ImportActivity extends AppCompatActivity {
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
     }
@@ -212,21 +200,21 @@ public class ImportActivity extends AppCompatActivity {
             this.cmd = cmd;
 
             if (cmd.endsWith(" ") && cmd.length() > 1)
-                cmd = Aux.newTrim(cmd, 1);
+                cmd = Ax.newTrim(cmd, 1);
 
             //Set color
             if (cmd.length() > 2 && cmd.startsWith("set") || (cmd.startsWith("mode ") && cmd.length() == 6)) {
                 if (cmd.length() > 8) {
-                    hex = Aux.getLast(cmd, 7);
+                    hex = Ax.getLast(cmd, 7);
 
                     if (!cmd.contains("mode") && !cmd.contains("reset0")) {
-                        hex = Aux.colorToUpper(hex);
+                        hex = Ax.colorToUpper(hex);
                     }
 
-                    isHex = Aux.isColor(hex);
+                    isHex = Ax.isColor(hex);
 
                     if (cmd.contains("-ft") && hex.substring(1).equalsIgnoreCase(tinydb.getString("cSecondary").substring(1))) {
-                        hex = Aux.hexAdd(hex, -1);
+                        hex = Ax.hexAdd(hex, -1);
                         ftIsSecondary = true;
                     }
                 }
@@ -283,10 +271,10 @@ public class ImportActivity extends AppCompatActivity {
                     MainActivity.mainActivity.recreate();
                 }
                 //Mode
-                else if ((cmd.length() == 6 && Aux.newTrim(cmd, 1).equals("mode ")) || (cmd.length() == 7 && Aux.newTrim(cmd, 1).equals("theme "))){
-                    if (Aux.isDigit(Aux.lastChar(cmd)) && (Aux.getLast(Aux.newTrim(cmd, 1), 5).equals("mode ") || Aux.getLast(Aux.newTrim(cmd, 1), 6).equals("theme "))){
-                        if (Integer.parseInt(Aux.lastChar(cmd)) < 6 && Integer.parseInt(Aux.lastChar(cmd)) > 0) {
-                            String newTheme = Aux.lastChar(cmd);
+                else if ((cmd.length() == 6 && Ax.newTrim(cmd, 1).equals("mode ")) || (cmd.length() == 7 && Ax.newTrim(cmd, 1).equals("theme "))){
+                    if (Ax.isDigit(Ax.lastChar(cmd)) && (Ax.getLast(Ax.newTrim(cmd, 1), 5).equals("mode ") || Ax.getLast(Ax.newTrim(cmd, 1), 6).equals("theme "))){
+                        if (Integer.parseInt(Ax.lastChar(cmd)) < 6 && Integer.parseInt(Ax.lastChar(cmd)) > 0) {
+                            String newTheme = Ax.lastChar(cmd);
                             String[] themeNames = {"Dark", "Light", "AMOLED Black (Colored Buttons)", "AMOLED Black (Black Buttons)", "Monochrome"};
                             int themeInt = Integer.parseInt(newTheme);
 
@@ -436,7 +424,7 @@ public class ImportActivity extends AppCompatActivity {
                     }
 
                     for (c=0; c < cmdEnd.length(); c++){
-                        if (Aux.chat(cmdEnd, c).equals(" "))
+                        if (Ax.chat(cmdEnd, c).equals(" "))
                             break;
 
                         codeLength++;
@@ -446,9 +434,9 @@ public class ImportActivity extends AppCompatActivity {
                     String buttonText;
 
                     if (buttonCode.endsWith("t") && !buttonCode.endsWith("ot")) {
-                        buttonText = Aux.newTrim(buttonCode.substring(2), 1);
+                        buttonText = Ax.newTrim(buttonCode.substring(2), 1);
 
-                        if (Aux.buttonExists(buttonText)) {
+                        if (Ax.buttonExists(buttonText)) {
                             if (isHex) {
                                 Log.d("printf", "Button " + buttonText + " text color set to " + hex);
                                 tinydb.putString(buttonCode, hex);
@@ -465,7 +453,7 @@ public class ImportActivity extends AppCompatActivity {
                     else {
                         buttonText = buttonCode.substring(2);
 
-                        if (Aux.buttonExists(buttonText)) {
+                        if (Ax.buttonExists(buttonText)) {
                             if (isHex) {
                                 Log.d("printf", "Button " + buttonText + " color set to " + hex);
                                 tinydb.putString(buttonCode, hex);
@@ -551,7 +539,7 @@ public class ImportActivity extends AppCompatActivity {
                             String newHex;
 
                             if (ftIsSecondary)
-                                newHex = Aux.hexAdd(hex, 1);
+                                newHex = Ax.hexAdd(hex, 1);
                             else
                                 newHex = hex;
 
@@ -796,7 +784,7 @@ public class ImportActivity extends AppCompatActivity {
                     Log.d("printf", setError);
                 }
 
-                if (!Aux.isNull(cFabText)) {
+                if (!Ax.isNull(cFabText)) {
                     if (cFabText.equals("#reset0")) {
                         cFabText = "\0";
                         tinydb.putString("cFabText", "\0");
@@ -813,7 +801,7 @@ public class ImportActivity extends AppCompatActivity {
                 String filename = cmd.substring(6);
 
                 if (filename.endsWith(".txt"))
-                    filename = Aux.newTrim(filename, 4);
+                    filename = Ax.newTrim(filename, 4);
 
                 File path = new File(this.getFilesDir(), "themes");
 
@@ -887,7 +875,7 @@ public class ImportActivity extends AppCompatActivity {
                     fileText = colors[0] + "\n";
 
                     for (i = 1; i < numColors; i++) {
-                        if (colors[i] == null || colors[i].equals("\0") || colors[i].equals("") || colors[i].equals("0") || !Aux.isColor(colors[i]))
+                        if (colors[i] == null || colors[i].equals("\0") || colors[i].equals("") || colors[i].equals("0") || !Ax.isColor(colors[i]))
                             colors[i] = "#reset0";
 
                         fileText += colors[i] + "\n";
@@ -897,7 +885,7 @@ public class ImportActivity extends AppCompatActivity {
 
                     for (a=0; a < extraColors.length; a++){
                         if (extraColors[a] != null){
-                            if (Aux.isColor(extraColors[a])) {
+                            if (Ax.isColor(extraColors[a])) {
                                 if (!hasAddedButton) {
                                     fileText += "\n";
                                     hasAddedButton = true;
@@ -908,7 +896,7 @@ public class ImportActivity extends AppCompatActivity {
                         }
 
                         if (extraTextColors[a] != null){
-                            if (Aux.isColor(extraTextColors[a])) {
+                            if (Ax.isColor(extraTextColors[a])) {
                                 if (!hasAddedButton) {
                                     fileText += "\n";
                                     hasAddedButton = true;
@@ -998,7 +986,7 @@ public class ImportActivity extends AppCompatActivity {
                             String line;
 
                             for (i=0; (line = bufferedReader.readLine()) != null; i++) {
-                                if (!((i > 12 && Aux.isDigit(line)) || Aux.isColor(line) || line.equals("#reset0") || (line.length() >= 6 && (Aux.isColor(line.substring(0, 6)) || Aux.isColor(line.substring(0, 7))) && line.contains("-b")))) {
+                                if (!((i > 12 && Ax.isDigit(line)) || Ax.isColor(line) || line.equals("#reset0") || (line.length() >= 6 && (Ax.isColor(line.substring(0, 6)) || Ax.isColor(line.substring(0, 7))) && line.contains("-b")))) {
                                     if (i != 14 && i != 19)
                                         isValid = false;
 
@@ -1017,7 +1005,7 @@ public class ImportActivity extends AppCompatActivity {
                                 }
 
                                 for (i=0; (line = bufferedReader.readLine()) != null; i++) {
-                                    if (Aux.isColor(line)) {
+                                    if (Ax.isColor(line)) {
                                         if (i == 3)
                                             tinydb.putString("-b=t", line);
                                         else if (i >= 5 && i <= 8){
@@ -1038,13 +1026,13 @@ public class ImportActivity extends AppCompatActivity {
                                         String buttonHex, buttonCode;
 
                                         buttonHex = line.substring(0, 7);
-                                        buttonCode = Aux.getLast(line, line.length() - buttonHex.length());
+                                        buttonCode = Ax.getLast(line, line.length() - buttonHex.length());
 
-                                        if (Aux.isColor(buttonHex)) {
+                                        if (Ax.isColor(buttonHex)) {
                                             run("set " + buttonCode + " " + buttonHex);
                                         }
                                     }
-                                    else if (Aux.isDigit(line) && Integer.parseInt(line) > 0 && Integer.parseInt(line) <= 5)
+                                    else if (Ax.isDigit(line) && Integer.parseInt(line) > 0 && Integer.parseInt(line) <= 5)
                                         tinydb.putString("theme", line);
                                 }
 

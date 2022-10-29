@@ -27,7 +27,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Aux {
+public class Ax {
     static String superNum, subNum;
 
     public static final String eSub = "ₑ";
@@ -64,7 +64,7 @@ public class Aux {
     public static final String piStr = superscripts[3] + superDot + superscripts[1] + superscripts[4] + superscripts[1] + superscripts[5] + superscripts[9];
 
     public static ArrayList<String> ops = new ArrayList<String>(Arrays.asList("+", "-", multi, divi, "%", bulletDot, multiDot, "*", "^", sq, "(", ")", "!"));
-    public static ArrayList<String> binaryOps = new ArrayList<String>(Arrays.asList("+", "-", "/", "*", multi, divi, "^", "%", Aux.emDash, bulletDot, multiDot));
+    public static ArrayList<String> binaryOps = new ArrayList<String>(Arrays.asList("+", "-", "/", "*", multi, divi, "^", "%", Ax.emDash, bulletDot, multiDot));
 
     public static boolean ratesChecked = false;
     static boolean isUpper = false;
@@ -1957,7 +1957,7 @@ public class Aux {
     }
 
     /**
-     * Returns the index of the first instance of the target string found in the full string. For example, Aux.searchFor("3.14", ".") will return 1.
+     * Returns the index of the first instance of the target string found in the full string. For example, Ax.searchFor("3.14", ".") will return 1.
      * @return Index of first instance of target string in full string
      */
     public static int searchFor(String full, String target){

@@ -35,12 +35,8 @@ import androidx.preference.PreferenceManager;
 import com.azeesoft.lib.colorpicker.ColorPickerDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -211,7 +207,7 @@ public class TerminalActivity extends AppCompatActivity {
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e, false);
+            Ax.saveStack(e, false);
             printf("Error: Something went wrong while loading the terminal (however, some functions may still work properly). If you'd like to report this to the developer, run \"debug stack\" and attach the command's output to a bug report.\n\nError message: \"" + e.getMessage() + "\"");
         }
     }
@@ -262,15 +258,15 @@ public class TerminalActivity extends AppCompatActivity {
     public void enterCmd(View v) {
         EditText tv = findViewById(R.id.cmdInput);
 
-        if (!Aux.isNull(tv)) {
-            if (!Aux.isNull(tv.getText()) && !Aux.isNull(tv.getText().toString())) {
+        if (!Ax.isNull(tv)) {
+            if (!Ax.isNull(tv.getText()) && !Ax.isNull(tv.getText().toString())) {
                 cmd = tv.getText().toString();
 
                 try {
                     run(cmd);
                 } catch (Exception except) {
                     except.printStackTrace();
-                    Aux.saveStack(except);
+                    Ax.saveStack(except);
                     printf("Error: Could not execute command.\nStack trace logged.");
                 }
             }
@@ -279,7 +275,7 @@ public class TerminalActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     public void run(String cmd) {
-        TinyDB tinydb = Aux.tinydb();
+        TinyDB tinydb = Ax.tinydb();
 
         //String[] cmdColors = {tinydb.getString("cPrimary"), tinydb.getString("cSecondary"), tinydb.getString("cTertiary"), tinydb.getString("cKeypad"), tinydb.getString("cMain"), tinydb.getString("cTop"), tinydb.getString("cNum"), tinydb.getString("cFabText"), tinydb.getString("cPlus"), tinydb.getString("cMinus"), tinydb.getString("cMulti"), tinydb.getString("cDiv"), tinydb.getString("cFab"), tinydb.getString("cbEquals")};
         String setError;
@@ -302,21 +298,21 @@ public class TerminalActivity extends AppCompatActivity {
 
         if (!cmd.equals("\0")) {
             if (cmd.endsWith(" ") && cmd.length() > 1)
-                cmd = Aux.newTrim(cmd, 1);
+                cmd = Ax.newTrim(cmd, 1);
 
             //Set color
             if (cmd.length() > 2 && cmd.startsWith("set") || (cmd.startsWith("mode ") && cmd.length() == 6)) {
                 if (cmd.length() > 8) {
-                    hex = Aux.getLast(cmd, 7);
+                    hex = Ax.getLast(cmd, 7);
 
                     if (!cmd.contains("mode") && !cmd.contains("reset0")) {
-                        hex = Aux.colorToUpper(hex);
+                        hex = Ax.colorToUpper(hex);
                     }
 
-                    isHex = Aux.isColor(hex);
+                    isHex = Ax.isColor(hex);
 
                     if (cmd.contains("-ft") && hex.substring(1).equalsIgnoreCase(tinydb.getString("cSecondary").substring(1))) {
-                        hex = Aux.hexAdd(hex, -1);
+                        hex = Ax.hexAdd(hex, -1);
                         ftIsSecondary = true;
                     }
                 }
@@ -327,13 +323,13 @@ public class TerminalActivity extends AppCompatActivity {
 
 
                 //ColorPicker
-                if (cmd.length() > 8 && Aux.chat(cmd, 3).equals(" ") && cmd.endsWith("gui")){
+                if (cmd.length() > 8 && Ax.chat(cmd, 3).equals(" ") && cmd.endsWith("gui")){
                     for (i=0; i < 14; i++){
-                        if (Aux.newTrim(cmd, 4).endsWith(cmdCodes[i])){
+                        if (Ax.newTrim(cmd, 4).endsWith(cmdCodes[i])){
                             openColorPicker(i);
                             break;
                         }
-                        else if (Aux.buttonExists(Aux.newTrim(cmd, 4).substring(6))){
+                        else if (Ax.buttonExists(Ax.newTrim(cmd, 4).substring(6))){
                             openColorPicker(15);
                             break;
                         }
@@ -392,10 +388,10 @@ public class TerminalActivity extends AppCompatActivity {
                     }
                 }
                 //Mode
-                else if ((cmd.length() == 6 && Aux.newTrim(cmd, 1).equals("mode ")) || (cmd.length() == 7 && Aux.newTrim(cmd, 1).equals("theme "))){
-                    if (Aux.isDigit(Aux.lastChar(cmd)) && (Aux.getLast(Aux.newTrim(cmd, 1), 5).equals("mode ") || Aux.getLast(Aux.newTrim(cmd, 1), 6).equals("theme "))){
-                        if (Integer.parseInt(Aux.lastChar(cmd)) < 6 && Integer.parseInt(Aux.lastChar(cmd)) > 0) {
-                            String newTheme = Aux.lastChar(cmd);
+                else if ((cmd.length() == 6 && Ax.newTrim(cmd, 1).equals("mode ")) || (cmd.length() == 7 && Ax.newTrim(cmd, 1).equals("theme "))){
+                    if (Ax.isDigit(Ax.lastChar(cmd)) && (Ax.getLast(Ax.newTrim(cmd, 1), 5).equals("mode ") || Ax.getLast(Ax.newTrim(cmd, 1), 6).equals("theme "))){
+                        if (Integer.parseInt(Ax.lastChar(cmd)) < 6 && Integer.parseInt(Ax.lastChar(cmd)) > 0) {
+                            String newTheme = Ax.lastChar(cmd);
                             String[] themeNames = {"Dark", "Light", "AMOLED Black (Colored Buttons)", "AMOLED Black (Black Buttons)", "Monochrome"};
                             int themeInt = Integer.parseInt(newTheme);
 
@@ -583,7 +579,7 @@ public class TerminalActivity extends AppCompatActivity {
                     }
 
                     for (c=0; c < cmdEnd.length(); c++){
-                        if (Aux.chat(cmdEnd, c).equals(" "))
+                        if (Ax.chat(cmdEnd, c).equals(" "))
                             break;
 
                         codeLength++;
@@ -593,9 +589,9 @@ public class TerminalActivity extends AppCompatActivity {
                     String buttonText;
 
                     if (buttonCode.endsWith("t") && !buttonCode.endsWith("ot")) {
-                        buttonText = Aux.newTrim(buttonCode.substring(2), 1);
+                        buttonText = Ax.newTrim(buttonCode.substring(2), 1);
 
-                        if (Aux.buttonExists(buttonText)) {
+                        if (Ax.buttonExists(buttonText)) {
                             if (isHex) {
                                 printf("Button " + buttonText + " text color set to " + hex);
                                 tinydb.putString(buttonCode, hex);
@@ -612,7 +608,7 @@ public class TerminalActivity extends AppCompatActivity {
                     else {
                         buttonText = buttonCode.substring(2);
 
-                        if (Aux.buttonExists(buttonText)) {
+                        if (Ax.buttonExists(buttonText)) {
                             if (isHex) {
                                 printf("Button " + buttonText + " color set to " + hex);
                                 tinydb.putString(buttonCode, hex);
@@ -763,7 +759,7 @@ public class TerminalActivity extends AppCompatActivity {
                             String newHex;
 
                             if (ftIsSecondary)
-                                newHex = Aux.hexAdd(hex, 1);
+                                newHex = Ax.hexAdd(hex, 1);
                             else
                                 newHex = hex;
 
@@ -822,7 +818,7 @@ public class TerminalActivity extends AppCompatActivity {
 
                             printf("\nAll colors set to " + hex);
 
-                            Aux.tinydb().putBoolean("isSetSecondary", true);
+                            Ax.tinydb().putBoolean("isSetSecondary", true);
 
                             isAll = false;
 
@@ -947,7 +943,7 @@ public class TerminalActivity extends AppCompatActivity {
                             cSecondary = hex;
                             tinydb.putString("cSecondary", cSecondary);
 
-                            Aux.tinydb().putBoolean("isSetSecondary", true);
+                            Ax.tinydb().putBoolean("isSetSecondary", true);
 
                             if (!isAll) {
                                 try {
@@ -1138,7 +1134,7 @@ public class TerminalActivity extends AppCompatActivity {
                     printf(setError);
                 }
 
-                if (!Aux.isNull(cFabText)) {
+                if (!Ax.isNull(cFabText)) {
                     if (cFabText.equals("#reset0")) {
                         cFabText = "\0";
                         tinydb.putString("cFabText", "\0");
@@ -1154,7 +1150,7 @@ public class TerminalActivity extends AppCompatActivity {
                 String filename = cmd.substring(7);
 
                 if (filename.endsWith(".txt"))
-                    filename = Aux.newTrim(filename, 4);
+                    filename = Ax.newTrim(filename, 4);
 
                 File path = new File(this.getFilesDir(), "themes");
                 File file = new File(path, filename + ".txt");
@@ -1175,7 +1171,7 @@ public class TerminalActivity extends AppCompatActivity {
                 String filename = cmd.substring(6);
 
                 if (filename.endsWith(".txt"))
-                    filename = Aux.newTrim(filename, 4);
+                    filename = Ax.newTrim(filename, 4);
 
                 File path = new File(this.getFilesDir(), "themes");
                 File file = new File(path, filename + ".txt");
@@ -1211,7 +1207,7 @@ public class TerminalActivity extends AppCompatActivity {
 
 
             //Accent Color
-            else if (splitCmd[0].equalsIgnoreCase("accent") && Aux.isFullNum(splitCmd[1])) {
+            else if (splitCmd[0].equalsIgnoreCase("accent") && Ax.isFullNum(splitCmd[1])) {
                 try {
                     int colorInt = Integer.parseInt(splitCmd[1]);
 
@@ -1282,7 +1278,7 @@ public class TerminalActivity extends AppCompatActivity {
                     }
                 }
 
-                if (Aux.isColor(value) || value.equals("#reset0") || (splitCmd.length == 4 && (splitCmd[3].equals("\"\"") || key.equals("custom")))) {
+                if (Ax.isColor(value) || value.equals("#reset0") || (splitCmd.length == 4 && (splitCmd[3].equals("\"\"") || key.equals("custom")))) {
                     try {
                         MainActivity.mainActivity.recreate();
                     }
@@ -1302,7 +1298,7 @@ public class TerminalActivity extends AppCompatActivity {
             //TextSize
             else if (splitCmd[0].equalsIgnoreCase("textSize") || splitCmd[0].equalsIgnoreCase("txtSize") && splitCmd.length > 1) {
                 try {
-                    if (Aux.isFullNum(splitCmd[1])) {
+                    if (Ax.isFullNum(splitCmd[1])) {
                         try {
                             tinydb.putBoolean("tvSizeChanged", true);
                             tinydb.putInt("tvSize", Integer.parseInt(splitCmd[1]));
@@ -1324,7 +1320,7 @@ public class TerminalActivity extends AppCompatActivity {
             //Minimum Width
             else if (splitCmd[0].equalsIgnoreCase("getMinimumWidth") || splitCmd[0].equalsIgnoreCase("minWidth")) {
                 try {
-                    smolPrintf("Current minimum width is: " + Aux.getMinimumWidth(MainActivity.mainActivity));
+                    smolPrintf("Current minimum width is: " + Ax.getMinimumWidth(MainActivity.mainActivity));
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -1342,7 +1338,7 @@ public class TerminalActivity extends AppCompatActivity {
                 int e;
 
                 if (end.equals("-s"))
-                    Aux.tinydb().putBoolean("isSetSecondary", false);
+                    Ax.tinydb().putBoolean("isSetSecondary", false);
 
                 if (end.equalsIgnoreCase("all") || end.equals("-a")){
                     run("set -a #reset0");
@@ -1351,7 +1347,7 @@ public class TerminalActivity extends AppCompatActivity {
 
                     tinydb.putBoolean("mtIsSet", false);
 
-                    Aux.tinydb().putBoolean("isSetSecondary", false);
+                    Ax.tinydb().putBoolean("isSetSecondary", false);
 
                     for (e=0; e < editorCodes.length; e++)
                         tinydb.putString(editorCodes[e], "\0");
@@ -1363,7 +1359,7 @@ public class TerminalActivity extends AppCompatActivity {
                 else if (end.equalsIgnoreCase("button") || end.equalsIgnoreCase("-buttons")){
                     run("reset buttons");
                 }
-                else if (Aux.isButtonCode(end)){
+                else if (Ax.isButtonCode(end)){
                     run("set " + end + " #reset0");
                 }
                 else {
@@ -1397,9 +1393,9 @@ public class TerminalActivity extends AppCompatActivity {
                 ArrayList<String> commands = new ArrayList<>(Arrays.asList("delete", "reset", "help", "set", "get", "copy", "share", "mode", "recreate", "themes", "sym"));
 
                 if (cmd.endsWith(" ") && cmd.length() > 1)
-                    Aux.newTrim(cmd, 1);
+                    Ax.newTrim(cmd, 1);
 
-                if (splitCmd.length == 2 && splitCmd[1].equals("debug") && Aux.isTinyColor("-mt") && (Aux.getTinyColor("-mt") == Color.parseColor("#010101") || Aux.getTinyColor("-mt") == Color.parseColor("#FEFEFE")))
+                if (splitCmd.length == 2 && splitCmd[1].equals("debug") && Ax.isTinyColor("-mt") && (Ax.getTinyColor("-mt") == Color.parseColor("#010101") || Ax.getTinyColor("-mt") == Color.parseColor("#FEFEFE")))
                     printf(getString(R.string.help_debug));
                 else if (cmd.equalsIgnoreCase("help") || cmd.equals("?"))
                     printf(getString(R.string.help_text));
@@ -1411,7 +1407,7 @@ public class TerminalActivity extends AppCompatActivity {
 
 
             //Debug Mode & Debug Last
-            else if (splitCmd.length == 2 && splitCmd[0].equalsIgnoreCase("debug") && (splitCmd[1].equalsIgnoreCase("last") || Aux.isDigit(splitCmd[1]))) {
+            else if (splitCmd.length == 2 && splitCmd[0].equalsIgnoreCase("debug") && (splitCmd[1].equalsIgnoreCase("last") || Ax.isDigit(splitCmd[1]))) {
                 String[] onOff = {"disabled", "enabled"};
 
                 if (splitCmd[1].equalsIgnoreCase("last")) {
@@ -1481,7 +1477,7 @@ public class TerminalActivity extends AppCompatActivity {
 
 
             //New EQ
-            else if (splitCmd.length > 1 && (splitCmd[0].equalsIgnoreCase("newEq") || splitCmd[0].equalsIgnoreCase("newEquals")) && Aux.isDigit(splitCmd[1])) {
+            else if (splitCmd.length > 1 && (splitCmd[0].equalsIgnoreCase("newEq") || splitCmd[0].equalsIgnoreCase("newEquals")) && Ax.isDigit(splitCmd[1])) {
                 try {
                     int option = Integer.parseInt(splitCmd[1]);
 
@@ -1604,7 +1600,7 @@ public class TerminalActivity extends AppCompatActivity {
                 String[] updated = {"-b=t", "-b÷t", "-b×t", "-b-t", "-b+t"};
 
                 if (cmd.endsWith(" "))
-                    cmd = Aux.newTrim(cmd, 1);
+                    cmd = Ax.newTrim(cmd, 1);
                 else if (buttonCode.startsWith(" "))
                     buttonCode = buttonCode.substring(1);
 
@@ -1615,7 +1611,7 @@ public class TerminalActivity extends AppCompatActivity {
                 for (c=0; c < old.length; c++) {
                     if (buttonCode.equals(old[c])) {
                         buttonCode = updated[c];
-                        cmd = Aux.newTrim(cmd, old[c].length()) + updated[c];
+                        cmd = Ax.newTrim(cmd, old[c].length()) + updated[c];
                         break;
                     }
                 }
@@ -1635,7 +1631,7 @@ public class TerminalActivity extends AppCompatActivity {
                     }
                 }
 
-                if (!copied && Aux.isButtonCode(buttonCode) && Aux.isColor(tinydb.getString(buttonCode))){
+                if (!copied && Ax.isButtonCode(buttonCode) && Ax.isColor(tinydb.getString(buttonCode))){
                     String color = tinydb.getString(buttonCode);
 
                     Log.d("buttonCode and color", buttonCode + "    " + color);
@@ -1646,7 +1642,7 @@ public class TerminalActivity extends AppCompatActivity {
                         clipboard.setPrimaryClip(clip);
 
                         if (buttonCode.endsWith("t") && !buttonCode.endsWith("ot")) {
-                            buttonText = Aux.newTrim(buttonCode.substring(2), 1);
+                            buttonText = Ax.newTrim(buttonCode.substring(2), 1);
 
                             printf("Copied " + buttonText + " button text color (" + color + ") to clipboard");
                         }
@@ -1691,7 +1687,7 @@ public class TerminalActivity extends AppCompatActivity {
                     throw new Exception("Test exception manually thrown using the terminal");
                 }
                 catch (Exception e) {
-                    Aux.saveStack(e);
+                    Ax.saveStack(e);
                 }
             }
 
@@ -1717,16 +1713,16 @@ public class TerminalActivity extends AppCompatActivity {
             //Gradient Colors
             else if (cmd.length() > 10 && cmd.startsWith("gradient ")) {
                 if (cmd.contains("-m")) {
-                    String gradHex = Aux.getLast(cmd, 7);
+                    String gradHex = Ax.getLast(cmd, 7);
 
-                    if (Aux.isColor(gradHex)) {
-                        if (Aux.newTrim(cmd, 8).endsWith("start")) {
+                    if (Ax.isColor(gradHex)) {
+                        if (Ax.newTrim(cmd, 8).endsWith("start")) {
                             tinydb.putString("gradStartMain", gradHex);
 
                             smolPrintf("\n\nGradient start color set to " + gradHex);
                             MainActivity.mainActivity.recreate();
                         }
-                        else if (Aux.newTrim(cmd, 8).endsWith("end")) {
+                        else if (Ax.newTrim(cmd, 8).endsWith("end")) {
                             tinydb.putString("gradEndMain", gradHex);
 
                             smolPrintf("\n\nGradient end color set to " + gradHex);
@@ -1760,7 +1756,7 @@ public class TerminalActivity extends AppCompatActivity {
                         MainActivity.mainActivity.recreate();
                     }
                     else if (cmd.endsWith("get")) {
-                        smolPrintf("\n\nGradient starts at " + tinydb.getString("gradStartMain") + " (" + Aux.getTinyColor("gradStartMain") + ") and ends at " + tinydb.getString("gradEndMain") + " (" + Aux.getTinyColor("gradEndMain") + ")");
+                        smolPrintf("\n\nGradient starts at " + tinydb.getString("gradStartMain") + " (" + Ax.getTinyColor("gradStartMain") + ") and ends at " + tinydb.getString("gradEndMain") + " (" + Ax.getTinyColor("gradEndMain") + ")");
                     }
                 }
             }
@@ -1976,9 +1972,9 @@ public class TerminalActivity extends AppCompatActivity {
                     String color = tinydb.getString(buttonCode);
 
                     if (buttonCode.endsWith("t") && !buttonCode.endsWith("ot")) {
-                        buttonText = Aux.newTrim(buttonCode.substring(2), 1);
-                        if (Aux.buttonExists(buttonText)) {
-                            if (Aux.isColor(color)) {
+                        buttonText = Ax.newTrim(buttonCode.substring(2), 1);
+                        if (Ax.buttonExists(buttonText)) {
+                            if (Ax.isColor(color)) {
                                 printf("Current " + buttonText + " button text color is " + color);
                             }
                             else {
@@ -1992,8 +1988,8 @@ public class TerminalActivity extends AppCompatActivity {
                     else {
                         buttonText = buttonCode.substring(2);
 
-                        if (Aux.buttonExists(buttonText)) {
-                            if (Aux.isColor(color)) {
+                        if (Ax.buttonExists(buttonText)) {
+                            if (Ax.isColor(color)) {
                                 printf("Current " + buttonText + " button color is " + color);
                             }
                             else {
@@ -2027,7 +2023,7 @@ public class TerminalActivity extends AppCompatActivity {
                 String k1 = "", k2 = "";
 
                 for (i=11; i < cmd.length(); i++) {
-                    if (Aux.chat(cmd, i).equals(" ")) {
+                    if (Ax.chat(cmd, i).equals(" ")) {
                         k1 = cmd.substring(11, i);
                         k2 = cmd.substring(i + 1);
                     }
@@ -2107,7 +2103,7 @@ public class TerminalActivity extends AppCompatActivity {
         colorPickerDialog.setOnColorPickedListener(new ColorPickerDialog.OnColorPickedListener() {
             @Override
             public void onColorPicked(int color, String hexVal) {
-                String buttonCode = Aux.newTrim(cmd, 4).substring(4);
+                String buttonCode = Ax.newTrim(cmd, 4).substring(4);
 
                 if (hexVal != null && !hexVal.equals("\0")) {
                     if (hexVal.length() > 0) {
@@ -2115,24 +2111,24 @@ public class TerminalActivity extends AppCompatActivity {
                     }
 
                     if (hexVal.length() > 7)
-                        hexVal = "#" + Aux.getLast(hexVal, 6);
+                        hexVal = "#" + Ax.getLast(hexVal, 6);
                     else if (hexVal.length() < 7)
                         hexVal = "#FFFFFF";
 
-                    hexVal = Aux.colorToUpper(hexVal);
+                    hexVal = Ax.colorToUpper(hexVal);
 
                     if (key < 15) {
-                        if (Aux.isColor(hexVal))
+                        if (Ax.isColor(hexVal))
                             tinydb.putString(cmdKeys[key], hexVal);
 
                         printf(cmdColorWords[i] + " color set to " + tinydb.getString(cmdKeys[i]));
                     }
                     else if (key == 15){
-                        if (Aux.isColor(hexVal))
+                        if (Ax.isColor(hexVal))
                             tinydb.putString(buttonCode, hexVal);
 
                         if (buttonCode.endsWith("t") && !buttonCode.endsWith("ot"))
-                            printf("Button " + Aux.newTrim(buttonCode.substring(2), 1) + " color set to " + hexVal);
+                            printf("Button " + Ax.newTrim(buttonCode.substring(2), 1) + " color set to " + hexVal);
                         else
                             printf("Button " + buttonCode.substring(2) + " color set to " + hexVal);
                     }
@@ -2152,7 +2148,7 @@ public class TerminalActivity extends AppCompatActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState){
         super.onSaveInstanceState(outState);
 
-        Aux Aux = new Aux();
+        Ax Ax = new Ax();
 
         TextView cmdOut = findViewById(R.id.cmdOut);
 
@@ -2162,7 +2158,7 @@ public class TerminalActivity extends AppCompatActivity {
         outState.putInt("k", k);
 
         //Strings
-        if (!Aux.isNull(cmdOut))
+        if (!Ax.isNull(cmdOut))
             outState.putString("cmdOutText", cmdOut.getText().toString());
 
         //Booleans
@@ -2265,7 +2261,7 @@ public class TerminalActivity extends AppCompatActivity {
             majMin = k1.substring(2);
         }
         else {
-            key = Aux.chat(k1, 0);
+            key = Ax.chat(k1, 0);
             majMin = k1.substring(1);
         }
 
@@ -2347,7 +2343,7 @@ public class TerminalActivity extends AppCompatActivity {
             majMin = k2.substring(2);
         }
         else {
-            key2 = Aux.chat(k2, 0);
+            key2 = Ax.chat(k2, 0);
             majMin = k2.substring(1);
         }
 

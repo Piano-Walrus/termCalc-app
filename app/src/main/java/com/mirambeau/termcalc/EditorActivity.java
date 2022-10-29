@@ -2,7 +2,6 @@ package com.mirambeau.termcalc;
 
 import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipData;
@@ -48,9 +47,6 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -120,7 +116,7 @@ public class EditorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         try {
-            setTheme(Aux.cursorColor);
+            setTheme(Ax.cursorColor);
             setContentView(R.layout.activity_editor);
 
             final TinyDB tinydb = new TinyDB(this);
@@ -166,9 +162,9 @@ public class EditorActivity extends AppCompatActivity {
 
             toolbar.setOverflowIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_overflow_menu, null));
 
-            final int theme = Aux.getThemeInt();
+            final int theme = Ax.getThemeInt();
 
-            newTheme = Aux.getThemeInt();
+            newTheme = Ax.getThemeInt();
 
             //Initialize BackupCards
             File directory = new File(this.getFilesDir(), "themes");
@@ -386,10 +382,10 @@ public class EditorActivity extends AppCompatActivity {
 
                         zonesLayout.setVisibility(visibilities[fi]);
 
-                        if (Aux.isTinyColor("cPrimary") && Aux.isTinyColor("cKeypad") && Aux.getTinyColor("cPrimary") == Aux.getTinyColor("cKeypad"))
+                        if (Ax.isTinyColor("cPrimary") && Ax.isTinyColor("cKeypad") && Ax.getTinyColor("cPrimary") == Ax.getTinyColor("cKeypad"))
                             keypadDivider.setVisibility(visibilities[fi]);
 
-                        if (Aux.isTinyColor("cSecondary") && Aux.isTinyColor("cTertiary") && Aux.getTinyColor("cSecondary") == Aux.getTinyColor("cTertiary"))
+                        if (Ax.isTinyColor("cSecondary") && Ax.isTinyColor("cTertiary") && Ax.getTinyColor("cSecondary") == Ax.getTinyColor("cTertiary"))
                             scrollbarDivider.setVisibility(visibilities[fi]);
 
                         //Sets visibility of each element depending on which radio button is selected.
@@ -467,7 +463,7 @@ public class EditorActivity extends AppCompatActivity {
                         undo();
                     }
                     catch (Exception e) {
-                        Aux.saveStack(e);
+                        Ax.saveStack(e);
                     }
                 }
             });
@@ -479,7 +475,7 @@ public class EditorActivity extends AppCompatActivity {
                         redo();
                     }
                     catch (Exception e) {
-                        Aux.saveStack(e);
+                        Ax.saveStack(e);
                     }
                 }
             });
@@ -554,7 +550,7 @@ public class EditorActivity extends AppCompatActivity {
             zoneButtons = new Button[]{findViewById(R.id.keypadZoneButton), findViewById(R.id.primaryZoneButton), findViewById(R.id.secondaryZoneButton),
                     findViewById(R.id.tertiaryZoneButton), findViewById(R.id.mainZoneButton)};
 
-            final String[] zoneTextCodes = {"cNum", "-bop", "cTop", "cTop", Aux.isTinyColor("-btt") ? "-btt" : "cTop"};
+            final String[] zoneTextCodes = {"cNum", "-bop", "cTop", "cTop", Ax.isTinyColor("-btt") ? "-btt" : "cTop"};
 
             //Set zone onClick listeners
             for (i=0; i < zoneButtons.length; i++) {
@@ -586,14 +582,14 @@ public class EditorActivity extends AppCompatActivity {
 
                         final AlertDialog alertDialog = builder.create();
 
-                        bgCircle.setColorFilter(Aux.getBackgroundColor(fi == 4 ? findViewById(R.id.previewLayout) : (View) button.getParent()));
+                        bgCircle.setColorFilter(Ax.getBackgroundColor(fi == 4 ? findViewById(R.id.previewLayout) : (View) button.getParent()));
 
                         try {
                             textIcon.setColorFilter(fi == 1 ? ((TextView) findViewById(R.id.primaryZoneButtonText)).getCurrentTextColor() : button.getCurrentTextColor());
                         }
                         catch (Exception e) {
                             e.printStackTrace();
-                            textIcon.setColorFilter(Aux.isTinyColor(codes[1]) ? Aux.getTinyColor(codes[1]) : defaultTextColor);
+                            textIcon.setColorFilter(Ax.isTinyColor(codes[1]) ? Ax.getTinyColor(codes[1]) : defaultTextColor);
                         }
 
                         for (o=0; o < dialogOptions.length; o++) {
@@ -648,7 +644,7 @@ public class EditorActivity extends AppCompatActivity {
 
                                     final AlertDialog alertDialog = builder.create();
 
-                                    bgCircle.setColorFilter(Aux.getBackgroundColor(button));
+                                    bgCircle.setColorFilter(Ax.getBackgroundColor(button));
                                     textIcon.setColorFilter(button.getCurrentTextColor());
 
                                     for (o=0; o < dialogOptions.length; o++) {
@@ -682,18 +678,18 @@ public class EditorActivity extends AppCompatActivity {
                 String backupPrimary, backupText;
 
                 if (i == 0)
-                    backupPrimary = Aux.isTinyColor("cPrimary") ? tinydb.getString("cPrimary") : "#03DAC5";
+                    backupPrimary = Ax.isTinyColor("cPrimary") ? tinydb.getString("cPrimary") : "#03DAC5";
                 else
-                    backupPrimary = Aux.isTinyColor("cFab") ? tinydb.getString("cFab") : (Aux.isTinyColor("cPrimary") ? tinydb.getString("cPrimary") : "#03DAC5");
+                    backupPrimary = Ax.isTinyColor("cFab") ? tinydb.getString("cFab") : (Ax.isTinyColor("cPrimary") ? tinydb.getString("cPrimary") : "#03DAC5");
 
                 try {
-                    backupPrimary = Aux.toColorString(fabs[i].getBackgroundTintList().getDefaultColor());
+                    backupPrimary = Ax.toColorString(fabs[i].getBackgroundTintList().getDefaultColor());
                 }
                 catch (Exception e) {
                     e.printStackTrace();
                 }
 
-                backupText = (Aux.isTinyColor(fabTextCodes[i]) ? tinydb.getString(fabTextCodes[i]) : Aux.isTinyColor("cFabText") ? tinydb.getString("cFabText") : (Aux.isTinyColor("-bop") ? tinydb.getString("-bop") : "#FFFFFF"));
+                backupText = (Ax.isTinyColor(fabTextCodes[i]) ? tinydb.getString(fabTextCodes[i]) : Ax.isTinyColor("cFabText") ? tinydb.getString("cFabText") : (Ax.isTinyColor("-bop") ? tinydb.getString("-bop") : "#FFFFFF"));
 
                 try {
                     for (f = entries.size() - 1; f > 0; f--) {
@@ -708,7 +704,7 @@ public class EditorActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                fabs[i].setTag((Aux.isTinyColor(fabBGCodes[i]) ? tinydb.getString(fabBGCodes[i]) : backupPrimary)
+                fabs[i].setTag((Ax.isTinyColor(fabBGCodes[i]) ? tinydb.getString(fabBGCodes[i]) : backupPrimary)
                         + "~" + backupText);
 
                 fabs[i].setOnClickListener(new View.OnClickListener() {
@@ -740,7 +736,7 @@ public class EditorActivity extends AppCompatActivity {
                             e.printStackTrace();
 
                             try {
-                                bgCircle.setColorFilter(Aux.isTinyColor(fabBGCodes[fi]) ? Aux.getTinyColor(fabBGCodes[fi]) : Aux.isTinyColor("cPrimary") ? Aux.getTinyColor("cPrimary") : Color.parseColor("#53E2D4"));
+                                bgCircle.setColorFilter(Ax.isTinyColor(fabBGCodes[fi]) ? Ax.getTinyColor(fabBGCodes[fi]) : Ax.isTinyColor("cPrimary") ? Ax.getTinyColor("cPrimary") : Color.parseColor("#53E2D4"));
                             } catch (Exception e2) {
                                 e2.printStackTrace();
                             }
@@ -771,19 +767,19 @@ public class EditorActivity extends AppCompatActivity {
                 for (String code : allCodes[i]) {
                     //Initialize "setZones" array
                     if (i == 0) {
-                        if (Aux.isTinyColor(code))
+                        if (Ax.isTinyColor(code))
                             setZones.add(code);
                     }
                     //Initialize "setButtons" array
                     else {
                         if (code.startsWith("-b")) {
-                            if (Aux.isTinyColor(code))
+                            if (Ax.isTinyColor(code))
                                 setButtons.add(code);
-                            if (Aux.isTinyColor(code + "t"))
+                            if (Ax.isTinyColor(code + "t"))
                                 setButtons.add(code + "t");
                         }
                         else if (code.startsWith("cFab")) {
-                            if (Aux.isTinyColor(code)) {
+                            if (Ax.isTinyColor(code)) {
                                 setButtons.add(code);
                             }
                         }
@@ -793,7 +789,7 @@ public class EditorActivity extends AppCompatActivity {
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
     }
@@ -830,7 +826,7 @@ public class EditorActivity extends AppCompatActivity {
             try {
                 int[] iconPadding = {icon.getPaddingLeft(), icon.getPaddingTop(), icon.getPaddingRight(), icon.getPaddingBottom()};
 
-                icon.setImageDrawable(option == 0 ? Aux.getDrawable(R.drawable.ic_baseline_format_color_fill_28) : Aux.getDrawable(R.drawable.ic_baseline_format_color_text_24));
+                icon.setImageDrawable(option == 0 ? Ax.getDrawable(R.drawable.ic_baseline_format_color_fill_28) : Ax.getDrawable(R.drawable.ic_baseline_format_color_text_24));
                 icon.setPadding(iconPadding[0], option == 0 ? iconPadding[1] + 6 : iconPadding[1], iconPadding[2], option == 0 ? iconPadding[3] : iconPadding[3] + 8);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -863,19 +859,19 @@ public class EditorActivity extends AppCompatActivity {
             try {
                 try {
                     if (isManual) {
-                        if (Aux.isColor(manualBG) && Aux.isColor(manualText)) {
+                        if (Ax.isColor(manualBG) && Ax.isColor(manualText)) {
                             bigColors[0] = Color.parseColor(manualBG);
                             bigColors[1] = Color.parseColor(manualText);
                         }
                     }
                     else {
-                        bigColors[0] = Aux.getBackgroundColor(code.equals("cMain") ? findViewById(R.id.previewLayout) : button);
+                        bigColors[0] = Ax.getBackgroundColor(code.equals("cMain") ? findViewById(R.id.previewLayout) : button);
                     }
                 } catch (Exception e2) {
                     e2.printStackTrace();
 
                     try {
-                        bigColors[0] = Aux.getBackgroundColor((View) button.getParent());
+                        bigColors[0] = Ax.getBackgroundColor((View) button.getParent());
                     } catch (Exception e3) {
                         e3.printStackTrace();
                     }
@@ -886,7 +882,7 @@ public class EditorActivity extends AppCompatActivity {
                         try {
                             bigColors[1] = ((TextView) findViewById(R.id.primaryZoneButtonText)).getCurrentTextColor();
                         } catch (Exception e) {
-                            bigColors[1] = Aux.isTinyColor("-bop") ? Aux.getTinyColor("-bop") : Color.WHITE;
+                            bigColors[1] = Ax.isTinyColor("-bop") ? Ax.getTinyColor("-bop") : Color.WHITE;
                         }
                     }
                     else {
@@ -895,19 +891,19 @@ public class EditorActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             e.printStackTrace();
 
-                            int defaultTextColor = button.getTag() != null && button.getTag().toString().contains("cKeypad") && Aux.getThemeInt() == 2 ? darkGray : Color.WHITE;
+                            int defaultTextColor = button.getTag() != null && button.getTag().toString().contains("cKeypad") && Ax.getThemeInt() == 2 ? darkGray : Color.WHITE;
 
                             String textCode = "-b" + ((Button) button).getText().toString() + "t";
 
                             if (button.getClass() == androidx.appcompat.widget.AppCompatButton.class) {
-                                bigColors[1] = (Aux.isTinyColor(textCode) ? Aux.getTinyColor(textCode) : defaultTextColor);
+                                bigColors[1] = (Ax.isTinyColor(textCode) ? Ax.getTinyColor(textCode) : defaultTextColor);
                             }
                         }
                     }
                 }
 
                 cpButton.setColorFilter(bigColors[option]);
-                hexField.setText(Aux.toColorString(bigColors[option]).replace("#", ""));
+                hexField.setText(Ax.toColorString(bigColors[option]).replace("#", ""));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -917,7 +913,7 @@ public class EditorActivity extends AppCompatActivity {
                 @Override
                 public void validate(TextView textView, String before, String after) {
                     try {
-                        if (Aux.isColor("#" + after.replace("#", ""))) {
+                        if (Ax.isColor("#" + after.replace("#", ""))) {
                             cpButton.setColorFilter(Color.parseColor("#" + after.replace("#", "")));
                         }
 
@@ -925,7 +921,7 @@ public class EditorActivity extends AppCompatActivity {
                             textView.setText(after.replace("#", ""));
                         }
                     } catch (Exception e) {
-                        Aux.saveStack(e);
+                        Ax.saveStack(e);
                     }
                 }
             });
@@ -944,7 +940,7 @@ public class EditorActivity extends AppCompatActivity {
             final Button[] zoneButtons = {findViewById(R.id.keypadZoneButton), null, findViewById(R.id.secondaryZoneButton), null, findViewById(R.id.tertiaryZoneButton),
                     findViewById(R.id.mainZoneButton)};
 
-            final String initResetColor = Aux.isColor(hexField.getText().toString()) ? hexField.getText().toString() : "#FFFFFF";
+            final String initResetColor = Ax.isColor(hexField.getText().toString()) ? hexField.getText().toString() : "#FFFFFF";
 
             final boolean finalIsFab = isFab;
             builder.setPositiveButton(positive, new DialogInterface.OnClickListener() {
@@ -959,7 +955,7 @@ public class EditorActivity extends AppCompatActivity {
                         final FloatingActionButton delete = findViewById(R.id.editorDelete);
                         final FloatingActionButton apply = findViewById(R.id.editorApply);
 
-                        if (Aux.isColor(formattedHex)) {
+                        if (Ax.isColor(formattedHex)) {
                             int i;
 
                             //Background Color
@@ -971,19 +967,19 @@ public class EditorActivity extends AppCompatActivity {
 
                                 //Zone
                                 if (isZone && button.getTag().toString().contains(" ")) {
-                                    int index = Integer.parseInt(Aux.lastChar(tag));
+                                    int index = Integer.parseInt(Ax.lastChar(tag));
 
                                     if (index > 2)
                                         index++;
 
-                                    if (Aux.isTinyColor(code))
-                                        initColor = Aux.toColorString(Aux.getTinyColor(code));
+                                    if (Ax.isTinyColor(code))
+                                        initColor = Ax.toColorString(Ax.getTinyColor(code));
                                     else {
                                         if (index == 2) {
-                                            initColor = Aux.toColorString(Aux.getBackgroundColor(findViewById(R.id.editorScrollBar)));
+                                            initColor = Ax.toColorString(Ax.getBackgroundColor(findViewById(R.id.editorScrollBar)));
                                         }
                                         else {
-                                            initColor = Aux.toColorString(Aux.getBackgroundColor(containers[index]));
+                                            initColor = Ax.toColorString(Ax.getBackgroundColor(containers[index]));
                                         }
                                     }
 
@@ -1026,7 +1022,7 @@ public class EditorActivity extends AppCompatActivity {
                                         }
                                     }
                                     else {
-                                        initColor = Aux.toColorString(Aux.getBackgroundColor(button));
+                                        initColor = Ax.toColorString(Ax.getBackgroundColor(button));
                                         button.setBackgroundColor(Color.parseColor(formattedHex));
                                     }
 
@@ -1044,16 +1040,16 @@ public class EditorActivity extends AppCompatActivity {
                                     String initColor;
                                     String tag = isZone ? button.getTag().toString() : "~";
 
-                                    int defaultTextColor = tag.contains(" ") && Aux.getThemeInt() == 2 ? darkGray : Color.WHITE;
+                                    int defaultTextColor = tag.contains(" ") && Ax.getThemeInt() == 2 ? darkGray : Color.WHITE;
 
                                     if (code.equals("-bop") || code.equals("-btt") || code.equals("cTop"))
                                         defaultTextColor = Color.WHITE;
 
                                     //Zone
                                     if (isZone && button.getTag().toString().contains(" ")) {
-                                        initColor = Aux.toColorString(Aux.isTinyColor(code) ? Aux.getTinyColor(code) : defaultTextColor);
+                                        initColor = Ax.toColorString(Ax.isTinyColor(code) ? Ax.getTinyColor(code) : defaultTextColor);
 
-                                        int index = Integer.parseInt(Aux.lastChar(tag));
+                                        int index = Integer.parseInt(Ax.lastChar(tag));
 
                                         if (index > 2)
                                             index++;
@@ -1137,7 +1133,7 @@ public class EditorActivity extends AppCompatActivity {
                                             }
                                         }
                                         else {
-                                            initColor = Aux.toColorString(((Button) button).getCurrentTextColor());
+                                            initColor = Ax.toColorString(((Button) button).getCurrentTextColor());
                                             ((Button) button).setTextColor(color);
                                         }
 
@@ -1170,7 +1166,7 @@ public class EditorActivity extends AppCompatActivity {
                             dialog.dismiss();
                         }
                         else {
-                            Aux.makeLongToast("Error: Invalid hex code");
+                            Ax.makeLongToast("Error: Invalid hex code");
                         }
 
                         try {
@@ -1183,7 +1179,7 @@ public class EditorActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     } catch (Exception e) {
-                        Aux.saveStack(e);
+                        Ax.saveStack(e);
                         finish();
                     }
                 }
@@ -1219,9 +1215,9 @@ public class EditorActivity extends AppCompatActivity {
                                     e.printStackTrace();
 
                                     if (code.startsWith("-"))
-                                        Aux.makeToast("Error: Failed to reset color.\nTry running \"reset " + code + "\" in the terminal.", 1);
+                                        Ax.makeToast("Error: Failed to reset color.\nTry running \"reset " + code + "\" in the terminal.", 1);
                                     else
-                                        Aux.makeToast("Error: Failed to reset color.\nTry running \"reset [button code]\" in the terminal.\n\n(Run \"help set\" for a list of button codes)", 1);
+                                        Ax.makeToast("Error: Failed to reset color.\nTry running \"reset [button code]\" in the terminal.\n\n(Run \"help set\" for a list of button codes)", 1);
                                 }
                             }
                         });
@@ -1247,7 +1243,7 @@ public class EditorActivity extends AppCompatActivity {
                         ClipData.Item item = pData.getItemAt(c);
                         String itemText = item.getText().toString();
 
-                        if (Aux.isColor("#" + itemText.replace("#", "")))
+                        if (Ax.isColor("#" + itemText.replace("#", "")))
                             colors.add("#" + itemText.replace("#", ""));
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -1288,12 +1284,12 @@ public class EditorActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     String color = "#" + hexField.getText().toString();
 
-                    if (Aux.isColor(color)) {
+                    if (Ax.isColor(color)) {
                         ClipboardManager clipboard = (ClipboardManager) EditorActivity.editorActivity.getSystemService(Context.CLIPBOARD_SERVICE);
                         ClipData clip = ClipData.newPlainText("color", color);
                         clipboard.setPrimaryClip(clip);
 
-                        Aux.makeToast("\"" + color + "\" copied to clipboard", EditorActivity.editorActivity, 0);
+                        Ax.makeToast("\"" + color + "\" copied to clipboard", EditorActivity.editorActivity, 0);
                     }
                 }
             });
@@ -1309,7 +1305,7 @@ public class EditorActivity extends AppCompatActivity {
                     colorPickerDialog.show();
                     colorPickerDialog.hideOpacityBar();
 
-                    if (Aux.isColor(Aux.toColorString(finalBigColor))) {
+                    if (Ax.isColor(Ax.toColorString(finalBigColor))) {
                         colorPickerDialog.setInitialColor(finalBigColor);
                         colorPickerDialog.setLastColor(finalBigColor);
                     }
@@ -1323,11 +1319,11 @@ public class EditorActivity extends AppCompatActivity {
                                 }
 
                                 if (hexVal.length() > 7)
-                                    hexVal = "#" + Aux.getLast(hexVal, 6);
+                                    hexVal = "#" + Ax.getLast(hexVal, 6);
                                 else if (hexVal.length() < 7)
                                     hexVal = "#FFFFFF";
 
-                                hexVal = Aux.colorToUpper(hexVal);
+                                hexVal = Ax.colorToUpper(hexVal);
 
                                 ((EditText) alertDialog.findViewById(R.id.hexField)).setText(hexVal.replace("#", ""));
                                 alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
@@ -1342,7 +1338,7 @@ public class EditorActivity extends AppCompatActivity {
             return alertDialog;
         }
         catch (Exception e) {
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
 
@@ -1425,7 +1421,7 @@ public class EditorActivity extends AppCompatActivity {
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
 
@@ -1439,7 +1435,7 @@ public class EditorActivity extends AppCompatActivity {
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
 
@@ -1550,7 +1546,7 @@ public class EditorActivity extends AppCompatActivity {
                 fileText = colors[0] + "\n";
 
                 for (i = 1; i < numColors; i++) {
-                    if (colors[i] == null || colors[i].equals("\0") || colors[i].equals("") || colors[i].equals("0") || !Aux.isColor(colors[i]))
+                    if (colors[i] == null || colors[i].equals("\0") || colors[i].equals("") || colors[i].equals("0") || !Ax.isColor(colors[i]))
                         colors[i] = "#reset0";
 
                     fileText += colors[i] + "\n";
@@ -1564,7 +1560,7 @@ public class EditorActivity extends AppCompatActivity {
                             extraTexts[a] = "ⁿ√";
 
                         if (extraColors[a] != null) {
-                            if (Aux.isColor(extraColors[a])) {
+                            if (Ax.isColor(extraColors[a])) {
                                 if (!hasAddedButton) {
                                     fileText += "\n";
                                     hasAddedButton = true;
@@ -1575,7 +1571,7 @@ public class EditorActivity extends AppCompatActivity {
                         }
 
                         if (extraTextColors[a] != null) {
-                            if (Aux.isColor(extraTextColors[a])) {
+                            if (Ax.isColor(extraTextColors[a])) {
                                 if (!hasAddedButton) {
                                     fileText += "\n";
                                     hasAddedButton = true;
@@ -1590,11 +1586,11 @@ public class EditorActivity extends AppCompatActivity {
                 String[] extraCodes = {"-bop", "-btt", "-bINV2", "-bINV2t", "-mt"};
 
                 for (a=0; a < extraCodes.length; a++) {
-                    if (Aux.isTinyColor(extraCodes[a]))
+                    if (Ax.isTinyColor(extraCodes[a]))
                         fileText += tinydb.getString(extraCodes[a]) + extraCodes[a] + "\n";
                 }
 
-                if (Aux.isDigit(bigTheme))
+                if (Ax.isDigit(bigTheme))
                     fileText += bigTheme;
                 else
                     fileText += tinydb.getString("theme");
@@ -1606,7 +1602,7 @@ public class EditorActivity extends AppCompatActivity {
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
 
@@ -1709,7 +1705,7 @@ public class EditorActivity extends AppCompatActivity {
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
     }
@@ -1753,7 +1749,7 @@ public class EditorActivity extends AppCompatActivity {
 
         TinyDB tinydb = new TinyDB(EditorActivity.editorActivity);
 
-        final String darkerSecondaryStr = Aux.hexAdd("#53E2D4", -6);
+        final String darkerSecondaryStr = Ax.hexAdd("#53E2D4", -6);
 
         final int darkerSecondary = Color.parseColor(darkerSecondaryStr);
 
@@ -1796,37 +1792,37 @@ public class EditorActivity extends AppCompatActivity {
         final FloatingActionButton apply = findViewById(R.id.editorApply);
 
         //Set colors in current theme
-        eMain.setBackgroundColor(Aux.isTinyColor("cMain") ? Aux.getTinyColor("cMain") : Color.parseColor(defaultByTheme[newTheme][3]));
-        eKeypad.setBackgroundColor(Aux.isTinyColor("cKeypad") ? Aux.getTinyColor("cKeypad") : Color.parseColor(defaultByTheme[newTheme][4]));
-        keypadZone.setBackgroundColor(Aux.isTinyColor("cKeypad") ? Aux.getTinyColor("cKeypad") : Color.parseColor(defaultByTheme[newTheme][4]));
+        eMain.setBackgroundColor(Ax.isTinyColor("cMain") ? Ax.getTinyColor("cMain") : Color.parseColor(defaultByTheme[newTheme][3]));
+        eKeypad.setBackgroundColor(Ax.isTinyColor("cKeypad") ? Ax.getTinyColor("cKeypad") : Color.parseColor(defaultByTheme[newTheme][4]));
+        keypadZone.setBackgroundColor(Ax.isTinyColor("cKeypad") ? Ax.getTinyColor("cKeypad") : Color.parseColor(defaultByTheme[newTheme][4]));
 
-        primaryButtons.setBackgroundColor(Aux.isTinyColor("cPrimary") ? Aux.getTinyColor("cPrimary") : Color.parseColor(defaultByTheme[newTheme][0]));
-        primaryZone.setBackgroundColor(Aux.isTinyColor("cPrimary") ? Aux.getTinyColor("cPrimary") : Color.parseColor(defaultByTheme[newTheme][0]));
-        secondaryButtons.setBackgroundColor(Aux.isTinyColor("cSecondary") ? Aux.getTinyColor("cSecondary") : Color.parseColor(defaultByTheme[newTheme][1]));
-        secondaryZone.setBackgroundColor(Aux.isTinyColor("cSecondary") ? Aux.getTinyColor("cSecondary") : Color.parseColor(defaultByTheme[newTheme][1]));
-        tertiaryButtons.setBackgroundColor(Aux.isTinyColor("cTertiary") ? Aux.getTinyColor("cTertiary") : Color.parseColor(defaultByTheme[newTheme][2]));
-        tertiaryZone.setBackgroundColor(Aux.isTinyColor("cTertiary") ? Aux.getTinyColor("cTertiary") : Color.parseColor(defaultByTheme[newTheme][2]));
+        primaryButtons.setBackgroundColor(Ax.isTinyColor("cPrimary") ? Ax.getTinyColor("cPrimary") : Color.parseColor(defaultByTheme[newTheme][0]));
+        primaryZone.setBackgroundColor(Ax.isTinyColor("cPrimary") ? Ax.getTinyColor("cPrimary") : Color.parseColor(defaultByTheme[newTheme][0]));
+        secondaryButtons.setBackgroundColor(Ax.isTinyColor("cSecondary") ? Ax.getTinyColor("cSecondary") : Color.parseColor(defaultByTheme[newTheme][1]));
+        secondaryZone.setBackgroundColor(Ax.isTinyColor("cSecondary") ? Ax.getTinyColor("cSecondary") : Color.parseColor(defaultByTheme[newTheme][1]));
+        tertiaryButtons.setBackgroundColor(Ax.isTinyColor("cTertiary") ? Ax.getTinyColor("cTertiary") : Color.parseColor(defaultByTheme[newTheme][2]));
+        tertiaryZone.setBackgroundColor(Ax.isTinyColor("cTertiary") ? Ax.getTinyColor("cTertiary") : Color.parseColor(defaultByTheme[newTheme][2]));
 
-        String tabColor = Aux.isTinyColor("cSecondary") ? tinydb.getString("cSecondary") : defaultByTheme[newTheme][1];
+        String tabColor = Ax.isTinyColor("cSecondary") ? tinydb.getString("cSecondary") : defaultByTheme[newTheme][1];
 
         if (tinydb.getBoolean("isDarkTab"))
-            tabColor = Aux.hexAdd(tabColor, -6);
+            tabColor = Ax.hexAdd(tabColor, -6);
 
         expBG1.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(tabColor)));
         expBG2.setBackgroundColor(Color.parseColor(tabColor));
 
-        bEquals.setTextColor(Aux.isTinyColor("cPrimary") && !Aux.isTinyColor("cNum") ? Aux.getTinyColor("cPrimary") :
-                (Aux.isTinyColor("cNum") ? Aux.getTinyColor("cNum") : Color.parseColor(defaultByTheme[newTheme][0])));
+        bEquals.setTextColor(Ax.isTinyColor("cPrimary") && !Ax.isTinyColor("cNum") ? Ax.getTinyColor("cPrimary") :
+                (Ax.isTinyColor("cNum") ? Ax.getTinyColor("cNum") : Color.parseColor(defaultByTheme[newTheme][0])));
 
-        if (Aux.isTinyColor("cFab")) {
-            delete.setBackgroundTintList(ColorStateList.valueOf(Aux.getTinyColor("cFab")));
-            customs.setBackgroundTintList(ColorStateList.valueOf(Aux.getTinyColor("cFab")));
-            apply.setBackgroundTintList(ColorStateList.valueOf(Aux.getTinyColor("cFab")));
+        if (Ax.isTinyColor("cFab")) {
+            delete.setBackgroundTintList(ColorStateList.valueOf(Ax.getTinyColor("cFab")));
+            customs.setBackgroundTintList(ColorStateList.valueOf(Ax.getTinyColor("cFab")));
+            apply.setBackgroundTintList(ColorStateList.valueOf(Ax.getTinyColor("cFab")));
         }
-        else if (Aux.isTinyColor("cPrimary")) {
-            delete.setBackgroundTintList(ColorStateList.valueOf(Aux.getTinyColor("cPrimary")));
-            customs.setBackgroundTintList(ColorStateList.valueOf(Aux.getTinyColor("cPrimary")));
-            apply.setBackgroundTintList(ColorStateList.valueOf(Aux.getTinyColor("cPrimary")));
+        else if (Ax.isTinyColor("cPrimary")) {
+            delete.setBackgroundTintList(ColorStateList.valueOf(Ax.getTinyColor("cPrimary")));
+            customs.setBackgroundTintList(ColorStateList.valueOf(Ax.getTinyColor("cPrimary")));
+            apply.setBackgroundTintList(ColorStateList.valueOf(Ax.getTinyColor("cPrimary")));
         }
         else {
             delete.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(defaultByTheme[newTheme][0])));
@@ -1834,15 +1830,15 @@ public class EditorActivity extends AppCompatActivity {
             apply.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(defaultByTheme[newTheme][0])));
         }
 
-        if (Aux.isTinyColor("cFabText")) {
-            delete.setColorFilter(Aux.getTinyColor("cFabText"));
-            customs.setColorFilter(Aux.getTinyColor("cFabText"));
-            apply.setColorFilter(Aux.getTinyColor("cFabText"));
+        if (Ax.isTinyColor("cFabText")) {
+            delete.setColorFilter(Ax.getTinyColor("cFabText"));
+            customs.setColorFilter(Ax.getTinyColor("cFabText"));
+            apply.setColorFilter(Ax.getTinyColor("cFabText"));
         }
-        else if (Aux.isTinyColor("-bop")) {
-            delete.setColorFilter(Aux.getTinyColor("-bop"));
-            customs.setColorFilter(Aux.getTinyColor("-bop"));
-            apply.setColorFilter(Aux.getTinyColor("-bop"));
+        else if (Ax.isTinyColor("-bop")) {
+            delete.setColorFilter(Ax.getTinyColor("-bop"));
+            customs.setColorFilter(Ax.getTinyColor("-bop"));
+            apply.setColorFilter(Ax.getTinyColor("-bop"));
         }
         else {
             delete.setColorFilter(Color.WHITE);
@@ -1850,12 +1846,12 @@ public class EditorActivity extends AppCompatActivity {
             apply.setColorFilter(Color.WHITE);
         }
 
-        if (Aux.isTinyColor("-bfc"))
-            customs.setBackgroundTintList(ColorStateList.valueOf(Aux.getTinyColor("-bfc")));
-        if (Aux.isTinyColor("-bfct"))
-            customs.setColorFilter(Aux.getTinyColor("-bfct"));
+        if (Ax.isTinyColor("-bfc"))
+            customs.setBackgroundTintList(ColorStateList.valueOf(Ax.getTinyColor("-bfc")));
+        if (Ax.isTinyColor("-bfct"))
+            customs.setColorFilter(Ax.getTinyColor("-bfct"));
 
-        int mtColor = Aux.isTinyColor("-mt") ? Aux.getTinyColor("-mt") : (newTheme == 2 ? darkGray : Color.WHITE);
+        int mtColor = Ax.isTinyColor("-mt") ? Ax.getTinyColor("-mt") : (newTheme == 2 ? darkGray : Color.WHITE);
 
         hmb.setColorFilter(mtColor);
         toolbarTitle.setTextColor(mtColor);
@@ -1869,7 +1865,7 @@ public class EditorActivity extends AppCompatActivity {
         final ViewGroup[] containers = {eKeypad, primaryButtons, findViewById(R.id.editorSecondaryLinear1), findViewById(R.id.editorSecondaryLinear2), tertiaryButtons};
         final String[] zoneTextCodes = {"cNum", "-bop", "cTop", "cTop", "-btt"};
 
-        expand.setColorFilter(Aux.isTinyColor("cTop") ? Aux.getTinyColor("cTop") : Color.WHITE);
+        expand.setColorFilter(Ax.isTinyColor("cTop") ? Ax.getTinyColor("cTop") : Color.WHITE);
 
         for (i = 0; i < containers.length; i++) {
             int defaultTextColor = i == 0 && newTheme == 2 ? darkGray : Color.WHITE;
@@ -1883,11 +1879,11 @@ public class EditorActivity extends AppCompatActivity {
                         final String bgCode = "-b" + text;
                         String textCode = "-b" + text + "t";
 
-                        if (Aux.isTinyColor(bgCode))
-                            button.setBackgroundColor(Aux.getTinyColor(bgCode));
+                        if (Ax.isTinyColor(bgCode))
+                            button.setBackgroundColor(Ax.getTinyColor(bgCode));
 
                         if (!textCode.equals("-b=t"))
-                            button.setTextColor(Aux.isTinyColor(textCode) ? Aux.getTinyColor(textCode) : Aux.isTinyColor(zoneTextCodes[i]) ? Aux.getTinyColor(zoneTextCodes[i]) : defaultTextColor);
+                            button.setTextColor(Ax.isTinyColor(textCode) ? Ax.getTinyColor(textCode) : Ax.isTinyColor(zoneTextCodes[i]) ? Ax.getTinyColor(zoneTextCodes[i]) : defaultTextColor);
 
                         try {
                             button.setElevation(0f);
@@ -1901,25 +1897,25 @@ public class EditorActivity extends AppCompatActivity {
             }
         }
 
-        if (Aux.isTinyColor("-b=t"))
-            bEquals.setTextColor(Aux.getTinyColor("-b=t"));
+        if (Ax.isTinyColor("-b=t"))
+            bEquals.setTextColor(Ax.getTinyColor("-b=t"));
 
         for (i=0; i < zoneButtons.length; i++) {
             int defaultTextColor = i == 0 && newTheme == 2 ? darkGray : Color.WHITE;
             String zoneTextCode = zoneButtons[i].getTag().toString().split(" ")[1];
 
-            zoneButtons[i].setTextColor(Aux.isTinyColor(zoneTextCode) ? Aux.getTinyColor(zoneTextCode) : defaultTextColor);
+            zoneButtons[i].setTextColor(Ax.isTinyColor(zoneTextCode) ? Ax.getTinyColor(zoneTextCode) : defaultTextColor);
         }
 
-        primaryZoneButtonText.setTextColor(Aux.isTinyColor("-bop") ? Aux.getTinyColor("-bop") : Color.WHITE);
+        primaryZoneButtonText.setTextColor(Ax.isTinyColor("-bop") ? Ax.getTinyColor("-bop") : Color.WHITE);
 
         Button inv2 = findViewById(R.id.eBInv2);
 
-        if (Aux.isTinyColor("-bINV2"))
-            inv2.setBackgroundColor(Aux.getTinyColor("-bINV2"));
+        if (Ax.isTinyColor("-bINV2"))
+            inv2.setBackgroundColor(Ax.getTinyColor("-bINV2"));
 
-        if (Aux.isTinyColor("-bINV2t"))
-            inv2.setTextColor(Aux.getTinyColor("-bINV2t"));
+        if (Ax.isTinyColor("-bINV2t"))
+            inv2.setTextColor(Ax.getTinyColor("-bINV2t"));
     }
 
     public void addHistoryEntry (View view, String code, String initColor, String finalColor) {
@@ -1972,7 +1968,7 @@ public class EditorActivity extends AppCompatActivity {
         if (code.startsWith("-b") && code.endsWith("t") && !code.endsWith("tt") && !code.startsWith("-bfc")) {
             button.setTextColor(initColor);
 
-            if (Aux.getFirstHistoryEntry(entries, code) == currentEntry)
+            if (Ax.getFirstHistoryEntry(entries, code) == currentEntry)
                 setButtons.remove(code);
         }
         //Fabs (Delete or Custom)
@@ -1999,7 +1995,7 @@ public class EditorActivity extends AppCompatActivity {
             if (!setButtons.contains("-bfc") && code.equals("cFab"))
                 customs.setBackgroundTintList(ColorStateList.valueOf(initColor));
 
-            if (Aux.getFirstHistoryEntry(entries, code) == currentEntry)
+            if (Ax.getFirstHistoryEntry(entries, code) == currentEntry)
                 setButtons.remove(code);
         }
         //Text Zone
@@ -2007,7 +2003,7 @@ public class EditorActivity extends AppCompatActivity {
             String tag = button.getTag() != null ? button.getTag().toString() : "~";
 
             int i;
-            int index = Integer.parseInt(Aux.lastChar(tag));
+            int index = Integer.parseInt(Ax.lastChar(tag));
 
             if (index > 2)
                 index++;
@@ -2114,7 +2110,7 @@ public class EditorActivity extends AppCompatActivity {
                 entry.view.setBackgroundColor(initColor);
 
             try {
-                if (Aux.getFirstHistoryEntry(entries, code) == currentEntry)
+                if (Ax.getFirstHistoryEntry(entries, code) == currentEntry)
                     setButtons.remove(code);
             }
             catch (Exception e) {
@@ -2167,7 +2163,7 @@ public class EditorActivity extends AppCompatActivity {
         if (code.startsWith("-b") && code.endsWith("t") && !code.endsWith("ot") && !code.equals("-btt")) {
             button.setTextColor(finalColor);
 
-            if (Aux.getFirstHistoryEntry(entries, code) == currentEntry + 1)
+            if (Ax.getFirstHistoryEntry(entries, code) == currentEntry + 1)
                 setButtons.add(code);
         }
         else if (fab != null) {
@@ -2197,7 +2193,7 @@ public class EditorActivity extends AppCompatActivity {
             String tag = button.getTag() != null ? button.getTag().toString() : "~";
 
             int i;
-            int index = Integer.parseInt(Aux.lastChar(tag));
+            int index = Integer.parseInt(Ax.lastChar(tag));
 
             if (index > 2)
                 index++;
@@ -2302,7 +2298,7 @@ public class EditorActivity extends AppCompatActivity {
             else
                 entry.view.setBackgroundColor(finalColor);
 
-            if (Aux.getFirstHistoryEntry(entries, code) == currentEntry + 1)
+            if (Ax.getFirstHistoryEntry(entries, code) == currentEntry + 1)
                 setButtons.add(code);
         }
 
@@ -2348,12 +2344,12 @@ public class EditorActivity extends AppCompatActivity {
             String[] codes;
             int zoneIndex = 1;
             int finalColor, defaultZoneColor = Color.WHITE;
-            int themeInt = Aux.getThemeInt();
+            int themeInt = Ax.getThemeInt();
             boolean isZone = false;
 
             //Check button's tag to determine whether or not the button is a zoneButton
             try {
-                isZone = Aux.isDigit(Aux.lastChar(view.getTag().toString()));
+                isZone = Ax.isDigit(Ax.lastChar(view.getTag().toString()));
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -2380,7 +2376,7 @@ public class EditorActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            //Aux.makeToast("" + zoneIndex, 0);
+            //Ax.makeToast("" + zoneIndex, 0);
 
             try {
                 defaultZoneColor = Color.parseColor(option == 0 ? defaultBGByTheme[themeInt][zoneIndex] : defaultTextByTheme[themeInt][zoneIndex]);
@@ -2395,7 +2391,7 @@ public class EditorActivity extends AppCompatActivity {
 
                 AlertDialog alertDialog = openCPAlertDialog(R.layout.new_cpdialog, " ", "Set color", "Cancel", buttonCode, view, option);
 
-                ((EditText) alertDialog.findViewById(R.id.hexField)).setText(Aux.toColorString(defaultZoneColor));
+                ((EditText) alertDialog.findViewById(R.id.hexField)).setText(Ax.toColorString(defaultZoneColor));
 
                 alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
 
@@ -2410,7 +2406,7 @@ public class EditorActivity extends AppCompatActivity {
 
                 try {
                     if (isSet(code))
-                        finalColor = Color.parseColor(entries.get(Aux.getLastHistoryEntry(entries, code)).finalColor);
+                        finalColor = Color.parseColor(entries.get(Ax.getLastHistoryEntry(entries, code)).finalColor);
                     else
                         finalColor = defaultZoneColor;
                 }
@@ -2426,7 +2422,7 @@ public class EditorActivity extends AppCompatActivity {
 
                     try {
                         if (code.equals("-b=t") && isSet("cPrimary") && !isSet("cNum"))
-                            finalColor = Aux.getLastHistoryEntry(entries, "cPrimary") != -1 ? Color.parseColor(entries.get(Aux.getLastHistoryEntry(entries, "cPrimary")).finalColor) : (Aux.isTinyColor("cPrimary") ? Aux.getTinyColor("cPrimary") : defaultZoneColor);
+                            finalColor = Ax.getLastHistoryEntry(entries, "cPrimary") != -1 ? Color.parseColor(entries.get(Ax.getLastHistoryEntry(entries, "cPrimary")).finalColor) : (Ax.isTinyColor("cPrimary") ? Ax.getTinyColor("cPrimary") : defaultZoneColor);
                     }
                     catch (Exception e) {
                         e.printStackTrace();
@@ -2462,8 +2458,8 @@ public class EditorActivity extends AppCompatActivity {
             addHistoryEntry(view, buttonCode, initColor, "#reset0");
         }
         catch (Exception e) {
-            Aux.saveStack(e);
-            Aux.makeToast("Error: Failed to reset color.\nTry resetting this color using the terminal.", 1);
+            Ax.saveStack(e);
+            Ax.makeToast("Error: Failed to reset color.\nTry resetting this color using the terminal.", 1);
         }
     }
 
@@ -2487,7 +2483,7 @@ public class EditorActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        return !((Aux.getFirstHistoryEntry(entries, code) == -1 && !Aux.isTinyColor(code)) || (Aux.getLastHistoryEntry(entries, code) != -1 && entries.get(Aux.getLastHistoryEntry(entries, code)).finalColor.equalsIgnoreCase("#reset0")));
+        return !((Ax.getFirstHistoryEntry(entries, code) == -1 && !Ax.isTinyColor(code)) || (Ax.getLastHistoryEntry(entries, code) != -1 && entries.get(Ax.getLastHistoryEntry(entries, code)).finalColor.equalsIgnoreCase("#reset0")));
     }
 
 
@@ -2526,7 +2522,7 @@ public class EditorActivity extends AppCompatActivity {
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
     }
@@ -2635,7 +2631,7 @@ public class EditorActivity extends AppCompatActivity {
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
     }
@@ -2679,7 +2675,7 @@ public class EditorActivity extends AppCompatActivity {
         BufferedReader bufferedReader = new BufferedReader(isr);
 
         for (i = 0; (line = bufferedReader.readLine()) != null; i++) {
-            if (i > 12 && Aux.isDigit(line))
+            if (i > 12 && Ax.isDigit(line))
                 theme = line;
         }
 
@@ -2691,15 +2687,15 @@ public class EditorActivity extends AppCompatActivity {
         boolean hasSetMinus = false, hasSetMulti = false, hasSetDiv = false;
 
         for (i = 0; (line = bufferedReader.readLine()) != null; i++) {
-            if ((i == 3 || i > 13) && (Aux.isColor(line) || (line.endsWith("-b=t") && Aux.isColor(Aux.newTrim(line, 4))))) {
+            if ((i == 3 || i > 13) && (Ax.isColor(line) || (line.endsWith("-b=t") && Ax.isColor(Ax.newTrim(line, 4))))) {
                 if (i == 3)
                     tempEqualsColor = line;
                 else
-                    tempEqualsColor = Aux.newTrim(line, 4);
+                    tempEqualsColor = Ax.newTrim(line, 4);
             }
 
             if (index < colorIndexes.length && i == colorIndexes[index]) {
-                if (Aux.isColor(line))
+                if (Ax.isColor(line))
                     currentColors.add(line);
                 else if (i == 0){
                     currentColors.add("#03DAC5");
@@ -2734,26 +2730,26 @@ public class EditorActivity extends AppCompatActivity {
             }
             else if (i > 13) {
                 if (line.endsWith("-b-t")) {
-                    currentColors.set(1, Aux.newTrim(line, 4));
+                    currentColors.set(1, Ax.newTrim(line, 4));
                     hasSetMinus = true;
                 }
-                else if (line.endsWith("-b" + Aux.multi + "t")) {
-                    currentColors.set(2, Aux.newTrim(line, 4));
+                else if (line.endsWith("-b" + Ax.multi + "t")) {
+                    currentColors.set(2, Ax.newTrim(line, 4));
 
                     hasSetMulti = true;
                 }
-                else if (line.endsWith("-b" + Aux.divi + "t")) {
-                    currentColors.set(3, Aux.newTrim(line, 4));
+                else if (line.endsWith("-b" + Ax.divi + "t")) {
+                    currentColors.set(3, Ax.newTrim(line, 4));
 
                     hasSetDiv = true;
                 }
                 else if (line.endsWith("-bop")) {
                     if (!hasSetMinus)
-                        currentColors.set(1, Aux.newTrim(line, 4));
+                        currentColors.set(1, Ax.newTrim(line, 4));
                     if (!hasSetMulti)
-                        currentColors.set(2, Aux.newTrim(line, 4));
+                        currentColors.set(2, Ax.newTrim(line, 4));
                     if (!hasSetDiv)
-                        currentColors.set(3, Aux.newTrim(line, 4));
+                        currentColors.set(3, Ax.newTrim(line, 4));
                 }
             }
         }
@@ -2790,7 +2786,7 @@ public class EditorActivity extends AppCompatActivity {
                 process(uri);
             } catch (Exception e) {
                 e.printStackTrace();
-                Aux.makeLongToast("Error: Either the specified file could not be found, or access was denied.");
+                Ax.makeLongToast("Error: Either the specified file could not be found, or access was denied.");
             }
         }
     }
@@ -2810,14 +2806,14 @@ public class EditorActivity extends AppCompatActivity {
             if (themeTitle != null) {
                 if (themeTitle.startsWith("0000-0000:"))
                     themeTitle = themeTitle.substring(10);
-                else if ((themeTitle.length() > 5 && themeTitle.startsWith("msf:") && Aux.isDigit(Aux.chat(themeTitle, 5))) || themeTitle.startsWith("document")) {
+                else if ((themeTitle.length() > 5 && themeTitle.startsWith("msf:") && Ax.isDigit(Ax.chat(themeTitle, 5))) || themeTitle.startsWith("document")) {
                     themeTitle = "\0";
                     noName = true;
                 }
 
                 try {
                     for (i = 0; i < themeTitle.length(); i++) {
-                        if (Aux.chat(themeTitle, i).equals("/"))
+                        if (Ax.chat(themeTitle, i).equals("/"))
                             numSlashes++;
                     }
                 }
@@ -2829,12 +2825,12 @@ public class EditorActivity extends AppCompatActivity {
 
                 for (i=0; i < numSlashes; i++) {
                     if (themeTitle.contains("/")) {
-                        themeTitle = themeTitle.substring(Aux.searchFor(themeTitle, "/") + 1);
+                        themeTitle = themeTitle.substring(Ax.searchFor(themeTitle, "/") + 1);
                     }
                 }
 
                 if (!noName && themeTitle != null && themeTitle.endsWith(".txt"))
-                    themeTitle = Aux.newTrim(themeTitle, 4);
+                    themeTitle = Ax.newTrim(themeTitle, 4);
 
                 if (themeTitle != null && themeTitle.contains("/"))
                     themeTitle = themeTitle.replace("/", "");
@@ -2913,7 +2909,7 @@ public class EditorActivity extends AppCompatActivity {
                 run("restore " + themeName);
                 save();
 
-                if ((themeName.startsWith("temp-") || themeTitle.startsWith("temp-")) && Aux.isDigit(Aux.lastChar(themeName)))
+                if ((themeName.startsWith("temp-") || themeTitle.startsWith("temp-")) && Ax.isDigit(Ax.lastChar(themeName)))
                     theme.delete();
 
                 applyTheme();
@@ -2950,21 +2946,21 @@ public class EditorActivity extends AppCompatActivity {
             this.cmd = cmd;
 
             if (cmd.endsWith(" ") && cmd.length() > 1)
-                cmd = Aux.newTrim(cmd, 1);
+                cmd = Ax.newTrim(cmd, 1);
 
             //Set color
             if (cmd.length() > 2 && cmd.startsWith("set") || (cmd.startsWith("mode ") && cmd.length() == 6)) {
                 if (cmd.length() > 8) {
-                    hex = Aux.getLast(cmd, 7);
+                    hex = Ax.getLast(cmd, 7);
 
                     if (!cmd.contains("mode") && !cmd.contains("reset0")) {
-                        hex = Aux.colorToUpper(hex);
+                        hex = Ax.colorToUpper(hex);
                     }
 
-                    isHex = Aux.isColor(hex);
+                    isHex = Ax.isColor(hex);
 
                     if (cmd.contains("-ft") && hex.substring(1).equalsIgnoreCase(tinydb.getString("cSecondary").substring(1))) {
-                        hex = Aux.hexAdd(hex, -1);
+                        hex = Ax.hexAdd(hex, -1);
                         ftIsSecondary = true;
                     }
                 }
@@ -3034,10 +3030,10 @@ public class EditorActivity extends AppCompatActivity {
                     mainHandler.post(myRunnable);
                 }
                 //Mode
-                else if ((cmd.length() == 6 && Aux.newTrim(cmd, 1).equals("mode ")) || (cmd.length() == 7 && Aux.newTrim(cmd, 1).equals("theme "))) {
-                    if (Aux.isDigit(Aux.lastChar(cmd)) && (Aux.getLast(Aux.newTrim(cmd, 1), 5).equals("mode ") || Aux.getLast(Aux.newTrim(cmd, 1), 6).equals("theme "))) {
-                        if (Integer.parseInt(Aux.lastChar(cmd)) < 6 && Integer.parseInt(Aux.lastChar(cmd)) > 0) {
-                            String newTheme = Aux.lastChar(cmd);
+                else if ((cmd.length() == 6 && Ax.newTrim(cmd, 1).equals("mode ")) || (cmd.length() == 7 && Ax.newTrim(cmd, 1).equals("theme "))) {
+                    if (Ax.isDigit(Ax.lastChar(cmd)) && (Ax.getLast(Ax.newTrim(cmd, 1), 5).equals("mode ") || Ax.getLast(Ax.newTrim(cmd, 1), 6).equals("theme "))) {
+                        if (Integer.parseInt(Ax.lastChar(cmd)) < 6 && Integer.parseInt(Ax.lastChar(cmd)) > 0) {
+                            String newTheme = Ax.lastChar(cmd);
                             String[] themeNames = {"Dark", "Light", "AMOLED Black (Colored Buttons)", "AMOLED Black (Black Buttons)", "Monochrome"};
                             int themeInt = Integer.parseInt(newTheme);
 
@@ -3273,7 +3269,7 @@ public class EditorActivity extends AppCompatActivity {
                     }
 
                     for (c = 0; c < cmdEnd.length(); c++) {
-                        if (Aux.chat(cmdEnd, c).equals(" "))
+                        if (Ax.chat(cmdEnd, c).equals(" "))
                             break;
 
                         codeLength++;
@@ -3283,9 +3279,9 @@ public class EditorActivity extends AppCompatActivity {
                     String buttonText;
 
                     if (buttonCode.endsWith("t") && !buttonCode.endsWith("ot")) {
-                        buttonText = Aux.newTrim(buttonCode.substring(2), 1);
+                        buttonText = Ax.newTrim(buttonCode.substring(2), 1);
 
-                        if (Aux.buttonExists(buttonText) || Aux.isExtraButtonCode(buttonCode)) {
+                        if (Ax.buttonExists(buttonText) || Ax.isExtraButtonCode(buttonCode)) {
                             if (isHex) {
                                 Log.d("printf", "Button " + buttonText + " text color set to " + hex);
                                 tinydb.putString(buttonCode, hex);
@@ -3302,7 +3298,7 @@ public class EditorActivity extends AppCompatActivity {
                     else {
                         buttonText = buttonCode.substring(2);
 
-                        if (Aux.buttonExists(buttonText) || Aux.isExtraButtonCode(buttonCode)) {
+                        if (Ax.buttonExists(buttonText) || Ax.isExtraButtonCode(buttonCode)) {
                             if (isHex) {
                                 Log.d("printf", "Button " + buttonText + " color set to " + hex);
                                 tinydb.putString(buttonCode, hex);
@@ -3489,7 +3485,7 @@ public class EditorActivity extends AppCompatActivity {
                             String newHex;
 
                             if (ftIsSecondary)
-                                newHex = Aux.hexAdd(hex, 1);
+                                newHex = Ax.hexAdd(hex, 1);
                             else
                                 newHex = hex;
 
@@ -3736,7 +3732,7 @@ public class EditorActivity extends AppCompatActivity {
                             Log.d("printf", "Secondary color set to " + hex);
                             cSecondary = hex;
                             tinydb.putString("cSecondary", cSecondary);
-                            Aux.tinydb().putBoolean("isSetSecondary", true);
+                            Ax.tinydb().putBoolean("isSetSecondary", true);
 
                             if (!isAll) {
                                 Handler mainHandler = new Handler(this.getMainLooper());
@@ -4006,7 +4002,7 @@ public class EditorActivity extends AppCompatActivity {
                     Log.d("printf", setError);
                 }
 
-                if (!Aux.isNull(cFabText)) {
+                if (!Ax.isNull(cFabText)) {
                     if (cFabText.equals("#reset0")) {
                         cFabText = "\0";
                         tinydb.putString("cFabText", "\0");
@@ -4020,7 +4016,7 @@ public class EditorActivity extends AppCompatActivity {
                 String filename = cmd.substring(7);
 
                 if (filename.endsWith(".txt"))
-                    filename = Aux.newTrim(filename, 4);
+                    filename = Ax.newTrim(filename, 4);
 
                 File path = new File(this.getFilesDir(), "themes");
                 File file = new File(path, filename + ".txt");
@@ -4038,7 +4034,7 @@ public class EditorActivity extends AppCompatActivity {
                 String filename = cmd.substring(6);
 
                 if (filename.endsWith(".txt"))
-                    filename = Aux.newTrim(filename, 4);
+                    filename = Ax.newTrim(filename, 4);
 
                 File path = new File(this.getFilesDir(), "themes");
                 File file = new File(path, filename + ".txt");
@@ -4112,7 +4108,7 @@ public class EditorActivity extends AppCompatActivity {
                     fileText = colors[0] + "\n";
 
                     for (i = 1; i < numColors; i++) {
-                        if (colors[i] == null || colors[i].equals("\0") || colors[i].equals("") || colors[i].equals("0") || !Aux.isColor(colors[i]))
+                        if (colors[i] == null || colors[i].equals("\0") || colors[i].equals("") || colors[i].equals("0") || !Ax.isColor(colors[i]))
                             colors[i] = "#reset0";
 
                         fileText += colors[i] + "\n";
@@ -4126,7 +4122,7 @@ public class EditorActivity extends AppCompatActivity {
                                 extraTexts[a] = "ⁿ√";
 
                             if (extraColors[a] != null) {
-                                if (Aux.isColor(extraColors[a])) {
+                                if (Ax.isColor(extraColors[a])) {
                                     if (!hasAddedButton) {
                                         fileText += "\n";
                                         hasAddedButton = true;
@@ -4137,7 +4133,7 @@ public class EditorActivity extends AppCompatActivity {
                             }
 
                             if (extraTextColors[a] != null) {
-                                if (Aux.isColor(extraTextColors[a])) {
+                                if (Ax.isColor(extraTextColors[a])) {
                                     if (!hasAddedButton) {
                                         fileText += "\n";
                                         hasAddedButton = true;
@@ -4152,11 +4148,11 @@ public class EditorActivity extends AppCompatActivity {
                     String[] extraCodes = {"-bop", "-btt", "-bINV2", "-bINV2t", "-mt"};
 
                     for (a=0; a < extraCodes.length; a++) {
-                        if (Aux.isTinyColor(extraCodes[a]))
+                        if (Ax.isTinyColor(extraCodes[a]))
                             fileText += tinydb.getString(extraCodes[a]) + extraCodes[a] + "\n";
                     }
 
-                    if (Aux.isDigit(bigTheme))
+                    if (Ax.isDigit(bigTheme))
                         fileText += bigTheme;
                     else
                         fileText += tinydb.getString("theme");
@@ -4180,13 +4176,13 @@ public class EditorActivity extends AppCompatActivity {
                 int e;
 
                 if (end.equals("-s"))
-                    Aux.tinydb().putBoolean("isSetSecondary", false);
+                    Ax.tinydb().putBoolean("isSetSecondary", false);
 
                 if (end.equalsIgnoreCase("all") || end.equals("-a")){
                     run("set -a #reset0");
                     run("reset buttons");
 
-                    Aux.tinydb().putBoolean("isSetSecondary", false);
+                    Ax.tinydb().putBoolean("isSetSecondary", false);
 
                     for (e=0; e < editorCodes.length; e++)
                         tinydb.putString(editorCodes[e], "\0");
@@ -4194,7 +4190,7 @@ public class EditorActivity extends AppCompatActivity {
                 else if (end.equalsIgnoreCase("button") || end.equalsIgnoreCase("-buttons")){
                     run("reset buttons");
                 }
-                else if (Aux.isButtonCode(end)){
+                else if (Ax.isButtonCode(end)){
                     run("set " + end + " #reset0");
                 }
             }
@@ -4287,7 +4283,7 @@ public class EditorActivity extends AppCompatActivity {
                             String line;
 
                             for (i = 0; (line = bufferedReader.readLine()) != null; i++) {
-                                if (!((i > 12 && Aux.isDigit(line)) || Aux.isColor(line) || line.equals("#reset0") || (line.length() >= 6 && (Aux.isColor(line.substring(0, 6)) || Aux.isColor(line.substring(0, 7))) && line.contains("-b")))) {
+                                if (!((i > 12 && Ax.isDigit(line)) || Ax.isColor(line) || line.equals("#reset0") || (line.length() >= 6 && (Ax.isColor(line.substring(0, 6)) || Ax.isColor(line.substring(0, 7))) && line.contains("-b")))) {
                                     if (i < 14)
                                         isValid = false;
 
@@ -4315,10 +4311,10 @@ public class EditorActivity extends AppCompatActivity {
                                 tinydb.putString("-bfct", "");
 
                                 for (i = 0; (line = bufferedReader.readLine()) != null; i++) {
-                                    if (Aux.isDigit(Aux.chat(line, 0)) && line.contains("name:"))
-                                        line = Aux.chat(line, 0);
+                                    if (Ax.isDigit(Ax.chat(line, 0)) && line.contains("name:"))
+                                        line = Ax.chat(line, 0);
 
-                                    if (Aux.isColor(line)) {
+                                    if (Ax.isColor(line)) {
                                         if (i == 3)
                                             tinydb.putString("-b=t", line);
                                         else if (i >= 5 && i <= 8) {
@@ -4330,7 +4326,7 @@ public class EditorActivity extends AppCompatActivity {
                                             tinydb.putString(colorKeys[i], line);
 
                                             if (colorKeys[i].equals("cSecondary"))
-                                                Aux.tinydb().putBoolean("isSetSecondary", true);
+                                                Ax.tinydb().putBoolean("isSetSecondary", true);
                                         }
                                     }
                                     else if (line.startsWith("name:")) {
@@ -4340,26 +4336,26 @@ public class EditorActivity extends AppCompatActivity {
                                         tinydb.putString(colorKeys[i], "\0");
 
                                         if (colorKeys[i].equals("cSecondary"))
-                                            Aux.tinydb().putBoolean("isSetSecondary", false);
+                                            Ax.tinydb().putBoolean("isSetSecondary", false);
                                     }
                                     else if (line.contains("-b")) {
                                         String buttonHex, buttonCode;
 
                                         buttonHex = line.substring(0, 7);
-                                        buttonCode = Aux.getLast(line, line.length() - buttonHex.length());
+                                        buttonCode = Ax.getLast(line, line.length() - buttonHex.length());
 
-                                        if (Aux.isColor(buttonHex) && buttonCode != null) {
+                                        if (Ax.isColor(buttonHex) && buttonCode != null) {
                                             run("set " + buttonCode + " " + buttonHex);
                                         }
                                     }
                                     else if (line.endsWith("-mt")){
                                         String uiHex = line.substring(0, 7);
 
-                                        if (Aux.isColor(uiHex)){
+                                        if (Ax.isColor(uiHex)){
                                             run("set -mt " + uiHex);
                                         }
                                     }
-                                    else if (Aux.isDigit(line) && Integer.parseInt(line) > 0 && Integer.parseInt(line) <= 5) {
+                                    else if (Ax.isDigit(line) && Integer.parseInt(line) > 0 && Integer.parseInt(line) <= 5) {
                                         if (line.equals("2"))
                                             tinydb.putString("customTheme", line);
                                         else if (line.equals("5"))

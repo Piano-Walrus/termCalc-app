@@ -111,21 +111,21 @@ public class FunctionsAdapter extends RecyclerView.Adapter<FunctionsAdapter.View
         int i;
         final int darkGray = Color.parseColor("#3C4043");
 
-        String functionText = current.function.replace("*", Aux.multiDot).replace(Aux.divi, "/");
+        String functionText = current.function.replace("*", Ax.multiDot).replace(Ax.divi, "/");
 
         holder.title.setText(current.title);
 
         for (i=0; i < functionText.length(); i++){
-            if (functionText.length() >= i + 1 && Aux.chat(functionText, i).equals("^") && (Aux.isDigit(Aux.chat(functionText, i + 1)) || Aux.isLetter(Aux.chat(functionText, i + 1)))) {
+            if (functionText.length() >= i + 1 && Ax.chat(functionText, i).equals("^") && (Ax.isDigit(Ax.chat(functionText, i + 1)) || Ax.isLetter(Ax.chat(functionText, i + 1)))) {
                 int j;
 
-                functionText = Aux.newReplace(i, functionText, "");
+                functionText = Ax.newReplace(i, functionText, "");
 
                 for (j=i; j < functionText.length(); j++) {
-                    String currentStr = Aux.chat(functionText, j);
+                    String currentStr = Ax.chat(functionText, j);
 
-                    if (currentStr != null && (Aux.isDigit(currentStr) || currentStr.equals(".") || Aux.isLetter(currentStr)))
-                        functionText = Aux.newReplace(j, functionText, Aux.toSuper(Aux.chat(functionText, j)));
+                    if (currentStr != null && (Ax.isDigit(currentStr) || currentStr.equals(".") || Ax.isLetter(currentStr)))
+                        functionText = Ax.newReplace(j, functionText, Ax.toSuper(Ax.chat(functionText, j)));
                     else
                         break;
                 }
@@ -141,8 +141,8 @@ public class FunctionsAdapter extends RecyclerView.Adapter<FunctionsAdapter.View
                 if(i == -1)
                     break;
 
-                if (Aux.isDigit(Aux.chat(functionText, i+1)) && Aux.isDigit(Aux.chat(functionText, i-1)))
-                    Aux.newReplace(i, functionText, "⁄");
+                if (Ax.isDigit(Ax.chat(functionText, i+1)) && Ax.isDigit(Ax.chat(functionText, i-1)))
+                    Ax.newReplace(i, functionText, "⁄");
             }
         }
         catch (Exception e) {
@@ -156,7 +156,7 @@ public class FunctionsAdapter extends RecyclerView.Adapter<FunctionsAdapter.View
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(MainActivity.mainActivity);
         String theme = sp.getString(SettingsActivity.KEY_PREF_THEME, "1");
 
-        if (theme == null || !Aux.isDigit(theme))
+        if (theme == null || !Ax.isDigit(theme))
             theme = "1";
 
         if (theme.equals("2")) {
@@ -176,35 +176,35 @@ public class FunctionsAdapter extends RecyclerView.Adapter<FunctionsAdapter.View
         String accentColor;
         boolean isCustomTheme = tinydb.getBoolean("custom");
 
-        if (!isCustomTheme && Aux.isColor(tinydb.getString("accentPrimary")))
+        if (!isCustomTheme && Ax.isColor(tinydb.getString("accentPrimary")))
             accentColor = tinydb.getString("accentPrimary");
         else
             accentColor = "#FFFFFF";
 
         String bigColor = accentColor;
 
-        if (theme.equals("5") && Aux.isColor(tinydb.getString("accentPrimary")) && !isCustomTheme)
+        if (theme.equals("5") && Ax.isColor(tinydb.getString("accentPrimary")) && !isCustomTheme)
             bigColor = tinydb.getString("accentSecondary");
         else if (isCustomTheme) {
-            if (Aux.isColor(tinydb.getString("cFabText")) && !Aux.isGray(tinydb.getString("cFabText")))
+            if (Ax.isColor(tinydb.getString("cFabText")) && !Ax.isGray(tinydb.getString("cFabText")))
                 bigColor = tinydb.getString("cFabText");
-            else if (Aux.isColor(tinydb.getString("cFab")) && !Aux.isGray(tinydb.getString("cFab")))
+            else if (Ax.isColor(tinydb.getString("cFab")) && !Ax.isGray(tinydb.getString("cFab")))
                 bigColor = tinydb.getString("cFab");
-            else if (Aux.isColor(tinydb.getString("-b=t")) && !Aux.isGray(tinydb.getString("-b=t")))
+            else if (Ax.isColor(tinydb.getString("-b=t")) && !Ax.isGray(tinydb.getString("-b=t")))
                 bigColor = tinydb.getString("-b=t");
-            else if (Aux.isColor(tinydb.getString("cPrimary")) && !Aux.isGray(tinydb.getString("cPrimary")))
+            else if (Ax.isColor(tinydb.getString("cPrimary")) && !Ax.isGray(tinydb.getString("cPrimary")))
                 bigColor = tinydb.getString("cPrimary");
-            else if (Aux.isColor(tinydb.getString("cSecondary")) && !Aux.isGray(tinydb.getString("cSecondary")))
+            else if (Ax.isColor(tinydb.getString("cSecondary")) && !Ax.isGray(tinydb.getString("cSecondary")))
                 bigColor = tinydb.getString("cSecondary");
-            else if (Aux.isColor(tinydb.getString("cTop")) && !Aux.isGray(tinydb.getString("cTop")))
+            else if (Ax.isColor(tinydb.getString("cTop")) && !Ax.isGray(tinydb.getString("cTop")))
                 bigColor = tinydb.getString("cTop");
-            else if (Aux.isColor(tinydb.getString("cTertiary")) && !Aux.isGray(tinydb.getString("cTertiary")))
+            else if (Ax.isColor(tinydb.getString("cTertiary")) && !Ax.isGray(tinydb.getString("cTertiary")))
                 bigColor = tinydb.getString("cTertiary");
-            else if (Aux.isColor(tinydb.getString("-b+t")) && !Aux.isGray(tinydb.getString("-b+t")))
+            else if (Ax.isColor(tinydb.getString("-b+t")) && !Ax.isGray(tinydb.getString("-b+t")))
                 bigColor = tinydb.getString("-b+t");
         }
         else {
-            if (!Aux.isColor(bigColor))
+            if (!Ax.isColor(bigColor))
                 bigColor = "#FFFFFF";
         }
 

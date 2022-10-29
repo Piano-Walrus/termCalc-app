@@ -114,7 +114,7 @@ public class ConstantsAdapter extends RecyclerView.Adapter<ConstantsAdapter.View
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(MainActivity.mainActivity);
         String theme = sp.getString(SettingsActivity.KEY_PREF_THEME, "1");
 
-        if (theme == null || !Aux.isDigit(theme))
+        if (theme == null || !Ax.isDigit(theme))
             theme = "1";
 
         if (theme.equals("2")) {
@@ -136,35 +136,35 @@ public class ConstantsAdapter extends RecyclerView.Adapter<ConstantsAdapter.View
         String accentColor;
         boolean isCustomTheme = tinydb.getBoolean("custom");
 
-        if (!isCustomTheme && Aux.isTinyColor("accentPrimary"))
+        if (!isCustomTheme && Ax.isTinyColor("accentPrimary"))
             accentColor = tinydb.getString("accentPrimary");
         else
             accentColor = "#FFFFFF";
 
         String bigColor = accentColor;
 
-        if (theme.equals("5") && Aux.isTinyColor("accentPrimary") && !isCustomTheme)
+        if (theme.equals("5") && Ax.isTinyColor("accentPrimary") && !isCustomTheme)
             bigColor = tinydb.getString("accentSecondary");
         else if (isCustomTheme) {
-            if (Aux.isTinyColor("cFabText") && !Aux.isGray(tinydb.getString("cFabText")))
+            if (Ax.isTinyColor("cFabText") && !Ax.isGray(tinydb.getString("cFabText")))
                 bigColor = tinydb.getString("cFabText");
-            else if (Aux.isTinyColor("cFab") && !Aux.isGray(tinydb.getString("cFab")))
+            else if (Ax.isTinyColor("cFab") && !Ax.isGray(tinydb.getString("cFab")))
                 bigColor = tinydb.getString("cFab");
-            else if (Aux.isTinyColor("-b=t") && !Aux.isGray(tinydb.getString("-b=t")))
+            else if (Ax.isTinyColor("-b=t") && !Ax.isGray(tinydb.getString("-b=t")))
                 bigColor = tinydb.getString("-b=t");
-            else if (Aux.isTinyColor("cPrimary") && !Aux.isGray(tinydb.getString("cPrimary")))
+            else if (Ax.isTinyColor("cPrimary") && !Ax.isGray(tinydb.getString("cPrimary")))
                 bigColor = tinydb.getString("cPrimary");
-            else if (Aux.isTinyColor("cSecondary") && !Aux.isGray(tinydb.getString("cSecondary")))
+            else if (Ax.isTinyColor("cSecondary") && !Ax.isGray(tinydb.getString("cSecondary")))
                 bigColor = tinydb.getString("cSecondary");
-            else if (Aux.isTinyColor("cTop") && !Aux.isGray(tinydb.getString("cTop")))
+            else if (Ax.isTinyColor("cTop") && !Ax.isGray(tinydb.getString("cTop")))
                 bigColor = tinydb.getString("cTop");
-            else if (Aux.isTinyColor("cTertiary") && !Aux.isGray(tinydb.getString("cTertiary")))
+            else if (Ax.isTinyColor("cTertiary") && !Ax.isGray(tinydb.getString("cTertiary")))
                 bigColor = tinydb.getString("cTertiary");
-            else if (Aux.isTinyColor("-b+t") && !Aux.isGray(tinydb.getString("-b+t")))
+            else if (Ax.isTinyColor("-b+t") && !Ax.isGray(tinydb.getString("-b+t")))
                 bigColor = tinydb.getString("-b+t");
         }
         else {
-            if (!Aux.isColor(bigColor))
+            if (!Ax.isColor(bigColor))
                 bigColor = "#FFFFFF";
         }
 
@@ -180,26 +180,26 @@ public class ConstantsAdapter extends RecyclerView.Adapter<ConstantsAdapter.View
     }
 
     public String parseExponents(String str) {
-        if (Aux.isNull(str))
+        if (Ax.isNull(str))
             return "";
 
         int i, j;
 
-        for (i=0; i < Aux.countChars(str, "^"); i++){
-            for (j=Aux.searchFor(str, "^"); j < str.length(); j++){
-                if (Aux.chat(str, j).equals("^"))
-                    str = Aux.newReplace(j, str, "");
+        for (i=0; i < Ax.countChars(str, "^"); i++){
+            for (j= Ax.searchFor(str, "^"); j < str.length(); j++){
+                if (Ax.chat(str, j).equals("^"))
+                    str = Ax.newReplace(j, str, "");
 
-                String currentChar = Aux.chat(str, j);
+                String currentChar = Ax.chat(str, j);
 
                 if (currentChar.equals("-"))
-                    str = Aux.newReplace(j, str, "⁻");
-                else if (Aux.isDigit(currentChar))
-                    str = Aux.newReplace(j, str, Aux.superscripts[Integer.parseInt(currentChar)]);
+                    str = Ax.newReplace(j, str, "⁻");
+                else if (Ax.isDigit(currentChar))
+                    str = Ax.newReplace(j, str, Ax.superscripts[Integer.parseInt(currentChar)]);
                 else if (currentChar.equals("e"))
-                    str = Aux.newReplace(j, str, "ᵉ");
+                    str = Ax.newReplace(j, str, "ᵉ");
                 else if (currentChar.equals("."))
-                    str = Aux.newReplace(j, str, "⋅");
+                    str = Ax.newReplace(j, str, "⋅");
                 else
                     break;
             }

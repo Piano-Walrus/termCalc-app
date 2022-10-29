@@ -65,30 +65,30 @@ public class BetterMath {
 
     public static BigDecimal evaluate(String eq, boolean prioritizeCoefficients, boolean isRad, MathContext mc, int scale, boolean debug) throws NaNException {
         int i;
-        int parenthesisDifference = Ax.charDiff(eq, "(", ")");
+        int parenthesisDifference = Aux.charDiff(eq, "(", ")");
 
         if (eq.contains("Error"))
             throw new NaNException("Parse Error");
 
         eq = eq.trim();
 
-        eq = eq.replace(Ax.emDash, "-");
-        eq = eq.replace(Ax.multiDot, "*");
-        eq = eq.replace(Ax.bulletDot, "*");
-        eq = eq.replace(Ax.multi, "*");
-        eq = eq.replace(Ax.divi, "/");
+        eq = eq.replace(Aux.emDash, "-");
+        eq = eq.replace(Aux.multiDot, "*");
+        eq = eq.replace(Aux.bulletDot, "*");
+        eq = eq.replace(Aux.multi, "*");
+        eq = eq.replace(Aux.divi, "/");
         eq = eq.replace("÷", "/");
 
         if (eq.startsWith("-("))
             eq = "-1(" + eq.substring(2);
 
-        if (eq.endsWith(Ax.sq))
+        if (eq.endsWith(Aux.sq))
             throw new NaNException("Parse Error");
 
-        if (Ax.isFullSignedNumE(eq) && !eq.contains(Ax.pi) && !eq.contains("e"))
+        if (Aux.isFullSignedNumE(eq) && !eq.contains(Aux.pi) && !eq.contains("e"))
             return parseBigDecimal(eq.replace(",", ""), mc);
 
-        eq = eq.replace("ln", "log" + Ax.eSub);
+        eq = eq.replace("ln", "log" + Aux.eSub);
 
         for (i=0; i < parenthesisDifference; i++) {
             eq += ")";
@@ -104,13 +104,13 @@ public class BetterMath {
         //TODO: Replace all the while loops with the new for loop thingy
 
         //Replace pi symbol with value 3.1415...
-        while (eqArray.contains(Ax.pi)) {
-            int index = eqArray.indexOf(Ax.pi);
+        while (eqArray.contains(Aux.pi)) {
+            int index = eqArray.indexOf(Aux.pi);
 
             eqArray.set(index, pi);
 
             try {
-                if (Ax.isFullSignedNumE(eqArray.get(index - 1))) {
+                if (Aux.isFullSignedNumE(eqArray.get(index - 1))) {
                     eqArray.add(index, "*");
                     index++;
                 }
@@ -118,7 +118,7 @@ public class BetterMath {
             catch (Exception ignored) {}
 
             try {
-                if (Ax.isFullSignedNumE(eqArray.get(index + 1)))
+                if (Aux.isFullSignedNumE(eqArray.get(index + 1)))
                     eqArray.add(index + 1, "*");
             }
             catch (Exception ignored) {}
@@ -131,7 +131,7 @@ public class BetterMath {
             eqArray.set(index, e);
 
             try {
-                if (Ax.isFullSignedNumE(eqArray.get(index - 1))) {
+                if (Aux.isFullSignedNumE(eqArray.get(index - 1))) {
                     eqArray.add(index, "*");
                     index++;
                 }
@@ -139,7 +139,7 @@ public class BetterMath {
             catch (Exception ignored) {}
 
             try {
-                if (Ax.isFullSignedNumE(eqArray.get(index + 1)))
+                if (Aux.isFullSignedNumE(eqArray.get(index + 1)))
                     eqArray.add(index + 1, "*");
             }
             catch (Exception ignored) {}
@@ -156,8 +156,8 @@ public class BetterMath {
                 }
                 catch (Exception ignored) {}
 
-                if ((i == 0 || (!Ax.isFullNum(previous) && !previous.equals(")") && !previous.equals("!")))) {
-                    if (Ax.isFullNum(eqArray.get(i + 1))) {
+                if ((i == 0 || (!Aux.isFullNum(previous) && !previous.equals(")") && !previous.equals("!")))) {
+                    if (Aux.isFullNum(eqArray.get(i + 1))) {
                         eqArray.set(i + 1, parseBigDecimal(eqArray.get(i + 1), mc).negate(mc).toPlainString());
                         eqArray.remove(i);
                     }
@@ -185,7 +185,7 @@ public class BetterMath {
             eqArray.set(start, evaluate(subList.toString().trim().replace("[", "").replace("]", "").replace(",", "").replace(" ", ""), prioritizeCoefficients, isRad, mc, scale, debug).toPlainString());
 
             try {
-                if (Ax.isFullSignedNum(eqArray.get(end + 1)) || eqArray.get(end + 1).equals(Ax.sq))
+                if (Aux.isFullSignedNum(eqArray.get(end + 1)) || eqArray.get(end + 1).equals(Aux.sq))
                     eqArray.add(end + 1, "*");
             }
             catch (Exception ignored) {}
@@ -196,7 +196,7 @@ public class BetterMath {
 
             //Handle coefficients that appear before parenthesis
             try {
-                if (Ax.isFullSignedNum(eqArray.get(start-1)) && (start < 2 || !eqArray.get(start-2).equals(Ax.sq))) {
+                if (Aux.isFullSignedNum(eqArray.get(start-1)) && (start < 2 || !eqArray.get(start-2).equals(Aux.sq))) {
                     if (prioritizeCoefficients) {
                         eqArray.add(start + 1, ")");
                         eqArray.add(start, "*");
@@ -209,7 +209,7 @@ public class BetterMath {
                 else if (eqArray.get(start-1).equals("!") || eqArray.get(start-1).equals(")")) {
                     eqArray.add(start, "*");
                 }
-                else if (start >= 2 && Ax.isFullSignedNum(eqArray.get(start-1)) && eqArray.get(start-2).equals(Ax.sq)) {
+                else if (start >= 2 && Aux.isFullSignedNum(eqArray.get(start-1)) && eqArray.get(start-2).equals(Aux.sq)) {
                     eqArray.add(start, "*");
                     eqArray.set(start-1, sqrt(parseBigDecimal(eqArray.get(start-1), mc), mc).toPlainString());
                     eqArray.remove(start-2);
@@ -233,8 +233,8 @@ public class BetterMath {
                 }
                 catch (Exception ignored) {}
 
-                if ((i == 0 || (!Ax.isFullNum(previous) && !previous.equals(")") && !previous.equals("!")))) {
-                    if (Ax.isFullNum(eqArray.get(i + 1))) {
+                if ((i == 0 || (!Aux.isFullNum(previous) && !previous.equals(")") && !previous.equals("!")))) {
+                    if (Aux.isFullNum(eqArray.get(i + 1))) {
                         eqArray.set(i + 1, parseBigDecimal(eqArray.get(i + 1), mc).negate(mc).toPlainString());
                         eqArray.remove(i);
                     }
@@ -247,7 +247,7 @@ public class BetterMath {
             String current = eqArray.get(i);
             String next;
 
-            if (Ax.trigList.contains(current)) {
+            if (Aux.trigList.contains(current)) {
                 try {
                     next = eqArray.get(i+1);
                 }
@@ -255,7 +255,7 @@ public class BetterMath {
                     throw new NaNException("Parse Error");
                 }
 
-                if (Ax.isFullSignedNum(next)) {
+                if (Aux.isFullSignedNum(next)) {
                     try {
                         eqArray.set(i, Trig.evaluate(current, next, mc, isRad, scale));
                     }
@@ -293,7 +293,7 @@ public class BetterMath {
                 throw new NaNException("Parse Error");
             }
 
-            if (Ax.isFullSubNum(next)) {
+            if (Aux.isFullSubNum(next)) {
                 base = next;
 
                 try {
@@ -304,13 +304,13 @@ public class BetterMath {
                 }
             }
 
-            if (!Ax.isFullSignedNum(next))
+            if (!Aux.isFullSignedNum(next))
                 throw new NaNException("Parse Error");
-            else if (Ax.isFullSignedNum(next) && next.startsWith("-"))
+            else if (Aux.isFullSignedNum(next) && next.startsWith("-"))
                 throw new NaNException("NaN");
 
             //Log Base 10
-            if (Ax.isFullSignedNum(next) && (base.equals("10") || base.equals("~"))) {
+            if (Aux.isFullSignedNum(next) && (base.equals("10") || base.equals("~"))) {
                 try {
                     eqArray.set(index, BigDecimalMath.log10(BigDecimalMath.toBigDecimal(next, mc), mc).toPlainString());
                 }
@@ -325,7 +325,7 @@ public class BetterMath {
             }
             else if (!base.equals("~")) {
                 //Natural Log
-                if (base.equals(Ax.eSub)) {
+                if (base.equals(Aux.eSub)) {
                     try {
                         eqArray.set(index, BigDecimalMath.log(BigDecimalMath.toBigDecimal(next, mc), mc).toPlainString());
                     }
@@ -337,7 +337,7 @@ public class BetterMath {
                     eqArray.remove(index + 1);
                 }
                 //Log Base 2
-                else if (base.equals(Ax.subscripts[2])) {
+                else if (base.equals(Aux.subscripts[2])) {
                     try {
                         eqArray.set(index, BigDecimalMath.log2(BigDecimalMath.toBigDecimal(next, mc), mc).toPlainString());
                     }
@@ -349,12 +349,12 @@ public class BetterMath {
                     eqArray.remove(index + 1);
                 }
                 //Log Base n
-                else if (Ax.isFullSubNum(base)) {
+                else if (Aux.isFullSubNum(base)) {
                     if (base.equals("0")) {
                         throw new NaNException("Nan");
                     }
                     else {
-                        base = Ax.subToNum(base);
+                        base = Aux.subToNum(base);
 
                         try {
                             eqArray.set(index, logBase(base, next, new MathContext((mc.getPrecision() / 5) + scale, RoundingMode.HALF_UP), scale).toPlainString());
@@ -376,16 +376,16 @@ public class BetterMath {
         }
 
         //Handle Roots
-        while (eqArray.contains(Ax.sq)) {
-            int index = eqArray.indexOf(Ax.sq);
+        while (eqArray.contains(Aux.sq)) {
+            int index = eqArray.indexOf(Aux.sq);
 
             try {
-                if (Ax.isFullNum(eqArray.get(index+1))) {
+                if (Aux.isFullNum(eqArray.get(index+1))) {
                     //N-th Root
-                    if (index >= 1 && Ax.superlist.contains(eqArray.get(index-1))) {
+                    if (index >= 1 && Aux.superlist.contains(eqArray.get(index-1))) {
                         //TODO: Handle non-integer nth-roots (have parseEq group all superscripts
                         // in a row so i can just isFullSuperNum(previous)
-                        eqArray.set(index-1, newPow(parseBigDecimal(eqArray.get(index+1), mc), BigDecimal.ONE.divide(parseBigDecimal(Integer.toString(Ax.superlist.indexOf(eqArray.get(index-1))), mc), mc)).toPlainString());
+                        eqArray.set(index-1, newPow(parseBigDecimal(eqArray.get(index+1), mc), BigDecimal.ONE.divide(parseBigDecimal(Integer.toString(Aux.superlist.indexOf(eqArray.get(index-1))), mc), mc)).toPlainString());
 
                         eqArray.remove(index);
                         eqArray.remove(index);
@@ -427,7 +427,7 @@ public class BetterMath {
 
             int numIndex = eqArray.indexOf("!") - 1;
 
-            if (Ax.isFullSignedNum(eqArray.get(numIndex))){
+            if (Aux.isFullSignedNum(eqArray.get(numIndex))){
                 eqArray.set(numIndex, fact(eqArray.get(numIndex), mc));
                 eqArray.remove(numIndex + 1);
             }
@@ -448,7 +448,7 @@ public class BetterMath {
             if (index == 0)
                 throw new NaNException("Parse Error");
 
-            if (Ax.isFullNum(eqArray.get(index-1)) && Ax.isFullNum(eqArray.get(index+1))) {
+            if (Aux.isFullNum(eqArray.get(index-1)) && Aux.isFullNum(eqArray.get(index+1))) {
                 String previous = eqArray.get(index - 1);
                 String next = eqArray.get(index + 1);
 
@@ -521,7 +521,7 @@ public class BetterMath {
                 catch (Exception ignored) {
                 }
 
-                if (Ax.isBinaryOp(current) && Ax.isFullSignedNum(previous) && Ax.isFullSignedNum(next) && !(Ax.isNull(current) || Ax.chat(current, 0) == null)) {
+                if (Aux.isBinaryOp(current) && Aux.isFullSignedNum(previous) && Aux.isFullSignedNum(next) && !(Aux.isNull(current) || Aux.chat(current, 0) == null)) {
                     if (current.equals("*")) {
                         eqArray.set(i - 1, parseBigDecimal(previous, mc).multiply(parseBigDecimal(next, mc), mc).toPlainString());
 
@@ -594,7 +594,7 @@ public class BetterMath {
                 catch (Exception ignored) {
                 }
 
-                if (Ax.isBinaryOp(current) && Ax.isFullSignedNum(previous) && Ax.isFullSignedNum(next) && !(Ax.isNull(current) || Ax.chat(current, 0) == null)) {
+                if (Aux.isBinaryOp(current) && Aux.isFullSignedNum(previous) && Aux.isFullSignedNum(next) && !(Aux.isNull(current) || Aux.chat(current, 0) == null)) {
                     if (current.equals("+")) {
                         eqArray.set(i - 1, parseBigDecimal(previous, mc).add(parseBigDecimal(next, mc), mc).toPlainString());
 
@@ -652,7 +652,7 @@ public class BetterMath {
             throw new NaNException("Parse Error");
         }
 
-        if (eqArray.size() > 0 && (Ax.isFullNum(eqArray.get(0)) || (eqArray.get(0).length() > 1 && Ax.isFullNum(eqArray.get(0).substring(1)) && (eqArray.get(0).startsWith("-")))))
+        if (eqArray.size() > 0 && (Aux.isFullNum(eqArray.get(0)) || (eqArray.get(0).length() > 1 && Aux.isFullNum(eqArray.get(0).substring(1)) && (eqArray.get(0).startsWith("-")))))
             return parseBigDecimal(eqArray.get(0), mc);
         else
             throw new NaNException("Parse Error");
@@ -663,29 +663,29 @@ public class BetterMath {
         ArrayList<String> eqArray = new ArrayList<>();
 
         for (i=0; i < eq.length(); i++) {
-            String current = Ax.chat(eq, i);
+            String current = Aux.chat(eq, i);
 
             if (current == null || current.equals("\0") || current.equals(" ") || current.equals(","))
                 continue;
 
-            if (Ax.isDigit(current) || current.equals(".")) {
+            if (Aux.isDigit(current) || current.equals(".")) {
                 String lastItem = eqArray.size() > 0 ? eqArray.get(eqArray.size() - 1) : "";
 
                 //TODO: Handle superscripts preceding numbers
-                if (eqArray.size() < 1 || (Ax.isOp(lastItem) || Ax.trigList.contains(lastItem) || lastItem.equals(Ax.pi) || lastItem.equals("e") || lastItem.equals("ₑ")))
+                if (eqArray.size() < 1 || (Aux.isOp(lastItem) || Aux.trigList.contains(lastItem) || lastItem.equals(Aux.pi) || lastItem.equals("e") || lastItem.equals("ₑ")))
                     eqArray.add(current);
                 else
                     eqArray.set(eqArray.size() - 1, lastItem + current);
             }
             //TODO: Parse n-th roots properly
-            else if (Ax.isOp(current) || current.equals(Ax.pi) || current.equals("e") || Ax.superlist.contains(current) ||
-                    Ax.sublist.contains(current) || current.equals("ₑ") || current.equals(Ax.superMinus)) {
+            else if (Aux.isOp(current) || current.equals(Aux.pi) || current.equals("e") || Aux.superlist.contains(current) ||
+                    Aux.sublist.contains(current) || current.equals("ₑ") || current.equals(Aux.superMinus)) {
                 String lastItem = eqArray.size() > 0 ? eqArray.get(eqArray.size() - 1) : "";
 
-                if (Ax.isDigit(lastItem) && current.equals(Ax.sq))
+                if (Aux.isDigit(lastItem) && current.equals(Aux.sq))
                     eqArray.add("*");
-                else if (lastItem != null && current.equals(Ax.superMinus) && Ax.trigList.contains(lastItem) && i < eq.length() - 1 && Ax.chat(eq, i+1) != null && Ax.chat(eq, i+1).equals(Ax.superscripts[1])) {
-                    eqArray.set(eqArray.size() - 1, lastItem + Ax.superMinus + Ax.superscripts[1]);
+                else if (lastItem != null && current.equals(Aux.superMinus) && Aux.trigList.contains(lastItem) && i < eq.length() - 1 && Aux.chat(eq, i+1) != null && Aux.chat(eq, i+1).equals(Aux.superscripts[1])) {
+                    eqArray.set(eqArray.size() - 1, lastItem + Aux.superMinus + Aux.superscripts[1]);
                     i++;
                     continue;
                 }
@@ -722,7 +722,7 @@ public class BetterMath {
                 }
 
                 if (!trigCheck.equals("~")) {
-                    int length = Ax.trigIn.length - 1;
+                    int length = Aux.trigIn.length - 1;
 
                     for (j=length; j >= 0; j--) {
                         if (j == length) {
@@ -749,7 +749,7 @@ public class BetterMath {
 
                                 //Handle coefficients before log or ln
                                 try {
-                                    if (Ax.isFullSignedNum(eqArray.get(eqArray.size() - 2))) {
+                                    if (Aux.isFullSignedNum(eqArray.get(eqArray.size() - 2))) {
                                         eqArray.add(eqArray.size() - 1, "*");
                                     }
                                 }
@@ -759,12 +759,12 @@ public class BetterMath {
                             }
                         }
 
-                        if (trigCheck.startsWith(Ax.trigIn[j])) {
-                            eqArray.add(trigCheck.substring(0, Ax.trigIn[j].length()));
-                            eq = eq.substring(0, i) + eq.substring(i + Ax.trigIn[j].length() - 1);
+                        if (trigCheck.startsWith(Aux.trigIn[j])) {
+                            eqArray.add(trigCheck.substring(0, Aux.trigIn[j].length()));
+                            eq = eq.substring(0, i) + eq.substring(i + Aux.trigIn[j].length() - 1);
 
                             try {
-                                if (Ax.isFullSignedNum(eqArray.get(eqArray.size() - 2))) {
+                                if (Aux.isFullSignedNum(eqArray.get(eqArray.size() - 2))) {
                                     eqArray.add(eqArray.size() - 1, "*");
                                 }
                             }
@@ -807,7 +807,7 @@ public class BetterMath {
             return BigDecimal.ONE;
         else if (num.compareTo(base) != 0) {
             BigDecimal initNum = num;
-            String maxIncrement = "0.25", minIncrement = "0.1";
+            String mAuxIncrement = "0.25", minIncrement = "0.1";
 
             if (num.compareTo(base) >= 0) {
                 while (num.compareTo(BigDecimal.ONE) > 0) {
@@ -826,11 +826,11 @@ public class BetterMath {
 
             BigDecimal bound;
 
-            BigDecimal increment = parseBigDecimal(maxIncrement, mc);
+            BigDecimal increment = parseBigDecimal(mAuxIncrement, mc);
             BigDecimal previousBound, previousIncrement;
 
             int i = 0;
-            int maxPrecision = mc.getPrecision();
+            int mAuxPrecision = mc.getPrecision();
             int whichBound = initNum.subtract(lowerBound, mc).abs(mc).compareTo(initNum.subtract(upperBound, mc).abs(mc));
 
             //Add or subtract from middle bound
@@ -847,14 +847,14 @@ public class BetterMath {
                         result = result.add(direction < 0 ? increment : increment.negate());
                         bound = BigDecimalMath.pow(base, result, mc);
 
-                        if (i < maxPrecision && (direction < 0 ? bound.compareTo(initNum) : initNum.compareTo(bound)) > 0) {
+                        if (i < mAuxPrecision && (direction < 0 ? bound.compareTo(initNum) : initNum.compareTo(bound)) > 0) {
                             result = result.add(direction < 0 ? increment.negate() : increment);
                             bound = BigDecimalMath.pow(base, result, mc);
 
                             if (increment.toPlainString().contains("1"))
                                 i++;
 
-                            increment = updateIncrement(increment, maxIncrement, minIncrement);
+                            increment = updateIncrement(increment, mAuxIncrement, minIncrement);
                         }
 
                         if (result.scale() > base.scale())
@@ -870,8 +870,8 @@ public class BetterMath {
                 bound = whichBound > 0 ? upperBound : lowerBound;
 
                 for (i = 0;
-                     i < maxPrecision && (whichBound > 0 ? initNum.compareTo(bound) : bound.compareTo(initNum)) <= 0;
-                     i += increment.toPlainString().contains(maxIncrement.replace("0.", "")) && previousIncrement.toPlainString().contains(minIncrement.replace("0.", "")) ? 1 : 0) {
+                     i < mAuxPrecision && (whichBound > 0 ? initNum.compareTo(bound) : bound.compareTo(initNum)) <= 0;
+                     i += increment.toPlainString().contains(mAuxIncrement.replace("0.", "")) && previousIncrement.toPlainString().contains(minIncrement.replace("0.", "")) ? 1 : 0) {
                     previousIncrement = increment;
                     previousBound = bound;
 
@@ -882,7 +882,7 @@ public class BetterMath {
                         bound = previousBound;
                         result = result.add(whichBound > 0 ? increment : increment.negate());
 
-                        increment = updateIncrement(increment, maxIncrement, minIncrement);
+                        increment = updateIncrement(increment, mAuxIncrement, minIncrement);
                     }
 
                     if (result.scale() > base.scale())
@@ -898,14 +898,14 @@ public class BetterMath {
             throw new NaNException("NaN");
     }
 
-    public static BigDecimal updateIncrement(BigDecimal increment, String maxIncrement, String minIncrement) {
-        maxIncrement = maxIncrement.replace("0.", "");
+    public static BigDecimal updateIncrement(BigDecimal increment, String mAuxIncrement, String minIncrement) {
+        mAuxIncrement = mAuxIncrement.replace("0.", "");
         minIncrement = minIncrement.replace("0.", "");
 
-        if (increment.toPlainString().contains(maxIncrement))
-            return parseBigDecimal(increment.toPlainString().replace(maxIncrement, minIncrement));
+        if (increment.toPlainString().contains(mAuxIncrement))
+            return parseBigDecimal(increment.toPlainString().replace(mAuxIncrement, minIncrement));
 
-        return parseBigDecimal(increment.toPlainString().replace(".", ".0").replace(minIncrement, maxIncrement));
+        return parseBigDecimal(increment.toPlainString().replace(".", ".0").replace(minIncrement, mAuxIncrement));
     }
 
     public static BigDecimal sqrt(BigDecimal num) {
@@ -923,7 +923,7 @@ public class BetterMath {
     public static String fact(String num, MathContext mc) throws NaNException {
         BigDecimal i;
 
-        if (num == null || num.equals("\0") || num.contains(".") || !Ax.isFullNum(num))
+        if (num == null || num.equals("\0") || num.contains(".") || !Aux.isFullNum(num))
             throw new NaNException("NaN") ;
 
         BigDecimal number;
@@ -1036,14 +1036,14 @@ class Trig {
     public static String evaluate(String trigOp, String n, MathContext mc, boolean isRad, int scale) throws NaNException {
         BigDecimal num = parseBigDecimal(n);
 
-        String op = trigOp.replace("arc", "").replace(Ax.superMinus + Ax.superscripts[1], "");
+        String op = trigOp.replace("arc", "").replace(Aux.superMinus + Aux.superscripts[1], "");
 
         if (op.endsWith("h"))
-            op = Ax.newTrim(op, 1);
+            op = Aux.newTrim(op, 1);
 
         //Hyperbolic
         if (trigOp.contains("h")) {
-            if (trigOp.contains("arc") || trigOp.contains(Ax.superMinus + Ax.superscripts[1])) {
+            if (trigOp.contains("arc") || trigOp.contains(Aux.superMinus + Aux.superscripts[1])) {
                 String cscIdentity = "ln((1/" + n + ")+(1+(1/(" + n + "^2)))^0.5)";
                 String secIdentity = "ln((1/" + n + ")+((1-2)+(1/(" + n + "^2)))^0.5)";
                 String cotIdentity = "(ln((1+" + n + ")/(-1+" + n + ")))/2";
@@ -1072,7 +1072,7 @@ class Trig {
         }
         //Normal
         else {
-            if (trigOp.contains("arc") || trigOp.contains(Ax.superMinus + Ax.superscripts[1])) {
+            if (trigOp.contains("arc") || trigOp.contains(Aux.superMinus + Aux.superscripts[1])) {
                 switch(op) {
                     case "sin": return isRad ? BigDecimalMath.asin(num, mc).toPlainString() : toDegrees(BigDecimalMath.asin(num, mc)).toPlainString();
                     case "cos": return isRad ? BigDecimalMath.acos(num, mc).toPlainString() : toDegrees(BigDecimalMath.acos(num, mc)).toPlainString();
@@ -1110,7 +1110,7 @@ class Trig {
 
 
 
-class Ax {
+class Aux {
     public static final String eSub = "ₑ";
     public static final String opSub = "₍";
     public static final String cpSub = "₎";
@@ -1142,7 +1142,7 @@ class Ax {
     public static final String piStr = superscripts[3] + superDot + superscripts[1] + superscripts[4] + superscripts[1] + superscripts[5] + superscripts[9];
 
     public static ArrayList<String> ops = new ArrayList<>(Arrays.asList("+", "-", multi, divi, sq, "^", "(", ")", "!", "%", bulletDot, multiDot, "*", "/", "log", "ln"));
-    public static ArrayList<String> binaryOps = new ArrayList<String>(Arrays.asList("+", "-", "/", "*", multi, divi, "^", "%", Ax.emDash, bulletDot, multiDot));
+    public static ArrayList<String> binaryOps = new ArrayList<String>(Arrays.asList("+", "-", "/", "*", multi, divi, "^", "%", Aux.emDash, bulletDot, multiDot));
 
     //The method's name is a shortened version of "charAt." It's literally just a shortcut for writing "Character.toString(str.charAt(index))"
     public static String chat(String str, int index) {

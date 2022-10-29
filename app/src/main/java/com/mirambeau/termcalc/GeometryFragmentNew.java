@@ -87,7 +87,7 @@ public class GeometryFragmentNew extends Fragment {
 
             boolean theme_boolean;
 
-            if (theme == null || !Aux.isDigit(theme))
+            if (theme == null || !Ax.isDigit(theme))
                 theme = "1";
 
             if (theme.equals("5"))
@@ -97,7 +97,7 @@ public class GeometryFragmentNew extends Fragment {
                 theme_boolean = mPrefs.getBoolean("theme_boolean", true);
             }
 
-            if (color == null || !Aux.isDigit(color))
+            if (color == null || !Ax.isDigit(color))
                 color = "1";
 
             if (!isCustomTheme) {
@@ -272,26 +272,26 @@ public class GeometryFragmentNew extends Fragment {
                 bigColor = "#303030";
             }
             else {
-                if (!isCustomTheme && Aux.isColor(tinydb.getString("accentPrimary"))) {
+                if (!isCustomTheme && Ax.isColor(tinydb.getString("accentPrimary"))) {
                     bigColor = tinydb.getString("accentPrimary");
                 }
                 else if (isCustomTheme) {
-                    if (Aux.isColor(tinydb.getString("cPrimary")) && !Aux.isGray(tinydb.getString("cPrimary"))) {
+                    if (Ax.isColor(tinydb.getString("cPrimary")) && !Ax.isGray(tinydb.getString("cPrimary"))) {
                         bigColor = tinydb.getString("cPrimary");
                     }
-                    else if (Aux.isColor(tinydb.getString("cSecondary")) && !Aux.isGray(tinydb.getString("cSecondary"))) {
+                    else if (Ax.isColor(tinydb.getString("cSecondary")) && !Ax.isGray(tinydb.getString("cSecondary"))) {
                         bigColor = tinydb.getString("cSecondary");
                     }
-                    else if (Aux.isColor(tinydb.getString("-b=t")) && !Aux.isGray(tinydb.getString("-b=t"))) {
+                    else if (Ax.isColor(tinydb.getString("-b=t")) && !Ax.isGray(tinydb.getString("-b=t"))) {
                         bigColor = tinydb.getString("-b=t");
                     }
-                    else if (Aux.isColor(tinydb.getString("cTop")) && !Aux.isGray(tinydb.getString("cTop"))) {
+                    else if (Ax.isColor(tinydb.getString("cTop")) && !Ax.isGray(tinydb.getString("cTop"))) {
                         bigColor = tinydb.getString("cTop");
                     }
-                    else if (Aux.isColor(tinydb.getString("cTertiary")) && !Aux.isGray(tinydb.getString("cTertiary"))) {
+                    else if (Ax.isColor(tinydb.getString("cTertiary")) && !Ax.isGray(tinydb.getString("cTertiary"))) {
                         bigColor = tinydb.getString("cTertiary");
                     }
-                    else if (Aux.isColor(tinydb.getString("-b+t")) && !Aux.isGray(tinydb.getString("-b+t"))) {
+                    else if (Ax.isColor(tinydb.getString("-b+t")) && !Ax.isGray(tinydb.getString("-b+t"))) {
                         bigColor = tinydb.getString("-b+t");
                     }
                 }
@@ -306,7 +306,7 @@ public class GeometryFragmentNew extends Fragment {
                 if (theme.equals("5")) {
                     jumpTo.setBackgroundTintList(ColorStateList.valueOf(monochromeTextColor));
 
-                    if (!isCustomTheme && Aux.isColor(tinydb.getString("accentPrimary")))
+                    if (!isCustomTheme && Ax.isColor(tinydb.getString("accentPrimary")))
                         jumpTo.setColorFilter(Color.parseColor(tinydb.getString("accentPrimary")));
                 }
                 else if (theme.equals("2")) {
@@ -407,7 +407,7 @@ public class GeometryFragmentNew extends Fragment {
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             MainActivity.mainActivity.finishAffinity();
         }
     }
@@ -432,7 +432,7 @@ public class GeometryFragmentNew extends Fragment {
                 }
             }
 
-            if (!arraysAreEqual && Aux.isFullNum(inputs[0])) {
+            if (!arraysAreEqual && Ax.isFullNum(inputs[0])) {
                 if (allCards.get(tab).get(0).getShapeTitle().equalsIgnoreCase("square")) {
                     if (GeoCalc.area(card.getShapeTitle().toLowerCase(), inputs) != 0.0)
                         card.setAnswerText(" = " + GeoCalc.area(card.getShapeTitle().toLowerCase(), inputs));

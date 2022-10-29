@@ -30,7 +30,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.themeToolbar);
 
-        setTheme(Aux.switchColors[Aux.isFullNum(tinydb.getString("color")) ? (Integer.parseInt(tinydb.getString("color")) - 1) : 0]);
+        setTheme(Ax.switchColors[Ax.isFullNum(tinydb.getString("color")) ? (Integer.parseInt(tinydb.getString("color")) - 1) : 0]);
 
         toolbar.setTitle(R.string.theme_settings);
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));

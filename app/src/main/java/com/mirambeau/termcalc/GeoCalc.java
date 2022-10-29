@@ -1,6 +1,6 @@
 package com.mirambeau.termcalc;
 
-public class GeoCalc extends Aux {
+public class GeoCalc extends Ax {
     static final double pi = 3.141592;
 
     final static String[] twoD = {"Square", "Rectangle", "Circle", "Ellipse", "Triangle", "Trapezoid", "Parallelogram", "Pentagon", "Hexagon", "Heptagon", "Octagon", "Nonagon", "Decagon"};

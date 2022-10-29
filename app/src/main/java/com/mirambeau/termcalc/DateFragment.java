@@ -76,7 +76,7 @@ public class DateFragment extends Fragment {
             int i;
 
             if (color != null && isCustomTheme) {
-                if (!Aux.isColor(cFabText)) {
+                if (!Ax.isColor(cFabText)) {
                     if (theme.equals("5"))
                         cFabText = primary;
                     else
@@ -246,7 +246,7 @@ public class DateFragment extends Fragment {
             }
 
             if (isCustomTheme) {
-                if (!Aux.isColor(cMain)) {
+                if (!Ax.isColor(cMain)) {
                     if (theme.equals("1"))
                         cMain = "#272C33";
                     else if (theme.equals("2"))
@@ -257,7 +257,7 @@ public class DateFragment extends Fragment {
                         cMain = secondary;
                 }
 
-                if (!Aux.isColor(cMain))
+                if (!Ax.isColor(cMain))
                     cMain = "#00B5A3";
 
                 if (mainDate != null) {
@@ -265,7 +265,7 @@ public class DateFragment extends Fragment {
                     mainDate.setBackgroundColor(Color.parseColor(cMain));
                 }
 
-                if (!Aux.isColor(cKeypad)) {
+                if (!Ax.isColor(cKeypad)) {
                     if (theme.equals("2"))
                         cKeypad = "#FFFFFF";
                     else if (theme.equals("1"))
@@ -276,13 +276,13 @@ public class DateFragment extends Fragment {
                         cKeypad = "#000000";
                 }
 
-                if (Aux.isColor(cMain) && Aux.isColor(cKeypad) && cKeypad.equalsIgnoreCase(cMain) && Build.VERSION.SDK_INT < 29 && theme.equals("5")) {
-                    cKeypad = Aux.hexAdd(cKeypad, -15);
+                if (Ax.isColor(cMain) && Ax.isColor(cKeypad) && cKeypad.equalsIgnoreCase(cMain) && Build.VERSION.SDK_INT < 29 && theme.equals("5")) {
+                    cKeypad = Ax.hexAdd(cKeypad, -15);
                     cFabText = cKeypad;
                 }
 
                 if (input != null) {
-                    if (Aux.isColor(cKeypad))
+                    if (Ax.isColor(cKeypad))
                         input.setBackgroundColor(Color.parseColor(cKeypad));
                 }
 
@@ -350,7 +350,7 @@ public class DateFragment extends Fragment {
             }
 
             if (isCustomTheme) {
-                if (!Aux.isColor(cFab) || cFab.equals("#reset0")) {
+                if (!Ax.isColor(cFab) || cFab.equals("#reset0")) {
                     if (theme.equals("4"))
                         cFab = "#222222";
                     else if (theme.equals("5"))
@@ -359,7 +359,7 @@ public class DateFragment extends Fragment {
                         cFab = primary;
                 }
 
-                if (!Aux.isColor(cFabText) || cFabText.equals("#reset0")) {
+                if (!Ax.isColor(cFabText) || cFabText.equals("#reset0")) {
                     if (theme.equals("5"))
                         cFabText = primary;
                     else
@@ -371,8 +371,8 @@ public class DateFragment extends Fragment {
                     dateEquals.setColorFilter(Color.parseColor(cFabText));
                 }
 
-                if (Aux.isTinyColor("-mt")) {
-                    int uiTextColor = Aux.getTinyColor("-mt");
+                if (Ax.isTinyColor("-mt")) {
+                    int uiTextColor = Ax.getTinyColor("-mt");
 
                     for (TextView label : labels){
                         if (label != null)
@@ -383,7 +383,7 @@ public class DateFragment extends Fragment {
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             MainActivity.mainActivity.finishAffinity();
         }
     }

@@ -8,7 +8,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -108,7 +107,7 @@ public class VariablesAdapter extends RecyclerView.Adapter<VariablesAdapter.View
 
         textInputLayout.setHint(current);
 
-        if (Aux.getThemeInt() == 2) {
+        if (Ax.getThemeInt() == 2) {
             editText.setHintTextColor(Color.DKGRAY);
             editText.setTextColor(darkGray);
 

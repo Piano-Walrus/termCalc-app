@@ -44,7 +44,7 @@ import java.util.Calendar;
 public class Backups extends AppCompatActivity {
     final Activity main = MainActivity.mainActivity;
 
-    public static String THEME_DARK = Aux.tinydb().getBoolean("darkStatusBar") ? "1" : "3";
+    public static String THEME_DARK = Ax.tinydb().getBoolean("darkStatusBar") ? "1" : "3";
     public static String THEME_LIGHT = "2";
 
     final private ArrayList<BackupCard> cards = new ArrayList<>();
@@ -269,12 +269,12 @@ public class Backups extends AppCompatActivity {
                 }
             });
 
-            if (Aux.isColor(tinydb.getString("cPrimary")))
+            if (Ax.isColor(tinydb.getString("cPrimary")))
                 newBackup.setRippleColor(Color.parseColor(tinydb.getString("cPrimary")));
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
     }
@@ -295,7 +295,7 @@ public class Backups extends AppCompatActivity {
         BufferedReader bufferedReader = new BufferedReader(isr);
 
         for (i = 0; (line = bufferedReader.readLine()) != null; i++) {
-            if (i > 12 && Aux.isDigit(line))
+            if (i > 12 && Ax.isDigit(line))
                 theme = line;
         }
 
@@ -307,15 +307,15 @@ public class Backups extends AppCompatActivity {
         boolean hasSetMinus = false, hasSetMulti = false, hasSetDiv = false;
 
         for (i = 0; (line = bufferedReader.readLine()) != null; i++) {
-            if ((i == 3 || i > 13) && (Aux.isColor(line) || (line.endsWith("-b=t") && Aux.isColor(Aux.newTrim(line, 4))))) {
+            if ((i == 3 || i > 13) && (Ax.isColor(line) || (line.endsWith("-b=t") && Ax.isColor(Ax.newTrim(line, 4))))) {
                 if (i == 3)
                     tempEqualsColor = line;
                 else
-                    tempEqualsColor = Aux.newTrim(line, 4);
+                    tempEqualsColor = Ax.newTrim(line, 4);
             }
 
             if (index < colorIndexes.length && i == colorIndexes[index]) {
-                if (Aux.isColor(line))
+                if (Ax.isColor(line))
                     currentColors.add(line);
                 else if (i == 0){
                     currentColors.add("#03DAC5");
@@ -350,26 +350,26 @@ public class Backups extends AppCompatActivity {
             }
             else if (i > 13) {
                 if (line.endsWith("-b-t")) {
-                    currentColors.set(1, Aux.newTrim(line, 4));
+                    currentColors.set(1, Ax.newTrim(line, 4));
                     hasSetMinus = true;
                 }
-                else if (line.endsWith("-b" + Aux.multi + "t")) {
-                    currentColors.set(2, Aux.newTrim(line, 4));
+                else if (line.endsWith("-b" + Ax.multi + "t")) {
+                    currentColors.set(2, Ax.newTrim(line, 4));
 
                     hasSetMulti = true;
                 }
-                else if (line.endsWith("-b" + Aux.divi + "t")) {
-                    currentColors.set(3, Aux.newTrim(line, 4));
+                else if (line.endsWith("-b" + Ax.divi + "t")) {
+                    currentColors.set(3, Ax.newTrim(line, 4));
 
                     hasSetDiv = true;
                 }
                 else if (line.endsWith("-bop")) {
                     if (!hasSetMinus)
-                        currentColors.set(1, Aux.newTrim(line, 4));
+                        currentColors.set(1, Ax.newTrim(line, 4));
                     if (!hasSetMulti)
-                        currentColors.set(2, Aux.newTrim(line, 4));
+                        currentColors.set(2, Ax.newTrim(line, 4));
                     if (!hasSetDiv)
-                        currentColors.set(3, Aux.newTrim(line, 4));
+                        currentColors.set(3, Ax.newTrim(line, 4));
                 }
             }
         }
@@ -414,7 +414,7 @@ public class Backups extends AppCompatActivity {
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
     }
@@ -523,7 +523,7 @@ public class Backups extends AppCompatActivity {
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
     }
@@ -544,7 +544,7 @@ public class Backups extends AppCompatActivity {
                 int theme;
 
                 try {
-                    theme = Aux.getThemeInt();
+                    theme = Ax.getThemeInt();
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -711,7 +711,7 @@ public class Backups extends AppCompatActivity {
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             finish();
         }
     }
@@ -752,7 +752,7 @@ public class Backups extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.help) {
-            final AlertDialog.Builder builder = Aux.createAlertDialog("Help", Backups.this);
+            final AlertDialog.Builder builder = Ax.createAlertDialog("Help", Backups.this);
 
             builder.setMessage("Any themes you save can be found here.\n\nUsing the buttons on each theme's card, you can either favorite, share, delete, rename, or restore that theme.\n\nThe button on the bottom right of the screen can be used to import new themes from your device's file manager.");
 
@@ -776,7 +776,7 @@ public class Backups extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (shouldRecreate) {
-            Aux.restored = true;
+            Ax.restored = true;
 
             try {
                 EditorActivity.editorActivity.recreate();
@@ -817,7 +817,7 @@ public class Backups extends AppCompatActivity {
                 process(uri);
             } catch (Exception e) {
                 e.printStackTrace();
-                Aux.makeLongToast("Error: Either the specified file could not be found, or access was denied.");
+                Ax.makeLongToast("Error: Either the specified file could not be found, or access was denied.");
             }
         }
     }
@@ -837,14 +837,14 @@ public class Backups extends AppCompatActivity {
             if (themeTitle != null) {
                 if (themeTitle.startsWith("0000-0000:"))
                     themeTitle = themeTitle.substring(10);
-                else if ((themeTitle.length() > 5 && themeTitle.startsWith("msf:") && Aux.isDigit(Aux.chat(themeTitle, 5))) || themeTitle.startsWith("document")) {
+                else if ((themeTitle.length() > 5 && themeTitle.startsWith("msf:") && Ax.isDigit(Ax.chat(themeTitle, 5))) || themeTitle.startsWith("document")) {
                     themeTitle = "\0";
                     noName = true;
                 }
 
                 try {
                     for (i = 0; i < themeTitle.length(); i++) {
-                        if (Aux.chat(themeTitle, i).equals("/"))
+                        if (Ax.chat(themeTitle, i).equals("/"))
                             numSlashes++;
                     }
                 }
@@ -856,12 +856,12 @@ public class Backups extends AppCompatActivity {
 
                 for (i=0; i < numSlashes; i++) {
                     if (themeTitle.contains("/")) {
-                        themeTitle = themeTitle.substring(Aux.searchFor(themeTitle, "/") + 1);
+                        themeTitle = themeTitle.substring(Ax.searchFor(themeTitle, "/") + 1);
                     }
                 }
 
                 if (!noName && themeTitle != null && themeTitle.endsWith(".txt"))
-                    themeTitle = Aux.newTrim(themeTitle, 4);
+                    themeTitle = Ax.newTrim(themeTitle, 4);
 
                 if (themeTitle != null && themeTitle.contains("/"))
                     themeTitle = themeTitle.replace("/", "");
@@ -940,7 +940,7 @@ public class Backups extends AppCompatActivity {
                 run("restore " + themeName);
                 save(newTheme);
 
-                if ((themeName.startsWith("temp-") || themeTitle.startsWith("temp-")) && Aux.isDigit(Aux.lastChar(themeName)))
+                if ((themeName.startsWith("temp-") || themeTitle.startsWith("temp-")) && Ax.isDigit(Ax.lastChar(themeName)))
                     theme.delete();
 
                 shouldRecreate = true;
@@ -976,21 +976,21 @@ public class Backups extends AppCompatActivity {
             this.cmd = cmd;
 
             if (cmd.endsWith(" ") && cmd.length() > 1)
-                cmd = Aux.newTrim(cmd, 1);
+                cmd = Ax.newTrim(cmd, 1);
 
             //Set color
             if (cmd.length() > 2 && cmd.startsWith("set") || (cmd.startsWith("mode ") && cmd.length() == 6)) {
                 if (cmd.length() > 8) {
-                    hex = Aux.getLast(cmd, 7);
+                    hex = Ax.getLast(cmd, 7);
 
                     if (!cmd.contains("mode") && !cmd.contains("reset0")) {
-                        hex = Aux.colorToUpper(hex);
+                        hex = Ax.colorToUpper(hex);
                     }
 
-                    isHex = Aux.isColor(hex);
+                    isHex = Ax.isColor(hex);
 
                     if (cmd.contains("-ft") && hex.substring(1).equalsIgnoreCase(tinydb.getString("cSecondary").substring(1))) {
-                        hex = Aux.hexAdd(hex, -1);
+                        hex = Ax.hexAdd(hex, -1);
                         ftIsSecondary = true;
                     }
                 }
@@ -1060,10 +1060,10 @@ public class Backups extends AppCompatActivity {
                     mainHandler.post(myRunnable);
                 }
                 //Mode
-                else if ((cmd.length() == 6 && Aux.newTrim(cmd, 1).equals("mode ")) || (cmd.length() == 7 && Aux.newTrim(cmd, 1).equals("theme "))) {
-                    if (Aux.isDigit(Aux.lastChar(cmd)) && (Aux.getLast(Aux.newTrim(cmd, 1), 5).equals("mode ") || Aux.getLast(Aux.newTrim(cmd, 1), 6).equals("theme "))) {
-                        if (Integer.parseInt(Aux.lastChar(cmd)) < 6 && Integer.parseInt(Aux.lastChar(cmd)) > 0) {
-                            String newTheme = Aux.lastChar(cmd);
+                else if ((cmd.length() == 6 && Ax.newTrim(cmd, 1).equals("mode ")) || (cmd.length() == 7 && Ax.newTrim(cmd, 1).equals("theme "))) {
+                    if (Ax.isDigit(Ax.lastChar(cmd)) && (Ax.getLast(Ax.newTrim(cmd, 1), 5).equals("mode ") || Ax.getLast(Ax.newTrim(cmd, 1), 6).equals("theme "))) {
+                        if (Integer.parseInt(Ax.lastChar(cmd)) < 6 && Integer.parseInt(Ax.lastChar(cmd)) > 0) {
+                            String newTheme = Ax.lastChar(cmd);
                             String[] themeNames = {"Dark", "Light", "AMOLED Black (Colored Buttons)", "AMOLED Black (Black Buttons)", "Monochrome"};
                             int themeInt = Integer.parseInt(newTheme);
 
@@ -1299,7 +1299,7 @@ public class Backups extends AppCompatActivity {
                     }
 
                     for (c = 0; c < cmdEnd.length(); c++) {
-                        if (Aux.chat(cmdEnd, c).equals(" "))
+                        if (Ax.chat(cmdEnd, c).equals(" "))
                             break;
 
                         codeLength++;
@@ -1309,9 +1309,9 @@ public class Backups extends AppCompatActivity {
                     String buttonText;
 
                     if (buttonCode.endsWith("t") && !buttonCode.endsWith("ot")) {
-                        buttonText = Aux.newTrim(buttonCode.substring(2), 1);
+                        buttonText = Ax.newTrim(buttonCode.substring(2), 1);
 
-                        if (Aux.buttonExists(buttonText) || Aux.isExtraButtonCode(buttonCode)) {
+                        if (Ax.buttonExists(buttonText) || Ax.isExtraButtonCode(buttonCode)) {
                             if (isHex) {
                                 Log.d("printf", "Button " + buttonText + " text color set to " + hex);
                                 tinydb.putString(buttonCode, hex);
@@ -1328,7 +1328,7 @@ public class Backups extends AppCompatActivity {
                     else {
                         buttonText = buttonCode.substring(2);
 
-                        if (Aux.buttonExists(buttonText) || Aux.isExtraButtonCode(buttonCode)) {
+                        if (Ax.buttonExists(buttonText) || Ax.isExtraButtonCode(buttonCode)) {
                             if (isHex) {
                                 Log.d("printf", "Button " + buttonText + " color set to " + hex);
                                 tinydb.putString(buttonCode, hex);
@@ -1515,7 +1515,7 @@ public class Backups extends AppCompatActivity {
                             String newHex;
 
                             if (ftIsSecondary)
-                                newHex = Aux.hexAdd(hex, 1);
+                                newHex = Ax.hexAdd(hex, 1);
                             else
                                 newHex = hex;
 
@@ -1762,7 +1762,7 @@ public class Backups extends AppCompatActivity {
                             Log.d("printf", "Secondary color set to " + hex);
                             cSecondary = hex;
                             tinydb.putString("cSecondary", cSecondary);
-                            Aux.tinydb().putBoolean("isSetSecondary", true);
+                            Ax.tinydb().putBoolean("isSetSecondary", true);
 
                             if (!isAll) {
                                 Handler mainHandler = new Handler(this.getMainLooper());
@@ -2032,7 +2032,7 @@ public class Backups extends AppCompatActivity {
                     Log.d("printf", setError);
                 }
 
-                if (!Aux.isNull(cFabText)) {
+                if (!Ax.isNull(cFabText)) {
                     if (cFabText.equals("#reset0")) {
                         cFabText = "\0";
                         tinydb.putString("cFabText", "\0");
@@ -2046,7 +2046,7 @@ public class Backups extends AppCompatActivity {
                 String filename = cmd.substring(7);
 
                 if (filename.endsWith(".txt"))
-                    filename = Aux.newTrim(filename, 4);
+                    filename = Ax.newTrim(filename, 4);
 
                 File path = new File(this.getFilesDir(), "themes");
                 File file = new File(path, filename + ".txt");
@@ -2064,7 +2064,7 @@ public class Backups extends AppCompatActivity {
                 String filename = cmd.substring(6);
 
                 if (filename.endsWith(".txt"))
-                    filename = Aux.newTrim(filename, 4);
+                    filename = Ax.newTrim(filename, 4);
 
                 File path = new File(this.getFilesDir(), "themes");
                 File file = new File(path, filename + ".txt");
@@ -2138,7 +2138,7 @@ public class Backups extends AppCompatActivity {
                     fileText = colors[0] + "\n";
 
                     for (i = 1; i < numColors; i++) {
-                        if (colors[i] == null || colors[i].equals("\0") || colors[i].equals("") || colors[i].equals("0") || !Aux.isColor(colors[i]))
+                        if (colors[i] == null || colors[i].equals("\0") || colors[i].equals("") || colors[i].equals("0") || !Ax.isColor(colors[i]))
                             colors[i] = "#reset0";
 
                         fileText += colors[i] + "\n";
@@ -2152,7 +2152,7 @@ public class Backups extends AppCompatActivity {
                                 extraTexts[a] = "ⁿ√";
 
                             if (extraColors[a] != null) {
-                                if (Aux.isColor(extraColors[a])) {
+                                if (Ax.isColor(extraColors[a])) {
                                     if (!hasAddedButton) {
                                         fileText += "\n";
                                         hasAddedButton = true;
@@ -2163,7 +2163,7 @@ public class Backups extends AppCompatActivity {
                             }
 
                             if (extraTextColors[a] != null) {
-                                if (Aux.isColor(extraTextColors[a])) {
+                                if (Ax.isColor(extraTextColors[a])) {
                                     if (!hasAddedButton) {
                                         fileText += "\n";
                                         hasAddedButton = true;
@@ -2178,11 +2178,11 @@ public class Backups extends AppCompatActivity {
                     String[] extraCodes = {"-bop", "-btt", "-bINV2", "-bINV2t", "-mt"};
 
                     for (a=0; a < extraCodes.length; a++) {
-                        if (Aux.isTinyColor(extraCodes[a]))
+                        if (Ax.isTinyColor(extraCodes[a]))
                             fileText += tinydb.getString(extraCodes[a]) + extraCodes[a] + "\n";
                     }
 
-                    if (Aux.isDigit(bigTheme))
+                    if (Ax.isDigit(bigTheme))
                         fileText += bigTheme;
                     else
                         fileText += tinydb.getString("theme");
@@ -2206,13 +2206,13 @@ public class Backups extends AppCompatActivity {
                 int e;
 
                 if (end.equals("-s"))
-                    Aux.tinydb().putBoolean("isSetSecondary", false);
+                    Ax.tinydb().putBoolean("isSetSecondary", false);
 
                 if (end.equalsIgnoreCase("all") || end.equals("-a")){
                     run("set -a #reset0");
                     run("reset buttons");
 
-                    Aux.tinydb().putBoolean("isSetSecondary", false);
+                    Ax.tinydb().putBoolean("isSetSecondary", false);
 
                     for (e=0; e < editorCodes.length; e++)
                         tinydb.putString(editorCodes[e], "\0");
@@ -2220,7 +2220,7 @@ public class Backups extends AppCompatActivity {
                 else if (end.equalsIgnoreCase("button") || end.equalsIgnoreCase("-buttons")){
                     run("reset buttons");
                 }
-                else if (Aux.isButtonCode(end)){
+                else if (Ax.isButtonCode(end)){
                     run("set " + end + " #reset0");
                 }
             }
@@ -2313,7 +2313,7 @@ public class Backups extends AppCompatActivity {
                             String line;
 
                             for (i = 0; (line = bufferedReader.readLine()) != null; i++) {
-                                if (!((i > 12 && Aux.isDigit(line)) || Aux.isColor(line) || line.equals("#reset0") || (line.length() >= 6 && (Aux.isColor(line.substring(0, 6)) || Aux.isColor(line.substring(0, 7))) && line.contains("-b")))) {
+                                if (!((i > 12 && Ax.isDigit(line)) || Ax.isColor(line) || line.equals("#reset0") || (line.length() >= 6 && (Ax.isColor(line.substring(0, 6)) || Ax.isColor(line.substring(0, 7))) && line.contains("-b")))) {
                                     if (i < 14)
                                         isValid = false;
 
@@ -2341,10 +2341,10 @@ public class Backups extends AppCompatActivity {
                                 tinydb.putString("-bfct", "");
 
                                 for (i = 0; (line = bufferedReader.readLine()) != null; i++) {
-                                    if (Aux.isDigit(Aux.chat(line, 0)) && line.contains("name:"))
-                                        line = Aux.chat(line, 0);
+                                    if (Ax.isDigit(Ax.chat(line, 0)) && line.contains("name:"))
+                                        line = Ax.chat(line, 0);
 
-                                    if (Aux.isColor(line)) {
+                                    if (Ax.isColor(line)) {
                                         if (i == 3)
                                             tinydb.putString("-b=t", line);
                                         else if (i >= 5 && i <= 8) {
@@ -2356,7 +2356,7 @@ public class Backups extends AppCompatActivity {
                                             tinydb.putString(colorKeys[i], line);
 
                                             if (colorKeys[i].equals("cSecondary"))
-                                                Aux.tinydb().putBoolean("isSetSecondary", true);
+                                                Ax.tinydb().putBoolean("isSetSecondary", true);
                                         }
                                     }
                                     else if (line.startsWith("name:")) {
@@ -2366,26 +2366,26 @@ public class Backups extends AppCompatActivity {
                                         tinydb.putString(colorKeys[i], "\0");
 
                                         if (colorKeys[i].equals("cSecondary"))
-                                            Aux.tinydb().putBoolean("isSetSecondary", false);
+                                            Ax.tinydb().putBoolean("isSetSecondary", false);
                                     }
                                     else if (line.contains("-b")) {
                                         String buttonHex, buttonCode;
 
                                         buttonHex = line.substring(0, 7);
-                                        buttonCode = Aux.getLast(line, line.length() - buttonHex.length());
+                                        buttonCode = Ax.getLast(line, line.length() - buttonHex.length());
 
-                                        if (Aux.isColor(buttonHex) && buttonCode != null) {
+                                        if (Ax.isColor(buttonHex) && buttonCode != null) {
                                             run("set " + buttonCode + " " + buttonHex);
                                         }
                                     }
                                     else if (line.endsWith("-mt")){
                                         String uiHex = line.substring(0, 7);
 
-                                        if (Aux.isColor(uiHex)){
+                                        if (Ax.isColor(uiHex)){
                                             run("set -mt " + uiHex);
                                         }
                                     }
-                                    else if (Aux.isDigit(line) && Integer.parseInt(line) > 0 && Integer.parseInt(line) <= 5) {
+                                    else if (Ax.isDigit(line) && Integer.parseInt(line) > 0 && Integer.parseInt(line) <= 5) {
                                         if (line.equals("2"))
                                             tinydb.putString("customTheme", line);
                                         else if (line.equals("5"))

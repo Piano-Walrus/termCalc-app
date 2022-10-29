@@ -37,7 +37,7 @@ public class FunctionsBottomSheet extends BottomSheetDialogFragment {
     ArrayList<String> functionTitles, functionTexts, functionVariables;
 
     static final String[] initFunctionTitles = {"Compound Interest", "Simple Interest", "Pythagorean Theorem"};
-    static final String[] initFunctionTexts = {"P(1 + (r/n))^nt", "P(1 + rt)", Aux.sq + "(a^2 + b^2)"};
+    static final String[] initFunctionTexts = {"P(1 + (r/n))^nt", "P(1 + rt)", Ax.sq + "(a^2 + b^2)"};
     static final String[] initFunctionVariables = {"P`r`n`t", "P`r`t", "a`b"};
 
     Button[] nums, compBar, trigBar, mainOps;
@@ -62,9 +62,9 @@ public class FunctionsBottomSheet extends BottomSheetDialogFragment {
             }
         });
 
-        int theme = Aux.getThemeInt();
+        int theme = Ax.getThemeInt();
 
-        view.findViewById(R.id.functionsMainBG).setBackground(Aux.getSheetBackground(theme));
+        view.findViewById(R.id.functionsMainBG).setBackground(Ax.getSheetBackground(theme));
 
         if (theme == 2) {
             int darkGray = Color.parseColor("#3C4043");
@@ -94,7 +94,7 @@ public class FunctionsBottomSheet extends BottomSheetDialogFragment {
 
         getFunctions();
 
-        adapter = Aux.adapter;
+        adapter = Ax.adapter;
 
         recyclerView = view.findViewById(R.id.functionsRv);
         recyclerView.setHasFixedSize(false);
@@ -129,7 +129,7 @@ public class FunctionsBottomSheet extends BottomSheetDialogFragment {
         int i;
 
         try {
-            TinyDB tinydb = Aux.tinydb();
+            TinyDB tinydb = Ax.tinydb();
 
             functionTitles = tinydb.getListString("functionTitles");
             functionTexts = tinydb.getListString("functionTexts");
@@ -155,7 +155,7 @@ public class FunctionsBottomSheet extends BottomSheetDialogFragment {
         }
         catch (Exception e){
             e.printStackTrace();
-            Aux.saveStack(e);
+            Ax.saveStack(e);
             main.finishAffinity();
         }
     }
