@@ -864,7 +864,7 @@
                 android:elevation="4dp"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="4dp"
-                android:text="Constants"
+                android:text="@string/constants"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@id/constantsSpacer"
                 app:layout_constraintEnd_toStartOf="@id/constantsSpacer"
