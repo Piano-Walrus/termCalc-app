@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -73,7 +73,6 @@
     <string name="black">Black</string>
     <string name="midnight">Midnight</string>
     <string name="monochrome">Monochrome</string>
-    <string name="custom">Custom</string>
     <string name="new_theme">New Theme</string>
     <string name="keypad">KEYPAD</string>
     <string name="primary">PRIMARY</string>

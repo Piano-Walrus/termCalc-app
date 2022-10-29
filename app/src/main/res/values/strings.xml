@@ -19,17 +19,18 @@
     <string name="theme_settings">Settings</string>
 
     <string name="current_changes" translatable="false" tools:ignore="TypographyDashes">
-        1. You can now switch between square buttons and rounded buttons in Theme Settings!
-        \n2. The \"Functions\" section has been redesigned to make evaluating functions more convenient.
-        \n3. While typing on the Home screen, the result of your expression will now be calculated as you type it!\n
+        1. Redesigned the Theme Editor (again). You can now switch between square buttons and rounded buttons!
+        \n2. All themes are treated as custom themes now. This essentially just means that changing your accent color will now also affect your custom theme.
+        \n3. The Settings and Advanced Options sections will now be themed according to your Accent Color. The text cursors in most layouts will also now use this color.
+        \n4. The \"Functions\" section has been redesigned to make evaluating functions more convenient.
+        \n5. While typing on the Home screen, the result of your expression will now be calculated as you type it!\n
         Note: This behavior can be disabled in settings.
-        \n4. The new input method is now finally out of beta! You can now tap an expression on the home screen to go back and edit it from any point.
-        \n5. The Settings and Advanced Options sections will now be themed according to your Accent Color. The text cursors in most layouts will also now use this color.
-        \n6. Switched from double to BigDecimal precision, which should improve the accuracy of calculations involving multiple numbers with many decimal places.
-        \n7. The equals/clear animation is now a bit smoother.
-        \n8. The changelog will now display one more previous version.
-        \n9. Updated a few Spanish translations.
-        \n10. Many bug fixes and performance improvements.
+        \n6. The new input method is now finally out of beta! You can now tap an expression on the home screen to go back and edit it from any point. This also means a cursor will now always be shown on the Home screen.
+        \n7. Switched from double to BigDecimal precision, which should improve the accuracy of calculations involving multiple numbers with many decimal places.
+        \n8. The equals/clear animation is now a bit smoother.
+        \n9. The changelog will now display one more previous version.
+        \n10. Updated Spanish translations. Most of the app is now available in Spanish!
+        \n11. Many bug fixes and performance improvements.
 
     </string>
 
@@ -368,7 +369,7 @@
     <string name="black">Black</string>
     <string name="midnight">Midnight</string>
     <string name="monochrome">Monochrome</string>
-    <string name="custom">Custom</string>
+    <string name="custom" translatable="false">Custom</string>
     <string name="new_theme">New Theme</string>
     <string name="keypad">KEYPAD</string>
     <string name="primary">PRIMARY</string>
