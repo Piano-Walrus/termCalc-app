@@ -1114,7 +1114,7 @@ public class ConversionsFragmentNew extends Fragment {
                                         convEquals(v);
                                     }
                                     else {
-                                        to.setText("Error retrieving currency data");
+                                        to.setText(getString(R.string.currency_fetch_error));
                                         isError = true;
                                     }
 
@@ -1122,14 +1122,14 @@ public class ConversionsFragmentNew extends Fragment {
                                     return;
                                 }
                                 else if (result == -4) {
-                                    to.setText("Error retrieving currency data");
+                                    to.setText(getString(R.string.currency_fetch_error));
                                     isError = true;
                                     internetChecked = false;
                                     return;
                                 }
                             }
                             else {
-                                to.setText("Error: No Internet Connection");
+                                to.setText(getString(R.string.error_no_internet));
                                 isError = true;
                                 internetChecked = false;
                                 return;
@@ -1200,9 +1200,11 @@ public class ConversionsFragmentNew extends Fragment {
 
     public boolean internetIsConnected() {
         try {
+            //TODO: Maybe ping another domain if this fails. Also wait, wouldn't this loop endlessly if Google was down?
             String command = "ping -c 1 google.com";
             return (Runtime.getRuntime().exec(command).waitFor() == 0);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             return false;
         }
     }

@@ -232,4 +232,6 @@
 
     <!-- "custom" cannot be longer than 7 characters due to layout size constraints. -->
     <string name="custom">Custom</string>
+    <string name="currency_fetch_error">Error retrieving currency data</string>
+    <string name="error_no_internet">Error: No Internet Connection</string>
 </resources>
