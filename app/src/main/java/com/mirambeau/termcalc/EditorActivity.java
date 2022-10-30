@@ -672,7 +672,7 @@ public class EditorActivity extends AppCompatActivity {
 
                                     int o;
 
-                                    final AlertDialog.Builder builder = createAlertDialog(getString(R.string.set_color));
+                                    final AlertDialog.Builder builder = createAlertDialog(getString(R.string.select_color));
 
                                     final View viewInflated = LayoutInflater.from(EditorActivity.this).inflate(R.layout.bg_text_dialog, (ViewGroup) findViewById(R.id.editorBG), false);
 
