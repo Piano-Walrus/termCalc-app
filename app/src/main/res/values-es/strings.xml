@@ -169,7 +169,7 @@
     <string name="from">Inicial:</string>
     <string name="to">Final:</string>
     <string name="select_shortcut_key">Select the number key(s) to which you would like to assign</string>
-    <string name="always_dark_nav">Always set the nav drawer to dark mode.</string>
+    <string name="always_dark_nav">Ponga siempre el cajón de navegación en modo oscuro.</string>
     <string name="darken_status_bar">Darken the status bar slightly when using a custom dark theme.</string>
     <string name="darken_tab">Slightly darken the tab above the top bar.</string>
     <string name="dynamic_precision_description">Let TermCalc determine the number of decimal places to display based on your input.</string>
@@ -181,7 +181,7 @@
     <string name="focus_mode">Modo de Enfoque</string>
     <string name="show_constants_functions">Show Custom Constants/Functions</string>
     <string name="live_expression_eval">Evaluación de Expresión En Vivo</string>
-    <string name="exchange_rate_frequency_title">Frecuencia de Obtención de Tipos de Cambio</string>
+    <string name="exchange_rate_frequency_title">Cuándo Descargar Tipos de Cambio</string>
     <string name="prioritize_coefficients_title">Priorizar Coeficientes</string>
     <string name="distance">Distancia</string>
     <string name="mass">Peso</string>
