@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
-        app:title="General">
+        app:title="@string/settings_title_general">
 
         <SwitchPreference
             android:title="@string/dynamic_precision"
@@ -26,7 +26,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        app:title="Appearance">
+        app:title="@string/settings_title_appearance">
 
         <SwitchPreference
             android:title="@string/focus_mode"
@@ -54,7 +54,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        app:title="Data Usage">
+        app:title="@string/settings_title_data_usage">
 
         <ListPreference
             android:defaultValue="3"
@@ -68,7 +68,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        app:title="Advanced">
+        app:title="@string/settings_title_advanced">
 
         <SwitchPreference
             android:title="@string/prioritize_coefficients_title"

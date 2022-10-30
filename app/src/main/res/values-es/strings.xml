@@ -220,4 +220,14 @@
     <string name="currency_fetch_error">Error: No se pudieron descargar los tipos de cambio</string>
     <string name="error_no_internet">Error: No hay conexión a Internet</string>
     <string name="no_colors_in_clipboard">Colores no encontrados en el portapapeles</string>
+    <string name="settings_title_general">General</string>
+    <string name="settings_title_appearance">Apariencia</string>
+    <string name="settings_title_data_usage">Uso de datos</string>
+    <string name="settings_title_advanced">Avanzado</string>
+    <string name="settings_title_terminal">Terminal</string>
+    <string name="theme_nav_drawer">Aplicar Tema al Cajón de Navegación</string>
+    <string name="force_dark_nav">Configure Siempre el Cajón de Navegación en Modo Oscuro</string>
+    <string name="darken_dark_status_bar">Oscurecer la Barra de Estado Cuando Está en Modo Oscuro</string>
+    <string name="darken_top_tab">Oscurecer la Pestaña de la Barra Superior</string>
+    <string name="terminal_theme">Tema de la Terminal</string>
 </resources>

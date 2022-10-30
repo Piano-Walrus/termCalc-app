@@ -235,4 +235,14 @@
     <string name="currency_fetch_error">Error retrieving currency data</string>
     <string name="error_no_internet">Error: No Internet Connection</string>
     <string name="no_colors_in_clipboard">No colors found in clipboard</string>
+    <string name="settings_title_general">General</string>
+    <string name="settings_title_appearance">Appearance</string>
+    <string name="settings_title_data_usage">Data Usage</string>
+    <string name="settings_title_advanced">Advanced</string>
+    <string name="settings_title_terminal">Terminal</string>
+    <string name="theme_nav_drawer">Theme Nav Drawer</string>
+    <string name="force_dark_nav">Force Dark Nav Drawer</string>
+    <string name="darken_dark_status_bar">Darken Dark Mode Status Bar</string>
+    <string name="darken_top_tab">Darken Top Bar Tab</string>
+    <string name="terminal_theme">Terminal Theme</string>
 </resources>
