@@ -234,4 +234,5 @@
     <string name="custom">Custom</string>
     <string name="currency_fetch_error">Error retrieving currency data</string>
     <string name="error_no_internet">Error: No Internet Connection</string>
+    <string name="no_colors_in_clipboard">No colors found in clipboard</string>
 </resources>

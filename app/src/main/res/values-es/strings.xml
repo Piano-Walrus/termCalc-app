@@ -209,14 +209,15 @@
     <string name="apply">Aplicar</string>
     <string name="dont_apply">Descartar los Cambios</string>
     <string name="successfully_saved">Guardado Con Éxito</string>
-    <string name="empty_theme_name_error">Error: Theme name cannot be empty</string>
+    <string name="empty_theme_name_error">Error: El nombre del tema no puede estar vacío</string>
     <string name="rename_theme">Renombrar el Tema</string>
-    <string name="overwrite_theme_confirmation">A theme with that name already exists. Do you want to overwrite it?</string>
+    <string name="overwrite_theme_confirmation">Ya existe un tema con ese nombre. ¿Quieres sobreescribirlo?</string>
     <string name="successfully_renamed">Renombrado con éxito</string>
-    <string name="import_file_not_found_error">Error: Either the specified file could not be found, or access was denied.</string>
+    <string name="import_file_not_found_error">Error: O no se pudo encontrar el archivo especificado o se denegó el acceso.</string>
 
     <!-- "custom" cannot be longer than 7 characters due to layout size constraints. -->
     <string name="custom">Escoger</string>
-    <string name="currency_fetch_error">Error retrieving currency data</string>
+    <string name="currency_fetch_error">Error: No se pudieron descargar los tipos de cambio</string>
     <string name="error_no_internet">Error: No hay conexión a Internet</string>
+    <string name="no_colors_in_clipboard">Colores no encontrados en el portapapeles</string>
 </resources>
