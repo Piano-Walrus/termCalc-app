@@ -238,4 +238,9 @@
     <string name="upon_startup">Cuando se abre la aplicación</string>
     <string name="upon_conversions_opened">Al cambiar a la sección de conversiones (Recomendado)</string>
     <string name="upon_currency_tab">Al cambiar a la pestaña de moneda</string>
+
+    <string name="terminal_theme_black">Negro</string>
+    <string name="terminal_theme_dark">Oscuro</string>
+    <string name="terminal_theme_light">Claro</string>
+    <string name="terminal_theme_ubuntu_dark">Ubuntu Oscuro</string>
 </resources>

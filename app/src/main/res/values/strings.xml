@@ -565,4 +565,23 @@
         <item>@string/upon_conversions_opened</item>
         <item>@string/upon_currency_tab</item>
     </string-array>
+
+
+    <string name="terminal_theme_black">Black</string>
+    <string name="terminal_theme_dark">Dark</string>
+    <string name="terminal_theme_light">Light</string>
+    <string name="terminal_theme_ubuntu" translatable="false">Ubuntu</string>
+    <string name="terminal_theme_ubuntu_dark">Ubuntu Dark</string>
+    <string name="terminal_theme_matrix" translatable="false">Matrix</string>
+    <string name="terminal_theme_powershell" translatable="false">Powershell</string>
+
+    <string-array name="terminal_theme_options">
+        <item>@string/terminal_theme_black</item>
+        <item>@string/terminal_theme_dark</item>
+        <item>@string/terminal_theme_light</item>
+        <item>@string/terminal_theme_ubuntu</item>
+        <item>@string/terminal_theme_ubuntu_dark</item>
+        <item>@string/terminal_theme_matrix</item>
+        <item>@string/terminal_theme_powershell</item>
+    </string-array>
 </resources>

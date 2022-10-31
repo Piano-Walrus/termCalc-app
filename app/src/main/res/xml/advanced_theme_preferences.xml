@@ -38,7 +38,7 @@
 
         <ListPreference
             android:defaultValue="1"
-            android:entries="@array/term_entries"
+            android:entries="@array/terminal_theme_options"
             android:entryValues="@array/term_values"
             android:key="termTheme"
             app:icon="@drawable/ic_palette_24"

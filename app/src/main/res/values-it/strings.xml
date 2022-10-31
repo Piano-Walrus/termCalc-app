@@ -253,4 +253,9 @@
     <string name="upon_startup">Upon app startup</string>
     <string name="upon_conversions_opened">Upon opening the Conversions section (Recommended)</string>
     <string name="upon_currency_tab">Upon switching to the Currency tab</string>
+
+    <string name="terminal_theme_black">Black</string>
+    <string name="terminal_theme_dark">Dark</string>
+    <string name="terminal_theme_light">Light</string>
+    <string name="terminal_theme_ubuntu_dark">Ubuntu Dark</string>
 </resources>
