@@ -1,12 +1,26 @@
 package com.mirambeau.termcalc;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class GeoCalc extends Ax {
     static final double pi = 3.141592;
 
     //TODO: Make two separate ArrayLists that just point to the string resources of each of these, then do like, "if .contains(resourceString), then change it to the english counterpart"
-    final static String[] twoD = {"Square", "Rectangle", "Circle", "Ellipse", "Triangle", "Trapezoid", "Parallelogram", "Pentagon", "Hexagon", "Heptagon", "Octagon", "Nonagon", "Decagon"};
-    final static String[] threeD = {"Cube", "Rectangular Prism", "Sphere", "Hemisphere", "Triangular Prism", "Pyramid (Triangular Base)", "Pyramid (Rectangular Base)",
-            "Pentagonal Prism", "Cone", "Cylinder", "Regular Octahedron", "Dodecahedron", "Torus"};
+    final static ArrayList<String> resources2D = new ArrayList<>(Arrays.asList(MainActivity.mainActivity.getString(R.string.shape_square), MainActivity.mainActivity.getString(R.string.rectangle), MainActivity.mainActivity.getString(R.string.circle), MainActivity.mainActivity.getString(R.string.ellipse), MainActivity.mainActivity.getString(R.string.triangle), MainActivity.mainActivity.getString(R.string.trapezoid), MainActivity.mainActivity.getString(R.string.parallelogram), MainActivity.mainActivity.getString(R.string.pentagon), MainActivity.mainActivity.getString(R.string.hexagon),
+            MainActivity.mainActivity.getString(R.string.heptagon), MainActivity.mainActivity.getString(R.string.octagon), MainActivity.mainActivity.getString(R.string.nonagon), MainActivity.mainActivity.getString(R.string.decagon)));
+    final static ArrayList<String> resources3D = new ArrayList<>(Arrays.asList(MainActivity.mainActivity.getString(R.string.cube), MainActivity.mainActivity.getString(R.string.rectangular_prism), MainActivity.mainActivity.getString(R.string.sphere), MainActivity.mainActivity.getString(R.string.hemisphere), MainActivity.mainActivity.getString(R.string.triangular_prism), MainActivity.mainActivity.getString(R.string.pyramid_triangular_base),
+            MainActivity.mainActivity.getString(R.string.pyramid_rectangular_base), MainActivity.mainActivity.getString(R.string.pentagonal_prism), MainActivity.mainActivity.getString(R.string.cone), MainActivity.mainActivity.getString(R.string.cylinder), MainActivity.mainActivity.getString(R.string.regular_octahedron), MainActivity.mainActivity.getString(R.string.dodecahedron), MainActivity.mainActivity.getString(R.string.torus)));
+
+
+    final static String[] twoD = {"Square", "Rectangle", "Circle", "Ellipse", "Triangle", "Trapezoid", "Parallelogram", "Pentagon", "Hexagon",
+            "Heptagon", "Octagon", "Nonagon", "Decagon"};
+    final static String[] threeD = {"Cube", "Rectangular Prism", "Sphere", "Hemisphere", "Triangular Prism", "Pyramid (Triangular Base)",
+            "Pyramid (Rectangular Base)", "Pentagonal Prism", "Cone", "Cylinder", "Regular Octahedron", "Dodecahedron", "Torus"};
+    
+    public static String translateKey(String key) {
+        return resources2D.contains(key) ? twoD[resources2D.indexOf(key)].toLowerCase() : (resources3D.contains(key) ? threeD[resources3D.indexOf(key)].toLowerCase() : "square");
+    }
 
     public boolean hasString(String[] array, String str, int numElements){
         int i;

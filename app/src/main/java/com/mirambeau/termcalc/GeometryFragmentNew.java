@@ -432,21 +432,40 @@ public class GeometryFragmentNew extends Fragment {
 
             //TODO: Somehow make this work with other languages
 
-            if (!arraysAreEqual && Ax.isFullNum(inputs[0])) {
-                if (allCards.get(tab).get(0).getShapeTitle().equalsIgnoreCase("square")) {
-                    if (GeoCalc.area(card.getShapeTitle().toLowerCase(), inputs) != 0.0)
-                        card.setAnswerText(" = " + GeoCalc.area(card.getShapeTitle().toLowerCase(), inputs));
+            if (!arraysAreEqual && Ax.isFullNum(inputs[0]) && card != null) {
+                String currentCardTitle = card.getShapeTitle();
+                String firstCardTitle = allCards.get(tab).get(0).getShapeTitle();
+
+                String result = "~";
+
+                Activity main = MainActivity.mainActivity;
+
+                if (firstCardTitle.equalsIgnoreCase(main.getString(R.string.shape_square))) {
+                    double areaCheck = GeoCalc.area(GeoCalc.translateKey(currentCardTitle).toLowerCase(), inputs);
+
+                    if (areaCheck != 0.0)
+                        result = " = " + areaCheck;
                 }
-                else if (allCards.get(tab).get(0).getShapeTitle().equalsIgnoreCase("cube")) {
-                    if (allCards.get(tab).get(5).getParamHint(2).equalsIgnoreCase("slant height")) {
-                        if (GeoCalc.sa(card.getShapeTitle().toLowerCase(), inputs) != 0.0)
-                            card.setAnswerText(" = " + GeoCalc.sa(card.getShapeTitle().toLowerCase(), inputs));
+                else if (firstCardTitle.equalsIgnoreCase(main.getString(R.string.cube))) {
+                    if (allCards.get(tab).get(5).getParamHint(2).equalsIgnoreCase(main.getString(R.string.slant_height))) {
+                        double saCheck = GeoCalc.sa(GeoCalc.translateKey(currentCardTitle).toLowerCase(), inputs);
+
+                        if (saCheck != 0.0)
+                            result = " = " + saCheck;
                     }
-                    else if (GeoCalc.volume(card.getShapeTitle().toLowerCase(), inputs) != 0.0)
-                        card.setAnswerText(" = " + GeoCalc.volume(card.getShapeTitle().toLowerCase(), inputs));
+                    else if (GeoCalc.volume(card.getShapeTitle().toLowerCase(), inputs) != 0.0) {
+                        double volumeCheck = GeoCalc.volume(GeoCalc.translateKey(currentCardTitle).toLowerCase(), inputs);
+
+                        if (volumeCheck != 0.0)
+                            result = " = " + volumeCheck;
+                    }
                 }
 
-                card.setInputTexts(inputs, card.getShapeTitle());
+                //TODO: Format the output to only have like 4-5 decimal places
+                if (!result.equals("~"))
+                    card.setAnswerText(result);
+
+                card.setInputTexts(inputs, currentCardTitle);
 
                 if (card.getAnswerText() != null && card.getAnswerText().contains("="))
                     adapter.notifyItemChanged(position);
