@@ -589,9 +589,11 @@ public class ConversionsFragmentNew extends Fragment {
                             selectedFrom = 0;
                             selectedTo = 1;
 
+                            Activity main = MainActivity.mainActivity;
+
                             if (selectedType == 7) {
-                                fromUnitLabel.setText("From: Base");
-                                toUnitLabel.setText("To: Base");
+                                fromUnitLabel.setText(main.getString(R.string.from) + " Base");
+                                toUnitLabel.setText(main.getString(R.string.to) + " Base");
 
                                 expandFrom.setVisibility(View.GONE);
                                 expandTo.setVisibility(View.GONE);
@@ -603,8 +605,12 @@ public class ConversionsFragmentNew extends Fragment {
                                 toBase.setVisibility(View.VISIBLE);
                             }
                             else {
-                                String[] initFrom = {"Inches", "Micrograms", "Milliliters", "Nanoseconds", "USD", "MPH", "Fahrenheit"};
-                                String[] initTo = {"Feet", "Milligrams", "Liters", "Microseconds", "EUR", "KM/H", "Celsius"};
+                                String[] initFrom = {main.getString(R.string.distance_inches), main.getString(R.string.mass_micrograms),
+                                        main.getString(R.string.volume_milliliters), main.getString(R.string.time_nanoseconds), "USD",
+                                        "MPH", main.getString(R.string.temp_fahrenheit)};
+                                String[] initTo = {main.getString(R.string.distance_feet), main.getString(R.string.mass_milligrams),
+                                        main.getString(R.string.volume_liters), main.getString(R.string.time_microseconds), "EUR",
+                                        "KM/H", main.getString(R.string.temp_celsius)};
 
                                 if (unitFrom != null)
                                     unitFrom.setText(initFrom[selectedType]);
