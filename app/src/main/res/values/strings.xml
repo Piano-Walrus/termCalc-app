@@ -543,4 +543,26 @@
     <string name="darken_dark_status_bar">Darken Dark Mode Status Bar</string>
     <string name="darken_top_tab">Darken Top Bar Tab</string>
     <string name="terminal_theme">Terminal Theme</string>
+
+
+    <string name="as_buttons">As Buttons</string>
+    <string name="in_menu">In 3-dot Menu</string>
+    <string name="both">Both</string>
+
+    <string-array name="customs_locations">
+        <item>@string/as_buttons</item>
+        <item>@string/in_menu</item>
+        <item>@string/both</item>
+    </string-array>
+
+
+    <string name="upon_startup">Upon app startup</string>
+    <string name="upon_conversions_opened">Upon opening the Conversions section (Recommended)</string>
+    <string name="upon_currency_tab">Upon switching to the Currency tab</string>
+
+    <string-array name="exchange_rate_frequency_options">
+        <item>@string/upon_startup</item>
+        <item>@string/upon_conversions_opened</item>
+        <item>@string/upon_currency_tab</item>
+    </string-array>
 </resources>

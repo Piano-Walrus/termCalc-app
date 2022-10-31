@@ -245,4 +245,12 @@
     <string name="darken_dark_status_bar">Darken Dark Mode Status Bar</string>
     <string name="darken_top_tab">Darken Top Bar Tab</string>
     <string name="terminal_theme">Terminal Theme</string>
+
+    <string name="as_buttons">As Buttons</string>
+    <string name="in_menu">In 3-dot Menu</string>
+    <string name="both">Both</string>
+
+    <string name="upon_startup">Upon app startup</string>
+    <string name="upon_conversions_opened">Upon opening the Conversions section (Recommended)</string>
+    <string name="upon_currency_tab">Upon switching to the Currency tab</string>
 </resources>

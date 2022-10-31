@@ -168,7 +168,7 @@
     <string name="days">DÍAS</string>
     <string name="from">Inicial:</string>
     <string name="to">Final:</string>
-    <string name="select_shortcut_key">Select the number key(s) to which you would like to assign</string>
+    <string name="select_shortcut_key">Seleccionar las teclas numéricas a las que desea asignar</string>
     <string name="always_dark_nav">Ponga siempre el cajón de navegación en modo oscuro.</string>
     <string name="darken_status_bar">Darken the status bar slightly when using a custom dark theme.</string>
     <string name="darken_tab">Slightly darken the tab above the top bar.</string>
@@ -179,7 +179,7 @@
     <string name="dynamic_precision">Precisión Dinámica</string>
     <string name="max_decimal_places">Número Máximo de Decimales</string>
     <string name="focus_mode">Modo de Enfoque</string>
-    <string name="show_constants_functions">Show Custom Constants/Functions</string>
+    <string name="show_constants_functions">Mostrar Constantes/Funciones Personalizadas</string>
     <string name="live_expression_eval">Evaluación de Expresión En Vivo</string>
     <string name="exchange_rate_frequency_title">Cuándo Descargar Tipos de Cambio</string>
     <string name="prioritize_coefficients_title">Priorizar Coeficientes</string>
@@ -230,4 +230,12 @@
     <string name="darken_dark_status_bar">Oscurecer la Barra de Estado Cuando Está en Modo Oscuro</string>
     <string name="darken_top_tab">Oscurecer la Pestaña de la Barra Superior</string>
     <string name="terminal_theme">Tema de la Terminal</string>
+
+    <string name="as_buttons">Como Botones</string>
+    <string name="in_menu">En Menú de Tres Puntos</string>
+    <string name="both">Los Dos</string>
+
+    <string name="upon_startup">Cuando se abre la aplicación</string>
+    <string name="upon_conversions_opened">Al cambiar a la sección de conversiones (Recomendado)</string>
+    <string name="upon_currency_tab">Al cambiar a la pestaña de moneda</string>
 </resources>

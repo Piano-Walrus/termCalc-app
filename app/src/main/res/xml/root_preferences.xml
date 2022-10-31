@@ -37,7 +37,7 @@
 
         <ListPreference
             android:defaultValue="1"
-            android:entries="@array/custom_fab_entries"
+            android:entries="@array/customs_locations"
             android:entryValues="@array/custom_fab_values"
             android:key="whereCustom"
             app:icon="@drawable/ic_function"
@@ -58,7 +58,7 @@
 
         <ListPreference
             android:defaultValue="3"
-            android:entries="@array/currency_entries"
+            android:entries="@array/exchange_rate_frequency_options"
             android:entryValues="@array/currency_values"
             android:key="fetchRate"
             app:icon="@drawable/ic_baseline_signal_cellular_alt_24"
