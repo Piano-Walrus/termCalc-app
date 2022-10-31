@@ -504,7 +504,7 @@
     <string name="time">Time</string>
     <string name="currency">Currency</string>
     <string name="speed">Speed</string>
-    <string name="temperature_abbreviated">Temp.</string>
+    <string name="temperature_abbreviated">Temperature</string>
     <string name="base_representation">Base</string>
     <string name="date_toolbar_title">Date</string>
     <string name="volume_lower">Volume</string>

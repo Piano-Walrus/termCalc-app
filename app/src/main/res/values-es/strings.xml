@@ -188,7 +188,7 @@
     <string name="time">Tiempo</string>
     <string name="currency">Moneda</string>
     <string name="speed">Velocidad</string>
-    <string name="temperature_abbreviated">Temp.</string>
+    <string name="temperature_abbreviated">Temperatura</string>
     <string name="base_representation">Base</string>
     <string name="date_toolbar_title">Cálculo de Fecha</string>
     <string name="volume_lower">Volumen</string>
