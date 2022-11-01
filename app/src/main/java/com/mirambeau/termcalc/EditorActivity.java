@@ -1186,18 +1186,17 @@ public class EditorActivity extends AppCompatActivity {
                                     }
 
                                     addHistoryEntry(button, button.getTag() != null && button.getTag().toString().contains("-b%") ? "-b%t" : code, initColor, formattedHex);
-                                } catch (Exception e) {
+                                }
+                                catch (Exception e) {
                                     e.printStackTrace();
                                 }
                             }
 
                             //Handle primary-dependent defaults
                             if (code.equals("cPrimary")) {
-                                if (!isSet("cNum")) {
-                                    if (!setButtons.contains("-b=t")) {
+                                if (!isSet("cNum") && !setButtons.contains("-b=t"))
                                         ((Button) findViewById(R.id.eBEquals)).setTextColor(color);
-                                    }
-                                }
+
                                 if (!isSet("cFab")) {
                                     delete.setBackgroundTintList(ColorStateList.valueOf(color));
                                     apply.setBackgroundTintList(ColorStateList.valueOf(color));
@@ -1273,13 +1272,12 @@ public class EditorActivity extends AppCompatActivity {
 
             final AlertDialog alertDialog = builder.create();
 
-            if (recyclerView.getVisibility() == View.VISIBLE) {
+            if (recyclerView.getVisibility() == View.VISIBLE)
                 errorText.setVisibility(View.INVISIBLE);
-            }
 
             //Populate Clipboard RecyclerView
             try {
-                int numItems = pData.getItemCount();
+                int numItems = pData != null ? pData.getItemCount() : 0;
                 int c;
 
                 for (c = 0; c < numItems; c++) {
@@ -1289,7 +1287,8 @@ public class EditorActivity extends AppCompatActivity {
 
                         if (Ax.isColor("#" + itemText.replace("#", "")))
                             colors.add("#" + itemText.replace("#", ""));
-                    } catch (Exception e) {
+                    }
+                    catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
@@ -1316,7 +1315,8 @@ public class EditorActivity extends AppCompatActivity {
                     recyclerView.setVisibility(View.GONE);
                     errorText.setVisibility(View.VISIBLE);
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 recyclerView.setVisibility(View.GONE);
                 errorText.setVisibility(View.VISIBLE);
 
@@ -1358,9 +1358,8 @@ public class EditorActivity extends AppCompatActivity {
                         @Override
                         public void onColorPicked(int color, String hexVal) {
                             if (hexVal != null && !hexVal.equals("\0")) {
-                                if (hexVal.length() > 3) {
+                                if (hexVal.length() > 3)
                                     hexVal = "#" + hexVal.substring(3);
-                                }
 
                                 if (hexVal.length() > 7)
                                     hexVal = "#" + Ax.getLast(hexVal, 6);
@@ -1391,7 +1390,7 @@ public class EditorActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
+        //TODO: Put the options button here instead
 
         return true;
     }
@@ -1657,9 +1656,8 @@ public class EditorActivity extends AppCompatActivity {
     public final void writeTheme(Context mcoContext, String body, String filename) {
         File dir = new File(mcoContext.getFilesDir(), "themes");
 
-        if (!dir.exists()) {
+        if (!dir.exists())
             dir.mkdir();
-        }
 
         try {
             File theme = new File(dir, filename);
@@ -1696,7 +1694,7 @@ public class EditorActivity extends AppCompatActivity {
                         if (themeExists(themeName)) {
                             AlertDialog.Builder builder2 = new AlertDialog.Builder(EditorActivity.editorActivity, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
 
-                            builder2.setTitle("A theme with that name already exists. Do you want to overwrite it?" + "\n");
+                            builder2.setTitle(main.getString(R.string.overwrite_theme_confirmation) + "\n");
 
                             builder2.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
                                 @Override
