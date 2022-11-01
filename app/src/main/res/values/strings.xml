@@ -584,4 +584,10 @@
         <item>@string/terminal_theme_matrix</item>
         <item>@string/terminal_theme_powershell</item>
     </string-array>
+
+    <string name="miles_per_hour">MPH</string>
+    <string name="kilometers_per_hour">KM/H</string>
+    <string name="meters_per_second">M/S</string>
+    <string name="feet_per_second">FT/S</string>
+    <string name="knots">Knots</string>
 </resources>

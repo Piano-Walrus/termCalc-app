@@ -258,4 +258,10 @@
     <string name="terminal_theme_dark">Dark</string>
     <string name="terminal_theme_light">Light</string>
     <string name="terminal_theme_ubuntu_dark">Ubuntu Dark</string>
+
+    <string name="miles_per_hour">MPH</string>
+    <string name="kilometers_per_hour">KM/H</string>
+    <string name="meters_per_second">M/S</string>
+    <string name="feet_per_second">FT/S</string>
+    <string name="knots">Knots</string>
 </resources>

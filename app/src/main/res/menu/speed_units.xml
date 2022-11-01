@@ -5,31 +5,31 @@
     <item
         android:id="@+id/square"
         android:orderInCategory="0"
-        android:title="MPH"
+        android:title="@string/miles_per_hour"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/rectangle"
         android:orderInCategory="1"
-        android:title="KM/H"
+        android:title="@string/kilometers_per_hour"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/circle"
         android:orderInCategory="2"
-        android:title="M/S"
+        android:title="@string/meters_per_second"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/ellipse"
         android:orderInCategory="3"
-        android:title="FT/S"
+        android:title="@string/feet_per_second"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/triangle"
         android:orderInCategory="4"
-        android:title="Knots"
+        android:title="@string/knots"
         app:showAsAction="never"/>
 
 </menu>

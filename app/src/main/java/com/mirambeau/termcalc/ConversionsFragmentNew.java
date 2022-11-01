@@ -618,8 +618,8 @@ public class ConversionsFragmentNew extends Fragment {
                                 if (unitTo != null)
                                     unitTo.setText(initTo[selectedType]);
 
-                                fromUnitLabel.setText("From:");
-                                toUnitLabel.setText("To:");
+                                fromUnitLabel.setText(main.getString(R.string.from));
+                                toUnitLabel.setText(main.getString(R.string.to));
 
                                 expandFrom.setVisibility(View.VISIBLE);
                                 expandTo.setVisibility(View.VISIBLE);
