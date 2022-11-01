@@ -88,11 +88,13 @@ public class BetterMath {
         if (Axi.isFullSignedNumE(eq) && !eq.contains(Axi.pi) && !eq.contains("e"))
             return parseBigDecimal(eq.replace(",", ""), mc);
 
-        eq = eq.replace("ln", "log" + Axi.eSub);
+        StringBuilder eqBuilder = new StringBuilder(eq.replace("ln", "log" + Axi.eSub));
 
         for (i=0; i < parenthesisDifference; i++) {
-            eq += ")";
+            eqBuilder.append(")");
         }
+
+        eq = eqBuilder.toString();
 
         ArrayList<String> eqArray = parseEq(eq);
 
@@ -1293,7 +1295,7 @@ class Axi {
 
         try {
             for (i = 0; i < length; i += inputLength) {
-                if (chat(inputLength, str, i).equals(input))
+                if (chat(inputLength, str, i) != null && chat(inputLength, str, i).equals(input))
                     numChars++;
             }
         }
@@ -1376,59 +1378,59 @@ class Axi {
 
     public static String subToNum(String str) {
         int i;
-        String output = "";
+        StringBuilder output = new StringBuilder();
 
         if (str == null || str.equals("\0"))
             return null;
 
         for (i=0; i < str.length(); i++) {
             if (isSubDigit(chat(str, i)))
-                output += Integer.toString(sublist.indexOf(chat(str, i)));
+                output.append(Integer.toString(sublist.indexOf(chat(str, i))));
             else if (sublistMisc.contains(str))
-                output += normalListMisc.get(sublistMisc.indexOf(str));
+                output.append(normalListMisc.get(sublistMisc.indexOf(str)));
             else
                 return null;
         }
 
-        return output;
+        return output.toString();
     }
 
     public static String numToSuper(String str) {
         int i;
-        String output = "";
+        StringBuilder output = new StringBuilder();
 
         if (str == null || str.equals("\0"))
             return null;
 
         for (i=0; i < str.length(); i++) {
             if (isDigit(chat(str, i)))
-                output += superlist.get(Integer.parseInt(chat(str, i)));
+                output.append(superlist.get(Integer.parseInt(chat(str, i))));
             else if (normalListMisc.contains(str))
-                output += superlistMisc.get(normalListMisc.indexOf(str));
+                output.append(superlistMisc.get(normalListMisc.indexOf(str)));
             else
                 return null;
         }
 
-        return output;
+        return output.toString();
     }
 
     public static String superToNum(String str) {
         int i;
-        String output = "";
+        StringBuilder output = new StringBuilder();
 
         if (str == null || str.equals("\0"))
             return null;
 
         for (i=0; i < str.length(); i++) {
             if (isSuperscript(chat(str, i)))
-                output += Integer.toString(superlist.indexOf(chat(str, i)));
+                output.append(Integer.toString(superlist.indexOf(chat(str, i))));
             else if (superlistMisc.contains(str))
-                output += normalListMisc.get(superlistMisc.indexOf(str));
+                output.append(normalListMisc.get(superlistMisc.indexOf(str)));
             else
                 return null;
         }
 
-        return output;
+        return output.toString();
     }
 
     public static String getLast(String str, int numChars){

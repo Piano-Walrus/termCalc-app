@@ -88,7 +88,7 @@ public class ConversionsFragmentNew extends Fragment {
             isDynamic = tinydb.getBoolean("isDynamic");
 
             if (!isDynamic) {
-                String dfStr = "#,###.";
+                StringBuilder dfStr = new StringBuilder("#,###.");
                 int precision = tinydb.getInt("precision");
 
                 if (precision == 0) {
@@ -97,10 +97,10 @@ public class ConversionsFragmentNew extends Fragment {
                 }
 
                 for (i = 0; i < precision; i++) {
-                    dfStr += "#";
+                    dfStr.append("#");
                 }
 
-                userdf = new DecimalFormat(dfStr);
+                userdf = new DecimalFormat(dfStr.toString());
 
                 edf = userdf;
                 pidf = userdf;
@@ -111,6 +111,9 @@ public class ConversionsFragmentNew extends Fragment {
             }
 
             boolean theme_boolean;
+
+            if (theme == null || theme.equals("\0"))
+                theme = "1";
 
             if (theme.equals("5"))
                 theme_boolean = tinydb.getBoolean("theme_boolean");
@@ -420,15 +423,12 @@ public class ConversionsFragmentNew extends Fragment {
                     clear.setImageDrawable(ContextCompat.getDrawable(MainActivity.mainActivity, R.drawable.ic_close_dark_24));
 
                 if (bEqualsConv != null) {
-                    if (theme.equals("5")) {
+                    if (theme.equals("5"))
                         bEqualsConv.setTextColor(monochromeTextColor);
-                    }
-                    else if (color.equals("14")) {
+                    else if (color.equals("14"))
                         bEqualsConv.setTextColor(Color.parseColor("#f4e64b"));
-                    }
-                    else {
+                    else
                         bEqualsConv.setTextColor(Color.parseColor(primary));
-                    }
                 }
 
                 if (theme.equals("5")) {
@@ -446,27 +446,24 @@ public class ConversionsFragmentNew extends Fragment {
             }
 
             if (isCustomTheme) {
-                if (Ax.isColor(cMain)) {
+                if (Ax.isColor(cMain) && bgConv != null)
                     bgConv.setBackgroundColor(Color.parseColor(cMain));
-                }
-                if (Ax.isColor(cKeypad) && keypadConv != null) {
+
+                if (Ax.isColor(cKeypad) && keypadConv != null)
                     keypadConv.setBackgroundColor(Color.parseColor(cKeypad));
-                }
+
                 if (Ax.isColor(cKeytext)) {
                     for (j = 0; j < 11; j++) {
                         if (convKeys[j] != null)
                             convKeys[j].setTextColor(Color.parseColor(cKeytext));
                     }
                 }
-                if (Ax.isColor(cEquals)) {
-                    if (bEqualsConv != null)
-                        bEqualsConv.setTextColor(Color.parseColor(cEquals));
-                }
+
+                if (Ax.isColor(cEquals) && bEqualsConv != null)
+                    bEqualsConv.setTextColor(Color.parseColor(cEquals));
             }
-            else if (!theme.equals("5")) {
-                if (bEqualsConv != null)
+            else if (theme != null && bEqualsConv != null && !theme.equals("5"))
                     bEqualsConv.setTextColor(Color.parseColor(primary));
-            }
 
             if (isCustomTheme) {
                 if (cMain.equals(cKeypad) && keypadConv != null)
@@ -592,8 +589,8 @@ public class ConversionsFragmentNew extends Fragment {
                             Activity main = MainActivity.mainActivity;
 
                             if (selectedType == 7) {
-                                fromUnitLabel.setText(main.getString(R.string.from) + " Base");
-                                toUnitLabel.setText(main.getString(R.string.to) + " Base");
+                                fromUnitLabel.setText(main.getString(R.string.from) + " " + main.getString(R.string.base_representation));
+                                toUnitLabel.setText(main.getString(R.string.to) + " " + main.getString(R.string.base_representation));
 
                                 expandFrom.setVisibility(View.GONE);
                                 expandTo.setVisibility(View.GONE);
@@ -607,10 +604,10 @@ public class ConversionsFragmentNew extends Fragment {
                             else {
                                 String[] initFrom = {main.getString(R.string.distance_inches), main.getString(R.string.mass_micrograms),
                                         main.getString(R.string.volume_milliliters), main.getString(R.string.time_nanoseconds), "USD",
-                                        "MPH", main.getString(R.string.temp_fahrenheit)};
+                                        main.getString(R.string.miles_per_hour), main.getString(R.string.temp_fahrenheit)};
                                 String[] initTo = {main.getString(R.string.distance_feet), main.getString(R.string.mass_milligrams),
                                         main.getString(R.string.volume_liters), main.getString(R.string.time_microseconds), "EUR",
-                                        "KM/H", main.getString(R.string.temp_celsius)};
+                                        main.getString(R.string.kilometers_per_hour), main.getString(R.string.temp_celsius)};
 
                                 if (unitFrom != null)
                                     unitFrom.setText(initFrom[selectedType]);
@@ -697,7 +694,9 @@ public class ConversionsFragmentNew extends Fragment {
 
                         if (clear != null && clear.getVisibility() == View.VISIBLE) {
                             clear.setVisibility(View.GONE);
-                            toNum.setText("");
+
+                            if (toNum != null)
+                                toNum.setText("");
                         }
 
                         if (!isError) {

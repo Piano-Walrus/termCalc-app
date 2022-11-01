@@ -1572,7 +1572,8 @@ public class EditorActivity extends AppCompatActivity {
                 extraTextColors[b] = tinydb.getString("-b" + extraTexts[b] + "t");
             }
 
-            String fileText, filename;
+            StringBuilder fileText;
+            String filename;
 
             int numColors = colors.length;
 
@@ -1587,13 +1588,13 @@ public class EditorActivity extends AppCompatActivity {
                 if (colors[0] == null || colors[0].equals("\0") || colors[0].equals("0"))
                     colors[0] = "#reset0";
 
-                fileText = colors[0] + "\n";
+                fileText = new StringBuilder(colors[0] + "\n");
 
                 for (i = 1; i < numColors; i++) {
                     if (colors[i] == null || colors[i].equals("\0") || colors[i].equals("") || colors[i].equals("0") || !Ax.isColor(colors[i]))
                         colors[i] = "#reset0";
 
-                    fileText += colors[i] + "\n";
+                    fileText.append(colors[i]).append("\n");
                 }
 
                 boolean hasAddedButton = false;
@@ -1606,22 +1607,22 @@ public class EditorActivity extends AppCompatActivity {
                         if (extraColors[a] != null) {
                             if (Ax.isColor(extraColors[a])) {
                                 if (!hasAddedButton) {
-                                    fileText += "\n";
+                                    fileText.append("\n");
                                     hasAddedButton = true;
                                 }
 
-                                fileText += extraColors[a] + "-b" + extraTexts[a] + "\n";
+                                fileText.append(extraColors[a]).append("-b").append(extraTexts[a]).append("\n");
                             }
                         }
 
                         if (extraTextColors[a] != null) {
                             if (Ax.isColor(extraTextColors[a])) {
                                 if (!hasAddedButton) {
-                                    fileText += "\n";
+                                    fileText.append("\n");
                                     hasAddedButton = true;
                                 }
 
-                                fileText += extraTextColors[a] + "-b" + extraTexts[a] + "t" + "\n";
+                                fileText.append(extraTextColors[a]).append("-b").append(extraTexts[a]).append("t").append("\n");
                             }
                         }
                     }
@@ -1631,17 +1632,17 @@ public class EditorActivity extends AppCompatActivity {
 
                 for (a=0; a < extraCodes.length; a++) {
                     if (Ax.isTinyColor(extraCodes[a]))
-                        fileText += tinydb.getString(extraCodes[a]) + extraCodes[a] + "\n";
+                        fileText.append(tinydb.getString(extraCodes[a])).append(extraCodes[a]).append("\n");
                 }
 
                 if (Ax.isDigit(bigTheme))
-                    fileText += bigTheme;
+                    fileText.append(bigTheme);
                 else
-                    fileText += tinydb.getString("theme");
+                    fileText.append(tinydb.getString("theme"));
 
-                fileText += "\nname:" + themeName + "\n";
+                fileText.append("\nname:").append(themeName).append("\n");
 
-                writeTheme(this, fileText, filename);
+                writeTheme(this, fileText.toString(), filename);
             }
         }
         catch (Exception e){
@@ -3038,15 +3039,7 @@ public class EditorActivity extends AppCompatActivity {
                         }
                     }
 
-                    String[] extraColors = new String[extraTexts.length];
-                    String[] extraTextColors = new String[extraTexts.length];
-
-                    for (b = 0; b < extraTexts.length; b++) {
-                        extraColors[b] = tinydb.getString("-b" + extraTexts[b]);
-                        extraTextColors[b] = tinydb.getString("-b" + extraTexts[b] + "t");
-                    }
-
-                    for (a = 0; a < extraColors.length; a++) {
+                    for (a = 0; a < extraTexts.length; a++) {
                         tinydb.putString("-b" + extraTexts[a], "\0");
                         tinydb.putString("-b" + extraTexts[a] + "t", "\0");
                     }
@@ -4132,7 +4125,9 @@ public class EditorActivity extends AppCompatActivity {
                     extraTextColors[b] = tinydb.getString("-b" + extraTexts[b] + "t");
                 }
 
-                String fileText, filename, themeName;
+                StringBuilder fileText;
+                String filename;
+                String themeName;
 
                 int numColors = colors.length;
 
@@ -4147,13 +4142,13 @@ public class EditorActivity extends AppCompatActivity {
                     if (colors[0] == null || colors[0].equals("\0") || colors[0].equals("0"))
                         colors[0] = "#reset0";
 
-                    fileText = colors[0] + "\n";
+                    fileText = new StringBuilder(colors[0] + "\n");
 
                     for (i = 1; i < numColors; i++) {
                         if (colors[i] == null || colors[i].equals("\0") || colors[i].equals("") || colors[i].equals("0") || !Ax.isColor(colors[i]))
                             colors[i] = "#reset0";
 
-                        fileText += colors[i] + "\n";
+                        fileText.append(colors[i]).append("\n");
                     }
 
                     boolean hasAddedButton = false;
@@ -4166,22 +4161,22 @@ public class EditorActivity extends AppCompatActivity {
                             if (extraColors[a] != null) {
                                 if (Ax.isColor(extraColors[a])) {
                                     if (!hasAddedButton) {
-                                        fileText += "\n";
+                                        fileText.append("\n");
                                         hasAddedButton = true;
                                     }
 
-                                    fileText += extraColors[a] + "-b" + extraTexts[a] + "\n";
+                                    fileText.append(extraColors[a]).append("-b").append(extraTexts[a]).append("\n");
                                 }
                             }
 
                             if (extraTextColors[a] != null) {
                                 if (Ax.isColor(extraTextColors[a])) {
                                     if (!hasAddedButton) {
-                                        fileText += "\n";
+                                        fileText.append("\n");
                                         hasAddedButton = true;
                                     }
 
-                                    fileText += extraTextColors[a] + "-b" + extraTexts[a] + "t" + "\n";
+                                    fileText.append(extraTextColors[a]).append("-b").append(extraTexts[a]).append("t").append("\n");
                                 }
                             }
                         }
@@ -4191,18 +4186,18 @@ public class EditorActivity extends AppCompatActivity {
 
                     for (a=0; a < extraCodes.length; a++) {
                         if (Ax.isTinyColor(extraCodes[a]))
-                            fileText += tinydb.getString(extraCodes[a]) + extraCodes[a] + "\n";
+                            fileText.append(tinydb.getString(extraCodes[a])).append(extraCodes[a]).append("\n");
                     }
 
                     if (Ax.isDigit(bigTheme))
-                        fileText += bigTheme;
+                        fileText.append(bigTheme);
                     else
-                        fileText += tinydb.getString("theme");
+                        fileText.append(tinydb.getString("theme"));
 
                     if (filename.endsWith(".txt"))
-                        fileText += "\nname:" + themeName + "\n";
+                        fileText.append("\nname:").append(themeName).append("\n");
 
-                    writeTheme(this, fileText, filename);
+                    writeTheme(this, fileText.toString(), filename);
                 }
             }
 
@@ -4267,13 +4262,7 @@ public class EditorActivity extends AppCompatActivity {
                     }
                 }
 
-                String[] extraColors = new String[extraTexts.length];
-
-                for (b=0; b < extraTexts.length; b++){
-                    extraColors[b] = tinydb.getString("-b" + extraTexts[b]);
-                }
-
-                for (a = 0; a < extraColors.length; a++) {
+                for (a = 0; a < extraTexts.length; a++) {
                     tinydb.putString("-b" + extraTexts[a], "\0");
                     tinydb.putString("-b" + extraTexts[a] + "t", "\0");
                 }

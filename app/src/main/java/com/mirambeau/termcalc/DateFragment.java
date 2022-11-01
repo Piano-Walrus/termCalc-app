@@ -291,14 +291,18 @@ public class DateFragment extends Fragment {
                         fromIn.setBackgroundTintList(dateCSL);
                         fromIn.setTextColor(Color.parseColor(cKeytext));
                         fromIn.setHintTextColor(Color.parseColor(cKeytext));
-                        fromLabel.setTextColor(Color.parseColor(cKeytext));
+
+                        if (fromLabel != null)
+                            fromLabel.setTextColor(Color.parseColor(cKeytext));
                     }
 
                     if (toIn != null) {
                         toIn.setBackgroundTintList(dateCSL);
                         toIn.setTextColor(Color.parseColor(cKeytext));
                         toIn.setHintTextColor(Color.parseColor(cKeytext));
-                        toLabel.setTextColor(Color.parseColor(cKeytext));
+
+                        if (toLabel != null)
+                            toLabel.setTextColor(Color.parseColor(cKeytext));
                     }
                 }
             }

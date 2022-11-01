@@ -51,23 +51,20 @@ public class Contributors extends AppCompatActivity {
             theme = "1";
 
         if (theme.equals("1")){
-            if (Build.VERSION.SDK_INT >= 21) {
-                getWindow().setStatusBarColor(Color.parseColor("#16181B"));
-                getWindow().setNavigationBarColor(Color.parseColor("#16181B"));
-            }
+            getWindow().setStatusBarColor(Color.parseColor("#16181B"));
+            getWindow().setNavigationBarColor(Color.parseColor("#16181B"));
         }
         else if (theme.equals("2")){
             setTheme(R.style.LightTheme);
             toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
             main.setBackgroundColor(Color.parseColor("#FFFFFF"));
 
-            if (Build.VERSION.SDK_INT >= 21) {
-                getWindow().setNavigationBarColor(Color.parseColor("#1A1A1B"));
 
-                if (Build.VERSION.SDK_INT >= 23) {
-                    main.setFitsSystemWindows(true);
-                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                }
+            getWindow().setNavigationBarColor(Color.parseColor("#1A1A1B"));
+
+            if (Build.VERSION.SDK_INT >= 23) {
+                main.setFitsSystemWindows(true);
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             }
 
             for (i=0; i < names.length; i++){
@@ -79,10 +76,8 @@ public class Contributors extends AppCompatActivity {
             toolbar.setBackgroundColor(Color.parseColor("#000000"));
             main.setBackgroundColor(Color.parseColor("#000000"));
 
-            if (Build.VERSION.SDK_INT >= 21) {
-                getWindow().setNavigationBarColor(Color.parseColor("#000000"));
-                getWindow().setStatusBarColor(Color.parseColor("#000000"));
-            }
+            getWindow().setNavigationBarColor(Color.parseColor("#000000"));
+            getWindow().setStatusBarColor(Color.parseColor("#000000"));
 
             main.setFitsSystemWindows(true);
         }

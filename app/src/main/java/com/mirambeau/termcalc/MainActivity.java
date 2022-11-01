@@ -1990,43 +1990,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 @Override
                 public boolean onLongClick(View v) {
                     Button pressed = (Button) v;
-                    String eq3 = getTvText();
+                    StringBuilder eq3 = new StringBuilder(getTvText());
 
                     if (equaled)
                         getEqualed();
 
-                    if (!Ax.isNull(eq3) && Ax.isNum(Ax.lastChar(eq3))) {
+                    if (!Ax.isNull(eq3.toString()) && Ax.isNum(Ax.lastChar(eq3.toString()))) {
                         vibe(vibeDuration);
 
                         int n;
-                        int numChars = Ax.countNums(eq3);
-                        String number = Ax.getLast(eq3, numChars);
+                        int numChars = Ax.countNums(eq3.toString());
+                        String number = Ax.getLast(eq3.toString(), numChars);
 
-                        eq3 = Ax.newTrim(eq3, numChars);
+                        eq3 = new StringBuilder(Ax.newTrim(eq3.toString(), numChars));
 
                         pressed.setText("log");
                         operation(pressed);
 
-                        eq3 = Ax.newTrim(eq3, 1);
+                        eq3 = new StringBuilder(Ax.newTrim(eq3.toString(), 1));
 
                         for (n = 0; n < numChars; n++) {
                             if (Ax.isDigit(Ax.chat(number, n)))
-                                eq3 += subscripts[Integer.parseInt(Ax.chat(number, n))];
+                                eq3.append(subscripts[Integer.parseInt(Ax.chat(number, n))]);
                             else if (Ax.chat(number, n).equals("e"))
-                                eq3 += "ₑ";
+                                eq3.append("ₑ");
                             else if (Ax.chat(number, n).equals("π")) {
                                 if (number.length() == 1)
-                                    eq3 += subscripts[3] + "  ̣" + subscripts[1] + subscripts[4] + subscripts[1] + subscripts[5] + subscripts[9] + subscripts[2] + subscripts[6];
+                                    eq3.append("₃  ̣₁₄₁₅₉₂₆");
                                 else
-                                    eq3 += "₍" + subscripts[3] + "  ̣" + subscripts[1] + subscripts[4] + subscripts[1] + subscripts[5] + subscripts[9] + subscripts[2] + subscripts[6] + "₎";
+                                    eq3.append("₍₃  ̣₁₄₁₅₉₂₆₎");
                             }
                             else if (Ax.chat(number, n).equals("."))
-                                eq3 += "  ̣";
+                                eq3.append("  ̣");
                         }
 
-                        eq3 += "(";
+                        eq3.append("(");
 
-                        tv.setText(eq3);
+                        tv.setText(eq3.toString());
                     }
 
                     return true;
@@ -2653,6 +2653,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         bgAnim.setLayoutParams(bgAnimParams);
                     }
+
                     if (bgAnimParams.width <= screenWidth) {
                         bgAnimParams.width += 1.5 * (screenWidth - bgAnimParams.width);
 
@@ -5871,16 +5872,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         final BigDecimal maxNum = BigDecimal.valueOf(2000000);
 
+        StringBuilder num1Builder = new StringBuilder(num1);
+
         for (i = 3; i < 7; i += 3) {
             String iStr = Integer.toString(i);
-            if (num1.length() > 2 && num1.contains(iStr + iStr) && num1.replace(iStr, "").endsWith(".")) {
+            String numStr = num1Builder.toString();
+
+            if (num1Builder.length() > 2 && numStr.contains(iStr + iStr) && numStr.replace(iStr, "").endsWith(".")) {
                 for (j=0; j < 5; j++){
-                    num1 += iStr;
+                    num1Builder.append(iStr);
                 }
 
                 break;
             }
         }
+        num1 = num1Builder.toString();
 
         try {
             dec = new BigDecimal(num1);
