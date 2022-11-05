@@ -4188,15 +4188,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             }
                         }
                         //Normal backspace
-                        else
+                        else {
+                            if (getTvText().endsWith("."))
+                                isDec = false;
+
                             tv.setText(Ax.newTrim(getTvText(), 1));
+                        }
                     }
                 }
 
-                tv.setSelection(getTvText().length());
-
-                if (!Ax.isNull(getTvText()) && getTvText().endsWith("."))
+                if (getTvText().endsWith("."))
                     isDec = true;
+
+                tv.setSelection(getTvText().length());
             }
         }
         else {
