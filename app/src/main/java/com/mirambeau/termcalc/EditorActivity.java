@@ -103,7 +103,7 @@ public class EditorActivity extends AppCompatActivity {
     ViewGroup[] bigContainers;
     ViewGroup[] bigZones;
 
-    boolean isAll, isRestore, isHex, ftIsSecondary;
+    boolean isAll, isHex, ftIsSecondary;
     boolean themeChanged = false;
 
     int newTheme;
@@ -187,7 +187,8 @@ public class EditorActivity extends AppCompatActivity {
 
                             try {
                                 colors = getColorsFromFile(files[f]);
-                            } catch (IOException e) {
+                            }
+                            catch (IOException e) {
                                 e.printStackTrace();
                             }
 
@@ -254,10 +255,23 @@ public class EditorActivity extends AppCompatActivity {
                             dialog.dismiss();
 
                             try {
-                                run("delete " + title);
+                                final Activity activity = EditorActivity.this;
+                                String filename = title;
+
+                                if (filename.endsWith(".txt"))
+                                    filename = Ax.newTrim(filename, 4);
+
+                                File path = new File(activity.getFilesDir(), "themes");
+                                File file = new File(path, filename + ".txt");
+
+                                boolean deleted = file.delete();
+
                                 removeItem(position);
-                                Toast.makeText(EditorActivity.this, getString(R.string.successfully_deleted_theme) + title + "\"", Toast.LENGTH_SHORT).show();
-                            } catch (IOException e) {
+
+                                if (deleted)
+                                    Toast.makeText(activity, getString(R.string.successfully_deleted_theme) + title + "\"", Toast.LENGTH_SHORT).show();
+                            }
+                            catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
@@ -281,7 +295,13 @@ public class EditorActivity extends AppCompatActivity {
                     Toast.makeText(EditorActivity.this, getString(R.string.successfully_restored_theme) + title + "\"", Toast.LENGTH_SHORT).show();
 
                     newRun("reset all");
-                    newRun("restore " + title);
+
+                    try {
+                        restore(title);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
                     applyTheme();
 
@@ -291,10 +311,25 @@ public class EditorActivity extends AppCompatActivity {
                 @Override
                 public void onShareClick(int position) {
                     final String title = cards.get(position).getThemeName();
+                    final Activity activity = EditorActivity.this;
 
                     try {
-                        run("share " + title);
-                    } catch (IOException e) {
+                        String filename = title;
+
+                        if (filename.endsWith(".txt"))
+                            filename = Ax.newTrim(filename, 4);
+
+                        File path = new File(activity.getFilesDir(), "themes");
+                        File file = new File(path, filename + ".txt");
+
+                        Uri textUri = FileProvider.getUriForFile(activity, "com.mirambeau.termcalc.fileprovider", file);
+
+                        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                        sharingIntent.setType("application/text");
+                        sharingIntent.putExtra(Intent.EXTRA_STREAM, textUri);
+                        startActivity(Intent.createChooser(sharingIntent, "Share Theme"));
+                    }
+                    catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
@@ -315,8 +350,6 @@ public class EditorActivity extends AppCompatActivity {
                     adapter.notifyItemChanged(position);
                 }
             });
-
-            //end of new stuff
 
             //Primary, Secondary, Tertiary, Main, Keypad
             String[][] defaultByTheme = {{}, {"#03DAC5", "#00B5A3", "#00C5B1", "#272C33", "#202227"}, {"#03DAC5", "#53E2D4", "#3CDECE", "#FFFFFF", "#FFFFFF"},
@@ -472,7 +505,7 @@ public class EditorActivity extends AppCompatActivity {
             saveLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    save();
+                    openSaveDialog();
                 }
             });
 
@@ -840,8 +873,6 @@ public class EditorActivity extends AppCompatActivity {
 
     public AlertDialog openCPAlertDialog(int layout, final String title, String positive, String negative, final String code, final View button, final int option) {
         try {
-            final TinyDB tinydb = new TinyDB(MainActivity.mainActivity);
-
             int[] bigColors = {Color.WHITE, Color.WHITE};
             String manualBG = "#FFFFFF", manualText = "#FFFFFF";
             boolean isManual = false;
@@ -1653,6 +1684,162 @@ public class EditorActivity extends AppCompatActivity {
         return null;
     }
 
+    public void restore(String themeName) throws IOException {
+        TinyDB tinydb = new TinyDB(EditorActivity.this);
+
+        int i;
+        int f = 0;
+
+        boolean exists = false;
+        String[] colorKeys = {"cPrimary", "cSecondary", "cTertiary", "cbEquals", "cFab", "cPlus", "cMinus", "cMulti", "cDiv", "cMain", "cKeypad", "cTop", "cNum", "cFabText"};
+
+        if (themeName.length() > 0 && !themeName.equals("\0")) {
+            isAll = true;
+
+            if (themeName.endsWith(".txt"))
+                themeName = Ax.newTrim(themeName,4);
+
+            File directory = new File(this.getFilesDir(), "themes");
+            File[] files = directory.listFiles();
+
+            if (files != null) {
+                files = directory.listFiles();
+
+                if (files != null) {
+                    if (files.length > 0) {
+                        for (f = 0; f < files.length; f++) {
+                            if (files[f].getName().equals(themeName + ".txt")) {
+                                exists = true;
+                                break;
+                            }
+                        }
+                    }
+                    else {
+                        Log.d("printf", "\nError: No theme backups currently exist.");
+                    }
+                }
+
+                boolean isValid = true;
+
+                if (exists) {
+                    FileInputStream fis = new FileInputStream(files[f]);
+                    InputStreamReader isr = new InputStreamReader(fis);
+                    BufferedReader bufferedReader = new BufferedReader(isr);
+
+                    String line;
+
+                    for (i = 0; (line = bufferedReader.readLine()) != null; i++) {
+                        if (!((i > 12 && Ax.isDigit(line)) || Ax.isColor(line) || line.equals("#reset0") || (line.length() >= 6 && (Ax.isColor(line.substring(0, 6)) || Ax.isColor(line.substring(0, 7))) && line.contains("-b")))) {
+                            if (i < 14)
+                                isValid = false;
+
+                            Log.d("printf", "Error restoring theme:\n" + i + " color hex code (" + line + ") is invalid.\n\nPlease check the file and try again.");
+                        }
+                    }
+
+                    if (isValid) {
+                        fis = new FileInputStream(files[f]);
+                        isr = new InputStreamReader(fis);
+                        bufferedReader = new BufferedReader(isr);
+
+                        newRun("reset all");
+                        newRun("reset -bⁿ√");
+                        newRun("reset -bⁿ√t");
+                        newRun("set -mt #reset0");
+
+                        tinydb.putString("-bINV2", "");
+                        tinydb.putString("-bINV2t", "");
+
+                        tinydb.putString("-btt", "");
+                        tinydb.putString("-bop", "");
+
+                        tinydb.putString("-bfc", "");
+                        tinydb.putString("-bfct", "");
+
+                        for (i = 0; (line = bufferedReader.readLine()) != null; i++) {
+                            if (Ax.isDigit(Ax.chat(line, 0)) && line.contains("name:"))
+                                line = Ax.chat(line, 0);
+
+                            if (Ax.isColor(line)) {
+                                if (i == 3)
+                                    tinydb.putString("-b=t", line);
+                                else if (i >= 5 && i <= 8) {
+                                    String[] codes = {"-b+t", "-b-t", "-b×t", "-b÷t"};
+
+                                    tinydb.putString(codes[i - 5], line);
+                                }
+                                else {
+                                    tinydb.putString(colorKeys[i], line);
+
+                                    if (colorKeys[i].equals("cSecondary"))
+                                        Ax.tinydb().putBoolean("isSetSecondary", true);
+                                }
+                            }
+                            else if (line.startsWith("name:")) {
+                                continue;
+                            }
+                            else if (line.equals("#reset0")) {
+                                tinydb.putString(colorKeys[i], "\0");
+
+                                if (colorKeys[i].equals("cSecondary"))
+                                    Ax.tinydb().putBoolean("isSetSecondary", false);
+                            }
+                            else if (line.contains("-b")) {
+                                String buttonHex, buttonCode;
+
+                                buttonHex = line.substring(0, 7);
+                                buttonCode = Ax.getLast(line, line.length() - buttonHex.length());
+
+                                if (Ax.isColor(buttonHex) && buttonCode != null)
+                                    newRun("set " + buttonCode + " " + buttonHex);
+                            }
+                            else if (line.endsWith("-mt")){
+                                String uiHex = line.substring(0, 7);
+
+                                if (Ax.isColor(uiHex))
+                                    newRun("set -mt " + uiHex);
+                            }
+                            else if (Ax.isDigit(line) && Integer.parseInt(line) > 0 && Integer.parseInt(line) <= 5) {
+                                if (line.equals("2"))
+                                    tinydb.putString("customTheme", line);
+                                else if (line.equals("5"))
+                                    tinydb.putString("customTheme", "2");
+                                else {
+                                    if (tinydb.getBoolean("darkStatusBar"))
+                                        tinydb.putString("customTheme", "1");
+                                    else
+                                        tinydb.putString("customTheme", "3");
+                                }
+
+                                tinydb.putString("theme", tinydb.getString("customTheme"));
+                            }
+                        }
+
+                        isAll = false;
+
+                        Handler mainHandler = new Handler(this.getMainLooper());
+
+                        Runnable myRunnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                MainActivity.mainActivity.recreate();
+                            }
+                        };
+                        mainHandler.post(myRunnable);
+                    }
+                }
+                else {
+                    Log.d("printf", "Error: File does not exist. Please verify that you have entered the correct theme name.");
+                }
+            }
+            else {
+                Log.d("printf", "\nError: No theme backups currently exist.");
+            }
+        }
+
+        isAll = false;
+    }
+
     public final void writeTheme(Context mcoContext, String body, String filename) {
         File dir = new File(mcoContext.getFilesDir(), "themes");
 
@@ -1671,7 +1858,7 @@ public class EditorActivity extends AppCompatActivity {
         }
     }
 
-    public void save() {
+    public void openSaveDialog() {
         try {
             final AlertDialog.Builder builder = createAlertDialog(getString(R.string.backup_current_theme) + "\n");
 
@@ -2640,7 +2827,8 @@ public class EditorActivity extends AppCompatActivity {
 
                             try {
                                 colors = getColorsFromFile(newTheme);
-                            } catch (IOException e) {
+                            }
+                            catch (IOException e) {
                                 e.printStackTrace();
                             }
 
@@ -2840,8 +3028,6 @@ public class EditorActivity extends AppCompatActivity {
             int i;
             int numSlashes = 0;
 
-            FloatingActionButton newTheme = findViewById(R.id.newBackup);
-
             themeTitle = inputTheme.getLastPathSegment();
 
             if (themeTitle != null) {
@@ -2865,9 +3051,8 @@ public class EditorActivity extends AppCompatActivity {
                 }
 
                 for (i=0; i < numSlashes; i++) {
-                    if (themeTitle.contains("/")) {
+                    if (themeTitle.contains("/"))
                         themeTitle = themeTitle.substring(Ax.searchFor(themeTitle, "/") + 1);
-                    }
                 }
 
                 if (!noName && themeTitle != null && themeTitle.endsWith(".txt"))
@@ -2947,8 +3132,9 @@ public class EditorActivity extends AppCompatActivity {
                 writer.flush();
                 writer.close();
 
-                run("restore " + themeName);
-                save();
+                restore(themeName);
+
+                openSaveDialog();
 
                 if ((themeName.startsWith("temp-") || themeTitle.startsWith("temp-")) && Ax.isDigit(Ax.lastChar(themeName)))
                     theme.delete();
@@ -2963,25 +3149,17 @@ public class EditorActivity extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    public String run(String cmd) throws IOException {
+    public String run(String cmd) {
         final TinyDB tinydb = new TinyDB(this);
 
-        String setError;
+        String setError = "\nUsages:\n• set <button code> <hex code>\n• set <button code> gui\n• set <button code> #reset0\n\nType \"help set\" or \"help get\" for more information about button codes, and how these commands work.";
         String hex = "none";
         String output = "";
 
         String cPrimary, cSecondary, cTertiary, cbEquals, cPlus, cMinus, cMulti, cDiv, cKeypad, cMain, cTop, cNum, cFab, cFabText = null;
 
-        int i;
-
-        if (isRestore)
-            setError = "Error: Invalid hex code";
-        else
-            setError = "\nUsages:\n• set <button code> <hex code>\n• set <button code> gui\n• set <button code> #reset0\n\nType \"help set\" or \"help get\" for more information about button codes, and how these commands work.";
-
-        if (!cmd.equals("\0")) {
+        if (!cmd.equals("\0"))
             Log.d("cmd", cmd);
-        }
 
         if (!cmd.equals("\0")) {
             this.cmd = cmd;
@@ -3589,7 +3767,7 @@ public class EditorActivity extends AppCompatActivity {
                             isAll = true;
 
                             for (k = 0; k < 14; k++) {
-                                run("set " + cmdCodes[k] + " " + hex);
+                                newRun("set " + cmdCodes[k] + " " + hex);
                             }
 
                             isAll = false;
@@ -3610,14 +3788,10 @@ public class EditorActivity extends AppCompatActivity {
                             mainHandler.post(myRunnable);
                         }
                         else if (hex.equals("#reset0")) {
-                            FloatingActionButton enter = findViewById(R.id.enterCmd);
-
-                            String initCmd = cmd;
-
                             isAll = true;
 
                             for (k = 0; k < 14; k++) {
-                                run("set " + cmdCodes[k] + " " + hex);
+                                newRun("set " + cmdCodes[k] + " " + hex);
                             }
 
                             isAll = false;
@@ -4044,162 +4218,6 @@ public class EditorActivity extends AppCompatActivity {
             }
 
 
-            //Delete
-            else if (cmd.startsWith("delete ") && cmd.length() > 7) {
-                String filename = cmd.substring(7);
-
-                if (filename.endsWith(".txt"))
-                    filename = Ax.newTrim(filename, 4);
-
-                File path = new File(this.getFilesDir(), "themes");
-                File file = new File(path, filename + ".txt");
-                boolean deleted = file.delete();
-
-                if (deleted)
-                    Log.d("printf", "\"" + filename + "\" successfully deleted.");
-                else
-                    Log.d("printf", "Error: \"" + filename + "\" could not be deleted.\nPlease check that you have typed the name correctly, and try again.");
-            }
-
-
-            //Share
-            else if (cmd.startsWith("share ") && cmd.length() > 6) {
-                String filename = cmd.substring(6);
-
-                if (filename.endsWith(".txt"))
-                    filename = Ax.newTrim(filename, 4);
-
-                File path = new File(this.getFilesDir(), "themes");
-                File file = new File(path, filename + ".txt");
-
-                Uri textUri = FileProvider.getUriForFile(
-                        this,
-                        "com.mirambeau.termcalc.fileprovider",
-                        file);
-
-                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-                sharingIntent.setType("application/text");
-                sharingIntent.putExtra(Intent.EXTRA_STREAM, textUri);
-                startActivity(Intent.createChooser(sharingIntent, "Share Theme"));
-            }
-
-
-            //Backup
-            else if (cmd.startsWith("backup") && cmd.length() > 6 && Character.toString(cmd.charAt(6)).equals(" ")) {
-                int a, b, c;
-
-                String[] colors = {tinydb.getString("cPrimary"), tinydb.getString("cSecondary"), tinydb.getString("cTertiary"), tinydb.getString("cbEquals"), tinydb.getString("cFab"), tinydb.getString("cPlus"), tinydb.getString("cMinus"), tinydb.getString("cMulti"), tinydb.getString("cDiv"), tinydb.getString("cMain"), tinydb.getString("cKeypad"), tinydb.getString("cTop"), tinydb.getString("cNum"), tinydb.getString("cFabText")};
-
-                int testLength = 0;
-
-                for (a = 0; a < allButtons.length; a++) {
-                    for (b = 0; b < allButtons[a].length; b++) {
-                        testLength++;
-                    }
-                }
-
-                testLength += 1;
-
-                String[] extraTexts = new String[testLength + 1];
-
-                c = 0;
-
-                for (a = 0; a < allButtons.length; a++) {
-                    for (b = 0; b < allButtons[a].length; b++) {
-                        if (allButtons[a][b] != null)
-                            extraTexts[c] = allButtons[a][b].getText().toString();
-
-                        c++;
-                    }
-                }
-
-                extraTexts[extraTexts.length - 1] = "ⁿ√";
-
-                String[] extraColors = new String[extraTexts.length];
-                String[] extraTextColors = new String[extraTexts.length];
-
-                for (b = 0; b < extraTexts.length; b++) {
-                    extraColors[b] = tinydb.getString("-b" + extraTexts[b]);
-                    extraTextColors[b] = tinydb.getString("-b" + extraTexts[b] + "t");
-                }
-
-                StringBuilder fileText;
-                String filename;
-                String themeName;
-
-                int numColors = colors.length;
-
-                if (cmd.length() > 7 && !cmd.substring(7).equals("\0")) {
-                    themeName = cmd.substring(7);
-
-                    if (cmd.substring(7).endsWith(".txt"))
-                        filename = themeName;
-                    else
-                        filename = themeName + ".txt";
-
-                    if (colors[0] == null || colors[0].equals("\0") || colors[0].equals("0"))
-                        colors[0] = "#reset0";
-
-                    fileText = new StringBuilder(colors[0] + "\n");
-
-                    for (i = 1; i < numColors; i++) {
-                        if (colors[i] == null || colors[i].equals("\0") || colors[i].equals("") || colors[i].equals("0") || !Ax.isColor(colors[i]))
-                            colors[i] = "#reset0";
-
-                        fileText.append(colors[i]).append("\n");
-                    }
-
-                    boolean hasAddedButton = false;
-
-                    for (a = 0; a < extraColors.length; a++) {
-                        if (extraTexts[a] != null) {
-                            if (extraTexts[a].equals("%"))
-                                extraTexts[a] = "ⁿ√";
-
-                            if (extraColors[a] != null) {
-                                if (Ax.isColor(extraColors[a])) {
-                                    if (!hasAddedButton) {
-                                        fileText.append("\n");
-                                        hasAddedButton = true;
-                                    }
-
-                                    fileText.append(extraColors[a]).append("-b").append(extraTexts[a]).append("\n");
-                                }
-                            }
-
-                            if (extraTextColors[a] != null) {
-                                if (Ax.isColor(extraTextColors[a])) {
-                                    if (!hasAddedButton) {
-                                        fileText.append("\n");
-                                        hasAddedButton = true;
-                                    }
-
-                                    fileText.append(extraTextColors[a]).append("-b").append(extraTexts[a]).append("t").append("\n");
-                                }
-                            }
-                        }
-                    }
-
-                    String[] extraCodes = {"-bop", "-btt", "-bINV2", "-bINV2t", "-mt"};
-
-                    for (a=0; a < extraCodes.length; a++) {
-                        if (Ax.isTinyColor(extraCodes[a]))
-                            fileText.append(tinydb.getString(extraCodes[a])).append(extraCodes[a]).append("\n");
-                    }
-
-                    if (Ax.isDigit(bigTheme))
-                        fileText.append(bigTheme);
-                    else
-                        fileText.append(tinydb.getString("theme"));
-
-                    if (filename.endsWith(".txt"))
-                        fileText.append("\nname:").append(themeName).append("\n");
-
-                    writeTheme(this, fileText.toString(), filename);
-                }
-            }
-
-
 
 
 
@@ -4214,8 +4232,8 @@ public class EditorActivity extends AppCompatActivity {
                     Ax.tinydb().putBoolean("isSetSecondary", false);
 
                 if (end.equalsIgnoreCase("all") || end.equals("-a")){
-                    run("set -a #reset0");
-                    run("reset buttons");
+                    newRun("set -a #reset0");
+                    newRun("reset buttons");
 
                     Ax.tinydb().putBoolean("isSetSecondary", false);
 
@@ -4223,10 +4241,10 @@ public class EditorActivity extends AppCompatActivity {
                         tinydb.putString(editorCodes[e], "\0");
                 }
                 else if (end.equalsIgnoreCase("button") || end.equalsIgnoreCase("-buttons")){
-                    run("reset buttons");
+                    newRun("reset buttons");
                 }
                 else if (Ax.isButtonCode(end)){
-                    run("set " + end + " #reset0");
+                    newRun("set " + end + " #reset0");
                 }
             }
 
@@ -4267,165 +4285,6 @@ public class EditorActivity extends AppCompatActivity {
 
                 tinydb.putString("-bⁿ√", "\0");
                 tinydb.putString("-bⁿ√t", "\0");
-            }
-
-
-            //Restore
-            else if (cmd.startsWith("restore") && cmd.length() > 7 && Character.toString(cmd.charAt(7)).equals(" ")) {
-                int f = 0;
-                boolean exists = false;
-                String[] colorKeys = {"cPrimary", "cSecondary", "cTertiary", "cbEquals", "cFab", "cPlus", "cMinus", "cMulti", "cDiv", "cMain", "cKeypad", "cTop", "cNum", "cFabText"};
-
-                if (cmd.length() > 8 && !cmd.substring(8).equals("\0")) {
-                    isAll = true;
-                    isRestore = true;
-
-                    String themeName = cmd.substring(8);
-
-                    File directory = new File(this.getFilesDir(), "themes");
-                    File[] files = directory.listFiles();
-
-                    if (files != null) {
-                        files = directory.listFiles();
-
-                        if (files != null) {
-                            if (files.length > 0) {
-                                for (f = 0; f < files.length; f++) {
-                                    if (files[f].getName().equals(themeName + ".txt")) {
-                                        exists = true;
-                                        break;
-                                    }
-                                }
-                            }
-                            else {
-                                Log.d("printf", "\nError: No theme backups currently exist.");
-                            }
-                        }
-
-                        boolean isValid = true;
-
-                        if (exists) {
-                            FileInputStream fis = new FileInputStream(files[f]);
-                            InputStreamReader isr = new InputStreamReader(fis);
-                            BufferedReader bufferedReader = new BufferedReader(isr);
-
-                            String line;
-
-                            for (i = 0; (line = bufferedReader.readLine()) != null; i++) {
-                                if (!((i > 12 && Ax.isDigit(line)) || Ax.isColor(line) || line.equals("#reset0") || (line.length() >= 6 && (Ax.isColor(line.substring(0, 6)) || Ax.isColor(line.substring(0, 7))) && line.contains("-b")))) {
-                                    if (i < 14)
-                                        isValid = false;
-
-                                    Log.d("printf", "Error restoring theme:\n" + i + " color hex code (" + line + ") is invalid.\n\nPlease check the file and try again.");
-                                }
-                            }
-
-                            if (isValid) {
-                                fis = new FileInputStream(files[f]);
-                                isr = new InputStreamReader(fis);
-                                bufferedReader = new BufferedReader(isr);
-
-                                run("reset all");
-                                run("reset -bⁿ√");
-                                run("reset -bⁿ√t");
-                                run("set -mt #reset0");
-
-                                tinydb.putString("-bINV2", "");
-                                tinydb.putString("-bINV2t", "");
-
-                                tinydb.putString("-btt", "");
-                                tinydb.putString("-bop", "");
-
-                                tinydb.putString("-bfc", "");
-                                tinydb.putString("-bfct", "");
-
-                                for (i = 0; (line = bufferedReader.readLine()) != null; i++) {
-                                    if (Ax.isDigit(Ax.chat(line, 0)) && line.contains("name:"))
-                                        line = Ax.chat(line, 0);
-
-                                    if (Ax.isColor(line)) {
-                                        if (i == 3)
-                                            tinydb.putString("-b=t", line);
-                                        else if (i >= 5 && i <= 8) {
-                                            String[] codes = {"-b+t", "-b-t", "-b×t", "-b÷t"};
-
-                                            tinydb.putString(codes[i - 5], line);
-                                        }
-                                        else {
-                                            tinydb.putString(colorKeys[i], line);
-
-                                            if (colorKeys[i].equals("cSecondary"))
-                                                Ax.tinydb().putBoolean("isSetSecondary", true);
-                                        }
-                                    }
-                                    else if (line.startsWith("name:")) {
-                                        continue;
-                                    }
-                                    else if (line.equals("#reset0")) {
-                                        tinydb.putString(colorKeys[i], "\0");
-
-                                        if (colorKeys[i].equals("cSecondary"))
-                                            Ax.tinydb().putBoolean("isSetSecondary", false);
-                                    }
-                                    else if (line.contains("-b")) {
-                                        String buttonHex, buttonCode;
-
-                                        buttonHex = line.substring(0, 7);
-                                        buttonCode = Ax.getLast(line, line.length() - buttonHex.length());
-
-                                        if (Ax.isColor(buttonHex) && buttonCode != null) {
-                                            run("set " + buttonCode + " " + buttonHex);
-                                        }
-                                    }
-                                    else if (line.endsWith("-mt")){
-                                        String uiHex = line.substring(0, 7);
-
-                                        if (Ax.isColor(uiHex)){
-                                            run("set -mt " + uiHex);
-                                        }
-                                    }
-                                    else if (Ax.isDigit(line) && Integer.parseInt(line) > 0 && Integer.parseInt(line) <= 5) {
-                                        if (line.equals("2"))
-                                            tinydb.putString("customTheme", line);
-                                        else if (line.equals("5"))
-                                            tinydb.putString("customTheme", "2");
-                                        else {
-                                            if (tinydb.getBoolean("darkStatusBar"))
-                                                tinydb.putString("customTheme", "1");
-                                            else
-                                                tinydb.putString("customTheme", "3");
-                                        }
-
-                                        tinydb.putString("theme", tinydb.getString("customTheme"));
-                                    }
-                                }
-
-                                isAll = false;
-
-                                Handler mainHandler = new Handler(this.getMainLooper());
-
-                                Runnable myRunnable = new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        MainActivity.mainActivity.recreate();
-                                    }
-                                };
-                                mainHandler.post(myRunnable);
-                            }
-
-                            isAll = false;
-                        }
-                        else {
-                            Log.d("printf", "Error: File does not exist. Please verify that you have entered the correct theme name.");
-                        }
-                    }
-                    else {
-                        Log.d("printf", "\nError: No theme backups currently exist.");
-                    }
-                }
-
-                isAll = false;
-                isRestore = false;
             }
         }
 
