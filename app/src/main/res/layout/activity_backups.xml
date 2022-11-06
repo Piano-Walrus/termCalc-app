@@ -37,7 +37,6 @@
         android:clickable="true"
         android:contentDescription="@string/backup_current_theme"
         android:focusable="true"
-        android:onClick="onImportClick"
         app:backgroundTint="@color/darkColorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

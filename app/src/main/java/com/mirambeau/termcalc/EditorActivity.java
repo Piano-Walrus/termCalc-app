@@ -62,8 +62,6 @@ public class EditorActivity extends AppCompatActivity {
 
     ArrayList<BackupCard> cards = new ArrayList<>();
 
-    String cmd;
-
     ArrayList<String> setButtons = new ArrayList<>();
     ArrayList<String> setZones = new ArrayList<>();
 
@@ -512,7 +510,7 @@ public class EditorActivity extends AppCompatActivity {
             importLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //TODO: Import layout onClick
+                    onImportClick();
                 }
             });
 
@@ -1562,26 +1560,22 @@ public class EditorActivity extends AppCompatActivity {
         try {
             TinyDB tinydb = new TinyDB(this);
 
-            int i, a, b, c;
+            int i, a, b, c = 0;
 
             String[] colors = {tinydb.getString("cPrimary"), tinydb.getString("cSecondary"), tinydb.getString("cTertiary"), tinydb.getString("cbEquals"), tinydb.getString("cFab"), tinydb.getString("cPlus"), tinydb.getString("cMinus"), tinydb.getString("cMulti"), tinydb.getString("cDiv"), tinydb.getString("cMain"), tinydb.getString("cKeypad"), tinydb.getString("cTop"), tinydb.getString("cNum"), tinydb.getString("cFabText")};
 
             if (themeName == null)
                 themeName = " ";
 
-            int testLength = 0;
+            int testLength = allButtons[0].length;
 
-            for (a = 0; a < allButtons.length; a++) {
-                for (b = 0; b < allButtons[a].length; b++) {
-                    testLength++;
-                }
+            for (a = 1; a < allButtons.length; a++) {
+                testLength += allButtons[a].length;
             }
 
             testLength += 1;
 
             String[] extraTexts = new String[testLength + 1];
-
-            c = 0;
 
             for (a = 0; a < allButtons.length; a++) {
                 for (b = 0; b < allButtons[a].length; b++) {
@@ -1607,10 +1601,8 @@ public class EditorActivity extends AppCompatActivity {
 
             int numColors = colors.length;
 
-            cmd = "backup " + themeName;
-
-            if (cmd.length() > 7 && !cmd.substring(7).equals("\0")) {
-                if (cmd.substring(7).endsWith(".txt"))
+            if (themeName.length() > 0 && !themeName.equals("\0")) {
+                if (themeName.endsWith(".txt"))
                     filename = themeName;
                 else
                     filename = themeName + ".txt";
@@ -1817,15 +1809,7 @@ public class EditorActivity extends AppCompatActivity {
 
                         isAll = false;
 
-                        Handler mainHandler = new Handler(this.getMainLooper());
-
-                        Runnable myRunnable = new Runnable() {
-                            @Override
-                            public void run() {
-                                MainActivity.mainActivity.recreate();
-                            }
-                        };
-                        mainHandler.post(myRunnable);
+                        MainActivity.mainActivity.recreate();
                     }
                 }
                 else {
@@ -1862,9 +1846,9 @@ public class EditorActivity extends AppCompatActivity {
         try {
             final AlertDialog.Builder builder = createAlertDialog(getString(R.string.backup_current_theme) + "\n");
 
-            View viewInflated = LayoutInflater.from(this).inflate(R.layout.content, (ViewGroup) findViewById(R.id.editorBG), false);
+            View viewInflated = LayoutInflater.from(this).inflate(R.layout.content, findViewById(R.id.editorBG), false);
 
-            final EditText input = (EditText) viewInflated.findViewById(R.id.input);
+            final EditText input = viewInflated.findViewById(R.id.input);
 
             bigTheme = (newTheme == 2 || newTheme == 5) ? THEME_LIGHT : THEME_DARK;
 
@@ -2989,7 +2973,7 @@ public class EditorActivity extends AppCompatActivity {
         return currentColors.toArray(new String[0]);
     }
 
-    public void onImportClick(View v) {
+    public void onImportClick() {
         openStorageAccess();
     }
 
@@ -3090,9 +3074,8 @@ public class EditorActivity extends AppCompatActivity {
 
             File dir = new File(this.getFilesDir(), "themes");
 
-            if (!dir.exists()) {
+            if (!dir.exists())
                 dir.mkdir();
-            }
 
             for (i=0; i < 200; i++) {
                 line = br.readLine();
@@ -3158,11 +3141,8 @@ public class EditorActivity extends AppCompatActivity {
 
         String cPrimary, cSecondary, cTertiary, cbEquals, cPlus, cMinus, cMulti, cDiv, cKeypad, cMain, cTop, cNum, cFab, cFabText = null;
 
-        if (!cmd.equals("\0"))
-            Log.d("cmd", cmd);
-
         if (!cmd.equals("\0")) {
-            this.cmd = cmd;
+            Log.d("cmd", cmd);
 
             if (cmd.endsWith(" ") && cmd.length() > 1)
                 cmd = Ax.newTrim(cmd, 1);
@@ -3172,9 +3152,8 @@ public class EditorActivity extends AppCompatActivity {
                 if (cmd.length() > 8) {
                     hex = Ax.getLast(cmd, 7);
 
-                    if (!cmd.contains("mode") && !cmd.contains("reset0")) {
+                    if (!cmd.contains("mode") && !cmd.contains("reset0"))
                         hex = Ax.colorToUpper(hex);
-                    }
 
                     isHex = Ax.isColor(hex);
 
