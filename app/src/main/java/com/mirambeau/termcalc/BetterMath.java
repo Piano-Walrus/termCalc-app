@@ -684,7 +684,7 @@ public class BetterMath {
                     Axi.sublist.contains(current) || current.equals("ₑ") || current.equals(Axi.superMinus)) {
                 String lastItem = eqArray.size() > 0 ? eqArray.get(eqArray.size() - 1) : "";
 
-                if (Axi.isDigit(lastItem) && current.equals(Axi.sq))
+                if (current.equals(Axi.sq) && (Axi.isDigit(lastItem) || lastItem.equals("e") || lastItem.equals(Axi.pi)))
                     eqArray.add("*");
                 else if (lastItem != null && current.equals(Axi.superMinus) && Axi.trigList.contains(lastItem) && i < eq.length() - 1 && Axi.chat(eq, i+1) != null && Axi.chat(eq, i+1).equals(Axi.superscripts[1])) {
                     eqArray.set(eqArray.size() - 1, lastItem + Axi.superMinus + Axi.superscripts[1]);
@@ -948,14 +948,17 @@ public class BetterMath {
     }
 
     public static BigDecimal modulus(BigDecimal n1, BigDecimal n2, MathContext mc) {
+        boolean isNegative = n1.toPlainString().contains("-");
+
+        if (isNegative)
+            n1 = n1.negate(mc);
+
         if (n1.compareTo(n2) < 0)
             return n1;
         else if (n1.compareTo(n2) == 0)
             return BigDecimal.ZERO;
         else {
             BigDecimal temp = n1.divide(n2, mc);
-
-            //TODO: Test negative and decimal values
 
             return n1.subtract(n2.multiply(parseBigDecimal(temp.toBigInteger().toString()), mc));
         }

@@ -396,6 +396,8 @@ public class TerminalActivity extends AppCompatActivity {
                             int themeInt = Integer.parseInt(newTheme);
 
                             tinydb.putString("theme", newTheme);
+                            tinydb.putString("basicTheme", newTheme);
+                            tinydb.putString("customTheme", newTheme);
                             printf("Theme set to " + themeNames[themeInt - 1]);
 
                             try {

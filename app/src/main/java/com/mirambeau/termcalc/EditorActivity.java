@@ -447,9 +447,13 @@ public class EditorActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             int j;
+                            String themeStr = Integer.toString(fi);
 
                             //TODO: Make this work properly (change theme temporarily until apply is pressed, etc.)
-                            tinydb.putString("theme", Integer.toString(fi));
+                            tinydb.putString("theme", themeStr);
+                            tinydb.putString("customTheme", themeStr);
+                            tinydb.putString("basicTheme", themeStr);
+
 
                             recreate();
 

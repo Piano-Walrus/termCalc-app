@@ -20,7 +20,8 @@
 
     <color name="transparentWhite">#BFFFFFFF</color>
     <color name="rippleWhite">#3EFFFFFF</color>
-    <color name="rippleDarkGray">#3EFFFFFF</color>
+    <color name="rippleDarkGray">#32646464</color>
+    <color name="rippleBlack">#84000000</color>
 
     <color name="monochromeCardTabColor">#24000000</color>
     <color name="editorDrawerBG">#7A000000</color>

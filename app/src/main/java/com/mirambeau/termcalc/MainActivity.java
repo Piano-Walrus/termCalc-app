@@ -16,6 +16,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,6 +32,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -2694,98 +2696,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 bgAnimError.printStackTrace();
             }
 
-            //Handle Rounded Button Theme Colors
-            if (roundedButtons && !theme.equals("5")) {
-                ImageButton swapTopBar = findViewById(R.id.swapTopBar);
-                int textColor = theme.equals("2") ? darkGray : Color.parseColor(Ax.hexAdd(tertiary, 230));
-
-                Button inv = findViewById(R.id.bInv);
-
-                LinearLayout compLayout = findViewById(R.id.horizontalComplexLinearLayout);
-
-                //SwapTopBar onClickListener
-                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    swapTopBar.setOnClickListener(v -> {
-                        int a;
-
-                        //Spin the swapTopBar button
-                        ObjectAnimator.ofFloat(v, "rotation", 0f, inv.getVisibility() == View.VISIBLE ? -360f : 360f).setDuration(782).start();
-
-                        inv.setVisibility(Math.abs(inv.getVisibility() - 8));
-
-                        final int inVisibility = inv.getVisibility();
-                        final boolean invIsVisible = inVisibility == View.VISIBLE;
-                        final int childCount = compLayout.getChildCount();
-                        int delay = 30;
-                        int delayCount = 0;
-
-                        for (a = invIsVisible ? 0 : childCount - 1; a < childCount && a > -1; a += invIsVisible ? 1 : -1) {
-                            try {
-                                int finalA = a;
-
-                                new Handler((Looper.myLooper())).postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        try {
-                                            ((ConstraintLayout) compLayout.getChildAt(finalA)).getChildAt(1).setVisibility(inVisibility);
-                                        }
-                                        catch (Exception e) {
-                                            e.printStackTrace();
-
-                                            //Animate log and ln
-                                            compBar[finalA - 1].setVisibility(Math.abs(inVisibility - 8));
-                                        }
-                                    }
-                                }, (int) ((delayCount++ * delay) / (invIsVisible ? 1 : 2.6)));
-                            }
-                            catch (Exception e) {
-                                e.printStackTrace();
-                                break;
-                            }
-                        }
-                    });
-                }
-
-                if (!isCustomTheme) {
-                    for (i = 0; i < allButtons.length; i++) {
-                        for (j = 0; j < allButtons[i].length; j++) {
-                            try {
-                                Button button = allButtons[i][j];
-                                String buttonText = button.getText().toString();
-
-                                if (!buttonText.equals("=")) {
-                                    if (!theme.equals("2") && (color.equals("14") || color.equals("17")) && !Ax.isDigit(buttonText) && !buttonText.equals("."))
-                                        button.setTextColor(darkGray);
-                                    else
-                                        button.setTextColor(textColor);
-                                }
-                                else if (theme.equals("2"))
-                                    button.setTextColor(Color.parseColor(Ax.hexAdd(primary, -28)));
-
-                                if (button.getParent() == keypad && theme.equals("2")) {
-                                    button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(Ax.hexAdd(primary, 16))));
-
-                                    Drawable background = button.getBackground();
-                                    background.setAlpha(26);
-
-                                    button.setBackground(background);
-                                }
-
-                                if (button.getParent().getParent() == compLayout || button.getParent() == compLayout || (orientation != Configuration.ORIENTATION_PORTRAIT && button.getParent() == findViewById(R.id.scrollBar)))
-                                    button.setBackgroundTintList(ColorStateList.valueOf(secondaryColor));
-
-                                button.setElevation(0f);
-                                button.setStateListAnimator(null);
-                            }
-                            catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-
-                    setMTColor(textColor);
-                }
-            }
+            //Handle Rounded Button Theme Colors (and soon all theme colors)
+            applyTheme();
 
             try {
                 if (getTvText().length() < 1)
@@ -6349,5 +6261,174 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final Vibrator vibe = (Vibrator) MainActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
 
         vibe.vibrate(duration);
+    }
+
+    public static RippleDrawable createRippleDrawable(int normalColor, int pressedColor, Drawable background, Drawable mask)
+    {
+        return new RippleDrawable(getPressedColorSelector(normalColor, pressedColor), background, mask);
+    }
+
+    public static ColorStateList getPressedColorSelector(int normalColor, int pressedColor)
+    {
+        return new ColorStateList(
+                new int[][]
+                        {
+                                new int[]{android.R.attr.state_pressed},
+                                new int[]{android.R.attr.state_focused},
+                                new int[]{android.R.attr.state_activated},
+                                new int[]{}
+                        },
+                new int[]
+                        {
+                                pressedColor,
+                                pressedColor,
+                                pressedColor,
+                                normalColor
+                        }
+        );
+    }
+
+    public void applyTheme() {
+        final TinyDB tinydb = new TinyDB(MainActivity.mainActivity);
+
+        String theme = tinydb.getString("theme");
+        String color = tinydb.getString("color");
+
+        final ImageButton swapTopBar = findViewById(R.id.swapTopBar);
+        int textColor = theme.equals("2") ? darkGray : Color.parseColor(Ax.hexAdd(tertiary, 230));
+
+        final Button inv = findViewById(R.id.bInv);
+
+        final LinearLayout compLayout = findViewById(R.id.horizontalComplexLinearLayout);
+
+        final ConstraintLayout keypad = findViewById(R.id.buttonView);
+
+        int orientation = this.getResources().getConfiguration().orientation;
+
+        if (roundedButtons) {
+            //SwapTopBar onClickListener
+            if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                swapTopBar.setOnClickListener(v -> {
+                    int a;
+
+                    //Spin the swapTopBar button
+                    ObjectAnimator.ofFloat(v, "rotation", 0f, inv.getVisibility() == View.VISIBLE ? -360f : 360f).setDuration(782).start();
+
+                    inv.setVisibility(Math.abs(inv.getVisibility() - 8));
+
+                    final int inVisibility = inv.getVisibility();
+                    final boolean invIsVisible = inVisibility == View.VISIBLE;
+                    final int childCount = compLayout.getChildCount();
+                    int delay = 30;
+                    int delayCount = 0;
+
+                    for (a = invIsVisible ? 0 : childCount - 1; a < childCount && a > -1; a += invIsVisible ? 1 : -1) {
+                        try {
+                            int finalA = a;
+
+                            new Handler((Looper.myLooper())).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        ((ConstraintLayout) compLayout.getChildAt(finalA)).getChildAt(1).setVisibility(inVisibility);
+                                    }
+                                    catch (Exception e) {
+                                        e.printStackTrace();
+
+                                        //Animate log and ln
+                                        compBar[finalA - 1].setVisibility(Math.abs(inVisibility - 8));
+                                    }
+                                }
+                            }, (int) ((delayCount++ * delay) / (invIsVisible ? 1 : 2.6)));
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                            break;
+                        }
+                    }
+                });
+            }
+
+            if (!isCustomTheme) {
+                ColorStateList secondaryCSL = ColorStateList.valueOf(secondaryColor);
+                ColorStateList tertiaryCSL = ColorStateList.valueOf(tertiaryColor);
+
+                for (int i = 0; i < allButtons.length; i++) {
+                    for (int j = 0; j < allButtons[i].length; j++) {
+                        try {
+                            Button button = allButtons[i][j];
+                            String buttonText = button.getText().toString();
+
+                            ViewParent parent = button.getParent();
+
+                            int rippleDarkenAmt = theme.equals("2") ? -32 : 24;
+
+                            //TODO: Handle ripple colors of buttons above top bar, finish
+                            // updating circle drawables, and replace the if statements with ternaries
+                            // to account for dark themes
+
+                            if (!buttonText.equals("=")) {
+                                if (!theme.equals("2") && (color.equals("14") || color.equals("17")) && !Ax.isDigit(buttonText) && !buttonText.equals("."))
+                                    button.setTextColor(darkGray);
+                                else
+                                    button.setTextColor(textColor);
+                            }
+                            else if (theme.equals("2"))
+                                button.setTextColor(Color.parseColor(Ax.hexAdd(primary, -28)));
+
+                            if (parent == keypad && theme.equals("2")) {
+                                button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(Ax.hexAdd(primary, 16))));
+
+                                Drawable initBG = button.getBackground();
+                                RippleDrawable background = createRippleDrawable(Color.parseColor(Ax.hexAdd(primary, 16)), Color.parseColor(Ax.hexAdd(primary, 2*rippleDarkenAmt)), initBG, initBG);
+
+                                button.setBackground(background);
+
+                                Drawable newBG = button.getBackground();
+                                newBG.setAlpha(26);
+
+                                button.setBackground(newBG);
+                            }
+
+                            if (buttonText.equals("+") || buttonText.equals("-") || buttonText.equals(Ax.multi) || buttonText.equals(Ax.divi)) {
+                                if (theme.equals("2")) {
+                                    Drawable initBG = button.getBackground();
+                                    RippleDrawable background = createRippleDrawable(Color.parseColor(primary), Color.parseColor(Ax.hexAdd(primary, rippleDarkenAmt)), initBG, initBG);
+
+                                    button.setBackground(background);
+                                }
+                            }
+
+
+                            if (parent.getParent() == compLayout || parent == compLayout || (orientation != Configuration.ORIENTATION_PORTRAIT && parent == findViewById(R.id.scrollBar))) {
+                                button.setBackgroundTintList(secondaryCSL);
+
+                                Drawable initBG = button.getBackground();
+                                RippleDrawable background = createRippleDrawable(secondaryColor, Color.parseColor(Ax.hexAdd(secondary, rippleDarkenAmt)), initBG, AppCompatResources.getDrawable(MainActivity.mainActivity, R.drawable.circle_button_secondary));
+
+                                button.setBackground(background);
+                            }
+
+                            if (buttonText.equals("(") || buttonText.equals(")")) {
+                                button.setBackgroundTintList(tertiaryCSL);
+
+                                Drawable initBG = button.getBackground();
+                                RippleDrawable background = createRippleDrawable(tertiaryColor, Color.parseColor(Ax.hexAdd(tertiary, rippleDarkenAmt)), initBG, AppCompatResources.getDrawable(MainActivity.mainActivity, buttonText.equals(")") ? R.drawable.square_ripple_button : R.drawable.circle_button_tertiary));
+
+                                button.setBackground(background);
+                            }
+
+                            button.setElevation(0f);
+                            button.setStateListAnimator(null);
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                setMTColor(textColor);
+            }
+        }
     }
 }
