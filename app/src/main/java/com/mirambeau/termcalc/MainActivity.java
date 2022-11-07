@@ -2121,10 +2121,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             });
 
-            if (roundedButtons)
+            View.OnClickListener bDelClick = new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    backspace(view);
+                }
+            };
+
+            if (roundedButtons) {
                 backspace.setOnLongClickListener(bDelLongClick);
-            else
+                backspace.setOnClickListener(bDelClick);
+            }
+            else {
                 bDel.setOnLongClickListener(bDelLongClick);
+                bDel.setOnClickListener(bDelClick);
+            }
+
+            bDegRad.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    switchMode(view);
+                }
+            });
+
+            for (View button : new View[]{findViewById(R.id.bInv), inv2}) {
+                if (button != null) {
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            inv(view);
+                        }
+                    });
+                }
+            }
 
             if (roundedButtons) {
                 try {

@@ -4,5 +4,5 @@
     <dimen name="roundedTopBarTrigTextSize">16.5sp</dimen>
     <dimen name="roundedTopBarCompTextSize">17sp</dimen>
     <dimen name="roundedTopBarMiscTextSize">23sp</dimen>
-    <dimen name="roundedTextSize">28dp</dimen>
+    <dimen name="roundedTextSize">28sp</dimen>
 </resources>

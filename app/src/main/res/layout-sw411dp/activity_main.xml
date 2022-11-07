@@ -82,8 +82,10 @@
                         android:text=""
                         android:textAlignment="viewEnd"
                         android:textColor="#FEFEFE"
-                        android:textSize="42dp"
+                        android:textSize="42sp"
                         android:maxLines="1"
+                        android:inputType="text"
+                        android:importantForAutofill="no"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -218,7 +220,6 @@
                     android:background="@color/colorAccent"
                     android:foreground="?attr/selectableItemBackground"
                     android:hapticFeedbackEnabled="true"
-                    android:onClick="operation"
                     android:text="+"
                     android:textAlignment="center"
                     android:textAllCaps="false"
@@ -236,7 +237,6 @@
                     android:background="@color/colorAccent"
                     android:foreground="?attr/selectableItemBackground"
                     android:hapticFeedbackEnabled="true"
-                    android:onClick="operation"
                     android:text="-"
                     android:textAlignment="center"
                     android:textAllCaps="false"
@@ -256,7 +256,6 @@
                     android:background="@color/colorAccent"
                     android:foreground="?attr/selectableItemBackground"
                     android:hapticFeedbackEnabled="true"
-                    android:onClick="operation"
                     android:text="×"
                     android:textAlignment="center"
                     android:textAllCaps="false"
@@ -275,7 +274,6 @@
                     android:background="@color/colorAccent"
                     android:foreground="?attr/selectableItemBackground"
                     android:hapticFeedbackEnabled="true"
-                    android:onClick="operation"
                     android:text="÷"
                     android:textAlignment="center"
                     android:textAllCaps="false"
@@ -307,7 +305,6 @@
                     app:layout_constraintWidth="parent=0.33"
                     android:background="@null"
                     android:foreground="?attr/selectableItemBackground"
-                    android:onClick="number"
                     android:text="0"
                     android:textColor="@color/darkColorText"
                     android:textSize="30sp"
@@ -322,7 +319,6 @@
                     app:layout_constraintWidth="parent=0.33"
                     android:background="@null"
                     android:foreground="?attr/selectableItemBackground"
-                    android:onClick="decimal"
                     android:text="."
                     android:textColor="@color/darkColorText"
                     android:textSize="30sp"
@@ -338,7 +334,6 @@
                     android:background="@null"
                     android:foreground="?attr/selectableItemBackground"
                     android:hapticFeedbackEnabled="true"
-                    android:onClick="newerEquals"
                     android:text="="
                     android:textColor="@color/colorAccent"
                     android:textSize="30sp"
@@ -368,7 +363,6 @@
                     app:layout_constraintWidth="parent=0.33"
                     android:background="@null"
                     android:foreground="?attr/selectableItemBackground"
-                    android:onClick="number"
                     android:text="1"
                     android:textColor="@color/darkColorText"
                     android:textSize="30sp"
@@ -383,7 +377,6 @@
                     app:layout_constraintWidth="parent=0.33"
                     android:background="@null"
                     android:foreground="?attr/selectableItemBackground"
-                    android:onClick="number"
                     android:text="2"
                     android:textColor="@color/darkColorText"
                     android:textSize="30sp"
@@ -398,7 +391,6 @@
                     app:layout_constraintWidth="parent=0.33"
                     android:background="@null"
                     android:foreground="?attr/selectableItemBackground"
-                    android:onClick="number"
                     android:text="3"
                     android:textColor="@color/darkColorText"
                     android:textSize="30sp"
@@ -427,7 +419,6 @@
                     app:layout_constraintWidth="parent=0.33"
                     android:background="@null"
                     android:foreground="?attr/selectableItemBackground"
-                    android:onClick="number"
                     android:text="4"
                     android:textColor="@color/darkColorText"
                     android:textSize="30sp"
@@ -442,7 +433,6 @@
                     app:layout_constraintWidth="parent=0.33"
                     android:background="@null"
                     android:foreground="?attr/selectableItemBackground"
-                    android:onClick="number"
                     android:text="5"
                     android:textColor="@color/darkColorText"
                     android:textSize="30sp"
@@ -457,7 +447,6 @@
                     app:layout_constraintWidth="parent=0.33"
                     android:background="@null"
                     android:foreground="?attr/selectableItemBackground"
-                    android:onClick="number"
                     android:text="6"
                     android:textColor="@color/darkColorText"
                     android:textSize="30sp"
@@ -486,7 +475,6 @@
                     android:background="@null"
                     android:elevation="8dp"
                     android:foreground="?attr/selectableItemBackground"
-                    android:onClick="number"
                     android:text="7"
                     android:textColor="@color/darkColorText"
                     android:textSize="30sp"
@@ -502,7 +490,6 @@
                     android:background="@null"
                     android:elevation="8dp"
                     android:foreground="?attr/selectableItemBackground"
-                    android:onClick="number"
                     android:text="8"
                     android:textColor="@color/darkColorText"
                     android:textSize="30sp"
@@ -518,7 +505,6 @@
                     android:background="@null"
                     android:elevation="8dp"
                     android:foreground="?attr/selectableItemBackground"
-                    android:onClick="number"
                     android:text="9"
                     android:textColor="@color/darkColorText"
                     android:textSize="30sp"
@@ -585,7 +571,6 @@
                                 android:background="@null"
                                 android:elevation="10dp"
                                 android:foreground="?attr/selectableItemBackground"
-                                android:onClick="operation"
                                 android:text="√"
                                 android:textAllCaps="false"
                                 android:textColor="#FFFFFF"
@@ -599,11 +584,10 @@
                                 android:alpha="1"
                                 android:background="@null"
                                 android:foreground="?attr/selectableItemBackground"
-                                android:onClick="operation"
                                 android:paddingTop="10dp"
                                 android:text="^"
                                 android:textColor="#FFFFFF"
-                                android:textSize="28dp"
+                                android:textSize="28sp"
                                 app:layout_constraintStart_toEndOf="@+id/bCbqrt"
                                 app:layout_constraintTop_toTopOf="@+id/horizontalScrollView" />
 
@@ -613,10 +597,9 @@
                                 android:layout_height="match_parent"
                                 android:background="@null"
                                 android:foreground="?attr/selectableItemBackground"
-                                android:onClick="operation"
                                 android:text="!"
                                 android:textColor="#FFFFFF"
-                                android:textSize="20dp" />
+                                android:textSize="20sp" />
 
                             <Button
                                 android:id="@+id/bPi"
@@ -624,11 +607,10 @@
                                 android:layout_height="match_parent"
                                 android:background="@null"
                                 android:foreground="?attr/selectableItemBackground"
-                                android:onClick="number"
                                 android:text="π"
                                 android:textAllCaps="false"
                                 android:textColor="#FFFFFF"
-                                android:textSize="22dp" />
+                                android:textSize="22sp" />
 
                             <Button
                                 android:id="@+id/bE"
@@ -636,12 +618,11 @@
                                 android:layout_height="match_parent"
                                 android:background="@null"
                                 android:foreground="?attr/selectableItemBackground"
-                                android:onClick="number"
                                 android:text="e"
                                 android:textAlignment="center"
                                 android:textAllCaps="false"
                                 android:textColor="#FFFFFF"
-                                android:textSize="22dp" />
+                                android:textSize="22sp" />
 
                             <Button
                                 android:id="@+id/bMod"
@@ -649,12 +630,11 @@
                                 android:layout_height="match_parent"
                                 android:background="@null"
                                 android:foreground="?attr/selectableItemBackground"
-                                android:onClick="operation"
                                 android:text="mod"
                                 android:textAlignment="center"
                                 android:textAllCaps="false"
                                 android:textColor="#FFFFFF"
-                                android:textSize="20dp" />
+                                android:textSize="20sp" />
 
                             <Button
                                 android:id="@+id/bLog"
@@ -666,7 +646,7 @@
                                 android:textAlignment="center"
                                 android:textAllCaps="false"
                                 android:textColor="#FFFFFF"
-                                android:textSize="20dp" />
+                                android:textSize="20sp" />
 
                             <Button
                                 android:id="@+id/bLn"
@@ -674,12 +654,11 @@
                                 android:layout_height="match_parent"
                                 android:background="@null"
                                 android:foreground="?attr/selectableItemBackground"
-                                android:onClick="operation"
                                 android:text="ln"
                                 android:textAlignment="center"
                                 android:textAllCaps="false"
                                 android:textColor="#FFFFFF"
-                                android:textSize="20dp" />
+                                android:textSize="20sp" />
                         </LinearLayout>
                     </HorizontalScrollView>
 
@@ -700,11 +679,10 @@
                                 android:layout_height="70dp"
                                 android:background="@null"
                                 android:foreground="?attr/selectableItemBackground"
-                                android:onClick="operation"
                                 android:text="sin"
                                 android:textAllCaps="false"
                                 android:textColor="#FFFFFF"
-                                android:textSize="19dp" />
+                                android:textSize="19sp" />
 
                             <Button
                                 android:id="@+id/bCos"
@@ -712,11 +690,10 @@
                                 android:layout_height="70dp"
                                 android:background="@null"
                                 android:foreground="?attr/selectableItemBackground"
-                                android:onClick="operation"
                                 android:text="cos"
                                 android:textAllCaps="false"
                                 android:textColor="#FFFFFF"
-                                android:textSize="19dp" />
+                                android:textSize="19sp" />
 
                             <Button
                                 android:id="@+id/bTan"
@@ -724,11 +701,10 @@
                                 android:layout_height="70dp"
                                 android:background="@null"
                                 android:foreground="?attr/selectableItemBackground"
-                                android:onClick="operation"
                                 android:text="tan"
                                 android:textAllCaps="false"
                                 android:textColor="#FFFFFF"
-                                android:textSize="19dp" />
+                                android:textSize="19sp" />
 
                             <Button
                                 android:id="@+id/bCsc"
@@ -736,11 +712,10 @@
                                 android:layout_height="70dp"
                                 android:background="@null"
                                 android:foreground="?attr/selectableItemBackground"
-                                android:onClick="operation"
                                 android:text="csc"
                                 android:textAllCaps="false"
                                 android:textColor="#FFFFFF"
-                                android:textSize="19dp" />
+                                android:textSize="19sp" />
 
                             <Button
                                 android:id="@+id/bSec"
@@ -748,11 +723,10 @@
                                 android:layout_height="70dp"
                                 android:background="@null"
                                 android:foreground="?attr/selectableItemBackground"
-                                android:onClick="operation"
                                 android:text="sec"
                                 android:textAllCaps="false"
                                 android:textColor="#FFFFFF"
-                                android:textSize="19dp" />
+                                android:textSize="19sp" />
 
                             <Button
                                 android:id="@+id/bCot"
@@ -760,12 +734,11 @@
                                 android:layout_height="70dp"
                                 android:background="@null"
                                 android:foreground="?attr/selectableItemBackground"
-                                android:onClick="operation"
                                 android:text="cot"
                                 android:textAlignment="center"
                                 android:textAllCaps="false"
                                 android:textColor="#FFFFFF"
-                                android:textSize="19dp" />
+                                android:textSize="19sp" />
 
                             <Button
                                 android:id="@+id/bInv"
@@ -773,12 +746,11 @@
                                 android:layout_height="70dp"
                                 android:background="@null"
                                 android:foreground="?attr/selectableItemBackground"
-                                android:onClick="inv"
                                 android:paddingTop="2dp"
                                 android:text="INV"
                                 android:textAlignment="center"
                                 android:textColor="#FFFFFF"
-                                android:textSize="18dp" />
+                                android:textSize="18sp" />
 
                         </LinearLayout>
                     </HorizontalScrollView>
@@ -805,8 +777,8 @@
                 android:layout_marginHorizontal="14dp"
                 android:layout_marginVertical="12dp"
                 android:clickable="true"
+                android:focusable="true"
                 android:elevation="8dp"
-                android:onClick="backspace"
                 app:fabCustomSize="69dp"
                 app:fabSize="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -962,11 +934,10 @@
                 android:layout_height="70dp"
                 android:background="@null"
                 android:foreground="?attr/selectableItemBackground"
-                android:onClick="inv"
                 android:text="INV"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/bParenthesisClose"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -981,10 +952,9 @@
                 android:background="#00C5B1"
                 android:elevation="8dp"
                 android:foreground="?attr/selectableItemBackground"
-                android:onClick="operation"
                 android:text="("
                 android:textColor="#FFFFFF"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/bParenthesisClose"
                 app:layout_constraintEnd_toStartOf="@+id/bParenthesisClose"
                 app:layout_constraintStart_toStartOf="parent"
@@ -998,10 +968,9 @@
                 android:background="#00C5B1"
                 android:elevation="8dp"
                 android:foreground="?attr/selectableItemBackground"
-                android:onClick="operation"
                 android:text=")"
                 android:textColor="#FFFFFF"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -1107,7 +1076,6 @@
             android:layout_width="56dp"
             android:layout_height="44dp"
             android:layout_marginEnd="4dp"
-            android:onClick="switchMode"
             android:background="@null"
             android:text="RAD"
             android:textColor="#FFFFFF"
