@@ -195,10 +195,6 @@ public class TerminalActivity extends AppCompatActivity {
                 enter.setBackgroundTintList(ColorStateList.valueOf(Color.BLACK));
             }
 
-            if (!tinydb.getBoolean("custom")) {
-                printf("Note: You must first switch to \"Custom\" in Theme Settings before any changes to your theme become visible.\n");
-            }
-
             try {
                 MainActivity.mainActivity.recreate();
             } catch (NullPointerException e) {
@@ -1388,7 +1384,7 @@ public class TerminalActivity extends AppCompatActivity {
 
 
             //Help
-            else if (((cmd.length() > 3 && cmd.startsWith("help")) || (cmd.length() > 0 && cmd.startsWith("?"))) && splitCmd.length <= 2) {
+            else if ((splitCmd[0].equalsIgnoreCase(MainActivity.mainActivity.getString(R.string.help)) || splitCmd[0].equalsIgnoreCase("help") || splitCmd[0].equals("?")) && splitCmd.length <= 2) {
                 ArrayList<String> helps = new ArrayList<>(Arrays.asList(getString(R.string.help_delete), getString(R.string.help_reset), getString(R.string.help_help), getString(R.string.help_set),
                         getString(R.string.help_get), getString(R.string.help_copy), getString(R.string.help_share), getString(R.string.help_mode),
                         getString(R.string.help_recreate), getString(R.string.help_themes), getString(R.string.help_sym)));
@@ -1399,7 +1395,7 @@ public class TerminalActivity extends AppCompatActivity {
 
                 if (splitCmd.length == 2 && splitCmd[1].equals("debug") && Ax.isTinyColor("-mt") && (Ax.getTinyColor("-mt") == Color.parseColor("#010101") || Ax.getTinyColor("-mt") == Color.parseColor("#FEFEFE")))
                     printf(getString(R.string.help_debug));
-                else if (cmd.equalsIgnoreCase("help") || cmd.equals("?"))
+                else if (splitCmd[0].equalsIgnoreCase(MainActivity.mainActivity.getString(R.string.help)) || splitCmd[0].equalsIgnoreCase("help") || splitCmd[0].equals("?"))
                     printf(getString(R.string.help_text));
                 else if (splitCmd.length == 2 && commands.contains(splitCmd[1]))
                     printf(helps.get(commands.indexOf(splitCmd[1])));

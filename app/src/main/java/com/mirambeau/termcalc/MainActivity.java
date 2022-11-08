@@ -6381,7 +6381,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         //Text Colors
                         if (!buttonText.equals("=")) {
-                            boolean isDarkTextTheme = !theme.equals("2") && (color.equals("14") || color.equals("17")) && !Ax.isDigit(buttonText) && !buttonText.equals(".");
+                            //TODO: add all the zone tags (and also figure out the button tags)
+                            boolean isDarkTextTheme = !theme.equals("2") && (color.equals("14") || color.equals("17")) && !Ax.isDigit(buttonText) && !buttonText.equals(".") && !Ax.isTinyColor(((View) button.getParent()).getTag().toString());
 
                             button.setTextColor(isDarkTextTheme ? darkGray : textColor);
                         }

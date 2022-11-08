@@ -209,6 +209,7 @@
             app:layout_constraintHeight="parent=0.486"
             android:background="@null"
             android:elevation="0dp"
+            android:tag="cKeypad`cNum"
             android:fitsSystemWindows="true"
             android:layout_marginBottom="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -221,6 +222,7 @@
                 android:layout_height="0dp"
                 android:background="@null"
                 android:elevation="3dp"
+                android:tag="cPrimary`-bop"
                 app:layout_constraintWidth="parent=0.25"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -596,6 +598,7 @@
                             android:id="@+id/sinLayout"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
+                            android:tag="cKeypad`cNum"
                             android:animateLayoutChanges="true" >
 
                             <Button
