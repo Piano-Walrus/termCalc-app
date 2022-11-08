@@ -3191,14 +3191,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void setMTColor(int color){
+        TinyDB tinydb = new TinyDB(MainActivity.mainActivity);
+        String theme = tinydb.getString("theme");
+
+        int rippleDarkenAmt = theme.equals("2") ? -32 : 24;
+
         ImageButton swapTopBar = findViewById(R.id.swapTopBar);
         ImageButton backspace = findViewById(R.id.delete);
         Button inv = findViewById(R.id.bInv);
 
+        Button bgAnim = findViewById(R.id.bgAnim);
+
         toolbar.setTitleTextColor(color);
         tv.setTextColor(color);
+        bgAnim.setTextColor(color);
+
         ((Button) findViewById(R.id.bDegRad)).setTextColor(color);
-        ((Button) findViewById(R.id.bgAnim)).setTextColor(color);
 
         TextView numView = findViewById(R.id.num);
         TextView denView = findViewById(R.id.den);
@@ -3238,48 +3246,51 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (roundedButtons) {
             try {
-                swapTopBar.setColorFilter(color);
-                backspace.setColorFilter(color);
-
-                ImageButton expandCustomsNew = findViewById(R.id.expandCustomsNew);
-                ImageButton customFunctionsNew = findViewById(R.id.customFunctionsNew);
-                ImageButton customConstantsNew = findViewById(R.id.customConstantsNew);
-                ImageButton decFracNew = findViewById(R.id.decFracButtonNew);
-
-                expandCustomsNew.setColorFilter(color);
-                customFunctionsNew.setColorFilter(color);
-                customConstantsNew.setColorFilter(color);
-                decFracNew.setColorFilter(color);
-                inv.setTextColor(color);
-
-                TinyDB tinydb = new TinyDB(MainActivity.mainActivity);
-                String theme = tinydb.getString("theme");
-
-                ColorStateList bgColor;
+                ColorStateList bgCSL;
 
                 if (isCustomTheme && Ax.isTinyColor("cMain"))
-                    bgColor = ColorStateList.valueOf(Ax.getTinyColor("cMain"));
+                    bgCSL = ColorStateList.valueOf(Ax.getTinyColor("cMain"));
                 else if (theme.equals("2"))
-                    bgColor = ColorStateList.valueOf(Color.WHITE);
+                    bgCSL = ColorStateList.valueOf(Color.WHITE);
                 else if (theme.equals("1"))
-                    bgColor = ColorStateList.valueOf(Color.parseColor("#272C33"));
+                    bgCSL = ColorStateList.valueOf(Color.parseColor("#272C33"));
                 else
-                    bgColor = ColorStateList.valueOf(Color.BLACK);
+                    bgCSL = ColorStateList.valueOf(Color.BLACK);
 
-                swapTopBar.setBackgroundTintList(bgColor);
-                backspace.setBackgroundTintList(bgColor);
+                ImageButton[] mtButtons = {swapTopBar, backspace, findViewById(R.id.expandCustomsNew), findViewById(R.id.customFunctionsNew),
+                        findViewById(R.id.customConstantsNew), findViewById(R.id.decFracButtonNew)};
 
-                expandCustomsNew.setBackgroundTintList(bgColor);
-                customFunctionsNew.setBackgroundTintList(bgColor);
-                customConstantsNew.setBackgroundTintList(bgColor);
-                decFracNew.setBackgroundTintList(bgColor);
-                inv.setBackgroundTintList(bgColor);
+                for (ImageButton button : mtButtons) {
+                    button.setColorFilter(color);
+
+                    button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(bgColor)));
+
+                    Drawable initBG = button.getBackground();
+                    RippleDrawable background = createRippleDrawable(Color.parseColor(bgColor), Color.parseColor(Ax.hexAdd(bgColor, 2 * rippleDarkenAmt)), initBG, initBG);
+                    button.setBackground(background);
+                }
+
+                inv.setTextColor(color);
+                inv.setBackgroundTintList(bgCSL);
+
+                Drawable initBG = inv.getBackground();
+                RippleDrawable background = createRippleDrawable(Color.parseColor(bgColor), Color.parseColor(Ax.hexAdd(bgColor, 2 * rippleDarkenAmt)), initBG, initBG);
+                inv.setBackground(background);
             }
             catch (Exception e) {
                 e.printStackTrace();
             }
+        }
 
-            inv.setTextColor(color);
+        try {
+            bgAnim.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(bgColor)));
+
+            Drawable initBG = bgAnim.getBackground();
+            RippleDrawable background = createRippleDrawable(Color.parseColor(bgColor), Color.parseColor(Ax.hexAdd(bgColor, (int) (1.6 * rippleDarkenAmt))), initBG, initBG);
+            bgAnim.setBackground(background);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
 
         if (!isBig) {
@@ -3293,9 +3304,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
             else if (isCustomTheme) {
                 try {
-                    int theme = Ax.getThemeInt();
-
-                    if (theme == 5)
+                    if (theme.equals("5"))
                         ((ImageButton) findViewById(R.id.expand)).setColorFilter(monochromeTextColor);
                     else
                         ((ImageButton) findViewById(R.id.expand)).setColorFilter(Color.WHITE);
@@ -3306,9 +3315,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
             else {
                 try {
-                    TinyDB tinydb = new TinyDB(MainActivity.mainActivity);
                     String tinyColor = tinydb.getString("color");
-                    String theme = tinydb.getString("theme");
 
                     if (theme.equals("5"))
                         ((ImageButton) findViewById(R.id.expand)).setColorFilter(monochromeTextColor);
@@ -6294,6 +6301,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String theme = tinydb.getString("theme");
         String color = tinydb.getString("color");
 
+        primary = tinydb.getString("cPrimary");
+        secondary = tinydb.getString("cSecondary");
+        tertiary = tinydb.getString("cTertiary");
+
+        primaryColor = Color.parseColor(primary);
+        secondaryColor = Color.parseColor(secondary);
+        tertiaryColor = Color.parseColor(tertiary);
+
         final ImageButton swapTopBar = findViewById(R.id.swapTopBar);
         int textColor = theme.equals("2") ? darkGray : Color.parseColor(Ax.hexAdd(tertiary, 230));
 
@@ -6349,89 +6364,89 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
             }
 
-            if (!isCustomTheme) {
-                ColorStateList secondaryCSL = ColorStateList.valueOf(secondaryColor);
-                ColorStateList tertiaryCSL = ColorStateList.valueOf(tertiaryColor);
+            ColorStateList secondaryCSL = ColorStateList.valueOf(secondaryColor);
+            ColorStateList tertiaryCSL = ColorStateList.valueOf(tertiaryColor);
 
-                for (int i = 0; i < allButtons.length; i++) {
-                    for (int j = 0; j < allButtons[i].length; j++) {
-                        try {
-                            Button button = allButtons[i][j];
-                            String buttonText = button.getText().toString();
+            for (int i = 0; i < allButtons.length; i++) {
+                for (int j = 0; j < allButtons[i].length; j++) {
+                    try {
+                        Button button = allButtons[i][j];
+                        String buttonText = button.getText().toString();
 
-                            ViewParent parent = button.getParent();
+                        ViewParent parent = button.getParent();
 
-                            int rippleDarkenAmt = theme.equals("2") ? -32 : 24;
+                        RippleDrawable background = null;
 
-                            //TODO: Handle ripple colors of buttons above top bar, and replace the
-                            // if statements with ternaries to account for dark themes
+                        int rippleDarkenAmt = theme.equals("2") ? -32 : 24;
 
-                            //Text Colors
-                            if (!buttonText.equals("=")) {
-                                if (!theme.equals("2") && (color.equals("14") || color.equals("17")) && !Ax.isDigit(buttonText) && !buttonText.equals("."))
-                                    button.setTextColor(darkGray);
-                                else
-                                    button.setTextColor(textColor);
-                            }
-                            else if (theme.equals("2"))
-                                button.setTextColor(Color.parseColor(Ax.hexAdd(primary, -28)));
+                        //Text Colors
+                        if (!buttonText.equals("=")) {
+                            boolean isDarkTextTheme = !theme.equals("2") && (color.equals("14") || color.equals("17")) && !Ax.isDigit(buttonText) && !buttonText.equals(".");
 
-                            //Number Keypad
-                            if (parent == keypad && theme.equals("2")) {
-                                button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(Ax.hexAdd(primary, 16))));
+                            button.setTextColor(isDarkTextTheme ? darkGray : textColor);
+                        }
+                        else if (theme.equals("2"))
+                            button.setTextColor(Ax.isTinyColor("-b=t") ? Ax.getTinyColor("-b=t") : Color.parseColor(Ax.hexAdd(primary, -28)));
+                        else
+                            button.setTextColor(Ax.isTinyColor("-b=t") ? Ax.getTinyColor("-b=t") : primaryColor);
 
-                                Drawable initBG = button.getBackground();
-                                RippleDrawable background = createRippleDrawable(Color.parseColor(Ax.hexAdd(primary, 16)), Color.parseColor(Ax.hexAdd(primary, 2*rippleDarkenAmt)), initBG, initBG);
+                        //Number Keypad
+                        if (parent == keypad) {
+                            Drawable newBG;
 
-                                button.setBackground(background);
+                            String keypadColor = theme.equals("2") ? Ax.hexAdd(primary, 16) : this.keypadColor;
 
-                                Drawable newBG = button.getBackground();
+                            button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(keypadColor)));
+
+                            Drawable initBG = button.getBackground();
+                            background = createRippleDrawable(Color.parseColor(keypadColor), Color.parseColor(Ax.hexAdd(keypadColor, 2 * rippleDarkenAmt)), initBG, initBG);
+
+                            button.setBackground(background);
+
+                            newBG = button.getBackground();
+
+                            if (theme.equals("2"))
                                 newBG.setAlpha(26);
 
-                                button.setBackground(newBG);
-                            }
-
-                            //Main Ops
-                            if (buttonText.equals("+") || buttonText.equals("-") || buttonText.equals(Ax.multi) || buttonText.equals(Ax.divi)) {
-                                if (theme.equals("2")) {
-                                    Drawable initBG = button.getBackground();
-                                    RippleDrawable background = createRippleDrawable(Color.parseColor(primary), Color.parseColor(Ax.hexAdd(primary, rippleDarkenAmt)), initBG, initBG);
-
-                                    button.setBackground(background);
-                                }
-                            }
-
-                            //CompBar & TrigBar
-                            if (parent.getParent() == compLayout || parent == compLayout || (orientation != Configuration.ORIENTATION_PORTRAIT && parent == findViewById(R.id.scrollBar))) {
-                                button.setBackgroundTintList(secondaryCSL);
-
-                                Drawable initBG = button.getBackground();
-                                RippleDrawable background = createRippleDrawable(secondaryColor, Color.parseColor(Ax.hexAdd(secondary, rippleDarkenAmt)), initBG, AppCompatResources.getDrawable(MainActivity.mainActivity, R.drawable.circle_button_secondary));
-
-                                button.setBackground(background);
-                            }
-
-                            //Parenthesis
-                            if (buttonText.equals("(") || buttonText.equals(")")) {
-                                button.setBackgroundTintList(tertiaryCSL);
-
-                                Drawable initBG = button.getBackground();
-                                RippleDrawable background = createRippleDrawable(tertiaryColor, Color.parseColor(Ax.hexAdd(tertiary, rippleDarkenAmt)), initBG, AppCompatResources.getDrawable(MainActivity.mainActivity, buttonText.equals(")") ? R.drawable.square_ripple_button : R.drawable.circle_button_tertiary));
-
-                                button.setBackground(background);
-                            }
-
-                            button.setElevation(0f);
-                            button.setStateListAnimator(null);
+                            button.setBackground(newBG);
+                            continue;
                         }
-                        catch (Exception e) {
-                            e.printStackTrace();
+
+                        //Main Ops
+                        if (buttonText.equals("+") || buttonText.equals("-") || buttonText.equals(Ax.multi) || buttonText.equals(Ax.divi)) {
+                            button.setBackgroundTintList(ColorStateList.valueOf(primaryColor));
+
+                            Drawable initBG = button.getBackground();
+                            background = createRippleDrawable(primaryColor, Color.parseColor(Ax.hexAdd(primary, rippleDarkenAmt)), initBG, initBG);
                         }
+                        //CompBar & TrigBar
+                        else if (parent.getParent() == compLayout || parent == compLayout || (orientation != Configuration.ORIENTATION_PORTRAIT && parent == findViewById(R.id.scrollBar))) {
+                            button.setBackgroundTintList(secondaryCSL);
+
+                            Drawable initBG = button.getBackground();
+                            background = createRippleDrawable(secondaryColor, Color.parseColor(Ax.hexAdd(secondary, rippleDarkenAmt)), initBG, AppCompatResources.getDrawable(MainActivity.mainActivity, R.drawable.circle_button_secondary));
+                        }
+                        //Parenthesis
+                        else if (buttonText.equals("(") || buttonText.equals(")")) {
+                            button.setBackgroundTintList(tertiaryCSL);
+
+                            Drawable initBG = button.getBackground();
+                            background = createRippleDrawable(tertiaryColor, Color.parseColor(Ax.hexAdd(tertiary, rippleDarkenAmt)), initBG, initBG);
+                        }
+
+                        if (background != null)
+                            button.setBackground(background);
+
+                        button.setElevation(0f);
+                        button.setStateListAnimator(null);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
-
-                setMTColor(textColor);
             }
+
+            setMTColor(textColor);
         }
     }
 }
