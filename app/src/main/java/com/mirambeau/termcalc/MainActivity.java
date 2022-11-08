@@ -6363,10 +6363,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                             int rippleDarkenAmt = theme.equals("2") ? -32 : 24;
 
-                            //TODO: Handle ripple colors of buttons above top bar, finish
-                            // updating circle drawables, and replace the if statements with ternaries
-                            // to account for dark themes
+                            //TODO: Handle ripple colors of buttons above top bar, and replace the
+                            // if statements with ternaries to account for dark themes
 
+                            //Text Colors
                             if (!buttonText.equals("=")) {
                                 if (!theme.equals("2") && (color.equals("14") || color.equals("17")) && !Ax.isDigit(buttonText) && !buttonText.equals("."))
                                     button.setTextColor(darkGray);
@@ -6376,6 +6376,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             else if (theme.equals("2"))
                                 button.setTextColor(Color.parseColor(Ax.hexAdd(primary, -28)));
 
+                            //Number Keypad
                             if (parent == keypad && theme.equals("2")) {
                                 button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(Ax.hexAdd(primary, 16))));
 
@@ -6390,6 +6391,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 button.setBackground(newBG);
                             }
 
+                            //Main Ops
                             if (buttonText.equals("+") || buttonText.equals("-") || buttonText.equals(Ax.multi) || buttonText.equals(Ax.divi)) {
                                 if (theme.equals("2")) {
                                     Drawable initBG = button.getBackground();
@@ -6399,7 +6401,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 }
                             }
 
-
+                            //CompBar & TrigBar
                             if (parent.getParent() == compLayout || parent == compLayout || (orientation != Configuration.ORIENTATION_PORTRAIT && parent == findViewById(R.id.scrollBar))) {
                                 button.setBackgroundTintList(secondaryCSL);
 
@@ -6409,6 +6411,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 button.setBackground(background);
                             }
 
+                            //Parenthesis
                             if (buttonText.equals("(") || buttonText.equals(")")) {
                                 button.setBackgroundTintList(tertiaryCSL);
 
