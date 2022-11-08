@@ -6364,7 +6364,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
             }
 
-            ColorStateList secondaryCSL = ColorStateList.valueOf(secondaryColor);
             ColorStateList tertiaryCSL = ColorStateList.valueOf(tertiaryColor);
 
             for (int i = 0; i < allButtons.length; i++) {
@@ -6372,8 +6371,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     try {
                         Button button = allButtons[i][j];
                         String buttonText = button.getText().toString();
+                        String[] buttonTags = button.getTag().toString().split("`");
 
                         ViewParent parent = button.getParent();
+
+                        String[] tagColors = {"~", "~"};
+
+                        int colorInt;
+                        String colorStr;
+
+                        boolean isTinyColor;
+                        boolean isDarkTextTheme = !theme.equals("2") && (color.equals("14") || color.equals("17")) && !Ax.isDigit(buttonText) && !buttonText.equals(".") && !Ax.isTinyColor(((View) button.getParent()).getTag().toString());
+
+                        for (int k=0; k < 2; k++) {
+                            if (Ax.isTinyColor(buttonTags[k]))
+                                tagColors[k] = tinydb.getString(buttonTags[k]);
+                            else if (Ax.isTinyColor(((View) parent).getTag().toString()))
+                                tagColors[k] = tinydb.getString(((View) parent).getTag().toString());
+                        }
+
+                        if (Ax.isColor(tagColors[1])) {
+                            isDarkTextTheme = false;
+                            textColor = Color.parseColor(tagColors[1]);
+                        }
 
                         RippleDrawable background = null;
 
@@ -6382,20 +6402,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         //Text Colors
                         if (!buttonText.equals("=")) {
                             //TODO: add all the zone tags (and also figure out the button tags)
-                            boolean isDarkTextTheme = !theme.equals("2") && (color.equals("14") || color.equals("17")) && !Ax.isDigit(buttonText) && !buttonText.equals(".") && !Ax.isTinyColor(((View) button.getParent()).getTag().toString());
 
                             button.setTextColor(isDarkTextTheme ? darkGray : textColor);
                         }
                         else if (theme.equals("2"))
-                            button.setTextColor(Ax.isTinyColor("-b=t") ? Ax.getTinyColor("-b=t") : Color.parseColor(Ax.hexAdd(primary, -28)));
+                            button.setTextColor(Ax.isTinyColor("-b=t") ? Ax.getTinyColor("-b=t") : (Ax.isTinyColor("cNum") ? Ax.getTinyColor("cNum") : Color.parseColor(Ax.hexAdd(primary, -28))));
                         else
-                            button.setTextColor(Ax.isTinyColor("-b=t") ? Ax.getTinyColor("-b=t") : primaryColor);
+                            button.setTextColor(Ax.isTinyColor("-b=t") ? Ax.getTinyColor("-b=t") : (Ax.isTinyColor("cNum") ? Ax.getTinyColor("cNum") : primaryColor));
 
                         //Number Keypad
                         if (parent == keypad) {
                             Drawable newBG;
 
                             String keypadColor = theme.equals("2") ? Ax.hexAdd(primary, 16) : this.keypadColor;
+
+                            if (Ax.isColor(tagColors[0]))
+                                keypadColor = tagColors[0];
 
                             button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(keypadColor)));
 
@@ -6415,28 +6437,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         //Main Ops
                         if (buttonText.equals("+") || buttonText.equals("-") || buttonText.equals(Ax.multi) || buttonText.equals(Ax.divi)) {
-                            button.setBackgroundTintList(ColorStateList.valueOf(primaryColor));
-
-                            Drawable initBG = button.getBackground();
-                            background = createRippleDrawable(primaryColor, Color.parseColor(Ax.hexAdd(primary, rippleDarkenAmt)), initBG, initBG);
+                            isTinyColor = Ax.isColor(tagColors[0]);
+                            colorInt = isTinyColor ? Color.parseColor(tagColors[0]) : primaryColor;
+                            colorStr = isTinyColor ? tagColors[0] : primary;
                         }
                         //CompBar & TrigBar
                         else if (parent.getParent() == compLayout || parent == compLayout || (orientation != Configuration.ORIENTATION_PORTRAIT && parent == findViewById(R.id.scrollBar))) {
-                            button.setBackgroundTintList(secondaryCSL);
-
-                            Drawable initBG = button.getBackground();
-                            background = createRippleDrawable(secondaryColor, Color.parseColor(Ax.hexAdd(secondary, rippleDarkenAmt)), initBG, AppCompatResources.getDrawable(MainActivity.mainActivity, R.drawable.circle_button_secondary));
+                            isTinyColor = Ax.isColor(tagColors[0]);
+                            colorInt = isTinyColor ? Color.parseColor(tagColors[0]) : secondaryColor;
+                            colorStr = isTinyColor ? tagColors[0] : secondary;
                         }
                         //Parenthesis
                         else if (buttonText.equals("(") || buttonText.equals(")")) {
-                            button.setBackgroundTintList(tertiaryCSL);
-
-                            Drawable initBG = button.getBackground();
-                            background = createRippleDrawable(tertiaryColor, Color.parseColor(Ax.hexAdd(tertiary, rippleDarkenAmt)), initBG, initBG);
+                            isTinyColor = Ax.isColor(tagColors[0]);
+                            colorInt = isTinyColor ? Color.parseColor(tagColors[0]) : tertiaryColor;
+                            colorStr = isTinyColor ? tagColors[0] : tertiary;
                         }
+                        else
+                            continue;
 
-                        if (background != null)
-                            button.setBackground(background);
+                        button.setBackgroundTintList(ColorStateList.valueOf(colorInt));
+
+                        Drawable initBG = button.getBackground();
+                        background = createRippleDrawable(colorInt, isTinyColor ? colorInt : Color.parseColor(Ax.hexAdd(colorStr, rippleDarkenAmt)), initBG, initBG);
+
+                        button.setBackground(background);
 
                         button.setElevation(0f);
                         button.setStateListAnimator(null);

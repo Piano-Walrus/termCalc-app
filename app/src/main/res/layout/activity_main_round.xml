@@ -254,6 +254,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:background="@drawable/circle_button_num"
+                    android:tag="-b+`-b+t"
                     android:text="+"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
@@ -271,6 +272,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:background="@drawable/circle_button_num"
+                    android:tag="-b-`-b-t"
                     android:text="-"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
@@ -288,6 +290,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:background="@drawable/circle_button_num"
+                    android:tag="-b×`-b×t"
                     android:text="×"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
@@ -305,6 +308,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:background="@drawable/circle_button_num"
+                    android:tag="-b÷`-b÷t"
                     android:text="÷"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
@@ -359,6 +363,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:background="@drawable/circle_button_num"
+                    android:tag="-b0`-b0t"
                     android:text="0"
                     android:textColor="@color/white"
                     android:textSize="@dimen/roundedTextSize"
@@ -375,6 +380,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:background="@drawable/circle_button_num"
+                    android:tag="-b.`-b.t"
                     android:text="."
                     android:textAllCaps="false"
                     android:textColor="@color/white"
@@ -392,6 +398,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:background="@drawable/circle_button_num"
+                    android:tag="-b=`-b=t"
                     android:text="="
                     android:textAllCaps="false"
                     android:textColor="@color/colorAccent"
@@ -409,6 +416,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/circle_button_num"
+                android:tag="-b1`-b1t"
                 android:text="1"
                 android:textColor="@color/white"
                 android:textSize="@dimen/roundedTextSize"
@@ -425,6 +433,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/circle_button_num"
+                android:tag="-b2`-b2t"
                 android:text="2"
                 android:textColor="@color/white"
                 android:textSize="@dimen/roundedTextSize"
@@ -441,6 +450,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/circle_button_num"
+                android:tag="-b3`-b3t"
                 android:text="3"
                 android:textColor="@color/white"
                 android:textSize="@dimen/roundedTextSize"
@@ -457,6 +467,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/circle_button_num"
+                android:tag="-b4`-b4t"
                 android:text="4"
                 android:textColor="@color/white"
                 android:textSize="@dimen/roundedTextSize"
@@ -473,6 +484,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/circle_button_num"
+                android:tag="-b5`-b5t"
                 android:text="5"
                 android:textColor="@color/white"
                 android:textSize="@dimen/roundedTextSize"
@@ -489,6 +501,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/circle_button_num"
+                android:tag="-b6`-b6t"
                 android:text="6"
                 android:textColor="@color/white"
                 android:textSize="@dimen/roundedTextSize"
@@ -505,6 +518,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/circle_button_num"
+                android:tag="-b7`-b7t"
                 android:text="7"
                 android:textColor="@color/white"
                 android:textSize="@dimen/roundedTextSize"
@@ -521,6 +535,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/circle_button_num"
+                android:tag="-b8`-b8t"
                 android:text="8"
                 android:textColor="@color/white"
                 android:textSize="@dimen/roundedTextSize"
@@ -537,6 +552,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/circle_button_num"
+                android:tag="-b9`-b9t"
                 android:text="9"
                 android:textColor="@color/white"
                 android:textSize="@dimen/roundedTextSize"
@@ -564,6 +580,7 @@
             android:animateLayoutChanges="true"
             android:background="@null"
             android:elevation="0dp"
+            android:tag="cSecondary`cTop"
             app:layout_constraintBottom_toTopOf="@+id/buttonView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight="parent=0.0855"
@@ -574,6 +591,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:scrollbars="none"
+                android:tag="cSecondary`cTop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -584,6 +602,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scrollbars="none"
+                    android:tag="cSecondary`cTop"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -592,13 +611,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:animateLayoutChanges="true"
+                        android:tag="cSecondary`cTop"
                         android:orientation="horizontal">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/sinLayout"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:tag="cKeypad`cNum"
+                            android:tag="cSecondary`cTop"
                             android:animateLayoutChanges="true" >
 
                             <Button
@@ -610,6 +630,7 @@
                                 android:layout_marginEnd="4dp"
                                 android:layout_marginStart="6dp"
                                 android:elevation="0dp"
+                                android:tag="-b√`-b√t"
                                 android:text="√"
                                 android:textAllCaps="false"
                                 android:textColor="#FFFFFF"
@@ -628,6 +649,7 @@
                                 android:layout_marginEnd="4dp"
                                 android:layout_marginStart="6dp"
                                 android:elevation="0dp"
+                                android:tag="-bsin`-bsint"
                                 android:text="sin"
                                 android:textAllCaps="false"
                                 android:textColor="#FFFFFF"
@@ -644,6 +666,7 @@
                             android:id="@+id/cosLayout"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
+                            android:tag="cSecondary`cTop"
                             android:animateLayoutChanges="true" >
 
                             <Button
@@ -656,6 +679,7 @@
                                 android:layout_marginHorizontal="@dimen/roundedTopBarHMargin"
                                 android:elevation="0dp"
                                 android:paddingTop="10dp"
+                                android:tag="-b^`-b^t"
                                 android:text="^"
                                 android:textColor="#FFFFFF"
                                 android:textSize="@dimen/roundedTopBarMiscTextSize"
@@ -672,6 +696,7 @@
                                 android:layout_marginVertical="4dp"
                                 android:layout_marginHorizontal="@dimen/roundedTopBarHMargin"
                                 android:elevation="0dp"
+                                android:tag="-bcos`-bcost"
                                 android:text="cos"
                                 android:textAllCaps="false"
                                 android:textColor="#FFFFFF"
@@ -688,6 +713,7 @@
                             android:id="@+id/tanLayout"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
+                            android:tag="cSecondary`cTop"
                             android:animateLayoutChanges="true" >
 
                             <Button
@@ -730,6 +756,7 @@
                             android:id="@+id/cscLayout"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
+                            android:tag="cSecondary`cTop"
                             android:animateLayoutChanges="true" >
 
                             <Button
@@ -773,6 +800,7 @@
                             android:id="@+id/secLayout"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
+                            android:tag="cSecondary`cTop"
                             android:animateLayoutChanges="true" >
 
                             <Button
@@ -817,6 +845,7 @@
                             android:id="@+id/cotLayout"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
+                            android:tag="cSecondary`cTop"
                             android:animateLayoutChanges="true" >
 
                             <Button
@@ -866,6 +895,7 @@
                             android:layout_marginVertical="4dp"
                             android:layout_marginHorizontal="@dimen/roundedTopBarHMargin"
                             android:elevation="0dp"
+                            android:tag="-blog`-blogt"
                             android:text="log"
                             android:textAlignment="center"
                             android:textAllCaps="false"
@@ -880,6 +910,7 @@
                             android:layout_marginVertical="4dp"
                             android:layout_marginHorizontal="@dimen/roundedTopBarHMargin"
                             android:elevation="0dp"
+                            android:tag="-bln`-blnt"
                             android:text="ln"
                             android:textAlignment="center"
                             android:textAllCaps="false"
@@ -917,6 +948,7 @@
             app:fabCustomSize="69dp"
             app:fabSize="normal"
             android:visibility="gone"
+            android:tag="cFab`cFabText"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -929,6 +961,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/circle_button_extra"
             android:padding="24dp"
+            android:tag="cFab`cFabText"
             app:layout_constraintBottom_toBottomOf="@id/deleteAnchor"
             app:layout_constraintEnd_toEndOf="@id/deleteAnchor"
             app:layout_constraintStart_toStartOf="@id/deleteAnchor"
@@ -1062,6 +1095,7 @@
             android:layout_marginStart="2dp"
             android:layout_marginVertical="4dp"
             android:layout_marginEnd="0dp"
+            android:tag="cTertiary`cTertiaryText"
             app:layout_constraintBottom_toTopOf="@+id/buttonView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tertiaryLeftGuide"
@@ -1081,6 +1115,7 @@
                 android:background="@drawable/circle_button_tertiary"
                 android:elevation="0dp"
                 android:stateListAnimator="@null"
+                android:tag="-b(`-b(t"
                 android:text="("
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/roundedTopBarCompTextSize"
@@ -1095,6 +1130,7 @@
                 android:layout_height="0dp"
                 android:background="@drawable/square_ripple_button"
                 android:elevation="12dp"
+                android:tag="-b(`-b(t"
                 android:text=")"
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/roundedTopBarCompTextSize"
