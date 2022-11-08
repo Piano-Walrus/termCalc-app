@@ -1798,6 +1798,7 @@ public class EditorActivity extends AppCompatActivity {
                             else if (Ax.isDigit(line) && Integer.parseInt(line) > 0 && Integer.parseInt(line) <= 5) {
                                 if (line.equals("2"))
                                     tinydb.putString("customTheme", line);
+                                //TODO: Custom monochrome themes, maybe, possibly, if it's not too difficult
                                 else if (line.equals("5"))
                                     tinydb.putString("customTheme", "2");
                                 else {
@@ -1808,6 +1809,10 @@ public class EditorActivity extends AppCompatActivity {
                                 }
 
                                 tinydb.putString("theme", tinydb.getString("customTheme"));
+                                tinydb.putString("basicTheme", tinydb.getString("customTheme"));
+
+                                if (tinydb.getString("buttonShape").equals("2"))
+                                    tinydb.putBoolean("custom", false);
                             }
                         }
 

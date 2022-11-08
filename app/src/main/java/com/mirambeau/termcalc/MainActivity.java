@@ -6301,14 +6301,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String theme = tinydb.getString("theme");
         String color = tinydb.getString("color");
 
-        primary = tinydb.getString("cPrimary");
-        secondary = tinydb.getString("cSecondary");
-        tertiary = tinydb.getString("cTertiary");
-
-        primaryColor = Color.parseColor(primary);
-        secondaryColor = Color.parseColor(secondary);
-        tertiaryColor = Color.parseColor(tertiary);
-
         final ImageButton swapTopBar = findViewById(R.id.swapTopBar);
         int textColor = theme.equals("2") ? darkGray : Color.parseColor(Ax.hexAdd(tertiary, 230));
 
@@ -6364,8 +6356,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
             }
 
-            ColorStateList tertiaryCSL = ColorStateList.valueOf(tertiaryColor);
-
             for (int i = 0; i < allButtons.length; i++) {
                 for (int j = 0; j < allButtons[i].length; j++) {
                     try {
@@ -6380,14 +6370,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         int colorInt;
                         String colorStr;
 
-                        boolean isTinyColor;
+                        boolean isTinyColor = false;
+                        boolean isParenthesis = false;
                         boolean isDarkTextTheme = !theme.equals("2") && (color.equals("14") || color.equals("17")) && !Ax.isDigit(buttonText) && !buttonText.equals(".") && !Ax.isTinyColor(((View) button.getParent()).getTag().toString());
 
                         for (int k=0; k < 2; k++) {
                             if (Ax.isTinyColor(buttonTags[k]))
                                 tagColors[k] = tinydb.getString(buttonTags[k]);
-                            else if (Ax.isTinyColor(((View) parent).getTag().toString()))
-                                tagColors[k] = tinydb.getString(((View) parent).getTag().toString());
+                            else if (Ax.isTinyColor(((View) parent).getTag().toString().split("`")[k]))
+                                tagColors[k] = tinydb.getString(((View) parent).getTag().toString().split("`")[k]);
                         }
 
                         if (Ax.isColor(tagColors[1])) {
@@ -6395,7 +6386,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             textColor = Color.parseColor(tagColors[1]);
                         }
 
-                        RippleDrawable background = null;
+                        RippleDrawable background;
 
                         int rippleDarkenAmt = theme.equals("2") ? -32 : 24;
 
@@ -6416,8 +6407,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                             String keypadColor = theme.equals("2") ? Ax.hexAdd(primary, 16) : this.keypadColor;
 
-                            if (Ax.isColor(tagColors[0]))
+                            if (Ax.isColor(tagColors[0])) {
+                                isTinyColor = true;
                                 keypadColor = tagColors[0];
+                                rippleDarkenAmt = theme.equals("2") ? -40 : 40;
+                            }
 
                             button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(keypadColor)));
 
@@ -6428,7 +6422,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                             newBG = button.getBackground();
 
-                            if (theme.equals("2"))
+                            if (theme.equals("2") && !isTinyColor)
                                 newBG.setAlpha(26);
 
                             button.setBackground(newBG);
@@ -6449,6 +6443,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         }
                         //Parenthesis
                         else if (buttonText.equals("(") || buttonText.equals(")")) {
+                            //TODO: If i merge applyTheme with square buttons, add a check for roundedButtons here
+                            ((View) parent).setBackground(null);
+                            isParenthesis = true;
+
                             isTinyColor = Ax.isColor(tagColors[0]);
                             colorInt = isTinyColor ? Color.parseColor(tagColors[0]) : tertiaryColor;
                             colorStr = isTinyColor ? tagColors[0] : tertiary;
@@ -6456,14 +6454,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         else
                             continue;
 
+                        if (isTinyColor)
+                            rippleDarkenAmt = theme.equals("2") ? -40 : 40;
+
                         button.setBackgroundTintList(ColorStateList.valueOf(colorInt));
 
                         Drawable initBG = button.getBackground();
-                        background = createRippleDrawable(colorInt, isTinyColor ? colorInt : Color.parseColor(Ax.hexAdd(colorStr, rippleDarkenAmt)), initBG, initBG);
+                        background = createRippleDrawable(colorInt, Color.parseColor(Ax.hexAdd(colorStr, rippleDarkenAmt)), initBG, initBG);
 
                         button.setBackground(background);
 
-                        button.setElevation(0f);
+                        button.setElevation(isParenthesis ? 16f : 0f);
                         button.setStateListAnimator(null);
                     }
                     catch (Exception e) {
@@ -6472,7 +6473,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
 
-            setMTColor(textColor);
+            setMTColor(Ax.isTinyColor("-mt") ? Ax.getTinyColor("-mt") : textColor);
         }
     }
 }
