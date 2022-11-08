@@ -6301,7 +6301,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String color = tinydb.getString("color");
 
         final ImageButton swapTopBar = findViewById(R.id.swapTopBar);
+
         int textColor = theme.equals("2") ? darkGray : Color.parseColor(Ax.hexAdd(tertiary, 230));
+        int initTextColor = textColor;
 
         final Button inv = findViewById(R.id.bInv);
 
@@ -6478,14 +6480,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     findViewById(R.id.mainView).setBackgroundColor(Ax.getTinyColor("cMain"));
                     findViewById(R.id.drawer_layout).setBackgroundColor(Ax.getTinyColor("cMain"));
 
-                    //TODO: Figure out why black buttons themes have a gray status bar ??
+                    //TODO: Figure out why dark themes have a gray status bar even when the background is black
                 }
                 catch (Exception e) {
                     e.printStackTrace();
                 }
             }
 
-            setMTColor(Ax.isTinyColor("-mt") ? Ax.getTinyColor("-mt") : textColor);
+            setMTColor(Ax.isTinyColor("-mt") ? Ax.getTinyColor("-mt") : initTextColor);
         }
     }
 }
