@@ -3244,11 +3244,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
 
+        if (Ax.isTinyColor("cMain"))
+            bgColor = tinydb.getString("cMain");
+
         if (roundedButtons) {
             try {
                 ColorStateList bgCSL;
 
-                if (isCustomTheme && Ax.isTinyColor("cMain"))
+                if (Ax.isTinyColor("cMain"))
                     bgCSL = ColorStateList.valueOf(Ax.getTinyColor("cMain"));
                 else if (theme.equals("2"))
                     bgCSL = ColorStateList.valueOf(Color.WHITE);
@@ -6471,6 +6474,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         e.printStackTrace();
                     }
                 }
+            }
+
+            //bgAnim color handled in setMTColor
+            if (Ax.isTinyColor("cMain")) {
+                findViewById(R.id.mainView).setBackgroundColor(Ax.getTinyColor("cMain"));
+                drawer.setBackgroundColor(Ax.getTinyColor("cMain"));
             }
 
             setMTColor(Ax.isTinyColor("-mt") ? Ax.getTinyColor("-mt") : textColor);

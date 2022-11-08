@@ -1078,6 +1078,8 @@
                 android:text="INV"
                 android:textColor="@color/white"
                 android:textSize="16sp"
+                android:elevation="0dp"
+                android:stateListAnimator="@null"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/swapTopBar"
                 app:layout_constraintHeight="ratio=1:1"
