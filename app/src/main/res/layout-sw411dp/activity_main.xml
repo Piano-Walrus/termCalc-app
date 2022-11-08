@@ -84,7 +84,6 @@
                         android:textColor="#FEFEFE"
                         android:textSize="42sp"
                         android:maxLines="1"
-                        android:inputType="text"
                         android:importantForAutofill="no"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
