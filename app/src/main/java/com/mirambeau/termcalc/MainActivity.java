@@ -876,9 +876,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             else if (theme.equals("3")) {
                 toolbar.setPopupTheme(R.style.ThemeOverlay_AppCompat_Dark);
 
-                if (Build.VERSION.SDK_INT >= 21) {
-                    getWindow().setNavigationBarColor(Color.BLACK);
-                }
+                getWindow().setNavigationBarColor(Color.BLACK);
 
                 main.setFitsSystemWindows(true);
                 frame.setFitsSystemWindows(true);
@@ -911,9 +909,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     mainOps[i].setTextColor(primaryColor);
                 }
 
-                if (bMod != null) {
+                if (bMod != null)
                     bMod.setTextColor(secondaryColor);
-                }
 
                 for (i = 0; i < 7; i++) {
                     try {
@@ -935,9 +932,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 final Button inv2 = findViewById(R.id.bInv2);
 
-                if (inv2 != null) {
+                if (inv2 != null)
                     inv2.setTextColor(Ax.isTinyColor("-bINV2t") && isCustomTheme ? Ax.getTinyColor("-bINV2t") : tertiaryColor);
-                }
 
                 bParenthesisOpen.setTextColor(tertiaryColor);
                 bParenthesisClose.setTextColor(tertiaryColor);
@@ -6478,8 +6474,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             //bgAnim color handled in setMTColor
             if (Ax.isTinyColor("cMain")) {
-                findViewById(R.id.mainView).setBackgroundColor(Ax.getTinyColor("cMain"));
-                drawer.setBackgroundColor(Ax.getTinyColor("cMain"));
+                try {
+                    findViewById(R.id.mainView).setBackgroundColor(Ax.getTinyColor("cMain"));
+                    findViewById(R.id.drawer_layout).setBackgroundColor(Ax.getTinyColor("cMain"));
+
+                    //TODO: Figure out why black buttons themes have a gray status bar ??
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             setMTColor(Ax.isTinyColor("-mt") ? Ax.getTinyColor("-mt") : textColor);
