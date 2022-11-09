@@ -488,6 +488,7 @@ public class EditorActivity extends AppCompatActivity {
             ConstraintLayout saveLayout = findViewById(R.id.saveOptionLayout);
             ConstraintLayout importLayout = findViewById(R.id.importOptionLayout);
             ConstraintLayout advancedLayout = findViewById(R.id.advancedOptionLayout);
+            ConstraintLayout resetLayout = findViewById(R.id.resetOptionLayout);
 
             drawerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -523,6 +524,19 @@ public class EditorActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(EditorActivity.this, AdvancedThemeOptionsActivity.class);
                     startActivity(intent);
+                }
+            });
+
+            //TODO: Remove after changing to alertDialog
+            resetLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    newRun("reset all");
+
+                    tinydb.putString("-bop", "\0");
+                    tinydb.putString("-btt", "\0");
+
+                    recreate();
                 }
             });
 
@@ -1517,6 +1531,11 @@ public class EditorActivity extends AppCompatActivity {
 
         if (findViewById(R.id.styleShapeDimBG).getVisibility() == View.VISIBLE) {
             findViewById(R.id.styleShapeDimBG).performClick();
+            return;
+        }
+
+        if (findViewById(R.id.editorBlurView).getVisibility() == View.VISIBLE) {
+            closeDrawer();
             return;
         }
 
@@ -4195,13 +4214,6 @@ public class EditorActivity extends AppCompatActivity {
                 }
                 else if (cmd.startsWith("set") || cmd.startsWith("Set") || cmd.startsWith("SET")) {
                     Log.d("printf", setError);
-                }
-
-                if (!Ax.isNull(cFabText)) {
-                    if (cFabText.equals("#reset0")) {
-                        cFabText = "\0";
-                        tinydb.putString("cFabText", "\0");
-                    }
                 }
             }
 

@@ -6488,6 +6488,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
             setMTColor(Ax.isTinyColor("-mt") ? Ax.getTinyColor("-mt") : initTextColor);
+
+            if (Ax.isTinyColor("cFabText"))
+                ((ImageButton) findViewById(R.id.delete)).setColorFilter(Ax.getTinyColor("cFabText"));
         }
     }
 }
