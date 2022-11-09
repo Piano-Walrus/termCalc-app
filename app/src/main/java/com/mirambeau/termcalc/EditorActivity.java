@@ -454,7 +454,6 @@ public class EditorActivity extends AppCompatActivity {
                             tinydb.putString("customTheme", themeStr);
                             tinydb.putString("basicTheme", themeStr);
 
-
                             recreate();
 
                             ((ConstraintLayout) themeStyleButtons[fi].getParent()).setBackground(Ax.getDrawable(R.drawable.theme_toggle_selected));
