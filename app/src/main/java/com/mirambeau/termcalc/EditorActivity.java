@@ -165,7 +165,7 @@ public class EditorActivity extends AppCompatActivity {
 
             final int theme = Ax.getThemeInt();
 
-            newTheme = Ax.getThemeInt();
+            newTheme = theme;
 
             //Initialize BackupCards
             File directory = new File(this.getFilesDir(), "themes");
@@ -288,11 +288,9 @@ public class EditorActivity extends AppCompatActivity {
                 public void onApplyClick(int position) {
                     final String title = cards.get(position).getThemeName();
 
-                    tinydb.putBoolean("custom", true);
-
                     Toast.makeText(EditorActivity.this, getString(R.string.successfully_restored_theme) + title + "\"", Toast.LENGTH_SHORT).show();
 
-                    newRun("reset all");
+                    resetToDefaults();
 
                     try {
                         restore(title);
@@ -439,7 +437,7 @@ public class EditorActivity extends AppCompatActivity {
             ((ConstraintLayout) themeStyleButtons[Integer.parseInt(tinydb.getString("theme"))].getParent()).setBackground(Ax.getDrawable(R.drawable.theme_toggle_selected));
 
             //Handle Theme Style Buttons
-            for (i=0; i < themeStyleButtons.length; i++) {
+            for (i=1; i < themeStyleButtons.length; i++) {
                 if (themeStyleButtons[i] != null) {
                     final int fi = i;
 
@@ -451,14 +449,12 @@ public class EditorActivity extends AppCompatActivity {
 
                             //TODO: Make this work properly (change theme temporarily until apply is pressed, etc.)
                             tinydb.putString("theme", themeStr);
-                            tinydb.putString("customTheme", themeStr);
-                            tinydb.putString("basicTheme", themeStr);
 
                             recreate();
 
                             ((ConstraintLayout) themeStyleButtons[fi].getParent()).setBackground(Ax.getDrawable(R.drawable.theme_toggle_selected));
 
-                            for (j=0; j < themeStyleButtons.length; j++) {
+                            for (j=1; j < themeStyleButtons.length; j++) {
                                 if (j != fi && themeStyleButtons[j] != null)
                                     ((ConstraintLayout) themeStyleButtons[j].getParent()).setBackground(null);
                             }
@@ -530,10 +526,7 @@ public class EditorActivity extends AppCompatActivity {
             resetLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    newRun("reset all");
-
-                    tinydb.putString("-bop", "\0");
-                    tinydb.putString("-btt", "\0");
+                    resetToDefaults();
 
                     recreate();
                 }
@@ -1756,19 +1749,7 @@ public class EditorActivity extends AppCompatActivity {
                         isr = new InputStreamReader(fis);
                         bufferedReader = new BufferedReader(isr);
 
-                        newRun("reset all");
-                        newRun("reset -bⁿ√");
-                        newRun("reset -bⁿ√t");
-                        newRun("set -mt #reset0");
-
-                        tinydb.putString("-bINV2", "");
-                        tinydb.putString("-bINV2t", "");
-
-                        tinydb.putString("-btt", "");
-                        tinydb.putString("-bop", "");
-
-                        tinydb.putString("-bfc", "");
-                        tinydb.putString("-bfct", "");
+                        resetToDefaults();
 
                         for (i = 0; (line = bufferedReader.readLine()) != null; i++) {
                             if (Ax.isDigit(Ax.chat(line, 0)) && line.contains("name:"))
@@ -1814,23 +1795,7 @@ public class EditorActivity extends AppCompatActivity {
                                     newRun("set -mt " + uiHex);
                             }
                             else if (Ax.isDigit(line) && Integer.parseInt(line) > 0 && Integer.parseInt(line) <= 5) {
-                                if (line.equals("2"))
-                                    tinydb.putString("customTheme", line);
-                                //TODO: Custom monochrome themes, maybe, possibly, if it's not too difficult
-                                else if (line.equals("5"))
-                                    tinydb.putString("customTheme", "2");
-                                else {
-                                    if (tinydb.getBoolean("darkStatusBar"))
-                                        tinydb.putString("customTheme", "1");
-                                    else
-                                        tinydb.putString("customTheme", "3");
-                                }
-
-                                tinydb.putString("theme", tinydb.getString("customTheme"));
-                                tinydb.putString("basicTheme", tinydb.getString("customTheme"));
-
-                                if (tinydb.getString("buttonShape").equals("2"))
-                                    tinydb.putBoolean("custom", false);
+                                tinydb.putString("theme", line);
                             }
                         }
 
@@ -1964,8 +1929,7 @@ public class EditorActivity extends AppCompatActivity {
         }
 
         //Apply main theme
-        tinydb.putString("theme", newTheme == 2 ? THEME_LIGHT : THEME_DARK);
-        tinydb.putString("customTheme", newTheme == 2 ? THEME_LIGHT : THEME_DARK);
+        tinydb.putString("theme", Integer.toString(newTheme));
 
         try {
             ThemeActivity.themeActivity.recreate();
@@ -4288,6 +4252,25 @@ public class EditorActivity extends AppCompatActivity {
         }
 
         return output;
+    }
+
+    public void resetToDefaults() {
+        TinyDB tinydb = new TinyDB(MainActivity.mainActivity);
+        newRun("reset all");
+
+        tinydb.putString("-bop", "\0");
+        tinydb.putString("-btt", "\0");
+
+        tinydb.putString("-bⁿ√", "\0");
+        tinydb.putString("-bⁿ√t", "\0");
+
+        tinydb.putString("-mt", "#reset0");
+
+        tinydb.putString("-bINV2", "");
+        tinydb.putString("-bINV2t", "");
+
+        tinydb.putString("-bfc", "");
+        tinydb.putString("-bfct", "");
     }
 
     public void openStyleShapeCard(View view) {

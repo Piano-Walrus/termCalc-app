@@ -175,8 +175,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             isFocus = tinydb.getBoolean("isFocus");
 
-            //TODO: Enable custom rounded buttons themes, possibly after merging basic and custom themes into one layout
-            roundedButtons = tinydb.getString("buttonShape").equals("2") && !theme.equals("5") && !theme.equals("4");
+            //TODO: Rounded buttons black buttons themes ?
+            roundedButtons = tinydb.getString("buttonShape").equals("2") && !theme.equals("4");
 
             if (!tinydb.getBoolean("mtIsSet"))
                 tinydb.putString("-mt", "\0");
@@ -190,6 +190,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 tinydb.putBoolean("clearedHistory", true);
             }
+
+            tinydb.putBoolean("custom", false);
 
             isDynamic = tinydb.getBoolean("isDynamic");
             tinydb.putBoolean("termButton", true);
@@ -271,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 navBG = tinydb.getString("cMain");
 
             // ------------------- Set Content View ------------------- //
-            setContentView(roundedButtons && !theme.equals("5") ? R.layout.activity_main_round : R.layout.activity_main);
+            setContentView(roundedButtons ? R.layout.activity_main_round : R.layout.activity_main);
 
             mainActivity = this;
             drawer = findViewById(R.id.drawer_layout);
@@ -586,9 +588,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
 
-            if (theme.equals("1") || theme.equals("3"))
-                EditorActivity.THEME_DARK = theme;
-
             constantTitles = tinydb.getListString("constantTitles");
             constantNums = tinydb.getListString("constantNums");
             constantUnits = tinydb.getListString("constantUnits");
@@ -725,7 +724,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
             if (!roundedButtons)
-                scrollBar.setBackgroundColor(theme.equals("5") ? Color.parseColor(isDarkTab ? Ax.hexAdd(secondary, -6) : secondary) : secondaryColor);
+                scrollBar.setBackgroundColor(theme.equals("5") ? Color.parseColor(isDarkTab && !roundedButtons ? Ax.hexAdd(secondary, -6) : secondary) : secondaryColor);
 
             if (!isBig) {
                 if (theme.equals("2"))
@@ -887,6 +886,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 bgColor = secondary;
 
                 secondary = isDarkTab ? Ax.hexAdd(secondary, -6) : secondary;
+                tertiary = secondary;
 
                 bTextColor = "#303030";
                 keypadColor = secondary;
@@ -895,17 +895,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 getWindow().setNavigationBarColor(Color.BLACK);
 
-                    if (Build.VERSION.SDK_INT >= 23) {
-                        main.setFitsSystemWindows(true);
-                        frame.setFitsSystemWindows(true);
-                        getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                if (Build.VERSION.SDK_INT >= 23) {
+                    main.setFitsSystemWindows(true);
+                    frame.setFitsSystemWindows(true);
+                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-                        if (androidVersion >= 29) {
-                            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
-                            getWindow().setNavigationBarColor(Color.parseColor(secondary));
-                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                        }
+                    if (androidVersion >= 29) {
+                        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+                        getWindow().setNavigationBarColor(Color.parseColor(secondary));
+                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
                     }
+                }
 
                 setMTColor(monochromeTextColor);
 
@@ -915,9 +915,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     mainOps[i].setTextColor(monochromeTextColor);
                 }
 
-                if (bMod != null) {
+                if (bMod != null)
                     bMod.setTextColor(monochromeTextColor);
-                }
 
                 for (i = 0; i < 7; i++) {
                     try {
@@ -939,25 +938,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 final Button inv2 = findViewById(R.id.bInv2);
 
-                if (inv2 != null) {
+                if (inv2 != null)
                     inv2.setTextColor(monochromeTextColor);
-                }
 
                 bParenthesisOpen.setTextColor(monochromeTextColor);
                 bParenthesisClose.setTextColor(monochromeTextColor);
 
-                scrollBar.setBackgroundColor(Color.parseColor(secondary));
+                if (!roundedButtons)
+                    scrollBar.setBackgroundColor(Color.parseColor(secondary));
 
-                for (i = 0; i < 4; i++) {
-                    mainOps[i].setBackgroundColor(Color.parseColor(secondary));
-                }
-
-                if (tertiaryButtons != null) {
+                if (tertiaryButtons != null && !roundedButtons)
                     tertiaryButtons.setBackgroundColor(Color.parseColor(secondary));
-                }
-
-                bParenthesisClose.setBackgroundColor(Color.parseColor(secondary));
-                bParenthesisOpen.setBackgroundColor(Color.parseColor(secondary));
 
                 if (roundedButtons) {
                     backspace.setColorFilter(monochromeTextColor);
@@ -2048,9 +2039,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             String cSecondary = tinydb.getString("cSecondary");
 
-            if (theme.equals("4") && orientation == Configuration.ORIENTATION_LANDSCAPE && (cSecondary != null && !cSecondary.equals("\0") && cSecondary.length() == 7 && cSecondary.startsWith("#"))) {
-                bParenthesisOpen.setTextColor(Color.parseColor(cSecondary));
-                bParenthesisClose.setTextColor(Color.parseColor(cSecondary));
+            if (theme.equals("4") && orientation == Configuration.ORIENTATION_LANDSCAPE && (Ax.isTinyColor("cSecondary"))) {
+                //wait...shouldn't this be tertiary...... ?
+                bParenthesisOpen.setTextColor(Ax.getTinyColor("cSecondary"));
+                bParenthesisClose.setTextColor(Ax.getTinyColor("cSecondary"));
             }
 
             // If cKeypad and cPrimary are the same, hide the shadow between them
@@ -3063,12 +3055,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     if (theme.equals("5"))
                         ((ImageButton) findViewById(R.id.expand)).setColorFilter(monochromeTextColor);
-                    else if (theme.equals("4")) {
+                    else if (theme.equals("4"))
                         ((ImageButton) findViewById(R.id.expand)).setColorFilter(secondaryColor);
-                    }
-                    else if (tinyColor != null && (tinyColor.equals("14") || tinyColor.equals("17") && (theme.equals("3") || theme.equals("1")))) {
+                    else if (tinyColor != null && (tinyColor.equals("14") || tinyColor.equals("17") && (theme.equals("3") || theme.equals("1"))))
                         ((ImageButton) findViewById(R.id.expand)).setColorFilter(darkGray);
-                    }
                     else
                         ((ImageButton) findViewById(R.id.expand)).setColorFilter(Color.WHITE);
                 }
@@ -3305,7 +3295,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
         }
         else if (frame.getVisibility() == View.VISIBLE && !toolbar.getTitle().equals("Home")){
-            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            NavigationView navigationView = findViewById(R.id.nav_view);
             onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_home));
 
             toolbar.setTitle(getResources().getString(R.string.home_menu_item));
@@ -3378,17 +3368,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         recreate();
 
-        if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            setContentView(roundedButtons && Ax.getThemeInt() != 5 ? R.layout.activity_main_round : R.layout.activity_main);
-        }
-        else if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            setContentView(roundedButtons && Ax.getThemeInt() != 5 ? R.layout.activity_main_round : R.layout.activity_main);
+        setContentView(roundedButtons ? R.layout.activity_main_round : R.layout.activity_main);
 
-            if (theme != null && theme.equals("2")){
-                Button inv = findViewById(R.id.bInv);
-                inv.setTextColor(darkGray);
-            }
-        }
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE && theme != null && theme.equals("2"))
+            ((Button) findViewById(R.id.bInv)).setTextColor(darkGray);
     }
 
     @Override
@@ -6047,7 +6030,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         final ImageButton swapTopBar = findViewById(R.id.swapTopBar);
 
-        int textColor = theme.equals("2") ? darkGray : Color.parseColor(Ax.hexAdd(tertiary, 230));
+        int textColor = theme.equals("2") ? darkGray : (theme.equals("5") ? monochromeTextColor : Color.parseColor(Ax.hexAdd(tertiary, 230)));
         int initTextColor = textColor;
 
         final Button inv = findViewById(R.id.bInv);
@@ -6058,189 +6041,257 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         int orientation = this.getResources().getConfiguration().orientation;
 
-        if (roundedButtons) {
-            //SwapTopBar onClickListener
-            if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-                swapTopBar.setOnClickListener(v -> {
-                    int a;
+        //SwapTopBar onClickListener
+        if (roundedButtons && orientation == Configuration.ORIENTATION_PORTRAIT) {
+            swapTopBar.setOnClickListener(v -> {
+                int a;
 
-                    //Spin the swapTopBar button
-                    ObjectAnimator.ofFloat(v, "rotation", 0f, inv.getVisibility() == View.VISIBLE ? -360f : 360f).setDuration(782).start();
+                //Spin the swapTopBar button
+                ObjectAnimator.ofFloat(v, "rotation", 0f, inv.getVisibility() == View.VISIBLE ? -360f : 360f).setDuration(782).start();
 
-                    inv.setVisibility(Math.abs(inv.getVisibility() - 8));
+                inv.setVisibility(Math.abs(inv.getVisibility() - 8));
 
-                    final int inVisibility = inv.getVisibility();
-                    final boolean invIsVisible = inVisibility == View.VISIBLE;
-                    final int childCount = compLayout.getChildCount();
-                    int delay = 30;
-                    int delayCount = 0;
+                final int inVisibility = inv.getVisibility();
+                final boolean invIsVisible = inVisibility == View.VISIBLE;
+                final int childCount = compLayout.getChildCount();
+                int delay = 30;
+                int delayCount = 0;
 
-                    for (a = invIsVisible ? 0 : childCount - 1; a < childCount && a > -1; a += invIsVisible ? 1 : -1) {
-                        try {
-                            int finalA = a;
-
-                            new Handler((Looper.myLooper())).postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    try {
-                                        ((ConstraintLayout) compLayout.getChildAt(finalA)).getChildAt(1).setVisibility(inVisibility);
-                                    }
-                                    catch (Exception e) {
-                                        e.printStackTrace();
-
-                                        //Animate log and ln
-                                        compBar[finalA - 1].setVisibility(Math.abs(inVisibility - 8));
-                                    }
-                                }
-                            }, (int) ((delayCount++ * delay) / (invIsVisible ? 1 : 2.6)));
-                        }
-                        catch (Exception e) {
-                            e.printStackTrace();
-                            break;
-                        }
-                    }
-                });
-            }
-
-            for (int i = 0; i < allButtons.length; i++) {
-                for (int j = 0; j < allButtons[i].length; j++) {
+                for (a = invIsVisible ? 0 : childCount - 1; a < childCount && a > -1; a += invIsVisible ? 1 : -1) {
                     try {
-                        Button button = allButtons[i][j];
-                        String buttonText = button.getText().toString();
-                        String[] buttonTags = button.getTag().toString().split("`");
+                        int finalA = a;
 
-                        ViewParent parent = button.getParent();
+                        new Handler((Looper.myLooper())).postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    ((ConstraintLayout) compLayout.getChildAt(finalA)).getChildAt(1).setVisibility(inVisibility);
+                                }
+                                catch (Exception e) {
+                                    e.printStackTrace();
 
-                        String[] tagColors = {"~", "~"};
-
-                        int colorInt;
-                        String colorStr;
-
-                        boolean isTinyColor = false;
-                        boolean isParenthesis = false;
-                        boolean isDarkTextTheme = !theme.equals("2") && (color.equals("14") || color.equals("17")) && !Ax.isDigit(buttonText) && !buttonText.equals(".") && !Ax.isTinyColor(((View) button.getParent()).getTag().toString());
-
-                        for (int k=0; k < 2; k++) {
-                            if (Ax.isTinyColor(buttonTags[k]))
-                                tagColors[k] = tinydb.getString(buttonTags[k]);
-                            else if (Ax.isTinyColor(((View) parent).getTag().toString().split("`")[k]))
-                                tagColors[k] = tinydb.getString(((View) parent).getTag().toString().split("`")[k]);
-                        }
-
-                        if (Ax.isColor(tagColors[1])) {
-                            isDarkTextTheme = false;
-                            textColor = Color.parseColor(tagColors[1]);
-                        }
-
-                        RippleDrawable background;
-
-                        int rippleDarkenAmt = theme.equals("2") ? -32 : 24;
-
-                        //Text Colors
-                        if (buttonText.equals("=")) {
-                            //TODO: add square buttons tags
-                            if (theme.equals("2"))
-                                button.setTextColor(Ax.isTinyColor("-b=t") ? Ax.getTinyColor("-b=t") : (Ax.isTinyColor("cNum") ? Ax.getTinyColor("cNum") : Color.parseColor(Ax.hexAdd(primary, -28))));
-                            else
-                                button.setTextColor(Ax.isTinyColor("-b=t") ? Ax.getTinyColor("-b=t") : (Ax.isTinyColor("cNum") ? Ax.getTinyColor("cNum") : primaryColor));
-                        }
-                        else
-                            button.setTextColor(isDarkTextTheme ? darkGray : textColor);
-
-                        //Number Keypad
-                        if (parent == keypad) {
-                            Drawable newBG;
-
-                            String keypadColor = theme.equals("2") ? Ax.hexAdd(primary, 16) : (theme.equals("3") ? Ax.hexAdd(this.keypadColor, 20) : this.keypadColor);
-
-                            if (Ax.isColor(tagColors[0])) {
-                                isTinyColor = true;
-                                keypadColor = tagColors[0];
-                                rippleDarkenAmt = theme.equals("2") ? -40 : 40;
+                                    //Animate log and ln
+                                    compBar[finalA - 1].setVisibility(Math.abs(inVisibility - 8));
+                                }
                             }
-
-                            button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(keypadColor)));
-
-                            Drawable initBG = button.getBackground();
-                            background = createRippleDrawable(Color.parseColor(keypadColor), Color.parseColor(Ax.hexAdd(keypadColor, 2 * rippleDarkenAmt)), initBG, initBG);
-
-                            button.setBackground(background);
-
-                            newBG = button.getBackground();
-
-                            if (theme.equals("2") && !isTinyColor)
-                                newBG.setAlpha(26);
-
-                            button.setBackground(newBG);
-                            continue;
-                        }
-
-                        //Main Ops
-                        if (buttonText.equals("+") || buttonText.equals("-") || buttonText.equals(Ax.multi) || buttonText.equals(Ax.divi)) {
-                            isTinyColor = Ax.isColor(tagColors[0]);
-                            colorInt = isTinyColor ? Color.parseColor(tagColors[0]) : primaryColor;
-                            colorStr = isTinyColor ? tagColors[0] : primary;
-                        }
-                        //CompBar & TrigBar
-                        else if (parent.getParent() == compLayout || parent == compLayout || (orientation != Configuration.ORIENTATION_PORTRAIT && parent == findViewById(R.id.scrollBar))) {
-                            isTinyColor = Ax.isColor(tagColors[0]);
-                            colorInt = isTinyColor ? Color.parseColor(tagColors[0]) : secondaryColor;
-                            colorStr = isTinyColor ? tagColors[0] : secondary;
-                        }
-                        //Parenthesis
-                        else if (buttonText.equals("(") || buttonText.equals(")")) {
-                            //TODO: If i merge applyTheme with square buttons, add a check for roundedButtons here
-                            ((View) parent).setBackground(null);
-                            isParenthesis = true;
-
-                            isTinyColor = Ax.isColor(tagColors[0]);
-                            colorInt = isTinyColor ? Color.parseColor(tagColors[0]) : tertiaryColor;
-                            colorStr = isTinyColor ? tagColors[0] : tertiary;
-                        }
-                        else
-                            continue;
-
-                        if (isTinyColor)
-                            rippleDarkenAmt = theme.equals("2") ? -40 : 40;
-
-                        button.setBackgroundTintList(ColorStateList.valueOf(colorInt));
-
-                        Drawable initBG = button.getBackground();
-                        background = createRippleDrawable(colorInt, Color.parseColor(Ax.hexAdd(colorStr, rippleDarkenAmt)), initBG, initBG);
-
-                        button.setBackground(background);
-
-                        button.setElevation(isParenthesis ? 16f : 0f);
-                        button.setStateListAnimator(null);
+                        }, (int) ((delayCount++ * delay) / (invIsVisible ? 1 : 2.6)));
                     }
                     catch (Exception e) {
                         e.printStackTrace();
+                        break;
                     }
                 }
-            }
+            });
+        }
 
-            //bgAnim color handled in setMTColor
-            ConstraintLayout main = findViewById(R.id.mainView);
-            DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-
-            if (Ax.isTinyColor("cMain")) {
+        for (int i = 0; i < allButtons.length; i++) {
+            for (int j = 0; j < allButtons[i].length; j++) {
                 try {
-                    main.setBackgroundColor(Ax.getTinyColor("cMain"));
-                    drawerLayout.setBackgroundColor(Ax.getTinyColor("cMain"));
+                    Button button = allButtons[i][j];
+                    String buttonText = button.getText().toString();
+                    String[] buttonTags = button.getTag().toString().split("`");
+
+                    View parent = (View) button.getParent();
+                    String[] parentTags = parent.getTag().toString().split("`");
+
+                    String[] tagColors = {"~", "~"};
+
+                    int colorInt;
+                    String colorStr;
+
+                    boolean isTinyColor = false;
+                    boolean isParenthesis = false;
+                    //this might be causing the decimal color bug
+                    boolean isDarkTextTheme = !theme.equals("2") && (color.equals("14") || color.equals("17")) && !Ax.isDigit(buttonText) && !buttonText.equals(".") && !Ax.isTinyColor(parentTags[1]);
+
+                    for (int k=0; k < 2; k++) {
+                        if (Ax.isTinyColor(buttonTags[k]))
+                            tagColors[k] = tinydb.getString(buttonTags[k]);
+                        else if (Ax.isTinyColor(parentTags[k]))
+                            tagColors[k] = tinydb.getString(parentTags[k]);
+                    }
+
+                    if (Ax.isColor(tagColors[1])) {
+                        isDarkTextTheme = false;
+                        textColor = Color.parseColor(tagColors[1]);
+                    }
+
+                    RippleDrawable background;
+
+                    int rippleDarkenAmt = theme.equals("2") || theme.equals("5") ? -32 : 24;
+
+                    //Text Colors
+                    if (buttonText.equals("=")) {
+                        //TODO: add square buttons tags
+                        if (theme.equals("2"))
+                            button.setTextColor(Ax.isTinyColor("-b=t") ? Ax.getTinyColor("-b=t") : (Ax.isTinyColor("cNum") ? Ax.getTinyColor("cNum") : Color.parseColor(Ax.hexAdd(primary, -28))));
+                        else if (theme.equals("5"))
+                            button.setTextColor(Ax.isTinyColor("-b=t") ? Ax.getTinyColor("-b=t") : (Ax.isTinyColor("cNum") ? Ax.getTinyColor("cNum") : monochromeTextColor));
+                        else
+                            button.setTextColor(Ax.isTinyColor("-b=t") ? Ax.getTinyColor("-b=t") : (Ax.isTinyColor("cNum") ? Ax.getTinyColor("cNum") : primaryColor));
+                    }
+                    else
+                        button.setTextColor(isDarkTextTheme ? darkGray : textColor);
+
+                    //Number Keypad
+                    if (parent == keypad) {
+                        Drawable newBG;
+
+                        String keypadColor = theme.equals("2") ? Ax.hexAdd(primary, 16) : (theme.equals("3") ? Ax.hexAdd(this.keypadColor, 20) : this.keypadColor);
+
+                        if (Ax.isColor(tagColors[0])) {
+                            isTinyColor = true;
+                            keypadColor = tagColors[0];
+                            rippleDarkenAmt = theme.equals("2") || theme.equals("5") ? -40 : 40;
+                        }
+
+                        button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(keypadColor)));
+
+                        Drawable initBG = button.getBackground();
+                        background = createRippleDrawable(Color.parseColor(keypadColor), Color.parseColor(Ax.hexAdd(keypadColor, 2 * rippleDarkenAmt)), initBG, initBG);
+
+                        button.setBackground(background);
+
+                        newBG = button.getBackground();
+
+                        if (theme.equals("2") && !isTinyColor)
+                            newBG.setAlpha(26);
+
+                        button.setBackground(newBG);
+                        continue;
+                    }
+
+                    //Main Ops
+                    if (buttonText.equals("+") || buttonText.equals("-") || buttonText.equals(Ax.multi) || buttonText.equals(Ax.divi)) {
+                        String mainOpsColor = theme.equals("5") ? Ax.hexAdd(secondary, -6) : primary;
+
+                        isTinyColor = Ax.isColor(tagColors[0]);
+
+                        if (theme.equals("5") && Ax.isTinyColor("cSecondary"))
+                            tagColors[0] = Ax.hexAdd(tinydb.getString("cSecondary"), -6);
+
+                        colorInt = isTinyColor ? Color.parseColor(tagColors[0]) : Color.parseColor(mainOpsColor);
+                        colorStr = isTinyColor ? tagColors[0] : mainOpsColor;
+                    }
+                    //CompBar & TrigBar
+                    else if (parent.getParent() == compLayout || parent == compLayout || (orientation != Configuration.ORIENTATION_PORTRAIT && parent == findViewById(R.id.scrollBar))) {
+                        String compBarColor = theme.equals("5") ? Ax.hexAdd(secondary, -6) : secondary;
+
+                        isTinyColor = Ax.isColor(tagColors[0]);
+
+                        if (isTinyColor && theme.equals("5"))
+                            tagColors[0] = Ax.hexAdd(tagColors[0], -6);
+
+                        colorInt = isTinyColor ? Color.parseColor(tagColors[0]) : Color.parseColor(compBarColor);
+                        colorStr = isTinyColor ? tagColors[0] : compBarColor;
+                    }
+                    //Parenthesis
+                    else if (buttonText.equals("(") || buttonText.equals(")")) {
+                        if (roundedButtons) {
+                            parent.setBackground(null);
+                            isParenthesis = true;
+                        }
+
+                        String tertiaryButtonsColor = theme.equals("5") ? Ax.hexAdd(secondary, -6) : tertiary;
+
+                        if (theme.equals("5") && Ax.isTinyColor("cSecondary"))
+                            tagColors[0] = Ax.hexAdd(tinydb.getString("cSecondary"), -6);
+
+                        isTinyColor = Ax.isColor(tagColors[0]);
+                        colorInt = isTinyColor ? Color.parseColor(tagColors[0]) : Color.parseColor(tertiaryButtonsColor);
+                        colorStr = isTinyColor ? tagColors[0] : tertiaryButtonsColor;
+                    }
+                    else
+                        continue;
+
+                    if (isTinyColor)
+                        rippleDarkenAmt = theme.equals("2") ? -40 : 40;
+
+                    button.setBackgroundTintList(ColorStateList.valueOf(colorInt));
+
+                    Drawable initBG = button.getBackground();
+                    background = createRippleDrawable(colorInt, Color.parseColor(Ax.hexAdd(colorStr, rippleDarkenAmt)), initBG, initBG);
+
+                    button.setBackground(background);
+
+                    button.setElevation(isParenthesis ? 16f : 0f);
+                    button.setStateListAnimator(null);
                 }
                 catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-            else {
-                main.setBackgroundColor(Color.parseColor(bgColor));
-                drawerLayout.setBackgroundColor(Color.parseColor(bgColor));
+        }
+
+        //bgAnim color handled in setMTColor
+        ConstraintLayout main = findViewById(R.id.mainView);
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+
+        if (Ax.isTinyColor("cMain")) {
+            try {
+                main.setBackgroundColor(Ax.getTinyColor("cMain"));
+                drawerLayout.setBackgroundColor(Ax.getTinyColor("cMain"));
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            main.setBackgroundColor(Color.parseColor(bgColor));
+            drawerLayout.setBackgroundColor(Color.parseColor(bgColor));
+        }
+
+        setMTColor(Ax.isTinyColor("-mt") ? Ax.getTinyColor("-mt") : initTextColor);
+
+        if (roundedButtons && Ax.isTinyColor("cFabText"))
+            ((ImageButton) findViewById(R.id.delete)).setColorFilter(Ax.getTinyColor("cFabText"));
+
+        if (!roundedButtons) {
+            FloatingActionButton expandCustoms = findViewById(R.id.expandCustoms);
+            FloatingActionButton decFrac = findViewById(R.id.decFracButton);
+
+            FloatingActionButton bDel = findViewById(R.id.bDel);
+
+            try {
+                //Expand Customs Background Color
+                if (Ax.isTinyColor("-bfc")) {
+                    expandCustoms.setBackgroundTintList(ColorStateList.valueOf(Ax.getTinyColor("-bfc")));
+                    decFrac.setBackgroundTintList(ColorStateList.valueOf(Ax.getTinyColor("-bfc")));
+                }
+                else if (Ax.isTinyColor("cFab")) {
+                    expandCustoms.setBackgroundTintList(ColorStateList.valueOf(Ax.getTinyColor("cFab")));
+                    decFrac.setBackgroundTintList(ColorStateList.valueOf(Ax.getTinyColor("cFab")));
+                }
+                else {
+                    expandCustoms.setBackgroundTintList(bDel.getBackgroundTintList());
+                    decFrac.setBackgroundTintList(bDel.getBackgroundTintList());
+                }
+
+                //Expand Customs Text Color
+                if (Ax.isTinyColor("-bfct")) {
+                    expandCustoms.setColorFilter(Ax.getTinyColor("-bfct"));
+                    decFrac.setColorFilter(Ax.getTinyColor("-bfct"));
+                }
+                else if (Ax.isTinyColor("cFabText")) {
+                    expandCustoms.setColorFilter(Ax.getTinyColor("cFabText"));
+                    decFrac.setColorFilter(Ax.getTinyColor("cFabText"));
+                }
+                else if (Ax.isTinyColor("-bop")) {
+                    expandCustoms.setColorFilter(Ax.getTinyColor("-bop"));
+                    decFrac.setColorFilter(Ax.getTinyColor("-bop"));
+                }
+                else {
+                    expandCustoms.setColorFilter(bDel.getColorFilter());
+                    decFrac.setColorFilter(bDel.getColorFilter());
+                }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
             }
 
-            setMTColor(Ax.isTinyColor("-mt") ? Ax.getTinyColor("-mt") : initTextColor);
-
-            if (Ax.isTinyColor("cFabText"))
-                ((ImageButton) findViewById(R.id.delete)).setColorFilter(Ax.getTinyColor("cFabText"));
+            //TODO: Figure out black buttons theme logic
+            if (!roundedButtons && theme.equals("4"))
+                setExpandBGColor("#000000");
         }
     }
 }
