@@ -8,8 +8,11 @@
     <string name="other_menu_header">Más</string>
     <string name="theme_settings">Configuración</string>
     <string name="home_menu_item">Pantalla Principal</string>
+
     <string name="parse_error">Error de Análisis</string>
     <string name="domain_error">Error de Dominio</string>
+    <string name="error_nan">NaN</string>
+
     <string name="dec_frac_menu_item">Decimal a Fracción</string>
     <string name="conversions_menu_item">Conversiones</string>
     <string name="check_for_updates">Buscar Actualizaciones</string>

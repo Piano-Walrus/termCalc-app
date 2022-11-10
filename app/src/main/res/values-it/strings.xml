@@ -21,8 +21,10 @@
 
     <string name="check_for_updates">Check For Updates</string>
     <string name="scientific_calculator">Scientific Calculator</string>
+
     <string name="domain_error">Domain Error</string>
     <string name="parse_error">Parse Error</string>
+    <string name="error_nan">NaN</string>
 
 
     <string name="unsaved_confirmation">Do you want to apply your changes to the current theme?</string>

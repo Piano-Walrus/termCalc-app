@@ -5169,9 +5169,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                             if (value == null || value.equals("\0"))
                                 break;
-                            else if (value.startsWith("-") && !Ax.isFullNum(value.substring(1)))
-                                break;
-                            else if (!Ax.isFullNum(value))
+                            else if (!Ax.isFullSignedNum(value))
                                 break;
                         }
 
@@ -5933,7 +5931,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         System.out.println("initCursor = " + cursor);
 
-        if (tvText.contains("Error") || tvText.contains("NaN"))
+        if (tvText.replace(" ", "").contains(MainActivity.mainActivity.getString(R.string.parse_error).replace(" ", "")) || tvText.replace(" ", "").contains(MainActivity.mainActivity.getString(R.string.domain_error).replace(" ", "")) || tvText.replace(" ", "").contains(MainActivity.mainActivity.getString(R.string.error_nan).replace(" ", "")))
             return;
 
         if (cursor < tvText.length() && cursor > 0) {
