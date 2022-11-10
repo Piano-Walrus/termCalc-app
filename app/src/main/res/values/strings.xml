@@ -30,8 +30,9 @@
         \n8. The equals/clear animation is now a bit smoother.
         \n9. The changelog will now display one more previous version.
         \n10. Updated Spanish translations. Most of the app is now available in Spanish!
-        \n11. Optimized more layouts for smaller devices.
-        \n12. Many bug fixes and performance improvements.
+        \n11. Added support for Android 13\'s "Themed Icons" feature.
+        \n12. Optimized more layouts for smaller devices.
+        \n13. Many bug fixes and performance improvements.
 
     </string>
 
