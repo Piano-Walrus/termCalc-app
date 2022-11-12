@@ -1,6 +1,6 @@
 <resources>
-    <string name="navigation_drawer_open">Apri navigation drawer</string>
-    <string name="navigation_drawer_close">Chiudi navigation drawer</string>
+    <string name="navigation_drawer_open">Apri il drawer di navigazione</string>
+    <string name="navigation_drawer_close">Chiudi il drawer di navigazione</string>
 
     <string name="home_menu_item">Home</string>
 
