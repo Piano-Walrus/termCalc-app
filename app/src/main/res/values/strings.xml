@@ -22,14 +22,14 @@
         1. Redesigned the Theme Editor (again). You can now switch between square buttons and rounded buttons!
         \n2. All themes are treated as custom themes now. This essentially just means that changing your accent color will now also affect your custom theme.
         \n3. The Settings and Advanced Options sections will now be themed according to your Accent Color. The text cursors in most layouts will also now use this color.
-        \n4. The \"Functions\" section has been redesigned to make evaluating functions more convenient.
-        \n5. While typing on the Home screen, the result of your expression will now be calculated as you type it!\n
+        \n4. While typing on the Home screen, the result of your expression will now be calculated as you type it!\n
         Note: This behavior can be disabled in settings.
-        \n6. The new input method is now finally out of beta! You can now tap an expression on the home screen to go back and edit it from any point. This also means a cursor will now always be shown on the Home screen.
-        \n7. Switched from double to BigDecimal precision, which should improve the accuracy of calculations involving multiple numbers with many decimal places.
-        \n8. The equals/clear animation is now a bit smoother.
-        \n9. The changelog will now display one more previous version.
-        \n10. Updated Spanish translations. Most of the app is now available in Spanish!
+        \n5. The new input method is now finally out of beta! You can now tap an expression on the home screen to go back and edit it from any point. This also means a cursor will now always be shown on the Home screen.
+        \n6. Switched from double to BigDecimal precision, which should improve the accuracy of calculations involving multiple numbers with many decimal places.
+        \n7. The \"Functions\" section has been redesigned to make evaluating functions more convenient.
+        \n8. The entire app is now available in Spanish and Italian! Big thanks to Lorenzo Vainigli on GitHub for adding Italian translations!
+        \n9. The equals/clear animation is now a bit smoother.
+        \n10. The changelog will now display one more previous version.
         \n11. Added support for Android 13\'s "Themed Icons" feature.
         \n12. Optimized more layouts for smaller devices.
         \n13. Many bug fixes and performance improvements.
