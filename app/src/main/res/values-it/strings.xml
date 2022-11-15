@@ -50,7 +50,7 @@
     <string name="importNew">Importa</string>
     <string name="backup_current_theme">Backup del tema corrente</string>
 
-    <string name="terminal_intro_text">Digita \"help\" o \"?\" per una lista dei comandi disponibili.\n
+    <string name="terminal_intro_text">Digita \"aiuto\" o \"?\" per una lista dei comandi disponibili.\n
 
     </string>
     <string name="new_function">Nuova funzione</string>
