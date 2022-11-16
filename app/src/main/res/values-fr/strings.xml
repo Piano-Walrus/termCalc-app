@@ -1,0 +1,269 @@
+<resources>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="home_menu_item">Home</string>
+
+    <string name="date_menu_item">Date Calculator</string>
+    <string name="dec_frac_menu_item">Decimal to Fraction</string>
+    <string name="term_menu_item">Theme</string>
+    <string name="conversions_menu_item">Conversions</string>
+    <string name="about_menu_item">About</string>
+    <string name="configuration_menu_header">Personalization</string>
+    <string name="other_menu_header">Other</string>
+    <string name="history">History</string>
+    <string name="changelog">Changelog</string>
+
+    <string name="theme_settings">Settings</string>
+
+    <string name="version">Version</string>
+
+
+    <string name="check_for_updates">Check For Updates</string>
+    <string name="scientific_calculator">Scientific Calculator</string>
+
+    <string name="domain_error">Domain Error</string>
+    <string name="parse_error">Parse Error</string>
+    <string name="error_nan">NaN</string>
+
+
+    <string name="unsaved_confirmation">Do you want to apply your changes to the current theme?</string>
+
+
+    <string name="licenses">Licenses &amp; Credits</string>
+    <string name="licenses_title">Licenses</string>
+    <string name="contributors">Contributors</string>
+
+    <string name="current_release">Current Release</string>
+    <string name="previous_versions">Previous Versions</string>
+
+    <string name="twitter_title">Twitter Icon by \"Pixel perfect\"</string>
+    <string name="image_attributions">Image Attributions:</string>
+    <string name="apache_licenses">Apache 2.0 Licenses:</string>
+    <string name="constants">Constants</string>
+    <string name="functions">Functions</string>
+    <string name="geometry">Geometry</string>
+    <string name="area">AREA</string>
+    <string name="volume">VOLUME</string>
+    <string name="surface_area">SURFACE AREA</string>
+
+    <string name="importNew">Import</string>
+    <string name="backup_current_theme">Save current theme</string>
+
+    <string name="terminal_intro_text">Type \"help\" or \"?\" for a list of available commands.\n
+
+    </string>
+    <string name="new_function">New Function</string>
+    <string name="new_constant">New Constant</string>
+
+    <string name="theme_nav_summary">Apply the colors in your theme to the nav drawer.</string>
+    <string name="clear">Clear</string>
+    <string name="focus_summary">Hides system bars to minimize distraction.</string>
+    <string name="shape">Button Shape</string>
+    <string name="shape_square">Square</string>
+    <string name="shape_round">Round</string>
+    <string name="style_color">Style &amp; Color</string>
+    <string name="style">Style</string>
+    <string name="color">Color</string>
+    <string name="editor_options">Options</string>
+    <string name="editor_save">Save</string>
+    <string name="saved_themes">Saved Themes</string>
+    <string name="editor_reset">Reset to Defaults</string>
+    <string name="advanced_options">Advanced Options</string>
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
+    <string name="black">Black</string>
+    <string name="midnight">Midnight</string>
+    <string name="monochrome">Monochrome</string>
+    <string name="new_theme">New Theme</string>
+    <string name="keypad">KEYPAD</string>
+    <string name="primary">PRIMARY</string>
+    <string name="top_bar_right">TOP BAR (RIGHT)</string>
+    <string name="top_bar_left">TOP BAR (LEFT)</string>
+    <string name="main_background">MAIN BACKGROUND</string>
+    <string name="theme_name">Theme Name</string>
+    <string name="contact_me">Contact Me:</string>
+    <string name="support_development">Support Development:</string>
+    <string name="feedback">Feedback:</string>
+    <string name="help">Help</string>
+    <string name="today">Today</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="last_week">Last Week</string>
+    <string name="older">Older</string>
+    <string name="buttons">Buttons</string>
+    <string name="zones">Zones</string>
+    <string name="color_picker">Color Picker</string>
+    <string name="clipboard">Clipboard</string>
+    <string name="background">Background</string>
+    <string name="text">Text</string>
+    <string name="rectangle">Rectangle</string>
+    <string name="circle">Circle</string>
+    <string name="ellipse">Ellipse</string>
+    <string name="triangle">Triangle</string>
+    <string name="trapezoid">Trapezoid</string>
+    <string name="parallelogram">Parallelogram</string>
+    <string name="pentagon">Pentagon</string>
+    <string name="hexagon">Hexagon</string>
+    <string name="heptagon">Heptagon</string>
+    <string name="octagon">Octagon</string>
+    <string name="nonagon">Nonagon</string>
+    <string name="decagon">Decagon</string>
+    <string name="cube">Cube</string>
+    <string name="rectangular_prism">Rectangular Prism</string>
+    <string name="sphere">Sphere</string>
+    <string name="hemisphere">Hemisphere</string>
+    <string name="triangular_prism">Triangular Prism</string>
+    <string name="pyramid_triangular_base">Pyramid (Triangular Base)</string>
+    <string name="pyramid_rectangular_base">Pyramid (Rectangular Base)</string>
+    <string name="pentagonal_prism">Pentagonal Prism</string>
+    <string name="cone">Cone</string>
+    <string name="cylinder">Cylinder</string>
+    <string name="regular_octahedron">Regular Octahedron</string>
+    <string name="dodecahedron">Dodecahedron</string>
+    <string name="torus">Torus</string>
+    <string name="side_length">Side Length</string>
+    <string name="length">Length</string>
+    <string name="width">Width</string>
+    <string name="radius">Radius</string>
+    <string name="major_radius">Major Radius</string>
+    <string name="minor_radius">Minor Radius</string>
+    <string name="base_length">Base Length</string>
+    <string name="height">Height</string>
+    <string name="lower_base">Lower Base</string>
+    <string name="upper_base">Upper Base</string>
+    <string name="apothem">Apothem</string>
+    <string name="base_length_2">Base</string>
+    <string name="base_area">Base Area</string>
+    <string name="pyramid_height">Pyramid Height</string>
+    <string name="prism_height">Prism Height</string>
+    <string name="base_width">Base Width</string>
+    <string name="base_perimeter">Base Perimeter</string>
+    <string name="slant_height">Slant Height</string>
+    <string name="edit">Edit</string>
+    <string name="shortcuts">Shortcuts</string>
+    <string name="delete">Delete</string>
+    <string name="distance_inches">Inches</string>
+    <string name="distance_feet">Feet</string>
+    <string name="distance_yards">Yards</string>
+    <string name="distance_miles">Miles</string>
+    <string name="distance_millimeters">Millimeters</string>
+    <string name="distance_centimeters">Centimeters</string>
+    <string name="distance_meters">Meters</string>
+    <string name="distance_kilometers">Kilometers</string>
+    <string name="open_terminal">Open Terminal</string>
+    <string name="mass_micrograms">Micrograms</string>
+    <string name="mass_milligrams">Milligrams</string>
+    <string name="mass_centigrams">Centigrams</string>
+    <string name="mass_grams">Grams</string>
+    <string name="mass_kilograms">Kilograms</string>
+    <string name="mass_ounces">Ounces</string>
+    <string name="mass_pounds">Pounds</string>
+    <string name="mass_newtons">Newtons</string>
+    <string name="mass_stones">Stones</string>
+    <string name="temp_fahrenheit">Fahrenheit</string>
+    <string name="temp_celsius">Celsius</string>
+    <string name="temp_kelvin">Kelvin</string>
+    <string name="time_nanoseconds">Nanoseconds</string>
+    <string name="time_microseconds">Microseconds</string>
+    <string name="time_milliseconds">Milliseconds</string>
+    <string name="time_seconds">Seconds</string>
+    <string name="time_minutes">Minutes</string>
+    <string name="time_hours">Hours</string>
+    <string name="time_days">Days</string>
+    <string name="time_weeks">Weeks</string>
+    <string name="volume_milliliters">Milliliters</string>
+    <string name="volume_liters">Liters</string>
+    <string name="volume_cubic_meters">Cubic Meters</string>
+    <string name="volume_ounces">Ounces</string>
+    <string name="volume_cups">Cups</string>
+    <string name="volume_pints">Pints</string>
+    <string name="volume_quarts">Quarts</string>
+    <string name="volume_gallons">Gallons</string>
+    <string name="calculate">CALCULATE</string>
+    <string name="years">YEARS</string>
+    <string name="months">MONTHS</string>
+    <string name="days">DAYS</string>
+    <string name="from">From:</string>
+    <string name="to">To:</string>
+    <string name="select_shortcut_key">Select the number key(s) to which you would like to assign</string>
+    <string name="always_dark_nav">Always set the nav drawer to dark mode.</string>
+    <string name="darken_status_bar">Darken the status bar slightly when using a custom dark theme.</string>
+    <string name="darken_tab">Slightly darken the tab above the top bar.</string>
+    <string name="dynamic_precision_description">Let TermCalc determine the number of decimal places to display based on your input.</string>
+    <string name="max_decimals_description">Note: Some complex operations may take noticeably longer to complete if this value is greater than 10.</string>
+    <string name="live_expression_description">Calculate and display expression results before pressing the equals button.</string>
+    <string name="ignore_pemdas_description">Ignore PEMDAS and prioritize evaluating coefficients in front of parentheses.\n(WARNING: Only enable this if you know what you\'re doing! Enabling this can yield incorrect calculation results)</string>
+    <string name="dynamic_precision">Dynamic Precision</string>
+    <string name="max_decimal_places">Maximum Decimal Places</string>
+    <string name="focus_mode">Focus Mode</string>
+    <string name="show_constants_functions">Show Custom Constants/Functions</string>
+    <string name="live_expression_eval">Live Expression Evaluation</string>
+    <string name="exchange_rate_frequency_title">When to Fetch Exchange Rates</string>
+    <string name="prioritize_coefficients_title">Prioritize Coefficients</string>
+    <string name="distance">Distance</string>
+    <string name="mass">Mass</string>
+    <string name="time">Time</string>
+    <string name="currency">Currency</string>
+    <string name="speed">Speed</string>
+    <string name="temperature_abbreviated">Temperature</string>
+    <string name="date_toolbar_title">Date</string>
+    <string name="base_representation">Base</string>
+    <string name="volume_lower">Volume</string>
+    <string name="select_color">Select Color</string>
+    <string name="background_color">Background Color</string>
+    <string name="text_color">Text Color</string>
+    <string name="set_color">Set Color</string>
+    <string name="cancel">Cancel</string>
+    <string name="invalid_hex_error">Error: Invalid hex code</string>
+    <string name="confirm">Confirm</string>
+    <string name="delete_theme_confirmation">Are you sure you want to delete \"</string>
+    <string name="successfully_deleted_theme">Successfully deleted \"</string>
+    <string name="successfully_restored_theme">Successfully applied \"</string>
+    <string name="reset_color">Reset</string>
+    <string name="to_default">\?</string>
+    <string name="copied_to_clipboard">copied to clipboard</string>
+    <string name="unsaved_changes">Unsaved Changes</string>
+    <string name="apply">Apply</string>
+    <string name="dont_apply">Don\'t Apply</string>
+    <string name="successfully_saved">Successfully saved</string>
+    <string name="empty_theme_name_error">Error: Theme name cannot be empty</string>
+    <string name="rename_theme">Rename Theme</string>
+    <string name="overwrite_theme_confirmation">A theme with that name already exists. Do you want to overwrite it?</string>
+    <string name="successfully_renamed">Successfully renamed</string>
+    <string name="import_file_not_found_error">Error: Either the specified file could not be found, or access was denied.</string>
+
+    <!-- "custom" cannot be longer than 7 characters due to layout size constraints. -->
+    <string name="custom">Custom</string>
+    <string name="currency_fetch_error">Error retrieving currency data</string>
+    <string name="error_no_internet">Error: No Internet Connection</string>
+    <string name="no_colors_in_clipboard">No colors found in clipboard</string>
+    <string name="settings_title_general">General</string>
+    <string name="settings_title_appearance">Appearance</string>
+    <string name="settings_title_data_usage">Data Usage</string>
+    <string name="settings_title_advanced">Advanced</string>
+    <string name="settings_title_terminal">Terminal</string>
+    <string name="theme_nav_drawer">Theme Nav Drawer</string>
+    <string name="force_dark_nav">Force Dark Nav Drawer</string>
+    <string name="darken_dark_status_bar">Darken Dark Mode Status Bar</string>
+    <string name="darken_top_tab">Darken Top Bar Tab</string>
+    <string name="terminal_theme">Terminal Theme</string>
+
+    <string name="as_buttons">As Buttons</string>
+    <string name="in_menu">In 3-dot Menu</string>
+    <string name="both">Both</string>
+
+    <string name="upon_startup">Upon app startup</string>
+    <string name="upon_conversions_opened">Upon opening the Conversions section (Recommended)</string>
+    <string name="upon_currency_tab">Upon switching to the Currency tab</string>
+
+    <string name="terminal_theme_black">Black</string>
+    <string name="terminal_theme_dark">Dark</string>
+    <string name="terminal_theme_light">Light</string>
+    <string name="terminal_theme_ubuntu_dark">Ubuntu Dark</string>
+
+    <string name="miles_per_hour">MPH</string>
+    <string name="kilometers_per_hour">KM/H</string>
+    <string name="meters_per_second">M/S</string>
+    <string name="feet_per_second">FT/S</string>
+    <string name="knots">Knots</string>
+</resources>
