@@ -25,10 +25,9 @@
             android:background="@color/darkColorPrimary"
             android:clickable="false"
             android:foreground="?attr/selectableItemBackground"
-            android:textAllCaps="false"
+            tools:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="gone" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/previousExpression"

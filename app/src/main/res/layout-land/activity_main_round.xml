@@ -21,18 +21,19 @@
         <Button
             android:id="@+id/bgAnim"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="1150dp"
-            android:layout_height="800dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:background="@color/darkColorPrimary"
             android:clickable="false"
+            android:focusable="false"
             android:foreground="?attr/selectableItemBackground"
-            android:textAllCaps="false"
-            android:layout_marginBottom="32dp"
-            app:layout_constraintTop_toTopOf="@+id/delete"
-            app:layout_constraintBottom_toBottomOf="@+id/delete"
-            app:layout_constraintStart_toStartOf="@+id/delete"
+            android:tag="cMain`-mt"
+            android:alpha="0.58"
+            tools:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/delete"
-            tools:visibility="gone" />
+            app:layout_constraintStart_toStartOf="@id/delete"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/previousExpression"

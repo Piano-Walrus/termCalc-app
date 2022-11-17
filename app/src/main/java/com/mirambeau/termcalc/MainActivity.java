@@ -1108,7 +1108,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (Ax.isTinyColor("cMain"))
                 bgColor = tinydb.getString("cMain");
 
-            if (Ax.isTinyColor("cKeypad"))
+            if (!roundedButtons && Ax.isTinyColor("cKeypad"))
                 keypad.setBackgroundColor(Ax.getTinyColor("cKeypad"));
 
             if (Ax.isColor(bgColor)) {
@@ -5893,7 +5893,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             e.printStackTrace();
         }
 
-        view.setClickable(true);
         view.performClick();
         view.setPressed(true);
 
@@ -5903,9 +5902,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 view.invalidate();
                 view.setPressed(false);
                 view.invalidate();
-                view.setClickable(false);
             }
-        }, 112);
+        }, 110);
 
         new Handler().postDelayed(new Runnable() {
             @Override
