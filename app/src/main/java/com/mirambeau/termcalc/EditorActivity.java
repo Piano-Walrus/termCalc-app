@@ -428,52 +428,11 @@ public class EditorActivity extends AppCompatActivity {
                 });
             }
 
-            themeStyleButtons = new View[]{null, findViewById(R.id.themeStyleDark), findViewById(R.id.themeStyleLight), findViewById(R.id.themeStyleBlack),
-                    findViewById(R.id.themeStyleBlackButtons), findViewById(R.id.themeStyleMonochrome)};
-            themeColorButtons = new ImageButton[]{null, findViewById(R.id.mintButton), findViewById(R.id.tealButton), findViewById(R.id.greenButton), findViewById(R.id.cyanButton), findViewById(R.id.babyBlueButton),
-                    findViewById(R.id.blueButton), findViewById(R.id.navyBlueButton), findViewById(R.id.indigoButton), findViewById(R.id.purpleButton), findViewById(R.id.pinkButton), findViewById(R.id.redButton),
-                    findViewById(R.id.coralButton), findViewById(R.id.orangeButton), findViewById(R.id.honeyButton), findViewById(R.id.yellowButton), findViewById(R.id.brownButton)};
-
-            ((ConstraintLayout) themeStyleButtons[Integer.parseInt(tinydb.getString("theme"))].getParent()).setBackground(Ax.getDrawable(R.drawable.theme_toggle_selected));
-
-            //Handle Theme Style Buttons
-            for (i=1; i < themeStyleButtons.length; i++) {
-                if (themeStyleButtons[i] != null) {
-                    final int fi = i;
-
-                    ((ConstraintLayout) themeStyleButtons[i].getParent()).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            int j;
-                            String themeStr = Integer.toString(fi);
-
-                            //TODO: Make this work properly (change theme temporarily until apply is pressed, etc.)
-                            tinydb.putString("theme", themeStr);
-
-                            recreate();
-
-                            ((ConstraintLayout) themeStyleButtons[fi].getParent()).setBackground(Ax.getDrawable(R.drawable.theme_toggle_selected));
-
-                            for (j=1; j < themeStyleButtons.length; j++) {
-                                if (j != fi && themeStyleButtons[j] != null)
-                                    ((ConstraintLayout) themeStyleButtons[j].getParent()).setBackground(null);
-                            }
-                        }
-                    });
-                }
-            }
-
             BlurView blurView = findViewById(R.id.editorBlurView);
             float blurRadius = 12f;
 
             View decorView = getWindow().getDecorView();
-            // ViewGroup you want to start blur from. Choose root as close to BlurView in hierarchy as possible.
             ViewGroup rootView = (ViewGroup) decorView.findViewById(android.R.id.content);
-
-            // Optional:
-            // Set drawable to draw in the beginning of each blurred frame.
-            // Can be used in case your layout has a lot of transparent space and your content
-            // gets a too low alpha value after blur is applied.
 
             blurView.setupWith(rootView, new RenderScriptBlur(this)) // or RenderEffectBlur
                     .setBlurRadius(blurRadius);
@@ -483,7 +442,6 @@ public class EditorActivity extends AppCompatActivity {
             ConstraintLayout saveLayout = findViewById(R.id.saveOptionLayout);
             ConstraintLayout importLayout = findViewById(R.id.importOptionLayout);
             ConstraintLayout advancedLayout = findViewById(R.id.advancedOptionLayout);
-            ConstraintLayout resetLayout = findViewById(R.id.resetOptionLayout);
 
             drawerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -522,16 +480,6 @@ public class EditorActivity extends AppCompatActivity {
                 }
             });
 
-            //TODO: Remove after changing to alertDialog
-            resetLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    resetToDefaults();
-
-                    recreate();
-                }
-            });
-
             undoCheck();
 
             undo.setOnClickListener(new View.OnClickListener() {
@@ -567,65 +515,16 @@ public class EditorActivity extends AppCompatActivity {
 
             final ConstraintLayout styleContainer = findViewById(R.id.styleContainer);
             final ConstraintLayout shapeContainer = findViewById(R.id.shapeContainer);
-            final ConstraintLayout bgDimmer = findViewById(R.id.styleShapeDimBG);
-
-            final RadioButton squareRadioButton = findViewById(R.id.squareRadioButton);
-            final RadioButton roundRadioButton = findViewById(R.id.roundRadioButton);
-
-            final ConstraintLayout shapeCardLayout = findViewById(R.id.shapeCardLayout);
-
-            final TextView shapeLabel = findViewById(R.id.shapeLabel);
-
-            String buttonShape = tinydb.getString("buttonShape");
-
-            squareRadioButton.setChecked(buttonShape.equals("1"));
-            roundRadioButton.setChecked(buttonShape.equals("2"));
-
-            if (buttonShape.equals("1"))
-                shapeLabel.setText(getString(R.string.shape_square));
-            else if (buttonShape.equals("2"))
-                shapeLabel.setText(getString(R.string.shape_round));
-
-            for (i=0; i < shapeCardLayout.getChildCount(); i++) {
-                View view = shapeCardLayout.getChildAt(i);
-
-                if (view.getClass() == androidx.constraintlayout.widget.ConstraintLayout.class) {
-                    view.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            String tag = view.getTag() != null ? view.getTag().toString() : "square";
-
-                            squareRadioButton.setChecked(tag.equalsIgnoreCase("square"));
-                            roundRadioButton.setChecked(tag.equalsIgnoreCase("round"));
-
-                            tinydb.putString("buttonShape", squareRadioButton.isChecked() ? "1" : "2");
-
-                            shapeLabel.setText(squareRadioButton.isChecked() ? getString(R.string.shape_square) : getString(R.string.shape_round));
-
-                            closeStyleShapeCard();
-                        }
-                    });
-                }
-            }
 
             View.OnClickListener onBottomChipClick = new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (bgDimmer.getVisibility() != View.VISIBLE) {
-                        openStyleShapeCard(view);
-                    }
+                    openStyleShapeCard(view);
                 }
             };
 
             styleContainer.setOnClickListener(onBottomChipClick);
             shapeContainer.setOnClickListener(onBottomChipClick);
-
-            bgDimmer.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    closeStyleShapeCard();
-                }
-            });
 
             //Set colors in current theme
             applyTheme();
@@ -1519,11 +1418,6 @@ public class EditorActivity extends AppCompatActivity {
             e.printStackTrace();
             Ax.saveStack(e);
             finish();
-        }
-
-        if (findViewById(R.id.styleShapeDimBG).getVisibility() == View.VISIBLE) {
-            findViewById(R.id.styleShapeDimBG).performClick();
-            return;
         }
 
         if (findViewById(R.id.editorBlurView).getVisibility() == View.VISIBLE) {
@@ -4273,44 +4167,169 @@ public class EditorActivity extends AppCompatActivity {
         tinydb.putString("-bfct", "");
     }
 
-    public void openStyleShapeCard(View view) {
+    public void openStyleShapeCard(View v) {
+        Activity main = MainActivity.mainActivity;
+
+        TinyDB tinydb = new TinyDB(main);
         ConstraintLayout parent = findViewById(R.id.editorBG);
 
-        String tag = view.getTag() != null ? view.getTag().toString() : "style";
-        View layout = tag.equalsIgnoreCase("shape") ? findViewById(R.id.shapeCardLayout) : findViewById(R.id.styleCardLayout);
+        String tag = v.getTag() != null ? v.getTag().toString() : "style";
+        boolean isShape = tag.equalsIgnoreCase("shape");
 
-        findViewById(R.id.styleShapeDimBG).setVisibility(View.VISIBLE);
-        layout.setVisibility(View.VISIBLE);
+        final String title = main.getString(isShape ? R.string.shape : R.string.style_color);
 
-        ConstraintSet constraintSet = new ConstraintSet();
-        constraintSet.clone(parent);
+        AlertDialog.Builder builder = new AlertDialog.Builder(EditorActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
+        builder.setTitle(title);
 
-        constraintSet.clear(R.id.styleShapeCard, ConstraintSet.TOP);
-        constraintSet.connect(R.id.styleShapeCard, ConstraintSet.BOTTOM, R.id.editorBG, ConstraintSet.BOTTOM, 36);
+        final View viewInflated = LayoutInflater.from(EditorActivity.this).inflate(isShape ? R.layout.shape_card_dialog : R.layout.style_card_dialog, (ViewGroup) parent, false);
 
-        constraintSet.applyTo(parent);
+        builder.setView(viewInflated);
 
-        parent.getLayoutTransition()
-                .enableTransitionType(LayoutTransition.CHANGING);
-    }
+        if (isShape) {
+            final RadioButton squareRadioButton = viewInflated.findViewById(R.id.squareRadioButton);
+            final RadioButton roundRadioButton = viewInflated.findViewById(R.id.roundRadioButton);
 
-    public void closeStyleShapeCard() {
-        ConstraintLayout parent = findViewById(R.id.editorBG);
+            String buttonShape = tinydb.getString("buttonShape");
 
-        findViewById(R.id.styleShapeDimBG).setVisibility(View.INVISIBLE);
+            final TextView shapeLabel = findViewById(R.id.shapeLabel);
+            final ConstraintLayout shapeCardLayout = viewInflated.findViewById(R.id.shapeCardLayout);
 
-        findViewById(R.id.styleCardLayout).setVisibility(View.GONE);
-        findViewById(R.id.shapeCardLayout).setVisibility(View.GONE);
+            squareRadioButton.setChecked(buttonShape.equals("1"));
+            roundRadioButton.setChecked(buttonShape.equals("2"));
 
-        ConstraintSet constraintSet = new ConstraintSet();
-        constraintSet.clone(parent);
+            if (buttonShape.equals("1"))
+                shapeLabel.setText(getString(R.string.shape_square));
+            else if (buttonShape.equals("2"))
+                shapeLabel.setText(getString(R.string.shape_round));
 
-        constraintSet.connect(R.id.styleShapeCard, ConstraintSet.TOP, R.id.editorBG, ConstraintSet.BOTTOM, 12);
-        constraintSet.clear(R.id.styleShapeCard, ConstraintSet.BOTTOM);
+            for (int i=0; i < shapeCardLayout.getChildCount(); i++) {
+                View view = shapeCardLayout.getChildAt(i);
 
-        constraintSet.applyTo(parent);
+                if (view.getClass() == androidx.constraintlayout.widget.ConstraintLayout.class) {
+                    view.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String tag = view.getTag() != null ? view.getTag().toString() : "square";
 
-        parent.getLayoutTransition()
-                .enableTransitionType(LayoutTransition.CHANGING);
+                            squareRadioButton.setChecked(tag.equalsIgnoreCase("square"));
+                            roundRadioButton.setChecked(tag.equalsIgnoreCase("round"));
+                        }
+                    });
+                }
+            }
+
+            builder.setPositiveButton(R.string.apply, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+
+                    try {
+                        tinydb.putString("buttonShape", squareRadioButton.isChecked() ? "1" : "2");
+
+                        shapeLabel.setText(squareRadioButton.isChecked() ? getString(R.string.shape_square) : getString(R.string.shape_round));
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+        }
+        else {
+            ConstraintLayout resetLayout = viewInflated.findViewById(R.id.resetOptionLayout);
+
+            TextView styleTitle = viewInflated.findViewById(R.id.themeStyleTitle);
+            TextView colorTitle = viewInflated.findViewById(R.id.colorTitle);
+
+            themeStyleButtons = new View[]{null, viewInflated.findViewById(R.id.themeStyleDark), viewInflated.findViewById(R.id.themeStyleLight), viewInflated.findViewById(R.id.themeStyleBlack),
+                    viewInflated.findViewById(R.id.themeStyleBlackButtons), viewInflated.findViewById(R.id.themeStyleMonochrome)};
+            themeColorButtons = new ImageButton[]{null, viewInflated.findViewById(R.id.mintButton), viewInflated.findViewById(R.id.tealButton), viewInflated.findViewById(R.id.greenButton), viewInflated.findViewById(R.id.cyanButton), viewInflated.findViewById(R.id.babyBlueButton),
+                    viewInflated.findViewById(R.id.blueButton), viewInflated.findViewById(R.id.navyBlueButton), viewInflated.findViewById(R.id.indigoButton), viewInflated.findViewById(R.id.purpleButton), viewInflated.findViewById(R.id.pinkButton), viewInflated.findViewById(R.id.redButton),
+                    viewInflated.findViewById(R.id.coralButton), viewInflated.findViewById(R.id.orangeButton), viewInflated.findViewById(R.id.honeyButton), viewInflated.findViewById(R.id.yellowButton), viewInflated.findViewById(R.id.brownButton)};
+
+            ((ConstraintLayout) themeStyleButtons[Integer.parseInt(tinydb.getString("theme"))].getParent()).setBackground(Ax.getDrawable(R.drawable.theme_toggle_selected));
+
+            styleTitle.setTag(tinydb.getString("theme"));
+            colorTitle.setTag(tinydb.getString("color"));
+
+            //Handle Theme Style Buttons
+            for (int i=1; i < themeStyleButtons.length; i++) {
+                if (themeStyleButtons[i] != null) {
+                    final int fi = i;
+
+                    ((ConstraintLayout) themeStyleButtons[i].getParent()).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            int j;
+
+                            //TODO: Make this work properly (change theme temporarily until apply is pressed, etc.)
+                            styleTitle.setTag(Integer.toString(fi));
+
+                            ((ConstraintLayout) themeStyleButtons[fi].getParent()).setBackground(Ax.getDrawable(R.drawable.theme_toggle_selected));
+
+                            for (j=1; j < themeStyleButtons.length; j++) {
+                                if (j != fi && themeStyleButtons[j] != null)
+                                    ((ConstraintLayout) themeStyleButtons[j].getParent()).setBackground(null);
+                            }
+                        }
+                    });
+                }
+            }
+
+            //Handle Color Buttons
+            for (int i=1; i < themeColorButtons.length; i++) {
+                if (themeColorButtons[i] != null) {
+                    themeColorButtons[i].setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //TODO: Make this work properly (change theme temporarily until apply is pressed, etc.)
+                            colorTitle.setTag(v.getTag());
+                        }
+                    });
+                }
+            }
+
+            resetLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    resetToDefaults();
+
+                    //TODO: Eventually maybe eliminate the need to recreate, ideally
+                    recreate();
+                }
+            });
+
+            builder.setPositiveButton(R.string.apply, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+
+                    try {
+                        tinydb.putString("theme", styleTitle.getTag().toString());
+                        tinydb.putString("color", colorTitle.getTag().toString());
+
+                        recreate();
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+        }
+
+        final AlertDialog alertDialog = builder.create();
+
+        alertDialog.show();
     }
 }

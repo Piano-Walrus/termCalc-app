@@ -1213,6 +1213,7 @@ public class TerminalActivity extends AppCompatActivity {
                             "Dodie Yellow", "Festive", "Brown", "Baby Blue"};
                     if (colorInt > 0 && colorInt < 18) {
                         tinydb.putString("color", splitCmd[1]);
+
                         MainActivity.mainActivity.recreate();
                         printf("Accent color set to \"" + colors[colorInt-1] + "\"");
                     }

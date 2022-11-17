@@ -6243,8 +6243,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (roundedButtons && Ax.isTinyColor("cFabText"))
             ((ImageButton) findViewById(R.id.delete)).setColorFilter(Ax.getTinyColor("cFabText"));
-
-        if (!roundedButtons) {
+        else if (!roundedButtons) {
             FloatingActionButton expandCustoms = findViewById(R.id.expandCustoms);
             FloatingActionButton decFrac = findViewById(R.id.decFracButton);
 
